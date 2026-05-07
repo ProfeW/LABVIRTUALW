@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Física Grado 10 - LabVirtual W</title>
     
+    <!-- CONEXIÓN CON FUENTES DE GOOGLE -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- ICONOS GRATUITOS DE FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -146,7 +148,6 @@
         .titulo-seccion { border-left: 5px solid var(--color-fisica); padding-left: 15px; margin: 40px 0 20px 0; font-size: 24px; color: #4facfe; }
         .lista-temas { display: flex; flex-direction: column; gap: 15px; }
         
-        /* Modificado para que los enlaces se vean como tarjetas sin subrayado */
         .entrada-tema { 
             background: rgba(255, 255, 255, 0.03); 
             border: 1px solid rgba(255, 255, 255, 0.1); 
@@ -184,6 +185,7 @@
 </head>
 <body>
 
+    <!-- NAVEGACIÓN -->
     <header>
         <nav>
             <a href="inicio.html" class="logo">
@@ -221,6 +223,7 @@
         </nav>
     </header>
 
+    <!-- CONTENIDO FÍSICA 10 -->
     <main class="contenedor">
         
         <a href="inicio.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
@@ -228,6 +231,7 @@
         <h1 style="color: var(--color-fisica); font-size: 2.5rem; margin-bottom: 10px;">Física - Grado Décimo</h1>
         <p style="color: #ccc; margin-bottom: 30px;">Explora los conceptos fundamentales del movimiento y la energía.</p>
 
+        <!-- SECCIÓN 1: FUNDAMENTOS -->
         <h2 class="titulo-seccion"><i class="fa-solid fa-compass"></i> 1. Fundamentos de la Medida</h2>
         <div class="lista-temas">
             <a href="fisica10_magnitudes.html" class="entrada-tema">
@@ -260,6 +264,7 @@
             </a>
         </div>
 
+        <!-- SECCIÓN 2: CINEMÁTICA -->
         <h2 class="titulo-seccion"><i class="fa-solid fa-truck-fast"></i> 2. Cinemática (El Movimiento)</h2>
         <div class="lista-temas">
             <a href="fisica10_mru.html" class="entrada-tema">
@@ -269,29 +274,39 @@
                     <p>Velocidad constante: El viaje de un camión en línea recta por la carretera principal.</p>
                 </div>
             </a>
-            <a href="fisica10_mruv.html" class="entrada-tema">
+            
+            <!-- NUEVA ADICIÓN: ACELERACIÓN -->
+            <a href="fisica10_aceleracion.html" class="entrada-tema">
                 <div class="numero-tema">06</div>
                 <div class="info-tema">
+                    <h3>Aceleración</h3>
+                    <p>El cambio de velocidad: Entiende qué sucede cuando una chiva o un Willys aumentan su velocidad al subir una pendiente o al frenar de golpe.</p>
+                </div>
+            </a>
+
+            <a href="fisica10_mruv.html" class="entrada-tema">
+                <div class="numero-tema">07</div>
+                <div class="info-tema">
                     <h3>M.R.U.V. (Movimiento Variado)</h3>
-                    <p>Aceleración: Cuando el transporte escolar aumenta su velocidad al salir del pueblo.</p>
+                    <p>Aceleración constante: Cuando el transporte escolar aumenta su velocidad gradualmente al salir del pueblo.</p>
                 </div>
             </a>
             <a href="fisica10_caida_libre.html" class="entrada-tema">
-                <div class="numero-tema">07</div>
+                <div class="numero-tema">08</div>
                 <div class="info-tema">
                     <h3>Caída Libre</h3>
                     <p>¿Qué cae más rápido, un grano de café o una piedra? Descubre la gravedad en acción.</p>
                 </div>
             </a>
             <a href="fisica10_parabolico.html" class="entrada-tema">
-                <div class="numero-tema">08</div>
+                <div class="numero-tema">09</div>
                 <div class="info-tema">
                     <h3>Movimiento Parabólico</h3>
                     <p>El lanzamiento de un objeto o el chorro de agua en un sistema de riego.</p>
                 </div>
             </a>
             <a href="fisica10_circular.html" class="entrada-tema">
-                <div class="numero-tema">09</div>
+                <div class="numero-tema">10</div>
                 <div class="info-tema">
                     <h3>Movimiento Circular</h3>
                     <p>Analiza el giro de las aspas en la despulpadora de café de la finca.</p>
@@ -299,17 +314,18 @@
             </a>
         </div>
 
+        <!-- SECCIÓN 3: FUERZAS -->
         <h2 class="titulo-seccion"><i class="fa-solid fa-dumbbell"></i> 3. Dinámica (Fuerzas)</h2>
         <div class="lista-temas">
             <a href="fisica10_leyes_newton.html" class="entrada-tema">
-                <div class="numero-tema">10</div>
+                <div class="numero-tema">11</div>
                 <div class="info-tema">
                     <h3>Leyes de Newton</h3>
                     <p>Inercia, fuerza y acción/reacción aplicadas a la maquinaria agrícola y la vida diaria.</p>
                 </div>
             </a>
             <a href="fisica10_tipos_fuerzas.html" class="entrada-tema">
-                <div class="numero-tema">11</div>
+                <div class="numero-tema">12</div>
                 <div class="info-tema">
                     <h3>Principales Tipos de Fuerzas</h3>
                     <p>Tensión en cables de garrucha, fricción en el suelo y peso de los bultos.</p>
@@ -317,31 +333,32 @@
             </a>
         </div>
 
+        <!-- SECCIÓN 4: ENERGÍA -->
         <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> 4. Energía y Trabajo</h2>
         <div class="lista-temas">
             <a href="fisica10_energia_potencial.html" class="entrada-tema">
-                <div class="numero-tema">12</div>
+                <div class="numero-tema">13</div>
                 <div class="info-tema">
                     <h3>Energía Potencial Gravitacional</h3>
                     <p>La energía que tiene una carga de café situada en la parte alta de la montaña.</p>
                 </div>
             </a>
             <a href="fisica10_energia_cinetica.html" class="entrada-tema">
-                <div class="numero-tema">13</div>
+                <div class="numero-tema">14</div>
                 <div class="info-tema">
                     <h3>Energía Cinética</h3>
                     <p>La energía del movimiento: el agua bajando por los canales de lavado.</p>
                 </div>
             </a>
             <a href="fisica10_energia_elastica.html" class="entrada-tema">
-                <div class="numero-tema">14</div>
+                <div class="numero-tema">15</div>
                 <div class="info-tema">
                     <h3>Energía Potencial Elástica</h3>
                     <p>Resortes y sistemas de suspensión en la maquinaria pesada.</p>
                 </div>
             </a>
             <a href="fisica10_energia_mecanica.html" class="entrada-tema">
-                <div class="numero-tema">15</div>
+                <div class="numero-tema">16</div>
                 <div class="info-tema">
                     <h3>Energía Mecánica</h3>
                     <p>La suma de todo: ¿Cómo se conserva la energía en un sistema cerrado?</p>
