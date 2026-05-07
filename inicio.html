@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .submenu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
+            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+        }
+        .menu li:hover .submenu { display: block; }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .contenedor { max-width: 1200px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.5s ease; }
+
+        /* --- SECCIÓN BIENVENIDA (GRID) --- */
+        .seccion-introduccion {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .bloque-bienvenida, .bloque-creador {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .bloque-bienvenida h1 { font-size: 2.5rem; margin-bottom: 15px; color: #4facfe; }
+        .bloque-bienvenida p { line-height: 1.6; color: #ddd; font-size: 1.1rem; }
+
+        .bloque-creador { border-left: 5px solid var(--color-biologia); text-align: center; }
+        .bloque-creador img { 
+            width: 120px; height: 120px; border-radius: 50%; 
+            margin-bottom: 15px; border: 3px solid var(--color-biologia);
+            object-fit: cover;
+        }
+        .bloque-creador h2 { font-size: 1.5rem; margin-bottom: 5px; }
+        .bloque-creador h3 { font-size: 0.9rem; color: var(--color-biologia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .bloque-creador p { font-size: 0.95rem; color: #bbb; line-height: 1.5; }
+
+        /* --- SECCIÓN NOTICIAS --- */
+        .seccion-novedades h2 { 
+            font-size: 2rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 10px;
+        }
+
+        .lista-noticias { display: flex; flex-direction: column; gap: 20px; }
+
+        .tarjeta-noticia {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 6px solid var(--color-fisica);
+            transition: 0.3s;
+            position: relative;
+        }
+        .tarjeta-noticia:hover { transform: scale(1.01); background: rgba(255, 255, 255, 0.05); }
+
+        .tag-nuevo {
+            position: absolute; top: 20px; right: 25px;
+            background: #e74c3c; color: #fff; font-size: 0.7rem;
+            padding: 4px 10px; border-radius: 20px; font-weight: 800; text-transform: uppercase;
+        }
+
+        .fecha-noticia { color: #4facfe; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; display: block; }
+        .tarjeta-noticia h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .tarjeta-noticia p { color: #bbb; line-height: 1.5; margin-bottom: 15px; }
+        
+        .btn-noticia {
+            text-decoration: none; color: #fff; background: var(--color-fisica);
+            padding: 8px 20px; border-radius: 5px; font-size: 0.9rem; font-weight: 600;
+            display: inline-block; transition: 0.3s;
+        }
+        .btn-noticia:hover { background: #2980b9; box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 900px) {
+            .seccion-introduccion { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="fa-solid fa-flask"></i> Química</a></li>
+                <li><a href="#"><i class="fa-solid fa-leaf"></i> Biología</a></li>
+                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <section class="seccion-introduccion">
+            <div class="bloque-bienvenida">
+                <h1>Bienvenidos al Laboratorio</h1>
+                <p>Este espacio digital ha sido diseñado para los estudiantes de la <strong>Institución Educativa Gallego</strong>. Aquí, la ciencia se encuentra con la tecnología para explorar los fenómenos de la naturaleza desde nuestro propio contexto rural y cafetero.</p>
+                <p style="margin-top: 15px;">Nuestro objetivo es facilitar el aprendizaje interactivo a través de simuladores, videos y guías prácticas que transformen la teoría en experiencia real.</p>
+            </div>
+
+            <div class="bloque-creador">
+                <img src="https://via.placeholder.com/150" alt="Wilmer González Ossa">
+                <h2>Wilmer González Ossa</h2>
+                <h3>Creador y Docente</h3>
+                <p>Ingeniero Ambiental y apasionado por la educación. Comprometido con integrar herramientas digitales para fortalecer el conocimiento científico en nuestra comunidad huilense.</p>
+            </div>
+        </section>
+
+        <section class="seccion-novedades">
+            <h2><i class="fa-solid fa-rss"></i> Novedades del Laboratorio</h2>
+            
+            <div class="lista-noticias">
+
+                <article class="tarjeta-noticia">
+                    <span class="tag-nuevo">Nuevo</span>
+                    <span class="fecha-noticia">Mayo 2026</span>
+                    <h3>Cinemática: M.R.U. Disponible</h3>
+                    <p>¡Ya puedes explorar la nueva lección sobre el Movimiento Rectilíneo Uniforme! Incluye fórmulas interactivas, despejes paso a paso y un video tutorial aplicado al contexto de nuestra vereda.</p>
+                    <a href="fisica10_mru.html" class="btn-noticia">Ver Lección</a>
+                </article>
+
+                <article class="tarjeta-noticia" style="border-left-color: var(--color-biologia);">
+                    <span class="fecha-noticia">Abril 2026</span>
+                    <h3>Unidad 1: Magnitudes Físicas</h3>
+                    <p>Iniciamos nuestro recorrido por la física de décimo grado. Aprende qué son las magnitudes, cómo se clasifican y cuáles son los sistemas de unidades que rigen el mundo científico.</p>
+                    <a href="fisica10_magnitudes.html" class="btn-noticia" style="background: var(--color-biologia);">Explorar</a>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
