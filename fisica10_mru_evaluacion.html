@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación M.R.U. - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh; padding: 20px;
+        }
+        .contenedor { max-width: 800px; margin: 40px auto; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        .pantalla { display: none; }
+        .activa { display: block; }
+        h1 { color: var(--color-fisica); margin-bottom: 20px; text-align: center; }
+        input[type="text"] { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 5px; border: none; font-size: 1rem; }
+        .pregunta { margin-bottom: 30px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; }
+        .opcion { display: block; margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .opcion:hover { background: rgba(52, 152, 219, 0.2); }
+        input[type="radio"] { margin-right: 10px; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 5px; background: var(--color-fisica); color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 20px; }
+        #resultado-tabla { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        #resultado-tabla th, #resultado-tabla td { padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .correcto { color: #2ecc71; }
+        .incorrecto { color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <div id="pantalla-inicio" class="pantalla activa">
+            <h1>Evaluación de M.R.U.</h1>
+            <p style="margin-bottom: 20px; text-align: center;">Introduce tu nombre completo para comenzar:</p>
+            <input type="text" id="nombre-estudiante" placeholder="Tu nombre aquí...">
+            <button class="btn" onclick="empezarEvaluacion()">Comenzar Test</button>
+        </div>
+
+        <div id="pantalla-test" class="pantalla">
+            <div id="cuestionario">
+                </div>
+            <button class="btn" onclick="calificar()">Finalizar y Enviar Notas</button>
+        </div>
+
+        <div id="pantalla-final" class="pantalla">
+            <h1>Resultados</h1>
+            <div id="resumen-final"></div>
+            <button class="btn" onclick="location.href='fisica10_mru.html'">Volver a la Lección</button>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyRYwv-LHpep2UXLe2M8NhhJE6SFCNRod_dAUmWpwCposiYOb1fxLB6iFL0y45kotS_1w/exec';
+        let nombreEstudiante = "";
+        
+        const preguntas = [
+            { p: "Un Jeep recorre 100m en 10s. ¿Cuál es su velocidad?", o: ["5 m/s", "10 m/s", "20 m/s", "100 m/s"], c: 1 },
+            { p: "Si un camión viaja a 20 m/s durante 5s, ¿qué distancia recorre?", o: ["4 m", "15 m", "100 m", "200 m"], c: 2 },
+            { p: "En MRU, ¿cómo es la velocidad?", o: ["Aumenta", "Disminuye", "Es constante", "Es cero"], c: 2 },
+            { p: "¿Cuánto tiempo tarda un objeto en recorrer 60m a 12 m/s?", o: ["5 s", "10 s", "720 s", "2 s"], c: 0 },
+            { p: "¿Qué forma tiene la trayectoria en el MRU?", o: ["Circular", "Parabólica", "Línea Recta", "Ondulada"], c: 2 }
+        ];
+
+        function empezarEvaluacion() {
+            nombreEstudiante = document.getElementById('nombre-estudiante').value;
+            if(!nombreEstudiante) return alert("Por favor ingresa tu nombre");
+            document.getElementById('pantalla-inicio').classList.remove('activa');
+            document.getElementById('pantalla-test').classList.add('activa');
+            cargarPreguntas();
+        }
+
+        function cargarPreguntas() {
+            let html = "";
+            preguntas.forEach((pre, i) => {
+                html += `<div class="pregunta"><h3>${i+1}. ${pre.p}</h3>`;
+                pre.o.forEach((op, j) => {
+                    html += `<label class="opcion"><input type="radio" name="p${i}" value="${j}"> ${op}</label>`;
+                });
+                html += `</div>`;
+            });
+            document.getElementById('cuestionario').innerHTML = html;
+        }
+
+        function calificar() {
+            let aciertos = 0;
+            let respuestas = {};
+            preguntas.forEach((pre, i) => {
+                const marcada = document.querySelector(`input[name="p${i}"]:checked`);
+                let val = marcada ? parseInt(marcada.value) : -1;
+                respuestas[`p${i+1}`] = (val === pre.c) ? "CORRECTO" : "INCORRECTO (Marcó: " + (val === -1 ? "Nada" : pre.o[val]) + ")";
+                if(val === pre.c) aciertos++;
+            });
+
+            let nota = (aciertos * 1.0) / 1.0 + 1.0; // Escala básica 1-5 simplificada (Aciertos: 0=1.0, 5=5.0)
+            if(aciertos === 0) nota = 1.0; else if(aciertos === 1) nota = 1.8; else if(aciertos === 2) nota = 2.6; else if(aciertos === 3) nota = 3.4; else if (aciertos === 4) nota = 4.2; else nota = 5.0;
+
+            // Enviar a Google Sheets
+            const formData = new FormData();
+            formData.append('nombre', nombreEstudiante);
+            formData.append('nota', nota);
+            formData.append('p1', respuestas.p1);
+            formData.append('p2', respuestas.p2);
+            formData.append('p3', respuestas.p3);
+            formData.append('p4', respuestas.p4);
+            formData.append('p5', respuestas.p5);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(res => {
+                    document.getElementById('pantalla-test').classList.remove('activa');
+                    document.getElementById('pantalla-final').classList.add('activa');
+                    mostrarResumen(nota, respuestas);
+                })
+                .catch(err => alert("Error al enviar: " + err));
+        }
+
+        function mostrarResumen(nota, r) {
+            let html = `<h2>Estudiante: ${nombreEstudiante}</h2><h2 style="color:var(--color-fisica)">Nota Final: ${nota}</h2>`;
+            html += `<table id="resultado-tabla"><tr><th>Pregunta</th><th>Resultado</th></tr>`;
+            for(let i=1; i<=5; i++) {
+                let clase = r[`p${i}`].includes("CORRECTO") ? "correcto" : "incorrecto";
+                html += `<tr><td>${i}</td><td class="${clase}">${r[`p${i}`]}</td></tr>`;
+            }
+            html += `</table>`;
+            document.getElementById('resumen-final').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
+
+Espero que estas herramientas te sean de gran utilidad para tus clases en la I.E. Gallego. ¡Éxitos con el laboratorio virtual!
