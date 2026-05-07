@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Física Grado 10 - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        /* --- BARRA DE NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--color-fisica);
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu > li {
+            position: relative;
+        }
+
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .menu > li > a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #4facfe;
+        }
+
+        /* --- SUBMENÚS --- */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(20, 20, 35, 0.95);
+            backdrop-filter: blur(15px);
+            min-width: 180px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .menu li:hover .submenu {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .submenu li {
+            list-style: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .submenu a {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .submenu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 25px; 
+        }
+
+        .fisica:hover { border-left: 4px solid var(--color-fisica); }
+        .quimica:hover { border-left: 4px solid var(--color-quimica); }
+        .biologia:hover { border-left: 4px solid var(--color-biologia); }
+
+        /* --- CONTENEDOR PRINCIPAL Y ESTILOS DE FÍSICA --- */
+        .contenedor {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .titulo-seccion { border-left: 5px solid var(--color-fisica); padding-left: 15px; margin: 40px 0 20px 0; font-size: 24px; color: #4facfe; }
+        .lista-temas { display: flex; flex-direction: column; gap: 15px; }
+        
+        /* Modificado para que los enlaces se vean como tarjetas sin subrayado */
+        .entrada-tema { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            padding: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 25px; 
+            transition: 0.3s; 
+            cursor: pointer; 
+            text-decoration: none; 
+            color: white; 
+        }
+        .entrada-tema:hover { 
+            background: rgba(79, 172, 254, 0.1); 
+            transform: translateX(10px); 
+            border-color: var(--color-fisica); 
+            box-shadow: -5px 0px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .numero-tema { font-size: 32px; font-weight: 800; color: rgba(255,255,255,0.1); min-width: 50px; text-align: center; }
+        .info-tema h3 { font-size: 18px; margin-bottom: 5px; color: #fff; }
+        .info-tema p { font-size: 14px; color: #bbb; line-height: 1.4; }
+
+        .btn-volver {
+            display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s;
+        }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo">
+                <i class="fa-solid fa-microscope"></i> LabVirtual W
+            </a>
+
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html" class="fisica">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html" class="fisica">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html" class="fisica">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="quimica_9.html" class="quimica">Grado Noveno</a></li>
+                        <li><a href="quimica_10.html" class="quimica">Grado Décimo</a></li>
+                        <li><a href="quimica_11.html" class="quimica">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="biologia_9.html" class="biologia">Grado Noveno</a></li>
+                        <li><a href="biologia_10.html" class="biologia">Grado Décimo</a></li>
+                        <li><a href="biologia_11.html" class="biologia">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <a href="inicio.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
+
+        <h1 style="color: var(--color-fisica); font-size: 2.5rem; margin-bottom: 10px;">Física - Grado Décimo</h1>
+        <p style="color: #ccc; margin-bottom: 30px;">Explora los conceptos fundamentales del movimiento y la energía.</p>
+
+        <h2 class="titulo-seccion"><i class="fa-solid fa-compass"></i> 1. Fundamentos de la Medida</h2>
+        <div class="lista-temas">
+            <a href="fisica10_magnitudes.html" class="entrada-tema">
+                <div class="numero-tema">01</div>
+                <div class="info-tema">
+                    <h3>Magnitudes Físicas</h3>
+                    <p>¿Cómo medimos la altura de un cafetal o el peso de una carga? Aprende a diferenciar magnitudes escalares y vectoriales.</p>
+                </div>
+            </a>
+            <a href="fisica10_conversiones.html" class="entrada-tema">
+                <div class="numero-tema">02</div>
+                <div class="info-tema">
+                    <h3>Conversión de Unidades</h3>
+                    <p>Transforma arrobas a kilogramos o litros de agua para lavado a metros cúbicos de forma exacta.</p>
+                </div>
+            </a>
+            <a href="fisica10_notacion.html" class="entrada-tema">
+                <div class="numero-tema">03</div>
+                <div class="info-tema">
+                    <h3>Notación Científica</h3>
+                    <p>Maneja números gigantescos o microscópicos (como el tamaño de una plaga) de manera profesional.</p>
+                </div>
+            </a>
+            <a href="fisica10_cifras.html" class="entrada-tema">
+                <div class="numero-tema">04</div>
+                <div class="info-tema">
+                    <h3>Cifras Significativas</h3>
+                    <p>Aprende cuánta precisión necesitamos realmente en nuestras mediciones de laboratorio.</p>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="titulo-seccion"><i class="fa-solid fa-truck-fast"></i> 2. Cinemática (El Movimiento)</h2>
+        <div class="lista-temas">
+            <a href="fisica10_mru.html" class="entrada-tema">
+                <div class="numero-tema">05</div>
+                <div class="info-tema">
+                    <h3>M.R.U. (Movimiento Rectilíneo Uniforme)</h3>
+                    <p>Velocidad constante: El viaje de un camión en línea recta por la carretera principal.</p>
+                </div>
+            </a>
+            <a href="fisica10_mruv.html" class="entrada-tema">
+                <div class="numero-tema">06</div>
+                <div class="info-tema">
+                    <h3>M.R.U.V. (Movimiento Variado)</h3>
+                    <p>Aceleración: Cuando el transporte escolar aumenta su velocidad al salir del pueblo.</p>
+                </div>
+            </a>
+            <a href="fisica10_caida_libre.html" class="entrada-tema">
+                <div class="numero-tema">07</div>
+                <div class="info-tema">
+                    <h3>Caída Libre</h3>
+                    <p>¿Qué cae más rápido, un grano de café o una piedra? Descubre la gravedad en acción.</p>
+                </div>
+            </a>
+            <a href="fisica10_parabolico.html" class="entrada-tema">
+                <div class="numero-tema">08</div>
+                <div class="info-tema">
+                    <h3>Movimiento Parabólico</h3>
+                    <p>El lanzamiento de un objeto o el chorro de agua en un sistema de riego.</p>
+                </div>
+            </a>
+            <a href="fisica10_circular.html" class="entrada-tema">
+                <div class="numero-tema">09</div>
+                <div class="info-tema">
+                    <h3>Movimiento Circular</h3>
+                    <p>Analiza el giro de las aspas en la despulpadora de café de la finca.</p>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="titulo-seccion"><i class="fa-solid fa-dumbbell"></i> 3. Dinámica (Fuerzas)</h2>
+        <div class="lista-temas">
+            <a href="fisica10_leyes_newton.html" class="entrada-tema">
+                <div class="numero-tema">10</div>
+                <div class="info-tema">
+                    <h3>Leyes de Newton</h3>
+                    <p>Inercia, fuerza y acción/reacción aplicadas a la maquinaria agrícola y la vida diaria.</p>
+                </div>
+            </a>
+            <a href="fisica10_tipos_fuerzas.html" class="entrada-tema">
+                <div class="numero-tema">11</div>
+                <div class="info-tema">
+                    <h3>Principales Tipos de Fuerzas</h3>
+                    <p>Tensión en cables de garrucha, fricción en el suelo y peso de los bultos.</p>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> 4. Energía y Trabajo</h2>
+        <div class="lista-temas">
+            <a href="fisica10_energia_potencial.html" class="entrada-tema">
+                <div class="numero-tema">12</div>
+                <div class="info-tema">
+                    <h3>Energía Potencial Gravitacional</h3>
+                    <p>La energía que tiene una carga de café situada en la parte alta de la montaña.</p>
+                </div>
+            </a>
+            <a href="fisica10_energia_cinetica.html" class="entrada-tema">
+                <div class="numero-tema">13</div>
+                <div class="info-tema">
+                    <h3>Energía Cinética</h3>
+                    <p>La energía del movimiento: el agua bajando por los canales de lavado.</p>
+                </div>
+            </a>
+            <a href="fisica10_energia_elastica.html" class="entrada-tema">
+                <div class="numero-tema">14</div>
+                <div class="info-tema">
+                    <h3>Energía Potencial Elástica</h3>
+                    <p>Resortes y sistemas de suspensión en la maquinaria pesada.</p>
+                </div>
+            </a>
+            <a href="fisica10_energia_mecanica.html" class="entrada-tema">
+                <div class="numero-tema">15</div>
+                <div class="info-tema">
+                    <h3>Energía Mecánica</h3>
+                    <p>La suma de todo: ¿Cómo se conserva la energía en un sistema cerrado?</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>
