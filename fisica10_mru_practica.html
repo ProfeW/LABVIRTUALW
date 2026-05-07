@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica M.R.U. - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-advertencia: #f39c12;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu > li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .submenu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
+            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+        }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+
+        /* --- CONTENIDO --- */
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        .encabezado-leccion h1 { font-size: 2.5rem; color: var(--color-fisica); margin-bottom: 10px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+
+        /* --- ESTILOS DE LOS EJERCICIOS --- */
+        .ejercicio {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 5px solid var(--color-fisica); border-radius: 12px; padding: 30px; margin-bottom: 30px;
+        }
+        
+        .ejercicio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+        .enunciado { font-size: 1.1rem; line-height: 1.6; color: #ddd; margin-bottom: 20px; }
+
+        /* --- CONTROLES INTERACTIVOS --- */
+        .controles-practica { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; }
+        
+        .selector-formula {
+            width: 100%; padding: 12px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(20, 20, 35, 0.8); color: #fff; font-size: 1rem; font-family: 'Poppins', sans-serif;
+            margin-bottom: 20px; outline: none; cursor: pointer;
+        }
+        .selector-formula:focus { border-color: var(--color-fisica); }
+
+        .campos-datos {
+            display: none; align-items: center; justify-content: center; flex-wrap: wrap; gap: 15px;
+            margin-bottom: 20px; font-size: 1.5rem; font-weight: 600; color: #fff;
+        }
+
+        .campos-datos input {
+            width: 120px; padding: 10px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem; text-align: center;
+            font-family: 'Poppins', sans-serif; outline: none;
+        }
+        .campos-datos input:focus { border-color: var(--color-fisica); background: rgba(255,255,255,0.15); }
+        .campos-datos input::placeholder { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+
+        .btn-validar {
+            width: 100%; padding: 12px; border: none; border-radius: 5px; background: var(--color-fisica);
+            color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .btn-validar:hover { background: #2980b9; transform: translateY(-2px); }
+
+        .feedback {
+            margin-top: 15px; padding: 15px; border-radius: 5px; font-weight: 600; text-align: center; display: none;
+        }
+        .feedback.exito { display: block; background: rgba(46, 204, 113, 0.2); border: 1px solid var(--color-exito); color: var(--color-exito); }
+        .feedback.error { display: block; background: rgba(231, 76, 60, 0.2); border: 1px solid var(--color-error); color: #ff7675; }
+        .feedback.advertencia { display: block; background: rgba(243, 156, 18, 0.2); border: 1px solid var(--color-advertencia); color: var(--color-advertencia); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) {
+            .campos-datos { flex-direction: column; }
+            .campos-datos input { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="quimica_9.html">Grado Noveno</a></li>
+                        <li><a href="quimica_10.html">Grado Décimo</a></li>
+                        <li><a href="quimica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="biologia_9.html">Grado Noveno</a></li>
+                        <li><a href="biologia_10.html">Grado Décimo</a></li>
+                        <li><a href="biologia_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <a href="fisica10_mru.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Lección M.R.U.</a>
+
+        <div class="encabezado-leccion">
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <p>Lee el problema, elige la fórmula correcta, reemplaza los datos y valida tu respuesta.</p>
+        </div>
+
+        <div class="ejercicio" id="ej1" data-formula="d=v*t" data-val1="12" data-val2="30" data-res="360">
+            <h3>Ejercicio 1</h3>
+            <p class="enunciado">Un Willys cargado de café viaja por una vía recta a una velocidad constante de <strong>12 m/s</strong>. ¿Qué distancia recorrerá en <strong>30 segundos</strong>?</p>
+            
+            <div class="controles-practica">
+                <select class="selector-formula" onchange="mostrarCampos('ej1')">
+                    <option value="">1. Selecciona la fórmula a utilizar...</option>
+                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
+                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
+                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
+                </select>
+                
+                <div class="campos-datos"></div>
+                
+                <button class="btn-validar" onclick="validarEjercicio('ej1')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
+                <div class="feedback"></div>
+            </div>
+        </div>
+
+        <div class="ejercicio" id="ej2" data-formula="t=d/v" data-val1="1500" data-val2="1.5" data-res="1000">
+            <h3>Ejercicio 2</h3>
+            <p class="enunciado">Un estudiante camina desde su finca hasta la I.E. Gallego en línea recta. Si la escuela está a <strong>1500 metros</strong> y él camina a una velocidad constante de <strong>1.5 m/s</strong>, ¿cuántos segundos tardará en llegar?</p>
+            
+            <div class="controles-practica">
+                <select class="selector-formula" onchange="mostrarCampos('ej2')">
+                    <option value="">1. Selecciona la fórmula a utilizar...</option>
+                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
+                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
+                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
+                </select>
+                
+                <div class="campos-datos"></div>
+                
+                <button class="btn-validar" onclick="validarEjercicio('ej2')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
+                <div class="feedback"></div>
+            </div>
+        </div>
+
+        <div class="ejercicio" id="ej3" data-formula="v=d/t" data-val1="200" data-val2="40" data-res="5">
+            <h3>Ejercicio 3</h3>
+            <p class="enunciado">Una garrucha transporta racimos de plátano recorriendo una distancia de <strong>200 metros</strong> en exactamente <strong>40 segundos</strong>. ¿Cuál es su velocidad constante?</p>
+            
+            <div class="controles-practica">
+                <select class="selector-formula" onchange="mostrarCampos('ej3')">
+                    <option value="">1. Selecciona la fórmula a utilizar...</option>
+                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
+                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
+                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
+                </select>
+                
+                <div class="campos-datos"></div>
+                
+                <button class="btn-validar" onclick="validarEjercicio('ej3')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
+                <div class="feedback"></div>
+            </div>
+        </div>
+
+        <div class="ejercicio" id="ej4" data-formula="d=v*t" data-val1="0.8" data-val2="50" data-res="40">
+            <h3>Ejercicio 4</h3>
+            <p class="enunciado">El agua de un canal de riego fluye uniformemente a <strong>0.8 m/s</strong>. ¿Qué distancia recorrerá una hoja seca que flota en el agua después de <strong>50 segundos</strong>?</p>
+            
+            <div class="controles-practica">
+                <select class="selector-formula" onchange="mostrarCampos('ej4')">
+                    <option value="">1. Selecciona la fórmula a utilizar...</option>
+                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
+                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
+                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
+                </select>
+                
+                <div class="campos-datos"></div>
+                
+                <button class="btn-validar" onclick="validarEjercicio('ej4')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
+                <div class="feedback"></div>
+            </div>
+        </div>
+
+        <div class="ejercicio" id="ej5" data-formula="t=d/v" data-val1="450" data-val2="3" data-res="150">
+            <h3>Ejercicio 5</h3>
+            <p class="enunciado">Un caballo de paso fino avanza por un camino veredal recto a una velocidad de <strong>3 m/s</strong>. ¿Cuántos segundos le tomará recorrer un tramo recto de <strong>450 metros</strong>?</p>
+            
+            <div class="controles-practica">
+                <select class="selector-formula" onchange="mostrarCampos('ej5')">
+                    <option value="">1. Selecciona la fórmula a utilizar...</option>
+                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
+                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
+                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
+                </select>
+                
+                <div class="campos-datos"></div>
+                
+                <button class="btn-validar" onclick="validarEjercicio('ej5')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
+                <div class="feedback"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Función para mostrar los cajones de texto correctos según la fórmula elegida
+        function mostrarCampos(id) {
+            const ej = document.getElementById(id);
+            const formula = ej.querySelector('.selector-formula').value;
+            const contenedorCampos = ej.querySelector('.campos-datos');
+
+            // Limpiamos mensajes anteriores
+            ej.querySelector('.feedback').className = 'feedback';
+            ej.querySelector('.feedback').style.display = 'none';
+
+            if (!formula) {
+                contenedorCampos.style.display = 'none';
+                return;
+            }
+
+            let html = '';
+            if (formula === 'v=d/t') {
+                html = `<input type="number" id="${id}_val1" placeholder="Distancia"> /
+                        <input type="number" id="${id}_val2" placeholder="Tiempo"> =
+                        <input type="number" id="${id}_res" placeholder="Velocidad">`;
+            } else if (formula === 'd=v*t') {
+                html = `<input type="number" id="${id}_val1" placeholder="Velocidad"> ×
+                        <input type="number" id="${id}_val2" placeholder="Tiempo"> =
+                        <input type="number" id="${id}_res" placeholder="Distancia">`;
+            } else if (formula === 't=d/v') {
+                html = `<input type="number" id="${id}_val1" placeholder="Distancia"> /
+                        <input type="number" id="${id}_val2" placeholder="Velocidad"> =
+                        <input type="number" id="${id}_res" placeholder="Tiempo">`;
+            }
+
+            contenedorCampos.innerHTML = html;
+            contenedorCampos.style.display = 'flex';
+        }
+
+        // Función para validar si lo que escribió el estudiante está bien
+        function validarEjercicio(id) {
+            const ej = document.getElementById(id);
+            const formulaSeleccionada = ej.querySelector('.selector-formula').value;
+            const formulaCorrecta = ej.getAttribute('data-formula');
+            const fb = ej.querySelector('.feedback');
+
+            // 1. Validar que haya seleccionado una fórmula
+            if (!formulaSeleccionada) {
+                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-triangle-exclamation"></i> Primero debes seleccionar qué fórmula utilizarás.');
+                return;
+            }
+
+            // 2. Validar que la fórmula sea la correcta para lo que pide el problema
+            if (formulaSeleccionada !== formulaCorrecta) {
+                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-xmark"></i> <strong>Fórmula Incorrecta:</strong> Analiza bien la pregunta. ¿Qué te están pidiendo calcular?');
+                return;
+            }
+
+            // Capturamos los valores que escribió el estudiante
+            const val1 = parseFloat(document.getElementById(`${id}_val1`).value);
+            const val2 = parseFloat(document.getElementById(`${id}_val2`).value);
+            const res = parseFloat(document.getElementById(`${id}_res`).value);
+
+            // Capturamos las respuestas correctas ocultas en el HTML
+            const val1Correcto = parseFloat(ej.getAttribute('data-val1'));
+            const val2Correcto = parseFloat(ej.getAttribute('data-val2'));
+            const resCorrecto = parseFloat(ej.getAttribute('data-res'));
+
+            // 3. Validar que no haya campos vacíos
+            if (isNaN(val1) || isNaN(val2) || isNaN(res)) {
+                mostrarMensaje(fb, 'advertencia', '<i class="fa-solid fa-triangle-exclamation"></i> Completa todos los campos numéricos para poder validar.');
+                return;
+            }
+
+            // 4. Validar resultado y procedimiento
+            if (val1 === val1Correcto && val2 === val2Correcto && res === resCorrecto) {
+                mostrarMensaje(fb, 'exito', '<i class="fa-solid fa-check-double"></i> <strong>¡Excelente!</strong> Procedimiento y resultado perfectos.');
+            } else if (res === resCorrecto) {
+                mostrarMensaje(fb, 'advertencia', '<i class="fa-solid fa-circle-exclamation"></i> El resultado final es correcto, pero ubicaste los datos al revés en la fórmula.');
+            } else {
+                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-xmark"></i> <strong>Cálculo Incorrecto:</strong> Revisa la operación matemática o asegúrate de haber puesto los datos correctos.');
+            }
+        }
+
+        // Función auxiliar para pintar los mensajes de colores
+        function mostrarMensaje(elemento, tipo, texto) {
+            elemento.innerHTML = texto;
+            elemento.className = `feedback ${tipo}`;
+            elemento.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
