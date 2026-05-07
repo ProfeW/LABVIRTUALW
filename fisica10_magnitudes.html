@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnitudes Físicas - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- BARRA DE NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu > li { position: relative; }
+        .menu a {
+            color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px;
+            border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
+        }
+        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .submenu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
+            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+        }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+
+        /* --- CONTENIDO DE LA LECCIÓN --- */
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 30px; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-fisica); margin-bottom: 10px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+
+        .seccion-contenido {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px; padding: 30px; margin-bottom: 30px;
+        }
+        
+        .seccion-contenido h2 { color: #4facfe; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; }
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
+        
+        .imagen-recurso {
+            width: 100%; height: 300px; object-fit: cover; border-radius: 10px;
+            margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .destacado {
+            background: rgba(52, 152, 219, 0.1); border-left: 4px solid var(--color-fisica);
+            padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 20px 0;
+        }
+
+        /* --- CUADRICULA DE TIPOS --- */
+        .grid-tipos { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .tarjeta-tipo {
+            background: rgba(0, 0, 0, 0.3); padding: 25px; border-radius: 10px;
+            border-top: 4px solid var(--color-quimica);
+        }
+        .tarjeta-tipo h3 { color: #fff; margin-bottom: 10px; font-size: 1.4rem; }
+
+        /* --- TABLAS --- */
+        .tabla-contenedor { overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { background: rgba(52, 152, 219, 0.2); color: #fff; font-weight: 600; }
+        tr:hover { background: rgba(255,255,255,0.05); }
+
+        @media (max-width: 768px) {
+            .grid-tipos { grid-template-columns: 1fr; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="quimica_9.html">Grado Noveno</a></li>
+                        <li><a href="quimica_10.html">Grado Décimo</a></li>
+                        <li><a href="quimica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="biologia_9.html">Grado Noveno</a></li>
+                        <li><a href="biologia_10.html">Grado Décimo</a></li>
+                        <li><a href="biologia_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Temas de Décimo</a>
+
+        <div class="encabezado-leccion">
+            <h1>Magnitudes Físicas</h1>
+            <p><i class="fa-solid fa-book"></i> Unidad 1: Fundamentos de la Medida</p>
+        </div>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-ruler-combined"></i> 1. Definición</h2>
+            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1000&q=80" alt="Herramientas de medición" class="imagen-recurso">
+            
+            <p>Una <strong>magnitud física</strong> es toda aquella propiedad de un cuerpo, sustancia o fenómeno físico que puede ser medida de forma objetiva y expresada mediante un número y una unidad. Las magnitudes clásicas o fundamentales originales en la física son la <strong>masa</strong>, el <strong>tiempo</strong>, la <strong>temperatura</strong> y la <strong>distancia</strong>.</p>
+            
+            <div class="destacado">
+                <p><strong><i class="fa-solid fa-lightbulb"></i> Ejemplo de Magnitud Física:</strong></p>
+                <p>Al pesar un bulto de abono o la carga de café recolectada, obtenemos una medición de <strong>50 Kilogramos</strong>. En este caso, la masa es la magnitud física, "50" es la cantidad numérica y "Kilogramos" es la unidad de medida.</p>
+            </div>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-sitemap"></i> 2. Tipos de Magnitudes Físicas</h2>
+            <p>Dependiendo de la información que necesitemos para comprenderlas por completo, las magnitudes se dividen en dos grandes grupos:</p>
+
+            <div class="grid-tipos">
+                <div class="tarjeta-tipo" style="border-top-color: #f39c12;">
+                    <h3><i class="fa-solid fa-temperature-half"></i> Magnitudes Escalares</h3>
+                    <p>Son aquellas que quedan perfectamente definidas con solo un número y su unidad de medida. No necesitan que indiquemos hacia dónde se dirigen.</p>
+                    <p style="margin-top: 10px; color: #aaa;"><strong>Ejemplos:</strong></p>
+                    <ul style="margin-left: 20px; color: #ddd; font-size: 0.95rem;">
+                        <li><strong>Temperatura:</strong> 24 °C (No decimos "24 grados hacia el norte").</li>
+                        <li><strong>Tiempo:</strong> 55 minutos de clase.</li>
+                        <li><strong>Masa:</strong> 12 kg.</li>
+                    </ul>
+                </div>
+
+                <div class="tarjeta-tipo" style="border-top-color: #e74c3c;">
+                    <h3><i class="fa-solid fa-arrow-trend-up"></i> Magnitudes Vectoriales</h3>
+                    <p>Son aquellas que, además de un número y una unidad, necesitan que especifiquemos una <strong>dirección</strong> y un <strong>sentido</strong> para que tengan lógica.</p>
+                    <p style="margin-top: 10px; color: #aaa;"><strong>Ejemplos:</strong></p>
+                    <ul style="margin-left: 20px; color: #ddd; font-size: 0.95rem;">
+                        <li><strong>Velocidad:</strong> Un Jeep moviéndose a 40 km/h <em>hacia el centro poblado de Gallego</em>.</li>
+                        <li><strong>Fuerza:</strong> Aplicar 50 Newtons <em>hacia arriba</em> para levantar una caja.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-globe"></i> 3. Sistemas de Unidades</h2>
+            <p>A lo largo de la historia, diferentes regiones del mundo inventaron sus propias formas de medir. Para evitar confusiones globales, los científicos estandarizaron estos valores. Los sistemas más importantes son el <strong>Sistema Internacional (SI)</strong>, que usamos en Colombia y en la ciencia a nivel mundial; el <strong>Sistema Cegesimal (CGS)</strong>, utilizado para mediciones muy pequeñas; y el <strong>Sistema Inglés</strong>, que aún se utiliza en países como Estados Unidos y en mucha de la maquinaria agrícola que importamos.</p>
+            
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Magnitud Clásica</th>
+                            <th>Sistema Internacional (SI)</th>
+                            <th>Sistema Cegesimal (CGS)</th>
+                            <th>Sistema Inglés</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Distancia / Longitud</strong></td>
+                            <td>Metro (m)</td>
+                            <td>Centímetro (cm)</td>
+                            <td>Pie (ft) / Pulgada (in)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Masa</strong></td>
+                            <td>Kilogramo (kg)</td>
+                            <td>Gramo (g)</td>
+                            <td>Libra (lb) / Slug</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tiempo</strong></td>
+                            <td>Segundo (s)</td>
+                            <td>Segundo (s)</td>
+                            <td>Segundo (s)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Temperatura</strong></td>
+                            <td>Kelvin (K) / Celsius (°C)</td>
+                            <td>Celsius (°C)</td>
+                            <td>Fahrenheit (°F)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
