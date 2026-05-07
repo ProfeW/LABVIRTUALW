@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Física 11 - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN (IDÉNTICA A LA PRINCIPAL) --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        /* --- CONTENIDO --- */
+        .contenedor { max-width: 1000px; margin: 50px auto; padding: 20px; }
+
+        .header-tema { margin-bottom: 40px; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        .header-tema h1 { font-size: 2.5rem; color: var(--color-fisica); }
+
+        .titulo-seccion {
+            border-left: 5px solid var(--color-fisica);
+            padding-left: 15px; margin: 40px 0 20px 0; font-size: 24px; color: #4facfe;
+        }
+
+        .lista-temas { display: flex; flex-direction: column; gap: 15px; }
+        
+        .entrada-tema {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .entrada-tema:hover {
+            background: rgba(79, 172, 254, 0.1);
+            transform: translateX(10px);
+            border-color: var(--color-fisica);
+        }
+
+        .numero-tema {
+            font-size: 32px; font-weight: 800; color: rgba(52, 152, 219, 0.3);
+            min-width: 60px; text-align: center;
+        }
+
+        .info-tema h3 { font-size: 20px; margin-bottom: 8px; color: #fff; }
+        .info-tema p { font-size: 15px; color: #bbb; line-height: 1.5; }
+
+        .btn-volver {
+            display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-microscope"></i> LabVirtual W
+        </a>
+        <ul class="menu">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+        </ul>
+    </nav>
+
+    <main class="contenedor">
+        <a href="index.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
+
+        <div class="header-tema">
+            <h1>Física - Grado 11°</h1>
+            <p>Unidad Temática: Trabajo, Potencia y Energía</p>
+        </div>
+
+        <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> Sección: Energía</h2>
+        
+        <div class="lista-temas">
+            
+            <div class="entrada-tema">
+                <div class="numero-tema">01</div>
+                <div class="info-tema">
+                    <h3>Energía Cinética (Ec)</h3>
+                    <p>Analiza el movimiento: ¿Cuánta energía posee un Jeep Willys cargado bajando por las pendientes de Gallego? Descubre la relación entre masa y velocidad.</p>
+                </div>
+            </div>
+
+            <div class="entrada-tema">
+                <div class="numero-tema">02</div>
+                <div class="info-tema">
+                    <h3>Energía Potencial Gravitacional (Epg)</h3>
+                    <p>La energía de la posición: Calculamos la energía almacenada en los tanques de agua elevados que usamos para el beneficio del café.</p>
+                </div>
+            </div>
+
+            <div class="entrada-tema">
+                <div class="numero-tema">03</div>
+                <div class="info-tema">
+                    <h3>Energía Potencial Elástica (Epe)</h3>
+                    <p>La física de los resortes: Observa cómo funcionan las básculas de resorte al pesar los bultos de café en la cosecha.</p>
+                </div>
+            </div>
+
+            <div class="entrada-tema">
+                <div class="numero-tema">04</div>
+                <div class="info-tema">
+                    <h3>Energía Mecánica (Em)</h3>
+                    <p>La suma total: Aprende cómo la energía se transforma pero no se destruye en un sistema de poleas o garruchas de transporte de carga.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
