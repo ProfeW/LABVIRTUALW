@@ -100,8 +100,31 @@
         }
         .video-contenedor iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
+        /* --- NUEVOS BOTONES DE ACCIÓN FINAL --- */
+        .botones-accion-final {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+            margin-top: 40px; margin-bottom: 20px;
+        }
+        
+        .btn-accion {
+            padding: 15px 25px; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
+            text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px;
+            transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .btn-practica { background: #2ecc71; }
+        .btn-practica:hover { background: #27ae60; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
+        
+        .btn-evaluacion { background: #e74c3c; }
+        .btn-evaluacion:hover { background: #c0392b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4); }
+        
+        .btn-taller { background: #f39c12; }
+        .btn-taller:hover { background: #d68910; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(243, 156, 18, 0.4); }
+
         @media (max-width: 768px) {
             .grid-despejes { grid-template-columns: 1fr; }
+            .botones-accion-final { flex-direction: column; }
+            .btn-accion { justify-content: center; }
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -162,7 +185,6 @@
                 <li><strong>U - Uniforme:</strong> Esta es la clave. Indica que la velocidad es <strong>constante</strong>. El objeto no acelera ni frena; recorre distancias exactamente iguales en intervalos de tiempo iguales.</li>
             </ul>
 
-            
             <div style="background: rgba(46, 204, 113, 0.1); border-left: 4px solid #2ecc71; padding: 15px; border-radius: 0 8px 8px 0;">
                 <p><strong>Definición formal:</strong> Un cuerpo describe un M.R.U. cuando su trayectoria es una línea recta y su velocidad permanece constante en el tiempo.</p>
             </div>
@@ -274,6 +296,22 @@
                         allowfullscreen>
                 </iframe>
             </div>
+        </section>
+
+        <section class="botones-accion-final">
+            
+            <a href="fisica10_mru_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Práctica Interactiva
+            </a>
+
+            <a href="fisica10_mru_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-file-signature"></i> Evaluación
+            </a>
+
+            <a href="https://drive.google.com/file/d/1XWHY2QXjTDsaX6fLxKOBLZA4JguqTCqf/view?usp=sharing" target="_blank" class="btn-accion btn-taller">
+                <i class="fa-solid fa-cloud-arrow-down"></i> Taller Adicional
+            </a>
+            
         </section>
 
     </main>
