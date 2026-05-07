@@ -27,7 +27,7 @@
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- BARRA DE NAVEGACIÓN COMPLETAMENTE RESTAURADA --- */
         nav {
             background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -37,18 +37,26 @@
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .logo i { color: var(--color-fisica); }
         .menu { list-style: none; display: flex; gap: 20px; }
+        .menu > li { position: relative; } /* Clave para que los submenús se alineen bien */
         .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
 
+        /* --- SUBMENÚS DESPLEGABLES --- */
         .submenu {
             display: none; position: absolute; top: 100%; left: 0;
             background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
             min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
         }
-        .menu li:hover .submenu { display: block; }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
         .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+
+        /* Colores dinámicos al pasar el mouse por los submenús */
+        .fisica:hover { border-left: 4px solid var(--color-fisica); }
+        .quimica:hover { border-left: 4px solid var(--color-quimica); }
+        .biologia:hover { border-left: 4px solid var(--color-biologia); }
 
         /* --- CONTENIDO PRINCIPAL --- */
         .contenedor { max-width: 1200px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.5s ease; }
@@ -131,16 +139,34 @@
             <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                
                 <li>
                     <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
                     <ul class="submenu">
-                        <li><a href="fisica_9.html">Grado Noveno</a></li>
-                        <li><a href="fisica_10.html">Grado Décimo</a></li>
-                        <li><a href="fisica_11.html">Grado 11</a></li>
+                        <li><a href="fisica_9.html" class="fisica">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html" class="fisica">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html" class="fisica">Grado 11</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="fa-solid fa-flask"></i> Química</a></li>
-                <li><a href="#"><i class="fa-solid fa-leaf"></i> Biología</a></li>
+
+                <li>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="quimica_9.html" class="quimica">Grado Noveno</a></li>
+                        <li><a href="quimica_10.html" class="quimica">Grado Décimo</a></li>
+                        <li><a href="quimica_11.html" class="quimica">Grado 11</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="biologia_9.html" class="biologia">Grado Noveno</a></li>
+                        <li><a href="biologia_10.html" class="biologia">Grado Décimo</a></li>
+                        <li><a href="biologia_11.html" class="biologia">Grado 11</a></li>
+                    </ul>
+                </li>
+
                 <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
             </ul>
         </nav>
