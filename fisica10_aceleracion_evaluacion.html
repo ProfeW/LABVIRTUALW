@@ -122,8 +122,8 @@
     </div>
 
     <script>
-        // Enlace actualizado que creaste para las 10 preguntas
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzNHZuUMRbgz_osixvyeNJA1QPoK8kHRQVs_NaIWbFmxJXpAc9dViIS0qOSEFf_NcFJ/exec';
+        // ¡NUEVO ENLACE CONECTADO!
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyo_VQiQSYXgHmzDw9p971nUF66g5e6gpCUfEiYY7sOfU5-aH1vMoTJPniYQgtD1gKQ/exec';
         let nombre = "";
         
         // Banco de 10 preguntas (3 Teóricas, 7 Prácticas)
@@ -183,7 +183,7 @@
             if(calculoNota < 1.0) calculoNota = 1.0; 
             let notaFinal = calculoNota.toFixed(1);
 
-            // Preparar datos para enviar a Excel (Las 10 preguntas)
+            // Preparar datos para enviar a Excel
             const body = new FormData();
             body.append('nombre', nombre);
             body.append('nota', notaFinal);
@@ -198,20 +198,20 @@
             body.append('p9', respuestasEstudiante.p9);
             body.append('p10', respuestasEstudiante.p10);
 
-            // Cambiar estado del botón mientras se envía
             document.getElementById('btn-finalizar').innerText = "ENVIANDO RESULTADOS A EXCEL...";
             document.getElementById('btn-finalizar').disabled = true;
 
-            // Enviar datos
-            fetch(scriptURL, { method: 'POST', body: body })
+            // Se añadió { mode: 'no-cors' } para evitar bloqueos del navegador
+            fetch(scriptURL, { method: 'POST', body: body, mode: 'no-cors' })
                 .then(() => {
+                    // Como usamos no-cors, asumimos que el envío fue exitoso si no entra al catch
                     document.getElementById('pantalla-test').classList.remove('activa');
                     document.getElementById('pantalla-final').classList.add('activa');
                     document.getElementById('progress-fill').style.width = "100%";
                     mostrarResultadosFinales(notaFinal, respuestasEstudiante);
                 })
-                .catch(() => {
-                    alert("Error de conexión. Verifica tu internet e intenta de nuevo.");
+                .catch((error) => {
+                    alert("No pudimos conectar con la base de datos. Verifica tu internet e intenta de nuevo.");
                     document.getElementById('btn-finalizar').innerText = "ENVIAR RESULTADOS Y CALIFICAR";
                     document.getElementById('btn-finalizar').disabled = false;
                 });
