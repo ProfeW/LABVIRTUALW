@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Avanzada M.R.U.V. - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #9b59b6; /* Morado para denotar nivel avanzado */
+            --color-fisica-hover: #8e44ad;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-alerta: #f39c12;
+            --bg-pregunta: rgba(255, 255, 255, 0.03);
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.96), rgba(26, 26, 46, 0.99)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #e056fd; }
+
+        /* --- CONTENIDO --- */
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #e056fd; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-eval { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid rgba(155, 89, 182, 0.3); }
+        .encabezado-eval h1 { font-size: 2.8rem; color: var(--color-fisica); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;}
+        .encabezado-eval p { color: #bbb; font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+
+        /* --- DATOS DEL ESTUDIANTE --- */
+        .datos-estudiante { background: rgba(155, 89, 182, 0.1); border: 1px solid rgba(155, 89, 182, 0.3); border-radius: 10px; padding: 25px; margin-bottom: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 600; color: #e056fd; }
+        .input-group input, .input-group select { padding: 12px 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: #fff; font-size: 1.05rem; outline: none; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--color-fisica); }
+
+        /* --- PREGUNTAS --- */
+        .eval-form { display: flex; flex-direction: column; gap: 30px; }
+        .pregunta-card { background: var(--bg-pregunta); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 25px; transition: 0.3s; border-left: 4px solid var(--color-fisica);}
+        .pregunta-card:hover { border-color: rgba(155, 89, 182, 0.4); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        
+        .pregunta-texto { font-size: 1.15rem; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.5; }
+        .pregunta-texto span.num { color: var(--color-fisica); font-weight: 800; font-size: 1.3rem; margin-right: 10px; }
+
+        .opciones-lista { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .opcion-item { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; transition: 0.2s; }
+        .opcion-item:hover { background: rgba(255,255,255,0.05); }
+        
+        .opcion-label { display: flex; align-items: center; padding: 15px 20px; cursor: pointer; color: #ddd; font-size: 1.05rem; }
+        .opcion-label input[type="radio"] { margin-right: 15px; cursor: pointer; transform: scale(1.2); accent-color: var(--color-fisica); }
+
+        /* Estados de Validación */
+        .opcion-item.correcta { background: rgba(46, 204, 113, 0.2); border-color: var(--color-exito); }
+        .opcion-item.correcta .opcion-label { color: #fff; font-weight: bold; }
+        .opcion-item.incorrecta { background: rgba(231, 76, 60, 0.2); border-color: var(--color-error); opacity: 0.7; }
+        .icono-resultado { margin-left: auto; font-size: 1.2rem; display: none; }
+        .correcta .icono-resultado { display: block; color: var(--color-exito); }
+        .incorrecta .icono-resultado { display: block; color: var(--color-error); }
+
+        /* --- CONTROLES Y RESULTADOS --- */
+        .controles-eval { margin-top: 50px; text-align: center; }
+        .btn-enviar { background: var(--color-fisica); color: #fff; border: none; padding: 15px 40px; font-size: 1.2rem; font-weight: 800; border-radius: 8px; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
+        .btn-enviar:hover { background: var(--color-fisica-hover); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(155, 89, 182, 0.4); }
+        .btn-enviar:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .panel-resultado { display: none; background: rgba(0,0,0,0.5); border: 2px dashed var(--color-exito); border-radius: 12px; padding: 30px; margin-top: 40px; text-align: center; animation: fadeIn 0.5s ease; }
+        .panel-resultado.activo { display: block; }
+        .nota-final { font-size: 4.5rem; font-weight: 800; color: var(--color-exito); text-shadow: 0 0 20px rgba(46, 204, 113, 0.4); margin: 10px 0; }
+        .mensaje-nota { font-size: 1.3rem; color: #fff; line-height: 1.6;}
+
+        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { padding: 15px 25px; border-radius: 8px; color: #fff; font-weight: 600; background: var(--color-error); box-shadow: 0 10px 20px rgba(0,0,0,0.3); animation: slideIn 0.3s ease forwards; display: flex; align-items: center; gap: 10px; }
+        .toast.fade-out { animation: fadeOut 0.5s ease forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
+        
+        @media (max-width: 768px) { .datos-estudiante { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="fisica10_mruv_avanzado.html"><i class="fa-solid fa-arrow-left"></i> Volver a Lección</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-eval">
+            <h1><i class="fa-solid fa-star"></i> Evaluación Avanzada</h1>
+            <p>Retos de movimiento por intervalos y análisis complejo. Recuerda la regla de oro: la velocidad final de un intervalo es la velocidad inicial del siguiente.</p>
+        </div>
+
+        <form id="formulario-evaluacion" class="eval-form">
+            
+            <!-- DATOS DEL ESTUDIANTE -->
+            <div class="datos-estudiante">
+                <div class="input-group">
+                    <label for="nombreEstudiante"><i class="fa-solid fa-user"></i> Nombre Completo:</label>
+                    <input type="text" id="nombreEstudiante" placeholder="Ej: Vanesa Rodríguez" required>
+                </div>
+                <div class="input-group">
+                    <label for="gradoEstudiante"><i class="fa-solid fa-graduation-cap"></i> Grado:</label>
+                    <select id="gradoEstudiante" required>
+                        <option value="">Selecciona...</option>
+                        <option value="10-1">10-1</option>
+                        <option value="10-2">10-2</option>
+                        <option value="10-3">10-3</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- RETO 1 (Concepto de Intervalos) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">1.</span> Un vehículo viaja por una vía plana manteniendo su velocímetro en 60 km/h durante 20 segundos. Luego, observa un obstáculo en la vía y frena uniformemente hasta detenerse. ¿Qué tipos de movimiento describen este viaje en orden?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p1" value="a"> A) M.R.U.V. acelerado y luego M.R.U.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p1" value="b"> B) M.R.U. (Movimiento Rectilíneo Uniforme) y luego M.R.U.V. desacelerado.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p1" value="c"> C) Ambos intervalos son de M.R.U.V. porque finalmente el vehículo se detiene.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p1" value="d"> D) Ambos intervalos son de M.R.U. porque ocurre en línea recta.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- RETO 2 (Cálculo Combinado) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">2.</span> Una motocicleta arranca desde el reposo y acelera a 2 m/s² durante 4 segundos. Una vez alcanza esa velocidad, la mantiene constante durante 5 segundos más. ¿Cuál es la distancia total recorrida en todo el trayecto?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p2" value="a"> A) 16 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p2" value="b"> B) 40 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p2" value="c"> C) 56 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p2" value="d"> D) 72 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- RETO 3 (Tiempo de Reacción y Frenado) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">3.</span> Un conductor viaja en su carro a 20 m/s. De repente, ve un árbol caído en la vía. El conductor tarda 1 segundo en reaccionar (tiempo de reacción donde no frena, viaja constante) y luego pisa los frenos desacelerando a -5 m/s² hasta detenerse. ¿Cuál fue la distancia total de parada desde el instante en que vio el árbol?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p3" value="a"> A) 60 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p3" value="b"> B) 40 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p3" value="c"> C) 20 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p3" value="d"> D) 100 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- RETO 4 (Tres Intervalos Básicos) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">4.</span> Un camión recolector en la vereda acelera pasando de 10 m/s a 20 m/s en 5 segundos. Inmediatamente después, pisa los frenos y se detiene por completo en 4 segundos más. ¿Cuál fue la distancia total cubierta en ambos procesos?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p4" value="a"> A) 75 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p4" value="b"> B) 115 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p4" value="c"> C) 40 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p4" value="d"> D) 150 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- RETO 5 (Alcance / Ecuaciones Simultáneas) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">5.</span> Reto de Alcance: Una patrulla de policía está estacionada (reposo). En ese instante pasa una motocicleta con exceso de velocidad moviéndose de forma constante a 15 m/s. En ese mismo instante la patrulla arranca y acelera uniformemente a 3 m/s² para alcanzarla. ¿Cuánto tiempo tarda la patrulla en alcanzar a la motocicleta? (Pista: En el punto de alcance, las distancias de ambos son iguales).</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p5" value="a"> A) 5 segundos<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p5" value="b"> B) 15 segundos<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p5" value="c"> C) 12 segundos<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p5" value="d"> D) 10 segundos<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="controles-eval">
+                <button type="button" class="btn-enviar" id="btn-evaluar" onclick="evaluarPruebaAvanzada()">Enviar Reto Final</button>
+            </div>
+
+            <!-- PANEL DE RESULTADOS -->
+            <div class="panel-resultado" id="panel-res">
+                <h3 style="color:#fff; font-size:1.8rem;">Tu Resultado Avanzado</h3>
+                <div class="nota-final" id="nota-texto">0 / 5</div>
+                <p class="mensaje-nota" id="mensaje-texto"></p>
+                
+                <a href="fisica_10.html" class="btn-volver" style="margin-top: 25px; display: inline-block; border: 1px solid #9b59b6; padding: 10px 20px; border-radius: 5px;">Regresar al Menú Principal</a>
+            </div>
+
+        </form>
+
+    </main>
+
+    <script>
+        // Nuevo URL para la Evaluación Avanzada
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxJbovLRMvSVPYOC-Sk3F2GXGnS98ImtpVpEAN38hlRJZYAddngq5kjz3WhC_Bxbl_O2w/exec';
+
+        // Respuestas correctas (Retos Avanzados)
+        const respuestas = {
+            p1: 'b', // MRU -> MRUV desacelerado
+            p2: 'c', // Int 1: d=16m, Vf=8m/s. Int 2: d=40m. Total = 56m.
+            p3: 'a', // Reacción: d=20m. Frenado: d=40m. Total = 60m.
+            p4: 'b', // Int 1: d=75m. Int 2: d=40m. Total = 115m.
+            p5: 'd'  // d(poli) = d(moto) -> 1.5*t^2 = 15*t -> 1.5t = 15 -> t = 10s.
+        };
+
+        function mostrarToast(mensaje) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${mensaje}`;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('fade-out');
+                setTimeout(() => toast.remove(), 500); 
+            }, 3000);
+        }
+
+        function evaluarPruebaAvanzada() {
+            let form = document.getElementById('formulario-evaluacion');
+            let nombreEstudiante = document.getElementById('nombreEstudiante').value.trim();
+            let gradoEstudiante = document.getElementById('gradoEstudiante').value;
+            let puntaje = 0;
+            let totalPreguntas = 5;
+            let todasRespondidas = true;
+
+            // 1. Validar nombre y grado
+            if (!nombreEstudiante || !gradoEstudiante) {
+                mostrarToast("Por favor, ingresa tu Nombre y selecciona tu Grado.");
+                return;
+            }
+
+            // 2. Verificar que todas las preguntas estén respondidas
+            for (let i = 1; i <= totalPreguntas; i++) {
+                if (!form.querySelector(`input[name="p${i}"]:checked`)) {
+                    todasRespondidas = false;
+                    break;
+                }
+            }
+
+            if (!todasRespondidas) {
+                mostrarToast("Asegúrate de responder los 5 retos antes de enviar.");
+                return;
+            }
+
+            // Cambiar estado del botón
+            let btn = document.getElementById('btn-evaluar');
+            btn.disabled = true;
+            btn.innerText = "Calculando y Enviando...";
+
+            // 3. Preparar los datos a enviar
+            let datosEstudiante = {
+                nombre: nombreEstudiante,
+                grado: gradoEstudiante,
+                p1: form.querySelector('input[name="p1"]:checked').value,
+                p2: form.querySelector('input[name="p2"]:checked').value,
+                p3: form.querySelector('input[name="p3"]:checked').value,
+                p4: form.querySelector('input[name="p4"]:checked').value,
+                p5: form.querySelector('input[name="p5"]:checked').value
+            };
+
+            // Evaluar puntaje internamente para enviarlo a la base de datos
+            for (let i = 1; i <= totalPreguntas; i++) {
+                if (datosEstudiante[`p${i}`] === respuestas[`p${i}`]) {
+                    puntaje++;
+                }
+            }
+            datosEstudiante.puntaje = `${puntaje}/5`;
+
+            // 4. Enviar a Google Apps Script
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(datosEstudiante),
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "exito") {
+                    mostrarResultadosEstudiante(form, puntaje, totalPreguntas);
+                    btn.innerText = "Evaluación Guardada en Planilla";
+                } else {
+                    throw new Error("Error en el servidor");
+                }
+            })
+            .catch(error => {
+                mostrarToast("Hubo un problema de conexión. Intenta enviar de nuevo.");
+                btn.disabled = false;
+                btn.innerText = "Enviar Reto Final";
+            });
+        }
+
+        // Función que pinta los colores y muestra el cuadro final (solo si el envío fue exitoso)
+        function mostrarResultadosEstudiante(form, puntaje, totalPreguntas) {
+            
+            // Bloquear inputs de nombre y grado
+            document.getElementById('nombreEstudiante').disabled = true;
+            document.getElementById('gradoEstudiante').disabled = true;
+
+            // Pintar respuestas correctas e incorrectas
+            for (let i = 1; i <= totalPreguntas; i++) {
+                let seleccionada = form.querySelector(`input[name="p${i}"]:checked`);
+                let valorElegido = seleccionada.value;
+                let valorCorrecto = respuestas[`p${i}`];
+
+                let todosInputs = form.querySelectorAll(`input[name="p${i}"]`);
+                todosInputs.forEach(inp => inp.disabled = true);
+
+                let itemSeleccionado = seleccionada.closest('.opcion-item');
+                
+                if (valorElegido === valorCorrecto) {
+                    itemSeleccionado.classList.add('correcta');
+                } else {
+                    itemSeleccionado.classList.add('incorrecta');
+                    let inputCorrecto = form.querySelector(`input[name="p${i}"][value="${valorCorrecto}"]`);
+                    inputCorrecto.closest('.opcion-item').classList.add('correcta');
+                }
+            }
+
+            // Mostrar resultados en pantalla
+            let panel = document.getElementById('panel-res');
+            let notaDiv = document.getElementById('nota-texto');
+            let msgDiv = document.getElementById('mensaje-texto');
+
+            notaDiv.innerText = `${puntaje} / 5`;
+
+            if (puntaje === 5) {
+                msgDiv.innerText = "¡Nivel Experto Desbloqueado! Tienes un análisis físico impecable.";
+                notaDiv.style.color = "#2ecc71";
+            } else if (puntaje >= 3) {
+                msgDiv.innerText = "¡Felicidades! Superaste los retos avanzados. Faltó poco para la perfección.";
+                notaDiv.style.color = "#f39c12";
+            } else {
+                msgDiv.innerText = "Estos retos son difíciles, ¡no te desanimes! Repasa el paso a paso de los intervalos y vuelve a intentarlo.";
+                notaDiv.style.color = "#e74c3c";
+            }
+
+            panel.classList.add('activo');
+            
+            setTimeout(() => {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+    </script>
+</body>
+</html>
