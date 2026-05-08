@@ -63,9 +63,16 @@
         .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
 
-        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 30px; }
-        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-fisica); margin-bottom: 10px; }
-        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+        /* CABECERA CENTRADA Y LLAMATIVA */
+        .encabezado-leccion { 
+            border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; 
+            margin-bottom: 30px; text-align: center; 
+        }
+        .encabezado-leccion h1 { 
+            font-size: 4rem; color: var(--color-fisica); margin-bottom: 10px; 
+            text-shadow: 0px 4px 10px rgba(0,0,0,0.5); letter-spacing: 2px;
+        }
+        .encabezado-leccion p { color: #ccc; font-size: 1.2rem; }
 
         .seccion-contenido {
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
@@ -106,8 +113,12 @@
 
         .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
         .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
-        .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
+        .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;}
         
+        .lista-datos { list-style-type: none; margin-left: 10px; color: #ddd; line-height: 1.8; }
+        .lista-datos li strong { color: #fff; font-size: 1.1rem; display: inline-block; width: 40px;}
+        .dato-ausente { color: #e74c3c; font-weight: 600; background: rgba(231, 76, 60, 0.1); padding: 2px 8px; border-radius: 4px;}
+
         /* --- VIDEOS RESPONSIVOS EN GRID 2x2 --- */
         .grid-videos {
             display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;
@@ -211,71 +222,99 @@
 
         <!-- SECCIÓN 2: LAS FÓRMULAS Y SUS DESPEJES -->
         <section class="seccion-contenido">
-            <h2>2. Las Tres Fórmulas Restantes y Despejes</h2>
-            <p>En el tema anterior aprendimos la fórmula base de la aceleración ($a = \frac{v_f - v_i}{t}$). En el M.R.U.V., utilizamos otras tres ecuaciones fundamentales dependiendo de los datos que nos entregue el problema. Analicemos cada una:</p>
+            <h2>2. Las Fórmulas del M.R.U.V.</h2>
+            <p>A continuación se presentan las 4 fórmulas fundamentales que rigen este movimiento. Analizaremos cada una y extraeremos detalladamente todos sus despejes posibles.</p>
 
-            <!-- FÓRMULA 1 -->
-            <div class="seccion-formula">
-                <h3><i class="fa-solid fa-ruler"></i> Fórmula 1: Distancia con Aceleración y Tiempo</h3>
-                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos la velocidad final</strong> y necesitamos calcular la distancia recorrida.</p>
+            <!-- FÓRMULA 1 (ACELERACIÓN) -->
+            <div class="seccion-formula" style="border-color: var(--color-acento2);">
+                <h3><i class="fa-solid fa-gauge-high"></i> Fórmula 1: Aceleración</h3>
+                <p style="color: #bbb;">Esta es la fórmula original que ya estudiamos a fondo en la lección anterior. La utilizamos cuando <strong>NO conocemos la distancia</strong>.</p>
                 <div class="caja-formula">
-                    <div class="formula-principal">d = v<sub>i</sub> · t + &frac12; · a · t<sup>2</sup></div>
+                    <div class="formula-principal">a = (v<sub>f</sub> - v<sub>i</sub>) / t</div>
                 </div>
                 
-                <div class="grid-despejes">
-                    <div class="despeje-caja">
-                        <div class="paso-titulo">Despeje para Aceleración (a)</div>
-                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos el término de velocidad inicial al otro lado a restar, el 2 a multiplicar y el tiempo al cuadrado a dividir.</p>
-                        <div class="formula-despejada">a = 2 · (d - v<sub>i</sub> · t) / t<sup>2</sup></div>
-                    </div>
-                    <div class="despeje-caja">
-                        <div class="paso-titulo">Despeje para Velocidad Inicial (v<sub>i</sub>)</div>
-                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos el bloque de la aceleración a restar al otro lado y el tiempo a dividir.</p>
-                        <div class="formula-despejada">v<sub>i</sub> = (d - &frac12; · a · t<sup>2</sup>) / t</div>
-                    </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="fisica10_aceleracion.html" class="btn-accion btn-evaluacion" style="display: inline-block; padding: 10px 20px; font-size: 1rem; flex: none; min-width: auto; width: auto;"><i class="fa-solid fa-arrow-rotate-left"></i> Repasar Aceleración y sus 3 despejes</a>
                 </div>
             </div>
 
             <!-- FÓRMULA 2 -->
             <div class="seccion-formula">
-                <h3><i class="fa-solid fa-gauge-simple-high"></i> Fórmula 2: Velocidades al Cuadrado</h3>
-                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos el tiempo</strong> pero tenemos las velocidades, aceleración y distancia.</p>
+                <h3><i class="fa-solid fa-ruler"></i> Fórmula 2: Distancia con Aceleración y Tiempo</h3>
+                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos la Velocidad Final (v<sub>f</sub>)</strong> y necesitamos calcular la distancia recorrida.</p>
                 <div class="caja-formula">
-                    <div class="formula-principal">v<sub>f</sub><sup>2</sup> = v<sub>i</sub><sup>2</sup> + 2 · a · d</div>
+                    <div class="formula-principal">d = v<sub>i</sub> &middot; t + &frac12; &middot; a &middot; t<sup>2</sup></div>
                 </div>
                 
                 <div class="grid-despejes">
                     <div class="despeje-caja">
-                        <div class="paso-titulo">Despeje para Velocidad Inicial (v<sub>i</sub>)</div>
-                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos (2·a·d) a restar y aplicamos raíz cuadrada para eliminar el exponente 2.</p>
-                        <div class="formula-despejada">v<sub>i</sub> = &radic;(v<sub>f</sub><sup>2</sup> - 2·a·d)</div>
+                        <div class="paso-titulo">Despeje para Aceleración (a)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos el término de la velocidad inicial por el tiempo <code>(v<sub>i</sub> &middot; t)</code> al otro lado a restar a la distancia. Luego, el <code>2</code> de la fracción pasa a multiplicar todo ese resultado, y finalmente el tiempo al cuadrado <code>(t<sup>2</sup>)</code> pasa a dividir.</p>
+                        <div class="formula-despejada">a = 2 &middot; (d - v<sub>i</sub> &middot; t) / t<sup>2</sup></div>
                     </div>
                     <div class="despeje-caja">
-                        <div class="paso-titulo">Despeje para Distancia (d)</div>
-                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos la velocidad inicial al cuadrado a restar, y (2·a) a dividir.</p>
-                        <div class="formula-despejada">d = (v<sub>f</sub><sup>2</sup> - v<sub>i</sub><sup>2</sup>) / (2·a)</div>
+                        <div class="paso-titulo">Despeje para Vel. Inicial (v<sub>i</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos el bloque completo de la aceleración <code>(&frac12; &middot; a &middot; t<sup>2</sup>)</code> a restar al otro lado. Luego, el tiempo <code>(t)</code> que multiplica a la velocidad inicial pasa a dividir a todo el conjunto.</p>
+                        <div class="formula-despejada">v<sub>i</sub> = (d - &frac12; &middot; a &middot; t<sup>2</sup>) / t</div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Tiempo (t)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">¡Ojo aquí! Como la variable tiempo está elevada al cuadrado <code>(t<sup>2</sup>)</code> y también está lineal <code>(t)</code>, se debe usar la famosa ecuación cuadrática para despejarla. El resultado es:</p>
+                        <div class="formula-despejada">t = (-v<sub>i</sub> + &radic;(v<sub>i</sub><sup>2</sup> + 2&middot;a&middot;d)) / a</div>
                     </div>
                 </div>
             </div>
 
             <!-- FÓRMULA 3 -->
             <div class="seccion-formula">
-                <h3><i class="fa-solid fa-arrows-left-right"></i> Fórmula 3: Distancia Promedio</h3>
-                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos la aceleración</strong> pero tenemos velocidades inicial, final y tiempo.</p>
+                <h3><i class="fa-solid fa-gauge-simple-high"></i> Fórmula 3: Velocidades al Cuadrado</h3>
+                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos el Tiempo (t)</strong> pero tenemos las velocidades, aceleración y distancia.</p>
                 <div class="caja-formula">
-                    <div class="formula-principal">d = ( (v<sub>i</sub> + v<sub>f</sub>) / 2 ) · t</div>
+                    <div class="formula-principal">v<sub>f</sub><sup>2</sup> = v<sub>i</sub><sup>2</sup> + 2 &middot; a &middot; d</div>
+                </div>
+                
+                <div class="grid-despejes">
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Vel. Inicial (v<sub>i</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos el bloque <code>(2 &middot; a &middot; d)</code> a restar al otro lado de la igualdad. Para eliminar el cuadrado de la velocidad inicial, aplicamos raíz cuadrada a todo.</p>
+                        <div class="formula-despejada">v<sub>i</sub> = &radic;(v<sub>f</sub><sup>2</sup> - 2 &middot; a &middot; d)</div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Distancia (d)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos la velocidad inicial al cuadrado <code>(v<sub>i</sub><sup>2</sup>)</code> a restar a la velocidad final. Luego, el bloque <code>(2 &middot; a)</code> que multiplica a la distancia, pasa a dividir.</p>
+                        <div class="formula-despejada">d = (v<sub>f</sub><sup>2</sup> - v<sub>i</sub><sup>2</sup>) / (2 &middot; a)</div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Aceleración (a)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos la velocidad inicial al cuadrado <code>(v<sub>i</sub><sup>2</sup>)</code> a restar. Luego, el bloque <code>(2 &middot; d)</code> que acompaña a la aceleración multiplicándola, pasa a dividir al otro lado.</p>
+                        <div class="formula-despejada">a = (v<sub>f</sub><sup>2</sup> - v<sub>i</sub><sup>2</sup>) / (2 &middot; d)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FÓRMULA 4 -->
+            <div class="seccion-formula">
+                <h3><i class="fa-solid fa-arrows-left-right"></i> Fórmula 4: Distancia Promedio</h3>
+                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos la Aceleración (a)</strong> pero tenemos velocidades inicial, final y tiempo.</p>
+                <div class="caja-formula">
+                    <div class="formula-principal">d = ( (v<sub>i</sub> + v<sub>f</sub>) / 2 ) &middot; t</div>
                 </div>
                 
                 <div class="grid-despejes">
                     <div class="despeje-caja">
                         <div class="paso-titulo">Despeje para Tiempo (t)</div>
-                        <p style="font-size: 0.85rem; color: #ccc;">El 2 pasa a multiplicar a la distancia (d), y la suma de velocidades pasa a dividir.</p>
-                        <div class="formula-despejada">t = 2·d / (v<sub>i</sub> + v<sub>f</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">El <code>2</code> que está dividiendo pasa a multiplicar a la distancia <code>(2 &middot; d)</code>, y todo el bloque de la suma de velocidades <code>(v<sub>i</sub> + v<sub>f</sub>)</code> pasa a dividir.</p>
+                        <div class="formula-despejada">t = 2 &middot; d / (v<sub>i</sub> + v<sub>f</sub>)</div>
                     </div>
                     <div class="despeje-caja">
-                        <div class="paso-titulo">Despeje para Velocidad Final (v<sub>f</sub>)</div>
-                        <p style="font-size: 0.85rem; color: #ccc;">El 2 multiplica a 'd', el tiempo divide, y finalmente restamos la velocidad inicial.</p>
-                        <div class="formula-despejada">v<sub>f</sub> = (2·d / t) - v<sub>i</sub></div>
+                        <div class="paso-titulo">Despeje para Vel. Final (v<sub>f</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">El <code>2</code> pasa a multiplicar a la distancia <code>(2 &middot; d)</code> y el tiempo <code>(t)</code> pasa a dividir. Finalmente, la velocidad inicial <code>(v<sub>i</sub>)</code> que está sumando, pasa a restar.</p>
+                        <div class="formula-despejada">v<sub>f</sub> = (2 &middot; d / t) - v<sub>i</sub></div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Vel. Inicial (v<sub>i</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Hacemos el mismo procedimiento anterior: el <code>2</code> pasa a multiplicar a la distancia, el tiempo pasa a dividir. Y esta vez, la velocidad final <code>(v<sub>f</sub>)</code> que suma, pasa a restar.</p>
+                        <div class="formula-despejada">v<sub>i</sub> = (2 &middot; d / t) - v<sub>f</sub></div>
                     </div>
                 </div>
             </div>
@@ -289,53 +328,81 @@
                 <i class="fa-solid fa-lightbulb"></i> <strong>La Gran Pista para Resolver:</strong> En los ejercicios de M.R.U.V. siempre hay 5 variables posibles (d, a, t, v<sub>i</sub>, v<sub>f</sub>). El problema <strong>siempre</strong> te dará 3 datos conocidos y te pedirá calcular 1. Por lo tanto, siempre habrá <strong>1 dato que no te dan y tampoco te piden</strong>. ¡Ese dato ausente es tu guía secreta para elegir la fórmula correcta!
             </div>
 
-            <!-- EJERCICIO 1 -->
+            <!-- EJERCICIO 1 (Fórmula 2) -->
             <div class="ejercicio-tarjeta">
-                <h3>Ejercicio 1: Aplicando la Fórmula 1</h3>
+                <h3>Ejercicio 1: Aplicando la Fórmula 2 (Distancia con aceleración)</h3>
                 <div class="enunciado">
                     "Un camión de carga sale del reposo acelerando a 2 m/s² durante 8 segundos. ¿Qué distancia recorrió en ese tiempo?"
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Análisis de Datos</div>
-                    <p>Conocidos: v<sub>i</sub> = 0 m/s (reposo), a = 2 m/s², t = 8 s.<br>Incógnita: d = ?<br><strong>Dato ausente:</strong> Velocidad Final (v<sub>f</sub>) no la dan y no la piden.</p>
+                    <div class="paso-titulo">Paso 1: Lista de Datos</div>
+                    <ul class="lista-datos">
+                        <li><strong>v<sub>i</sub>:</strong> 0 m/s (porque parte del reposo)</li>
+                        <li><strong>a:</strong> 2 m/s&sup2;</li>
+                        <li><strong>t:</strong> 8 s</li>
+                        <li><strong>d:</strong> ? (La incógnita que buscamos)</li>
+                        <li class="dato-ausente"><strong>v<sub>f</sub>:</strong> Ausente (No lo dan y no lo piden)</li>
+                    </ul>
                 </div>
                 <div class="paso">
                     <div class="paso-titulo">Paso 2: Elegir fórmula y reemplazar</div>
-                    <p>Como no tenemos v<sub>f</sub>, usamos la Fórmula 1:<br>d = v<sub>i</sub> · t + &frac12; · a · t<sup>2</sup><br>d = 0 · 8 + 0.5 · 2 · (8)<sup>2</sup><br>d = 0 + 1 · 64</p>
+                    <p>Como nuestro dato ausente es <strong>v<sub>f</sub></strong>, usamos la Fórmula 2:<br>
+                    d = v<sub>i</sub> &middot; t + &frac12; &middot; a &middot; t<sup>2</sup><br>
+                    d = 0 &middot; 8 + 0.5 &middot; 2 &middot; (8)<sup>2</sup><br>
+                    d = 0 + 1 &middot; 64</p>
                     <p style="color: #3498db; font-size: 1.1rem; font-weight: bold; margin-top: 5px;">d = 64 metros</p>
                 </div>
             </div>
 
-            <!-- EJERCICIO 2 -->
+            <!-- EJERCICIO 2 (Fórmula 3) -->
             <div class="ejercicio-tarjeta">
-                <h3>Ejercicio 2: Aplicando la Fórmula 2</h3>
+                <h3>Ejercicio 2: Aplicando la Fórmula 3 (Velocidades al cuadrado)</h3>
                 <div class="enunciado">
                     "Un Willys viaja a 10 m/s y acelera a 3 m/s² para rebasar, recorriendo una distancia de 50 metros. ¿Cuál fue su velocidad al terminar de rebasar?"
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Análisis de Datos</div>
-                    <p>Conocidos: v<sub>i</sub> = 10 m/s, a = 3 m/s², d = 50 m.<br>Incógnita: v<sub>f</sub> = ?<br><strong>Dato ausente:</strong> Tiempo (t) no lo dan y no lo piden.</p>
+                    <div class="paso-titulo">Paso 1: Lista de Datos</div>
+                    <ul class="lista-datos">
+                        <li><strong>v<sub>i</sub>:</strong> 10 m/s</li>
+                        <li><strong>a:</strong> 3 m/s&sup2;</li>
+                        <li><strong>d:</strong> 50 m</li>
+                        <li><strong>v<sub>f</sub>:</strong> ? (La incógnita que buscamos)</li>
+                        <li class="dato-ausente"><strong>t:</strong> Ausente (No lo dan y no lo piden)</li>
+                    </ul>
                 </div>
                 <div class="paso">
                     <div class="paso-titulo">Paso 2: Elegir fórmula y reemplazar</div>
-                    <p>Como no tenemos tiempo, usamos la Fórmula 2:<br>v<sub>f</sub><sup>2</sup> = v<sub>i</sub><sup>2</sup> + 2 · a · d<br>v<sub>f</sub><sup>2</sup> = (10)<sup>2</sup> + 2 · 3 · 50<br>v<sub>f</sub><sup>2</sup> = 100 + 300<br>v<sub>f</sub> = &radic;400</p>
+                    <p>Como nuestro dato ausente es el <strong>tiempo (t)</strong>, usamos la Fórmula 3:<br>
+                    v<sub>f</sub><sup>2</sup> = v<sub>i</sub><sup>2</sup> + 2 &middot; a &middot; d<br>
+                    v<sub>f</sub><sup>2</sup> = (10)<sup>2</sup> + 2 &middot; 3 &middot; 50<br>
+                    v<sub>f</sub><sup>2</sup> = 100 + 300<br>
+                    v<sub>f</sub> = &radic;400</p>
                     <p style="color: #3498db; font-size: 1.1rem; font-weight: bold; margin-top: 5px;">v<sub>f</sub> = 20 m/s</p>
                 </div>
             </div>
 
-            <!-- EJERCICIO 3 -->
+            <!-- EJERCICIO 3 (Fórmula 4 despejada) -->
             <div class="ejercicio-tarjeta">
-                <h3>Ejercicio 3: Aplicando la Fórmula 3 (Despejada)</h3>
+                <h3>Ejercicio 3: Aplicando la Fórmula 4 (Despeje para Tiempo)</h3>
                 <div class="enunciado">
-                    "Una motocicleta frena reduciendo su velocidad desde 25 m/s hasta 5 m/s, en una distancia de 150 metros. ¿Cuánto tiempo le tomó frenar?"
+                    "Una motocicleta frena reduciendo su velocidad desde 25 m/s hasta 5 m/s, recorriendo una distancia exacta de 150 metros. ¿Cuánto tiempo le tomó frenar?"
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Análisis de Datos</div>
-                    <p>Conocidos: v<sub>i</sub> = 25 m/s, v<sub>f</sub> = 5 m/s, d = 150 m.<br>Incógnita: t = ?<br><strong>Dato ausente:</strong> Aceleración (a) no la dan y no la piden.</p>
+                    <div class="paso-titulo">Paso 1: Lista de Datos</div>
+                    <ul class="lista-datos">
+                        <li><strong>v<sub>i</sub>:</strong> 25 m/s</li>
+                        <li><strong>v<sub>f</sub>:</strong> 5 m/s</li>
+                        <li><strong>d:</strong> 150 m</li>
+                        <li><strong>t:</strong> ? (La incógnita que buscamos)</li>
+                        <li class="dato-ausente"><strong>a:</strong> Ausente (No la dan y no la piden)</li>
+                    </ul>
                 </div>
                 <div class="paso">
                     <div class="paso-titulo">Paso 2: Elegir fórmula y reemplazar</div>
-                    <p>Como no tenemos aceleración, usamos el despeje para tiempo de la Fórmula 3:<br>t = 2·d / (v<sub>i</sub> + v<sub>f</sub>)<br>t = 2(150) / (25 + 5)<br>t = 300 / 30</p>
+                    <p>Como nuestro dato ausente es la <strong>aceleración (a)</strong>, usamos el despeje de tiempo de la Fórmula 4:<br>
+                    t = 2 &middot; d / (v<sub>i</sub> + v<sub>f</sub>)<br>
+                    t = 2(150) / (25 + 5)<br>
+                    t = 300 / 30</p>
                     <p style="color: #3498db; font-size: 1.1rem; font-weight: bold; margin-top: 5px;">t = 10 segundos</p>
                 </div>
             </div>
