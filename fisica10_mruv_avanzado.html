@@ -13,9 +13,9 @@
             --color-fisica: #3498db;   
             --color-oscuro: #1a1a2e;
             --color-texto: #ffffff;
-            --color-mru: #2ecc71; /* Verde para velocidad constante */
-            --color-mruv-acelera: #e74c3c; /* Rojo para acelerar */
-            --color-mruv-frena: #f39c12; /* Naranja para frenar */
+            --color-mru: #2ecc71; 
+            --color-mruv-acelera: #e74c3c; 
+            --color-mruv-frena: #f39c12; 
         }
 
         html { scroll-behavior: smooth; }
@@ -56,10 +56,16 @@
         .ejercicio-intermedio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.4rem; }
         .enunciado { font-style: italic; color: #ddd; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.1rem; border-left: 4px solid #f39c12; }
         
-        .paso-resolucion { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
-        .paso-titulo { font-weight: 800; color: #f39c12; font-size: 1rem; text-transform: uppercase; margin-bottom: 5px; }
+        .paso-resolucion { margin-bottom: 20px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 800; color: #f39c12; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; }
         .paso-resolucion p { color: #ccc; line-height: 1.8; font-size: 1.05rem; }
-        .formula-hl { background: rgba(52, 152, 219, 0.2); padding: 2px 8px; border-radius: 5px; color: #fff; font-family: monospace; font-size: 1.1rem; }
+        
+        .lista-datos { list-style-type: none; margin-left: 10px; color: #ddd; line-height: 1.8; margin-bottom: 10px; }
+        .lista-datos li strong { color: #fff; display: inline-block; width: 45px;}
+        .dato-ausente { color: #e74c3c; font-weight: 600; background: rgba(231, 76, 60, 0.1); padding: 2px 8px; border-radius: 4px;}
+        .dato-incognita { color: #f39c12; font-weight: 600; }
+
+        .formula-hl { background: rgba(52, 152, 219, 0.2); padding: 4px 10px; border-radius: 5px; color: #fff; font-family: monospace; font-size: 1.1rem; display: inline-block; margin-top: 5px;}
         .resultado-hl { color: #2ecc71; font-weight: 800; font-size: 1.2rem; }
 
         /* --- EJERCICIOS AVANZADOS (INTERVALOS) --- */
@@ -71,27 +77,39 @@
         
         /* Animación CSS para intervalos */
         .pista-animada { position: relative; width: 100%; height: 120px; background: #333; border-radius: 10px; margin: 30px 0; display: flex; overflow: hidden; border-bottom: 4px dashed #7f8c8d; }
-        .tramo { height: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 10px; color: #fff; font-weight: bold; border-right: 2px dashed rgba(255,255,255,0.2); position: relative; }
-        .tramo-mruv-ac { background: rgba(231, 76, 60, 0.3); } /* Acelera */
-        .tramo-mru { background: rgba(46, 204, 113, 0.3); } /* Constante */
-        .tramo-mruv-fr { background: rgba(243, 156, 18, 0.3); } /* Frena */
+        .intervalo-grafico { height: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 10px; color: #fff; font-weight: bold; border-right: 2px dashed rgba(255,255,255,0.2); position: relative; }
+        .int-acelera { background: rgba(231, 76, 60, 0.3); } 
+        .int-constante { background: rgba(46, 204, 113, 0.3); } 
+        .int-frena { background: rgba(243, 156, 18, 0.3); } 
         
-        .datos-tramo { font-size: 0.8rem; font-weight: normal; color: #ddd; text-align: center; margin-top: 5px; background: rgba(0,0,0,0.5); padding: 4px; border-radius: 4px; line-height: 1.3;}
+        .datos-intervalo { font-size: 0.8rem; font-weight: normal; color: #ddd; text-align: center; margin-top: 5px; background: rgba(0,0,0,0.5); padding: 4px 8px; border-radius: 4px; line-height: 1.3;}
         
-        .vehiculo { position: absolute; bottom: 5px; left: 0; font-size: 30px; color: #fff; animation: conducir 10s infinite linear; z-index: 10; }
+        .vehiculo { position: absolute; bottom: 5px; left: 0; font-size: 30px; color: #fff; z-index: 10; }
         
-        @keyframes conducir {
-            0% { left: 0%; transform: scaleX(1); }
-            90% { left: 95%; transform: scaleX(1); opacity: 1; }
-            95% { left: 95%; opacity: 0; }
-            100% { left: 0%; opacity: 0; }
+        /* Animaciones con timing simulando aceleración/frenado */
+        .anim-1 { animation: recorrido1 8s infinite; }
+        @keyframes recorrido1 {
+            0% { left: 0%; }
+            35% { left: 25%; animation-timing-function: linear; } /* Arranca lento, acelera */
+            75% { left: 75%; animation-timing-function: ease-out; } /* Constante rápido */
+            100% { left: 95%; } /* Frena hasta 0 */
         }
 
-        .analisis-intervalo { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #fff; }
-        .analisis-intervalo h4 { font-size: 1.2rem; margin-bottom: 10px; }
+        .anim-2 { animation: recorrido2 8s infinite; }
+        @keyframes recorrido2 {
+            0% { left: 0%; animation-timing-function: linear; }
+            30% { left: 35%; animation-timing-function: ease-out; } /* Constante */
+            60% { left: 65%; animation-timing-function: ease-in; } /* Frena */
+            100% { left: 95%; } /* Acelera de nuevo */
+        }
+
+        .analisis-intervalo { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #fff; }
+        .analisis-intervalo h4 { font-size: 1.3rem; margin-bottom: 15px; color: #fff;}
+        .analisis-intervalo p { margin-bottom: 10px; line-height: 1.6; color: #ddd; }
+        .analisis-intervalo .bloque-calc { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin-top: 10px; font-family: monospace; font-size: 1.05rem;}
 
         /* --- BOTONES FINALES --- */
-        .botones-accion-final { display: flex; gap: 20px; justify-content: center; margin-top: 50px; }
+        .botones-accion-final { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 50px; }
         .btn-accion { padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
         .btn-practica { background: #2ecc71; }
         .btn-practica:hover { background: #27ae60; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
@@ -99,6 +117,7 @@
         .btn-evaluacion:hover { background: #8e44ad; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4); }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .intervalo-grafico span { font-size: 0.7rem; } }
     </style>
 </head>
 <body>
@@ -117,109 +136,166 @@
 
         <div class="encabezado-leccion">
             <h1>Ejercicios Avanzados M.R.U.V.</h1>
-            <p>De la teoría a la maestría: Reemplazos con unidades y movimientos por intervalos.</p>
+            <p>¡Subamos el nivel! Demuestra tus habilidades resolviendo retos más complejos y analizando movimientos reales.</p>
         </div>
 
         <!-- ========================================== -->
-        <!-- NIVEL INTERMEDIO (5 EJERCICIOS CON UNIDADES)-->
+        <!-- NIVEL INTERMEDIO (5 EJERCICIOS CON DESPEJES)-->
         <!-- ========================================== -->
-        <h2 class="titulo-seccion">Nivel Intermedio: Dominio de Fórmulas</h2>
-        <p style="color: #bbb; margin-bottom: 20px; font-size: 1.1rem;">Observa cuidadosamente el <strong>Paso 3</strong> de cada ejercicio. Fíjate cómo al momento de reemplazar las letras por números, <strong>siempre colocamos la unidad de medida al lado</strong>. Esto evita errores y te asegura que el resultado final sea correcto.</p>
+        <h2 class="titulo-seccion">Nivel Intermedio</h2>
+        <p style="color: #bbb; margin-bottom: 30px; font-size: 1.1rem;">¡Estás listo para el siguiente paso! En estos ejercicios pondremos a prueba tu capacidad de análisis. Recuerda leer bien el problema, identificar tus datos y organizar tus ideas antes de operar. ¡Tú puedes!</p>
 
-        <!-- Ejercicio 1 (Despejar Distancia) -->
+        <!-- Ejercicio 1 (Despejar Aceleración) -->
         <div class="ejercicio-intermedio">
-            <h3>1. Calculando Distancia (Fórmula Directa)</h3>
-            <div class="enunciado">"Un motociclista va a 12 m/s. Al ver la recta, acelera a 2 m/s² durante 5 segundos. ¿Qué distancia recorrió en esa recta?"</div>
+            <h3>1. Hallando la Aceleración (Con distancia y tiempo)</h3>
+            <div class="enunciado">"Un motociclista que parte con una velocidad de 5 m/s, recorre una distancia de 85 metros en 5 segundos. ¿Cuál fue su aceleración en ese trayecto?"</div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
-                <p>Datos: Vi, a, t. Incógnita: d. No tenemos Vf. Usamos: <span class="formula-hl">d = Vi·t + &frac12;·a·t²</span></p>
+                <div class="paso-titulo">Paso 1: Identificación de Datos</div>
+                <ul class="lista-datos">
+                    <li><strong>Vi =</strong> 5 m/s</li>
+                    <li><strong>d =</strong> 85 m</li>
+                    <li><strong>t =</strong> 5 s</li>
+                    <li><strong>a =</strong> <span class="dato-incognita">? (Incógnita)</span></li>
+                    <li><strong>Vf =</strong> <span class="dato-ausente">Ausente (No nos la dan y no la piden)</span></li>
+                </ul>
+                <p>Por tanto, escogemos la fórmula: <span class="formula-hl">d = Vi·t + &frac12;·a·t²</span></p>
             </div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 2: Despejar</div>
-                <p>No es necesario despejar, la fórmula ya está igualada a la distancia (d).</p>
+                <div class="paso-titulo">Paso 2: Despejar la Ecuación</div>
+                <p>Como esta fórmula elegida no nos funciona directamente porque está igualada a la distancia, debemos despejarla para la aceleración (a). Pasamos el bloque de velocidad inicial por tiempo a restar, el 2 a multiplicar y el tiempo al cuadrado a dividir, quedando así:</p>
+                <p><span class="formula-hl">a = 2(d - Vi·t) / t²</span></p>
             </div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
-                <p>d = (12 m/s) · (5 s) + 0.5 · (2 m/s²) · (5 s)²</p>
-                <p>d = (60 m) + 0.5 · (2 m/s²) · (25 s²)</p>
-                <p>d = 60 m + 25 m <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">d = 85 m</span></p>
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar</div>
+                <p>a = 2(85 m - (5 m/s) · (5 s)) / (5 s)²</p>
+                <p>a = 2(85 m - 25 m) / 25 s²</p>
+                <p>a = 2(60 m) / 25 s²</p>
+                <p>a = 120 m / 25 s² <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">a = 4.8 m/s²</span></p>
             </div>
         </div>
 
         <!-- Ejercicio 2 (Despejar Vi) -->
         <div class="ejercicio-intermedio">
-            <h3>2. Calculando Velocidad Inicial (Despeje de cuadrados)</h3>
-            <div class="enunciado">"Una carga de café llega al final de una rampa de 40 metros con una velocidad de 15 m/s. Si la rampa genera una aceleración de 2 m/s², ¿con qué velocidad empezó a caer?"</div>
+            <h3>2. Hallando la Velocidad Inicial (Sin tiempo)</h3>
+            <div class="enunciado">"Un vehículo llega al final de una pendiente de 40 metros con una velocidad de 15 m/s. Si bajó con una aceleración constante de 2 m/s², ¿a qué velocidad inició el descenso?"</div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
-                <p>Datos: Vf, d, a. Incógnita: Vi. No tenemos tiempo (t). Usamos: <span class="formula-hl">Vf² = Vi² + 2·a·d</span></p>
+                <div class="paso-titulo">Paso 1: Identificación de Datos</div>
+                <ul class="lista-datos">
+                    <li><strong>Vf =</strong> 15 m/s</li>
+                    <li><strong>a =</strong> 2 m/s²</li>
+                    <li><strong>d =</strong> 40 m</li>
+                    <li><strong>Vi =</strong> <span class="dato-incognita">? (Incógnita)</span></li>
+                    <li><strong>t =</strong> <span class="dato-ausente">Ausente (No nos lo dan y no lo piden)</span></li>
+                </ul>
+                <p>Por tanto, escogemos la fórmula: <span class="formula-hl">Vf² = Vi² + 2·a·d</span></p>
             </div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 2: Despejar Vi</div>
-                <p>Vi = &radic;(Vf² - 2·a·d)</p>
+                <div class="paso-titulo">Paso 2: Despejar la Ecuación</div>
+                <p>Para dejar la Vi sola, pasamos el bloque (2·a·d) a restar al otro lado. Luego aplicamos raíz cuadrada para quitar el exponente 2 de la velocidad, quedando así:</p>
+                <p><span class="formula-hl">Vi = &radic;(Vf² - 2·a·d)</span></p>
             </div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar</div>
                 <p>Vi = &radic;[ (15 m/s)² - 2 · (2 m/s²) · (40 m) ]</p>
                 <p>Vi = &radic;[ 225 m²/s² - 160 m²/s² ]</p>
                 <p>Vi = &radic;[ 65 m²/s² ] <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">Vi = 8.06 m/s</span></p>
             </div>
         </div>
 
-        <!-- Ejercicio 3 (Despejar Aceleración) -->
+        <!-- Ejercicio 3 (Despejar t en Vf) -->
         <div class="ejercicio-intermedio">
-            <h3>3. Calculando Aceleración Negativa (Frenado)</h3>
-            <div class="enunciado">"Un tractor viaja a 20 m/s y frena hasta detenerse por completo en 8 segundos. ¿Cuál fue su aceleración de frenado?"</div>
+            <h3>3. Calculando el Tiempo (Con Aceleración)</h3>
+            <div class="enunciado">"Un transporte escolar va a 10 m/s y acelera constantemente a 1.5 m/s² hasta alcanzar los 19 m/s. ¿Cuánto tiempo duró acelerando?"</div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
-                <p>Datos: Vi, t, Vf=0 (porque se detiene). Incógnita: a. Usamos: <span class="formula-hl">a = (Vf - Vi) / t</span></p>
+                <div class="paso-titulo">Paso 1: Identificación de Datos</div>
+                <ul class="lista-datos">
+                    <li><strong>Vi =</strong> 10 m/s</li>
+                    <li><strong>Vf =</strong> 19 m/s</li>
+                    <li><strong>a =</strong> 1.5 m/s²</li>
+                    <li><strong>t =</strong> <span class="dato-incognita">? (Incógnita)</span></li>
+                    <li><strong>d =</strong> <span class="dato-ausente">Ausente (No nos la dan y no la piden)</span></li>
+                </ul>
+                <p>Por tanto, escogemos la fórmula: <span class="formula-hl">Vf = Vi + a·t</span></p>
             </div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 2: Despejar</div>
-                <p>Ya está despejada para aceleración.</p>
+                <div class="paso-titulo">Paso 2: Despejar la Ecuación</div>
+                <p>Como necesitamos hallar el tiempo, pasamos la Vi a restar al otro lado y luego la aceleración (a) pasa a dividir, quedando así:</p>
+                <p><span class="formula-hl">t = (Vf - Vi) / a</span></p>
             </div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
-                <p>a = (0 m/s - 20 m/s) / (8 s)</p>
-                <p>a = (-20 m/s) / (8 s) <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">a = -2.5 m/s²</span></p>
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar</div>
+                <p>t = (19 m/s - 10 m/s) / (1.5 m/s²)</p>
+                <p>t = (9 m/s) / (1.5 m/s²) <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">t = 6 s</span></p>
             </div>
         </div>
 
-        <!-- Ejercicio 4 (Despejar Tiempo) -->
+        <!-- Ejercicio 4 (Despejar Vf) -->
         <div class="ejercicio-intermedio">
-            <h3>4. Calculando Tiempo (Distancia promedio)</h3>
+            <h3>4. Calculando Velocidad Final (Sin aceleración)</h3>
+            <div class="enunciado">"Un vehículo ingresa a un tramo de 100 metros a una velocidad de 12 m/s y le toma 5 segundos recorrerlo. Si su aceleración fue constante, ¿A qué velocidad salió del tramo?"</div>
+            
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 1: Identificación de Datos</div>
+                <ul class="lista-datos">
+                    <li><strong>Vi =</strong> 12 m/s</li>
+                    <li><strong>d =</strong> 100 m</li>
+                    <li><strong>t =</strong> 5 s</li>
+                    <li><strong>Vf =</strong> <span class="dato-incognita">? (Incógnita)</span></li>
+                    <li><strong>a =</strong> <span class="dato-ausente">Ausente (No nos la dan y no la piden)</span></li>
+                </ul>
+                <p>Por tanto, escogemos la fórmula: <span class="formula-hl">d = ( (Vi + Vf) / 2 ) · t</span></p>
+            </div>
+            
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 2: Despejar la Ecuación</div>
+                <p>Para despejar la Vf, el 2 pasa a multiplicar a la distancia (d), el tiempo (t) pasa a dividir, y la Vi que está sumando pasa a restar, quedando así:</p>
+                <p><span class="formula-hl">Vf = (2·d / t) - Vi</span></p>
+            </div>
+            
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar</div>
+                <p>Vf = (2 · 100 m / 5 s) - 12 m/s</p>
+                <p>Vf = (200 m / 5 s) - 12 m/s</p>
+                <p>Vf = 40 m/s - 12 m/s <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">Vf = 28 m/s</span></p>
+            </div>
+        </div>
+
+        <!-- Ejercicio 5 (Despejar t en promedio) -->
+        <div class="ejercicio-intermedio">
+            <h3>5. Hallando el Tiempo (Con velocidades y distancia)</h3>
             <div class="enunciado">"Un ciclista reduce su velocidad de 12 m/s a 4 m/s mientras recorre un tramo de 32 metros. ¿Cuánto tiempo le tomó este recorrido?"</div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
-                <p>Datos: Vi, Vf, d. Incógnita: t. No hay aceleración. Usamos: <span class="formula-hl">d = ((Vi + Vf)/2) · t</span></p>
+                <div class="paso-titulo">Paso 1: Identificación de Datos</div>
+                <ul class="lista-datos">
+                    <li><strong>Vi =</strong> 12 m/s</li>
+                    <li><strong>Vf =</strong> 4 m/s</li>
+                    <li><strong>d =</strong> 32 m</li>
+                    <li><strong>t =</strong> <span class="dato-incognita">? (Incógnita)</span></li>
+                    <li><strong>a =</strong> <span class="dato-ausente">Ausente (No nos la dan y no la piden)</span></li>
+                </ul>
+                <p>Por tanto, escogemos la fórmula: <span class="formula-hl">d = ( (Vi + Vf) / 2 ) · t</span></p>
             </div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 2: Despejar t</div>
-                <p>t = (2 · d) / (Vi + Vf)</p>
+                <div class="paso-titulo">Paso 2: Despejar la Ecuación</div>
+                <p>Para hallar el tiempo, pasamos el 2 a multiplicar a la distancia (d), y todo el bloque de suma de velocidades pasa a dividir, quedando así:</p>
+                <p><span class="formula-hl">t = 2·d / (Vi + Vf)</span></p>
             </div>
+            
             <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar</div>
                 <p>t = (2 · 32 m) / (12 m/s + 4 m/s)</p>
                 <p>t = (64 m) / (16 m/s) <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">t = 4 s</span></p>
-            </div>
-        </div>
-
-        <!-- Ejercicio 5 (Despejar Vf) -->
-        <div class="ejercicio-intermedio">
-            <h3>5. Calculando Velocidad Final</h3>
-            <div class="enunciado">"Un transporte escolar va a 10 m/s y acelera constantemente a 1.5 m/s² durante 6 segundos. ¿A qué velocidad llega al final de los 6 segundos?"</div>
-            <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
-                <p>Datos: Vi, a, t. Incógnita: Vf. No nos piden distancia. Usamos: <span class="formula-hl">Vf = Vi + a·t</span></p>
-            </div>
-            <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 2: Despejar</div>
-                <p>La fórmula ya está lista para usarse.</p>
-            </div>
-            <div class="paso-resolucion">
-                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
-                <p>Vf = (10 m/s) + (1.5 m/s²) · (6 s)</p>
-                <p>Vf = (10 m/s) + (9 m/s) <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">Vf = 19 m/s</span></p>
             </div>
         </div>
 
@@ -232,119 +308,231 @@
             <h3><i class="fa-solid fa-route"></i> ¿Qué son los Intervalos y cómo resolverlos?</h3>
             <p>En la vida real, un vehículo no hace un solo movimiento. Puede acelerar, luego mantener la velocidad y finalmente frenar. Para resolver estos problemas debes "partir" el viaje en pedazos (intervalos) y resolver uno por uno. <strong>Las claves son:</strong></p>
             <ul>
-                <li><strong>Identificar M.R.U.:</strong> Si el texto dice "mantiene su velocidad", "velocidad constante" o "no acelera", en ese tramo <strong>solo usas la fórmula del triángulo (v = d/t)</strong>. La aceleración ahí es cero.</li>
-                <li><strong>Identificar M.R.U.V.:</strong> Si dice "arranca", "frena", "aumenta a", "se detiene", hay aceleración. Usas las 4 fórmulas que acabamos de ver.</li>
-                <li><strong>La regla de oro de la Continuidad:</strong> La Velocidad Final (Vf) de un intervalo, se convierte automáticamente en la Velocidad Inicial (Vi) del siguiente intervalo. ¡Es el mismo vehículo continuando su camino!</li>
+                <li><strong>Identificar M.R.U.:</strong> Si el texto dice "mantiene su velocidad", "velocidad constante" o "no acelera", en ese intervalo <strong>solo usas la fórmula del triángulo (v = d / t)</strong>.</li>
+                <li><strong>Identificar M.R.U.V.:</strong> Si dice "arranca", "frena", "aumenta a", "se detiene", hay aceleración. Usas las fórmulas de M.R.U.V.</li>
+                <li><strong>La regla de oro de la Continuidad:</strong> La Velocidad Final (Vf) con la que termina un intervalo, se convierte automáticamente en la Velocidad Inicial (Vi) con la que empieza el siguiente intervalo.</li>
             </ul>
         </div>
 
         <!-- Ejercicio Avanzado 1 -->
         <div class="ejercicio-avanzado">
             <h3 style="color: #4facfe; font-size: 1.6rem; margin-bottom: 10px;">Problema Avanzado 1: El Willys Cafetero</h3>
-            <div class="enunciado" style="border-left-color: #3498db;">"Un Willys cargado parte del reposo y acelera a 2 m/s² durante 5 segundos. Luego, al llegar a la vía plana, mantiene esa velocidad constante durante 10 segundos. Finalmente, ve un obstáculo y frena a razón de -2 m/s² hasta detenerse por completo. ¿Cuál es la distancia total recorrida?"</div>
+            <div class="enunciado" style="border-left-color: #3498db;">"Un Willys cargado parte del reposo y acelera a 2 m/s² durante 5 segundos. Luego, al llegar a la vía plana, mantiene esa velocidad constante durante 10 segundos. Finalmente, ve un obstáculo y frena a razón de -2 m/s² hasta detenerse por completo. ¿Cuál es la distancia total y el tiempo total del recorrido?"</div>
             
-            <!-- Animación Gráfica 1 -->
             <div class="pista-animada">
-                <i class="fa-solid fa-truck-pickup vehiculo"></i>
-                <div class="tramo tramo-mruv-ac" style="width: 25%;">
-                    <span>Tramo 1 (M.R.U.V.)</span>
-                    <div class="datos-datos tramo">a = 2 m/s²<br>t = 5s<br>Arranca (Vi=0)</div>
+                <i class="fa-solid fa-truck-pickup vehiculo anim-1"></i>
+                <div class="intervalo-grafico int-acelera" style="width: 25%;">
+                    <span>Int. 1 (Acelera)</span>
+                    <div class="datos-intervalo">a = 2 m/s²<br>t = 5s<br>Arranca (Vi=0)</div>
                 </div>
-                <div class="tramo tramo-mru" style="width: 50%;">
-                    <span>Tramo 2 (M.R.U.)</span>
-                    <div class="datos-tramo">Velocidad Constante<br>t = 10s</div>
+                <div class="intervalo-grafico int-constante" style="width: 50%;">
+                    <span>Int. 2 (Constante)</span>
+                    <div class="datos-intervalo">V Constante<br>t = 10s</div>
                 </div>
-                <div class="tramo tramo-mruv-fr" style="width: 25%; border-right: none;">
-                    <span>Tramo 3 (M.R.U.V.)</span>
-                    <div class="datos-tramo">a = -2 m/s²<br>Hasta detenerse</div>
+                <div class="intervalo-grafico int-frena" style="width: 25%; border-right: none;">
+                    <span>Int. 3 (Frena)</span>
+                    <div class="datos-intervalo">a = -2 m/s²<br>Hasta detenerse</div>
                 </div>
             </div>
 
-            <!-- Resolución T1 -->
+            <!-- Análisis Int 1 -->
             <div class="analisis-intervalo" style="border-left-color: #e74c3c;">
-                <h4>Análisis Tramo 1 (Aceleración)</h4>
-                <p>Nace porque el Willys "parte del reposo y acelera". Es un M.R.U.V.</p>
-                <p><strong>Datos:</strong> Vi = 0 m/s, a = 2 m/s², t = 5 s. Necesitamos distancia (d1) y Velocidad final (Vf1) para el siguiente tramo.</p>
-                <p><strong>Cálculos:</strong><br>
-                - Vf1 = Vi + a·t <i class="fa-solid fa-arrow-right"></i> Vf1 = (0 m/s) + (2 m/s²)(5 s) = <strong>10 m/s</strong>.<br>
-                - d1 = Vi·t + 0.5·a·t² <i class="fa-solid fa-arrow-right"></i> d1 = 0 + 0.5(2 m/s²)(5 s)² = <strong>25 m</strong>.</p>
+                <h4>Análisis Intervalo 1 (M.R.U.V.)</h4>
+                <p>El vehículo "parte del reposo y acelera".</p>
+                <p><strong>Datos:</strong><br>
+                   Vi = 0 m/s<br>
+                   a = 2 m/s²<br>
+                   t1 = 5 s
+                </p>
+                <p><strong>Cálculos:</strong> Necesitamos d1 (para sumar la distancia) y Vf1 (para el siguiente intervalo).</p>
+                <div class="bloque-calc">
+                    Vf1 = Vi + a·t <br>
+                    Vf1 = (0 m/s) + (2 m/s²) · (5 s) = <strong>10 m/s</strong>.<br><br>
+                    d1 = Vi·t + 0.5·a·t² <br>
+                    d1 = 0 + 0.5 · (2 m/s²) · (5 s)² = <strong>25 m</strong>.
+                </div>
             </div>
 
-            <!-- Resolución T2 -->
+            <!-- Análisis Int 2 -->
             <div class="analisis-intervalo" style="border-left-color: #2ecc71;">
-                <h4>Análisis Tramo 2 (Velocidad Constante)</h4>
-                <p>Nace porque dice "mantiene esa velocidad constante". Es un M.R.U. (No hay aceleración).</p>
-                <p><strong>Datos:</strong> La velocidad es la Vf del tramo 1, o sea V = 10 m/s. El tiempo t = 10 s.</p>
-                <p><strong>Cálculos:</strong><br>
-                - Al ser M.R.U. usamos d = v·t <i class="fa-solid fa-arrow-right"></i> d2 = (10 m/s)(10 s) = <strong>100 m</strong>.</p>
+                <h4>Análisis Intervalo 2 (M.R.U.)</h4>
+                <p>El vehículo "mantiene esa velocidad constante". No hay aceleración.</p>
+                <p><strong>Datos heredados y nuevos:</strong><br>
+                   V = 10 m/s (La Vf del intervalo 1)<br>
+                   t2 = 10 s
+                </p>
+                <p><strong>Cálculos:</strong></p>
+                <div class="bloque-calc">
+                    d2 = v · t <br>
+                    d2 = (10 m/s) · (10 s) = <strong>100 m</strong>.
+                </div>
             </div>
 
-            <!-- Resolución T3 -->
+            <!-- Análisis Int 3 -->
             <div class="analisis-intervalo" style="border-left-color: #f39c12;">
-                <h4>Análisis Tramo 3 (Frenado)</h4>
-                <p>Nace porque el vehículo "frena hasta detenerse". Es un M.R.U.V.</p>
-                <p><strong>Datos:</strong> La Vi es la que traía del tramo anterior (10 m/s). La Vf = 0 m/s (se detiene). a = -2 m/s².</p>
-                <p><strong>Cálculos:</strong><br>
-                - Para la distancia sin tiempo usamos: d = (Vf² - Vi²) / (2a)<br>
-                - d3 = ( (0 m/s)² - (10 m/s)² ) / (2 · -2 m/s²)<br>
-                - d3 = (-100 m²/s²) / (-4 m/s²) = <strong>25 m</strong>.</p>
+                <h4>Análisis Intervalo 3 (M.R.U.V.)</h4>
+                <p>El vehículo "frena hasta detenerse".</p>
+                <p><strong>Datos heredados y nuevos:</strong><br>
+                   Vi = 10 m/s (La que traía del intervalo 2)<br>
+                   Vf = 0 m/s (Porque se detiene)<br>
+                   a = -2 m/s²
+                </p>
+                <p><strong>Cálculos:</strong> Necesitamos la distancia (d3) y el tiempo (t3).</p>
+                <div class="bloque-calc">
+                    d3 = (Vf² - Vi²) / (2·a) <br>
+                    d3 = ((0 m/s)² - (10 m/s)²) / (2 · -2 m/s²) = (-100 m²/s²) / (-4 m/s²) = <strong>25 m</strong>.<br><br>
+                    t3 = (Vf - Vi) / a <br>
+                    t3 = (0 m/s - 10 m/s) / (-2 m/s²) = <strong>5 s</strong>.
+                </div>
             </div>
 
-            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem;">
-                <strong>Distancia Total Recorrida:</strong> d1 + d2 + d3 = 25m + 100m + 25m = <span class="resultado-hl">150 metros</span>.
+            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem; line-height: 1.8;">
+                <strong>Distancia Total:</strong> d1 + d2 + d3 = 25m + 100m + 25m = <span class="resultado-hl">150 m</span>.<br>
+                <strong>Tiempo Total:</strong> t1 + t2 + t3 = 5s + 10s + 5s = <span class="resultado-hl">20 s</span>.
             </div>
         </div>
 
         <!-- Ejercicio Avanzado 2 -->
         <div class="ejercicio-avanzado">
             <h3 style="color: #4facfe; font-size: 1.6rem; margin-bottom: 10px;">Problema Avanzado 2: La Chiva en la Vereda</h3>
-            <div class="enunciado" style="border-left-color: #9b59b6;">"Una chiva transita a una velocidad constante de 15 m/s durante 8 segundos. De repente, el conductor ve un hueco y frena reduciendo su velocidad a 5 m/s en un tiempo de 4 segundos. Tras pasar el hueco, vuelve a acelerar a razón de 2 m/s² durante 5 segundos. Calcula la distancia total del recorrido."</div>
+            <div class="enunciado" style="border-left-color: #9b59b6;">"Una chiva transita a velocidad constante de 15 m/s durante 8 segundos. Ve un hueco y frena reduciendo su velocidad a 5 m/s en 4 segundos. Tras pasar el hueco, vuelve a acelerar a razón de 2 m/s² durante 5 segundos. Calcula la distancia y el tiempo total."</div>
             
-            <!-- Animación Gráfica 2 -->
             <div class="pista-animada">
-                <i class="fa-solid fa-bus vehiculo"></i>
-                <div class="tramo tramo-mru" style="width: 35%;">
-                    <span>Tramo 1 (M.R.U.)</span>
-                    <div class="datos-tramo">V constante = 15 m/s<br>t = 8s</div>
+                <i class="fa-solid fa-bus vehiculo anim-2"></i>
+                <div class="intervalo-grafico int-constante" style="width: 35%;">
+                    <span>Int. 1 (Constante)</span>
+                    <div class="datos-intervalo">V = 15 m/s<br>t = 8s</div>
                 </div>
-                <div class="tramo tramo-mruv-fr" style="width: 30%;">
-                    <span>Tramo 2 (M.R.U.V.)</span>
-                    <div class="datos-tramo">Frena<br>Vf = 5 m/s<br>t = 4s</div>
+                <div class="intervalo-grafico int-frena" style="width: 30%;">
+                    <span>Int. 2 (Frena)</span>
+                    <div class="datos-intervalo">Vf = 5 m/s<br>t = 4s</div>
                 </div>
-                <div class="tramo tramo-mruv-ac" style="width: 35%; border-right: none;">
-                    <span>Tramo 3 (M.R.U.V.)</span>
-                    <div class="datos-tramo">Acelera de nuevo<br>a = 2 m/s²<br>t = 5s</div>
+                <div class="intervalo-grafico int-acelera" style="width: 35%; border-right: none;">
+                    <span>Int. 3 (Acelera)</span>
+                    <div class="datos-intervalo">a = 2 m/s²<br>t = 5s</div>
                 </div>
             </div>
 
-            <!-- Resolución T1 -->
+            <!-- Análisis Int 1 -->
             <div class="analisis-intervalo" style="border-left-color: #2ecc71;">
-                <h4>Análisis Tramo 1 (Velocidad Constante)</h4>
-                <p>Inicia con M.R.U. porque indica "velocidad constante".</p>
-                <p><strong>Cálculos:</strong> d1 = v·t <i class="fa-solid fa-arrow-right"></i> d1 = (15 m/s) · (8 s) = <strong>120 m</strong>.</p>
+                <h4>Análisis Intervalo 1 (M.R.U.)</h4>
+                <p><strong>Datos:</strong><br>
+                   V = 15 m/s<br>
+                   t1 = 8 s
+                </p>
+                <p><strong>Cálculos:</strong></p>
+                <div class="bloque-calc">
+                    d1 = v · t <br>
+                    d1 = (15 m/s) · (8 s) = <strong>120 m</strong>.
+                </div>
             </div>
 
-            <!-- Resolución T2 -->
+            <!-- Análisis Int 2 -->
             <div class="analisis-intervalo" style="border-left-color: #f39c12;">
-                <h4>Análisis Tramo 2 (Frenado ante el hueco)</h4>
-                <p>Empieza a frenar, pasamos a M.R.U.V.</p>
-                <p><strong>Datos heredados:</strong> Vi = 15 m/s (la que traía). Vf = 5 m/s. t = 4 s.</p>
-                <p><strong>Cálculos:</strong> Como tenemos Vi, Vf y t, no hace falta calcular la aceleración para hallar la distancia. Usamos la fórmula promedio:<br>
-                - d2 = ( (Vi + Vf) / 2 ) · t <i class="fa-solid fa-arrow-right"></i> d2 = ( (15 m/s + 5 m/s) / 2 ) · 4s = (10 m/s) · 4s = <strong>40 m</strong>.</p>
+                <h4>Análisis Intervalo 2 (M.R.U.V. Frenando)</h4>
+                <p><strong>Datos:</strong><br>
+                   Vi = 15 m/s (La que traía)<br>
+                   Vf = 5 m/s<br>
+                   t2 = 4 s
+                </p>
+                <p><strong>Cálculos:</strong> Tenemos tiempo, velocidades inicial y final. Calculamos la distancia.</p>
+                <div class="bloque-calc">
+                    d2 = ( (Vi + Vf) / 2 ) · t <br>
+                    d2 = ( (15 m/s + 5 m/s) / 2 ) · 4 s = (10 m/s) · (4 s) = <strong>40 m</strong>.
+                </div>
             </div>
 
-            <!-- Resolución T3 -->
+            <!-- Análisis Int 3 -->
             <div class="analisis-intervalo" style="border-left-color: #e74c3c;">
-                <h4>Análisis Tramo 3 (Aceleración post-hueco)</h4>
-                <p>Vuelve a ganar velocidad, es M.R.U.V.</p>
-                <p><strong>Datos heredados:</strong> Vi = 5 m/s (con la que terminó el tramo anterior). a = 2 m/s², t = 5 s.</p>
-                <p><strong>Cálculos:</strong><br>
-                - d3 = Vi·t + 0.5·a·t² <i class="fa-solid fa-arrow-right"></i> d3 = (5 m/s)(5 s) + 0.5(2 m/s²)(5 s)²<br>
-                - d3 = 25 m + 25 m = <strong>50 m</strong>.</p>
+                <h4>Análisis Intervalo 3 (M.R.U.V. Acelerando)</h4>
+                <p><strong>Datos:</strong><br>
+                   Vi = 5 m/s (Con la que terminó el hueco)<br>
+                   a = 2 m/s²<br>
+                   t3 = 5 s
+                </p>
+                <p><strong>Cálculos:</strong></p>
+                <div class="bloque-calc">
+                    d3 = Vi·t + 0.5·a·t² <br>
+                    d3 = (5 m/s)·(5 s) + 0.5·(2 m/s²)·(5 s)² = 25 m + 25 m = <strong>50 m</strong>.
+                </div>
             </div>
 
-            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem;">
-                <strong>Distancia Total Recorrida:</strong> d1 + d2 + d3 = 120m + 40m + 50m = <span class="resultado-hl">210 metros</span>.
+            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem; line-height: 1.8;">
+                <strong>Distancia Total:</strong> 120m + 40m + 50m = <span class="resultado-hl">210 m</span>.<br>
+                <strong>Tiempo Total:</strong> 8s + 4s + 5s = <span class="resultado-hl">17 s</span>.
+            </div>
+        </div>
+
+        <!-- Ejercicio Avanzado 3 -->
+        <div class="ejercicio-avanzado">
+            <h3 style="color: #4facfe; font-size: 1.6rem; margin-bottom: 10px;">Problema Avanzado 3: El Moto-trabajador</h3>
+            <div class="enunciado" style="border-left-color: #2ecc71;">"Un trabajador en su moto viaja a 10 m/s constantes por 6 segundos. Luego empieza a subir una loma, reduciendo su velocidad a 4 m/s de manera uniforme en 3 segundos. Al terminar la loma, vuelve a acelerar a 2 m/s² hasta alcanzar los 12 m/s. Determina la distancia total recorrida y el tiempo total del viaje."</div>
+            
+            <div class="pista-animada">
+                <i class="fa-solid fa-motorcycle vehiculo anim-1"></i>
+                <div class="intervalo-grafico int-constante" style="width: 35%;">
+                    <span>Int. 1 (Constante)</span>
+                    <div class="datos-intervalo">V = 10 m/s<br>t = 6s</div>
+                </div>
+                <div class="intervalo-grafico int-frena" style="width: 25%;">
+                    <span>Int. 2 (Sube loma)</span>
+                    <div class="datos-intervalo">Vf = 4 m/s<br>t = 3s</div>
+                </div>
+                <div class="intervalo-grafico int-acelera" style="width: 40%; border-right: none;">
+                    <span>Int. 3 (Acelera)</span>
+                    <div class="datos-intervalo">a = 2 m/s²<br>Vf = 12 m/s</div>
+                </div>
+            </div>
+
+            <!-- Análisis Int 1 -->
+            <div class="analisis-intervalo" style="border-left-color: #2ecc71;">
+                <h4>Análisis Intervalo 1 (M.R.U.)</h4>
+                <p><strong>Datos:</strong><br>
+                   V = 10 m/s<br>
+                   t1 = 6 s
+                </p>
+                <p><strong>Cálculos:</strong></p>
+                <div class="bloque-calc">
+                    d1 = v · t <br>
+                    d1 = (10 m/s) · (6 s) = <strong>60 m</strong>.
+                </div>
+            </div>
+
+            <!-- Análisis Int 2 -->
+            <div class="analisis-intervalo" style="border-left-color: #f39c12;">
+                <h4>Análisis Intervalo 2 (M.R.U.V. Desacelerando)</h4>
+                <p><strong>Datos:</strong><br>
+                   Vi = 10 m/s<br>
+                   Vf = 4 m/s<br>
+                   t2 = 3 s
+                </p>
+                <p><strong>Cálculos:</strong></p>
+                <div class="bloque-calc">
+                    d2 = ( (Vi + Vf) / 2 ) · t <br>
+                    d2 = ( (10 m/s + 4 m/s) / 2 ) · 3 s = (7 m/s) · (3 s) = <strong>21 m</strong>.
+                </div>
+            </div>
+
+            <!-- Análisis Int 3 -->
+            <div class="analisis-intervalo" style="border-left-color: #e74c3c;">
+                <h4>Análisis Intervalo 3 (M.R.U.V. Acelerando)</h4>
+                <p><strong>Datos:</strong><br>
+                   Vi = 4 m/s<br>
+                   Vf = 12 m/s<br>
+                   a = 2 m/s²
+                </p>
+                <p><strong>Cálculos:</strong> Debemos calcular primero el tiempo y luego la distancia.</p>
+                <div class="bloque-calc">
+                    t3 = (Vf - Vi) / a <br>
+                    t3 = (12 m/s - 4 m/s) / (2 m/s²) = (8 m/s) / (2 m/s²) = <strong>4 s</strong>.<br><br>
+                    d3 = ( (Vi + Vf) / 2 ) · t <br>
+                    d3 = ( (4 m/s + 12 m/s) / 2 ) · 4 s = (8 m/s) · (4 s) = <strong>32 m</strong>.
+                </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem; line-height: 1.8;">
+                <strong>Distancia Total:</strong> 60m + 21m + 32m = <span class="resultado-hl">113 m</span>.<br>
+                <strong>Tiempo Total:</strong> 6s + 3s + 4s = <span class="resultado-hl">13 s</span>.
             </div>
         </div>
 
@@ -352,12 +540,17 @@
         <section class="botones-accion-final">
             <!-- Botón hacia Práctica M.R.U.V -->
             <a href="fisica10_mruv_practica.html" class="btn-accion btn-practica">
-                <i class="fa-solid fa-gamepad"></i> Ir a Práctica M.R.U.V.
+                <i class="fa-solid fa-gamepad"></i> Práctica M.R.U.V.
+            </a>
+
+            <!-- Botón hacia Evaluación -->
+            <a href="fisica10_mruv_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-file-signature"></i> Evaluación
             </a>
 
             <!-- Botón hacia Evaluación Avanzada -->
-            <a href="fisica10_mruv_evaluacion_avanzada.html" class="btn-accion btn-evaluacion">
-                <i class="fa-solid fa-file-signature"></i> Evaluación Avanzada
+            <a href="fisica10_mruv_evaluacion_avanzada.html" class="btn-accion btn-evaluacion" style="background: #e74c3c;">
+                <i class="fa-solid fa-star"></i> Evaluación Avanzada
             </a>
         </section>
 
