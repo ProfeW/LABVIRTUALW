@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Avanzados M.R.U.V. - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-mru: #2ecc71; /* Verde para velocidad constante */
+            --color-mruv-acelera: #e74c3c; /* Rojo para acelerar */
+            --color-mruv-frena: #f39c12; /* Naranja para frenar */
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        /* --- CONTENIDO --- */
+        .contenedor { max-width: 1100px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 40px; text-align: center; }
+        .encabezado-leccion h1 { font-size: 3rem; color: var(--color-fisica); margin-bottom: 10px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+
+        .titulo-seccion { font-size: 2.2rem; border-left: 5px solid var(--color-fisica); padding-left: 15px; margin: 50px 0 30px 0; color: #fff; }
+
+        /* --- EJERCICIOS INTERMEDIOS --- */
+        .ejercicio-intermedio { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; margin-bottom: 25px; border-top: 4px solid var(--color-fisica); }
+        .ejercicio-intermedio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.4rem; }
+        .enunciado { font-style: italic; color: #ddd; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.1rem; border-left: 4px solid #f39c12; }
+        
+        .paso-resolucion { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 800; color: #f39c12; font-size: 1rem; text-transform: uppercase; margin-bottom: 5px; }
+        .paso-resolucion p { color: #ccc; line-height: 1.8; font-size: 1.05rem; }
+        .formula-hl { background: rgba(52, 152, 219, 0.2); padding: 2px 8px; border-radius: 5px; color: #fff; font-family: monospace; font-size: 1.1rem; }
+        .resultado-hl { color: #2ecc71; font-weight: 800; font-size: 1.2rem; }
+
+        /* --- EJERCICIOS AVANZADOS (INTERVALOS) --- */
+        .guia-intervalos { background: rgba(155, 89, 182, 0.15); border: 1px solid #9b59b6; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
+        .guia-intervalos h3 { color: #9b59b6; margin-bottom: 15px; }
+        .guia-intervalos ul { margin-left: 20px; color: #ddd; line-height: 1.7; }
+
+        .ejercicio-avanzado { background: rgba(0, 0, 0, 0.4); border-radius: 15px; padding: 35px; margin-bottom: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* Animación CSS para intervalos */
+        .pista-animada { position: relative; width: 100%; height: 120px; background: #333; border-radius: 10px; margin: 30px 0; display: flex; overflow: hidden; border-bottom: 4px dashed #7f8c8d; }
+        .tramo { height: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 10px; color: #fff; font-weight: bold; border-right: 2px dashed rgba(255,255,255,0.2); position: relative; }
+        .tramo-mruv-ac { background: rgba(231, 76, 60, 0.3); } /* Acelera */
+        .tramo-mru { background: rgba(46, 204, 113, 0.3); } /* Constante */
+        .tramo-mruv-fr { background: rgba(243, 156, 18, 0.3); } /* Frena */
+        
+        .datos-tramo { font-size: 0.8rem; font-weight: normal; color: #ddd; text-align: center; margin-top: 5px; background: rgba(0,0,0,0.5); padding: 4px; border-radius: 4px; line-height: 1.3;}
+        
+        .vehiculo { position: absolute; bottom: 5px; left: 0; font-size: 30px; color: #fff; animation: conducir 10s infinite linear; z-index: 10; }
+        
+        @keyframes conducir {
+            0% { left: 0%; transform: scaleX(1); }
+            90% { left: 95%; transform: scaleX(1); opacity: 1; }
+            95% { left: 95%; opacity: 0; }
+            100% { left: 0%; opacity: 0; }
+        }
+
+        .analisis-intervalo { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #fff; }
+        .analisis-intervalo h4 { font-size: 1.2rem; margin-bottom: 10px; }
+
+        /* --- BOTONES FINALES --- */
+        .botones-accion-final { display: flex; gap: 20px; justify-content: center; margin-top: 50px; }
+        .btn-accion { padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .btn-practica { background: #2ecc71; }
+        .btn-practica:hover { background: #27ae60; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
+        .btn-evaluacion { background: #9b59b6; }
+        .btn-evaluacion:hover { background: #8e44ad; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="fisica_10.html"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica10_mruv.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Regresar a M.R.U.V. Básico</a>
+
+        <div class="encabezado-leccion">
+            <h1>Ejercicios Avanzados M.R.U.V.</h1>
+            <p>De la teoría a la maestría: Reemplazos con unidades y movimientos por intervalos.</p>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- NIVEL INTERMEDIO (5 EJERCICIOS CON UNIDADES)-->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">Nivel Intermedio: Dominio de Fórmulas</h2>
+        <p style="color: #bbb; margin-bottom: 20px; font-size: 1.1rem;">Observa cuidadosamente el <strong>Paso 3</strong> de cada ejercicio. Fíjate cómo al momento de reemplazar las letras por números, <strong>siempre colocamos la unidad de medida al lado</strong>. Esto evita errores y te asegura que el resultado final sea correcto.</p>
+
+        <!-- Ejercicio 1 (Despejar Distancia) -->
+        <div class="ejercicio-intermedio">
+            <h3>1. Calculando Distancia (Fórmula Directa)</h3>
+            <div class="enunciado">"Un motociclista va a 12 m/s. Al ver la recta, acelera a 2 m/s² durante 5 segundos. ¿Qué distancia recorrió en esa recta?"</div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
+                <p>Datos: Vi, a, t. Incógnita: d. No tenemos Vf. Usamos: <span class="formula-hl">d = Vi·t + &frac12;·a·t²</span></p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 2: Despejar</div>
+                <p>No es necesario despejar, la fórmula ya está igualada a la distancia (d).</p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
+                <p>d = (12 m/s) · (5 s) + 0.5 · (2 m/s²) · (5 s)²</p>
+                <p>d = (60 m) + 0.5 · (2 m/s²) · (25 s²)</p>
+                <p>d = 60 m + 25 m <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">d = 85 m</span></p>
+            </div>
+        </div>
+
+        <!-- Ejercicio 2 (Despejar Vi) -->
+        <div class="ejercicio-intermedio">
+            <h3>2. Calculando Velocidad Inicial (Despeje de cuadrados)</h3>
+            <div class="enunciado">"Una carga de café llega al final de una rampa de 40 metros con una velocidad de 15 m/s. Si la rampa genera una aceleración de 2 m/s², ¿con qué velocidad empezó a caer?"</div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
+                <p>Datos: Vf, d, a. Incógnita: Vi. No tenemos tiempo (t). Usamos: <span class="formula-hl">Vf² = Vi² + 2·a·d</span></p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 2: Despejar Vi</div>
+                <p>Vi = &radic;(Vf² - 2·a·d)</p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
+                <p>Vi = &radic;[ (15 m/s)² - 2 · (2 m/s²) · (40 m) ]</p>
+                <p>Vi = &radic;[ 225 m²/s² - 160 m²/s² ]</p>
+                <p>Vi = &radic;[ 65 m²/s² ] <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">Vi = 8.06 m/s</span></p>
+            </div>
+        </div>
+
+        <!-- Ejercicio 3 (Despejar Aceleración) -->
+        <div class="ejercicio-intermedio">
+            <h3>3. Calculando Aceleración Negativa (Frenado)</h3>
+            <div class="enunciado">"Un tractor viaja a 20 m/s y frena hasta detenerse por completo en 8 segundos. ¿Cuál fue su aceleración de frenado?"</div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
+                <p>Datos: Vi, t, Vf=0 (porque se detiene). Incógnita: a. Usamos: <span class="formula-hl">a = (Vf - Vi) / t</span></p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 2: Despejar</div>
+                <p>Ya está despejada para aceleración.</p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
+                <p>a = (0 m/s - 20 m/s) / (8 s)</p>
+                <p>a = (-20 m/s) / (8 s) <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">a = -2.5 m/s²</span></p>
+            </div>
+        </div>
+
+        <!-- Ejercicio 4 (Despejar Tiempo) -->
+        <div class="ejercicio-intermedio">
+            <h3>4. Calculando Tiempo (Distancia promedio)</h3>
+            <div class="enunciado">"Un ciclista reduce su velocidad de 12 m/s a 4 m/s mientras recorre un tramo de 32 metros. ¿Cuánto tiempo le tomó este recorrido?"</div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
+                <p>Datos: Vi, Vf, d. Incógnita: t. No hay aceleración. Usamos: <span class="formula-hl">d = ((Vi + Vf)/2) · t</span></p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 2: Despejar t</div>
+                <p>t = (2 · d) / (Vi + Vf)</p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
+                <p>t = (2 · 32 m) / (12 m/s + 4 m/s)</p>
+                <p>t = (64 m) / (16 m/s) <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">t = 4 s</span></p>
+            </div>
+        </div>
+
+        <!-- Ejercicio 5 (Despejar Vf) -->
+        <div class="ejercicio-intermedio">
+            <h3>5. Calculando Velocidad Final</h3>
+            <div class="enunciado">"Un transporte escolar va a 10 m/s y acelera constantemente a 1.5 m/s² durante 6 segundos. ¿A qué velocidad llega al final de los 6 segundos?"</div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 1: Elegir la fórmula</div>
+                <p>Datos: Vi, a, t. Incógnita: Vf. No nos piden distancia. Usamos: <span class="formula-hl">Vf = Vi + a·t</span></p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 2: Despejar</div>
+                <p>La fórmula ya está lista para usarse.</p>
+            </div>
+            <div class="paso-resolucion">
+                <div class="paso-titulo">Paso 3: Reemplazar y Solucionar (¡Con unidades!)</div>
+                <p>Vf = (10 m/s) + (1.5 m/s²) · (6 s)</p>
+                <p>Vf = (10 m/s) + (9 m/s) <i class="fa-solid fa-arrow-right"></i> <span class="resultado-hl">Vf = 19 m/s</span></p>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- NIVEL AVANZADO (MOVIMIENTOS POR INTERVALOS)-->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">Nivel Avanzado: Movimientos por Intervalos</h2>
+        
+        <div class="guia-intervalos">
+            <h3><i class="fa-solid fa-route"></i> ¿Qué son los Intervalos y cómo resolverlos?</h3>
+            <p>En la vida real, un vehículo no hace un solo movimiento. Puede acelerar, luego mantener la velocidad y finalmente frenar. Para resolver estos problemas debes "partir" el viaje en pedazos (intervalos) y resolver uno por uno. <strong>Las claves son:</strong></p>
+            <ul>
+                <li><strong>Identificar M.R.U.:</strong> Si el texto dice "mantiene su velocidad", "velocidad constante" o "no acelera", en ese tramo <strong>solo usas la fórmula del triángulo (v = d/t)</strong>. La aceleración ahí es cero.</li>
+                <li><strong>Identificar M.R.U.V.:</strong> Si dice "arranca", "frena", "aumenta a", "se detiene", hay aceleración. Usas las 4 fórmulas que acabamos de ver.</li>
+                <li><strong>La regla de oro de la Continuidad:</strong> La Velocidad Final (Vf) de un intervalo, se convierte automáticamente en la Velocidad Inicial (Vi) del siguiente intervalo. ¡Es el mismo vehículo continuando su camino!</li>
+            </ul>
+        </div>
+
+        <!-- Ejercicio Avanzado 1 -->
+        <div class="ejercicio-avanzado">
+            <h3 style="color: #4facfe; font-size: 1.6rem; margin-bottom: 10px;">Problema Avanzado 1: El Willys Cafetero</h3>
+            <div class="enunciado" style="border-left-color: #3498db;">"Un Willys cargado parte del reposo y acelera a 2 m/s² durante 5 segundos. Luego, al llegar a la vía plana, mantiene esa velocidad constante durante 10 segundos. Finalmente, ve un obstáculo y frena a razón de -2 m/s² hasta detenerse por completo. ¿Cuál es la distancia total recorrida?"</div>
+            
+            <!-- Animación Gráfica 1 -->
+            <div class="pista-animada">
+                <i class="fa-solid fa-truck-pickup vehiculo"></i>
+                <div class="tramo tramo-mruv-ac" style="width: 25%;">
+                    <span>Tramo 1 (M.R.U.V.)</span>
+                    <div class="datos-datos tramo">a = 2 m/s²<br>t = 5s<br>Arranca (Vi=0)</div>
+                </div>
+                <div class="tramo tramo-mru" style="width: 50%;">
+                    <span>Tramo 2 (M.R.U.)</span>
+                    <div class="datos-tramo">Velocidad Constante<br>t = 10s</div>
+                </div>
+                <div class="tramo tramo-mruv-fr" style="width: 25%; border-right: none;">
+                    <span>Tramo 3 (M.R.U.V.)</span>
+                    <div class="datos-tramo">a = -2 m/s²<br>Hasta detenerse</div>
+                </div>
+            </div>
+
+            <!-- Resolución T1 -->
+            <div class="analisis-intervalo" style="border-left-color: #e74c3c;">
+                <h4>Análisis Tramo 1 (Aceleración)</h4>
+                <p>Nace porque el Willys "parte del reposo y acelera". Es un M.R.U.V.</p>
+                <p><strong>Datos:</strong> Vi = 0 m/s, a = 2 m/s², t = 5 s. Necesitamos distancia (d1) y Velocidad final (Vf1) para el siguiente tramo.</p>
+                <p><strong>Cálculos:</strong><br>
+                - Vf1 = Vi + a·t <i class="fa-solid fa-arrow-right"></i> Vf1 = (0 m/s) + (2 m/s²)(5 s) = <strong>10 m/s</strong>.<br>
+                - d1 = Vi·t + 0.5·a·t² <i class="fa-solid fa-arrow-right"></i> d1 = 0 + 0.5(2 m/s²)(5 s)² = <strong>25 m</strong>.</p>
+            </div>
+
+            <!-- Resolución T2 -->
+            <div class="analisis-intervalo" style="border-left-color: #2ecc71;">
+                <h4>Análisis Tramo 2 (Velocidad Constante)</h4>
+                <p>Nace porque dice "mantiene esa velocidad constante". Es un M.R.U. (No hay aceleración).</p>
+                <p><strong>Datos:</strong> La velocidad es la Vf del tramo 1, o sea V = 10 m/s. El tiempo t = 10 s.</p>
+                <p><strong>Cálculos:</strong><br>
+                - Al ser M.R.U. usamos d = v·t <i class="fa-solid fa-arrow-right"></i> d2 = (10 m/s)(10 s) = <strong>100 m</strong>.</p>
+            </div>
+
+            <!-- Resolución T3 -->
+            <div class="analisis-intervalo" style="border-left-color: #f39c12;">
+                <h4>Análisis Tramo 3 (Frenado)</h4>
+                <p>Nace porque el vehículo "frena hasta detenerse". Es un M.R.U.V.</p>
+                <p><strong>Datos:</strong> La Vi es la que traía del tramo anterior (10 m/s). La Vf = 0 m/s (se detiene). a = -2 m/s².</p>
+                <p><strong>Cálculos:</strong><br>
+                - Para la distancia sin tiempo usamos: d = (Vf² - Vi²) / (2a)<br>
+                - d3 = ( (0 m/s)² - (10 m/s)² ) / (2 · -2 m/s²)<br>
+                - d3 = (-100 m²/s²) / (-4 m/s²) = <strong>25 m</strong>.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem;">
+                <strong>Distancia Total Recorrida:</strong> d1 + d2 + d3 = 25m + 100m + 25m = <span class="resultado-hl">150 metros</span>.
+            </div>
+        </div>
+
+        <!-- Ejercicio Avanzado 2 -->
+        <div class="ejercicio-avanzado">
+            <h3 style="color: #4facfe; font-size: 1.6rem; margin-bottom: 10px;">Problema Avanzado 2: La Chiva en la Vereda</h3>
+            <div class="enunciado" style="border-left-color: #9b59b6;">"Una chiva transita a una velocidad constante de 15 m/s durante 8 segundos. De repente, el conductor ve un hueco y frena reduciendo su velocidad a 5 m/s en un tiempo de 4 segundos. Tras pasar el hueco, vuelve a acelerar a razón de 2 m/s² durante 5 segundos. Calcula la distancia total del recorrido."</div>
+            
+            <!-- Animación Gráfica 2 -->
+            <div class="pista-animada">
+                <i class="fa-solid fa-bus vehiculo"></i>
+                <div class="tramo tramo-mru" style="width: 35%;">
+                    <span>Tramo 1 (M.R.U.)</span>
+                    <div class="datos-tramo">V constante = 15 m/s<br>t = 8s</div>
+                </div>
+                <div class="tramo tramo-mruv-fr" style="width: 30%;">
+                    <span>Tramo 2 (M.R.U.V.)</span>
+                    <div class="datos-tramo">Frena<br>Vf = 5 m/s<br>t = 4s</div>
+                </div>
+                <div class="tramo tramo-mruv-ac" style="width: 35%; border-right: none;">
+                    <span>Tramo 3 (M.R.U.V.)</span>
+                    <div class="datos-tramo">Acelera de nuevo<br>a = 2 m/s²<br>t = 5s</div>
+                </div>
+            </div>
+
+            <!-- Resolución T1 -->
+            <div class="analisis-intervalo" style="border-left-color: #2ecc71;">
+                <h4>Análisis Tramo 1 (Velocidad Constante)</h4>
+                <p>Inicia con M.R.U. porque indica "velocidad constante".</p>
+                <p><strong>Cálculos:</strong> d1 = v·t <i class="fa-solid fa-arrow-right"></i> d1 = (15 m/s) · (8 s) = <strong>120 m</strong>.</p>
+            </div>
+
+            <!-- Resolución T2 -->
+            <div class="analisis-intervalo" style="border-left-color: #f39c12;">
+                <h4>Análisis Tramo 2 (Frenado ante el hueco)</h4>
+                <p>Empieza a frenar, pasamos a M.R.U.V.</p>
+                <p><strong>Datos heredados:</strong> Vi = 15 m/s (la que traía). Vf = 5 m/s. t = 4 s.</p>
+                <p><strong>Cálculos:</strong> Como tenemos Vi, Vf y t, no hace falta calcular la aceleración para hallar la distancia. Usamos la fórmula promedio:<br>
+                - d2 = ( (Vi + Vf) / 2 ) · t <i class="fa-solid fa-arrow-right"></i> d2 = ( (15 m/s + 5 m/s) / 2 ) · 4s = (10 m/s) · 4s = <strong>40 m</strong>.</p>
+            </div>
+
+            <!-- Resolución T3 -->
+            <div class="analisis-intervalo" style="border-left-color: #e74c3c;">
+                <h4>Análisis Tramo 3 (Aceleración post-hueco)</h4>
+                <p>Vuelve a ganar velocidad, es M.R.U.V.</p>
+                <p><strong>Datos heredados:</strong> Vi = 5 m/s (con la que terminó el tramo anterior). a = 2 m/s², t = 5 s.</p>
+                <p><strong>Cálculos:</strong><br>
+                - d3 = Vi·t + 0.5·a·t² <i class="fa-solid fa-arrow-right"></i> d3 = (5 m/s)(5 s) + 0.5(2 m/s²)(5 s)²<br>
+                - d3 = 25 m + 25 m = <strong>50 m</strong>.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem;">
+                <strong>Distancia Total Recorrida:</strong> d1 + d2 + d3 = 120m + 40m + 50m = <span class="resultado-hl">210 metros</span>.
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE BOTONES FINALES -->
+        <section class="botones-accion-final">
+            <!-- Botón hacia Práctica M.R.U.V -->
+            <a href="fisica10_mruv_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Ir a Práctica M.R.U.V.
+            </a>
+
+            <!-- Botón hacia Evaluación Avanzada -->
+            <a href="fisica10_mruv_evaluacion_avanzada.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-file-signature"></i> Evaluación Avanzada
+            </a>
+        </section>
+
+    </main>
+
+</body>
+</html>
