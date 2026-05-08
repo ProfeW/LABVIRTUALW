@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación M.R.U.V. - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-alerta: #f39c12;
+            --bg-pregunta: rgba(255, 255, 255, 0.03);
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        /* --- CONTENIDO --- */
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-eval { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid rgba(52, 152, 219, 0.3); }
+        .encabezado-eval h1 { font-size: 2.8rem; color: var(--color-fisica); margin-bottom: 10px; }
+        .encabezado-eval p { color: #bbb; font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+
+        /* --- DATOS DEL ESTUDIANTE --- */
+        .datos-estudiante { background: rgba(52, 152, 219, 0.1); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 25px; margin-bottom: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 600; color: #4facfe; }
+        .input-group input, .input-group select { padding: 12px 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: #fff; font-size: 1.05rem; outline: none; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--color-fisica); }
+
+        /* --- PREGUNTAS --- */
+        .eval-form { display: flex; flex-direction: column; gap: 30px; }
+        .pregunta-card { background: var(--bg-pregunta); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 25px; transition: 0.3s; }
+        .pregunta-card:hover { border-color: rgba(52, 152, 219, 0.4); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        
+        .pregunta-texto { font-size: 1.15rem; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.5; }
+        .pregunta-texto span.num { color: var(--color-fisica); font-weight: 800; font-size: 1.3rem; margin-right: 10px; }
+
+        .opciones-lista { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .opcion-item { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; transition: 0.2s; }
+        .opcion-item:hover { background: rgba(255,255,255,0.05); }
+        
+        .opcion-label { display: flex; align-items: center; padding: 15px 20px; cursor: pointer; color: #ddd; font-size: 1.05rem; }
+        .opcion-label input[type="radio"] { margin-right: 15px; cursor: pointer; transform: scale(1.2); accent-color: var(--color-fisica); }
+
+        /* Estados de Validación */
+        .opcion-item.correcta { background: rgba(46, 204, 113, 0.2); border-color: var(--color-exito); }
+        .opcion-item.correcta .opcion-label { color: #fff; font-weight: bold; }
+        .opcion-item.incorrecta { background: rgba(231, 76, 60, 0.2); border-color: var(--color-error); opacity: 0.7; }
+        .icono-resultado { margin-left: auto; font-size: 1.2rem; display: none; }
+        .correcta .icono-resultado { display: block; color: var(--color-exito); }
+        .incorrecta .icono-resultado { display: block; color: var(--color-error); }
+
+        /* --- CONTROLES Y RESULTADOS --- */
+        .controles-eval { margin-top: 50px; text-align: center; }
+        .btn-enviar { background: var(--color-fisica); color: #fff; border: none; padding: 15px 40px; font-size: 1.2rem; font-weight: 800; border-radius: 8px; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
+        .btn-enviar:hover { background: #2980b9; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4); }
+        .btn-enviar:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .panel-resultado { display: none; background: rgba(0,0,0,0.5); border: 2px dashed var(--color-exito); border-radius: 12px; padding: 30px; margin-top: 40px; text-align: center; animation: fadeIn 0.5s ease; }
+        .panel-resultado.activo { display: block; }
+        .nota-final { font-size: 4rem; font-weight: 800; color: var(--color-exito); text-shadow: 0 0 20px rgba(46, 204, 113, 0.4); margin: 10px 0; }
+        .mensaje-nota { font-size: 1.3rem; color: #fff; }
+
+        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { padding: 15px 25px; border-radius: 8px; color: #fff; font-weight: 600; background: var(--color-error); box-shadow: 0 10px 20px rgba(0,0,0,0.3); animation: slideIn 0.3s ease forwards; display: flex; align-items: center; gap: 10px; }
+        .toast.fade-out { animation: fadeOut 0.5s ease forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
+        
+        @media (max-width: 768px) { .datos-estudiante { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="fisica10_mruv.html"><i class="fa-solid fa-arrow-left"></i> Volver a Lección</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-eval">
+            <h1>Evaluación M.R.U.V.</h1>
+            <p>Demuestra lo que has aprendido sobre el Movimiento Rectilíneo Uniformemente Variado. Lee con atención cada pregunta, haz tus cálculos en una hoja aparte y selecciona la respuesta correcta.</p>
+        </div>
+
+        <form id="formulario-evaluacion" class="eval-form">
+            
+            <!-- DATOS DEL ESTUDIANTE -->
+            <div class="datos-estudiante">
+                <div class="input-group">
+                    <label for="nombreEstudiante"><i class="fa-solid fa-user"></i> Nombre Completo:</label>
+                    <input type="text" id="nombreEstudiante" placeholder="Ej: Juan Pérez" required>
+                </div>
+                <div class="input-group">
+                    <label for="gradoEstudiante"><i class="fa-solid fa-graduation-cap"></i> Grado:</label>
+                    <select id="gradoEstudiante" required>
+                        <option value="">Selecciona...</option>
+                        <option value="10-1">10-1</option>
+                        <option value="10-2">10-2</option>
+                        <option value="10-3">10-3</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 1 (Teoría) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">1.</span> ¿Cuál es la característica principal que diferencia al M.R.U.V. del M.R.U.?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p1" value="a"> A) La velocidad se mantiene constante durante todo el recorrido.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p1" value="b"> B) El objeto siempre debe partir del reposo.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p1" value="c"> C) Existe una aceleración constante, por lo que la velocidad cambia de manera uniforme.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p1" value="d"> D) La trayectoria del movimiento es circular.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 2 (Teoría) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">2.</span> Si un vehículo que va a alta velocidad pisa los frenos para detenerse en un semáforo, su aceleración es:</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p2" value="a"> A) Positiva, porque sigue avanzando hacia adelante.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p2" value="b"> B) Negativa, porque está reduciendo su velocidad (desacelerando).<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p2" value="c"> C) Cero, porque finalmente se va a detener.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p2" value="d"> D) Igual a la velocidad inicial.<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 3 (Teoría) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">3.</span> En la fórmula de M.R.U.V. para hallar la distancia "d = Vi·t + 0.5·a·t²", si un objeto parte del reposo, la fórmula se simplifica a:</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p3" value="a"> A) d = 0.5·a·t²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p3" value="b"> B) d = a·t<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p3" value="c"> C) d = Vi·t<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p3" value="d"> D) d = (Vi + Vf) / t<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 4 (Problema - Aceleración) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">4.</span> Un Willys cargado de café arranca desde el reposo y a los 5 segundos alcanza una velocidad de 15 m/s. ¿Cuál fue su aceleración?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p4" value="a"> A) 75 m/s²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p4" value="b"> B) 10 m/s²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p4" value="c"> C) 3 m/s²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p4" value="d"> D) 5 m/s²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 5 (Problema - Distancia) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">5.</span> Una motocicleta viaja por una carretera rural a 10 m/s. De repente acelera a razón de 2 m/s² durante 4 segundos. ¿Qué distancia recorrió en ese tiempo?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p5" value="a"> A) 56 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p5" value="b"> B) 40 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p5" value="c"> C) 72 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p5" value="d"> D) 16 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 6 (Problema - Tiempo) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">6.</span> Una chiva escolar viaja a 20 m/s y el conductor aplica los frenos produciendo una desaceleración constante de -4 m/s² hasta detenerse. ¿Cuánto tiempo tardó en detener la chiva?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p6" value="a"> A) 8 segundos<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p6" value="b"> B) 5 segundos<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p6" value="c"> C) 4 segundos<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p6" value="d"> D) 10 segundos<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 7 (Problema - Vf) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">7.</span> Un tractor ingresa a un terreno de cultivo con una velocidad inicial de 3 m/s. Si acelera a 2 m/s² mientras avanza 10 metros, ¿Cuál es su velocidad final al terminar esos 10 metros?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p7" value="a"> A) 5 m/s<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p7" value="b"> B) 49 m/s<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p7" value="c"> C) 7 m/s<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p7" value="d"> D) 12 m/s<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 8 (Problema - Vi) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">8.</span> Un camión recolector acelera a 1.5 m/s² durante 10 segundos. Si su velocidad final tras ese tiempo fue de 25 m/s, ¿A qué velocidad iba antes de empezar a acelerar (Vi)?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p8" value="a"> A) 10 m/s<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p8" value="b"> B) 15 m/s<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p8" value="c"> C) 5 m/s<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p8" value="d"> D) 0 m/s (Reposo)<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 9 (Problema - Conversión y aceleración) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">9.</span> Un automóvil transita a 72 km/h y frena uniformemente hasta detenerse en 4 segundos. ¿Cuál fue su aceleración? (Pista: ¡Ojo con las unidades!)</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p9" value="a"> A) -18 m/s²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p9" value="b"> B) -5 m/s²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p9" value="c"> C) 5 m/s²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p9" value="d"> D) -10 m/s²<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- PREGUNTA 10 (Problema - Distancia promedio) -->
+            <div class="pregunta-card">
+                <div class="pregunta-texto"><span class="num">10.</span> Un ciclista que baja por una calle reduce su velocidad de 12 m/s a 4 m/s en un tiempo de 5 segundos. ¿Qué distancia recorrió durante esos 5 segundos?</div>
+                <ul class="opciones-lista">
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p10" value="a"> A) 40 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p10" value="b"> B) 80 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p10" value="c"> C) 20 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                    <li class="opcion-item"><label class="opcion-label"><input type="radio" name="p10" value="d"> D) 60 metros<i class="fa-solid fa-circle-xmark icono-resultado"></i><i class="fa-solid fa-circle-check icono-resultado"></i></label></li>
+                </ul>
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="controles-eval">
+                <button type="button" class="btn-enviar" id="btn-evaluar" onclick="evaluarPrueba()">Enviar Evaluación</button>
+            </div>
+
+            <!-- PANEL DE RESULTADOS -->
+            <div class="panel-resultado" id="panel-res">
+                <h3 style="color:#fff; font-size:1.8rem;">Tu Resultado Final</h3>
+                <div class="nota-final" id="nota-texto">0 / 10</div>
+                <p class="mensaje-nota" id="mensaje-texto"></p>
+                
+                <a href="fisica10_mruv.html" class="btn-volver" style="margin-top: 25px; display: inline-block; border: 1px solid #4facfe; padding: 10px 20px; border-radius: 5px;">Regresar a la Lección</a>
+            </div>
+
+        </form>
+
+    </main>
+
+    <script>
+        // URL de tu Google Apps Script
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw0cB7eEqUIjRc810W3UFuOZPfv0gOZMTDMzS5rKWuo0VnbNEex1FXEjeVRuT-60ZlfKw/exec';
+
+        // Respuestas correctas
+        const respuestas = {
+            p1: 'c', p2: 'b', p3: 'a', p4: 'c', p5: 'a', 
+            p6: 'b', p7: 'c', p8: 'a', p9: 'b', p10: 'a'
+        };
+
+        function mostrarToast(mensaje) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${mensaje}`;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('fade-out');
+                setTimeout(() => toast.remove(), 500); 
+            }, 3000);
+        }
+
+        function evaluarPrueba() {
+            let form = document.getElementById('formulario-evaluacion');
+            let nombreEstudiante = document.getElementById('nombreEstudiante').value.trim();
+            let gradoEstudiante = document.getElementById('gradoEstudiante').value;
+            let puntaje = 0;
+            let totalPreguntas = 10;
+            let todasRespondidas = true;
+
+            // 1. Validar nombre y grado
+            if (!nombreEstudiante || !gradoEstudiante) {
+                mostrarToast("Por favor, ingresa tu Nombre y selecciona tu Grado.");
+                return;
+            }
+
+            // 2. Verificar que todas las preguntas estén respondidas
+            for (let i = 1; i <= totalPreguntas; i++) {
+                if (!form.querySelector(`input[name="p${i}"]:checked`)) {
+                    todasRespondidas = false;
+                    break;
+                }
+            }
+
+            if (!todasRespondidas) {
+                mostrarToast("Por favor, responde todas las preguntas antes de enviar.");
+                return;
+            }
+
+            // Cambiar estado del botón
+            let btn = document.getElementById('btn-evaluar');
+            btn.disabled = true;
+            btn.innerText = "Enviando respuestas...";
+
+            // 3. Preparar los datos a enviar
+            let datosEstudiante = {
+                nombre: nombreEstudiante,
+                grado: gradoEstudiante,
+                p1: form.querySelector('input[name="p1"]:checked').value,
+                p2: form.querySelector('input[name="p2"]:checked').value,
+                p3: form.querySelector('input[name="p3"]:checked').value,
+                p4: form.querySelector('input[name="p4"]:checked').value,
+                p5: form.querySelector('input[name="p5"]:checked').value,
+                p6: form.querySelector('input[name="p6"]:checked').value,
+                p7: form.querySelector('input[name="p7"]:checked').value,
+                p8: form.querySelector('input[name="p8"]:checked').value,
+                p9: form.querySelector('input[name="p9"]:checked').value,
+                p10: form.querySelector('input[name="p10"]:checked').value
+            };
+
+            // Evaluar puntaje internamente para enviarlo a la base de datos
+            for (let i = 1; i <= totalPreguntas; i++) {
+                if (datosEstudiante[`p${i}`] === respuestas[`p${i}`]) {
+                    puntaje++;
+                }
+            }
+            datosEstudiante.puntaje = `${puntaje}/10`;
+
+            // 4. Enviar a Google Apps Script
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(datosEstudiante),
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "exito") {
+                    mostrarResultadosEstudiante(form, puntaje, totalPreguntas);
+                    btn.innerText = "Evaluación Guardada";
+                } else {
+                    throw new Error("Error en el servidor");
+                }
+            })
+            .catch(error => {
+                mostrarToast("Hubo un problema de conexión. Intenta enviar de nuevo.");
+                btn.disabled = false;
+                btn.innerText = "Enviar Evaluación";
+            });
+        }
+
+        // Función que pinta los colores y muestra el cuadro final (solo si el envío fue exitoso)
+        function mostrarResultadosEstudiante(form, puntaje, totalPreguntas) {
+            
+            // Bloquear inputs de nombre y grado
+            document.getElementById('nombreEstudiante').disabled = true;
+            document.getElementById('gradoEstudiante').disabled = true;
+
+            // Pintar respuestas correctas e incorrectas
+            for (let i = 1; i <= totalPreguntas; i++) {
+                let seleccionada = form.querySelector(`input[name="p${i}"]:checked`);
+                let valorElegido = seleccionada.value;
+                let valorCorrecto = respuestas[`p${i}`];
+
+                let todosInputs = form.querySelectorAll(`input[name="p${i}"]`);
+                todosInputs.forEach(inp => inp.disabled = true);
+
+                let itemSeleccionado = seleccionada.closest('.opcion-item');
+                
+                if (valorElegido === valorCorrecto) {
+                    itemSeleccionado.classList.add('correcta');
+                } else {
+                    itemSeleccionado.classList.add('incorrecta');
+                    let inputCorrecto = form.querySelector(`input[name="p${i}"][value="${valorCorrecto}"]`);
+                    inputCorrecto.closest('.opcion-item').classList.add('correcta');
+                }
+            }
+
+            // Mostrar resultados en pantalla
+            let panel = document.getElementById('panel-res');
+            let notaDiv = document.getElementById('nota-texto');
+            let msgDiv = document.getElementById('mensaje-texto');
+
+            notaDiv.innerText = `${puntaje} / 10`;
+
+            if (puntaje === 10) {
+                msgDiv.innerText = "¡Perfecto! Dominas el M.R.U.V. a la perfección.";
+                notaDiv.style.color = "#2ecc71";
+            } else if (puntaje >= 6) {
+                msgDiv.innerText = "¡Buen trabajo! Has aprobado la evaluación, revisa las que fallaste para mejorar.";
+                notaDiv.style.color = "#f39c12";
+            } else {
+                msgDiv.innerText = "Necesitas seguir practicando. Te recomiendo repasar la teoría y volver a intentarlo.";
+                notaDiv.style.color = "#e74c3c";
+            }
+
+            panel.classList.add('activo');
+            
+            setTimeout(() => {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+    </script>
+</body>
+</html>
