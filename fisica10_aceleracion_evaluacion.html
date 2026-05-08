@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Aceleración - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { 
+            --color-fisica: #3498db; 
+            --color-oscuro: #0f172a; 
+            --color-acento: #deff9a;
+            --color-texto: #ffffff; 
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-oscuro); 
+            color: var(--color-texto);
+            background-image: radial-gradient(circle at 50% 50%, rgba(52, 152, 219, 0.1), transparent 80%),
+                              url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh; padding: 20px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .contenedor { 
+            max-width: 850px; width: 100%; background: rgba(15, 23, 42, 0.85); 
+            backdrop-filter: blur(15px); padding: 50px; border-radius: 24px; 
+            border: 1px solid rgba(222, 255, 154, 0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        /* --- AMBIENTACIÓN Y CABECERA --- */
+        .eval-header { margin-bottom: 30px; }
+        .eval-header i { font-size: 60px; color: var(--color-acento); margin-bottom: 15px; }
+        .eval-header h1 { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .eval-header span { color: var(--color-acento); }
+        .eval-header p { font-size: 1.1rem; color: #ddd; line-height: 1.6; padding: 0 20px; }
+
+        .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 40px; overflow: hidden; }
+        #progress-fill { width: 0%; height: 100%; background: var(--color-acento); transition: 0.5s; }
+
+        .pantalla { display: none; }
+        .activa { display: block; animation: fadeIn 0.6s ease; }
+
+        input[type="text"] { 
+            width: 80%; padding: 15px; margin: 20px auto; border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); 
+            color: #fff; font-size: 1.1rem; text-align: center; display: block;
+        }
+        input[type="text"]:focus { border-color: var(--color-acento); outline: none; background: rgba(0,0,0,0.6); }
+
+        .pregunta-card { 
+            background: rgba(255,255,255,0.03); padding: 30px; border-radius: 15px; 
+            border-top: 5px solid var(--color-acento); margin-bottom: 30px; 
+            text-align: center; 
+        }
+        .pregunta-card h3 { margin-bottom: 25px; font-weight: 500; font-size: 1.25rem; line-height: 1.5; color: #fff;}
+
+        .opciones-contenedor { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        
+        .opcion { 
+            display: flex; align-items: center; justify-content: center; gap: 15px; 
+            width: 80%; padding: 15px; background: rgba(255,255,255,0.05); 
+            border-radius: 10px; cursor: pointer; transition: 0.3s;
+            font-size: 1.05rem;
+        }
+        .opcion:hover { background: rgba(222, 255, 154, 0.1); }
+        .opcion input { accent-color: var(--color-acento); transform: scale(1.3); cursor: pointer; }
+
+        .btn { 
+            width: 80%; padding: 18px; border: none; border-radius: 12px; 
+            background: var(--color-acento); color: #000; font-size: 1.2rem; 
+            font-weight: 700; cursor: pointer; transition: 0.3s; margin: 20px auto 0; display: block;
+        }
+        .btn:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(222, 255, 154, 0.3); }
+        .btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 30px; background: rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 1rem; }
+        th { background: rgba(222, 255, 154, 0.1); color: var(--color-acento); font-weight: 600; text-transform: uppercase; }
+        .correcto { color: #2ecc71; font-weight: bold; }
+        .incorrecto { color: #e74c3c; font-weight: bold; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 768px) {
+            .opcion, .btn, input[type="text"] { width: 100%; }
+            .contenedor { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <div class="eval-header">
+            <i class="fa-solid fa-rocket"></i>
+            <h1>Evaluación <span>Aceleración</span></h1>
+            <p>El test consta de 10 preguntas (3 teóricas y 7 prácticas). Cada respuesta correcta suma 0.5 puntos a tu calificación final.</p>
+        </div>
+
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+
+        <div id="pantalla-inicio" class="pantalla activa">
+            <p style="color: #ccc; margin-bottom: 10px;">Para iniciar tu prueba en el Laboratorio Virtual, por favor identifícate:</p>
+            <input type="text" id="nombre-estudiante" placeholder="Escribe tu nombre y apellido completos">
+            <button class="btn" onclick="iniciar()">COMENZAR EXAMEN</button>
+        </div>
+
+        <div id="pantalla-test" class="pantalla">
+            <div id="cuestionario"></div>
+            <button class="btn" id="btn-finalizar" onclick="procesarEvaluacion()">ENVIAR RESULTADOS Y CALIFICAR</button>
+        </div>
+
+        <div id="pantalla-final" class="pantalla">
+            <div id="resumen-visual"></div>
+            <div id="tabla-detalle"></div>
+            <button class="btn" onclick="window.location.reload()">VOLVER A INTENTAR</button>
+            <button class="btn" style="background: transparent; border: 2px solid var(--color-acento); color: var(--color-acento); margin-top: 15px;" onclick="location.href='fisica10_aceleracion.html'">REGRESAR A LA LECCIÓN</button>
+        </div>
+    </div>
+
+    <script>
+        // Enlace actualizado que creaste para las 10 preguntas
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzNHZuUMRbgz_osixvyeNJA1QPoK8kHRQVs_NaIWbFmxJXpAc9dViIS0qOSEFf_NcFJ/exec';
+        let nombre = "";
+        
+        // Banco de 10 preguntas (3 Teóricas, 7 Prácticas)
+        const preguntas = [
+            // TEÓRICAS
+            { p: "¿Cuál es la definición correcta de aceleración en física?", o: ["Es mantener una velocidad alta constantemente.", "Es el cambio de velocidad en un intervalo de tiempo.", "Es la distancia que recorre un objeto en un segundo.", "Es la fuerza con la que un motor empuja."], c: 1 },
+            { p: "¿En qué unidades se mide la aceleración según el Sistema Internacional (SI)?", o: ["Metros (m)", "Metros por segundo (m/s)", "Metros por segundo al cuadrado (m/s²)", "Kilómetros por hora (km/h)"], c: 2 },
+            { p: "Si un vehículo va muy rápido y repentinamente pisa los frenos para detenerse, matemáticamente su aceleración es:", o: ["Positiva", "Nula (Cero)", "Infinita", "Negativa"], c: 3 },
+            // PRÁCTICAS
+            { p: "Una chiva arranca desde la plaza principal (reposo) y alcanza 15 m/s en 5 segundos. Su aceleración es:", o: ["75 m/s²", "10 m/s²", "3 m/s²", "0.33 m/s²"], c: 2 },
+            { p: "Un camión que viaja a 20 m/s ve un bache y reduce su velocidad a 10 m/s en 2 segundos. Su aceleración es:", o: ["5 m/s²", "-5 m/s²", "10 m/s²", "-10 m/s²"], c: 1 },
+            { p: "Una motocicleta acelera a razón de 4 m/s². Si parte del reposo, ¿cuánto tiempo tarda en llegar a 24 m/s?", o: ["6 s", "96 s", "20 s", "0.16 s"], c: 0 },
+            { p: "Un tractor va a 18 m/s y frena a -3 m/s² hasta detenerse por completo. ¿Cuánto tiempo le tomó frenar?", o: ["54 s", "15 s", "6 s", "9 s"], c: 2 },
+            { p: "Un ciclista entra a una pendiente a 5 m/s y acelera a 2 m/s² durante 4 segundos. ¿Qué velocidad tendrá al final?", o: ["13 m/s", "11 m/s", "40 m/s", "8 m/s"], c: 0 },
+            { p: "Un transporte escolar va a 22 m/s y frena con una aceleración de -2 m/s² por 5 segundos. Su velocidad final es:", o: ["32 m/s", "12 m/s", "10 m/s", "15 m/s"], c: 1 },
+            { p: "Un bulto de abono se desliza por una rampa acelerando a 3 m/s² por 3 segundos, alcanzando 14 m/s al final. ¿Con qué velocidad inicial empezó?", o: ["5 m/s", "23 m/s", "9 m/s", "4 m/s"], c: 0 }
+        ];
+
+        function iniciar() {
+            nombre = document.getElementById('nombre-estudiante').value.trim();
+            if(!nombre) return alert("Por favor, ingresa tu nombre completo para continuar.");
+            
+            document.getElementById('pantalla-inicio').classList.remove('activa');
+            document.getElementById('pantalla-test').classList.add('activa');
+            document.getElementById('progress-fill').style.width = "50%";
+            pintarPreguntas();
+        }
+
+        function pintarPreguntas() {
+            let html = "";
+            preguntas.forEach((q, i) => {
+                html += `<div class="pregunta-card"><h3>${i+1}. ${q.p}</h3><div class="opciones-contenedor">`;
+                q.o.forEach((opt, j) => {
+                    html += `<label class="opcion"><input type="radio" name="preg${i}" value="${j}"> ${opt}</label>`;
+                });
+                html += `</div></div>`;
+            });
+            document.getElementById('cuestionario').innerHTML = html;
+        }
+
+        function procesarEvaluacion() {
+            let aciertos = 0;
+            let respuestasEstudiante = {};
+            
+            preguntas.forEach((q, i) => {
+                const seleccion = document.querySelector(`input[name="preg${i}"]:checked`);
+                let indiceMarcado = seleccion ? parseInt(seleccion.value) : -1;
+                
+                let esCorrecta = (indiceMarcado === q.c);
+                if(esCorrecta) aciertos++;
+                
+                respuestasEstudiante[`p${i+1}`] = esCorrecta ? "CORRECTO" : "ERROR (Marcó: " + (indiceMarcado === -1 ? "Ninguna" : q.o[indiceMarcado]) + ")";
+            });
+
+            // LÓGICA DE NOTA: 0.5 puntos por cada acierto. Mínimo 1.0. Máximo 5.0.
+            let calculoNota = aciertos * 0.5;
+            if(calculoNota < 1.0) calculoNota = 1.0; 
+            let notaFinal = calculoNota.toFixed(1);
+
+            // Preparar datos para enviar a Excel (Las 10 preguntas)
+            const body = new FormData();
+            body.append('nombre', nombre);
+            body.append('nota', notaFinal);
+            body.append('p1', respuestasEstudiante.p1);
+            body.append('p2', respuestasEstudiante.p2);
+            body.append('p3', respuestasEstudiante.p3);
+            body.append('p4', respuestasEstudiante.p4);
+            body.append('p5', respuestasEstudiante.p5);
+            body.append('p6', respuestasEstudiante.p6);
+            body.append('p7', respuestasEstudiante.p7);
+            body.append('p8', respuestasEstudiante.p8);
+            body.append('p9', respuestasEstudiante.p9);
+            body.append('p10', respuestasEstudiante.p10);
+
+            // Cambiar estado del botón mientras se envía
+            document.getElementById('btn-finalizar').innerText = "ENVIANDO RESULTADOS A EXCEL...";
+            document.getElementById('btn-finalizar').disabled = true;
+
+            // Enviar datos
+            fetch(scriptURL, { method: 'POST', body: body })
+                .then(() => {
+                    document.getElementById('pantalla-test').classList.remove('activa');
+                    document.getElementById('pantalla-final').classList.add('activa');
+                    document.getElementById('progress-fill').style.width = "100%";
+                    mostrarResultadosFinales(notaFinal, respuestasEstudiante);
+                })
+                .catch(() => {
+                    alert("Error de conexión. Verifica tu internet e intenta de nuevo.");
+                    document.getElementById('btn-finalizar').innerText = "ENVIAR RESULTADOS Y CALIFICAR";
+                    document.getElementById('btn-finalizar').disabled = false;
+                });
+        }
+
+        function mostrarResultadosFinales(nota, r) {
+            let colorNota = nota >= 3.0 ? "#2ecc71" : "#e74c3c";
+            let icono = nota >= 3.0 ? "fa-solid fa-medal" : "fa-solid fa-triangle-exclamation";
+            
+            let htmlCabecera = `
+                <i class="${icono}" style="font-size: 60px; color: ${colorNota}; margin-bottom: 15px;"></i>
+                <h2 style="margin-bottom:10px;">¡Examen Finalizado!</h2>
+                <h3 style="font-size:4.5rem; color:${colorNota}; margin: 10px 0;">${nota}</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">Estudiante: <strong>${nombre}</strong></p>
+            `;
+            
+            let htmlTabla = `<table><thead><tr><th>N°</th><th>Estado de Respuesta</th></tr></thead><tbody>`;
+            for(let i=1; i<=10; i++) {
+                let clase = r[`p${i}`].startsWith("CORRECTO") ? "correcto" : "incorrecto";
+                htmlTabla += `<tr><td>P${i}</td><td class="${clase}">${r[`p${i}`]}</td></tr>`;
+            }
+            htmlTabla += `</tbody></table>`;
+            
+            document.getElementById('resumen-visual').innerHTML = htmlCabecera;
+            document.getElementById('tabla-detalle').innerHTML = htmlTabla;
+        }
+    </script>
+</body>
+</html>
