@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bases de la Química Orgánica - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-principal: #3498db;   
+            --color-secundario: #4facfe;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-destaque: #2ecc71; 
+            --color-alerta: #f39c12;
+            --color-radical: #e74c3c;
+            --color-enlace: #9b59b6;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* NAVEGACIÓN */
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-principal); }
+        .btn-volver { color: var(--color-secundario); text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; margin-top: 20px;}
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor { max-width: 1100px; margin: 0 auto; padding: 20px; animation: fadeIn 0.5s ease; }
+
+        .encabezado-leccion { text-align: center; margin-bottom: 40px; border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 30px; margin-top: 20px;}
+        .encabezado-leccion h1 { font-size: 3.5rem; color: var(--color-principal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;}
+        .encabezado-leccion p { font-size: 1.15rem; color: #ccc; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+        .titulo-seccion { font-size: 2.2rem; border-left: 5px solid var(--color-principal); padding-left: 15px; margin: 60px 0 30px 0; color: #fff; }
+        .texto-base { font-size: 1.1rem; color: #ddd; line-height: 1.7; margin-bottom: 20px; }
+
+        /* --- PIZARRA INTERACTIVA (AHORA ES EL CENTRO DE ATENCIÓN) --- */
+        .pizarra-interactiva { background: #0f111a; border: 3px solid var(--color-secundario); border-radius: 15px; overflow: hidden; box-shadow: 0 15px 50px rgba(52, 152, 219, 0.3); margin-top: 10px; }
+        
+        .pizarra-header { background: #1c2833; padding: 20px 25px; display: flex; flex-direction: column; gap: 15px; align-items: center; border-bottom: 1px solid #2c3e50; text-align: center;}
+        .pizarra-header h3 { color: var(--color-secundario); margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px;}
+        
+        /* Selector Resaltado */
+        .selector-container { background: rgba(243, 156, 18, 0.1); border: 2px dashed var(--color-alerta); padding: 15px 25px; border-radius: 10px; display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 600px; animation: pulseBorder 2s infinite;}
+        .selector-label { color: var(--color-alerta); font-weight: 800; font-size: 1.2rem; }
+        .selector-ejercicio { padding: 12px 15px; border-radius: 8px; background: #2c3e50; color: #fff; border: 2px solid var(--color-principal); outline: none; font-weight: 600; font-size: 1.1rem; cursor: pointer; width: 100%;}
+        
+        /* Área de la molécula */
+        .molecula-display { padding: 40px; text-align: center; min-height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%); }
+        .molecula-display pre { font-family: 'Fira Code', monospace; font-size: 2.2rem; font-weight: 600; color: #fff; margin: 0; line-height: 1.6; transition: 0.3s; }
+        
+        /* Zona de Construcción de Palabra */
+        .construccion-palabra { margin-top: 30px; font-size: 2.5rem; font-weight: 800; letter-spacing: 2px; color: #fff; background: rgba(0,0,0,0.5); padding: 10px 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); min-height: 70px; display: flex; align-items: center;}
+
+        /* Clases JS */
+        .hl-cadena { color: var(--color-destaque); text-shadow: 0 0 10px rgba(46, 204, 113, 0.5); }
+        .hl-enlace { color: var(--color-enlace); font-weight: 800; text-shadow: 0 0 10px rgba(155, 89, 182, 0.5);}
+        .hl-radical { color: var(--color-radical); }
+        .hl-num { color: var(--color-alerta); font-size: 1.2rem; position: relative; top: -15px; margin-left: -15px; margin-right: 5px;}
+        .hl-num-bad { color: #555; font-size: 1.2rem; text-decoration: line-through; position: relative; top: -15px; margin-left: -15px; margin-right: 5px;}
+
+        /* Panel de explicación */
+        .panel-controles { background: #17202a; border-top: 1px solid #2c3e50; padding: 25px; display: flex; flex-direction: column; gap: 20px; }
+        .texto-explicacion { font-size: 1.25rem; color: #ddd; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; min-height: 90px; border-left: 5px solid var(--color-alerta); line-height: 1.6;}
+        .texto-explicacion strong { color: var(--color-secundario); }
+        
+        .botones-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px;}
+        .btn-pizarra { background: var(--color-principal); color: #fff; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 800; font-size: 1.2rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .btn-pizarra:hover { background: #2980b9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);}
+        .btn-pizarra:disabled { background: #34495e; color: #7f8c8d; cursor: not-allowed; transform: none; box-shadow: none;}
+        .indicador-paso { font-weight: 800; color: #aaa; letter-spacing: 2px; font-size: 1.2rem; background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 20px;}
+
+        /* --- CAJAS DE REGLAS Y TEORÍA --- */
+        .regla-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; border-top: 4px solid var(--color-principal); }
+        .regla-box h3 { color: var(--color-secundario); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;}
+        .regla-box h3 .num-regla { background: var(--color-principal); color: #fff; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-size: 1.2rem;}
+        
+        .ejemplo-estatico { background: rgba(0,0,0,0.5); padding: 20px; border-radius: 8px; border-left: 4px solid var(--color-destaque); font-family: 'Fira Code', monospace; color: #fff; margin: 15px 0; font-size: 1.2rem; white-space: pre;}
+        .nota-simulador { background: rgba(243, 156, 18, 0.1); padding: 12px 20px; border-radius: 8px; color: var(--color-alerta); font-weight: 600; display: inline-flex; align-items: center; gap: 10px; margin-top: 10px;}
+
+        /* --- TABLA IUPAC --- */
+        .tabla-contenedor { overflow-x: auto; margin-bottom: 40px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+        table { width: 100%; border-collapse: collapse; background: rgba(0,0,0,0.4); text-align: center; font-size: 1.1rem;}
+        th { background: rgba(52, 152, 219, 0.2); color: #4facfe; padding: 15px; font-weight: 800; border-bottom: 2px solid var(--color-principal); }
+        td { padding: 12px 15px; color: #ddd; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+        tr:hover td { background: rgba(52, 152, 219, 0.1); color: #fff; }
+        .td-prefijo { font-weight: 800; color: var(--color-alerta); }
+
+        @keyframes pulseBorder { 0% { border-color: rgba(243, 156, 18, 0.3); } 50% { border-color: rgba(243, 156, 18, 1); } 100% { border-color: rgba(243, 156, 18, 0.3); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="quimica_11.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Química Orgánica</a>
+
+        <div class="encabezado-leccion">
+            <h1>Bases de la Química Orgánica</h1>
+            <p>Aprende a dominar el lenguaje universal de la IUPAC. Conoce la tetravalencia del carbono, descubre cómo numerar las cadenas y conviértete en un experto nombrando moléculas paso a paso.</p>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SIMULADOR INTERACTIVO (WIDGET PRINCIPAL)   -->
+        <!-- ========================================== -->
+        <div class="pizarra-interactiva">
+            <div class="pizarra-header">
+                <h3><i class="fa-solid fa-chalkboard-user"></i> Simulador de Nomenclatura IUPAC</h3>
+                <div class="selector-container">
+                    <span class="selector-label">👉 ¡SELECCIONA AQUÍ TU MOLÉCULA! 👈</span>
+                    <select id="selectEjercicio" class="selector-ejercicio" onchange="cambiarEjercicio()"></select>
+                </div>
+            </div>
+            
+            <div class="molecula-display">
+                <pre id="moleculaCanvas">
+                    <!-- Molécula renderizada -->
+                </pre>
+                <div class="construccion-palabra" id="construccionPalabra">
+                    <!-- Palabra construyéndose -->
+                </div>
+            </div>
+
+            <div class="panel-controles">
+                <div class="texto-explicacion" id="textoExplicacion">Cargando...</div>
+                <div class="botones-nav">
+                    <button id="btnPrev" class="btn-pizarra" onclick="pasoAnterior()"><i class="fa-solid fa-arrow-left"></i> ANTERIOR</button>
+                    <span class="indicador-paso" id="indicadorPaso">PASO 1</span>
+                    <button id="btnNext" class="btn-pizarra" onclick="pasoSiguiente()">SIGUIENTE <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TABLA DE PREFIJOS IUPAC                    -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">Los Cimientos: Prefijos IUPAC</h2>
+        <p class="texto-base">El número de carbonos en tu cadena principal define el prefijo. Esta es la tabla que debes memorizar para armar cualquier hidrocarburo.</p>
+
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N° Carbonos</th>
+                        <th>Prefijo IUPAC</th>
+                        <th>Alcano (Enlace Simple)</th>
+                        <th>Alqueno (Enlace Doble)</th>
+                        <th>Alquino (Enlace Triple)</th>
+                        <th>Radical (Ramificación)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td class="td-prefijo">MET-</td><td>Metano</td><td>-</td><td>-</td><td>Metil</td></tr>
+                    <tr><td>2</td><td class="td-prefijo">ET-</td><td>Etano</td><td>Eteno</td><td>Etino</td><td>Etil</td></tr>
+                    <tr><td>3</td><td class="td-prefijo">PROP-</td><td>Propano</td><td>Propeno</td><td>Propino</td><td>Propil</td></tr>
+                    <tr><td>4</td><td class="td-prefijo">BUT-</td><td>Butano</td><td>Buteno</td><td>Butino</td><td>Butil</td></tr>
+                    <tr><td>5</td><td class="td-prefijo">PENT-</td><td>Pentano</td><td>Penteno</td><td>Pentino</td><td>Pentil</td></tr>
+                    <tr><td>6</td><td class="td-prefijo">HEX-</td><td>Hexano</td><td>Hexeno</td><td>Hexino</td><td>Hexil</td></tr>
+                    <tr><td>7</td><td class="td-prefijo">HEPT-</td><td>Heptano</td><td>Hepteno</td><td>Heptino</td><td>Heptil</td></tr>
+                    <tr><td>8</td><td class="td-prefijo">OCT-</td><td>Octano</td><td>Octeno</td><td>Octino</td><td>Octil</td></tr>
+                    <tr><td>9</td><td class="td-prefijo">NON-</td><td>Nonano</td><td>Noneno</td><td>Nonino</td><td>Nonil</td></tr>
+                    <tr><td>10</td><td class="td-prefijo">DEC-</td><td>Decano</td><td>Deceno</td><td>Decino</td><td>Decil</td></tr>
+                    <tr><td>11</td><td class="td-prefijo">UNDEC-</td><td>Undecano</td><td>Undeceno</td><td>Undecino</td><td>Undecil</td></tr>
+                    <tr><td>12</td><td class="td-prefijo">DODEC-</td><td>Dodecano</td><td>Dodeceno</td><td>Dodecino</td><td>Dodecil</td></tr>
+                    <tr><td>13</td><td class="td-prefijo">TRIDEC-</td><td>Tridecano</td><td>Trideceno</td><td>Tridecino</td><td>Tridecil</td></tr>
+                    <tr><td>14</td><td class="td-prefijo">TETRADEC-</td><td>Tetradecano</td><td>Tetradeceno</td><td>Tetradecino</td><td>Tetradecil</td></tr>
+                    <tr><td>15</td><td class="td-prefijo">PENTADEC-</td><td>Pentadecano</td><td>Pentadeceno</td><td>Pentadecino</td><td>Pentadecil</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- REGLAS DE NOMENCLATURA                     -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">Reglas Maestras de Nomenclatura</h2>
+        
+        <div class="regla-box">
+            <h3><span class="num-regla">1</span> Identificar la Cadena Principal</h3>
+            <p class="texto-base">Busca la secuencia continua de carbonos <strong>más larga posible</strong>. Si hay dobles o triples enlaces, la cadena principal <strong>debe contenerlos obligatoriamente</strong>, aunque exista una cadena de carbonos simples más larga.</p>
+            <div class="ejemplo-estatico">
+CH₃-CH₂-CH-CH₂-CH₃    <span style="color:#aaa;">(Correcto: 5 carbonos)</span>
+       |
+       CH₃
+            </div>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Prueba en el simulador el ejemplo: "2. Alcano Ramificado" para ver esto en acción.</div>
+        </div>
+
+        <div class="regla-box">
+            <h3><span class="num-regla">2</span> Numerar buscando el Localizador Más Bajo</h3>
+            <p class="texto-base">Debes enumerar los carbonos de la cadena principal de extremo a extremo. Primero hazlo de Izquierda a Derecha, luego de Derecha a Izquierda. <strong>Gana la numeración que le dé el número más pequeño</strong> a la ramificación o al enlace múltiple.</p>
+            <div class="ejemplo-estatico">
+<span style="color:#f39c12">1</span>   <span style="color:#f39c12">2</span>   <span style="color:#f39c12">3</span>   <span style="color:#f39c12">4</span>
+CH₃-CH₂-CH-CH₃     <span style="color:#e74c3c">Mal: El radical queda en el 3</span>
+       |
+       CH₃
+
+<span style="color:#2ecc71">4</span>   <span style="color:#2ecc71">3</span>   <span style="color:#2ecc71">2</span>   <span style="color:#2ecc71">1</span>
+CH₃-CH₂-CH-CH₃     <span style="color:#2ecc71">Bien: El radical queda en el 2 (Gana derecha a izq)</span>
+       |
+       CH₃
+            </div>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Ve al simulador y selecciona: "4. Regla de Numeración (L-R vs R-L)"</div>
+        </div>
+
+        <div class="regla-box">
+            <h3><span class="num-regla">3</span> Jerarquía (Regla de Alonso Fórmula)</h3>
+            <p class="texto-base">Si hay un conflicto entre dónde empezar a numerar, la prioridad es: <strong>1° Doble/Triple Enlace > 2° Radicales</strong>. El enlace múltiple manda y debe tener el número más pequeño posible, sin importar dónde queden los radicales.</p>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "8. Alqueno Ramificado (Prioridad de Enlace)"</div>
+        </div>
+
+        <div class="regla-box">
+            <h3><span class="num-regla">4</span> Orden Alfabético y Puntuación</h3>
+            <p class="texto-base">Si hay diferentes radicales (ej. Metil y Etil), se escriben en orden alfabético. <strong>Reglas de escritura:</strong> Los números se separan de otros números con comas (2,3) y los números se separan de las letras con guiones (2-Metil).</p>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "6. Orden Alfabético (Etil y Metil)"</div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- ISÓMEROS                                   -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">Isómeros y el prefijo ISO</h2>
+        <div class="regla-box">
+            <p class="texto-base">Los isómeros son moléculas que tienen la misma cantidad de "piezas" (misma fórmula como C₄H₁₀) pero armadas de forma diferente. El prefijo <strong>ISO-</strong> es un nombre común (no sistemático) aceptado por la IUPAC para una estructura específica en forma de "cola de pez" al final de una cadena.</p>
+            
+            <div style="display:flex; gap:20px; flex-wrap: wrap;">
+                <div class="ejemplo-estatico" style="flex: 1;">
+<strong>ISOBUTANO (C₄H₁₀)</strong>
+  CH₃
+   |
+CH₃-CH-CH₃
+                </div>
+                <div class="ejemplo-estatico" style="flex: 1;">
+<strong>ISOPENTANO (C₅H₁₂)</strong>
+  CH₃
+   |
+CH₃-CH-CH₂-CH₃
+                </div>
+            </div>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Ve al simulador y busca los ejercicios 11 y 12 para ver la explicación detallada de estos isómeros.</div>
+        </div>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT DEL VISUALIZADOR INTERACTIVO        -->
+    <!-- ========================================== -->
+    <script>
+        // BASE DE DATOS DE EJERCICIOS (12 Ejercicios Profundos)
+        // Uso caracteres Unicode ₁₂₃₄₅₆₇₈₉ para subíndices perfectos en <pre>
+        const ejercicios = [
+            {
+                id: 0,
+                nombre: "1. Alcano Simple (Propano)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Observamos la molécula. Es una cadena lineal continua.", visual: "CH₃ - CH₂ - CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2 (Prefijo):</strong> Contamos los carbonos. Hay 3 carbonos. En la tabla, 3 carbonos corresponde al prefijo <strong>PROP</strong>.", visual: "<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₃</span>", palabra: "<span style='color:var(--color-destaque)'>PROP</span>" },
+                    { texto: "<strong>Paso 3 (Sufijo):</strong> Observamos los enlaces. Todos son enlaces simples (-). Corresponde a la familia de los Alcanos, sufijo <strong>ANO</strong>.", visual: "CH₃ <span class='hl-enlace'>-</span> CH₂ <span class='hl-enlace'>-</span> CH₃", palabra: "PROP <span style='color:var(--color-enlace)'>+ ANO</span>" },
+                    { texto: "<strong>Paso 4:</strong> Unimos el prefijo y el sufijo.", visual: "<span style='color:#2ecc71'>CH₃ - CH₂ - CH₃</span>", palabra: "PROPANO" }
+                ]
+            },
+            {
+                id: 1,
+                nombre: "2. Alcano Ramificado (Identificando partes)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Tenemos una cadena con una ramificación.", visual: "      CH₃\n       |\nCH₃ - CH - CH₂ - CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Buscamos la cadena más larga. La horizontal tiene 4 carbonos = <strong>BUT</strong>.", visual: "      CH₃\n       |\n<span class='hl-cadena'>CH₃ - CH - CH₂ - CH₃</span>", palabra: "<span style='color:var(--color-destaque)'>BUT</span>" },
+                    { texto: "<strong>Paso 3:</strong> Enlaces simples = <strong>ANO</strong>. El nombre base es BUTANO.", visual: "      CH₃\n       |\n<span class='hl-cadena'>CH₃</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH₂</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH₃</span>", palabra: "BUT<span style='color:var(--color-enlace)'>ANO</span>" },
+                    { texto: "<strong>Paso 4:</strong> Lo que quedó fuera de la cadena es un radical. Tiene 1 carbono (MET) + terminación IL = <strong>METIL</strong>.", visual: "      <span class='hl-radical'>CH₃</span> (Radical Metil)\n       |\n<span class='hl-cadena'>CH₃ - CH - CH₂ - CH₃</span>", palabra: "<span style='color:var(--color-radical)'>METIL</span> + BUTANO" },
+                    { texto: "<strong>Paso 5:</strong> Numeramos de Izquierda a Derecha. El Metil cae en el carbono 2.", visual: "      <span class='hl-radical'>CH₃</span>\n       |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>4</span><span class='hl-cadena'>CH₃</span>", palabra: "<span style='color:var(--color-alerta)'>2-</span>METILBUTANO" }
+                ]
+            },
+            {
+                id: 2,
+                nombre: "3. Evaluando Numeración (Der a Izq vs Izq a Der)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Tenemos la misma cadena del ejemplo anterior. Ya sabemos que es un Metilbutano. Pero, ¿cómo la numeramos correctamente?", visual: "      CH₃\n       |\nCH₃ - CH - CH₂ - CH₃", palabra: "METILBUTANO" },
+                    { texto: "<strong>Opción A:</strong> Numeramos de Izquierda a Derecha. El radical Metil cae en la posición <strong>2</strong>.", visual: "      <span class='hl-radical'>CH₃</span>\n       |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>4</span><span class='hl-cadena'>CH₃</span>", palabra: "Posición: 2" },
+                    { texto: "<strong>Opción B:</strong> Numeramos de Derecha a Izquierda. El radical Metil cae en la posición <strong>3</strong>.", visual: "      <span class='hl-radical'>CH₃</span>\n       |\n<span class='hl-num'>4</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>2</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>", palabra: "Posición: 3" },
+                    { texto: "<strong>Decisión:</strong> La regla exige el localizador MÁS BAJO. Comparamos: 2 es menor que 3. Ganó la Opción A (Izq a Der).", visual: "      <span class='hl-radical'>CH₃</span>\n       |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>CH</span>-<span class='hl-num-bad'>3</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num-bad'>4</span><span class='hl-cadena'>CH₃</span>", palabra: "<span style='color:var(--color-alerta)'>2-</span>METILBUTANO" }
+                ]
+            },
+            {
+                id: 3,
+                nombre: "4. Múltiples Radicales Iguales (Dimetil)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Molécula con varias ramificaciones.", visual: "      CH₃ CH₃\n       |   |\nCH₃ - CH - CH - CH₂ - CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena principal: 5 carbonos = PENTANO.", visual: "      CH₃ CH₃\n       |   |\n<span class='hl-cadena'>CH₃ - CH - CH - CH₂ - CH₃</span>", palabra: "<span style='color:var(--color-destaque)'>PENTANO</span>" },
+                    { texto: "<strong>Paso 3:</strong> Hay DOS radicales CH₃ (Metil). Como son iguales, agrupamos usando el prefijo <strong>DI</strong> = DIMETIL.", visual: "      <span class='hl-radical'>CH₃</span> <span class='hl-radical'>CH₃</span>\n       |   |\n<span class='hl-cadena'>CH₃ - CH - CH - CH₂ - CH₃</span>", palabra: "<span style='color:var(--color-radical)'>DIMETIL</span>PENTANO" },
+                    { texto: "<strong>Paso 4:</strong> Numeramos. Izq a Der da (2,3). Der a Izq da (3,4). Elegimos la más baja: <strong>2,3</strong>.", visual: "      <span class='hl-radical'>CH₃</span> <span class='hl-radical'>CH₃</span>\n       |   |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>4</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>5</span><span class='hl-cadena'>CH₃</span>", palabra: "<span style='color:var(--color-alerta)'>2,3-</span>DIMETILPENTANO" }
+                ]
+            },
+            {
+                id: 4,
+                nombre: "5. Orden Alfabético (Etil y Metil)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Molécula con radicales diferentes.", visual: "      CH₃\n       |\nCH₃ - CH - CH - CH₂ - CH₂ - CH₃\n           |\n          CH₂-CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena principal: 6 carbonos = HEXANO.", visual: "      CH₃\n       |\n<span class='hl-cadena'>CH₃ - CH - CH - CH₂ - CH₂ - CH₃</span>\n           |\n          CH₂-CH₃", palabra: "HEXANO" },
+                    { texto: "<strong>Paso 3:</strong> Radical Arriba: 1 carbono = METIL. Radical Abajo: 2 carbonos = ETIL.", visual: "      <span class='hl-radical'>CH₃</span> (Metil)\n       |\n<span class='hl-cadena'>CH₃ - CH - CH - CH₂ - CH₂ - CH₃</span>\n           |\n          <span style='color:#e67e22'>CH₂-CH₃</span> (Etil)", palabra: "METIL y ETIL" },
+                    { texto: "<strong>Paso 4:</strong> Numeración (Izq a Der da 2 y 3).", visual: "      <span class='hl-radical'>CH₃</span>\n       |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>4</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>5</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>6</span><span class='hl-cadena'>CH₃</span>\n           |\n          <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "Posición 2 y 3" },
+                    { texto: "<strong>Paso 5:</strong> ORDEN ALFABÉTICO. Primero la 'E' de Etil (en posición 3), luego la 'M' de Metil (en el 2).", visual: "      <span class='hl-radical'>CH₃</span>\n       |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>4</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>5</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>6</span><span class='hl-cadena'>CH₃</span>\n           |\n          <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "3-ETIL-2-METILHEXANO" }
+                ]
+            },
+            {
+                id: 5,
+                nombre: "6. Alqueno Simple (2-Buteno)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Observamos un doble enlace (C=C). Familia de los Alquenos.", visual: "CH₃ - CH = CH - CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena de 4 carbonos = BUT.", visual: "<span class='hl-cadena'>CH₃ - CH</span> = <span class='hl-cadena'>CH - CH₃</span>", palabra: "BUT" },
+                    { texto: "<strong>Paso 3:</strong> Doble enlace = sufijo ENO. Base: BUTENO.", visual: "CH₃ - CH <span class='hl-enlace'>=</span> CH - CH₃", palabra: "BUT<span style='color:var(--color-enlace)'>ENO</span>" },
+                    { texto: "<strong>Paso 4:</strong> Hay que indicar DÓNDE empieza el doble enlace. Numeramos: arranca en el carbono 2.", visual: "<span class='hl-num'>1</span>CH₃ - <span class='hl-num'>2</span>CH <span class='hl-enlace'>=</span> <span class='hl-num'>3</span>CH - <span class='hl-num'>4</span>CH₃", palabra: "2-BUTENO" }
+                ]
+            },
+            {
+                id: 6,
+                nombre: "7. Alquino Simple (2-Pentino)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Observamos un triple enlace (C≡C). Familia de los Alquinos.", visual: "CH₃ - C ≡ C - CH₂ - CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena de 5 carbonos = PENT. Triple enlace = INO.", visual: "<span class='hl-cadena'>CH₃ - C</span> <span class='hl-enlace'>≡</span> <span class='hl-cadena'>C - CH₂ - CH₃</span>", palabra: "PENT<span style='color:var(--color-enlace)'>INO</span>" },
+                    { texto: "<strong>Paso 3:</strong> Numeramos. Izq a Der empieza en 2. Der a Izq empieza en 3. Elegimos 2.", visual: "<span class='hl-num'>1</span>CH₃ - <span class='hl-num'>2</span>C <span class='hl-enlace'>≡</span> <span class='hl-num'>3</span>C - <span class='hl-num'>4</span>CH₂ - <span class='hl-num'>5</span>CH₃", palabra: "2-PENTINO" }
+                ]
+            },
+            {
+                id: 7,
+                nombre: "8. Alqueno Ramificado (Prioridad de Enlace)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Molécula con doble enlace Y ramificación. Regla: La cadena principal DEBE contener el doble enlace.", visual: "CH₂ = CH - CH - CH₃\n           |\n           CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena principal de 4 carbonos = BUTENO.", visual: "<span class='hl-cadena'>CH₂ = CH - CH - CH₃</span>\n           |\n           CH₃", palabra: "BUTENO" },
+                    { texto: "<strong>Paso 3:</strong> Evaluamos Numeración. <strong>Derecha a Izq:</strong> El radical queda en 2. El enlace en 3.", visual: "<span class='hl-num'>4</span><span class='hl-cadena'>CH₂</span> = <span class='hl-num'>3</span><span class='hl-cadena'>CH</span> - <span class='hl-num'>2</span><span class='hl-cadena'>CH</span> - <span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>\n           |\n           <span class='hl-radical'>CH₃</span>", palabra: "Radical 2, Enlace 3" },
+                    { texto: "<strong>Paso 4:</strong> Evaluamos <strong>Izq a Derecha:</strong> El enlace queda en 1. El radical en 3.", visual: "<span class='hl-num'>1</span><span class='hl-cadena'>CH₂</span> = <span class='hl-num'>2</span><span class='hl-cadena'>CH</span> - <span class='hl-num'>3</span><span class='hl-cadena'>CH</span> - <span class='hl-num'>4</span><span class='hl-cadena'>CH₃</span>\n           |\n           <span class='hl-radical'>CH₃</span>", palabra: "Enlace 1, Radical 3" },
+                    { texto: "<strong>Paso 5:</strong> REGLA ALONSO FÓRMULA. ¡El doble enlace MANDA! Debe tener el número más bajo posible (1 vs 3). Elegimos Izq a Der.", visual: "<span class='hl-num'>1</span><span class='hl-cadena'>CH₂</span> = <span class='hl-num'>2</span><span class='hl-cadena'>CH</span> - <span class='hl-num'>3</span><span class='hl-cadena'>CH</span> - <span class='hl-num'>4</span><span class='hl-cadena'>CH₃</span>\n           |\n           <span class='hl-radical'>CH₃</span>", palabra: "3-METIL-1-BUTENO" }
+                ]
+            },
+            {
+                id: 8,
+                nombre: "9. Complejidad: 4-Etil-2,2-dimetilheptano",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Cadena muy ramificada.", visual: "       CH₃\n        |\nCH₃ - C - CH₂ - CH - CH₂ - CH₂ - CH₃\n        |       |\n       CH₃     CH₂-CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena principal: 7 carbonos = HEPTANO.", visual: "       CH₃\n        |\n<span class='hl-cadena'>CH₃ - C - CH₂ - CH - CH₂ - CH₂ - CH₃</span>\n        |       |\n       CH₃     CH₂-CH₃", palabra: "HEPTANO" },
+                    { texto: "<strong>Paso 3:</strong> Radicales: Dos Metiles (DIMETIL) y un Etil.", visual: "       <span class='hl-radical'>CH₃</span>\n        |\n<span class='hl-cadena'>CH₃ - C - CH₂ - CH - CH₂ - CH₂ - CH₃</span>\n        |       |\n       <span class='hl-radical'>CH₃</span>     <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "DIMETIL y ETIL" },
+                    { texto: "<strong>Paso 4:</strong> Numeramos Izq a Der para que los carbonos con más ramas tengan el número bajo (posiciones 2, 2 y 4).", visual: "       <span class='hl-radical'>CH₃</span>\n        |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>C</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>4</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>5</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>6</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>7</span><span class='hl-cadena'>CH₃</span>\n        |       |\n       <span class='hl-radical'>CH₃</span>     <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "Posiciones: 2, 2 y 4" },
+                    { texto: "<strong>Paso 5:</strong> Orden alfabético. Etil va primero.", visual: "       <span class='hl-radical'>CH₃</span>\n        |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>C</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>4</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>5</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>6</span><span class='hl-cadena'>CH₂</span>-<span class='hl-num'>7</span><span class='hl-cadena'>CH₃</span>\n        |       |\n       <span class='hl-radical'>CH₃</span>     <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "4-ETIL-2,2-DIMETILHEPTANO" }
+                ]
+            },
+            {
+                id: 9,
+                nombre: "10. El prefijo ISO (Isobutano)",
+                pasos: [
+                    { texto: "<strong>Paso 1:</strong> Fórmula C₄H₁₀ en forma ramificada.", visual: "      CH₃\n       |\nCH₃ - CH - CH₃", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Nombre sistemático IUPAC: Cadena de 3 (Propano) con Metil en el 2. Sería 2-Metilpropano.", visual: "      <span class='hl-radical'>CH₃</span>\n       |\n<span class='hl-num'>1</span><span class='hl-cadena'>CH₃</span>-<span class='hl-num'>2</span><span class='hl-cadena'>CH</span>-<span class='hl-num'>3</span><span class='hl-cadena'>CH₃</span>", palabra: "2-METILPROPANO" },
+                    { texto: "<strong>Paso 3:</strong> Regla ISO: Si termina en forma de 'Y' (cola de pez), se cuenta el TOTAL de carbonos de la molécula. Tiene 4 carbonos totales = BUT.", visual: "Forma ISO detectada:\n\n<span style='color:var(--color-principal)'>      CH₃\n       |\nCH₃ - CH</span> - CH₃\n\nTotal = 4 Carbonos", palabra: "ISO + BUT + ANO" },
+                    { texto: "<strong>Paso 4:</strong> Nombre común aceptado por IUPAC: ISOBUTANO.", visual: "<span style='color:var(--color-secundario)'>      CH₃\n       |\nCH₃ - CH - CH₃</span>", palabra: "ISOBUTANO" }
+                ]
+            }
+        ];
+
+        let ejActual = 0;
+        let pasoActual = 0;
+
+        const selectEj = document.getElementById("selectEjercicio");
+        const canvas = document.getElementById("moleculaCanvas");
+        const textoExp = document.getElementById("textoExplicacion");
+        const panelPalabra = document.getElementById("construccionPalabra");
+        const btnPrev = document.getElementById("btnPrev");
+        const btnNext = document.getElementById("btnNext");
+        const indPaso = document.getElementById("indicadorPaso");
+
+        // Inicializar
+        function inicializar() {
+            ejercicios.forEach((ej, index) => {
+                let option = document.createElement("option");
+                option.value = index;
+                option.text = ej.nombre;
+                selectEj.appendChild(option);
+            });
+            renderPaso();
+        }
+
+        function cambiarEjercicio() {
+            ejActual = parseInt(selectEj.value);
+            pasoActual = 0;
+            renderPaso();
+        }
+
+        function pasoSiguiente() {
+            if (pasoActual < ejercicios[ejActual].pasos.length - 1) {
+                pasoActual++;
+                renderPaso();
+            }
+        }
+
+        function pasoAnterior() {
+            if (pasoActual > 0) {
+                pasoActual--;
+                renderPaso();
+            }
+        }
+
+        function renderPaso() {
+            let dataPaso = ejercicios[ejActual].pasos[pasoActual];
+            let totalPasos = ejercicios[ejActual].pasos.length;
+
+            // Renderizar contenido
+            canvas.innerHTML = dataPaso.visual;
+            textoExp.innerHTML = dataPaso.texto;
+            indPaso.innerText = `PASO ${pasoActual + 1} / ${totalPasos}`;
+            
+            if(dataPaso.palabra === "") {
+                panelPalabra.style.display = "none";
+            } else {
+                panelPalabra.style.display = "flex";
+                panelPalabra.innerHTML = dataPaso.palabra;
+            }
+
+            // Controles
+            btnPrev.disabled = (pasoActual === 0);
+            btnNext.disabled = (pasoActual === totalPasos - 1);
+            
+            // Animación
+            canvas.style.opacity = 0;
+            panelPalabra.style.opacity = 0;
+            setTimeout(() => {
+                canvas.style.opacity = 1;
+                panelPalabra.style.opacity = 1;
+            }, 50);
+        }
+
+        window.onload = inicializar;
+
+    </script>
+
+</body>
+</html>
