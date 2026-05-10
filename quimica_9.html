@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Química 9° - Menú Principal | LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-quim-primario: #9b59b6;   /* Morado químico */
+            --color-quim-secundario: #00d2d3; /* Cian neón */
+            --color-oscuro: #14111f; /* Fondo oscuro tintado de morado */
+            --color-texto: #ffffff;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(20, 17, 31, 0.92), rgba(20, 17, 31, 0.98)), url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(155, 89, 182, 0.2); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-quim-primario); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(155, 89, 182, 0.1); color: var(--color-quim-secundario); }
+
+        /* --- ENCABEZADO --- */
+        .contenedor { max-width: 1200px; margin: 40px auto; padding: 20px; animation: fadeIn 0.8s ease; }
+        
+        .encabezado-area { text-align: center; margin-bottom: 50px; }
+        .badge-grado { display: inline-block; background: rgba(155, 89, 182, 0.2); color: var(--color-quim-primario); padding: 5px 15px; border-radius: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(155, 89, 182, 0.4);}
+        .encabezado-area h1 { font-size: 3.5rem; color: #fff; margin-bottom: 15px; text-transform: uppercase; }
+        .encabezado-area h1 span { color: var(--color-quim-secundario); }
+        .encabezado-area p { color: #ccc; font-size: 1.15rem; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+        /* --- GRID DE UNIDADES TEMÁTICAS --- */
+        .grid-unidades { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
+
+        /* --- TARJETA DE UNIDAD --- */
+        .tarjeta-unidad {
+            background: var(--bg-tarjeta);
+            border-radius: 15px;
+            border-top: 5px solid var(--color-quim-primario);
+            border-left: 1px solid rgba(255,255,255,0.05);
+            border-right: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .tarjeta-unidad:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-top-color: var(--color-quim-secundario);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .unidad-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;}
+        .icono-unidad { font-size: 2.5rem; color: var(--color-quim-primario); background: rgba(155, 89, 182, 0.1); width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
+        .unidad-header h2 { font-size: 1.6rem; color: #fff; line-height: 1.2; }
+
+        /* --- LISTA DE TEMAS (MENÚ INTERNO) --- */
+        .lista-temas { display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+        
+        .tema-enlace {
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 18px;
+            border-radius: 8px;
+            color: #ddd;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .tema-enlace i.fa-angle-right { margin-left: auto; color: #555; transition: 0.3s;}
+        .tema-enlace i.icono-tema { color: var(--color-quim-secundario); width: 20px; text-align: center; }
+        
+        .tema-enlace:hover {
+            background: rgba(0, 210, 211, 0.15);
+            border-color: rgba(0, 210, 211, 0.3);
+            color: #fff;
+            transform: translateX(5px);
+        }
+        .tema-enlace:hover i.fa-angle-right { color: var(--color-quim-secundario); transform: translateX(3px); }
+
+        /* Categorías o Sub-bloques visuales dentro de una tarjeta */
+        .sub-categoria {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin: 15px 0 5px 5px;
+            font-weight: 800;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 768px) { 
+            .grid-unidades { grid-template-columns: 1fr; } 
+            .encabezado-area h1 { font-size: 2.5rem; }
+            nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-area">
+            <div class="badge-grado">GRADO NOVENO</div>
+            <h1>Laboratorio de <span>Química</span></h1>
+            <p>Descubre las propiedades de la materia, el comportamiento de los gases, los secretos del átomo y cómo calcular reacciones químicas en este menú interactivo.</p>
+        </div>
+
+        <div class="grid-unidades">
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 1: FUNDAMENTOS Y ESTRUCTURA ATÓMICA     -->
+            <!-- ============================================== -->
+            <!-- Lo puse de primero porque pedagógicamente es la introducción -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #f1c40f; background: rgba(241, 196, 15, 0.1); border-color: #f1c40f;"><i class="fa-solid fa-atom"></i></div>
+                    <h2>Fundamentos y Estructura Atómica</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Conceptos Generales</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-journal-whills icono-tema" style="color: #f1c40f;"></i> Historia de la Química<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-ruler-combined icono-tema" style="color: #f1c40f;"></i> Sistema Internacional y Escalas de Temperatura<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-shapes icono-tema" style="color: #f1c40f;"></i> Propiedades y Transformaciones de la Materia<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">El Mundo Subatómico</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-microscope icono-tema" style="color: #f1c40f;"></i> Estructura y Propiedades del Átomo<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-timeline icono-tema" style="color: #f1c40f;"></i> Evolución de los Modelos Atómicos<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-satellite-dish icono-tema" style="color: #f1c40f;"></i> El Modelo Atómico Actual<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 2: ESTADOS DE AGREGACIÓN DE LA MATERIA  -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad"><i class="fa-solid fa-cloud"></i></div>
+                    <h2>Estados de Agregación</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Sólidos y Líquidos</div>
+                    <!-- Agrupados para facilitar navegación -->
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-cubes icono-tema"></i> Estado Sólido y Estado Líquido<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-chart-line icono-tema"></i> Teoría Cinético Molecular de los Líquidos<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">El Estado Gaseoso</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-wind icono-tema"></i> Propiedades y Teoría Cinética de los Gases<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Leyes de los Gases</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-temperature-arrow-up icono-tema"></i> Leyes de Boyle, Charles y Gay-Lussac<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-scale-balanced icono-tema"></i> Ley General y Principio de Avogadro<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 3: EL AGUA Y LAS SOLUCIONES             -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #3498db; background: rgba(52, 152, 219, 0.1);"><i class="fa-solid fa-water"></i></div>
+                    <h2>El Agua y Las Soluciones</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Propiedades del Agua</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-droplet icono-tema" style="color: #3498db;"></i> Estructura y Polaridad de la Molécula<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-link icono-tema" style="color: #3498db;"></i> Puentes de Hidrógeno y Otras Propiedades<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Soluciones Químicas</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-blender icono-tema" style="color: #3498db;"></i> Propiedades y Clases de Soluciones<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-layer-group icono-tema" style="color: #3498db;"></i> Clasificación según Estado Físico y Solubilidad<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-sliders icono-tema" style="color: #3498db;"></i> Factores Modificadores y Propiedades Cualitativas<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 4: ESTEQUIOMETRÍA                       -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #e74c3c; background: rgba(231, 76, 60, 0.1);"><i class="fa-solid fa-calculator"></i></div>
+                    <h2>Estequiometría</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Concentraciones Físicas</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-percent icono-tema" style="color: #e74c3c;"></i> Porcentaje Masa-Masa (% m/m)<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-flask icono-tema" style="color: #e74c3c;"></i> Porcentaje Volumen-Volumen (% v/v)<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-weight-scale icono-tema" style="color: #e74c3c;"></i> Porcentaje Masa-Volumen (% m/v)<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Cálculos de Reacción</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-arrow-right-arrow-left icono-tema" style="color: #e74c3c;"></i> Factores de Conversión<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-stopwatch icono-tema" style="color: #e74c3c;"></i> Rendimiento de la Reacción y Reactivo Límite<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+</body>
+</html>

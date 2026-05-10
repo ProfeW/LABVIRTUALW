@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Física 9° - Menú Principal | LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fis9-primario: #00a8ff;   /* Azul eléctrico */
+            --color-fis9-secundario: #fbc531; /* Amarillo energía */
+            --color-oscuro: #0f111a; /* Fondo muy oscuro con un toque azul marino */
+            --color-texto: #ffffff;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(15, 17, 26, 0.92), rgba(15, 17, 26, 0.98)), url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fis9-primario); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(0, 168, 255, 0.1); color: var(--color-fis9-secundario); }
+
+        /* --- ENCABEZADO --- */
+        .contenedor { max-width: 1200px; margin: 40px auto; padding: 20px; animation: fadeIn 0.8s ease; }
+        
+        .encabezado-area { text-align: center; margin-bottom: 50px; }
+        .badge-grado { display: inline-block; background: rgba(0, 168, 255, 0.2); color: var(--color-fis9-primario); padding: 5px 15px; border-radius: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(0, 168, 255, 0.4);}
+        .encabezado-area h1 { font-size: 3.5rem; color: #fff; margin-bottom: 15px; text-transform: uppercase; }
+        .encabezado-area h1 span { color: var(--color-fis9-secundario); }
+        .encabezado-area p { color: #ccc; font-size: 1.15rem; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+        /* --- GRID DE UNIDADES TEMÁTICAS --- */
+        .grid-unidades { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
+
+        /* --- TARJETA DE UNIDAD --- */
+        .tarjeta-unidad {
+            background: var(--bg-tarjeta);
+            border-radius: 15px;
+            border-top: 5px solid var(--color-fis9-primario);
+            border-left: 1px solid rgba(255,255,255,0.05);
+            border-right: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .tarjeta-unidad:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-top-color: var(--color-fis9-secundario);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .unidad-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;}
+        .icono-unidad { font-size: 2.5rem; color: var(--color-fis9-primario); background: rgba(0, 168, 255, 0.1); width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
+        .unidad-header h2 { font-size: 1.6rem; color: #fff; line-height: 1.2; }
+
+        /* --- LISTA DE TEMAS (MENÚ INTERNO) --- */
+        .lista-temas { display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+        
+        .tema-enlace {
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 18px;
+            border-radius: 8px;
+            color: #ddd;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .tema-enlace i.fa-angle-right { margin-left: auto; color: #555; transition: 0.3s;}
+        .tema-enlace i.icono-tema { color: var(--color-fis9-secundario); width: 20px; text-align: center; }
+        
+        .tema-enlace:hover {
+            background: rgba(251, 197, 49, 0.15);
+            border-color: rgba(251, 197, 49, 0.3);
+            color: #fff;
+            transform: translateX(5px);
+        }
+        .tema-enlace:hover i.fa-angle-right { color: var(--color-fis9-secundario); transform: translateX(3px); }
+
+        /* Categorías o Sub-bloques visuales dentro de una tarjeta */
+        .sub-categoria {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin: 15px 0 5px 5px;
+            font-weight: 800;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 768px) { 
+            .grid-unidades { grid-template-columns: 1fr; } 
+            .encabezado-area h1 { font-size: 2.5rem; }
+            nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-area">
+            <div class="badge-grado">GRADO NOVENO</div>
+            <h1>Ondas, Luz y <span>Sonido</span></h1>
+            <p>Explora cómo se mueve la energía a través de los diferentes medios. Desde los movimientos oscilatorios y el comportamiento del sonido, hasta los misterios de la luz y la óptica.</p>
+        </div>
+
+        <div class="grid-unidades">
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 1: MOVIMIENTOS Y CONCEPTOS BÁSICOS      -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #00a8ff; background: rgba(0, 168, 255, 0.1); border-color: #00a8ff;"><i class="fa-solid fa-wave-square"></i></div>
+                    <h2>Los Movimientos</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Conceptos Iniciales</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-arrow-right-long icono-tema" style="color: #00a8ff;"></i> Movimiento Rectilíneo<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-hurricane icono-tema" style="color: #00a8ff;"></i> Fenómenos Naturales y Oscilatorios<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Las Ondas</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-leaf icono-tema" style="color: #00a8ff;"></i> Elementos Naturales y Artificiales<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-chart-bar icono-tema" style="color: #00a8ff;"></i> Elementos de una Onda<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-arrows-left-right icono-tema" style="color: #00a8ff;"></i> Propiedades y Propagación Oscilatoria<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 2: FENÓMENOS ONDULATORIOS               -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #e84118; background: rgba(232, 65, 24, 0.1);"><i class="fa-solid fa-water"></i></div>
+                    <h2>Fenómenos Ondulatorios</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Dinámica de las Ondas</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-link icono-tema" style="color: #e84118;"></i> Relación entre Variables de Propagación<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Comportamiento Ondulatorio</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-arrow-right-arrow-left icono-tema" style="color: #e84118;"></i> Reflexión, Refracción y Principio de Huygens<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-code-merge icono-tema" style="color: #e84118;"></i> Interferencia: Constructiva y Destructiva<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 3: EL SONIDO Y LA ACÚSTICA              -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #4cd137; background: rgba(76, 209, 55, 0.1);"><i class="fa-solid fa-volume-high"></i></div>
+                    <h2>El Sonido y la Acústica</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">El Sonido como Onda</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-compact-disc icono-tema" style="color: #4cd137;"></i> El Sonido como Movimiento Oscilatorio<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-gauge-high icono-tema" style="color: #4cd137;"></i> Velocidad del Sonido según el Medio<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Clasificación y Características</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-wave-square icono-tema" style="color: #4cd137;"></i> Infrasonido y Ultrasonido<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-sliders icono-tema" style="color: #4cd137;"></i> Naturaleza y Características del Sonido<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Percepción</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-ear-listen icono-tema" style="color: #4cd137;"></i> La Acústica y la Audición<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 4: LA ÓPTICA                            -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #fbc531; background: rgba(251, 197, 49, 0.1);"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h2>La Óptica y La Luz</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Estudio de la Luz</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-sun icono-tema" style="color: #fbc531;"></i> Naturaleza y Características de la Luz<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-glasses icono-tema" style="color: #fbc531;"></i> Reflexión y Refracción de la Luz<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Aplicaciones y Espectro</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-binoculars icono-tema" style="color: #fbc531;"></i> Principales Instrumentos Ópticos<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-rainbow icono-tema" style="color: #fbc531;"></i> El Espectro Electromagnético<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+</body>
+</html>
