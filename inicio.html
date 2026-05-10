@@ -10,209 +10,157 @@
 
     <style>
         :root {
-            --color-fisica: #3498db;   
-            --color-quimica: #9b59b6;  
-            --color-biologia: #2ecc71; 
-            --color-oscuro: #1a1a2e;
+            --color-principal: #3498db;   
+            --color-secundario: #4facfe;
+            --color-oscuro: #0f111a;
             --color-texto: #ffffff;
+            --color-acento1: #e74c3c; 
+            --color-acento2: #2ecc71;
+            --color-acento3: #f39c12;
+            --color-acento4: #9b59b6;
         }
 
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         body {
-            background-color: var(--color-oscuro);
-            color: var(--color-texto);
-            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-attachment: fixed; min-height: 100vh;
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(15, 17, 26, 0.85), rgba(15, 17, 26, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; background-position: center;
+            min-height: 100vh; display: flex; flex-direction: column;
         }
 
-        /* --- BARRA DE NAVEGACIÓN COMPLETAMENTE RESTAURADA --- */
-        nav {
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
-        }
-        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo i { color: var(--color-fisica); }
-        .menu { list-style: none; display: flex; gap: 20px; }
-        .menu > li { position: relative; } /* Clave para que los submenús se alineen bien */
-        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+        /* --- NAVEGACIÓN --- */
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; padding: 20px 50px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);}
+        .logo { font-size: 28px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 12px; text-decoration: none; letter-spacing: 1px;}
+        .logo i { color: var(--color-principal); filter: drop-shadow(0 0 5px rgba(52,152,219,0.5));}
 
-        /* --- SUBMENÚS DESPLEGABLES --- */
-        .submenu {
-            display: none; position: absolute; top: 100%; left: 0;
-            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
-            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
-        }
-        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
-        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
-        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+        .contenedor { max-width: 1200px; margin: 0 auto; padding: 40px 20px; flex-grow: 1; animation: fadeIn 0.8s ease; display: flex; flex-direction: column; align-items: center;}
 
-        /* Colores dinámicos al pasar el mouse por los submenús */
-        .fisica:hover { border-left: 4px solid var(--color-fisica); }
-        .quimica:hover { border-left: 4px solid var(--color-quimica); }
-        .biologia:hover { border-left: 4px solid var(--color-biologia); }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        .contenedor { max-width: 1200px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.5s ease; }
-
-        /* --- SECCIÓN BIENVENIDA (GRID) --- */
-        .seccion-introduccion {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .bloque-bienvenida, .bloque-creador {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-        }
-
-        .bloque-bienvenida h1 { font-size: 2.5rem; margin-bottom: 15px; color: #4facfe; }
-        .bloque-bienvenida p { line-height: 1.6; color: #ddd; font-size: 1.1rem; }
-
-        .bloque-creador { border-left: 5px solid var(--color-biologia); text-align: center; }
-        .bloque-creador img { 
-            width: 120px; height: 120px; border-radius: 50%; 
-            margin-bottom: 15px; border: 3px solid var(--color-biologia);
-            object-fit: cover;
-        }
-        .bloque-creador h2 { font-size: 1.5rem; margin-bottom: 5px; }
-        .bloque-creador h3 { font-size: 0.9rem; color: var(--color-biologia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        .bloque-creador p { font-size: 0.95rem; color: #bbb; line-height: 1.5; }
-
-        /* --- SECCIÓN NOTICIAS --- */
-        .seccion-novedades h2 { 
-            font-size: 2rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px;
-            border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 10px;
-        }
-
-        .lista-noticias { display: flex; flex-direction: column; gap: 20px; }
-
-        .tarjeta-noticia {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 12px;
-            padding: 25px;
-            border-left: 6px solid var(--color-fisica);
-            transition: 0.3s;
-            position: relative;
-        }
-        .tarjeta-noticia:hover { transform: scale(1.01); background: rgba(255, 255, 255, 0.05); }
-
-        .tag-nuevo {
-            position: absolute; top: 20px; right: 25px;
-            background: #e74c3c; color: #fff; font-size: 0.7rem;
-            padding: 4px 10px; border-radius: 20px; font-weight: 800; text-transform: uppercase;
-        }
-
-        .fecha-noticia { color: #4facfe; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; display: block; }
-        .tarjeta-noticia h3 { font-size: 1.4rem; margin-bottom: 10px; }
-        .tarjeta-noticia p { color: #bbb; line-height: 1.5; margin-bottom: 15px; }
+        /* --- PERFIL DEL DOCENTE --- */
+        .perfil-container { text-align: center; margin-bottom: 60px; position: relative; }
         
-        .btn-noticia {
-            text-decoration: none; color: #fff; background: var(--color-fisica);
-            padding: 8px 20px; border-radius: 5px; font-size: 0.9rem; font-weight: 600;
-            display: inline-block; transition: 0.3s;
-        }
-        .btn-noticia:hover { background: #2980b9; box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3); }
+        /* Efecto de resplandor detrás del avatar */
+        .perfil-resplandor { position: absolute; width: 160px; height: 160px; background: var(--color-principal); border-radius: 50%; top: 0; left: 50%; transform: translateX(-50%); filter: blur(40px); opacity: 0.5; z-index: -1; animation: pulsar 3s infinite alternate;}
+        
+        .avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--color-secundario); box-shadow: 0 10px 25px rgba(0,0,0,0.5); padding: 5px; background: rgba(255,255,255,0.1); transition: 0.4s;}
+        .avatar:hover { transform: scale(1.05); border-color: #fff; box-shadow: 0 15px 35px rgba(52, 152, 219, 0.4);}
+        
+        .saludo { margin-top: 20px; font-size: 2.5rem; font-weight: 800; background: linear-gradient(to right, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+        .mensaje { font-size: 1.2rem; color: #ccc; max-width: 700px; margin: 15px auto 0; line-height: 1.6;}
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- GRID DE MÓDULOS --- */
+        .titulo-modulos { width: 100%; text-align: left; font-size: 1.8rem; border-left: 5px solid var(--color-principal); padding-left: 15px; margin-bottom: 30px; color: #fff; }
+        
+        .grid-modulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%;}
 
-        @media (max-width: 900px) {
-            .seccion-introduccion { grid-template-columns: 1fr; }
-        }
+        /* Diseño de Tarjeta Glassmorphism */
+        .tarjeta-modulo { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 35px 25px; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden;}
+        
+        .tarjeta-modulo::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--color-principal); transition: 0.4s;}
+        
+        /* Colores específicos para cada tarjeta */
+        .t-bases::before { background: var(--color-principal); }
+        .t-alcanos::before { background: var(--color-acento2); }
+        .t-acidos::before { background: var(--color-acento3); }
+        .t-proximamente::before { background: #555; }
+
+        .tarjeta-modulo:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); background: rgba(255, 255, 255, 0.08); border-color: rgba(255,255,255,0.2);}
+        
+        .icono-modulo { font-size: 3.5rem; margin-bottom: 20px; transition: 0.4s;}
+        .t-bases .icono-modulo { color: var(--color-secundario); }
+        .t-alcanos .icono-modulo { color: var(--color-acento2); }
+        .t-acidos .icono-modulo { color: var(--color-acento3); }
+        .t-proximamente .icono-modulo { color: #555; }
+        
+        .tarjeta-modulo:hover .icono-modulo { transform: scale(1.1); }
+
+        .tarjeta-modulo h3 { font-size: 1.5rem; margin-bottom: 10px; font-weight: 800;}
+        .tarjeta-modulo p { font-size: 1rem; color: #aaa; line-height: 1.5; flex-grow: 1;}
+
+        .btn-entrar { margin-top: 20px; padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: 0.3s;}
+        .tarjeta-modulo:hover .btn-entrar { background: var(--color-principal); border-color: var(--color-principal);}
+
+        /* Tarjeta bloqueada */
+        .tarjeta-modulo.bloqueada { cursor: not-allowed; opacity: 0.7;}
+        .tarjeta-modulo.bloqueada:hover { transform: none; box-shadow: none; background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1);}
+        .tarjeta-modulo.bloqueada:hover .icono-modulo { transform: none; }
+
+        /* --- FOOTER --- */
+        footer { background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; padding: 25px 20px; margin-top: auto;}
+        footer p { color: #888; font-size: 0.95rem; }
+        footer i { color: var(--color-acento1); margin: 0 5px;}
+        .colegio-tag { font-weight: 800; color: #ccc;}
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulsar { 0% { opacity: 0.3; transform: translateX(-50%) scale(0.9); } 100% { opacity: 0.6; transform: translateX(-50%) scale(1.1); } }
+
+        @media (max-width: 768px) { .saludo { font-size: 2rem; } .grid-modulos { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
-            <ul class="menu">
-                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                
-                <li>
-                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="fisica_9.html" class="fisica">Grado Noveno</a></li>
-                        <li><a href="fisica_10.html" class="fisica">Grado Décimo</a></li>
-                        <li><a href="fisica_11.html" class="fisica">Grado 11</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="quimica_9.html" class="quimica">Grado Noveno</a></li>
-                        <li><a href="quimica_10.html" class="quimica">Grado Décimo</a></li>
-                        <li><a href="quimica_11.html" class="quimica">Grado 11</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="biologia_9.html" class="biologia">Grado Noveno</a></li>
-                        <li><a href="biologia_10.html" class="biologia">Grado Décimo</a></li>
-                        <li><a href="biologia_11.html" class="biologia">Grado 11</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <a href="#" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+    </nav>
 
     <main class="contenedor">
         
-        <section class="seccion-introduccion">
-            <div class="bloque-bienvenida">
-                <h1>Bienvenidos al Laboratorio</h1>
-                <p>Este espacio digital ha sido diseñado para los estudiantes de la <strong>Institución Educativa Gallego</strong>. Aquí, la ciencia se encuentra con la tecnología para explorar los fenómenos de la naturaleza desde nuestro propio contexto rural y cafetero.</p>
-                <p style="margin-top: 15px;">Nuestro objetivo es facilitar el aprendizaje interactivo a través de simuladores, videos y guías prácticas que transformen la teoría en experiencia real.</p>
-            </div>
-
-            <div class="bloque-creador">
-                <img src="https://via.placeholder.com/150" alt="Wilmer González Ossa">
-                <h2>Wilmer González Ossa</h2>
-                <h3>Creador y Docente</h3>
-                <p>Ingeniero Ambiental y apasionado por la educación. Comprometido con integrar herramientas digitales para fortalecer el conocimiento científico en nuestra comunidad huilense.</p>
-            </div>
-        </section>
-
-        <section class="seccion-novedades">
-            <h2><i class="fa-solid fa-rss"></i> Novedades del Laboratorio</h2>
+        <!-- SECCIÓN DE PERFIL -->
+        <div class="perfil-container">
+            <div class="perfil-resplandor"></div>
+            <!-- Avatar de profesor: Puedes cambiar la URL de esta imagen por tu foto real -->
+            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=400&q=80" alt="Avatar del Docente" class="avatar">
             
-            <div class="lista-noticias">
+            <h1 class="saludo">¡Hola, clase!</h1>
+            <p class="mensaje">Bienvenidos a su laboratorio interactivo de Química Orgánica. Aquí vamos a explorar las moléculas, romper esquemas y aprender haciendo. Elige un módulo para comenzar tu misión de hoy.</p>
+        </div>
 
-                <article class="tarjeta-noticia">
-                    <span class="tag-nuevo">Nuevo</span>
-                    <span class="fecha-noticia">Mayo 2026</span>
-                    <h3>Cinemática: M.R.U. Disponible</h3>
-                    <p>¡Ya puedes explorar la nueva lección sobre el Movimiento Rectilíneo Uniforme! Incluye fórmulas interactivas, despejes paso a paso y un video tutorial aplicado al contexto de nuestra vereda.</p>
-                    <a href="fisica10_mru.html" class="btn-noticia">Ver Lección</a>
-                </article>
+        <!-- MÓDULOS DE APRENDIZAJE -->
+        <h2 class="titulo-modulos"><i class="fa-solid fa-layer-group"></i> Módulos Disponibles</h2>
+        
+        <div class="grid-modulos">
+            
+            <!-- Módulo 1: Bases -->
+            <a href="quimica11_bases.html" class="tarjeta-modulo t-bases">
+                <i class="fa-solid fa-laptop-code icono-modulo"></i>
+                <h3>Bases IUPAC</h3>
+                <p>Domina el lenguaje universal. Aprende a encontrar la cadena principal, numerar y aplicar orden alfabético.</p>
+                <div class="btn-entrar">Ingresar</div>
+            </a>
 
-                <article class="tarjeta-noticia" style="border-left-color: var(--color-biologia);">
-                    <span class="fecha-noticia">Abril 2026</span>
-                    <h3>Unidad 1: Magnitudes Físicas</h3>
-                    <p>Iniciamos nuestro recorrido por la física de décimo grado. Aprende qué son las magnitudes, cómo se clasifican y cuáles son los sistemas de unidades que rigen el mundo científico.</p>
-                    <a href="fisica10_magnitudes.html" class="btn-noticia" style="background: var(--color-biologia);">Explorar</a>
-                </article>
+            <!-- Módulo 2: Alcanos -->
+            <a href="alcanos.html" class="tarjeta-modulo t-alcanos">
+                <i class="fa-solid fa-fire-flame-simple icono-modulo"></i>
+                <h3>Alcanos</h3>
+                <p>Los hidrocarburos saturados. Estudia la familia base, su importancia en los combustibles y nomenclatura interactiva.</p>
+                <div class="btn-entrar">Ingresar</div>
+            </a>
 
+            <!-- Módulo 3: Ácidos Carboxílicos -->
+            <a href="acidos_carboxilicos.html" class="tarjeta-modulo t-acidos">
+                <i class="fa-solid fa-crown icono-modulo"></i>
+                <h3>Ácidos Carboxílicos</h3>
+                <p>Los reyes de la jerarquía orgánica. Descubre los ácidos presentes en la naturaleza y cómo superan a otros grupos.</p>
+                <div class="btn-entrar">Ingresar</div>
+            </a>
+
+            <!-- Módulo 4: Próximamente -->
+            <div class="tarjeta-modulo t-proximamente bloqueada">
+                <i class="fa-solid fa-lock icono-modulo"></i>
+                <h3>Alquenos y Alquinos</h3>
+                <p>Nuevos desafíos con dobles y triples enlaces se están preparando. Mantente atento a las próximas actualizaciones.</p>
+                <div class="btn-entrar" style="background: transparent; border-color: #555; color: #555;">Próximamente</div>
             </div>
-        </section>
+
+        </div>
 
     </main>
+
+    <footer>
+        <p>Construido con <i class="fa-solid fa-heart"></i> y mucha Química para la <span class="colegio-tag">I.E. Gallego</span></p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">© 2026 LabVirtual W - Docente Oficial</p>
+    </footer>
 
 </body>
 </html>
