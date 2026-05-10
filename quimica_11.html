@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Química 11° - Química Orgánica | LabVirtual W</title>
+    <title>Química Orgánica 11 - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* --- ESTILOS ORIGINALES --- */
         :root {
-            var(--color-principal): #3498db;   
-            --color-principal: #3498db;
+            --color-principal: #3498db;   
             --color-secundario: #4facfe;
             --color-oscuro: #1a1a2e;
             --color-texto: #ffffff;
-            --color-destaque: #2ecc71; 
+            --color-bases: #9b59b6;
+            --color-alcanos: #e74c3c;
+            --color-acidos: #e67e22;
         }
 
         html { scroll-behavior: smooth; }
@@ -23,250 +25,109 @@
 
         body {
             background-color: var(--color-oscuro); color: var(--color-texto);
-            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-attachment: fixed; min-height: 100vh;
+            display: flex; flex-direction: column;
         }
 
-        /* --- NAVEGACIÓN --- */
-        nav {
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
-        }
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .logo i { color: var(--color-principal); }
-        .menu { list-style: none; display: flex; gap: 20px; }
-        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: var(--color-secundario); }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
-        .btn-volver { display: inline-block; margin-bottom: 20px; color: var(--color-secundario); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver { color: var(--color-secundario); text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; margin-top: 20px;}
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
 
-        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 40px; text-align: center; }
-        .encabezado-leccion h1 { font-size: 3rem; color: var(--color-principal); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
-        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; max-width: 800px; margin: 0 auto; line-height: 1.6;}
+        .contenedor { max-width: 1100px; margin: 0 auto; padding: 20px; flex-grow: 1; animation: fadeIn 0.5s ease; }
 
-        /* --- BOTÓN DESTACADO: BASES DE LA QUÍMICA --- */
-        .tarjeta-destacada {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(46, 204, 113, 0.15));
-            border: 2px solid var(--color-principal);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 50px;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            text-decoration: none;
-            transition: 0.3s;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .tarjeta-destacada::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
-            transform: skewX(-25deg); transition: 0.5s;
-        }
-        
-        .tarjeta-destacada:hover::before { left: 150%; }
-        
-        .tarjeta-destacada:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.3);
-            border-color: var(--color-destaque);
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.25), rgba(46, 204, 113, 0.25));
-        }
+        .encabezado-leccion { text-align: center; margin-bottom: 50px; border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 30px; margin-top: 20px;}
+        .encabezado-leccion h1 { font-size: 3.5rem; color: var(--color-principal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;}
+        .encabezado-leccion p { font-size: 1.15rem; color: #ccc; max-width: 800px; margin: 0 auto; line-height: 1.6; }
 
-        .icono-destacado { font-size: 3.5rem; color: var(--color-destaque); }
-        .contenido-destacado h2 { color: #fff; font-size: 2rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;}
-        .contenido-destacado p { color: #ddd; font-size: 1.1rem; line-height: 1.5; margin: 0;}
-        .flecha-destacada { margin-left: auto; font-size: 1.8rem; color: var(--color-principal); transition: 0.3s; }
-        
-        .tarjeta-destacada:hover .flecha-destacada { transform: translateX(10px); color: var(--color-destaque); }
+        /* --- GRID DE MÓDULOS --- */
+        .grid-modulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px;}
 
-        /* --- SECCIONES NORMALES --- */
-        .titulo-seccion { font-size: 2rem; border-left: 5px solid var(--color-principal); padding-left: 15px; margin: 50px 0 25px 0; color: #fff; }
-
-        .modulo-bloque { 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 12px; 
-            padding: 30px; 
-            margin-bottom: 25px; 
-            border-top: 4px solid var(--color-principal); 
-        }
-        .modulo-bloque > p.descripcion { color: #ccc; font-size: 1.05rem; margin-bottom: 25px; line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.2); padding: 10px 15px; border-radius: 6px;}
-
-        /* --- SUBSECCIONES INTERNAS --- */
-        .grupo-temas { margin-bottom: 25px; padding-left: 10px; border-left: 2px solid rgba(255,255,255,0.05); }
-        .grupo-temas:last-child { margin-bottom: 0; }
-        .grupo-titulo { font-weight: 800; color: var(--color-secundario); font-size: 1.2rem; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+        .modulo-card { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; text-decoration: none; color: #fff; position: relative; overflow: hidden;}
         
-        /* --- ENLACES DE TEMAS --- */
-        .lista-enlaces { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-        .enlace-tema { 
-            display: flex; align-items: center; justify-content: space-between;
-            background: rgba(0, 0, 0, 0.3); padding: 12px 20px; border-radius: 8px; 
-            color: #ddd; text-decoration: none; font-size: 1.05rem; transition: 0.2s;
-            border: 1px solid transparent;
-        }
-        .enlace-tema i.fa-chevron-right { color: #555; transition: 0.3s; font-size: 0.9rem;}
-        
-        .enlace-tema:hover { 
-            background: rgba(52, 152, 219, 0.1); border-color: rgba(52, 152, 219, 0.3); 
-            color: #fff; transform: translateX(5px); 
-        }
-        .enlace-tema:hover i.fa-chevron-right { color: var(--color-principal); transform: translateX(3px); }
+        .modulo-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; transition: 0.3s; }
+        .card-bases::before { background: var(--color-bases); }
+        .card-alcanos::before { background: var(--color-alcanos); }
+        .card-acidos::before { background: var(--color-acidos); }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        @media (max-width: 768px) {
-            .tarjeta-destacada { flex-direction: column; text-align: center; gap: 15px; padding: 25px 20px; }
-            .flecha-destacada { margin: 0 auto; transform: rotate(90deg); }
-            .tarjeta-destacada:hover .flecha-destacada { transform: rotate(90deg) translateY(10px); }
-        }
+        .modulo-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.5); background: rgba(255, 255, 255, 0.05); }
+        .card-bases:hover { border-color: var(--color-bases); }
+        .card-alcanos:hover { border-color: var(--color-alcanos); }
+        .card-acidos:hover { border-color: var(--color-acidos); }
+
+        .modulo-icono { font-size: 3.5rem; margin-bottom: 20px; }
+        .card-bases .modulo-icono { color: var(--color-bases); }
+        .card-alcanos .modulo-icono { color: var(--color-alcanos); }
+        .card-acidos .modulo-icono { color: var(--color-acidos); }
+
+        .modulo-titulo { font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; }
+        .modulo-desc { font-size: 1rem; color: #aaa; line-height: 1.5; flex-grow: 1; margin-bottom: 20px;}
+
+        .modulo-btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: 0.3s; border: 1px solid transparent;}
+        .card-bases .modulo-btn { background: rgba(155, 89, 182, 0.2); color: var(--color-bases); border-color: var(--color-bases); }
+        .card-alcanos .modulo-btn { background: rgba(231, 76, 60, 0.2); color: var(--color-alcanos); border-color: var(--color-alcanos); }
+        .card-acidos .modulo-btn { background: rgba(230, 126, 34, 0.2); color: var(--color-acidos); border-color: var(--color-acidos); }
+
+        .card-bases:hover .modulo-btn { background: var(--color-bases); color: #fff; }
+        .card-alcanos:hover .modulo-btn { background: var(--color-alcanos); color: #fff; }
+        .card-acidos:hover .modulo-btn { background: var(--color-acidos); color: #fff; }
+
+        /* --- FOOTER --- */
+        footer { background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; padding: 20px; margin-top: auto;}
+        footer p { color: #888; font-size: 0.95rem; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
-            <ul class="menu">
-                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+    </nav>
 
     <main class="contenedor">
-        <a href="inicio.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Menú Principal</a>
+        <a href="inicio.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
 
         <div class="encabezado-leccion">
-            <h1>Química Orgánica (11°)</h1>
-            <p>Bienvenidos al estudio de los compuestos del carbono. Aquí exploraremos la estructura, nomenclatura y propiedades de las moléculas que forman la base de la vida y de innumerables productos de uso diario.</p>
+            <h1>Química Orgánica - Grado 11</h1>
+            <p>Selecciona la familia de compuestos que deseas estudiar. Cada módulo incluye teoría completa, ejemplos detallados y simuladores de práctica interactiva.</p>
         </div>
 
-        <!-- ========================================== -->
-        <!-- BOTÓN DESTACADO: BASES DE LA QUÍMICA       -->
-        <!-- ========================================== -->
-        <a href="#" class="tarjeta-destacada">
-            <div class="icono-destacado"><i class="fa-solid fa-layer-group"></i></div>
-            <div class="contenido-destacado">
-                <h2>Bases de la Química Orgánica</h2>
-                <p><strong>¡Inicia Aquí!</strong> Aprende los conceptos fundamentales: la tetravalencia del carbono, los tipos de cadenas, qué es la IUPAC, y los prefijos numéricos básicos (Met, Et, Prop, But...) antes de nombrar moléculas complejas.</p>
-            </div>
-            <i class="fa-solid fa-arrow-right flecha-destacada"></i>
-        </a>
+        <div class="grid-modulos">
+            
+            <!-- ENLACE CORREGIDO: quimica11_bases.html -->
+            <a href="quimica11_bases.html" class="modulo-card card-bases">
+                <i class="fa-solid fa-laptop-code modulo-icono"></i>
+                <h2 class="modulo-titulo">Bases de Nomenclatura</h2>
+                <p class="modulo-desc">Comprende las reglas fundamentales de la IUPAC: selección de cadena principal, numeración y orden alfabético.</p>
+                <div class="modulo-btn">Ingresar al Módulo</div>
+            </a>
 
-        <!-- ========================================== -->
-        <!-- SECCIÓN 1: HIDROCARBUROS                   -->
-        <!-- ========================================== -->
-        <h2 class="titulo-seccion">1. Hidrocarburos</h2>
-        <div class="modulo-bloque">
-            <p class="descripcion">Comprenderemos las cadenas de carbono e hidrógeno, aplicando la metodología de Alonso Fórmula para dominar la nomenclatura IUPAC, dando prioridad correcta a los dobles y triples enlaces de la cadena principal.</p>
+            <!-- ENLACE CORREGIDO: alcanos.html -->
+            <a href="alcanos.html" class="modulo-card card-alcanos">
+                <i class="fa-solid fa-fire-flame-simple modulo-icono"></i>
+                <h2 class="modulo-titulo">Alcanos</h2>
+                <p class="modulo-desc">Estudia los hidrocarburos saturados. Incluye la estructura de los alcanos, su importancia en combustibles y práctica interactiva.</p>
+                <div class="modulo-btn">Ingresar al Módulo</div>
+            </a>
 
-            <div class="grupo-temas">
-                <div class="grupo-titulo"><i class="fa-solid fa-fire-flame-simple"></i> Alifáticos</div>
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span><strong>Alcanos:</strong> Nomenclatura y Propiedades</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span><strong>Alquenos:</strong> Nomenclatura y Propiedades</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span><strong>Alquinos:</strong> Nomenclatura y Propiedades</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
+            <!-- ENLACE CORREGIDO: acidos_carboxilicos.html -->
+            <a href="acidos_carboxilicos.html" class="modulo-card card-acidos">
+                <i class="fa-solid fa-crown modulo-icono"></i>
+                <h2 class="modulo-titulo">Ácidos Carboxílicos</h2>
+                <p class="modulo-desc">Descubre el grupo funcional de máxima jerarquía. Aprende sobre propiedades, pruebas químicas de laboratorio y nomenclatura con radicales complejos.</p>
+                <div class="modulo-btn">Ingresar al Módulo</div>
+            </a>
 
-            <div class="grupo-temas">
-                <div class="grupo-titulo"><i class="fa-solid fa-circle-notch"></i> Cíclicos</div>
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span>Cicloalcanos</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span>Cicloalquenos</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-
-            <div class="grupo-temas">
-                <div class="grupo-titulo"><i class="fa-solid fa-hexagon-nodes"></i> Aromáticos</div>
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span><strong>El Benceno:</strong> Estructura, Nomenclatura y Propiedades</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ========================================== -->
-        <!-- SECCIÓN 2: FUNCIONES ORGÁNICAS             -->
-        <!-- ========================================== -->
-        <h2 class="titulo-seccion">2. Funciones Orgánicas</h2>
-        <div class="modulo-bloque">
-            <p class="descripcion">Estudio de los compuestos oxigenados y nitrogenados. Aprenderemos a jerarquizar los grupos funcionales (alcoholes, aldehídos, cetonas, ácidos carboxílicos y ésteres) al momento de nombrar estructuras complejas.</p>
-
-            <div class="grupo-temas">
-                <div class="grupo-titulo"><i class="fa-solid fa-droplet"></i> Grupo Hidroxilo (-OH)</div>
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span>Alcoholes</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span>Fenoles</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span>Éteres</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-
-            <div class="grupo-temas">
-                <div class="grupo-titulo"><i class="fa-solid fa-link"></i> Grupo Carbonilo (C=O)</div>
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span>Aldehídos</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span>Cetonas</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-
-            <div class="grupo-temas">
-                <div class="grupo-titulo"><i class="fa-solid fa-vial"></i> Grupo Carboxílico (-COOH)</div>
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span>Ácidos Carboxílicos</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span>Ésteres (Derivados)</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-
-            <div class="grupo-temas">
-                <div class="grupo-titulo"><i class="fa-solid fa-atom"></i> Compuestos Nitrogenados</div>
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span>Aminas</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span>Amidas</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ========================================== -->
-        <!-- SECCIÓN 3: BIOMOLÉCULAS (PARTE 1)          -->
-        <!-- ========================================== -->
-        <h2 class="titulo-seccion">3. Moléculas Orgánicas de Interés Biológico (I)</h2>
-        <div class="modulo-bloque">
-            <p class="descripcion">Primera parte del estudio de las macromoléculas que sustentan los procesos vitales de los organismos.</p>
-
-            <div class="grupo-temas">
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span><i class="fa-solid fa-cubes-stacked" style="color:var(--color-secundario); margin-right: 10px;"></i> Carbohidratos</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span><i class="fa-solid fa-dna" style="color:var(--color-secundario); margin-right: 10px;"></i> Aminoácidos y Proteínas</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span><i class="fa-solid fa-bolt" style="color:var(--color-destaque); margin-right: 10px;"></i> Enzimas</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ========================================== -->
-        <!-- SECCIÓN 4: BIOMOLÉCULAS (PARTE 2)          -->
-        <!-- ========================================== -->
-        <h2 class="titulo-seccion">4. Moléculas Orgánicas de Interés Biológico (II)</h2>
-        <div class="modulo-bloque">
-            <p class="descripcion">Segunda parte del estudio bioquímico, centrado en el almacenamiento de energía y la información genética.</p>
-
-            <div class="grupo-temas">
-                <ul class="lista-enlaces">
-                    <li><a href="#" class="enlace-tema"><span><i class="fa-solid fa-cheese" style="color:var(--color-secundario); margin-right: 10px;"></i> Lípidos</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                    <li><a href="#" class="enlace-tema"><span><i class="fa-solid fa-microscope" style="color:var(--color-secundario); margin-right: 10px;"></i> Ácidos Nucleicos</span> <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
         </div>
 
     </main>
+
+    <footer>
+        <p>I.E. GALLEGO - Departamento de Ciencias Naturales</p>
+    </footer>
 
 </body>
 </html>
