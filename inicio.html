@@ -9,130 +9,222 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- ESTILOS ORIGINALES DEL SISTEMA --- */
         :root {
-            --color-principal: #3498db;   
-            --color-secundario: #4facfe;
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
             --color-oscuro: #1a1a2e;
             --color-texto: #ffffff;
-            --color-destaque: #2ecc71; 
-            --color-alerta: #f39c12;
-            --color-noticia: #e74c3c;
         }
 
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         body {
-            background-color: var(--color-oscuro); color: var(--color-texto);
-            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-attachment: fixed; min-height: 100vh;
-            display: flex; flex-direction: column;
         }
 
-        /* NAVEGACIÓN ORIGINAL */
-        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        /* --- NAVEGACIÓN CORREGIDA --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo i { color: var(--color-principal); }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #fff; text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: var(--color-principal); }
-
-        .contenedor { max-width: 1100px; margin: 40px auto; padding: 20px; flex-grow: 1; display: grid; grid-template-columns: 1fr 2.5fr; gap: 40px; }
-
-        /* --- SECCIÓN PERFIL ORIGINAL --- */
-        .panel-perfil { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 12px; padding: 30px; text-align: center; height: fit-content; }
-        .avatar { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--color-principal); margin-bottom: 20px; background-color: #fff;}
-        .perfil-nombre { font-size: 1.5rem; color: var(--color-secundario); margin-bottom: 5px; font-weight: 800; }
-        .perfil-rol { color: #aaa; font-size: 1rem; margin-bottom: 20px; }
-        .btn-menu { display: block; width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(52, 152, 219, 0.1); border: 1px solid var(--color-principal); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; transition: 0.3s; text-align: left;}
-        .btn-menu i { width: 25px; text-align: center; margin-right: 10px; color: var(--color-secundario);}
-        .btn-menu:hover { background: var(--color-principal); transform: translateX(5px); }
-
-        /* --- SECCIÓN NOTICIAS ACTUALIZADA --- */
-        .panel-principal { display: flex; flex-direction: column; gap: 30px; }
-        .titulo-seccion { font-size: 2rem; border-left: 5px solid var(--color-principal); padding-left: 15px; color: #fff; margin-bottom: 10px;}
+        .logo i { color: var(--color-fisica); }
         
-        .noticia-card { background: rgba(255, 255, 255, 0.03); border-left: 4px solid var(--color-noticia); border-radius: 8px; padding: 25px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
-        .noticia-card:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.06); box-shadow: 0 8px 20px rgba(0,0,0,0.4);}
-        .noticia-fecha { font-size: 0.9rem; color: var(--color-alerta); font-weight: 800; margin-bottom: 10px; display: block; }
-        .noticia-titulo { font-size: 1.4rem; color: #fff; margin-bottom: 10px; }
-        .noticia-texto { color: #ccc; line-height: 1.6; margin-bottom: 15px; }
+        .menu { list-style: none; display: flex; gap: 20px; }
         
-        .noticia-link { display: inline-block; color: var(--color-secundario); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .noticia-link:hover { border-color: var(--color-secundario); letter-spacing: 0.5px; }
+        /* CORRECCIÓN CRÍTICA: Añadido position relative para que el submenú sepa dónde ubicarse */
+        .menu li { position: relative; } 
 
-        /* Colores específicos de borde para variar las noticias */
-        .borde-alcanos { border-left-color: #3498db; }
-        .borde-acidos { border-left-color: #e67e22; }
-        .borde-bases { border-left-color: #2ecc71; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
 
-        /* --- FOOTER ORIGINAL --- */
-        footer { background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; padding: 20px; margin-top: auto;}
-        footer p { color: #888; font-size: 0.95rem; }
+        .submenu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
+            min-width: 200px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+            padding: 5px 0;
+        }
+        
+        /* El submenú ahora se muestra correctamente al pasar el cursor */
+        .menu li:hover .submenu { display: block; }
+        
+        .submenu li { width: 100%; }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; border-radius: 0; }
+        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; color: #fff; }
 
-        @media (max-width: 900px) { .contenedor { grid-template-columns: 1fr; } }
+        /* --- CONTENIDO PRINCIPAL --- */
+        .contenedor { max-width: 1200px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.5s ease; }
+
+        /* --- SECCIÓN BIENVENIDA (GRID) --- */
+        .seccion-introduccion {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .bloque-bienvenida, .bloque-creador {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .bloque-bienvenida h1 { font-size: 2.5rem; margin-bottom: 15px; color: #4facfe; }
+        .bloque-bienvenida p { line-height: 1.6; color: #ddd; font-size: 1.1rem; }
+
+        .bloque-creador { border-left: 5px solid var(--color-biologia); text-align: center; }
+        .bloque-creador img { 
+            width: 120px; height: 120px; border-radius: 50%; 
+            margin-bottom: 15px; border: 3px solid var(--color-biologia);
+            object-fit: cover;
+        }
+        .bloque-creador h2 { font-size: 1.5rem; margin-bottom: 5px; }
+        .bloque-creador h3 { font-size: 0.9rem; color: var(--color-biologia); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .bloque-creador p { font-size: 0.95rem; color: #bbb; line-height: 1.5; }
+
+        /* --- SECCIÓN NOTICIAS --- */
+        .seccion-novedades h2 { 
+            font-size: 2rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 10px;
+        }
+
+        .lista-noticias { display: flex; flex-direction: column; gap: 20px; }
+
+        .tarjeta-noticia {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 6px solid var(--color-fisica);
+            transition: 0.3s;
+            position: relative;
+        }
+        .tarjeta-noticia:hover { transform: scale(1.01); background: rgba(255, 255, 255, 0.05); }
+
+        .tag-nuevo {
+            position: absolute; top: 20px; right: 25px;
+            background: #e74c3c; color: #fff; font-size: 0.7rem;
+            padding: 4px 10px; border-radius: 20px; font-weight: 800; text-transform: uppercase;
+        }
+
+        .fecha-noticia { color: #4facfe; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; display: block; }
+        .tarjeta-noticia h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .tarjeta-noticia p { color: #bbb; line-height: 1.5; margin-bottom: 15px; }
+        
+        .btn-noticia {
+            text-decoration: none; color: #fff; background: var(--color-fisica);
+            padding: 8px 20px; border-radius: 5px; font-size: 0.9rem; font-weight: 600;
+            display: inline-block; transition: 0.3s;
+        }
+        .btn-noticia:hover { background: #2980b9; box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 900px) {
+            .seccion-introduccion { grid-template-columns: 1fr; }
+            nav { padding: 15px 20px; }
+            .menu { gap: 10px; }
+            .menu a { padding: 8px; font-size: 14px; }
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
-        <div class="nav-links">
-            <a href="inicio.html">Inicio</a>
-            <a href="quimica_11.html">Módulos</a>
-        </div>
-    </nav>
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html">Grado Undécimo</a></li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="quimica_9.html">Grado Noveno</a></li>
+                        <li><a href="quimica_10.html">Grado Décimo</a></li>
+                        <li><a href="quimica_11.html">Grado Undécimo</a></li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="biologia_9.html">Grado Noveno</a></li>
+                        <li><a href="biologia_10.html">Grado Décimo</a></li>
+                        <li><a href="biologia_11.html">Grado Undécimo</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main class="contenedor">
         
-        <!-- PANEL LATERAL: PERFIL ORIGINAL -->
-        <aside class="panel-perfil">
-            <!-- Imagen genérica de avatar solicitada -->
-            <img src="https://img.freepik.com/vector-premium/avatar-profesor-dibujos-animados-3d-ilustracion-vectorial-sobre-fondo-transparente_1150390-337.jpg" alt="Avatar Docente" class="avatar">
-            <h2 class="perfil-nombre">Docente de Química</h2>
-            <p class="perfil-rol">Administrador / Creador</p>
+        <section class="seccion-introduccion">
+            <div class="bloque-bienvenida">
+                <h1>Bienvenidos al Laboratorio</h1>
+                <p>Este espacio digital ha sido diseñado para los estudiantes de la <strong>Institución Educativa GALLEGO</strong>. Aquí, la ciencia se encuentra con la tecnología para explorar los fenómenos de la naturaleza desde nuestro propio contexto rural y cafetero.</p>
+                <p style="margin-top: 15px;">Nuestro objetivo es facilitar el aprendizaje interactivo a través de simuladores, videos y guías prácticas que transformen la teoría en experiencia real.</p>
+            </div>
+
+            <div class="bloque-creador">
+                <img src="https://img.freepik.com/vector-premium/avatar-profesor-dibujos-animados-3d-ilustracion-vectorial-sobre-fondo-transparente_1150390-337.jpg" alt="Docente">
+                <h2>Wilmer González Ossa</h2>
+                <h3>Creador y Docente</h3>
+                <p>Docente de la I.E. GALLEGO. Apasionado por integrar herramientas digitales para fortalecer el conocimiento científico en nuestra comunidad huilense.</p>
+            </div>
+        </section>
+
+        <section class="seccion-novedades">
+            <h2><i class="fa-solid fa-rss"></i> Novedades del Laboratorio</h2>
             
-            <a href="quimica_11.html" class="btn-menu"><i class="fa-solid fa-book"></i> Química 11</a>
-            <a href="#" class="btn-menu"><i class="fa-solid fa-flask"></i> Laboratorios</a>
-            <a href="#" class="btn-menu"><i class="fa-solid fa-chart-pie"></i> Calificaciones</a>
-        </aside>
+            <div class="lista-noticias">
 
-        <!-- PANEL CENTRAL: SECCIÓN DE NOTICIAS ACTUALIZADA -->
-        <section class="panel-principal">
-            <h1 class="titulo-seccion">Noticias y Actualizaciones</h1>
-            
-            <!-- NOTICIA 1: ÁCIDOS CARBOXÍLICOS -->
-            <article class="noticia-card borde-acidos">
-                <span class="noticia-fecha"><i class="fa-solid fa-bell"></i> NUEVO MÓDULO DISPONIBLE</span>
-                <h2 class="noticia-titulo">Los Reyes de la Jerarquía: Ácidos Carboxílicos</h2>
-                <p class="noticia-texto">Ya está disponible la sección completa de Ácidos Carboxílicos. Incluye teoría sobre propiedades químicas, pruebas de laboratorio (bicarbonato y esterificación) y ejemplos con alcoholes, cetonas y feniles como radicales.</p>
-                <a href="acidos_carboxilicos.html" class="noticia-link">Ir al módulo <i class="fa-solid fa-arrow-right"></i></a>
-            </article>
+                <article class="tarjeta-noticia" style="border-left-color: var(--color-quimica);">
+                    <span class="tag-nuevo">Nuevo</span>
+                    <span class="fecha-noticia">Mayo 2026</span>
+                    <h3>Química 11: Ácidos Carboxílicos</h3>
+                    <p>Ya está disponible la sección completa de Ácidos Carboxílicos. Conoce el grupo funcional de máxima jerarquía, estudia sus propiedades y practica nomenclatura en el simulador inteligente.</p>
+                    <a href="acidos_carboxilicos.html" class="btn-noticia" style="background: var(--color-quimica);">Ver Módulo</a>
+                </article>
 
-            <!-- NOTICIA 2: PRÁCTICAS INTERACTIVAS -->
-            <article class="noticia-card borde-alcanos">
-                <span class="noticia-fecha"><i class="fa-solid fa-gamepad"></i> ACTUALIZACIÓN DE SISTEMA</span>
-                <h2 class="noticia-titulo">Simuladores de Práctica Inteligente</h2>
-                <p class="noticia-texto">Se habilitaron las evaluaciones formativas para Alcanos y Ácidos. El sistema ahora valida automáticamente la nomenclatura IUPAC, reconociendo múltiples respuestas correctas (ej. 3-pentenoico o pent-3-enoico) y corrigiendo espacios automáticamente.</p>
-                <a href="practica_alcanos.html" class="noticia-link">Probar simulador de Alcanos <i class="fa-solid fa-arrow-right"></i></a>
-            </article>
+                <article class="tarjeta-noticia" style="border-left-color: var(--color-quimica);">
+                    <span class="fecha-noticia">Mayo 2026</span>
+                    <h3>Simuladores de Alcanos</h3>
+                    <p>Se habilitaron los simuladores interactivos para Alcanos. El sistema valida automáticamente la nomenclatura IUPAC, reconociendo múltiples respuestas correctas.</p>
+                    <a href="alcanos.html" class="btn-noticia" style="background: var(--color-quimica);">Explorar</a>
+                </article>
 
-            <!-- NOTICIA 3: BASES IUPAC -->
-            <article class="noticia-card borde-bases">
-                <span class="noticia-fecha"><i class="fa-solid fa-wrench"></i> MEJORA VISUAL</span>
-                <h2 class="noticia-titulo">Pizarra Interactiva Perfeccionada</h2>
-                <p class="noticia-texto">Se ajustó milimétricamente la alineación de enlaces carbono-carbono en el módulo de Bases IUPAC. Los subíndices de los isómeros (Isobutano, Isopentano) están 100% corregidos respetando la tetravalencia del carbono.</p>
-                <a href="quimica11_bases.html" class="noticia-link">Revisar bases <i class="fa-solid fa-arrow-right"></i></a>
-            </article>
+                <article class="tarjeta-noticia">
+                    <span class="fecha-noticia">Mayo 2026</span>
+                    <h3>Cinemática: M.R.U. Disponible</h3>
+                    <p>Explora la lección sobre el Movimiento Rectilíneo Uniforme aplicada a nuestro contexto rural. Incluye fórmulas interactivas y despejes paso a paso.</p>
+                    <a href="fisica10_mru.html" class="btn-noticia">Ver Lección</a>
+                </article>
 
+            </div>
         </section>
 
     </main>
-
-    <footer>
-        <p>I.E. GALLEGO - Plataforma Educativa Interactiva</p>
-    </footer>
 
 </body>
 </html>
