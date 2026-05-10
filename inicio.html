@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* --- ESTILOS ORIGINALES DEL SISTEMA --- */
         :root {
             --color-principal: #3498db;   
             --color-secundario: #4facfe;
-            --color-oscuro: #0f111a;
+            --color-oscuro: #1a1a2e;
             --color-texto: #ffffff;
-            --color-acento1: #e74c3c; 
-            --color-acento2: #2ecc71;
-            --color-acento3: #f39c12;
-            --color-acento4: #9b59b6;
+            --color-destaque: #2ecc71; 
+            --color-alerta: #f39c12;
+            --color-noticia: #e74c3c;
         }
 
         html { scroll-behavior: smooth; }
@@ -25,141 +25,113 @@
 
         body {
             background-color: var(--color-oscuro); color: var(--color-texto);
-            background-image: linear-gradient(rgba(15, 17, 26, 0.85), rgba(15, 17, 26, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-attachment: fixed; background-position: center;
-            min-height: 100vh; display: flex; flex-direction: column;
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+            display: flex; flex-direction: column;
         }
 
-        /* --- NAVEGACIÓN --- */
-        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; padding: 20px 50px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);}
-        .logo { font-size: 28px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 12px; text-decoration: none; letter-spacing: 1px;}
-        .logo i { color: var(--color-principal); filter: drop-shadow(0 0 5px rgba(52,152,219,0.5));}
+        /* NAVEGACIÓN ORIGINAL */
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-principal); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--color-principal); }
 
-        .contenedor { max-width: 1200px; margin: 0 auto; padding: 40px 20px; flex-grow: 1; animation: fadeIn 0.8s ease; display: flex; flex-direction: column; align-items: center;}
+        .contenedor { max-width: 1100px; margin: 40px auto; padding: 20px; flex-grow: 1; display: grid; grid-template-columns: 1fr 2.5fr; gap: 40px; }
 
-        /* --- PERFIL DEL DOCENTE --- */
-        .perfil-container { text-align: center; margin-bottom: 60px; position: relative; }
+        /* --- SECCIÓN PERFIL ORIGINAL --- */
+        .panel-perfil { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 12px; padding: 30px; text-align: center; height: fit-content; }
+        .avatar { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--color-principal); margin-bottom: 20px; background-color: #fff;}
+        .perfil-nombre { font-size: 1.5rem; color: var(--color-secundario); margin-bottom: 5px; font-weight: 800; }
+        .perfil-rol { color: #aaa; font-size: 1rem; margin-bottom: 20px; }
+        .btn-menu { display: block; width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(52, 152, 219, 0.1); border: 1px solid var(--color-principal); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; transition: 0.3s; text-align: left;}
+        .btn-menu i { width: 25px; text-align: center; margin-right: 10px; color: var(--color-secundario);}
+        .btn-menu:hover { background: var(--color-principal); transform: translateX(5px); }
+
+        /* --- SECCIÓN NOTICIAS ACTUALIZADA --- */
+        .panel-principal { display: flex; flex-direction: column; gap: 30px; }
+        .titulo-seccion { font-size: 2rem; border-left: 5px solid var(--color-principal); padding-left: 15px; color: #fff; margin-bottom: 10px;}
         
-        /* Efecto de resplandor detrás del avatar */
-        .perfil-resplandor { position: absolute; width: 160px; height: 160px; background: var(--color-principal); border-radius: 50%; top: 0; left: 50%; transform: translateX(-50%); filter: blur(40px); opacity: 0.5; z-index: -1; animation: pulsar 3s infinite alternate;}
+        .noticia-card { background: rgba(255, 255, 255, 0.03); border-left: 4px solid var(--color-noticia); border-radius: 8px; padding: 25px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
+        .noticia-card:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.06); box-shadow: 0 8px 20px rgba(0,0,0,0.4);}
+        .noticia-fecha { font-size: 0.9rem; color: var(--color-alerta); font-weight: 800; margin-bottom: 10px; display: block; }
+        .noticia-titulo { font-size: 1.4rem; color: #fff; margin-bottom: 10px; }
+        .noticia-texto { color: #ccc; line-height: 1.6; margin-bottom: 15px; }
         
-        .avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--color-secundario); box-shadow: 0 10px 25px rgba(0,0,0,0.5); padding: 5px; background: rgba(255,255,255,0.1); transition: 0.4s;}
-        .avatar:hover { transform: scale(1.05); border-color: #fff; box-shadow: 0 15px 35px rgba(52, 152, 219, 0.4);}
-        
-        .saludo { margin-top: 20px; font-size: 2.5rem; font-weight: 800; background: linear-gradient(to right, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
-        .mensaje { font-size: 1.2rem; color: #ccc; max-width: 700px; margin: 15px auto 0; line-height: 1.6;}
+        .noticia-link { display: inline-block; color: var(--color-secundario); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .noticia-link:hover { border-color: var(--color-secundario); letter-spacing: 0.5px; }
 
-        /* --- GRID DE MÓDULOS --- */
-        .titulo-modulos { width: 100%; text-align: left; font-size: 1.8rem; border-left: 5px solid var(--color-principal); padding-left: 15px; margin-bottom: 30px; color: #fff; }
-        
-        .grid-modulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%;}
+        /* Colores específicos de borde para variar las noticias */
+        .borde-alcanos { border-left-color: #3498db; }
+        .borde-acidos { border-left-color: #e67e22; }
+        .borde-bases { border-left-color: #2ecc71; }
 
-        /* Diseño de Tarjeta Glassmorphism */
-        .tarjeta-modulo { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 35px 25px; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden;}
-        
-        .tarjeta-modulo::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--color-principal); transition: 0.4s;}
-        
-        /* Colores específicos para cada tarjeta */
-        .t-bases::before { background: var(--color-principal); }
-        .t-alcanos::before { background: var(--color-acento2); }
-        .t-acidos::before { background: var(--color-acento3); }
-        .t-proximamente::before { background: #555; }
-
-        .tarjeta-modulo:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); background: rgba(255, 255, 255, 0.08); border-color: rgba(255,255,255,0.2);}
-        
-        .icono-modulo { font-size: 3.5rem; margin-bottom: 20px; transition: 0.4s;}
-        .t-bases .icono-modulo { color: var(--color-secundario); }
-        .t-alcanos .icono-modulo { color: var(--color-acento2); }
-        .t-acidos .icono-modulo { color: var(--color-acento3); }
-        .t-proximamente .icono-modulo { color: #555; }
-        
-        .tarjeta-modulo:hover .icono-modulo { transform: scale(1.1); }
-
-        .tarjeta-modulo h3 { font-size: 1.5rem; margin-bottom: 10px; font-weight: 800;}
-        .tarjeta-modulo p { font-size: 1rem; color: #aaa; line-height: 1.5; flex-grow: 1;}
-
-        .btn-entrar { margin-top: 20px; padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: 0.3s;}
-        .tarjeta-modulo:hover .btn-entrar { background: var(--color-principal); border-color: var(--color-principal);}
-
-        /* Tarjeta bloqueada */
-        .tarjeta-modulo.bloqueada { cursor: not-allowed; opacity: 0.7;}
-        .tarjeta-modulo.bloqueada:hover { transform: none; box-shadow: none; background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1);}
-        .tarjeta-modulo.bloqueada:hover .icono-modulo { transform: none; }
-
-        /* --- FOOTER --- */
-        footer { background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; padding: 25px 20px; margin-top: auto;}
+        /* --- FOOTER ORIGINAL --- */
+        footer { background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; padding: 20px; margin-top: auto;}
         footer p { color: #888; font-size: 0.95rem; }
-        footer i { color: var(--color-acento1); margin: 0 5px;}
-        .colegio-tag { font-weight: 800; color: #ccc;}
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulsar { 0% { opacity: 0.3; transform: translateX(-50%) scale(0.9); } 100% { opacity: 0.6; transform: translateX(-50%) scale(1.1); } }
-
-        @media (max-width: 768px) { .saludo { font-size: 2rem; } .grid-modulos { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .contenedor { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+        <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+        <div class="nav-links">
+            <a href="inicio.html">Inicio</a>
+            <a href="quimica_11.html">Módulos</a>
+        </div>
     </nav>
 
     <main class="contenedor">
         
-        <!-- SECCIÓN DE PERFIL -->
-        <div class="perfil-container">
-            <div class="perfil-resplandor"></div>
-            <!-- Avatar de profesor: Puedes cambiar la URL de esta imagen por tu foto real -->
-            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=400&q=80" alt="Avatar del Docente" class="avatar">
+        <!-- PANEL LATERAL: PERFIL ORIGINAL -->
+        <aside class="panel-perfil">
+            <!-- Imagen genérica de avatar solicitada -->
+            <img src="https://img.freepik.com/vector-premium/avatar-profesor-dibujos-animados-3d-ilustracion-vectorial-sobre-fondo-transparente_1150390-337.jpg" alt="Avatar Docente" class="avatar">
+            <h2 class="perfil-nombre">Docente de Química</h2>
+            <p class="perfil-rol">Administrador / Creador</p>
             
-            <h1 class="saludo">¡Hola, clase!</h1>
-            <p class="mensaje">Bienvenidos a su laboratorio interactivo de Química Orgánica. Aquí vamos a explorar las moléculas, romper esquemas y aprender haciendo. Elige un módulo para comenzar tu misión de hoy.</p>
-        </div>
+            <a href="quimica_11.html" class="btn-menu"><i class="fa-solid fa-book"></i> Química 11</a>
+            <a href="#" class="btn-menu"><i class="fa-solid fa-flask"></i> Laboratorios</a>
+            <a href="#" class="btn-menu"><i class="fa-solid fa-chart-pie"></i> Calificaciones</a>
+        </aside>
 
-        <!-- MÓDULOS DE APRENDIZAJE -->
-        <h2 class="titulo-modulos"><i class="fa-solid fa-layer-group"></i> Módulos Disponibles</h2>
-        
-        <div class="grid-modulos">
+        <!-- PANEL CENTRAL: SECCIÓN DE NOTICIAS ACTUALIZADA -->
+        <section class="panel-principal">
+            <h1 class="titulo-seccion">Noticias y Actualizaciones</h1>
             
-            <!-- Módulo 1: Bases -->
-            <a href="quimica11_bases.html" class="tarjeta-modulo t-bases">
-                <i class="fa-solid fa-laptop-code icono-modulo"></i>
-                <h3>Bases IUPAC</h3>
-                <p>Domina el lenguaje universal. Aprende a encontrar la cadena principal, numerar y aplicar orden alfabético.</p>
-                <div class="btn-entrar">Ingresar</div>
-            </a>
+            <!-- NOTICIA 1: ÁCIDOS CARBOXÍLICOS -->
+            <article class="noticia-card borde-acidos">
+                <span class="noticia-fecha"><i class="fa-solid fa-bell"></i> NUEVO MÓDULO DISPONIBLE</span>
+                <h2 class="noticia-titulo">Los Reyes de la Jerarquía: Ácidos Carboxílicos</h2>
+                <p class="noticia-texto">Ya está disponible la sección completa de Ácidos Carboxílicos. Incluye teoría sobre propiedades químicas, pruebas de laboratorio (bicarbonato y esterificación) y ejemplos con alcoholes, cetonas y feniles como radicales.</p>
+                <a href="acidos_carboxilicos.html" class="noticia-link">Ir al módulo <i class="fa-solid fa-arrow-right"></i></a>
+            </article>
 
-            <!-- Módulo 2: Alcanos -->
-            <a href="alcanos.html" class="tarjeta-modulo t-alcanos">
-                <i class="fa-solid fa-fire-flame-simple icono-modulo"></i>
-                <h3>Alcanos</h3>
-                <p>Los hidrocarburos saturados. Estudia la familia base, su importancia en los combustibles y nomenclatura interactiva.</p>
-                <div class="btn-entrar">Ingresar</div>
-            </a>
+            <!-- NOTICIA 2: PRÁCTICAS INTERACTIVAS -->
+            <article class="noticia-card borde-alcanos">
+                <span class="noticia-fecha"><i class="fa-solid fa-gamepad"></i> ACTUALIZACIÓN DE SISTEMA</span>
+                <h2 class="noticia-titulo">Simuladores de Práctica Inteligente</h2>
+                <p class="noticia-texto">Se habilitaron las evaluaciones formativas para Alcanos y Ácidos. El sistema ahora valida automáticamente la nomenclatura IUPAC, reconociendo múltiples respuestas correctas (ej. 3-pentenoico o pent-3-enoico) y corrigiendo espacios automáticamente.</p>
+                <a href="practica_alcanos.html" class="noticia-link">Probar simulador de Alcanos <i class="fa-solid fa-arrow-right"></i></a>
+            </article>
 
-            <!-- Módulo 3: Ácidos Carboxílicos -->
-            <a href="acidos_carboxilicos.html" class="tarjeta-modulo t-acidos">
-                <i class="fa-solid fa-crown icono-modulo"></i>
-                <h3>Ácidos Carboxílicos</h3>
-                <p>Los reyes de la jerarquía orgánica. Descubre los ácidos presentes en la naturaleza y cómo superan a otros grupos.</p>
-                <div class="btn-entrar">Ingresar</div>
-            </a>
+            <!-- NOTICIA 3: BASES IUPAC -->
+            <article class="noticia-card borde-bases">
+                <span class="noticia-fecha"><i class="fa-solid fa-wrench"></i> MEJORA VISUAL</span>
+                <h2 class="noticia-titulo">Pizarra Interactiva Perfeccionada</h2>
+                <p class="noticia-texto">Se ajustó milimétricamente la alineación de enlaces carbono-carbono en el módulo de Bases IUPAC. Los subíndices de los isómeros (Isobutano, Isopentano) están 100% corregidos respetando la tetravalencia del carbono.</p>
+                <a href="quimica11_bases.html" class="noticia-link">Revisar bases <i class="fa-solid fa-arrow-right"></i></a>
+            </article>
 
-            <!-- Módulo 4: Próximamente -->
-            <div class="tarjeta-modulo t-proximamente bloqueada">
-                <i class="fa-solid fa-lock icono-modulo"></i>
-                <h3>Alquenos y Alquinos</h3>
-                <p>Nuevos desafíos con dobles y triples enlaces se están preparando. Mantente atento a las próximas actualizaciones.</p>
-                <div class="btn-entrar" style="background: transparent; border-color: #555; color: #555;">Próximamente</div>
-            </div>
-
-        </div>
+        </section>
 
     </main>
 
     <footer>
-        <p>Construido con <i class="fa-solid fa-heart"></i> y mucha Química para la <span class="colegio-tag">I.E. Gallego</span></p>
-        <p style="font-size: 0.8rem; margin-top: 5px;">© 2026 LabVirtual W - Docente Oficial</p>
+        <p>I.E. GALLEGO - Plataforma Educativa Interactiva</p>
     </footer>
 
 </body>
