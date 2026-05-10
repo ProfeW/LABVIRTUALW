@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ácidos Carboxílicos - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-principal: #e67e22;   
+            --color-secundario: #f39c12;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-destaque: #2ecc71; 
+            --color-alerta: #e74c3c;
+            --color-radical: #3498db;
+            --color-enlace: #9b59b6;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-principal); }
+        .btn-volver { color: var(--color-secundario); text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; margin-top: 20px;}
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor { max-width: 1100px; margin: 0 auto; padding: 20px; animation: fadeIn 0.5s ease; }
+
+        .encabezado-leccion { text-align: center; margin-bottom: 40px; border-bottom: 2px solid rgba(230, 126, 34, 0.3); padding-bottom: 30px; margin-top: 20px;}
+        .encabezado-leccion h1 { font-size: 3.5rem; color: var(--color-principal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;}
+        .encabezado-leccion p { font-size: 1.15rem; color: #ccc; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+        .titulo-seccion { font-size: 2.2rem; border-left: 5px solid var(--color-principal); padding-left: 15px; margin: 60px 0 30px 0; color: #fff; }
+        .texto-base { font-size: 1.1rem; color: #ddd; line-height: 1.7; margin-bottom: 20px; }
+
+        /* --- CAJAS DE INFORMACIÓN --- */
+        .info-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; border-top: 4px solid var(--color-principal); }
+        .info-box h3 { color: var(--color-secundario); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;}
+        .info-box ul { padding-left: 20px; margin-bottom: 15px; }
+        .info-box li { margin-bottom: 10px; color: #ddd; font-size: 1.1rem; line-height: 1.6;}
+        .destacado { color: var(--color-secundario); font-weight: 800; }
+        
+        /* Cajas para pruebas químicas */
+        .prueba-box { background: rgba(231, 76, 60, 0.05); border-left: 4px solid var(--color-alerta); padding: 20px; border-radius: 8px; margin-top: 15px;}
+        .prueba-box h4 { color: var(--color-alerta); font-size: 1.2rem; margin-bottom: 10px;}
+
+        /* --- GRID DE EJEMPLOS --- */
+        .grid-ejemplos { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .tarjeta-ejemplo { background: rgba(0,0,0,0.4); border: 1px solid rgba(230, 126, 34, 0.3); border-radius: 12px; overflow: hidden; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; flex-direction: column;}
+        .tarjeta-ejemplo:hover { transform: translateY(-5px); border-color: var(--color-principal); box-shadow: 0 10px 25px rgba(230, 126, 34, 0.2);}
+        
+        .ej-header { background: rgba(230, 126, 34, 0.15); padding: 15px 20px; border-bottom: 1px solid rgba(230, 126, 34, 0.2); font-weight: 800; color: var(--color-secundario); font-size: 1.2rem; display: flex; justify-content: space-between;}
+        .ej-numero { background: var(--color-principal); color: #fff; width: 30px; height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%; font-size: 1rem; margin-right: 10px;}
+        
+        .ej-molecula { padding: 25px; display: flex; justify-content: center; align-items: center; flex-grow: 1; background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%); overflow-x: auto;}
+        .ej-molecula pre { font-family: 'Fira Code', monospace; font-size: 1.4rem; font-weight: 600; color: #fff; margin: 0; line-height: 1.4; text-align: left; }
+        
+        .ej-footer { background: rgba(0,0,0,0.6); padding: 15px 20px; font-size: 0.95rem; color: #bbb; border-top: 1px solid rgba(255,255,255,0.05);}
+
+        /* --- BOTONES DE ACCIÓN FINALES --- */
+        .seccion-acciones { display: flex; justify-content: center; gap: 30px; margin: 80px 0 50px 0; flex-wrap: wrap;}
+        .btn-accion { padding: 20px 40px; border-radius: 12px; font-size: 1.4rem; font-weight: 800; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 15px; transition: 0.3s; box-shadow: 0 10px 25px rgba(0,0,0,0.5);}
+        
+        .btn-practica { background: linear-gradient(135deg, #e67e22, #d35400); color: #fff; border: 2px solid #f39c12;}
+        .btn-practica:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(230, 126, 34, 0.4); background: linear-gradient(135deg, #f39c12, #e67e22);}
+        
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border: 2px solid #ff7675;}
+        .btn-evaluacion:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(231, 76, 60, 0.4); background: linear-gradient(135deg, #ff7675, #e74c3c);}
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 900px) { .grid-ejemplos { grid-template-columns: 1fr; } .seccion-acciones { flex-direction: column; width: 100%;} .btn-accion { width: 100%; justify-content: center;} }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="quimica_11.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Química Orgánica</a>
+
+        <div class="encabezado-leccion">
+            <h1>ÁCIDOS CARBOXÍLICOS</h1>
+            <p>La máxima jerarquía de la IUPAC. Conoce los compuestos orgánicos responsables del sabor del vinagre, las defensas de las hormigas y procesos agroindustriales vitales.</p>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 1: ¿QUÉ SON Y POR QUÉ SE LLAMAN ASÍ? -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">1. ¿Qué son los Ácidos Carboxílicos?</h2>
+        <div class="info-box">
+            <p class="texto-base">Los ácidos carboxílicos son compuestos orgánicos oxigenados que se caracterizan por tener un <strong>grupo carboxilo (-COOH)</strong>. Este grupo es la fusión funcional de un grupo carbonilo (C=O) y un grupo hidroxilo (-OH) ubicados en el mismo átomo de carbono.</p>
+            
+            <h3><i class="fa-solid fa-crown"></i> Los Reyes de la Jerarquía</h3>
+            <p class="texto-base">Según las reglas que usamos (basadas en Alonso Fórmula y la IUPAC), el grupo -COOH <strong>manda sobre todos los demás</strong>. Siempre ocupará el Carbono número 1 de la cadena principal, superando en prioridad a los alquenos, alquinos, alcoholes y radicales.</p>
+            
+            <p class="texto-base">Su estructura condensada general se escribe como: <span style="font-size: 1.5rem; color: var(--color-secundario); font-family: 'Fira Code', monospace; font-weight: 800; background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 8px; display: inline-block;">R - COOH</span></p>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 2: IMPORTANCIA Y APLICACIONES      -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">2. Importancia y Aplicaciones</h2>
+        <div class="info-box">
+            <p class="texto-base">Están presentes en todo lo que nos rodea, desde la biología hasta la agroindustria:</p>
+            <ul>
+                <li><span class="destacado">Ácido Fórmico (Metanoico):</span> Es el veneno irritante que inyectan las hormigas y abejas al picar.</li>
+                <li><span class="destacado">Ácido Acético (Etanoico):</span> Es el componente principal del vinagre que usamos en las cocinas y ensaladas.</li>
+                <li><span class="destacado">Ácido Butírico (Butanoico):</span> Responsable del olor peculiar de la mantequilla rancia.</li>
+                <li><span class="destacado">Agroindustria y Fermentación:</span> Diversos ácidos carboxílicos se generan naturalmente en la pulpa de frutas y durante el beneficio húmedo y fermentación del café, influyendo en su acidez y sabor en taza.</li>
+                <li><span class="destacado">Ácidos Grasos:</span> Los ácidos carboxílicos de cadena larga forman las grasas y aceites con los que se fabrica el jabón.</li>
+            </ul>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 3: PROPIEDADES FÍSICAS             -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">3. Propiedades Físicas</h2>
+        <div class="info-box">
+            <ul>
+                <li><span class="destacado">Puntos de Ebullición:</span> Son inusualmente altos porque pueden formar puentes de hidrógeno dobles entre sus moléculas. Hierven a temperaturas mucho mayores que los alcanos o alcoholes de tamaño similar.</li>
+                <li><span class="destacado">Solubilidad:</span> Los ácidos pequeños (de 1 a 4 carbonos) son muy solubles en agua. A medida que la cadena de carbonos crece, se vuelven insolubles en agua pero solubles en solventes orgánicos (aceites, grasas).</li>
+                <li><span class="destacado">Olores:</span> Los primeros de la serie tienen olores muy fuertes y picantes (como el vinagre), mientras que los medianos (C4 a C8) huelen a sudor, cabra o queso fuerte. Los de cadena muy larga (sólidos) son inodoros.</li>
+            </ul>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 4: PROPIEDADES QUÍMICAS            -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">4. Propiedades Químicas</h2>
+        <div class="info-box">
+            <ul>
+                <li><span class="destacado">Comportamiento Ácido:</span> Son ácidos débiles. En agua liberan iones H⁺, lo que explica su sabor agrio (como el limón o el vinagre).</li>
+                <li><span class="destacado">Formación de Sales:</span> Reaccionan fácilmente con bases fuertes (como el hidróxido de sodio, NaOH) para formar sales orgánicas (jabones) y agua.</li>
+                <li><span class="destacado">Esterificación:</span> Reaccionan con los alcoholes en presencia de un catalizador ácido para formar Ésteres, que son los compuestos que le dan los olores agradables a las frutas artificiales.</li>
+            </ul>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 5: PRUEBAS DE IDENTIFICACIÓN       -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">5. Pruebas de Identificación en Laboratorio</h2>
+        <div class="info-box">
+            <p class="texto-base">¿Cómo sabemos si una sustancia misteriosa es un ácido carboxílico? Usamos estas pruebas químicas clásicas:</p>
+            
+            <div class="prueba-box">
+                <h4><i class="fa-solid fa-vial"></i> 1. Prueba de Bicarbonato de Sodio (NaHCO₃)</h4>
+                <p class="texto-base">Se añade una solución de bicarbonato a la muestra. Si se trata de un ácido carboxílico, ocurrirá una reacción inmediata que genera <strong>efervescencia vigorosa</strong> (burbujas). Ese gas que se libera es Dióxido de Carbono (CO₂).</p>
+            </div>
+
+            <div class="prueba-box">
+                <h4><i class="fa-solid fa-lemon"></i> 2. Prueba de Esterificación (Olor a Frutas)</h4>
+                <p class="texto-base">Se mezcla la muestra con un poco de etanol y unas gotas de ácido sulfúrico concentrado, calentando suavemente al baño maría. Si el olor cambia de algo desagradable o picante a un <strong>olor dulce y afrutado</strong> (parecido a pegante o esmalte), se confirma la presencia del grupo carboxilo formando un éster.</p>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 6: REGLAS DE NOMENCLATURA          -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">6. Reglas de Nomenclatura IUPAC</h2>
+        <div class="info-box">
+            <p class="texto-base">Para nombrar estos ácidos de forma sistemática:</p>
+            <ul>
+                <li><strong>Inicio y Fin:</strong> La palabra principal siempre será <strong>ÁCIDO</strong>, seguida del nombre del hidrocarburo, y se le añade el sufijo <strong>-OICO</strong>. (Ej: Ácido metan<span class="destacado">oico</span>).</li>
+                <li><strong>Carbono Número 1:</strong> El carbono del grupo <strong>-COOH siempre, obligatoriamente, es el Carbono 1</strong>. A partir de ahí se numera el resto de la cadena.</li>
+                <li><strong>Prioridad Absoluta:</strong> Si en la cadena hay dobles o triples enlaces, la numeración de esos enlaces queda sujeta a que el -COOH siga siendo el número 1.</li>
+            </ul>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 7: EJEMPLOS                        -->
+        <!-- ========================================== -->
+        <h2 class="titulo-seccion">7. Ejemplos de Nomenclatura</h2>
+        <p class="texto-base">Analiza detalladamente las siguientes estructuras, observando siempre cómo el -COOH toma el control total de la numeración y cómo otros grupos funcionales pasan a ser simples radicales.</p>
+
+        <div class="grid-ejemplos">
+            
+            <!-- Ejemplo 1 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">1</span> ÁCIDO METANOICO</span>
+                    <span style="color:var(--color-destaque); font-size: 0.9rem;">(Fórmico)</span>
+                </div>
+                <div class="ej-molecula">
+                    <pre>H-COOH</pre>
+                </div>
+                <div class="ej-footer">Un solo carbono. Es el ácido del veneno de las hormigas rojas.</div>
+            </div>
+
+            <!-- Ejemplo 2 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">2</span> ÁCIDO ETANOICO</span>
+                    <span style="color:var(--color-destaque); font-size: 0.9rem;">(Acético)</span>
+                </div>
+                <div class="ej-molecula">
+                    <pre>CH₃ - COOH</pre>
+                </div>
+                <div class="ej-footer">Dos carbonos. Es el componente activo que le da sabor y olor al vinagre.</div>
+            </div>
+
+            <!-- Ejemplo 3 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">3</span> ÁCIDO PROPANOICO</span>
+                </div>
+                <div class="ej-molecula">
+                    <pre>CH₃ - CH₂ - COOH</pre>
+                </div>
+                <div class="ej-footer">Tres carbonos. El -COOH es el carbono 1, numerando de derecha a izquierda.</div>
+            </div>
+
+            <!-- Ejemplo 4 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">4</span> ÁCIDO BUTANOICO</span>
+                    <span style="color:var(--color-destaque); font-size: 0.9rem;">(Butírico)</span>
+                </div>
+                <div class="ej-molecula">
+                    <pre>CH₃ - CH₂ - CH₂ - COOH</pre>
+                </div>
+                <div class="ej-footer">Cuatro carbonos. Responsable del olor desagradable de la mantequilla descompuesta.</div>
+            </div>
+
+            <!-- Ejemplo 5 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">5</span> ÁCIDO 2-METILPROPANOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>      CH₃
+      |
+CH₃ - CH - COOH</pre>
+                </div>
+                <div class="ej-footer">Cadena de 3. El carbono 1 es el -COOH, por ende el radical metil cae obligatoriamente en el carbono 2.</div>
+            </div>
+
+            <!-- Ejemplo 6 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">6</span> ÁCIDO 3-METILBUTANOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>      CH₃
+      |
+CH₃ - CH - CH₂ - COOH</pre>
+                </div>
+                <div class="ej-footer">El -COOH obliga a enumerar desde la derecha. El metil queda en la posición 3.</div>
+            </div>
+
+            <!-- Ejemplo 7 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">7</span> ÁCIDO 2,2-DIMETILBUTANOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>            CH₃
+            |
+CH₃ - CH₂ - C - COOH
+            |
+            CH₃</pre>
+                </div>
+                <div class="ej-footer">Dos radicales metil ubicados en el carbono 2. Fíjate cómo la "C" del carbono 2 no tiene hidrógenos (tetravalencia).</div>
+            </div>
+
+            <!-- Ejemplo 8 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">8</span> ÁCIDO PENT-3-ENOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>CH₃ - CH = CH - CH₂ - COOH</pre>
+                </div>
+                <div class="ej-footer">¡Regla de oro! El ácido tiene prioridad sobre el alqueno. El carbono 1 es el COOH, y el doble enlace arranca en el carbono 3.</div>
+            </div>
+
+            <!-- Ejemplo 9 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">9</span> ÁCIDO 4-METILPENT-2-ENOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>      CH₃
+      |
+CH₃ - CH - CH = CH - COOH</pre>
+                </div>
+                <div class="ej-footer">Cadena con alqueno y ramificación. El carbono 1 es el COOH. El doble enlace arranca en 2 y el Metil queda en 4.</div>
+            </div>
+
+            <!-- Ejemplo 10 -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">10</span> ÁCIDO 3-ETIL-5-METILHEXANOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>      CH₃        CH₂-CH₃
+      |          |
+CH₃ - CH - CH₂ - CH - CH₂ - COOH</pre>
+                </div>
+                <div class="ej-footer">Estructura compleja. Numeramos desde la derecha (COOH = 1). El Etil cae en 3 y el Metil en 5. ¡Alineación perfecta!</div>
+            </div>
+
+            <!-- Ejemplo 11 (Alcohol como radical) -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">11</span> ÁCIDO 3-HIDROXIBUTANOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>      OH
+      |
+CH₃ - CH - CH₂ - COOH</pre>
+                </div>
+                <div class="ej-footer">El -COOH es el rey. El grupo Alcohol (-OH) pierde su terminación "-ol" y pasa a ser un simple radical llamado "hidroxi" en el carbono 3.</div>
+            </div>
+
+            <!-- Ejemplo 12 (Cetona como radical) -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">12</span> ÁCIDO 4-OXOPENTANOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>      O
+      ||
+CH₃ - C - CH₂ - CH₂ - COOH</pre>
+                </div>
+                <div class="ej-footer">Frente al ácido, la Cetona (C=O) también pierde prioridad. Se nombra como el radical "oxo" en la posición 4 de la cadena principal.</div>
+            </div>
+
+            <!-- Ejemplo 13 (Aldehído como radical) -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">13</span> ÁCIDO 3-FORMILBUTANOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>      CHO
+      |
+CH₃ - CH - CH₂ - COOH</pre>
+                </div>
+                <div class="ej-footer">Incluso el Aldehído (-CHO) se somete al ácido. Cuando actúa como una ramificación de la cadena principal, se le llama "formil".</div>
+            </div>
+
+            <!-- Ejemplo 14 (Aromático como radical) -->
+            <div class="tarjeta-ejemplo">
+                <div class="ej-header">
+                    <span><span class="ej-numero">14</span> ÁCIDO 2-FENILPROPANOICO</span>
+                </div>
+                <div class="ej-molecula">
+<pre>      C₆H₅
+      |
+CH₃ - CH - COOH</pre>
+                </div>
+                <div class="ej-footer">El anillo aromático del benceno (C₆H₅-) tampoco le gana al ácido. Actúa como un radical y recibe el nombre de "fenil".</div>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 8: BOTONES DE ACCIÓN               -->
+        <!-- ========================================== -->
+        <div class="seccion-acciones">
+            <a href="practica_acidos.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-flask-vial"></i> Práctica Interactiva
+            </a>
+            
+            <a href="evaluacion_acidos.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-file-signature"></i> Evaluación
+            </a>
+        </div>
+
+    </main>
+
+</body>
+</html>

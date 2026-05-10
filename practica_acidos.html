@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Interactiva: Ácidos Carboxílicos - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-principal: #e67e22;   
+            --color-secundario: #f39c12;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-destaque: #2ecc71; 
+            --color-error: #e74c3c;
+            --color-alerta: #f39c12;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-principal); }
+
+        .contenedor { max-width: 900px; margin: 0 auto; padding: 20px; animation: fadeIn 0.5s ease; }
+
+        .encabezado { text-align: center; margin: 30px 0; }
+        .encabezado h1 { font-size: 3rem; color: var(--color-principal); text-transform: uppercase; margin-bottom: 10px; }
+
+        /* --- LEYENDA DE INSTRUCCIONES --- */
+        .leyenda { background: rgba(243, 156, 18, 0.1); border: 2px solid var(--color-alerta); border-radius: 15px; padding: 25px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .leyenda h2 { color: var(--color-alerta); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .leyenda ul { list-style: none; margin-bottom: 15px;}
+        .leyenda li { margin-bottom: 10px; font-size: 1.05rem; display: flex; gap: 10px; line-height: 1.4; }
+        .leyenda li i { color: var(--color-alerta); margin-top: 5px; }
+        .clave { font-weight: 800; color: #fff; text-decoration: underline; }
+        
+        .nota-inteligente { background: rgba(46, 204, 113, 0.1); border-left: 4px solid var(--color-destaque); padding: 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd;}
+
+        /* --- TARJETAS DE EJERCICIOS --- */
+        .ejercicio-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 30px; margin-bottom: 35px; border-left: 5px solid var(--color-principal); transition: 0.3s; }
+        .ejercicio-card:hover { transform: scale(1.01); background: rgba(255, 255, 255, 0.05); }
+
+        .mol-display { background: rgba(0,0,0,0.3); padding: 25px; border-radius: 10px; margin-bottom: 25px; display: flex; justify-content: center; min-height: 180px; align-items: center; overflow-x: auto; }
+        .mol-display pre { font-family: 'Fira Code', monospace; font-size: 1.6rem; color: #fff; line-height: 1.4; margin: 0; }
+
+        .input-group { display: flex; gap: 10px; flex-wrap: wrap; }
+        .input-nombre { flex: 1; padding: 15px; border-radius: 8px; border: 2px solid #2c3e50; background: #0f111a; color: #fff; font-size: 1.1rem; outline: none; transition: 0.3s; min-width: 250px; }
+        .input-nombre:focus { border-color: var(--color-principal); box-shadow: 0 0 10px rgba(230, 126, 34, 0.3); }
+
+        .btn-validar { padding: 15px 30px; border-radius: 8px; border: none; background: var(--color-principal); color: #fff; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 1rem; text-transform: uppercase; }
+        .btn-validar:hover { background: var(--color-secundario); transform: translateY(-2px); }
+
+        .feedback { margin-top: 15px; font-weight: 600; font-size: 1.1rem; display: none; align-items: center; gap: 10px; }
+        .feedback.correct { color: var(--color-destaque); }
+        .feedback.incorrect { color: var(--color-error); }
+        .feedback.warning { color: var(--color-alerta); }
+
+        .btn-regresar { display: inline-block; margin-top: 20px; color: #aaa; text-decoration: none; transition: 0.3s; font-weight: 600;}
+        .btn-regresar:hover { color: #fff; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+        <a href="acidos_carboxilicos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+    </nav>
+
+    <main class="contenedor">
+        <div class="encabezado">
+            <h1>Desafío: Ácidos Carboxílicos</h1>
+            <p>El reto final de la jerarquía IUPAC. Demuestra tu dominio frente a radicales, alcoholes, cetonas y alquenos.</p>
+        </div>
+
+        <!-- LEYENDA -->
+        <section class="leyenda">
+            <h2><i class="fa-solid fa-circle-info"></i> Instrucciones de Nomenclatura</h2>
+            <ul>
+                <li><i class="fa-solid fa-check"></i> Siempre debes iniciar con la palabra <span class="clave">ácido</span> y terminar en <span class="clave">-oico</span>.</li>
+                <li><i class="fa-solid fa-check"></i> Separa números de letras con guiones (-) y números de números con comas (,).</li>
+                <li><i class="fa-solid fa-check"></i> El carbono 1 <strong>siempre</strong> es el del grupo carboxilo (-COOH).</li>
+            </ul>
+            <div class="nota-inteligente">
+                <strong><i class="fa-solid fa-robot"></i> Inteligencia del Simulador:</strong> Este sistema es flexible. Entiende ambas nomenclaturas válidas. Por ejemplo, si la molécula es un alqueno, puedes escribir tanto <strong>ácido 3-pentenoico</strong> como <strong>ácido pent-3-enoico</strong>, y ambas serán calificadas como correctas. (Tampoco importa si olvidas las tildes).
+            </div>
+        </section>
+
+        <!-- CONTENEDOR DE EJERCICIOS -->
+        <div id="ejercicios-container">
+            <!-- Los ejercicios se cargan vía JS -->
+        </div>
+
+    </main>
+
+    <script>
+        // Array de ejercicios con múltiples opciones de respuesta válidas
+        const ejercicios = [
+            { 
+                id: 1, 
+                mol: "CH₃ - CH₂ - CH₂ - COOH", 
+                ans: ["acido butanoico"] 
+            },
+            { 
+                id: 2, 
+                mol: "      CH₃\n      |\nCH₃ - CH - CH₂ - COOH", 
+                ans: ["acido 3-metilbutanoico"] 
+            },
+            { 
+                id: 3, 
+                mol: "CH₃ - CH = CH - CH₂ - COOH", 
+                ans: ["acido pent-3-enoico", "acido 3-pentenoico"] 
+            },
+            { 
+                id: 4, 
+                mol: "      CH₃\n      |\nCH₃ - C = CH - COOH", 
+                ans: ["acido 3-metilbut-2-enoico", "acido 3-metil-2-butenoico"] 
+            },
+            { 
+                id: 5, 
+                mol: "CH ≡ C - CH₂ - COOH", 
+                ans: ["acido but-3-inoico", "acido 3-butinoico"] 
+            },
+            { 
+                id: 6, 
+                mol: "      OH\n      |\nCH₃ - CH - CH₂ - COOH", 
+                ans: ["acido 3-hidroxibutanoico"] 
+            },
+            { 
+                id: 7, 
+                mol: "      O\n      ||\nCH₃ - C - CH₂ - COOH", 
+                ans: ["acido 3-oxobutanoico"] 
+            },
+            { 
+                id: 8, 
+                mol: "      CHO\n      |\nCH₃ - CH - CH₂ - COOH", 
+                ans: ["acido 3-formilbutanoico"] 
+            },
+            { 
+                id: 9, 
+                mol: "      C₆H₅\n      |\nCH₃ - CH - COOH", 
+                ans: ["acido 2-fenilpropanoico"] 
+            },
+            { 
+                id: 10, 
+                mol: "      CH₃        CH₃\n      |          |\nCH₃ - C  - CH₂ - CH - COOH\n      |\n      CH₃", 
+                ans: ["acido 2,4,4-trimetilpentanoico"] 
+            },
+            { 
+                id: 11, 
+                mol: "      OH\n      |\nCH₃ - CH - CH = CH - COOH", 
+                ans: ["acido 4-hidroxipent-2-enoico", "acido 4-hidroxi-2-pentenoico"] 
+            },
+            { 
+                id: 12, 
+                mol: "      O\n      ||\nCH₃ - C - CH₂ - CH - COOH\n                |\n                CH₂-CH₃", 
+                ans: ["acido 2-etil-4-oxopentanoico"] 
+            }
+        ];
+
+        const container = document.getElementById('ejercicios-container');
+
+        // Renderizar tarjetas
+        ejercicios.forEach(ej => {
+            const card = document.createElement('div');
+            card.className = 'ejercicio-card';
+            card.innerHTML = `
+                <div class="mol-display">
+                    <pre>${ej.mol}</pre>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="input-nombre" id="input-${ej.id}" placeholder="Escribe el nombre IUPAC aquí..." onkeypress="handleEnter(event, ${ej.id})">
+                    <button class="btn-validar" onclick="validar(${ej.id})">Validar</button>
+                </div>
+                <div class="feedback" id="feedback-${ej.id}"></div>
+            `;
+            container.appendChild(card);
+        });
+
+        // Permite presionar "Enter" para validar
+        function handleEnter(e, id) {
+            if(e.key === 'Enter'){
+                validar(id);
+            }
+        }
+
+        // Función normalizadora extrema: quita tildes, convierte a minúscula, arregla espacios dobles y espacios en guiones
+        function normalizarTexto(str) {
+            let s = str.toLowerCase();
+            // Quitar tildes
+            s = s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            // Quitar espacios al inicio y final
+            s = s.trim();
+            // Quitar espacios alrededor de guiones (ej: "3 - metil" -> "3-metil")
+            s = s.replace(/\s*-\s*/g, '-');
+            // Quitar espacios alrededor de comas (ej: "2 , 2" -> "2,2")
+            s = s.replace(/\s*,\s*/g, ',');
+            // Asegurar que si escribieron la palabra "acido", haya exactamente un espacio después
+            s = s.replace(/^acido\s+/, 'acido ');
+            return s;
+        }
+
+        function validar(id) {
+            const input = document.getElementById(`input-${id}`);
+            const feedback = document.getElementById(`feedback-${id}`);
+            
+            const ejercicioActual = ejercicios.find(e => e.id === id);
+            const respuestasValidas = ejercicioActual.ans;
+            
+            // Texto escrito por el alumno
+            const textoCrudo = input.value;
+            const valorNormalizado = normalizarTexto(textoCrudo);
+
+            feedback.style.display = 'flex';
+
+            // Validar si olvidó la palabra "ácido"
+            if (!valorNormalizado.startsWith("acido ")) {
+                feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Recuerda: Debes empezar el nombre con la palabra "ácido".`;
+                feedback.className = 'feedback warning';
+                input.style.borderColor = 'var(--color-alerta)';
+                return; // Detiene la validación aquí
+            }
+
+            // Comprobar si el valor coincide con alguna de las opciones válidas
+            let esCorrecto = false;
+            for(let correcta of respuestasValidas) {
+                if (valorNormalizado === correcta) {
+                    esCorrecto = true;
+                    break;
+                }
+            }
+
+            if (esCorrecto) {
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Excelente! El nombre es totalmente correcto.`;
+                feedback.className = 'feedback correct';
+                input.style.borderColor = 'var(--color-destaque)';
+            } else {
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. Revisa bien los radicales, el orden alfabético o la numeración. ¡Inténtalo de nuevo!`;
+                feedback.className = 'feedback incorrect';
+                input.style.borderColor = 'var(--color-error)';
+            }
+        }
+    </script>
+
+</body>
+</html>
