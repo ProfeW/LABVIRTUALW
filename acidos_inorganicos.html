@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Ácidos - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-principal: #9b59b6;   
+            --color-secundario: #8e44ad;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-hidracido: #00d2ff; 
+            --color-oxacido: #ff4b2b;
+            --color-alerta: #f1c40f;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+            display: flex; flex-direction: column;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-principal); }
+        .btn-volver { color: #ccc; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; margin-top: 20px;}
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor { max-width: 1200px; margin: 0 auto; padding: 20px; flex-grow: 1; animation: fadeIn 0.5s ease; }
+
+        /* --- ENCABEZADO --- */
+        .encabezado-leccion { text-align: center; margin-bottom: 40px; border-bottom: 2px solid rgba(155, 89, 182, 0.3); padding-bottom: 30px; margin-top: 20px;}
+        .encabezado-leccion h1 { font-size: 3.5rem; color: var(--color-principal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; text-shadow: 0 0 15px rgba(155, 89, 182, 0.4);}
+        .encabezado-leccion p { font-size: 1.15rem; color: #ccc; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+        /* --- SECCIÓN GENERAL (QUÉ ES UN ÁCIDO) --- */
+        .info-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; margin-bottom: 40px; border-top: 4px solid var(--color-principal); box-shadow: 0 10px 30px rgba(0,0,0,0.3);}
+        .info-box h2 { color: var(--color-texto); margin-bottom: 15px; font-size: 2rem; display: flex; align-items: center; gap: 10px;}
+        .info-box h2 i { color: var(--color-principal); }
+        .texto-base { font-size: 1.1rem; color: #ddd; line-height: 1.7; margin-bottom: 20px; }
+        .destacado-importancia { background: rgba(155, 89, 182, 0.1); padding: 15px 20px; border-left: 4px solid var(--color-principal); border-radius: 8px; margin-top: 20px;}
+        .destacado-importancia h3 { color: #e0b0ff; margin-bottom: 10px; font-size: 1.2rem;}
+
+        /* --- COMPARATIVA DOS COLUMNAS (TIPOS DE ÁCIDOS) --- */
+        .titulo-seccion { font-size: 2.5rem; text-align: center; margin: 60px 0 30px 0; color: #fff; }
+        
+        .grid-comparativa { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 50px; }
+        
+        .columna-tipo { background: rgba(0, 0, 0, 0.4); border-radius: 15px; padding: 30px; position: relative; overflow: hidden; transition: 0.3s; box-shadow: 0 10px 25px rgba(0,0,0,0.3);}
+        .columna-tipo:hover { transform: translateY(-5px); }
+        
+        /* Tema Hidrácidos */
+        .columna-hidracido { border-top: 5px solid var(--color-hidracido); }
+        .columna-hidracido:hover { box-shadow: 0 15px 35px rgba(0, 210, 255, 0.2); border-color: #55e6ff;}
+        .columna-hidracido h3 { color: var(--color-hidracido); font-size: 1.8rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
+        
+        /* Tema Oxácidos */
+        .columna-oxacido { border-top: 5px solid var(--color-oxacido); }
+        .columna-oxacido:hover { box-shadow: 0 15px 35px rgba(255, 75, 43, 0.2); border-color: #ff7657;}
+        .columna-oxacido h3 { color: var(--color-oxacido); font-size: 1.8rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
+
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px;}
+        .badge-hidracido { background: rgba(0, 210, 255, 0.2); color: var(--color-hidracido); border: 1px solid var(--color-hidracido);}
+        .badge-oxacido { background: rgba(255, 75, 43, 0.2); color: var(--color-oxacido); border: 1px solid var(--color-oxacido);}
+
+        .seccion-datos { margin-bottom: 20px; }
+        .seccion-datos h4 { color: #fff; font-size: 1.1rem; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;}
+        .seccion-datos p { color: #ccc; font-size: 1rem; line-height: 1.6; margin-bottom: 10px;}
+        
+        .lista-ejemplos { list-style: none; padding: 0; }
+        .lista-ejemplos li { background: rgba(255,255,255,0.05); margin-bottom: 10px; padding: 12px; border-radius: 8px; font-size: 0.95rem; display: flex; flex-direction: column; gap: 5px;}
+        .formula { font-family: 'Fira Code', monospace; font-size: 1.1rem; font-weight: 600; color: #fff; background: rgba(0,0,0,0.5); padding: 3px 8px; border-radius: 4px; display: inline-block; width: fit-content;}
+
+        /* --- NOMENCLATURA (REALTADA AL FINAL) --- */
+        .seccion-nomenclatura { background: linear-gradient(145deg, rgba(20,20,35,0.9), rgba(10,10,20,0.9)); border: 1px solid rgba(241, 196, 15, 0.3); border-radius: 20px; padding: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); position: relative; overflow: hidden;}
+        .seccion-nomenclatura::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(to right, var(--color-hidracido), var(--color-alerta), var(--color-oxacido)); }
+        
+        .titulo-nomenclatura { color: var(--color-alerta); font-size: 2.2rem; text-align: center; margin-bottom: 10px;}
+        .subtitulo-nomenclatura { text-align: center; color: #bbb; font-size: 1.1rem; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;}
+
+        .grid-reglas { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .reglas-caja { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 25px; border: 1px solid rgba(255,255,255,0.05);}
+        .reglas-caja h3 { font-size: 1.5rem; margin-bottom: 20px; text-align: center; padding-bottom: 10px; border-bottom: 2px dashed rgba(255,255,255,0.2);}
+        .hid-title { color: var(--color-hidracido); }
+        .oxa-title { color: var(--color-oxacido); }
+
+        .sistema-nom { margin-bottom: 25px; }
+        .sistema-nom h4 { color: #fff; font-size: 1.1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;}
+        .sistema-nom h4 i { color: var(--color-alerta); font-size: 0.9rem;}
+        .sistema-nom p { color: #ccc; font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px;}
+        
+        .ej-nom { background: rgba(255,255,255,0.05); padding: 10px 15px; border-left: 3px solid var(--color-alerta); border-radius: 0 8px 8px 0; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #e0b0ff;}
+
+        /* --- BOTONES DE ACCIÓN FINALES --- */
+        .seccion-acciones { display: flex; justify-content: center; gap: 30px; margin: 60px 0; flex-wrap: wrap;}
+        .btn-accion { padding: 18px 35px; border-radius: 12px; font-size: 1.2rem; font-weight: 800; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 15px; transition: 0.3s; box-shadow: 0 10px 25px rgba(0,0,0,0.5);}
+        
+        .btn-practica { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: #fff; border: 2px solid #b27bc9;}
+        .btn-practica:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(155, 89, 182, 0.4); background: linear-gradient(135deg, #b27bc9, #9b59b6);}
+        
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border: 2px solid #ff7675;}
+        .btn-evaluacion:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(231, 76, 60, 0.4); background: linear-gradient(135deg, #ff7675, #e74c3c);}
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 900px) { 
+            .grid-comparativa, .grid-reglas { grid-template-columns: 1fr; gap: 20px;} 
+            .seccion-acciones { flex-direction: column; width: 100%;} 
+            .btn-accion { width: 100%; justify-content: center;} 
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+    </nav>
+
+    <main class="contenedor">
+        <a href="quimica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Química 10</a>
+
+        <div class="encabezado-leccion">
+            <h1>FUNCIONES INORGÁNICAS: LOS ÁCIDOS</h1>
+            <p>Descubre los compuestos responsables del sabor del limón, la digestión en tu cuerpo y la fuerza de la industria química mundial.</p>
+        </div>
+
+        <section class="info-box">
+            <h2><i class="fa-solid fa-vial-circle-check"></i> ¿Qué es un ácido?</h2>
+            <p class="texto-base">Un ácido es un compuesto químico que, al disolverse en agua, <strong>libera iones de hidrógeno (H⁺)</strong>. Son sustancias fundamentales en la química que se caracterizan por tener un sabor agrio (como el limón), neutralizar las bases (hidróxidos) y cambiar el color de ciertos indicadores (por ejemplo, vuelven rojo el papel tornasol azul).</p>
+            
+            <div class="destacado-importancia">
+                <h3><i class="fa-solid fa-earth-americas"></i> Importancia en nuestro entorno</h3>
+                <p class="texto-base" style="margin-bottom: 0;">Los ácidos son esenciales para la vida y la industria. En nuestro cuerpo, el ácido estomacal permite la digestión de los alimentos. En la naturaleza, intervienen en la formación de suelos y rocas. A nivel industrial, son la materia prima para fabricar fertilizantes, plásticos, medicamentos, baterías y productos de limpieza.</p>
+            </div>
+        </section>
+
+        <h2 class="titulo-seccion">Tipos de Ácidos</h2>
+
+        <div class="grid-comparativa">
+            
+            <article class="columna-tipo columna-hidracido">
+                <span class="badge badge-hidracido">Sin Oxígeno</span>
+                <h3><i class="fa-solid fa-wind"></i> Ácidos Hidrácidos</h3>
+                
+                <div class="seccion-datos">
+                    <h4><i class="fa-solid fa-cubes"></i> Estructura</h4>
+                    <p>Son <strong>compuestos binarios</strong> (formados por dos elementos). Están compuestos únicamente por <strong>Hidrógeno</strong> y un <strong>No Metal</strong> de los grupos VIA (S, Se, Te) o VIIA (F, Cl, Br, I).</p>
+                </div>
+
+                <div class="seccion-datos">
+                    <h4><i class="fa-solid fa-temperature-half"></i> Propiedades Físicas</h4>
+                    <p>A temperatura ambiente, suelen ser gases con olores fuertes e irritantes. Son altamente solubles en agua, y es en solución acuosa donde adquieren su carácter ácido. Conducen la electricidad en solución.</p>
+                </div>
+
+                <div class="seccion-datos">
+                    <h4><i class="fa-solid fa-flask-vial"></i> Propiedades Químicas</h4>
+                    <p>Reaccionan vigorosamente con metales activos (como el zinc) liberando gas hidrógeno (H₂). Al reaccionar con bases, forman sales haloideas y agua. <em>Dato clave: En estado puro (gaseoso) se consideran simplemente haluros de hidrógeno.</em></p>
+                </div>
+
+                <div class="seccion-datos">
+                    <h4><i class="fa-solid fa-star"></i> Los más conocidos</h4>
+                    <ul class="lista-ejemplos">
+                        <li>
+                            <span class="formula">HCl</span>
+                            <span><strong>Ácido clorhídrico:</strong> Ácido muriático. Limpia metales y es el componente de los jugos gástricos.</span>
+                        </li>
+                        <li>
+                            <span class="formula">HF</span>
+                            <span><strong>Ácido fluorhídrico:</strong> Altamente corrosivo, se utiliza para grabar o tallar vidrio.</span>
+                        </li>
+                        <li>
+                            <span class="formula">H₂S</span>
+                            <span><strong>Ácido sulfhídrico:</strong> Olor a "huevo podrido", presente en volcanes y aguas termales.</span>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="columna-tipo columna-oxacido">
+                <span class="badge badge-oxacido">Con Oxígeno</span>
+                <h3><i class="fa-solid fa-fire"></i> Ácidos Oxácidos</h3>
+                
+                <div class="seccion-datos">
+                    <h4><i class="fa-solid fa-cubes-stacked"></i> Estructura</h4>
+                    <p>Son <strong>compuestos ternarios</strong> (tres elementos). Resultan de la reacción de un Óxido Ácido con Agua (H₂O). Su estructura siempre es: <strong>Hidrógeno + No Metal + Oxígeno</strong>.</p>
+                </div>
+
+                <div class="seccion-datos">
+                    <h4><i class="fa-solid fa-droplet"></i> Propiedades Físicas</h4>
+                    <p>Generalmente son líquidos a temperatura ambiente (como el ácido sulfúrico) o sólidos solubles en agua. Tienen un sabor agrio y son excelentes conductores de electricidad en solución acuosa.</p>
+                </div>
+
+                <div class="seccion-datos">
+                    <h4><i class="fa-solid fa-flask-vial"></i> Propiedades Químicas</h4>
+                    <p>Son agentes oxidantes fuertes. Reaccionan con bases para formar sales oxisales y agua (neutralización). Reaccionan con metales liberando hidrógeno. <em>Dato clave: Su acidez depende de la cantidad de oxígenos y la electronegatividad del no metal.</em></p>
+                </div>
+
+                <div class="seccion-datos">
+                    <h4><i class="fa-solid fa-star"></i> Los más conocidos</h4>
+                    <ul class="lista-ejemplos">
+                        <li>
+                            <span class="formula">H₂SO₄</span>
+                            <span><strong>Ácido sulfúrico:</strong> El químico más producido del mundo. Uso en baterías y fertilizantes.</span>
+                        </li>
+                        <li>
+                            <span class="formula">HNO₃</span>
+                            <span><strong>Ácido nítrico:</strong> Fundamental en la fabricación de explosivos (dinamita) y abonos.</span>
+                        </li>
+                        <li>
+                            <span class="formula">H₃PO₄</span>
+                            <span><strong>Ácido fosfórico:</strong> Usado en la industria alimentaria (gaseosas de cola) y fertilizantes.</span>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+        </div>
+
+        <section class="seccion-nomenclatura">
+            <h2 class="titulo-nomenclatura"><i class="fa-solid fa-language"></i> El Lenguaje de los Ácidos</h2>
+            <p class="subtitulo-nomenclatura">La nomenclatura es vital en la química para identificar exactamente de qué sustancia estamos hablando. Aquí te mostramos cómo nombrar cada tipo de ácido según las reglas mundiales.</p>
+
+            <div class="grid-reglas">
+                
+                <div class="reglas-caja">
+                    <h3 class="hid-title">Nomenclatura para Hidrácidos</h3>
+                    
+                    <div class="sistema-nom">
+                        <h4><i class="fa-solid fa-circle-right"></i> Tradicional (Disueltos en agua)</h4>
+                        <p>Se escribe la palabra "Ácido", seguida de la raíz del no metal con la terminación <strong>-hídrico</strong>.</p>
+                        <div class="ej-nom">Ejemplo (HCl): Ácido clorhídrico.</div>
+                    </div>
+
+                    <div class="sistema-nom">
+                        <h4><i class="fa-solid fa-circle-right"></i> Stock</h4>
+                        <p>Nombra el no metal con terminación <strong>-uro</strong> seguido de "de hidrógeno".</p>
+                        <div class="ej-nom">Ejemplo (HCl): Cloruro de hidrógeno.</div>
+                    </div>
+
+                    <div class="sistema-nom">
+                        <h4><i class="fa-solid fa-circle-right"></i> IUPAC / Sistemática (Estado puro/gaseoso)</h4>
+                        <p>Se le da la terminación <strong>-uro</strong> al no metal, seguido de "de hidrógeno". (Igual a Stock en este caso).</p>
+                        <div class="ej-nom">Ejemplo (H₂S): Sulfuro de hidrógeno.</div>
+                    </div>
+                </div>
+
+                <div class="reglas-caja">
+                    <h3 class="oxa-title">Nomenclatura para Oxácidos</h3>
+                    
+                    <div class="sistema-nom">
+                        <h4><i class="fa-solid fa-circle-right"></i> Tradicional (Por estados de oxidación)</h4>
+                        <p>Se escribe "Ácido" y se añaden prefijos y sufijos al no metal según sus valencias (hipo-oso, -oso, -ico, per-ico).</p>
+                        <div class="ej-nom">Ejemplo (H₂SO₄ - Azufre con +6): Ácido sulfúrico.<br>Ejemplo (HClO - Cloro con +1): Ácido hipocloroso.</div>
+                    </div>
+
+                    <div class="sistema-nom">
+                        <h4><i class="fa-solid fa-circle-right"></i> Stock</h4>
+                        <p>Se escribe "Ácido" + prefijo número de oxígenos + "oxo" + raíz del no metal terminada en <strong>-ico</strong> + (Valencia en romanos).</p>
+                        <div class="ej-nom">Ejemplo (H₂SO₄): Ácido tetraoxosulfúrico (VI).<br>Ejemplo (HClO): Ácido monoxoclórico (I).</div>
+                    </div>
+
+                    <div class="sistema-nom">
+                        <h4><i class="fa-solid fa-circle-right"></i> IUPAC / Sistemática</h4>
+                        <p>Prefijo número de oxígenos + "oxo" + raíz del no metal terminada en <strong>-ato</strong> + (Valencia en romanos) + "de hidrógeno".</p>
+                        <div class="ej-nom">Ejemplo (H₂SO₄): Tetraoxosulfato (VI) de hidrógeno.<br>Ejemplo (HNO₃): Trioxonitrato (V) de hidrógeno.</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="seccion-acciones">
+            <a href="practica_acidos_inorganicos.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-flask-vial"></i> Práctica Interactiva
+            </a>
+            
+            <a href="evaluacion_acidos_inorganicos.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-file-signature"></i> Evaluación
+            </a>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0; padding: 15px; background: rgba(0,0,0,0.4); border-radius: 10px; border: 1px solid var(--color-principal); color: #fff; font-family: 'Poppins', sans-serif; font-size: 1.2rem;">
+            <i class="fa-solid fa-eye" style="color: #4facfe;"></i> Visitas totales: 
+            <span id="contador-visitas" style="font-weight: 800; color: #2ecc71;">Cargando...</span>
+        </div>
+
+    </main>
+
+    <script>
+        // LA URL DE TU EXCEL PARA EL CONTADOR (Ya configurada)
+        const URL_DEL_SCRIPT = 'https://script.google.com/macros/s/AKfycbxivsTI1yb7dsk9m1Rm9HuxKXJOH2q4yFmRbbefqyqLdLSpJu8BIqzdf3YP6FRc/exec';
+
+        fetch(URL_DEL_SCRIPT, {
+            redirect: 'follow',
+            method: 'GET'
+        })
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            document.getElementById('contador-visitas').innerText = datos.visitas;
+        })
+        .catch(error => {
+            console.error('Error al conectar con el contador:', error);
+            document.getElementById('contador-visitas').innerText = "Activo";
+        });
+    </script>
+
+</body>
+</html>

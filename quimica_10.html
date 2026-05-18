@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Química 10 - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-principal: #9b59b6;   
+            --color-secundario: #8e44ad;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-enlace: #4facfe;
+            --color-bloqueado: #555566;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+            display: flex; flex-direction: column;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-principal); }
+        .btn-volver { color: var(--color-enlace); text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; margin-top: 20px;}
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor { max-width: 1200px; margin: 0 auto; padding: 20px; flex-grow: 1; animation: fadeIn 0.5s ease; }
+
+        /* --- ENCABEZADO --- */
+        .encabezado-leccion { text-align: center; margin-bottom: 50px; border-bottom: 2px solid rgba(155, 89, 182, 0.3); padding-bottom: 30px; margin-top: 20px;}
+        .encabezado-leccion h1 { font-size: 3.5rem; color: var(--color-principal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; text-shadow: 0 0 15px rgba(155, 89, 182, 0.3);}
+        .encabezado-leccion p { font-size: 1.15rem; color: #ccc; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+        /* --- GRID DE UNIDADES TEMÁTICAS --- */
+        .grid-unidades { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        
+        .unidad-card { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 25px; display: flex; flex-direction: column; transition: 0.3s; position: relative;}
+        .unidad-card:hover { transform: translateY(-5px); border-color: var(--color-principal); box-shadow: 0 10px 25px rgba(155, 89, 182, 0.15); }
+        
+        .unidad-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px; }
+        .unidad-icon { font-size: 2rem; color: var(--color-principal); }
+        .unidad-title { font-size: 1.4rem; font-weight: 800; color: #fff; }
+        
+        .subtemas-lista { list-style: none; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; margin-bottom: 20px;}
+        
+        /* Estilos para los botones o enlaces internos de cada subtema */
+        .subtema-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: rgba(255,255,255,0.03); border-radius: 8px; text-decoration: none; color: #ddd; font-size: 0.95rem; transition: 0.2s; border: 1px solid transparent; }
+        .subtema-item i { font-size: 0.8rem; color: #777; transition: 0.2s; }
+        
+        /* Enlaces Habilitados */
+        .subtema-item.activo:hover { background: rgba(155, 89, 182, 0.15); border-color: var(--color-principal); color: #fff; padding-left: 20px;}
+        .subtema-item.activo:hover i { color: var(--color-principal); transform: translateX(3px); }
+        
+        /* Enlaces Bloqueados transitoriamente */
+        .subtema-item.bloqueado { cursor: not-allowed; opacity: 0.6; }
+        .subtema-item.bloqueado span { display: flex; align-items: center; gap: 8px; }
+        .subtema-item.bloqueado span::after { content: '\f023'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 0.75rem; color: var(--color-alerta); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .grid-unidades { grid-template-columns: 1fr; } .encabezado-leccion h1 { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+    </nav>
+
+    <main class="contenedor">
+        <a href="inicio.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Panel de Inicio</a>
+
+        <div class="encabezado-leccion">
+            <h1>Química - Décimo Grado</h1>
+            <p>Estructura curricular interactiva. Explora los componentes del microcosmos material, las interacciones atómicas, el cálculo estequiométrico y los fundamentos orgánicos.</p>
+        </div>
+
+        <div class="grid-unidades">
+            
+            <div class="unidad-card">
+                <div class="unidad-header">
+                    <i class="fa-solid fa-table-cells unidad-icon"></i>
+                    <h2 class="unidad-title">1. Tabla Periódica</h2>
+                </div>
+                <div class="subtemas-lista">
+                    <a href="quimica10_elementos_compuestos.html" class="subtema-item activo">
+                        <span>Elementos y Compuestos</span><i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                    <a href="quimica10_propiedades_periodicas.html" class="subtema-item activo">
+                        <span>Las 5 Propiedades Periódicas</span><i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="unidad-card">
+                <div class="unidad-header">
+                    <i class="fa-solid fa-circle-nodes unidad-icon"></i>
+                    <h2 class="unidad-title">2. Interacción Atómica</h2>
+                </div>
+                <div class="subtemas-lista">
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Enlaces Químicos y Tipos</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Enlaces Intermoleculares</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="unidad-card">
+                <div class="unidad-header">
+                    <i class="fa-solid fa-tags unidad-icon"></i>
+                    <h2 class="unidad-title">3. Funciones Químicas</h2>
+                </div>
+                <div class="subtemas-lista">
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Óxidos Inorgánicos</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Hidróxidos</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="acidos_inorganicos.html" class="subtema-item activo" style="border-left: 3px solid var(--color-enlace);">
+                        <span style="font-weight: 600; color: #fff;"><i class="fa-solid fa-fire-burner" style="color: var(--color-enlace); margin-right: 5px;"></i> Ácidos</span><i class="fa-solid fa-chevron-right" style="color: var(--color-enlace);"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Sales</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="unidad-card">
+                <div class="unidad-header">
+                    <i class="fa-solid fa-vial-virus unidad-icon"></i>
+                    <h2 class="unidad-title">4. Ecuaciones y Reacciones</h2>
+                </div>
+                <div class="subtemas-lista">
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Características y Tipos de Reacciones</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Métodos de Balanceo</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Leyes Ponderales</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="unidad-card">
+                <div class="unidad-header">
+                    <i class="fa-solid fa-calculator unidad-icon"></i>
+                    <h2 class="unidad-title">5. Estequiometría</h2>
+                </div>
+                <div class="subtemas-lista">
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Relaciones (Mol, Masa, Volumen)</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Unidades de Concentración (M, N, ppm)</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Reactivo Límite</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="unidad-card">
+                <div class="unidad-header">
+                    <i class="fa-solid fa-dna unidad-icon"></i>
+                    <h2 class="unidad-title">6. Química Orgánica</h2>
+                </div>
+                <div class="subtemas-lista">
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Introducción e Hibridación del Carbono</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Clasificación y Nomenclatura Orgánica</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                    <a href="#" class="subtema-item bloqueado">
+                        <span>Isomería y Reacciones Orgánicas</span><i class="fa-solid fa-lock"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin: 30px 0; padding: 15px; background: rgba(0,0,0,0.4); border-radius: 10px; border: 1px solid var(--color-principal); color: #fff; font-family: 'Poppins', sans-serif; font-size: 1.2rem;">
+            <i class="fa-solid fa-eye" style="color: #4facfe;"></i> Visitas totales en Décimo: 
+            <span id="contador-visitas" style="font-weight: 800; color: #2ecc71;">Cargando...</span>
+        </div>
+
+    </main>
+
+    <script>
+        const URL_DEL_SCRIPT = 'https://script.google.com/macros/s/AKfycbxivsTI1yb7dsk9m1Rm9HuxKXJOH2q4yFmRbbefqyqLdLSpJu8BIqzdf3YP6FRc/exec';
+
+        fetch(URL_DEL_SCRIPT, {
+            redirect: 'follow',
+            method: 'GET'
+        })
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            document.getElementById('contador-visitas').innerText = datos.visitas;
+        })
+        .catch(error => {
+            console.error('Error al conectar con el contador:', error);
+            document.getElementById('contador-visitas').innerText = "Activo";
+        });
+    </script>
+
+</body>
+</html>
