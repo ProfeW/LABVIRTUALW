@@ -65,16 +65,33 @@
         .item-clasificar { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05);}
         .formula-quimica { font-family: 'Fira Code', monospace; font-size: 1.2rem; font-weight: 800; color: #fff; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 5px;}
 
-        /* Botones y Feedback */
+        /* Estilos para Nomenclatura (NUEVO) */
+        .grid-nombres { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .item-nombre { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; display: flex; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap;}
+        .input-nombre { flex-grow: 1; min-width: 200px; padding: 10px; border-radius: 6px; background: #0f111a; color: #fff; border: 1px solid #555; outline: none; font-size: 1rem; font-family: 'Poppins', sans-serif;}
+        .input-nombre:focus { border-color: var(--color-principal); }
+        .btn-validar-peq { padding: 10px 20px; border-radius: 6px; border: none; background: var(--color-principal); color: #fff; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 0.9rem; text-transform: uppercase;}
+        .btn-validar-peq:hover { background: var(--color-secundario); }
+        .feedback-peq { display: none; padding: 8px 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; margin-left: auto;}
+
+        /* Botones y Feedback Generales */
         .btn-validar { margin-top: 25px; padding: 12px 30px; border-radius: 8px; border: none; background: var(--color-principal); color: #fff; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 1.1rem; text-transform: uppercase; width: 100%; letter-spacing: 1px;}
         .btn-validar:hover { background: var(--color-secundario); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);}
         
         .feedback { margin-top: 15px; font-weight: 600; font-size: 1.1rem; display: none; align-items: center; justify-content: center; gap: 10px; padding: 15px; border-radius: 8px; text-align: center;}
+        
         .correct { background: rgba(46, 204, 113, 0.1); color: var(--color-destaque); border: 1px solid var(--color-destaque); }
         .incorrect { background: rgba(231, 76, 60, 0.1); color: var(--color-error); border: 1px solid var(--color-error); }
+        .warning { background: rgba(243, 156, 18, 0.1); color: var(--color-alerta); border: 1px solid var(--color-alerta); }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) { .grid-clasificacion { grid-template-columns: 1fr; } .pregunta-vf { flex-direction: column; align-items: flex-start; } .opciones-vf { width: 100%; } }
+        @media (max-width: 768px) { 
+            .grid-clasificacion { grid-template-columns: 1fr; } 
+            .pregunta-vf { flex-direction: column; align-items: flex-start; } 
+            .opciones-vf { width: 100%; } 
+            .item-nombre { flex-direction: column; align-items: stretch; }
+            .feedback-peq { margin-left: 0; text-align: center;}
+        }
     </style>
 </head>
 <body>
@@ -88,7 +105,7 @@
 
         <div class="encabezado">
             <h1>Taller Interactivo: Ácidos</h1>
-            <p>Demuestra lo que aprendiste en la I.E. Gallego sobre los ácidos inorgánicos.</p>
+            <p>Demuestra lo que aprendiste sobre los ácidos inorgánicos.</p>
         </div>
 
         <section class="seccion-taller">
@@ -199,6 +216,85 @@
             <div id="feedback-p3" class="feedback"></div>
         </section>
 
+        <section class="seccion-taller">
+            <h2><i class="fa-solid fa-keyboard"></i> Parte 4: Nomenclatura</h2>
+            <p style="margin-bottom: 20px; color: #ccc;">Escribe el nombre tradicional para cada uno de los siguientes ácidos. Recuerda iniciar siempre con la palabra "ácido". (El sistema ignora las tildes y las mayúsculas).</p>
+            
+            <div class="grid-nombres">
+                
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">HCl</span>
+                    <input type="text" id="n1" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n1')">Validar</button>
+                    <div id="feedback-n1" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">H₂SO₄</span>
+                    <input type="text" id="n2" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n2')">Validar</button>
+                    <div id="feedback-n2" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">HNO₃</span>
+                    <input type="text" id="n3" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n3')">Validar</button>
+                    <div id="feedback-n3" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">HF</span>
+                    <input type="text" id="n4" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n4')">Validar</button>
+                    <div id="feedback-n4" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">H₃PO₄</span>
+                    <input type="text" id="n5" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n5')">Validar</button>
+                    <div id="feedback-n5" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">H₂S</span>
+                    <input type="text" id="n6" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n6')">Validar</button>
+                    <div id="feedback-n6" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">HClO</span>
+                    <input type="text" id="n7" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n7')">Validar</button>
+                    <div id="feedback-n7" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">H₂CO₃</span>
+                    <input type="text" id="n8" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n8')">Validar</button>
+                    <div id="feedback-n8" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">HBr</span>
+                    <input type="text" id="n9" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n9')">Validar</button>
+                    <div id="feedback-n9" class="feedback-peq"></div>
+                </div>
+
+                <div class="item-nombre">
+                    <span class="formula-quimica" style="width: 100px; text-align: center;">HClO₄</span>
+                    <input type="text" id="n10" class="input-nombre" placeholder="Nombre del compuesto">
+                    <button class="btn-validar-peq" onclick="validarNombre('n10')">Validar</button>
+                    <div id="feedback-n10" class="feedback-peq"></div>
+                </div>
+
+            </div>
+        </section>
+
         <div style="text-align: center; margin: 40px 0 20px 0; padding: 15px; background: rgba(0,0,0,0.4); border-radius: 10px; border: 1px solid var(--color-principal); color: #fff; font-family: 'Poppins', sans-serif; font-size: 1.2rem;">
             <i class="fa-solid fa-eye" style="color: #4facfe;"></i> Visitas totales: 
             <span id="contador-visitas" style="font-weight: 800; color: #2ecc71;">Cargando...</span>
@@ -207,9 +303,11 @@
     </main>
 
     <script>
-        // Función para normalizar texto (quita tildes y pasa a minúsculas)
+        // Función para normalizar texto (quita tildes, espacios extra y pasa a minúsculas)
         function normalizar(texto) {
-            return texto.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            let s = texto.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            s = s.replace(/^acido\s+/, 'acido '); // Asegura un solo espacio después de la palabra "acido"
+            return s;
         }
 
         // VALIDACIÓN PARTE 1
@@ -219,16 +317,14 @@
             const resp3 = normalizar(document.getElementById('p1-3').value);
             const feedback = document.getElementById('feedback-p1');
             
-            // Respuestas correctas: hidrógeno, agrio, rojo
             if(resp1 === "hidrogeno" && resp2 === "agrio" && resp3 === "rojo") {
                 feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Excelente! Todos los conceptos son correctos.`;
                 feedback.className = 'feedback correct';
-                feedback.style.display = 'flex';
             } else {
                 feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Hay errores. Recuerda: liberan iones de hidrógeno, tienen sabor agrio y tiñen de rojo.`;
                 feedback.className = 'feedback incorrect';
-                feedback.style.display = 'flex';
             }
+            feedback.style.display = 'flex';
         }
 
         // VALIDACIÓN PARTE 2
@@ -240,21 +336,19 @@
 
             if(r1 === "" || r2 === "" || r3 === "") {
                 feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Por favor, responde todas las preguntas.`;
-                feedback.className = 'feedback incorrect';
+                feedback.className = 'feedback warning';
                 feedback.style.display = 'flex';
                 return;
             }
 
-            // Correctas: 1(F), 2(V), 3(V)
             if(r1 === "F" && r2 === "V" && r3 === "V") {
                 feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Perfecto! Dominas las propiedades de los ácidos.`;
                 feedback.className = 'feedback correct';
-                feedback.style.display = 'flex';
             } else {
                 feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Revisa de nuevo. (Pista: Los hidrácidos NO tienen oxígeno).`;
                 feedback.className = 'feedback incorrect';
-                feedback.style.display = 'flex';
             }
+            feedback.style.display = 'flex';
         }
 
         // VALIDACIÓN PARTE 3
@@ -267,20 +361,65 @@
 
             if(r1 === "" || r2 === "" || r3 === "" || r4 === "") {
                 feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Faltan fórmulas por clasificar.`;
-                feedback.className = 'feedback incorrect';
+                feedback.className = 'feedback warning';
                 feedback.style.display = 'flex';
                 return;
             }
 
-            // Correctas: HCl(H), H2SO4(O), H3PO4(O), H2S(H)
             if(r1 === "H" && r2 === "O" && r3 === "O" && r4 === "H") {
                 feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Excelente clasificación visual!`;
                 feedback.className = 'feedback correct';
-                feedback.style.display = 'flex';
             } else {
                 feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Error. Recuerda: Si tiene la letra 'O' al final, es Oxácido.`;
                 feedback.className = 'feedback incorrect';
-                feedback.style.display = 'flex';
+            }
+            feedback.style.display = 'flex';
+        }
+
+        // VALIDACIÓN PARTE 4 (NOMENCLATURA)
+        const respuestasAcidos = {
+            'n1': ['acido clorhidrico', 'cloruro de hidrogeno'],
+            'n2': ['acido sulfurico'],
+            'n3': ['acido nitrico'],
+            'n4': ['acido fluorhidrico', 'fluoruro de hidrogeno'],
+            'n5': ['acido fosforico'],
+            'n6': ['acido sulfhidrico', 'sulfuro de hidrogeno'],
+            'n7': ['acido hipocloroso'],
+            'n8': ['acido carbonico'],
+            'n9': ['acido bromhidrico', 'bromuro de hidrogeno'],
+            'n10': ['acido perclorico']
+        };
+
+        function validarNombre(id) {
+            const input = document.getElementById(id);
+            const feedback = document.getElementById('feedback-' + id);
+            const valorIngresado = normalizar(input.value);
+            const respuestasValidas = respuestasAcidos[id];
+
+            feedback.style.display = 'flex';
+
+            if(valorIngresado === "") {
+                feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Escribe un nombre.`;
+                feedback.className = 'feedback-peq warning';
+                input.style.borderColor = 'var(--color-alerta)';
+                return;
+            }
+
+            if(!valorIngresado.startsWith("acido ")) {
+                feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Inicia con "ácido".`;
+                feedback.className = 'feedback-peq warning';
+                input.style.borderColor = 'var(--color-alerta)';
+                return;
+            }
+
+            if(respuestasValidas.includes(valorIngresado)) {
+                feedback.innerHTML = `<i class="fa-solid fa-check"></i> Correcto`;
+                feedback.className = 'feedback-peq correct';
+                input.style.borderColor = 'var(--color-destaque)';
+            } else {
+                feedback.innerHTML = `<i class="fa-solid fa-xmark"></i> Revisa los prefijos/sufijos`;
+                feedback.className = 'feedback-peq incorrect';
+                input.style.borderColor = 'var(--color-error)';
             }
         }
 
