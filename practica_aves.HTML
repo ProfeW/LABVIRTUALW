@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Aves de Gallego - I.E. Gallego</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primario: #7ea391;
+            --color-secundario: #fdfaf3;
+            --color-texto: #2c3e38;
+            --color-lineas-subrayado: rgba(0, 0, 0, 0.08); 
+            --color-lineas-divisoras: #b5c7bc;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+            color: var(--color-texto);
+        }
+
+        body {
+            background-color: #555;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .hoja {
+            width: 8.5in;
+            height: 11in;
+            background-color: #fff;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            padding: 0.3in 0.4in;
+            z-index: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hoja::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1516233758813-a38d024919c5?q=80&w=2400&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .header h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 34px;
+            color: #88b19e;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .header h2 {
+            font-size: 13px;
+            color: #597a6e;
+            margin: 2px 0 0 0;
+            letter-spacing: 1px;
+        }
+        .header-bar {
+            height: 4px;
+            background: linear-gradient(to right, #ffcf8a, #ffaf7a, #88b19e);
+            margin-top: 6px;
+            border-radius: 2px;
+        }
+
+        input[type="text"], input[type="date"], textarea {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--color-lineas-subrayado);
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            padding: 2px 5px;
+            width: 100%;
+        }
+        input[type="text"]:focus, input[type="date"]:focus, textarea:focus {
+            border-bottom: 2px solid var(--color-primario);
+        }
+        textarea {
+            resize: none;
+            line-height: 1.6em;
+            background-image: linear-gradient(var(--color-lineas-subrayado) 1px, transparent 1px);
+            background-size: 100% 1.6em;
+            padding-top: 0;
+            overflow: hidden;
+        }
+
+        .top-info {
+            background: rgba(253, 250, 243, 0.85);
+            border: 2px solid var(--color-primario);
+            border-radius: 8px;
+            padding: 6px 12px;
+            margin-bottom: 8px;
+        }
+        .row-inline {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 4px;
+            gap: 10px;
+        }
+        .row-inline label { font-weight: 700; font-size: 12px; white-space: nowrap; }
+
+        .section-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .section-title::before, .section-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 2px;
+            background: var(--color-primario);
+            margin: 0 15px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2.2in 1fr;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .foto-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .foto-box {
+            background: rgba(255,255,255,0.9);
+            border: 5px solid #b8d0c1;
+            border-radius: 12px;
+            height: 2.4in;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .foto-box i { font-size: 36px; color: #a0b8ab; margin-bottom: 8px; }
+        .foto-box p { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.2; color: #597a6e; }
+        .foto-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; display: none; }
+        .foto-input { display: none; }
+
+        .input-box-notas {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 5px;
+        }
+        .input-box-notas label { font-weight: 700; font-size: 11px; width: 45px; margin-top: 2px; }
+
+        .datos-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .name-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .name-fields label {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            display: block;
+            margin-top: 2px;
+        }
+        .name-fields input { text-align: center; }
+
+        .identificador-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .id-boxes {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .id-boxes input {
+            width: 26px;
+            text-align: center;
+            border: 1px solid var(--color-primario);
+            border-radius: 4px;
+            font-size: 14px;
+            padding: 2px 0;
+        }
+
+        .sub-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 12px;
+        }
+        .box {
+            background: rgba(253, 250, 243, 0.9);
+            border: 2px solid var(--color-primario);
+            border-radius: 8px;
+            padding: 8px;
+            position: relative;
+        }
+        .box-title {
+            text-align: center;
+            font-weight: 800;
+            font-size: 12px;
+            margin-bottom: 6px;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .taxonomia-list { display: flex; flex-direction: column; gap: 3px; }
+        .tax-item { display: flex; align-items: flex-end; }
+        .tax-item label { font-size: 11px; font-weight: 700; width: 50px; }
+        .tax-item input { font-size: 12px; }
+
+        .caract-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            row-gap: 12px;
+        }
+        .caract-item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: stretch; 
+            gap: 2px; 
+        }
+        .caract-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 2px;
+        }
+        .caract-icon {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px;
+            color: #fff;
+        }
+        .c-pico { background: #eacb6e; }
+        .c-plumaje { background: #d4a373; }
+        .c-patas { background: #88b19e; }
+        .c-canto { background: #9bb7d4; }
+
+        .full-box {
+            background: rgba(253, 250, 243, 0.9);
+            border: 2px solid var(--color-primario);
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .alim-item { display: flex; align-items: flex-end; gap: 5px; margin-bottom: 10px; }
+        .alim-icon {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 12px;
+        }
+        .a-dieta { background: #eacb6e; }
+        .a-ejem { background: #f4a261; }
+
+        .iucn-fix {
+            position: relative;
+            padding: 8px;
+        }
+        .iucn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 0 2px;
+            position: relative;
+            z-index: 1;
+        }
+        .iucn-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            position: relative;
+        }
+        .iucn-circle {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 11px; color: #fff;
+            cursor: pointer;
+            z-index: 1;
+            border: 1px solid transparent;
+            opacity: 0.4;
+            transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+        }
+        .iucn-item span { font-size: 8px; font-weight: 700; text-align: center; line-height: 1; max-width: 55px; }
+        
+        .bg-lc { background-color: #8fce00; }
+        .bg-vu { background-color: #f1c40f; }
+        .bg-en { background-color: #e67e22; }
+        .bg-cr { background-color: #e74c3c; }
+
+        input[type="radio"] { display: none; }
+        input[type="radio"]:checked + .iucn-circle {
+            opacity: 1;
+            transform: scale(1.1);
+            border-color: #333;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .btn-imprimir {
+            margin-top: 15px;
+            background-color: #597a6e;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            font-family: 'Nunito', sans-serif;
+        }
+        .btn-imprimir:hover { background-color: #435e54; }
+
+        /* AJUSTE ESTRICTO PARA IMPRESIÓN (SOLUCIÓN AL ESPACIO EN BLANCO) */
+        @media print {
+            @page { size: letter; margin: 0; }
+            html, body { 
+                width: 100%; 
+                height: 100%; 
+                margin: 0; 
+                padding: 0; 
+                background-color: white; 
+            }
+            .btn-imprimir { display: none; }
+            .hoja {
+                box-shadow: none;
+                width: 100%;
+                height: 100vh; /* Fuerza al contenedor a ocupar el 100% de la página de impresión */
+                padding: 0.3in 0.4in;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                justify-content: space-between; /* Distribuye equitativamente el espacio vacío restante */
+            }
+            textarea::-webkit-input-placeholder { color: transparent; }
+            input::-webkit-input-placeholder { color: transparent; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hoja">
+        
+        <div class="header">
+            <h1>GUÍA DE AVES DE GALLEGO</h1>
+            <h2>INSTITUCIÓN EDUCATIVA GALLEGO • BIOLOGÍA</h2>
+            <div class="header-bar"></div>
+        </div>
+
+        <div class="top-info">
+            <div class="row-inline">
+                <label>ESTUDIANTE / GRUPO</label>
+                <input type="text">
+            </div>
+            <div class="row-inline">
+                <label>FECHA DE REGISTRO</label>
+                <input type="date" style="width: 130px;">
+            </div>
+        </div>
+
+        <div class="section-title">PERFIL DE ESPECIE</div>
+
+        <div class="main-grid">
+            
+            <div class="foto-container">
+                <div class="foto-box" onclick="document.getElementById('input-foto').click()">
+                    <i class="fa-solid fa-camera"></i>
+                    <p>FOTOGRAFÍA O<br>ILUSTRACIÓN<br>DEL AVE</p>
+                    <img id="img-preview" src="" alt="Vista previa de la fotografía de ave">
+                </div>
+                <input type="file" id="input-foto" class="foto-input" accept="image/*" onchange="cargarImagen(event)">
+                
+                <div class="input-box-notas">
+                    <label>Notas:</label>
+                    <textarea style="height: 4.8em; font-size: 12px;"></textarea>
+                </div>
+            </div>
+
+            <div class="datos-container">
+                
+                <div class="name-fields">
+                    <div>
+                        <input type="text" style="font-size: 16px; font-weight: 700;">
+                        <label>NOMBRE COMÚN</label>
+                    </div>
+                    <div>
+                        <input type="text" style="font-size: 14px; font-style: italic;">
+                        <label>NOMBRE CIENTÍFICO</label>
+                    </div>
+                </div>
+
+                <div class="identificador-row">
+                    <span style="font-size: 12px;">IDENTIFICADOR DE ESPECIE (Nº)</span>
+                    <div class="id-boxes">
+                        <input type="text" maxlength="1"> /
+                        <input type="text" maxlength="1"> /
+                        <input type="text" maxlength="1">
+                    </div>
+                </div>
+
+                <div class="sub-grid">
+                    <div class="box">
+                        <div class="box-title">TAXONOMÍA</div>
+                        <div class="taxonomia-list">
+                            <div class="tax-item"><label>Reino:</label><input type="text"></div>
+                            <div class="tax-item"><label>Filo:</label><input type="text"></div>
+                            <div class="tax-item"><label>Clase:</label><input type="text"></div>
+                            <div class="tax-item"><label>Orden:</label><input type="text"></div>
+                            <div class="tax-item"><label>Familia:</label><input type="text"></div>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="box-title">CARACTERÍSTICAS CLAVE</div>
+                        <div class="caract-grid">
+                            <div class="caract-item">
+                                <div class="caract-header">
+                                    <div class="caract-icon c-pico"><i class="fa-solid fa-crow"></i></div>
+                                    <label style="font-size:11px; font-weight:700;">Pico</label>
+                                </div>
+                                <textarea style="height: 3.2em; font-size: 11px;"></textarea>
+                            </div>
+                            <div class="caract-item">
+                                <div class="caract-header">
+                                    <div class="caract-icon c-plumaje"><i class="fa-solid fa-feather"></i></div>
+                                    <label style="font-size:11px; font-weight:700;">Plumaje</label>
+                                </div>
+                                <textarea style="height: 3.2em; font-size: 11px;"></textarea>
+                            </div>
+                            <div class="caract-item">
+                                <div class="caract-header">
+                                    <div class="caract-icon c-patas"><i class="fa-solid fa-shoe-prints"></i></div>
+                                    <label style="font-size:11px; font-weight:700;">Patas</label>
+                                </div>
+                                <textarea style="height: 3.2em; font-size: 11px;"></textarea>
+                            </div>
+                            <div class="caract-item">
+                                <div class="caract-header">
+                                    <div class="caract-icon c-canto"><i class="fa-solid fa-volume-high"></i></div>
+                                    <label style="font-size:11px; font-weight:700;">Canto</label>
+                                </div>
+                                <textarea style="height: 3.2em; font-size: 11px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="full-box">
+            <div class="box-title">DESCRIPCIÓN FÍSICA</div>
+            <textarea style="height: 3.2em;"></textarea>
+        </div>
+
+        <div class="bottom-grid">
+            <div class="box">
+                <div class="box-title">ALIMENTACIÓN</div>
+                <div class="alim-item">
+                    <div class="alim-icon a-dieta"><i class="fa-solid fa-utensils"></i></div>
+                    <div style="flex-grow: 1;"><label style="font-size:11px; font-weight:700;">Dieta principal</label><textarea style="height: 3.2em; font-size: 12px;"></textarea></div>
+                </div>
+                <div class="alim-item" style="margin-top:-5px;">
+                    <div class="alim-icon a-ejem"><i class="fa-solid fa-bread-slice"></i></div>
+                    <div style="flex-grow: 1;"><label style="font-size:11px; font-weight:700;">Ejemplos de alimentos</label><textarea style="height: 3.2em; font-size: 12px;"></textarea></div>
+                </div>
+            </div>
+            
+            <div class="box">
+                <div class="box-title">HÁBITAT Y UBICACIÓN EN GALLEGO</div>
+                <div style="text-align: center; font-size: 11px; margin-top:-5px; margin-bottom:5px;">Zonas donde se observa</div>
+                <textarea style="height: 6.4em;"></textarea>
+            </div>
+        </div>
+
+        <div class="bottom-grid" style="margin-bottom: 0;">
+            <div class="box">
+                <div class="box-title">FUNCIÓN ECOSISTÉMICA</div>
+                <textarea style="height: 6.4em;"></textarea>
+            </div>
+            
+            <div class="box iucn-fix">
+                <div class="box-title">ESTADO DE CONSERVACIÓN (IUCN)</div>
+                <div class="iucn-container">
+                    <div class="iucn-item">
+                        <label>
+                            <input type="radio" name="iucn" value="lc">
+                            <div class="iucn-circle bg-lc">LC</div>
+                        </label>
+                        <span>Preocupación Menor</span>
+                    </div>
+                    <div class="iucn-item">
+                        <label>
+                            <input type="radio" name="iucn" value="vu">
+                            <div class="iucn-circle bg-vu">VU</div>
+                        </label>
+                        <span>Vulnerable</span>
+                    </div>
+                    <div class="iucn-item">
+                        <label>
+                            <input type="radio" name="iucn" value="en">
+                            <div class="iucn-circle bg-en">EN</div>
+                        </label>
+                        <span>En Peligro</span>
+                    </div>
+                    <div class="iucn-item">
+                        <label>
+                            <input type="radio" name="iucn" value="cr">
+                            <div class="iucn-circle bg-cr">CR</div>
+                        </label>
+                        <span>En Peligro Crítico</span>
+                    </div>
+                </div>
+                <div class="row-inline" style="margin-top: 5px;">
+                    <label style="font-size:11px;">Notas:</label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="btn-imprimir" onclick="window.print()">
+        <i class="fa-solid fa-file-pdf"></i> DESCARGAR COMO PDF (TAMAÑO CARTA)
+    </button>
+
+    <script>
+        function cargarImagen(event) {
+            const input = event.target;
+            const preview = document.getElementById('img-preview');
+            const icons = input.parentElement.querySelectorAll('i, p');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    icons.forEach(el => el.style.display = 'none');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>
