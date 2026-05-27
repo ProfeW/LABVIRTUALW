@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Interactiva — Caída Libre · LabVirtual W</title>
+    <meta name="description" content="Práctica interactiva de Caída Libre paso a paso para Física 10°.">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;
+            --color-oscuro: #1a1a2e;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-alerta: #f39c12;
+            --color-caida: #e67e22;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)),
+                url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255,255,255,0.1); color: #4facfe; }
+
+        .contenedor { max-width: 960px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-leccion { border-bottom: 2px solid rgba(230,126,34,0.4); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-caida); margin-bottom: 8px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+
+        /* LEYENDA */
+        .leyenda-global { background: rgba(52,152,219,0.1); border-left: 5px solid var(--color-fisica); padding: 20px; border-radius: 8px; margin-bottom: 30px; line-height: 1.6; }
+        .leyenda-global h3 { color: var(--color-fisica); margin-bottom: 10px; font-size: 1.2rem; }
+        .leyenda-global ul { margin-left: 20px; color: #ddd; }
+        .leyenda-global li { margin-bottom: 5px; }
+
+        /* SECCIÓN DE EJERCICIO */
+        .ejercicio-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 50px; border-top: 4px solid var(--color-caida); }
+        .ejercicio-box h3 { color: var(--color-caida); margin-bottom: 10px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .enunciado { font-style: italic; color: #ddd; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.05rem; border-left: 4px solid var(--color-alerta); line-height: 1.6; }
+
+        /* BADGE */
+        .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+        .badge-subida { background: rgba(46,204,113,0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+        .badge-bajada { background: rgba(230,126,34,0.2); color: var(--color-caida); border: 1px solid var(--color-caida); }
+        .badge-combinado { background: rgba(155,89,182,0.2); color: #9b59b6; border: 1px solid #9b59b6; }
+        .badge-avanzado { background: rgba(231,76,60,0.2); color: #e74c3c; border: 1px solid #e74c3c; }
+
+        /* PASOS EN CASCADA */
+        .paso-contenedor { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid #444; transition: 0.3s; }
+        .paso-contenedor.activo { border-left-color: var(--color-caida); box-shadow: 0 5px 15px rgba(230,126,34,0.1); }
+        .paso-contenedor.completado { border-left-color: var(--color-exito); opacity: 0.7; pointer-events: none; }
+        .paso-titulo { font-weight: 800; color: #fff; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .icono-check { color: var(--color-exito); display: none; font-size: 1.4rem; }
+        .completado .icono-check { display: block; }
+        .oculto { display: none; }
+
+        /* INPUTS */
+        .grid-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 15px; }
+        .input-grupo { display: flex; align-items: stretch; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; overflow: hidden; }
+        .input-grupo label { background: rgba(0,0,0,0.5); padding: 10px; color: #fff; font-weight: bold; min-width: 45px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+        .input-grupo input { flex: 1; padding: 10px; border: none; background: transparent; color: #fff; font-size: 1.05rem; text-align: center; font-family: 'Poppins'; outline: none; width: 100%; }
+        .input-grupo input:focus { background: rgba(255,255,255,0.08); }
+        .input-grupo .unidad { background: rgba(230,126,34,0.15); padding: 10px; font-size: 0.85rem; color: var(--color-caida); border-left: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; }
+
+        select { width: 100%; padding: 13px 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(20,20,35,0.8); color: #fff; font-size: 1rem; outline: none; cursor: pointer; margin-bottom: 5px; }
+        select:focus { border-color: var(--color-caida); }
+
+        .btn-validar { background: var(--color-caida); color: #fff; border: none; padding: 12px 28px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-validar:hover { opacity: 0.85; transform: translateY(-2px); }
+
+        .feedback { display: none; margin-top: 12px; padding: 12px 18px; border-radius: 6px; font-weight: 600; font-size: 1rem; }
+        .feedback.correcto { display: block; background: rgba(46,204,113,0.15); border: 1px solid var(--color-exito); color: var(--color-exito); }
+        .feedback.incorrecto { display: block; background: rgba(231,76,60,0.15); border: 1px solid var(--color-error); color: var(--color-error); }
+
+        /* NOTA AVANZADA */
+        .nota-avanzada { background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.3); border-radius: 10px; padding: 20px 25px; margin: 30px 0 10px; }
+        .nota-avanzada h3 { color: #e74c3c; margin-bottom: 8px; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
+        .nota-avanzada p { color: #ddd; line-height: 1.6; font-size: 0.98rem; }
+
+        /* PROGRESO */
+        .barra-progreso-contenedor { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.08); }
+        .barra-progreso-titulo { font-weight: 700; color: #fff; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .barra { background: rgba(255,255,255,0.1); border-radius: 20px; height: 10px; overflow: hidden; }
+        .barra-fill { background: linear-gradient(90deg, var(--color-caida), #f39c12); height: 100%; border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo"><i class="fas fa-flask"></i> LabVirtual W</a>
+    <ul class="menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10</a></li>
+        <li><a href="fisica10_caida_libre.html"><i class="fas fa-arrow-left"></i> Caída Libre</a></li>
+    </ul>
+</nav>
+
+<div class="contenedor">
+    <a href="fisica10_caida_libre.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a Caída Libre</a>
+
+    <div class="encabezado-leccion">
+        <h1>🎮 Práctica Interactiva</h1>
+        <p>Caída Libre · Física 10° · Resuelve paso a paso y valida tus respuestas</p>
+    </div>
+
+    <!-- PROGRESO GLOBAL -->
+    <div class="barra-progreso-contenedor">
+        <div class="barra-progreso-titulo">
+            <span>📊 Progreso General</span>
+            <span id="texto-progreso">0 / 7 ejercicios completados</span>
+        </div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+    </div>
+
+    <!-- LEYENDA -->
+    <div class="leyenda-global">
+        <h3><i class="fas fa-info-circle"></i> ¿Cómo funciona?</h3>
+        <ul>
+            <li>Cada ejercicio se resuelve en <strong>pasos en cascada</strong>: debes completar cada paso para desbloquear el siguiente.</li>
+            <li>Ingresa los datos, selecciona opciones y valida cada paso con el botón correspondiente.</li>
+            <li>Si cometes un error, el sistema te lo indica para que puedas corregirlo.</li>
+            <li>Recuerda: <strong>g = −9.8 m/s²</strong> cuando el objeto SUBE · <strong>g = +9.8 m/s²</strong> cuando BAJA.</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- EJERCICIO 1 — SOLO BAJADA           -->
+    <!-- ═══════════════════════════════════ -->
+    <div class="ejercicio-box" id="ej1">
+        <h3><i class="fas fa-arrow-down"></i> Ejercicio 1 <span class="badge badge-bajada">↓ Sólo bajada</span></h3>
+        <div class="enunciado">
+            Un libro cae desde una estantería de <strong>3.2 metros</strong> de altura. ¿Con qué velocidad llega al suelo y cuánto tiempo tarda?
+        </div>
+
+        <!-- PASO 1: DATOS -->
+        <div class="paso-contenedor activo" id="ej1-p1">
+            <div class="paso-titulo">📋 Paso 1 — Identificar los datos <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:12px; font-size:0.95rem;">Ingresa los datos conocidos del problema (deja en 0 lo que no aplique como velocidad inicial):</p>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>v₀</label><input type="number" id="ej1-v0" placeholder="0"><div class="unidad">m/s</div></div>
+                <div class="input-grupo"><label>h</label><input type="number" id="ej1-h" placeholder="3.2"><div class="unidad">m</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej1','p1')"><i class="fas fa-check"></i> Validar datos</button>
+            <div class="feedback" id="ej1-p1-fb"></div>
+        </div>
+
+        <!-- PASO 2: SIGNO DE g -->
+        <div class="paso-contenedor oculto" id="ej1-p2">
+            <div class="paso-titulo">⚠️ Paso 2 — ¿Qué signo tiene g? <span class="icono-check">✔</span></div>
+            <select id="ej1-signog">
+                <option value="">— Selecciona el signo correcto de g —</option>
+                <option value="-9.8">g = −9.8 m/s² (el objeto SUBE, gravedad opuesta al movimiento)</option>
+                <option value="+9.8">g = +9.8 m/s² (el objeto BAJA, gravedad en la misma dirección)</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej1','p2')"><i class="fas fa-check"></i> Validar signo</button>
+            <div class="feedback" id="ej1-p2-fb"></div>
+        </div>
+
+        <!-- PASO 3: FÓRMULA -->
+        <div class="paso-contenedor oculto" id="ej1-p3">
+            <div class="paso-titulo">📐 Paso 3 — Elegir la fórmula <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:10px; font-size:0.95rem;">Para calcular la velocidad final usando h y v₀, ¿qué fórmula usas?</p>
+            <select id="ej1-formula">
+                <option value="">— Selecciona la fórmula —</option>
+                <option value="vf=v0+gt">vf = v₀ + g·t</option>
+                <option value="h=v0t+0.5gt2">h = v₀·t + ½·g·t²</option>
+                <option value="vf2=v02+2gh">vf² = v₀² + 2·g·h ✓</option>
+                <option value="h=0.5gt2">h = ½·g·t²</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej1','p3')"><i class="fas fa-check"></i> Validar fórmula</button>
+            <div class="feedback" id="ej1-p3-fb"></div>
+        </div>
+
+        <!-- PASO 4: CALCULAR vf -->
+        <div class="paso-contenedor oculto" id="ej1-p4">
+            <div class="paso-titulo">🔢 Paso 4 — Calcular la velocidad final <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:10px; font-size:0.95rem;">Sustituye los valores en vf² = v₀² + 2·g·h y calcula vf (en m/s, redondea a 1 decimal):</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>vf</label><input type="number" id="ej1-vf" step="0.1" placeholder="?"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej1','p4')"><i class="fas fa-check"></i> Validar resultado</button>
+            <div class="feedback" id="ej1-p4-fb"></div>
+        </div>
+
+        <!-- PASO 5: CALCULAR t -->
+        <div class="paso-contenedor oculto" id="ej1-p5">
+            <div class="paso-titulo">⏱️ Paso 5 — Calcular el tiempo <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:10px; font-size:0.95rem;">Ahora usa vf = v₀ + g·t para hallar t (en segundos, redondea a 2 decimales):</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t</label><input type="number" id="ej1-t" step="0.01" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej1','p5')"><i class="fas fa-check"></i> Validar resultado</button>
+            <div class="feedback" id="ej1-p5-fb"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- EJERCICIO 2 — SOLO SUBIDA          -->
+    <!-- ═══════════════════════════════════ -->
+    <div class="ejercicio-box" id="ej2">
+        <h3><i class="fas fa-arrow-up"></i> Ejercicio 2 <span class="badge badge-subida">↑ Sólo subida</span></h3>
+        <div class="enunciado">
+            Un balón es lanzado verticalmente hacia arriba con una velocidad de <strong>15 m/s</strong>. ¿Cuánto tiempo tarda en llegar al punto más alto? ¿Cuál es la altura máxima que alcanza?
+        </div>
+
+        <div class="paso-contenedor activo" id="ej2-p1">
+            <div class="paso-titulo">📋 Paso 1 — Identificar datos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>v₀</label><input type="number" id="ej2-v0" placeholder="15"><div class="unidad">m/s</div></div>
+                <div class="input-grupo"><label>vf</label><input type="number" id="ej2-vf" placeholder="0"><div class="unidad">m/s</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej2','p1')"><i class="fas fa-check"></i> Validar datos</button>
+            <div class="feedback" id="ej2-p1-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej2-p2">
+            <div class="paso-titulo">⚠️ Paso 2 — ¿Qué signo tiene g? <span class="icono-check">✔</span></div>
+            <select id="ej2-signog">
+                <option value="">— Selecciona el signo correcto de g —</option>
+                <option value="-9.8">g = −9.8 m/s² (el objeto SUBE, gravedad opuesta al movimiento)</option>
+                <option value="+9.8">g = +9.8 m/s² (el objeto BAJA)</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej2','p2')"><i class="fas fa-check"></i> Validar signo</button>
+            <div class="feedback" id="ej2-p2-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej2-p3">
+            <div class="paso-titulo">📐 Paso 3 — Fórmula para el tiempo <span class="icono-check">✔</span></div>
+            <select id="ej2-formula">
+                <option value="">— ¿Cuál usas para hallar el tiempo? —</option>
+                <option value="vf=v0+gt">vf = v₀ + g·t → despejando t ✓</option>
+                <option value="vf2=v02+2gh">vf² = v₀² + 2·g·h</option>
+                <option value="h=v0t+0.5gt2">h = v₀·t + ½·g·t²</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej2','p3')"><i class="fas fa-check"></i> Validar fórmula</button>
+            <div class="feedback" id="ej2-p3-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej2-p4">
+            <div class="paso-titulo">⏱️ Paso 4 — Calcular el tiempo hasta la cima <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:10px; font-size:0.95rem;">t = (vf − v₀) / g → Ingresa el tiempo en segundos (redondea a 2 decimales):</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t</label><input type="number" id="ej2-t" step="0.01" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej2','p4')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej2-p4-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej2-p5">
+            <div class="paso-titulo">📏 Paso 5 — Calcular la altura máxima <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:10px; font-size:0.95rem;">Usa vf² = v₀² + 2·g·h → h = (vf²−v₀²)/(2g). Ingresa la altura en metros (redondea a 2 decimales):</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>h</label><input type="number" id="ej2-h" step="0.01" placeholder="?"><div class="unidad">m</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej2','p5')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej2-p5-fb"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- EJERCICIOS COMBINADOS (3, 4 y 5) — SUBIDA Y BAJADA -->
+    <!-- ═══════════════════════════════════════════════════ -->
+
+    <div class="ejercicio-box" id="ej3">
+        <h3><i class="fas fa-arrows-alt-v"></i> Ejercicio 3 <span class="badge badge-combinado">↑↓ Combinado</span></h3>
+        <div class="enunciado">
+            Se lanza una pelota de tenis hacia arriba con <strong>25 m/s</strong>. Calcula: a) el tiempo de subida, b) la altura máxima y c) el tiempo total hasta regresar al punto de lanzamiento.
+        </div>
+
+        <div class="paso-contenedor activo" id="ej3-p1">
+            <div class="paso-titulo">📋 Paso 1 — Datos y signo de g en la subida <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>v₀</label><input type="number" id="ej3-v0" placeholder="25"><div class="unidad">m/s</div></div>
+                <div class="input-grupo"><label>vf</label><input type="number" id="ej3-vf" placeholder="0"><div class="unidad">m/s</div></div>
+            </div>
+            <p style="color:#bbb; font-size:0.9rem; margin-bottom:8px;">Signo de g para la subida:</p>
+            <select id="ej3-signog">
+                <option value="">— Signo de g —</option>
+                <option value="-9.8">g = −9.8 m/s²</option>
+                <option value="+9.8">g = +9.8 m/s²</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej3','p1')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej3-p1-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej3-p2">
+            <div class="paso-titulo">⏱️ Paso 2 — Tiempo de subida <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t</label><input type="number" id="ej3-t1" step="0.01" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej3','p2')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej3-p2-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej3-p3">
+            <div class="paso-titulo">📏 Paso 3 — Altura máxima <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>h</label><input type="number" id="ej3-h" step="0.01" placeholder="?"><div class="unidad">m</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej3','p3')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej3-p3-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej3-p4">
+            <div class="paso-titulo">⏱️ Paso 4 — Tiempo total (subida + bajada) <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">Recuerda: por simetría, t_bajada = t_subida → t_total = 2 × t_subida</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t_total</label><input type="number" id="ej3-ttotal" step="0.01" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej3','p4')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej3-p4-fb"></div>
+        </div>
+    </div>
+
+    <div class="ejercicio-box" id="ej4">
+        <h3><i class="fas fa-arrows-alt-v"></i> Ejercicio 4 <span class="badge badge-combinado">↑↓ Combinado</span></h3>
+        <div class="enunciado">
+            Una flecha es lanzada verticalmente hacia arriba con <strong>40 m/s</strong>. ¿A qué altura está la flecha luego de <strong>5 segundos</strong>? ¿Sigue subiendo o ya está bajando?
+        </div>
+
+        <div class="paso-contenedor activo" id="ej4-p1">
+            <div class="paso-titulo">📋 Paso 1 — Datos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>v₀</label><input type="number" id="ej4-v0" placeholder="40"><div class="unidad">m/s</div></div>
+                <div class="input-grupo"><label>t</label><input type="number" id="ej4-t" placeholder="5"><div class="unidad">s</div></div>
+                <div class="input-grupo"><label>g</label><input type="number" id="ej4-g" placeholder="-9.8"><div class="unidad">m/s²</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej4','p1')"><i class="fas fa-check"></i> Validar datos</button>
+            <div class="feedback" id="ej4-p1-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej4-p2">
+            <div class="paso-titulo">📐 Paso 2 — Fórmula para la altura <span class="icono-check">✔</span></div>
+            <select id="ej4-formula">
+                <option value="">— ¿Qué fórmula usas para calcular h? —</option>
+                <option value="h=v0t+0.5gt2">h = v₀·t + ½·g·t² ✓</option>
+                <option value="vf=v0+gt">vf = v₀ + g·t</option>
+                <option value="vf2=v02+2gh">vf² = v₀² + 2·g·h</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej4','p2')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej4-p2-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej4-p3">
+            <div class="paso-titulo">📏 Paso 3 — Altura en t=5 s <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">h = 40(5) + ½(−9.8)(5²) = 200 − 122.5 = ? (en metros)</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>h</label><input type="number" id="ej4-h" step="0.1" placeholder="?"><div class="unidad">m</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej4','p3')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej4-p3-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej4-p4">
+            <div class="paso-titulo">❓ Paso 4 — ¿Sube o baja a los 5 s? <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">Calcula vf a los 5 s (vf = v₀ + g·t = 40 + (−9.8)(5)) y determina si el objeto sube o baja:</p>
+            <select id="ej4-estado">
+                <option value="">— Selecciona —</option>
+                <option value="sube">Todavía está SUBIENDO (vf > 0)</option>
+                <option value="baja">Ya está BAJANDO (vf < 0)</option>
+                <option value="tope">Está exactamente en el punto más alto (vf = 0)</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej4','p4')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej4-p4-fb"></div>
+        </div>
+    </div>
+
+    <div class="ejercicio-box" id="ej5">
+        <h3><i class="fas fa-arrows-alt-v"></i> Ejercicio 5 <span class="badge badge-combinado">↑↓ Combinado</span></h3>
+        <div class="enunciado">
+            Desde la azotea de un edificio de <strong>50 m</strong> de altura, se lanza una pelota verticalmente hacia arriba con <strong>10 m/s</strong>. ¿Con qué velocidad llega la pelota al suelo?
+        </div>
+
+        <div class="paso-contenedor activo" id="ej5-p1">
+            <div class="paso-titulo">📋 Paso 1 — Datos (cuidado con los signos) <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:10px; font-size:0.9rem;">Tomamos como positivo hacia arriba. La pelota sube pero finalmente cae 50 m más abajo del punto de lanzamiento, entonces h = −50 m.</p>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>v₀</label><input type="number" id="ej5-v0" placeholder="10"><div class="unidad">m/s</div></div>
+                <div class="input-grupo"><label>h</label><input type="number" id="ej5-h" placeholder="-50"><div class="unidad">m</div></div>
+                <div class="input-grupo"><label>g</label><input type="number" id="ej5-g" placeholder="-9.8"><div class="unidad">m/s²</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej5','p1')"><i class="fas fa-check"></i> Validar datos</button>
+            <div class="feedback" id="ej5-p1-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej5-p2">
+            <div class="paso-titulo">📐 Paso 2 — Fórmula a usar <span class="icono-check">✔</span></div>
+            <select id="ej5-formula">
+                <option value="">— ¿Qué fórmula usas para vf conociendo v₀, g y h? —</option>
+                <option value="vf2=v02+2gh">vf² = v₀² + 2·g·h ✓</option>
+                <option value="vf=v0+gt">vf = v₀ + g·t</option>
+                <option value="h=v0t+0.5gt2">h = v₀·t + ½·g·t²</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej5','p2')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej5-p2-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej5-p3">
+            <div class="paso-titulo">🔢 Paso 3 — Calcular vf <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">vf² = (10)² + 2(−9.8)(−50) = 100 + 980 = 1080 → vf = √1080 ≈ ? m/s (la pelota va hacia abajo, resultado negativo)</p>
+            <div class="input-grupo" style="max-width:220px;">
+                <label>vf</label><input type="number" id="ej5-vf" step="0.1" placeholder="?"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej5','p3')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej5-p3-fb"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════ -->
+    <!-- NOTA + EJERCICIOS AVANZADOS    -->
+    <!-- ═══════════════════════════════ -->
+    <div class="nota-avanzada">
+        <h3><i class="fas fa-exclamation-triangle"></i> ¡Zona Avanzada! <span class="badge badge-avanzado">★ Desafío</span></h3>
+        <p>Los siguientes ejercicios son más complejos. El objeto no siempre cae al suelo original — puede quedar a una altura intermedia (como enredado en un árbol). Esto implica calcular <strong>dos etapas por separado</strong>: primero la subida, luego una bajada parcial. ¡Piensa bien antes de resolver!</p>
+    </div>
+
+    <!-- EJERCICIO AVANZADO 1 -->
+    <div class="ejercicio-box" id="ej6">
+        <h3><i class="fas fa-tree"></i> Ejercicio 6 — Avanzado <span class="badge badge-avanzado">★ Desafío</span></h3>
+        <div class="enunciado">
+            Un niño lanza una pelota hacia arriba con <strong>18 m/s</strong>. La pelota sube, pero al bajar queda atrapada en las ramas de un árbol que está a <strong>8 metros</strong> del suelo (el niño está a nivel del suelo). ¿Cuánto tiempo tardó la pelota desde el lanzamiento hasta quedar atrapada en el árbol?
+        </div>
+
+        <div class="paso-contenedor activo" id="ej6-p1">
+            <div class="paso-titulo">📋 Paso 1 — Analizar las dos etapas <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:10px; font-size:0.9rem;">Para resolver este problema, ¿cuántas etapas de movimiento hay?</p>
+            <select id="ej6-etapas">
+                <option value="">— Selecciona —</option>
+                <option value="1">1 etapa: sólo la subida hasta los 8 m</option>
+                <option value="2">2 etapas: subida completa hasta la cima + bajada parcial hasta los 8 m</option>
+                <option value="3">3 etapas: subida, punto más alto y bajada</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej6','p1')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej6-p1-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej6-p2">
+            <div class="paso-titulo">⏱️ Paso 2 — Tiempo de subida (hasta la cima) <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">Etapa 1: v₀=18 m/s, vf=0, g=−9.8. t_subida = (0−18)/(−9.8) = ? s</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t₁</label><input type="number" id="ej6-t1" step="0.01" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej6','p2')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej6-p2-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej6-p3">
+            <div class="paso-titulo">📏 Paso 3 — Altura máxima alcanzada <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">h_max = (0² − 18²)/(2×−9.8) = ? m</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>h_max</label><input type="number" id="ej6-hmax" step="0.01" placeholder="?"><div class="unidad">m</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej6','p3')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej6-p3-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej6-p4">
+            <div class="paso-titulo">⏱️ Paso 4 — Tiempo de bajada desde la cima hasta los 8 m <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">Etapa 2: El objeto cae desde h_max hasta los 8 m. La distancia de bajada = h_max − 8. Con v₀=0, g=+9.8: h = ½g·t² → t = √(2h/g). Calcula t₂:</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t₂</label><input type="number" id="ej6-t2" step="0.01" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej6','p4')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej6-p4-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej6-p5">
+            <div class="paso-titulo">✅ Paso 5 — Tiempo total <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">t_total = t₁ + t₂ = ? s</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t_total</label><input type="number" id="ej6-ttotal" step="0.01" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej6','p5')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej6-p5-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO AVANZADO 2 -->
+    <div class="ejercicio-box" id="ej7">
+        <h3><i class="fas fa-building"></i> Ejercicio 7 — Avanzado <span class="badge badge-avanzado">★ Desafío</span></h3>
+        <div class="enunciado">
+            Desde una ventana ubicada a <strong>12 metros</strong> del suelo, se lanza una pelota verticalmente hacia arriba con <strong>8 m/s</strong>. La pelota sube, y al bajar, un estudiante en otra ventana a <strong>5 metros</strong> del suelo la atrapa. ¿Con qué velocidad llega la pelota a ese nivel? ¿Cuánto tiempo tardó todo el recorrido?
+        </div>
+
+        <div class="paso-contenedor activo" id="ej7-p1">
+            <div class="paso-titulo">📋 Paso 1 — Desplazamiento neto <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:10px; font-size:0.9rem;">La pelota parte de 12 m y llega a 5 m. Tomando hacia arriba como positivo, el desplazamiento total h es:</p>
+            <select id="ej7-h">
+                <option value="">— ¿Cuánto vale h? —</option>
+                <option value="7">h = +7 m (subió 7 metros)</option>
+                <option value="-7">h = −7 m (quedó 7 metros más abajo del punto de lanzamiento) ✓</option>
+                <option value="-5">h = −5 m</option>
+                <option value="17">h = +17 m</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej7','p1')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej7-p1-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej7-p2">
+            <div class="paso-titulo">⚡ Paso 2 — Velocidad al llegar a los 5 m <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">vf² = v₀² + 2gh = 64 + 2(−9.8)(−7) = 64 + 137.2 = 201.2 → vf = −√201.2 ≈ ? m/s (negativo porque baja)</p>
+            <div class="input-grupo" style="max-width:220px;">
+                <label>vf</label><input type="number" id="ej7-vf" step="0.1" placeholder="?"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej7','p2')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej7-p2-fb"></div>
+        </div>
+
+        <div class="paso-contenedor oculto" id="ej7-p3">
+            <div class="paso-titulo">⏱️ Paso 3 — Tiempo total del recorrido <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; margin-bottom:8px; font-size:0.9rem;">t = (vf − v₀)/g = (−14.2 − 8)/(−9.8) ≈ ? s</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t</label><input type="number" id="ej7-t" step="0.01" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej7','p3')"><i class="fas fa-check"></i> Validar</button>
+            <div class="feedback" id="ej7-p3-fb"></div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>LabVirtual W · Física 10° · Práctica Interactiva — Caída Libre &copy; 2025</p>
+</footer>
+
+<!-- Prof. IA -->
+<script src="profe-ia.js"></script>
+
+<script>
+// ─── LÓGICA DE VALIDACIÓN DE EJERCICIOS ───────────────────────────────────────
+
+// Tolerancia para respuestas numéricas (±5%)
+function cerca(val, esperado, tol = 0.05) {
+    return Math.abs(val - esperado) <= Math.abs(esperado * tol) + 0.05;
+}
+
+// Respuestas correctas
+const RESPUESTAS = {
+    ej1: {
+        p1: (v0, h) => cerca(v0, 0) && cerca(h, 3.2),
+        p2: (s) => s === '+9.8',
+        p3: (f) => f === 'vf2=v02+2gh',
+        p4: (vf) => cerca(vf, 7.9),
+        p5: (t) => cerca(t, 0.81)
+    },
+    ej2: {
+        p1: (v0, vf) => cerca(v0, 15) && cerca(vf, 0),
+        p2: (s) => s === '-9.8',
+        p3: (f) => f === 'vf=v0+gt',
+        p4: (t) => cerca(t, 1.53),
+        p5: (h) => cerca(h, 11.48)
+    },
+    ej3: {
+        p1: (v0, vf, g) => cerca(v0, 25) && cerca(vf, 0) && g === '-9.8',
+        p2: (t) => cerca(t, 2.55),
+        p3: (h) => cerca(h, 31.89),
+        p4: (tt) => cerca(tt, 5.10)
+    },
+    ej4: {
+        p1: (v0, t, g) => cerca(v0, 40) && cerca(t, 5) && cerca(g, -9.8),
+        p2: (f) => f === 'h=v0t+0.5gt2',
+        p3: (h) => cerca(h, 77.5),
+        p4: (e) => e === 'baja'   // vf = 40 + (−9.8)(5) = −9 < 0 → baja
+    },
+    ej5: {
+        p1: (v0, h, g) => cerca(v0, 10) && cerca(h, -50) && cerca(g, -9.8),
+        p2: (f) => f === 'vf2=v02+2gh',
+        p3: (vf) => cerca(vf, -32.9)
+    },
+    ej6: {
+        p1: (e) => e === '2',
+        p2: (t) => cerca(t, 1.84),
+        p3: (h) => cerca(h, 16.53),
+        p4: (t) => cerca(t, 1.37),
+        p5: (tt) => cerca(tt, 3.21)
+    },
+    ej7: {
+        p1: (h) => h === '-7',
+        p2: (vf) => cerca(vf, -14.2),
+        p3: (t) => cerca(t, 2.27)
+    }
+};
+
+// Pasos completados por ejercicio
+const completados = { ej1: 0, ej2: 0, ej3: 0, ej4: 0, ej5: 0, ej6: 0, ej7: 0 };
+const totalEjercicios = 7;
+let ejerciciosFinalizados = 0;
+
+function getValores(ej, paso) {
+    const g = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
+    const gn = (id) => { const el = document.getElementById(id); return el ? parseFloat(el.value) : NaN; };
+
+    if (ej === 'ej1') {
+        if (paso === 'p1') return [gn('ej1-v0'), gn('ej1-h')];
+        if (paso === 'p2') return [g('ej1-signog')];
+        if (paso === 'p3') return [g('ej1-formula')];
+        if (paso === 'p4') return [gn('ej1-vf')];
+        if (paso === 'p5') return [gn('ej1-t')];
+    }
+    if (ej === 'ej2') {
+        if (paso === 'p1') return [gn('ej2-v0'), gn('ej2-vf')];
+        if (paso === 'p2') return [g('ej2-signog')];
+        if (paso === 'p3') return [g('ej2-formula')];
+        if (paso === 'p4') return [gn('ej2-t')];
+        if (paso === 'p5') return [gn('ej2-h')];
+    }
+    if (ej === 'ej3') {
+        if (paso === 'p1') return [gn('ej3-v0'), gn('ej3-vf'), g('ej3-signog')];
+        if (paso === 'p2') return [gn('ej3-t1')];
+        if (paso === 'p3') return [gn('ej3-h')];
+        if (paso === 'p4') return [gn('ej3-ttotal')];
+    }
+    if (ej === 'ej4') {
+        if (paso === 'p1') return [gn('ej4-v0'), gn('ej4-t'), gn('ej4-g')];
+        if (paso === 'p2') return [g('ej4-formula')];
+        if (paso === 'p3') return [gn('ej4-h')];
+        if (paso === 'p4') return [g('ej4-estado')];
+    }
+    if (ej === 'ej5') {
+        if (paso === 'p1') return [gn('ej5-v0'), gn('ej5-h'), gn('ej5-g')];
+        if (paso === 'p2') return [g('ej5-formula')];
+        if (paso === 'p3') return [gn('ej5-vf')];
+    }
+    if (ej === 'ej6') {
+        if (paso === 'p1') return [g('ej6-etapas')];
+        if (paso === 'p2') return [gn('ej6-t1')];
+        if (paso === 'p3') return [gn('ej6-hmax')];
+        if (paso === 'p4') return [gn('ej6-t2')];
+        if (paso === 'p5') return [gn('ej6-ttotal')];
+    }
+    if (ej === 'ej7') {
+        if (paso === 'p1') return [g('ej7-h')];
+        if (paso === 'p2') return [gn('ej7-vf')];
+        if (paso === 'p3') return [gn('ej7-t')];
+    }
+    return [];
+}
+
+// Mensajes de feedback
+const MENSAJES_OK = [
+    '🎉 ¡Excelente! ¡Correcto!',
+    '✅ ¡Muy bien! Perfecto.',
+    '🌟 ¡Eso es! Sigue así.',
+    '👏 ¡Correcto! Avanzas al siguiente paso.',
+    '💪 ¡Genial! Respuesta perfecta.'
+];
+const MENSAJES_MAL = [
+    '❌ Incorrecto. Revisa los valores e intenta de nuevo.',
+    '❌ No es correcto. Verifica la fórmula o los datos.',
+    '❌ Ese no es el resultado. Comprueba tu cálculo.',
+    '❌ Intenta de nuevo. Revisa el signo de g.'
+];
+
+// Nombres de los pasos siguientes por ejercicio
+const SIGUIENTE_PASO = {
+    ej1: { p1: 'p2', p2: 'p3', p3: 'p4', p4: 'p5', p5: null },
+    ej2: { p1: 'p2', p2: 'p3', p3: 'p4', p4: 'p5', p5: null },
+    ej3: { p1: 'p2', p2: 'p3', p3: 'p4', p4: null },
+    ej4: { p1: 'p2', p2: 'p3', p3: 'p4', p4: null },
+    ej5: { p1: 'p2', p2: 'p3', p3: null },
+    ej6: { p1: 'p2', p2: 'p3', p3: 'p4', p4: 'p5', p5: null },
+    ej7: { p1: 'p2', p2: 'p3', p3: null }
+};
+
+function validarPaso(ej, paso) {
+    const valores = getValores(ej, paso);
+    const fnRespuesta = RESPUESTAS[ej][paso];
+    const esValido = fnRespuesta(...valores);
+
+    const fb = document.getElementById(`${ej}-${paso}-fb`);
+    const pasoEl = document.getElementById(`${ej}-${paso}`);
+
+    if (esValido) {
+        fb.className = 'feedback correcto';
+        fb.textContent = MENSAJES_OK[Math.floor(Math.random() * MENSAJES_OK.length)];
+        pasoEl.classList.add('completado');
+        pasoEl.classList.remove('activo');
+
+        const siguiente = SIGUIENTE_PASO[ej][paso];
+        if (siguiente) {
+            const sigEl = document.getElementById(`${ej}-${siguiente}`);
+            sigEl.classList.remove('oculto');
+            sigEl.classList.add('activo');
+            setTimeout(() => sigEl.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+        } else {
+            // Ejercicio completado
+            if (completados[ej] < 1) {
+                completados[ej] = 1;
+                ejerciciosFinalizados++;
+                actualizarProgreso();
+            }
+        }
+    } else {
+        fb.className = 'feedback incorrecto';
+        fb.textContent = MENSAJES_MAL[Math.floor(Math.random() * MENSAJES_MAL.length)];
+    }
+}
+
+function actualizarProgreso() {
+    const pct = Math.round((ejerciciosFinalizados / totalEjercicios) * 100);
+    document.getElementById('barra-fill').style.width = pct + '%';
+    document.getElementById('texto-progreso').textContent = `${ejerciciosFinalizados} / ${totalEjercicios} ejercicios completados`;
+}
+</script>
+</body>
+</html>
