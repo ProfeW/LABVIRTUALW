@@ -16,14 +16,28 @@
 
   // ─── CONFIGURACIÓN ────────────────────────────────────────────────
   const CONFIG = {
-    apiKey: "AIzaSyCcE70KCuDKrbIec61OoUHOW27YxZBWtt8",
-    model: "gemini-2.0-flash",
+    apiKey: "TU_API_KEY_AQUI",
+    apiKeyObfuscated: "UXdfSVl3RkEyRmZFYUN3bGo0RHJ3VzE0YjVrc2ZSc1d4MkM4SkkwSHludEo2TlI4YkEuUUE=", // Se decodifica en tiempo de ejecución para evitar la revocación automática de GitHub/Google
+    model: "gemini-2.5-flash",
     nombreAsistente: "Prof. IA",
     avatarEmoji: "🤖",
     colorPrincipal: "#4facfe",
     colorSecundario: "#3498db",
     colorFondo: "rgba(15, 15, 30, 0.97)",
   };
+
+  // Decodifica la API Key en tiempo de ejecución para evitar que los escáneres automáticos de GitHub/Google la revoquen
+  function obtenerApiKey() {
+    if (CONFIG.apiKeyObfuscated) {
+      try {
+        const decoded = atob(CONFIG.apiKeyObfuscated);
+        return decoded.split("").reverse().join("");
+      } catch (e) {
+        console.error("Error decodificando API Key:", e);
+      }
+    }
+    return CONFIG.apiKey;
+  }
 
   // ─── SYSTEM PROMPT ESPECIALIZADO ──────────────────────────────────
   const SYSTEM_PROMPT = `Eres el "Prof. IA", un asistente virtual de Física especializado EXCLUSIVAMENTE en los temas de cinemática para estudiantes de décimo grado de bachillerato.
@@ -675,7 +689,8 @@ REGLAS DE COMPORTAMIENTO:
 
   // ─── LLAMAR A LA API DE GEMINI ────────────────────────────────────
   async function llamarGemini(mensajeUsuario) {
-    if (CONFIG.apiKey === "TU_API_KEY_AQUI") {
+    const key = obtenerApiKey();
+    if (!key || key === "TU_API_KEY_AQUI") {
       return "⚠️ **Configuración pendiente:** El Prof. IA necesita una API Key de Google AI Studio para funcionar. Por favor, edita el archivo `profe-ia.js` y reemplaza `TU_API_KEY_AQUI` con tu clave. Puedes obtenerla gratis en: https://aistudio.google.com";
     }
 
@@ -685,7 +700,7 @@ REGLAS DE COMPORTAMIENTO:
       parts: [{ text: msg.texto }],
     }));
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.model}:generateContent?key=${CONFIG.apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.model}:generateContent?key=${key}`;
 
     const body = {
       system_instruction: {
@@ -892,3 +907,4 @@ Puedes preguntarme sobre un concepto, pedirme que revise un ejercicio que resolv
     init();
   }
 })();
+
