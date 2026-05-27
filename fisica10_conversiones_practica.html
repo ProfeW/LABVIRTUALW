@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Conversión de Unidades - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Renderizado de fórmulas matemáticas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-correcto: #2ecc71;
+            --color-incorrecto: #e74c3c;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        
+        .header-practica { text-align: center; margin-bottom: 30px; }
+        .header-practica h1 { color: #f39c12; font-size: 2.5rem; margin-bottom: 10px; }
+        
+        /* Barra de progreso */
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 20px 0 40px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, #f39c12, #e67e22); width: 0%; transition: width 0.5s ease; }
+
+        /* Tarjeta de Ejercicio */
+        .ejercicio-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 20px; display: none; animation: slideIn 0.5s ease forwards; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ejercicio-card.activo { display: block; }
+        
+        .nivel-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; background: rgba(52, 152, 219, 0.2); color: #4facfe; border: 1px solid #3498db; }
+        .ejercicio-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .enunciado { font-size: 1.2rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; padding: 15px; background: rgba(0,0,0,0.3); border-left: 4px solid #f39c12; border-radius: 5px; }
+
+        /* Opciones de respuesta */
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .opcion-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; color: #fff; font-size: 1.1rem; cursor: pointer; transition: 0.2s; text-align: center; }
+        .opcion-btn:hover:not(:disabled) { background: rgba(243, 156, 18, 0.2); border-color: #f39c12; transform: translateY(-2px); }
+        .opcion-btn.correcta { background: rgba(46, 204, 113, 0.2); border-color: var(--color-correcto); color: #fff; }
+        .opcion-btn.incorrecta { background: rgba(231, 76, 60, 0.2); border-color: var(--color-incorrecto); opacity: 0.7; }
+        .opcion-btn:disabled { cursor: not-allowed; }
+
+        /* Feedback */
+        .feedback { display: none; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: 500; font-size: 1.1rem; }
+        .feedback.correcto { display: block; background: rgba(46, 204, 113, 0.1); border: 1px solid var(--color-correcto); color: #2ecc71; }
+        .feedback.incorrecto { display: block; background: rgba(231, 76, 60, 0.1); border: 1px solid var(--color-incorrecto); color: #e74c3c; }
+
+        .btn-siguiente { display: none; width: 100%; padding: 15px; background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .btn-siguiente:hover { filter: brightness(1.1); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        /* Pantalla final */
+        .pantalla-final { display: none; text-align: center; padding: 50px 20px; background: rgba(20, 20, 35, 0.9); border-radius: 15px; border: 1px solid rgba(243, 156, 18, 0.5); }
+        .pantalla-final.activo { display: block; animation: fadeIn 1s; }
+        .trofeo { font-size: 5rem; margin-bottom: 20px; animation: bounce 2s infinite; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        @media (max-width: 600px) { .opciones-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <a href="fisica10_conversiones.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+
+        <div class="header-practica">
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <p>Resuelve estos 5 retos de conversión de unidades. Avanza paso a paso.</p>
+        </div>
+
+        <div class="progreso-container">
+            <div class="progreso-barra" id="barra"></div>
+        </div>
+
+        <!-- EJERCICIO 1 -->
+        <div class="ejercicio-card activo" id="ej1">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Longitud)</span>
+            <h3>Reto 1: Medición de un terreno</h3>
+            <div class="enunciado">
+                El largo de una finca cafetera es de <strong>2.5 kilómetros</strong>. Se requiere saber esta medida en metros para comprar una cerca. <br><br>
+                ¿A cuántos metros equivalen 2.5 km?
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Recuerda que 1 km son 1000 metros. Multiplica 2.5 por 1000.')">25 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Casi. Mídelo bien, 1 km = 1000 m.')">250 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! 2.5 km × (1000 m / 1 km) = 2500 m.')">2500 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Demasiado grande. Ese sería el resultado si multiplicas por 10,000.')">25000 m</button>
+            </div>
+            <div class="feedback" id="feed1"></div>
+            <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 2 -->
+        <div class="ejercicio-card" id="ej2">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Masa)</span>
+            <h3>Reto 2: Pesaje de la cosecha</h3>
+            <div class="enunciado">
+                Un camión transporta <strong>3.2 toneladas</strong> de plátano al mercado. <br><br>
+                Si sabemos que 1 tonelada equivale a 1000 kg, ¿cuántos kilogramos transporta el camión?
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! 3.2 ton × (1000 kg / 1 ton) = 3200 kg.')">3200 kg</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Recuerda multiplicar por 1000.')">320 kg</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'No, eso sería si fuera 1 tonelada = 10,000 kg.')">32000 kg</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Este valor es incorrecto. Intenta usar el factor de conversión.')">0.32 kg</button>
+            </div>
+            <div class="feedback" id="feed2"></div>
+            <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 3 -->
+        <div class="ejercicio-card" id="ej3">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Tiempo)</span>
+            <h3>Reto 3: Duración de un viaje</h3>
+            <div class="enunciado">
+                El recorrido del bus escolar desde la vereda hasta el colegio dura <strong>45 minutos</strong>. <br><br>
+                ¿A cuántos segundos equivale este tiempo? (Nota: 1 minuto = 60 segundos)
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Multiplicaste por 100, pero un minuto tiene 60 segundos.')">4500 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Muy bien! 45 min × (60 s / 1 min) = 2700 s.')">2700 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Te equivocaste en la multiplicación. 45 × 60 no es 2400.')">2400 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Dividiste en lugar de multiplicar. Los segundos son más pequeños que los minutos, así que el número debe ser mayor.')">0.75 s</button>
+            </div>
+            <div class="feedback" id="feed3"></div>
+            <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 4 -->
+        <div class="ejercicio-card" id="ej4">
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Velocidad)</span>
+            <h3>Reto 4: Velocímetro del auto</h3>
+            <div class="enunciado">
+                Un carro de policía persigue a un vehículo a una velocidad de <strong>90 km/h</strong>. <br><br>
+                Para resolver ecuaciones en física, necesitamos la velocidad en <strong>metros por segundo (m/s)</strong>. Realiza la conversión doble.
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Casi, revisa bien tu operación. (90 * 1000) / 3600.')">20 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Error. Un truco: para pasar de km/h a m/s, puedes dividir entre 3.6 directamente.')">9000 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Incorrecto. Estás usando un factor incorrecto.')">15 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Excelente! 90 km/h × (1000m / 1km) × (1h / 3600s) = 25 m/s. (O simplemente 90 ÷ 3.6 = 25).')">25 m/s</button>
+            </div>
+            <div class="feedback" id="feed4"></div>
+            <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        
+        <!-- EJERCICIO 5 -->
+        <div class="ejercicio-card" id="ej5">
+            <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto</span>
+            <h3>Reto 5: ¡Velocidad Inversa!</h3>
+            <div class="enunciado">
+                Un guepardo, el animal más rápido de la tierra, puede alcanzar una velocidad de <strong>30 m/s</strong>. <br><br>
+                ¿A qué velocidad equivale esto en <strong>kilómetros por hora (km/h)</strong>? (Pista: el proceso es inverso al anterior).
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Para pasar de m/s a km/h debes MULTIPLICAR por 3.6 o usar factores inversos: (30 / 1000) * 3600.')">8.33 km/h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Magistral! 30 m/s × (1km / 1000m) × (3600s / 1h) = 108 km/h. (O 30 × 3.6 = 108).')">108 km/h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Ese valor no es correcto. Inténtalo de nuevo aplicando factores de conversión.')">150 km/h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Incorrecto. No solo se multiplica por 1000 y 60.')">300 km/h</button>
+            </div>
+            <div class="feedback" id="feed5"></div>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+        </div>
+
+        <!-- PANTALLA FINAL -->
+        <div class="pantalla-final" id="pantalla-final">
+            <div class="trofeo">🏆</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Has dominado los factores de conversión de unidades. Ahora estás listo para realizar la evaluación final del tema.</p>
+            <a href="fisica10_conversiones_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+        </div>
+
+    </div>
+
+    <script>
+        const totalEjercicios = 5;
+
+        function verificarRespuesta(num, btn, esCorrecta, mensaje) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            
+            // Deshabilitar botones
+            botones.forEach(b => {
+                b.disabled = true;
+                if(b === btn) {
+                    b.classList.add(esCorrecta ? 'correcta' : 'incorrecta');
+                } else if (!esCorrecta && b.getAttribute('onclick').includes('true')) {
+                    // Mostrar cuál era la correcta si falló
+                    b.classList.add('correcta');
+                }
+            });
+
+            // Mostrar feedback
+            const feed = document.getElementById('feed' + num);
+            feed.innerHTML = esCorrecta ? 
+                `<i class="fa-solid fa-check-circle"></i> ${mensaje}` : 
+                `<i class="fa-solid fa-xmark-circle"></i> ${mensaje}`;
+            feed.className = 'feedback ' + (esCorrecta ? 'correcto' : 'incorrecto');
+            
+            // Si es correcta, lanzar confetti y mostrar botón siguiente
+            if(esCorrecta) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#f39c12', '#e67e22', '#f1c40f'] });
+                document.getElementById('btnSig' + num).style.display = 'block';
+                actualizarBarra(num);
+            } else {
+                // Si es incorrecta, obligar a reiniciar el ejercicio para intentarlo bien
+                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding: 8px 15px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">Intentar de nuevo</button>`;
+            }
+        }
+
+        function reiniciarEjercicio(num) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            botones.forEach(b => {
+                b.disabled = false;
+                b.classList.remove('correcta', 'incorrecta');
+            });
+            const feed = document.getElementById('feed' + num);
+            feed.className = 'feedback';
+            feed.innerHTML = '';
+        }
+
+        function actualizarBarra(num) {
+            const porcentaje = (num / totalEjercicios) * 100;
+            document.getElementById('barra').style.width = porcentaje + '%';
+        }
+
+        function siguiente(actual) {
+            document.getElementById('ej' + actual).classList.remove('activo');
+            document.getElementById('ej' + (actual + 1)).classList.add('activo');
+            window.scrollTo(0, 0);
+        }
+
+        function finalizar() {
+            document.getElementById('ej' + totalEjercicios).classList.remove('activo');
+            document.getElementById('pantalla-final').classList.add('activo');
+            confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
