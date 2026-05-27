@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversión de Unidades - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Renderizado de fórmulas matemáticas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-secundario: #2980b9;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; background-position: center;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .submenu {
+            display: none; position: absolute; top: 100%; left: 0; background: rgba(20, 20, 35, 0.95);
+            backdrop-filter: blur(15px); min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+        }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+        .fisica:hover { border-left: 4px solid var(--color-fisica); }
+
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 40px; padding: 40px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
+        .header-tema::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%); z-index: -1; }
+        .emoji-tema { font-size: 4rem; margin-bottom: 15px; display: inline-block; animation: bounce 2s infinite; }
+        .header-tema h1 { font-size: 3rem; color: #4facfe; margin-bottom: 15px; }
+        .header-tema p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto; }
+
+        .seccion { background: rgba(20, 20, 35, 0.8); border-radius: 15px; padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .seccion h2 { font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .seccion h2 i { color: var(--color-fisica); }
+        .seccion p { font-size: 1.1rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
+
+        .caja-formula { background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.05)); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 25px; text-align: center; margin: 20px 0; }
+        .formula { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 15px; letter-spacing: 2px; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { background: rgba(52, 152, 219, 0.2); color: #4facfe; font-weight: 600; }
+        td { color: #ccc; }
+        tr:last-child td { border-bottom: none; }
+
+        .ejercicio { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
+        .ejercicio:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(52, 152, 219, 0.3); }
+        .ejercicio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.2rem; }
+        .paso { display: flex; margin-bottom: 10px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .paso-num { background: var(--color-fisica); color: #fff; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
+        .paso-texto { color: #ddd; align-self: center; }
+        .resultado-final { background: rgba(46, 204, 113, 0.15); border-left: 4px solid #2ecc71; padding: 15px; border-radius: 5px; margin-top: 15px; font-weight: 600; color: #fff; }
+
+        .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+        .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .btn-practica { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
+        .btn-practica:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(230, 126, 34, 0.4); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+        .btn-evaluacion:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(231, 76, 60, 0.4); }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin-top: 20px; }
+        .video-card { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .video-header { background: rgba(0,0,0,0.5); padding: 10px; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; color: #4facfe; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html" class="fisica">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html" class="fisica">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html" class="fisica">Grado 11</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10</a>
+
+        <div class="header-tema">
+            <span class="emoji-tema">🔄</span>
+            <h1>Conversión de Unidades</h1>
+            <p>El lenguaje universal de las ciencias. Aprende a transformar medidas entre diferentes sistemas utilizando el método de factores de conversión.</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-book-open"></i> ¿Qué es y por qué es importante?</h2>
+            <p>En física, medir es fundamental. Sin embargo, en el mundo (y en los problemas de física) existen diferentes sistemas de medición. Por ejemplo, la velocidad de un auto se mide comúnmente en <strong>km/h</strong>, pero en el Sistema Internacional (SI) usamos <strong>m/s</strong>.</p>
+            <p>La conversión de unidades es el proceso matemático mediante el cual cambiamos una medida expresada en una unidad a su equivalente en otra unidad de la misma magnitud (como longitud, masa o tiempo).</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-calculator"></i> El Método: Factores de Conversión</h2>
+            <p>Un <strong>factor de conversión</strong> es una fracción que vale 1, donde el numerador y el denominador representan la misma cantidad pero en unidades distintas.</p>
+            
+            <div class="caja-formula">
+                <div class="formula" style="font-size: 1.5rem;">Cantidad Inicial × (Unidad Buscada / Unidad a Cancelar) = Cantidad Final</div>
+                
+                <h3 style="color: #4facfe; margin: 20px 0 10px; text-align: left;">Equivalencias Fundamentales:</h3>
+                <table>
+                    <tr>
+                        <th>Magnitud</th>
+                        <th>Equivalencias clave</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Longitud</strong></td>
+                        <td>1 km = 1000 m <br> 1 m = 100 cm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Masa</strong></td>
+                        <td>1 kg = 1000 g <br> 1 Tonelada = 1000 kg</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tiempo</strong></td>
+                        <td>1 hora = 60 min = 3600 s <br> 1 min = 60 s</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-pencil"></i> Ejercicios Resueltos Paso a Paso</h2>
+
+            <div class="ejercicio">
+                <h3>Ejercicio 1: Conversión Simple (Longitud)</h3>
+                <p style="margin-bottom: 15px; color: #fff;">Una carga de café debe transportarse a una bodega que está a 4.5 kilómetros. ¿A cuántos metros equivale esta distancia?</p>
+                
+                <div class="paso">
+                    <div class="paso-num">1</div>
+                    <div class="paso-texto">Identificamos el dato inicial: <strong>4.5 km</strong></div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">2</div>
+                    <div class="paso-texto">Identificamos la equivalencia necesaria: Sabemos que <strong>1 km = 1000 m</strong>.</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">3</div>
+                    <div class="paso-texto">Planteamos el factor de conversión. Como queremos cancelar los "km" (que están arriba), ponemos "1 km" en el denominador y "1000 m" en el numerador: <br><br> 
+                    $$ 4.5 \text{ km} \times \left( \frac{1000 \text{ m}}{1 \text{ km}} \right) $$</div>
+                </div>
+                
+                <div class="resultado-final">
+                    Resultado: 4.5 × 1000 = 4500 m. La bodega está a 4500 metros.
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <h3>Ejercicio 2: Conversión Doble (Velocidad)</h3>
+                <p style="margin-bottom: 15px; color: #fff;">Un Jeep Willys viaja por una carretera a 72 km/h. ¿Cuál es su velocidad en m/s (metros por segundo)?</p>
+                
+                <div class="paso">
+                    <div class="paso-num">1</div>
+                    <div class="paso-texto">Dato inicial: <strong>72 km / 1 h</strong>. Tenemos que cambiar km a metros, y horas a segundos.</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">2</div>
+                    <div class="paso-texto">Equivalencias: 1 km = 1000 m; 1 h = 3600 s.</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">3</div>
+                    <div class="paso-texto">Aplicamos dos factores de conversión seguidos (uno para longitud y otro para tiempo): <br><br>
+                    $$ \frac{72 \text{ km}}{\text{h}} \times \left( \frac{1000 \text{ m}}{1 \text{ km}} \right) \times \left( \frac{1 \text{ h}}{3600 \text{ s}} \right) $$
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">4</div>
+                    <div class="paso-texto">Multiplicamos todo lo de arriba y dividimos por lo de abajo: (72 × 1000) / 3600 = 72000 / 3600</div>
+                </div>
+                
+                <div class="resultado-final">
+                    Resultado: 20 m/s. El Willys se mueve a 20 metros por cada segundo.
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- SECCIÓN DE VIDEOS REQUERIDA POR EL USUARIO -->
+        <div class="seccion" style="background: rgba(30, 30, 45, 0.9);">
+            <h2><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Explicación en Video</h2>
+            <p>Selección de los mejores videos explicativos de Conversión de Unidades para afianzar tus conocimientos:</p>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed?listType=search&list=profe+alex+conversion+de+unidades" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Khan Academy Español</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed?listType=search&list=khan+academy+español+conversion+de+unidades+fisica" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Unicoos (David Calle)</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed?listType=search&list=unicoos+cambio+de+unidades+fisica" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Jorge Cogollo</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed?listType=search&list=fisica+10+conversion+unidades+ejercicios" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="botones-accion">
+            <a href="fisica10_conversiones_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Práctica Interactiva
+            </a>
+            <a href="fisica10_conversiones_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-clipboard-check"></i> Realizar Evaluación
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>LabVirtual W &copy; 2025 · Construido con inteligencia artificial para la educación</p>
+    </footer>
+
+    <script src="profe-ia.js"></script>
+</body>
+</html>
