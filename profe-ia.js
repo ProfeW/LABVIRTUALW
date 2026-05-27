@@ -21,6 +21,7 @@
     model: "gemini-2.5-flash",
     nombreAsistente: "Prof. IA",
     avatarEmoji: "🤖",
+    avatarUrl: "avatar.png", // URL de la imagen del avatar personalizada
     colorPrincipal: "#4facfe",
     colorSecundario: "#3498db",
     colorFondo: "rgba(15, 15, 30, 0.97)",
@@ -103,6 +104,16 @@ REGLAS DE COMPORTAMIENTO:
         animation: none;
         background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
         box-shadow: 0 8px 32px rgba(231, 76, 60, 0.5);
+        font-size: 24px;
+      }
+
+      #profe-ia-btn.abierto::after {
+        content: '✕';
+        position: absolute;
+        color: white;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1;
       }
 
       #profe-ia-notif {
@@ -526,12 +537,20 @@ REGLAS DE COMPORTAMIENTO:
 
   // ─── INYECTAR HTML ────────────────────────────────────────────────
   function inyectarHTML() {
+    const btnAvatarContent = CONFIG.avatarUrl 
+      ? `<img src="${CONFIG.avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">` 
+      : CONFIG.avatarEmoji;
+
+    const headerAvatarContent = CONFIG.avatarUrl 
+      ? `<img src="${CONFIG.avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">` 
+      : CONFIG.avatarEmoji;
+
     const container = document.createElement("div");
     container.id = "profe-ia-root";
     container.innerHTML = `
       <!-- BOTÓN FLOTANTE -->
       <button id="profe-ia-btn" title="Abrir Prof. IA - Asistente de Física">
-        🤖
+        <span id="profe-ia-btn-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">${btnAvatarContent}</span>
         <span id="profe-ia-notif">1</span>
       </button>
 
@@ -540,7 +559,7 @@ REGLAS DE COMPORTAMIENTO:
         
         <!-- HEADER -->
         <div id="profe-ia-header">
-          <div id="profe-ia-avatar">🤖</div>
+          <div id="profe-ia-avatar">${headerAvatarContent}</div>
           <div id="profe-ia-header-info">
             <h3>Prof. IA</h3>
             <p>Asistente · Física 10° · En línea</p>
@@ -645,12 +664,16 @@ REGLAS DE COMPORTAMIENTO:
     const msgDiv = document.createElement("div");
     msgDiv.className = `profe-ia-msg ${tipo}`;
 
-    const avatarEmoji = tipo === "bot" ? "🤖" : "👤";
+    const avatarContent = tipo === "bot" 
+      ? (CONFIG.avatarUrl 
+          ? `<img src="${CONFIG.avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">` 
+          : CONFIG.avatarEmoji)
+      : "👤";
     const contenido =
       tipo === "bot" ? formatearRespuesta(texto) : escapeHtml(texto);
 
     msgDiv.innerHTML = `
-      <div class="profe-ia-msg-avatar">${avatarEmoji}</div>
+      <div class="profe-ia-msg-avatar">${avatarContent}</div>
       <div class="profe-ia-msg-burbuja">${contenido}</div>
     `;
 
@@ -672,8 +695,13 @@ REGLAS DE COMPORTAMIENTO:
     const typingDiv = document.createElement("div");
     typingDiv.className = "profe-ia-typing";
     typingDiv.id = "profe-ia-typing";
+    
+    const avatarContent = CONFIG.avatarUrl 
+      ? `<img src="${CONFIG.avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">` 
+      : CONFIG.avatarEmoji;
+
     typingDiv.innerHTML = `
-      <div class="profe-ia-msg-avatar" style="background: linear-gradient(135deg,#4facfe,#00f2fe); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; margin-top:2px;">🤖</div>
+      <div class="profe-ia-msg-avatar" style="width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;">${avatarContent}</div>
       <div class="profe-ia-typing-dots">
         <span></span><span></span><span></span>
       </div>
@@ -801,14 +829,27 @@ REGLAS DE COMPORTAMIENTO:
     let panelAbierto = false;
 
     // Abrir/cerrar panel
+    const btnIconEl = document.getElementById("profe-ia-btn-icon");
+    const restoreBtnIcon = () => {
+      if (btnIconEl) {
+        btnIconEl.style.display = "flex";
+        btnIconEl.innerHTML = CONFIG.avatarUrl 
+          ? `<img src="${CONFIG.avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">` 
+          : CONFIG.avatarEmoji;
+      }
+    };
+
     btn.addEventListener("click", () => {
       panelAbierto = !panelAbierto;
       panel.classList.toggle("visible", panelAbierto);
       btn.classList.toggle("abierto", panelAbierto);
-      btn.textContent = panelAbierto ? "✕" : "🤖";
       if (panelAbierto) {
+        if (btnIconEl) { btnIconEl.style.display = "none"; }
+        // Show × via CSS content when .abierto
         notif.style.display = "none";
         input.focus();
+      } else {
+        restoreBtnIcon();
       }
     });
 
@@ -816,7 +857,7 @@ REGLAS DE COMPORTAMIENTO:
       panelAbierto = false;
       panel.classList.remove("visible");
       btn.classList.remove("abierto");
-      btn.textContent = "🤖";
+      restoreBtnIcon();
     });
 
     // Limpiar chat
