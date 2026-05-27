@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación — Caída Libre · LabVirtual W</title>
+    <meta name="description" content="Evaluación de 10 preguntas de selección múltiple sobre Caída Libre para Física 10°.">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;
+            --color-oscuro: #1a1a2e;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-alerta: #f39c12;
+            --color-caida: #e67e22;
+        }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26,26,46,0.95), rgba(26,26,46,0.98)),
+                url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255,255,255,0.1); color: #4facfe; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        /* ENCABEZADO */
+        .encabezado-eval { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid rgba(230,126,34,0.4); }
+        .encabezado-eval h1 { font-size: 2.8rem; color: var(--color-caida); margin-bottom: 10px; }
+        .encabezado-eval p { color: #bbb; font-size: 1.05rem; max-width: 650px; margin: 0 auto; }
+
+        /* DATOS DEL ESTUDIANTE */
+        .datos-estudiante { background: rgba(230,126,34,0.1); border: 1px solid rgba(230,126,34,0.3); border-radius: 10px; padding: 25px; margin-bottom: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 600; color: var(--color-caida); }
+        .input-group input, .input-group select { padding: 12px 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: #fff; font-size: 1rem; outline: none; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--color-caida); }
+
+        /* INSTRUCCIONES */
+        .instrucciones { background: rgba(52,152,219,0.08); border-left: 4px solid var(--color-fisica); padding: 18px 22px; border-radius: 0 8px 8px 0; margin-bottom: 30px; }
+        .instrucciones p { color: #ccc; line-height: 1.7; font-size: 0.95rem; }
+
+        /* PREGUNTAS */
+        .eval-form { display: flex; flex-direction: column; gap: 28px; }
+        .pregunta-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 25px; transition: 0.3s; }
+        .pregunta-card:hover { border-color: rgba(230,126,34,0.35); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .pregunta-texto { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.5; }
+        .pregunta-texto span.num { color: var(--color-caida); font-weight: 800; font-size: 1.25rem; margin-right: 8px; }
+
+        .opciones-lista { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .opcion-item { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; transition: 0.2s; }
+        .opcion-item:hover { background: rgba(255,255,255,0.05); }
+        .opcion-label { display: flex; align-items: center; padding: 14px 18px; cursor: pointer; color: #ddd; font-size: 1rem; }
+        .opcion-label input[type="radio"] { margin-right: 14px; cursor: pointer; transform: scale(1.2); accent-color: var(--color-caida); }
+
+        /* Estados Validación */
+        .opcion-item.correcta { background: rgba(46,204,113,0.2); border-color: var(--color-exito); }
+        .opcion-item.correcta .opcion-label { color: #fff; font-weight: bold; }
+        .opcion-item.incorrecta { background: rgba(231,76,60,0.2); border-color: var(--color-error); opacity: 0.7; }
+        .opcion-item.elegida-incorrecta { background: rgba(231,76,60,0.25); border-color: var(--color-error); }
+        .icono-resultado { margin-left: auto; font-size: 1.2rem; display: none; }
+        .correcta .icono-resultado { display: block; color: var(--color-exito); }
+        .incorrecta .icono-resultado { display: block; color: var(--color-error); }
+        .elegida-incorrecta .icono-resultado { display: block; color: var(--color-error); }
+
+        /* EXPLICACIÓN DE RESPUESTA */
+        .explicacion { display: none; margin-top: 14px; padding: 12px 16px; background: rgba(46,204,113,0.08); border-left: 3px solid var(--color-exito); border-radius: 0 6px 6px 0; font-size: 0.9rem; color: #ccc; line-height: 1.6; }
+
+        /* CONTROLES */
+        .controles-eval { margin-top: 50px; text-align: center; }
+        .btn-enviar { background: linear-gradient(135deg, var(--color-caida), #d35400); color: #fff; border: none; padding: 16px 45px; font-size: 1.2rem; font-weight: 800; border-radius: 8px; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
+        .btn-enviar:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(230,126,34,0.4); }
+        .btn-enviar:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* PANEL RESULTADO */
+        .panel-resultado { display: none; background: rgba(0,0,0,0.5); border: 2px dashed var(--color-caida); border-radius: 12px; padding: 35px; margin-top: 40px; text-align: center; animation: fadeIn 0.5s ease; }
+        .panel-resultado.activo { display: block; }
+        .nota-final { font-size: 4.5rem; font-weight: 800; margin: 15px 0; }
+        .nota-aprobado { color: var(--color-exito); text-shadow: 0 0 20px rgba(46,204,113,0.4); }
+        .nota-reprobado { color: var(--color-error); text-shadow: 0 0 20px rgba(231,76,60,0.4); }
+        .mensaje-nota { font-size: 1.3rem; color: #fff; margin-bottom: 10px; }
+        .detalle-nota { color: #aaa; font-size: 1rem; margin-bottom: 20px; }
+
+        .btn-reintentar { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 28px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; margin: 5px; }
+        .btn-reintentar:hover { background: rgba(255,255,255,0.2); }
+
+        /* ENVÍO A DRIVE */
+        .estado-envio { margin-top: 20px; padding: 12px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; display: none; }
+        .envio-ok { background: rgba(46,204,113,0.15); border: 1px solid var(--color-exito); color: var(--color-exito); }
+        .envio-error { background: rgba(231,76,60,0.15); border: 1px solid var(--color-error); color: var(--color-error); }
+        .envio-loading { background: rgba(52,152,219,0.15); border: 1px solid var(--color-fisica); color: #4facfe; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        @media (max-width: 600px) {
+            .datos-estudiante { grid-template-columns: 1fr; }
+            .encabezado-eval h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo"><i class="fas fa-flask"></i> LabVirtual W</a>
+    <ul class="menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10</a></li>
+        <li><a href="fisica10_caida_libre.html"><i class="fas fa-arrow-left"></i> Caída Libre</a></li>
+    </ul>
+</nav>
+
+<div class="contenedor">
+    <a href="fisica10_caida_libre.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a Caída Libre</a>
+
+    <div class="encabezado-eval">
+        <h1>📝 Evaluación — Caída Libre</h1>
+        <p>Física 10° · 10 preguntas de selección múltiple · Lee cada pregunta con cuidado y marca la opción correcta.</p>
+    </div>
+
+    <!-- DATOS DEL ESTUDIANTE -->
+    <div class="datos-estudiante">
+        <div class="input-group">
+            <label for="nombre-estudiante"><i class="fas fa-user"></i> Nombre completo</label>
+            <input type="text" id="nombre-estudiante" placeholder="Escribe tu nombre aquí..." required>
+        </div>
+        <div class="input-group">
+            <label for="grado-estudiante"><i class="fas fa-graduation-cap"></i> Grado</label>
+            <select id="grado-estudiante">
+                <option value="">— Selecciona —</option>
+                <option value="10A">10°A</option>
+                <option value="10B">10°B</option>
+                <option value="10C">10°C</option>
+                <option value="10D">10°D</option>
+                <option value="10E">10°E</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- INSTRUCCIONES -->
+    <div class="instrucciones">
+        <p>⚠️ <strong>Instrucciones:</strong> Lee cada pregunta con atención. Selecciona UNA respuesta por pregunta. Al finalizar, haz clic en <strong>"Enviar Evaluación"</strong> para ver tu calificación, la corrección de cada pregunta y el resumen que se enviará al profesor.</p>
+    </div>
+
+    <!-- PREGUNTAS -->
+    <div class="eval-form" id="eval-form">
+
+        <!-- P1 -->
+        <div class="pregunta-card" id="pc1">
+            <div class="pregunta-texto"><span class="num">1.</span> ¿Cuál es el valor de la aceleración de la gravedad (g) en la superficie terrestre?</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="1" data-v="a"><label class="opcion-label"><input type="radio" name="q1" value="a"> a) 10 m/s² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="1" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q1" value="b"> b) 9.8 m/s² <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="1" data-v="c"><label class="opcion-label"><input type="radio" name="q1" value="c"> c) 9.8 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="1" data-v="d"><label class="opcion-label"><input type="radio" name="q1" value="d"> d) 6.67 m/s² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">La aceleración gravitacional en la superficie terrestre es exactamente <strong>g = 9.8 m/s²</strong>. Este valor es una constante universal que actúa siempre hacia el centro de la Tierra.</div>
+        </div>
+
+        <!-- P2 -->
+        <div class="pregunta-card" id="pc2">
+            <div class="pregunta-texto"><span class="num">2.</span> Un objeto se lanza verticalmente hacia ARRIBA. ¿Qué signo tiene la gravedad si tomamos como positivo el sentido hacia arriba?</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="2" data-v="a"><label class="opcion-label"><input type="radio" name="q2" value="a"> a) g = +9.8 m/s² (positiva) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="2" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q2" value="b"> b) g = −9.8 m/s² (negativa) <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="2" data-v="c"><label class="opcion-label"><input type="radio" name="q2" value="c"> c) g = 0 (no actúa en la subida) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="2" data-v="d"><label class="opcion-label"><input type="radio" name="q2" value="d"> d) Depende de la masa del objeto <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">Cuando el objeto <strong>sube</strong> y tomamos hacia arriba como positivo, la gravedad actúa en sentido contrario (hacia abajo), por tanto <strong>g = −9.8 m/s²</strong>.</div>
+        </div>
+
+        <!-- P3 -->
+        <div class="pregunta-card" id="pc3">
+            <div class="pregunta-texto"><span class="num">3.</span> En el punto más alto del tiro vertical, ¿cuál es el valor de la velocidad?</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="3" data-v="a"><label class="opcion-label"><input type="radio" name="q3" value="a"> a) Es máxima <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="3" data-v="b"><label class="opcion-label"><input type="radio" name="q3" value="b"> b) Es igual a la velocidad inicial <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="3" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q3" value="c"> c) Es 0 m/s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="3" data-v="d"><label class="opcion-label"><input type="radio" name="q3" value="d"> d) Es igual a g <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">En el punto más alto, el objeto se detiene momentáneamente antes de comenzar a bajar, por tanto <strong>vf = 0 m/s</strong>. Sin embargo, la aceleración gravitacional sigue siendo g = 9.8 m/s² hacia abajo.</div>
+        </div>
+
+        <!-- P4 -->
+        <div class="pregunta-card" id="pc4">
+            <div class="pregunta-texto"><span class="num">4.</span> ¿Cuál de las siguientes fórmulas relaciona la velocidad final con la altura, SIN usar el tiempo?</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="4" data-v="a"><label class="opcion-label"><input type="radio" name="q4" value="a"> a) vf = v₀ + g·t <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="4" data-v="b"><label class="opcion-label"><input type="radio" name="q4" value="b"> b) h = v₀·t + ½·g·t² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="4" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q4" value="c"> c) vf² = v₀² + 2·g·h <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="4" data-v="d"><label class="opcion-label"><input type="radio" name="q4" value="d"> d) h = ½·g·t² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion"><strong>vf² = v₀² + 2·g·h</strong> es la fórmula que relaciona la velocidad final con la altura sin necesitar el tiempo. Es equivalente a la fórmula del MRUV con "d" reemplazada por "h" y "a" por "g".</div>
+        </div>
+
+        <!-- P5 -->
+        <div class="pregunta-card" id="pc5">
+            <div class="pregunta-texto"><span class="num">5.</span> Una pelota se suelta desde 20 m de altura (v₀ = 0). ¿Cuánto tiempo tarda en llegar al suelo? [Dato: h = ½·g·t²]</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="5" data-v="a"><label class="opcion-label"><input type="radio" name="q5" value="a"> a) t ≈ 1.02 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="5" data-v="b"><label class="opcion-label"><input type="radio" name="q5" value="b"> b) t ≈ 3.00 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="5" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q5" value="c"> c) t ≈ 2.02 s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="5" data-v="d"><label class="opcion-label"><input type="radio" name="q5" value="d"> d) t ≈ 4.08 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">Despejando t: t = √(2h/g) = √(2×20/9.8) = √(4.08) ≈ <strong>2.02 segundos</strong>.</div>
+        </div>
+
+        <!-- P6 -->
+        <div class="pregunta-card" id="pc6">
+            <div class="pregunta-texto"><span class="num">6.</span> Un objeto es lanzado verticalmente hacia arriba con 14.7 m/s. ¿Cuánto tiempo tarda en llegar al punto más alto?</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="6" data-v="a"><label class="opcion-label"><input type="radio" name="q6" value="a"> a) 0.5 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="6" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q6" value="b"> b) 1.5 s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="6" data-v="c"><label class="opcion-label"><input type="radio" name="q6" value="c"> c) 2.0 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="6" data-v="d"><label class="opcion-label"><input type="radio" name="q6" value="d"> d) 3.0 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">t = (vf − v₀)/g = (0 − 14.7)/(−9.8) = <strong>1.5 segundos</strong>.</div>
+        </div>
+
+        <!-- P7 -->
+        <div class="pregunta-card" id="pc7">
+            <div class="pregunta-texto"><span class="num">7.</span> Si el tiempo de subida de un objeto lanzado hacia arriba es de 3 segundos, ¿cuánto tiempo tarda en regresar al punto de lanzamiento? (Suponiendo que cae al mismo nivel)</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="7" data-v="a"><label class="opcion-label"><input type="radio" name="q7" value="a"> a) 3 s (solo el tiempo de bajada) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="7" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q7" value="b"> b) 6 s (subida + bajada) <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="7" data-v="c"><label class="opcion-label"><input type="radio" name="q7" value="c"> c) 4.5 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="7" data-v="d"><label class="opcion-label"><input type="radio" name="q7" value="d"> d) Depende de la velocidad inicial <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">Por simetría del movimiento, el tiempo de bajada = tiempo de subida. Por tanto, <strong>t_total = 2 × 3 = 6 segundos</strong>.</div>
+        </div>
+
+        <!-- P8 -->
+        <div class="pregunta-card" id="pc8">
+            <div class="pregunta-texto"><span class="num">8.</span> Un objeto en caída libre (v₀ = 0) cae durante 4 segundos. ¿Con qué velocidad llega al suelo?</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="8" data-v="a"><label class="opcion-label"><input type="radio" name="q8" value="a"> a) 19.6 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="8" data-v="b"><label class="opcion-label"><input type="radio" name="q8" value="b"> b) 29.4 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="8" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q8" value="c"> c) 39.2 m/s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="8" data-v="d"><label class="opcion-label"><input type="radio" name="q8" value="d"> d) 78.4 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">vf = v₀ + g·t = 0 + (9.8)(4) = <strong>39.2 m/s</strong>.</div>
+        </div>
+
+        <!-- P9 -->
+        <div class="pregunta-card" id="pc9">
+            <div class="pregunta-texto"><span class="num">9.</span> En el movimiento de Caída Libre, ¿qué variable de las fórmulas del M.R.U.V. es reemplazada por "h"?</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="9" data-v="a"><label class="opcion-label"><input type="radio" name="q9" value="a"> a) La velocidad (v) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="9" data-v="b"><label class="opcion-label"><input type="radio" name="q9" value="b"> b) El tiempo (t) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="9" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q9" value="c"> c) La distancia (d) <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="9" data-v="d"><label class="opcion-label"><input type="radio" name="q9" value="d"> d) La aceleración (a) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">En Caída Libre, "a" se reemplaza por "g" (gravedad) y <strong>"d" (distancia) se reemplaza por "h" (altura)</strong>. El resto de las fórmulas es idéntico al M.R.U.V.</div>
+        </div>
+
+        <!-- P10 -->
+        <div class="pregunta-card" id="pc10">
+            <div class="pregunta-texto"><span class="num">10.</span> Una piedra es lanzada hacia arriba con 19.6 m/s desde el borde de un pozo. La piedra sube, baja y cae al fondo del pozo que está 20 m por debajo del punto de lanzamiento. ¿Con qué velocidad llega al fondo? [Dato: vf² = v₀² + 2·g·h, con h = −20 m y g = −9.8 m/s²]</div>
+            <ul class="opciones-lista">
+                <li class="opcion-item" data-q="10" data-v="a"><label class="opcion-label"><input type="radio" name="q10" value="a"> a) 19.6 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="10" data-v="b"><label class="opcion-label"><input type="radio" name="q10" value="b"> b) 24.1 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="10" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q10" value="c"> c) 27.1 m/s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="10" data-v="d"><label class="opcion-label"><input type="radio" name="q10" value="d"> d) 39.2 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+            </ul>
+            <div class="explicacion">vf² = (19.6)² + 2(−9.8)(−20) = 384.16 + 392 = 776.16 → vf = √776.16 ≈ <strong>27.1 m/s</strong> (hacia abajo).</div>
+        </div>
+
+    </div><!-- /.eval-form -->
+
+    <!-- CONTROLES -->
+    <div class="controles-eval">
+        <button class="btn-enviar" id="btn-enviar" onclick="enviarEvaluacion()">
+            <i class="fas fa-paper-plane"></i> Enviar Evaluación
+        </button>
+
+        <!-- PANEL DE RESULTADOS -->
+        <div class="panel-resultado" id="panel-resultado">
+            <div id="emoji-resultado" style="font-size:3rem; margin-bottom:10px;"></div>
+            <div class="nota-final" id="nota-final"></div>
+            <div class="mensaje-nota" id="mensaje-nota"></div>
+            <div class="detalle-nota" id="detalle-nota"></div>
+            <div class="estado-envio" id="estado-envio"></div>
+            <br>
+            <button class="btn-reintentar" onclick="location.href='fisica10_caida_libre.html'">
+                <i class="fas fa-book-open"></i> Repasar el tema
+            </button>
+            <button class="btn-reintentar" onclick="location.reload()">
+                <i class="fas fa-redo"></i> Intentar de nuevo
+            </button>
+            <button class="btn-reintentar" onclick="location.href='fisica10_caida_libre_practica.html'">
+                <i class="fas fa-gamepad"></i> Ir a la Práctica
+            </button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>LabVirtual W · Física 10° · Evaluación — Caída Libre &copy; 2025</p>
+</footer>
+
+<!-- Prof. IA -->
+<script src="profe-ia.js"></script>
+
+<script>
+// ─── URL DEL GOOGLE APPS SCRIPT (Web App) ─────────────────────────────────────
+// Para configurar el envío a Google Sheets:
+// 1. Ve a tu Google Sheets y crea una hoja llamada "Caida Libre"
+// 2. En el menú, ve a Extensiones → Apps Script
+// 3. Pega el código de Apps Script provisto por tu profesor/LabVirtual
+// 4. Despliega como "App web" y copia la URL aquí abajo
+const APPS_SCRIPT_URL = ""; // ← PEGAR AQUÍ LA URL DEL WEB APP DE GOOGLE APPS SCRIPT
+
+// ─── RESPUESTAS CORRECTAS ─────────────────────────────────────────────────────
+const CORRECTAS = { q1:'b', q2:'b', q3:'c', q4:'c', q5:'c', q6:'b', q7:'b', q8:'c', q9:'c', q10:'c' };
+
+function enviarEvaluacion() {
+    const nombre = document.getElementById('nombre-estudiante').value.trim();
+    const grado = document.getElementById('grado-estudiante').value;
+
+    if (!nombre) { alert('Por favor ingresa tu nombre antes de enviar.'); return; }
+    if (!grado)  { alert('Por favor selecciona tu grado antes de enviar.'); return; }
+
+    let correctas = 0;
+    const detalles = {};
+
+    // Evaluar preguntas
+    for (let q = 1; q <= 10; q++) {
+        const sel = document.querySelector(`input[name="q${q}"]:checked`);
+        const respEstudiante = sel ? sel.value : null;
+        const respCorrecta = CORRECTAS[`q${q}`];
+        const esCorrecta = respEstudiante === respCorrecta;
+        if (esCorrecta) correctas++;
+        detalles[`q${q}`] = { respEstudiante, respCorrecta, esCorrecta };
+
+        // Aplicar clases visuales
+        const opciones = document.querySelectorAll(`[data-q="${q}"]`);
+        opciones.forEach(op => {
+            const v = op.getAttribute('data-v');
+            if (op.getAttribute('data-correct') === 'true') {
+                op.classList.add('correcta');
+            } else if (v === respEstudiante && !esCorrecta) {
+                op.classList.add('elegida-incorrecta');
+            }
+        });
+
+        // Mostrar explicación
+        const cardId = `pc${q}`;
+        const expl = document.querySelector(`#${cardId} .explicacion`);
+        if (expl) expl.style.display = 'block';
+    }
+
+    // Bloquear formulario
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+    document.getElementById('btn-enviar').disabled = true;
+
+    // Calcular nota
+    const puntaje = (correctas / 10) * 10;
+    const aprobado = puntaje >= 6;
+
+    // Mostrar panel
+    const panel = document.getElementById('panel-resultado');
+    panel.classList.add('activo');
+
+    document.getElementById('emoji-resultado').textContent = aprobado ? '🎉' : '📚';
+    const notaEl = document.getElementById('nota-final');
+    notaEl.textContent = puntaje.toFixed(1) + ' / 10';
+    notaEl.className = 'nota-final ' + (aprobado ? 'nota-aprobado' : 'nota-reprobado');
+
+    document.getElementById('mensaje-nota').textContent = aprobado
+        ? '¡Felicitaciones! Aprobaste la evaluación de Caída Libre.'
+        : 'No alcanzaste el mínimo. ¡Repasa el tema y vuelve a intentarlo!';
+
+    document.getElementById('detalle-nota').textContent =
+        `${nombre} · Grado ${grado} · Respuestas correctas: ${correctas}/10`;
+
+    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Enviar a Google Sheets si la URL está configurada
+    if (APPS_SCRIPT_URL) {
+        const estadoEnvio = document.getElementById('estado-envio');
+        estadoEnvio.className = 'estado-envio envio-loading';
+        estadoEnvio.style.display = 'block';
+        estadoEnvio.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando resultados al profesor...';
+
+        const payload = {
+            timestamp: new Date().toLocaleString('es-CO'),
+            nombre,
+            grado,
+            tema: 'Caída Libre',
+            puntaje: puntaje.toFixed(1),
+            correctas,
+            total: 10,
+            respuestas: JSON.stringify(detalles)
+        };
+
+        fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(() => {
+            estadoEnvio.className = 'estado-envio envio-ok';
+            estadoEnvio.innerHTML = '<i class="fas fa-check-circle"></i> ✅ Resultados enviados al profesor correctamente.';
+        }).catch(() => {
+            estadoEnvio.className = 'estado-envio envio-error';
+            estadoEnvio.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ❌ No se pudieron enviar los resultados. Muéstrale esta pantalla al profesor.';
+        });
+    }
+}
+</script>
+</body>
+</html>
