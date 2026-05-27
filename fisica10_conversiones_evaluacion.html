@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación: Conversión de Unidades - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Renderizado de fórmulas matemáticas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-evaluacion: #e74c3c;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        
+        .header-evaluacion { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(231, 76, 60, 0.1); border-radius: 15px; border: 1px solid rgba(231, 76, 60, 0.3); }
+        .header-evaluacion h1 { color: var(--color-evaluacion); font-size: 2.5rem; margin-bottom: 10px; }
+
+        /* Formulario estudiante */
+        .info-estudiante { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 600; color: #ccc; }
+        .input-group input, .input-group select { padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem; }
+        .input-group input:focus, .input-group select:focus { outline: none; border-color: var(--color-fisica); }
+
+        /* Preguntas */
+        .pregunta-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .pregunta-card:hover { border-color: rgba(52, 152, 219, 0.3); }
+        .pregunta-num { background: var(--color-evaluacion); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; }
+        .pregunta-texto { font-size: 1.15rem; margin-bottom: 20px; line-height: 1.6; }
+
+        /* Opciones Radio */
+        .opciones-lista { display: flex; flex-direction: column; gap: 12px; }
+        .opcion-item { display: flex; align-items: center; gap: 15px; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .opcion-item:hover { background: rgba(255,255,255,0.08); }
+        .opcion-item input[type="radio"] { width: 20px; height: 20px; accent-color: var(--color-evaluacion); cursor: pointer; }
+        .opcion-item label { flex: 1; cursor: pointer; font-size: 1.05rem; }
+
+        .btn-enviar { width: 100%; padding: 20px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border: none; border-radius: 10px; font-size: 1.3rem; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4); margin-top: 20px; }
+        .btn-enviar:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(231, 76, 60, 0.6); }
+
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        /* Resultados */
+        #pantalla-resultados { display: none; margin-top: 40px; text-align: center; background: rgba(20, 20, 35, 0.95); padding: 50px 30px; border-radius: 15px; border: 2px solid #2ecc71; animation: fadeIn 1s; }
+        .nota-final { font-size: 5rem; font-weight: 800; color: #2ecc71; margin: 20px 0; text-shadow: 0 0 20px rgba(46, 204, 113, 0.5); }
+        
+        .correccion-card { text-align: left; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #3498db; }
+        .resp-correcta { color: #2ecc71; font-weight: bold; }
+        .resp-incorrecta { color: #e74c3c; font-weight: bold; text-decoration: line-through; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 600px) { .info-estudiante { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <a href="fisica10_conversiones_practica.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Práctica</a>
+
+        <div class="header-evaluacion">
+            <h1><i class="fa-solid fa-clipboard-list"></i> Evaluación Final</h1>
+            <p><strong>Tema: Conversión de Unidades</strong></p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #ccc;">Esta evaluación consta de 10 preguntas. Lee cuidadosamente cada enunciado antes de seleccionar tu respuesta.</p>
+        </div>
+
+        <!-- Formulario -->
+        <div class="info-estudiante" id="datos-estudiante">
+            <div class="input-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+            </div>
+            <div class="input-group">
+                <label for="grado">Grado / Sección:</label>
+                <select id="grado" required>
+                    <option value="">Selecciona tu grado...</option>
+                    <option value="10-1">10-1</option>
+                    <option value="10-2">10-2</option>
+                    <option value="10-3">10-3</option>
+                    <option value="10-4">10-4</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="cuestionario">
+            <!-- P1 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 1</div>
+                <div class="pregunta-texto">¿Cuál es el factor de conversión correcto para pasar de kilómetros a metros?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p1" value="a"> a) Multiplicar por 100</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="b"> b) Multiplicar por 1000</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="c"> c) Dividir entre 1000</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="d"> d) Multiplicar por 3.6</label>
+                </div>
+            </div>
+
+            <!-- P2 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 2</div>
+                <div class="pregunta-texto">Una cancha de fútbol mide 120 metros de largo. ¿A cuántos centímetros equivale esto?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p2" value="a"> a) 12000 cm</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="b"> b) 1200 cm</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="c"> c) 1.2 cm</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="d"> d) 0.12 cm</label>
+                </div>
+            </div>
+
+            <!-- P3 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 3</div>
+                <div class="pregunta-texto">¿Cuántos segundos hay exactamente en 2 horas?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p3" value="a"> a) 120 s</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="b"> b) 3600 s</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="c"> c) 7200 s</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="d"> d) 72000 s</label>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 4</div>
+                <div class="pregunta-texto">Para pasar de m/s a km/h, una forma directa es multiplicar el valor por:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p4" value="a"> a) 1000</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="b"> b) 3.6</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="c"> c) 1/3.6</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="d"> d) 3600</label>
+                </div>
+            </div>
+
+            <!-- P5 -->
+            <div class="pregunta-card" data-correcta="d">
+                <div class="pregunta-num">Pregunta 5</div>
+                <div class="pregunta-texto">Un corredor recorre una pista a 10 m/s. ¿Cuál es su velocidad en km/h?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p5" value="a"> a) 100 km/h</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="b"> b) 10 km/h</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="c"> c) 3.6 km/h</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="d"> d) 36 km/h</label>
+                </div>
+            </div>
+
+            <!-- P6 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 6</div>
+                <div class="pregunta-texto">La masa de una máquina es de 4.5 toneladas. ¿A cuántos gramos equivale esto?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p6" value="a"> a) 4,500,000 g</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="b"> b) 45,000 g</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="c"> c) 4,500 g</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="d"> d) 450 g</label>
+                </div>
+            </div>
+
+            <!-- P7 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 7</div>
+                <div class="pregunta-texto">Un límite de velocidad de carretera es de 108 km/h. Expresado en m/s es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p7" value="a"> a) 10 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="b"> b) 20 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="c"> c) 30 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="d"> d) 40 m/s</label>
+                </div>
+            </div>
+
+            <!-- P8 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 8</div>
+                <div class="pregunta-texto">Para transformar años a días en problemas de física de grado décimo, ¿cuál es el factor de conversión estandarizado?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p8" value="a"> a) Multiplicar por 365</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="b"> b) Multiplicar por 12</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="c"> c) Multiplicar por 365.25</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="d"> d) Dividir entre 365</label>
+                </div>
+            </div>
+
+            <!-- P9 -->
+            <div class="pregunta-card" data-correcta="d">
+                <div class="pregunta-num">Pregunta 9</div>
+                <div class="pregunta-texto">Convertir 250 milímetros (mm) a metros (m):</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p9" value="a"> a) 2.5 m</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="b"> b) 25 m</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="c"> c) 0.025 m</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="d"> d) 0.25 m</label>
+                </div>
+            </div>
+
+            <!-- P10 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 10</div>
+                <div class="pregunta-texto">¿Qué representa físicamente una conversión de unidades?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p10" value="a"> a) Un cambio en la magnitud real del objeto</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="b"> b) Un cambio en el lenguaje o escala de medición, manteniendo la misma cantidad física real</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="c"> c) Un aumento en la precisión de la medida</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="d"> d) Ninguna de las anteriores</label>
+                </div>
+            </div>
+
+            <button class="btn-enviar" onclick="calificar()">
+                <i class="fa-solid fa-paper-plane"></i> Enviar Evaluación y Ver Calificación
+            </button>
+        </div>
+
+        <!-- PANTALLA RESULTADOS -->
+        <div id="pantalla-resultados">
+            <h2>Resultados Oficiales</h2>
+            <p style="font-size: 1.2rem; margin-top: 10px;" id="info-res-estudiante">Estudiante</p>
+            
+            <div class="nota-final" id="nota-numero">10/10</div>
+            
+            <h3 id="mensaje-motivacional" style="margin-bottom: 30px;">¡Excelente trabajo!</h3>
+            
+            <!-- Botón simulado para conectar a Google Sheets en el futuro -->
+            <button style="background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; color: #2ecc71; padding: 10px 20px; border-radius: 5px; cursor: not-allowed; margin-bottom: 40px;" title="Pendiente configurar URL de Google Apps Script">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Resultado enviado a Google Drive
+            </button>
+
+            <div id="correcciones" style="text-align: left;">
+                <!-- Aquí van las correcciones JS -->
+            </div>
+            
+            <a href="fisica_10.html" class="btn-enviar" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none; background: linear-gradient(135deg, #3498db, #2980b9); box-shadow: none;">Volver al Menú Principal</a>
+        </div>
+
+    </div>
+
+    <script>
+        function calificar() {
+            // Validación de datos
+            const nombre = document.getElementById('nombre').value;
+            const grado = document.getElementById('grado').value;
+            
+            if(!nombre || !grado) {
+                alert("Por favor ingresa tu nombre y selecciona tu grado antes de enviar.");
+                return;
+            }
+
+            let correctas = 0;
+            const total = 10;
+            const correccionesDiv = document.getElementById('correcciones');
+            correccionesDiv.innerHTML = '<h3 style="color: #fff; margin-bottom: 20px;">Revisión Detallada:</h3>';
+
+            // Evaluar preguntas
+            const preguntas = document.querySelectorAll('.pregunta-card');
+            
+            preguntas.forEach((preg, index) => {
+                const respCorrecta = preg.getAttribute('data-correcta');
+                const radios = preg.querySelectorAll('input[type="radio"]');
+                let respUsuario = null;
+                let textoUsuario = "No respondida";
+                let textoCorrecto = "";
+
+                radios.forEach(r => {
+                    if(r.checked) respUsuario = r.value;
+                    if(r.value === respCorrecta) textoCorrecto = r.parentElement.innerText;
+                    if(r.checked) textoUsuario = r.parentElement.innerText;
+                });
+
+                if(respUsuario === respCorrecta) {
+                    correctas++;
+                }
+
+                // Generar HTML de corrección
+                let claseCSS = (respUsuario === respCorrecta) ? "resp-correcta" : "resp-incorrecta";
+                let icono = (respUsuario === respCorrecta) ? "<i class='fa-solid fa-check' style='color:#2ecc71'></i>" : "<i class='fa-solid fa-xmark' style='color:#e74c3c'></i>";
+                
+                let cardHTML = `
+                <div class="correccion-card">
+                    <p style="color: #fff; margin-bottom: 10px;"><strong>Pregunta ${index + 1}:</strong> ${preg.querySelector('.pregunta-texto').innerText}</p>
+                    <p>Tu respuesta: <span class="${claseCSS}">${icono} ${textoUsuario}</span></p>
+                `;
+                
+                if(respUsuario !== respCorrecta) {
+                    cardHTML += `<p style="margin-top: 5px;">Respuesta correcta: <span class="resp-correcta">${textoCorrecto}</span></p>`;
+                }
+                
+                cardHTML += `</div>`;
+                correccionesDiv.innerHTML += cardHTML;
+            });
+
+            // Mostrar resultados
+            document.getElementById('datos-estudiante').style.display = 'none';
+            document.getElementById('cuestionario').style.display = 'none';
+            
+            const pantallaRes = document.getElementById('pantalla-resultados');
+            pantallaRes.style.display = 'block';
+            window.scrollTo(0, 0);
+
+            document.getElementById('info-res-estudiante').innerText = `${nombre} | Grado ${grado}`;
+            
+            const notaElement = document.getElementById('nota-numero');
+            notaElement.innerText = `${correctas}/${total}`;
+            
+            const mensaje = document.getElementById('mensaje-motivacional');
+            if(correctas === 10) {
+                mensaje.innerText = "¡Perfección absoluta! Eres un genio de las unidades.";
+                notaElement.style.color = "#2ecc71";
+            } else if(correctas >= 7) {
+                mensaje.innerText = "¡Muy buen trabajo! Tienes bases sólidas.";
+                notaElement.style.color = "#f1c40f";
+            } else if(correctas >= 4) {
+                mensaje.innerText = "Pasaste, pero necesitas repasar un poco más la práctica interactiva.";
+                notaElement.style.color = "#f39c12";
+            } else {
+                mensaje.innerText = "Debes repasar la teoría de los factores de conversión e intentarlo de nuevo.";
+                notaElement.style.color = "#e74c3c";
+            }
+
+            // AQUI IRIÁ EL CÓDIGO FETCH PARA GOOGLE APPS SCRIPT
+            // fetch('URL_DE_TU_APPS_SCRIPT', { method: 'POST', mode: 'no-cors', body: formData })
+        }
+    </script>
+</body>
+</html>
