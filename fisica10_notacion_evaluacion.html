@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación: Notación Científica - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; --color-evaluacion: #e74c3c; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-evaluacion { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(231, 76, 60, 0.1); border-radius: 15px; border: 1px solid rgba(231, 76, 60, 0.3); }
+        .header-evaluacion h1 { color: var(--color-evaluacion); font-size: 2.5rem; margin-bottom: 10px; }
+
+        .info-estudiante { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 600; color: #ccc; }
+        .input-group input, .input-group select { padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem; }
+        .input-group input:focus, .input-group select:focus { outline: none; border-color: var(--color-fisica); }
+
+        .pregunta-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .pregunta-card:hover { border-color: rgba(52, 152, 219, 0.3); }
+        .pregunta-num { background: var(--color-evaluacion); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; }
+        .pregunta-texto { font-size: 1.15rem; margin-bottom: 20px; line-height: 1.6; }
+
+        .opciones-lista { display: flex; flex-direction: column; gap: 12px; }
+        .opcion-item { display: flex; align-items: center; gap: 15px; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .opcion-item:hover { background: rgba(255,255,255,0.08); }
+        .opcion-item input[type="radio"] { width: 20px; height: 20px; accent-color: var(--color-evaluacion); cursor: pointer; }
+        .opcion-item label { flex: 1; cursor: pointer; font-size: 1.05rem; }
+
+        .btn-enviar { width: 100%; padding: 20px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border: none; border-radius: 10px; font-size: 1.3rem; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4); margin-top: 20px; }
+        .btn-enviar:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(231, 76, 60, 0.6); }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        #pantalla-resultados { display: none; margin-top: 40px; text-align: center; background: rgba(20, 20, 35, 0.95); padding: 50px 30px; border-radius: 15px; border: 2px solid #2ecc71; animation: fadeIn 1s; }
+        .nota-final { font-size: 5rem; font-weight: 800; color: #2ecc71; margin: 20px 0; text-shadow: 0 0 20px rgba(46, 204, 113, 0.5); }
+        
+        .correccion-card { text-align: left; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #3498db; }
+        .resp-correcta { color: #2ecc71; font-weight: bold; }
+        .resp-incorrecta { color: #e74c3c; font-weight: bold; text-decoration: line-through; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 600px) { .info-estudiante { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <a href="fisica10_notacion_practica.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Práctica</a>
+
+        <div class="header-evaluacion">
+            <h1><i class="fa-solid fa-clipboard-list"></i> Evaluación Final</h1>
+            <p><strong>Tema: Notación Científica</strong></p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #ccc;">Esta evaluación consta de 10 preguntas para validar tu comprensión en física y potencias de 10.</p>
+        </div>
+
+        <div class="info-estudiante" id="datos-estudiante">
+            <div class="input-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+            </div>
+            <div class="input-group">
+                <label for="grado">Grado / Sección:</label>
+                <select id="grado" required>
+                    <option value="">Selecciona tu grado...</option>
+                    <option value="10-1">10-1</option>
+                    <option value="10-2">10-2</option>
+                    <option value="10-3">10-3</option>
+                    <option value="10-4">10-4</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="cuestionario">
+            <!-- P1 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 1</div>
+                <div class="pregunta-texto">¿Cuál es la regla fundamental para el coeficiente (a) en notación científica?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p1" value="a"> a) Puede ser cualquier número decimal.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="b"> b) Debe ser mayor o igual a 1 y menor que 10.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="c"> c) Debe ser mayor o igual a 10 y menor a 100.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="d"> d) Solo puede ser un número entero.</label>
+                </div>
+            </div>
+
+            <!-- P2 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 2</div>
+                <div class="pregunta-texto">El número 4,500,000 expresado en notación científica es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p2" value="a"> a) \( 45 \times 10^5 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="b"> b) \( 4.5 \times 10^5 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="c"> c) \( 4.5 \times 10^6 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="d"> d) \( 4.5 \times 10^{-6} \)</label>
+                </div>
+            </div>
+
+            <!-- P3 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 3</div>
+                <div class="pregunta-texto">El número decimal 0.00038 expresado en notación científica es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p3" value="a"> a) \( 3.8 \times 10^{-4} \)</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="b"> b) \( 3.8 \times 10^4 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="c"> c) \( 38 \times 10^{-5} \)</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="d"> d) \( 3.8 \times 10^{-3} \)</label>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="pregunta-card" data-correcta="d">
+                <div class="pregunta-num">Pregunta 4</div>
+                <div class="pregunta-texto">¿Qué número estándar representa \( 7.2 \times 10^{-3} \)?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p4" value="a"> a) 7200</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="b"> b) 0.072</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="c"> c) 0.00072</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="d"> d) 0.0072</label>
+                </div>
+            </div>
+
+            <!-- P5 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 5</div>
+                <div class="pregunta-texto">En la notación científica, cuando un número original es muy grande (ej. la masa del Sol), el exponente de la base 10 será:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p5" value="a"> a) Negativo</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="b"> b) Positivo</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="c"> c) Cero</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="d"> d) Decimal</label>
+                </div>
+            </div>
+
+            <!-- P6 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 6</div>
+                <div class="pregunta-texto">El resultado de multiplicar \( (3 \times 10^2) \times (2 \times 10^3) \) es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p6" value="a"> a) \( 5 \times 10^5 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="b"> b) \( 6 \times 10^5 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="c"> c) \( 6 \times 10^6 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="d"> d) \( 5 \times 10^6 \)</label>
+                </div>
+            </div>
+
+            <!-- P7 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 7</div>
+                <div class="pregunta-texto">Al dividir \( (8 \times 10^6) \) entre \( (2 \times 10^2) \), el resultado correcto es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p7" value="a"> a) \( 4 \times 10^4 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="b"> b) \( 4 \times 10^3 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="c"> c) \( 6 \times 10^4 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="d"> d) \( 4 \times 10^8 \)</label>
+                </div>
+            </div>
+
+            <!-- P8 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 8</div>
+                <div class="pregunta-texto">¿Cuál de estos números NO está escrito correctamente en notación científica?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p8" value="a"> a) \( 1.5 \times 10^{-2} \)</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="b"> b) \( 9.9 \times 10^{15} \)</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="c"> c) \( 10.5 \times 10^3 \)</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="d"> d) \( 5 \times 10^8 \)</label>
+                </div>
+            </div>
+
+            <!-- P9 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 9</div>
+                <div class="pregunta-texto">Si la carga de un electrón es \( 1.6 \times 10^{-19} \) Coulombs, significa que es un número:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p9" value="a"> a) Infinito</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="b"> b) Muy, muy grande</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="c"> c) Extremadamente pequeño y cercano a cero</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="d"> d) Negativo (menor que cero en la recta numérica)</label>
+                </div>
+            </div>
+
+            <!-- P10 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 10</div>
+                <div class="pregunta-texto">Para expresar 540 millones en notación científica, debemos usar el exponente:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p10" value="a"> a) 7</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="b"> b) 8 (es \( 5.4 \times 10^8 \))</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="c"> c) 9</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="d"> d) -8</label>
+                </div>
+            </div>
+
+            <button class="btn-enviar" onclick="calificar()">
+                <i class="fa-solid fa-paper-plane"></i> Enviar Evaluación y Ver Calificación
+            </button>
+        </div>
+
+        <!-- PANTALLA RESULTADOS -->
+        <div id="pantalla-resultados">
+            <h2>Resultados Oficiales</h2>
+            <p style="font-size: 1.2rem; margin-top: 10px;" id="info-res-estudiante">Estudiante</p>
+            
+            <div class="nota-final" id="nota-numero">10/10</div>
+            <h3 id="mensaje-motivacional" style="margin-bottom: 30px;">¡Excelente trabajo!</h3>
+            
+            <button style="background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; color: #2ecc71; padding: 10px 20px; border-radius: 5px; margin-bottom: 40px;">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Resultado guardado en la plataforma
+            </button>
+
+            <div id="correcciones" style="text-align: left;"></div>
+            
+            <a href="fisica_10.html" class="btn-enviar" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none; background: linear-gradient(135deg, #3498db, #2980b9);">Volver al Menú Principal</a>
+        </div>
+
+    </div>
+
+    <script>
+        function calificar() {
+            const nombre = document.getElementById('nombre').value;
+            const grado = document.getElementById('grado').value;
+            if(!nombre || !grado) { alert("Por favor ingresa tu nombre y selecciona tu grado antes de enviar."); return; }
+
+            let correctas = 0; const total = 10;
+            const correccionesDiv = document.getElementById('correcciones');
+            correccionesDiv.innerHTML = '<h3 style="color: #fff; margin-bottom: 20px;">Revisión Detallada:</h3>';
+
+            const preguntas = document.querySelectorAll('.pregunta-card');
+            preguntas.forEach((preg, index) => {
+                const respCorrecta = preg.getAttribute('data-correcta');
+                const radios = preg.querySelectorAll('input[type="radio"]');
+                let respUsuario = null, textoUsuario = "No respondida", textoCorrecto = "";
+
+                radios.forEach(r => {
+                    if(r.checked) respUsuario = r.value;
+                    if(r.value === respCorrecta) textoCorrecto = r.parentElement.innerText;
+                    if(r.checked) textoUsuario = r.parentElement.innerText;
+                });
+
+                if(respUsuario === respCorrecta) correctas++;
+
+                let claseCSS = (respUsuario === respCorrecta) ? "resp-correcta" : "resp-incorrecta";
+                let icono = (respUsuario === respCorrecta) ? "<i class='fa-solid fa-check' style='color:#2ecc71'></i>" : "<i class='fa-solid fa-xmark' style='color:#e74c3c'></i>";
+                
+                let cardHTML = `<div class="correccion-card">
+                    <p style="color: #fff; margin-bottom: 10px;"><strong>Pregunta ${index + 1}:</strong> ${preg.querySelector('.pregunta-texto').innerHTML}</p>
+                    <p>Tu respuesta: <span class="${claseCSS}">${icono} ${textoUsuario}</span></p>`;
+                if(respUsuario !== respCorrecta) cardHTML += `<p style="margin-top: 5px;">Respuesta correcta: <span class="resp-correcta">${textoCorrecto}</span></p>`;
+                cardHTML += `</div>`;
+                correccionesDiv.innerHTML += cardHTML;
+            });
+
+            document.getElementById('datos-estudiante').style.display = 'none';
+            document.getElementById('cuestionario').style.display = 'none';
+            
+            const pantallaRes = document.getElementById('pantalla-resultados');
+            pantallaRes.style.display = 'block';
+            window.scrollTo(0, 0);
+
+            document.getElementById('info-res-estudiante').innerText = `${nombre} | Grado ${grado}`;
+            const notaElement = document.getElementById('nota-numero');
+            notaElement.innerText = `${correctas}/${total}`;
+            
+            const mensaje = document.getElementById('mensaje-motivacional');
+            if(correctas === 10) { mensaje.innerText = "¡Perfección! Tienes una precisión científica."; notaElement.style.color = "#2ecc71"; }
+            else if(correctas >= 7) { mensaje.innerText = "¡Muy bien! Tienes buen manejo de las potencias de 10."; notaElement.style.color = "#f1c40f"; }
+            else if(correctas >= 4) { mensaje.innerText = "Aprobado, pero asegúrate de repasar la teoría de los exponentes."; notaElement.style.color = "#f39c12"; }
+            else { mensaje.innerText = "Sigue practicando, necesitas reforzar las reglas matemáticas."; notaElement.style.color = "#e74c3c"; }
+            
+            // Re-render mathjax for feedback
+            if(window.MathJax) MathJax.typeset();
+        }
+    </script>
+</body>
+</html>
