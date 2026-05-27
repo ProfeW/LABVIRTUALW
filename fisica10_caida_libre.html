@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caída Libre - LabVirtual W</title>
+    <meta name="description" content="Aprende Caída Libre en Física 10°: definición, fórmulas, ejercicios resueltos y más.">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-acento1: #f39c12;
+            --color-acento2: #e74c3c;
+            --color-acento3: #9b59b6;
+            --color-caida: #e67e22;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)),
+                url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu > li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .menu > li > a:hover { background: rgba(255,255,255,0.1); color: #4facfe; }
+        .submenu { display: none; position: absolute; top: 100%; left: 0; background: rgba(20,20,35,0.95); backdrop-filter: blur(15px); min-width: 180px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255,255,255,0.1); padding-left: 25px; }
+
+        /* --- CONTENIDO --- */
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        /* CABECERA */
+        .encabezado-leccion { border-bottom: 2px solid rgba(230, 126, 34, 0.4); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        .encabezado-leccion h1 { font-size: 4rem; color: var(--color-caida); margin-bottom: 10px; text-shadow: 0px 4px 10px rgba(0,0,0,0.5); letter-spacing: 2px; }
+        .encabezado-leccion p { color: #ccc; font-size: 1.2rem; }
+        .emoji-titulo { font-size: 3.5rem; display: block; margin-bottom: 5px; animation: caer 2s ease-in-out infinite alternate; }
+        @keyframes caer { from { transform: translateY(0); } to { transform: translateY(10px); } }
+
+        /* SECCIONES */
+        .seccion-contenido { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .seccion-contenido h2 { color: var(--color-caida); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; border-left: 4px solid var(--color-caida); padding-left: 15px; }
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
+        .seccion-contenido ul { margin-left: 20px; color: #ddd; line-height: 2; }
+        .seccion-contenido li { margin-bottom: 6px; }
+        .highlight { color: var(--color-caida); font-weight: 700; }
+
+        /* CAJA DE NOTA IMPORTANTE */
+        .nota-importante { background: rgba(230, 126, 34, 0.1); border-left: 5px solid var(--color-caida); border-radius: 0 10px 10px 0; padding: 20px 25px; margin: 20px 0; }
+        .nota-importante h4 { color: var(--color-caida); margin-bottom: 8px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+        .nota-importante p { color: #ddd; line-height: 1.6; margin: 0; }
+
+        /* FÓRMULAS */
+        .seccion-formula { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 25px; margin-bottom: 30px; }
+        .seccion-formula h3 { color: #fff; margin-bottom: 15px; font-size: 1.4rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+
+        .grid-formulas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 10px; }
+        .caja-formula-cl {
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.1), rgba(230, 126, 34, 0.05));
+            border: 2px dashed var(--color-caida);
+            border-radius: 12px; padding: 20px; text-align: center;
+        }
+        .formula-nombre { font-size: 0.85rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .formula-expr { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 1px; margin-bottom: 8px; }
+        .formula-desc { font-size: 0.82rem; color: #bbb; line-height: 1.5; }
+
+        /* TABLA DE VARIABLES */
+        .tabla-vars { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .tabla-vars th { background: rgba(230,126,34,0.2); color: var(--color-caida); padding: 12px 15px; text-align: left; font-size: 0.95rem; }
+        .tabla-vars td { padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ddd; font-size: 0.95rem; }
+        .tabla-vars tr:hover td { background: rgba(255,255,255,0.02); }
+        .var-simbolo { font-weight: 800; color: #fff; font-size: 1.1rem; }
+
+        /* BTN PRACTICA DESPEJES */
+        .btn-despejes { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(52,152,219,0.1)); border: 1px solid var(--color-fisica); color: #4facfe; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.05rem; transition: 0.3s; margin-top: 10px; }
+        .btn-despejes:hover { background: rgba(52,152,219,0.3); transform: translateX(5px); }
+
+        /* EJERCICIOS */
+        .ejercicio-tarjeta { background: rgba(20,20,35,0.6); border-left: 4px solid var(--color-caida); padding: 25px; margin-bottom: 25px; border-radius: 0 12px 12px 0; }
+        .ejercicio-tarjeta h3 { margin-bottom: 12px; font-size: 1.3rem; color: var(--color-caida); display: flex; align-items: center; gap: 10px; }
+        .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 12px 15px; border-radius: 5px; border-left: 3px solid var(--color-acento1); line-height: 1.6; }
+
+        .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 700; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .lista-datos { list-style: none; margin-left: 5px; color: #ddd; line-height: 2; }
+        .lista-datos li strong { color: #fff; font-size: 1.1rem; display: inline-block; width: 50px; }
+        .dato-ausente { color: var(--color-acento2); font-style: italic; }
+        .formula-usada { font-size: 1.6rem; font-weight: 800; text-align: center; color: #fff; background: rgba(230,126,34,0.1); border: 1px dashed var(--color-caida); padding: 12px; border-radius: 8px; margin: 10px 0; }
+        .sustitucion { font-size: 1.1rem; text-align: center; color: #ddd; margin: 8px 0; }
+        .resultado-final { font-size: 1.4rem; font-weight: 800; text-align: center; color: var(--color-caida); background: rgba(230,126,34,0.15); padding: 14px; border-radius: 8px; margin-top: 12px; }
+
+        /* NOTA ACLARATORIA EJERCICIO AVANZADO */
+        .badge-avanzado { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #9b59b6, #8e44ad); color: #fff; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-left: 10px; vertical-align: middle; }
+
+        /* BOTONES DE NAVEGACIÓN INFERIORES */
+        .botones-navegacion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+        .btn-nav { display: inline-flex; align-items: center; gap: 12px; padding: 18px 36px; border-radius: 10px; font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; }
+        .btn-practica { background: linear-gradient(135deg, #27ae60, #2ecc71); color: #fff; box-shadow: 0 6px 20px rgba(46,204,113,0.3); }
+        .btn-practica:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(46,204,113,0.5); }
+        .btn-evaluacion { background: linear-gradient(135deg, var(--color-caida), #d35400); color: #fff; box-shadow: 0 6px 20px rgba(230,126,34,0.3); }
+        .btn-evaluacion:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(230,126,34,0.5); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); }
+    </style>
+</head>
+<body>
+
+<!-- NAVEGACIÓN -->
+<nav>
+    <a href="index.html" class="logo"><i class="fas fa-flask"></i> LabVirtual W</a>
+    <ul class="menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li>
+            <a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10 <i class="fas fa-chevron-down" style="font-size:0.75rem"></i></a>
+            <ul class="submenu">
+                <li><a href="fisica10_magnitudes.html">📐 Magnitudes</a></li>
+                <li><a href="fisica10_mru.html">🚗 M.R.U.</a></li>
+                <li><a href="fisica10_mruv.html">🚀 M.R.U.V.</a></li>
+                <li><a href="fisica10_aceleracion.html">⚡ Aceleración</a></li>
+                <li><a href="fisica10_caida_libre.html" style="color:#e67e22; font-weight:700;">🍎 Caída Libre</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<div class="contenedor">
+    <a href="fisica_10.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a Física 10°</a>
+
+    <!-- ENCABEZADO -->
+    <div class="encabezado-leccion">
+        <span class="emoji-titulo">🍎</span>
+        <h1>Caída Libre</h1>
+        <p>Física 10° · Cinemática · LabVirtual W</p>
+    </div>
+
+    <!-- SECCIÓN 1: DEFINICIÓN -->
+    <div class="seccion-contenido">
+        <h2><i class="fas fa-book-open"></i> ¿Qué es la Caída Libre?</h2>
+        <p>
+            La <span class="highlight">Caída Libre</span> es el movimiento que experimenta un cuerpo cuando <strong>cae únicamente bajo la influencia de la gravedad</strong>, sin que el aire u otras fuerzas lo afecten (despreciando la resistencia del aire).
+        </p>
+        <p>
+            Es un caso especial del <strong>Movimiento Rectilíneo Uniformemente Variado (M.R.U.V.)</strong>, ya que el cuerpo experimenta una aceleración constante hacia abajo debida a la fuerza de gravedad terrestre.
+        </p>
+        <p>
+            La aceleración de la gravedad en la superficie terrestre tiene un valor constante de aproximadamente:
+        </p>
+        <div style="text-align:center; font-size:2rem; font-weight:800; color:var(--color-caida); margin: 15px 0; background: rgba(230,126,34,0.1); padding:15px; border-radius:10px; border: 2px dashed var(--color-caida);">
+            g = 9.8 m/s²
+        </div>
+        <p>
+            Esta aceleración actúa <strong>siempre hacia abajo</strong> (hacia el centro de la Tierra), independientemente de si el objeto sube, baja o está en el punto más alto de su trayectoria.
+        </p>
+    </div>
+
+    <!-- SECCIÓN 2: IMPORTANCIA -->
+    <div class="seccion-contenido">
+        <h2><i class="fas fa-star"></i> Importancia y Aplicaciones</h2>
+        <p>El estudio de la Caída Libre es fundamental en física porque nos permite comprender y predecir el comportamiento de objetos en situaciones cotidianas:</p>
+        <ul>
+            <li>🍎 La <strong>caída de objetos</strong> desde una altura determinada (frutas de un árbol, objetos que se caen).</li>
+            <li>🏀 El <strong>tiro vertical</strong>: lanzar una pelota hacia arriba y calcular cuándo regresa.</li>
+            <li>🏗️ En <strong>ingeniería y construcción</strong>: calcular impactos, diseñar estructuras de seguridad.</li>
+            <li>🚀 En <strong>aeronáutica y física espacial</strong>: las naves en órbita están en caída libre constante.</li>
+            <li>⚕️ En <strong>medicina</strong>: análisis de caídas para prevención de lesiones.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN 3: FÓRMULAS -->
+    <div class="seccion-contenido">
+        <h2><i class="fas fa-square-root-alt"></i> Fórmulas de Caída Libre</h2>
+
+        <div class="nota-importante">
+            <h4><i class="fas fa-info-circle"></i> Nota clave antes de las fórmulas</h4>
+            <p>
+                Las fórmulas de <strong>Caída Libre son exactamente las mismas que las de M.R.U.V.</strong>, pero con dos cambios importantes en la notación:
+                <br><br>
+                • La <strong>aceleración (a)</strong> se reemplaza por <strong>g = 9.8 m/s²</strong> (gravedad).<br>
+                • La <strong>distancia (d)</strong> se reemplaza por <strong>h</strong> (altura).
+                <br><br>
+                ⚠️ <strong>Convención de signos:</strong> Cuando el objeto <span style="color:#2ecc71">SUBE</span>, la gravedad actúa en sentido contrario al movimiento, por lo que se usa <strong style="color:#2ecc71">g = −9.8 m/s²</strong>. Cuando el objeto <span style="color:var(--color-caida)">BAJA</span> o es lanzado desde arriba, se usa <strong style="color:var(--color-caida)">g = +9.8 m/s²</strong>.
+            </p>
+        </div>
+
+        <div class="grid-formulas">
+            <div class="caja-formula-cl">
+                <div class="formula-nombre">Velocidad Final</div>
+                <div class="formula-expr">vf = v₀ + g·t</div>
+                <div class="formula-desc">Velocidad en cualquier instante t, partiendo de velocidad inicial v₀</div>
+            </div>
+            <div class="caja-formula-cl">
+                <div class="formula-nombre">Altura en función del tiempo</div>
+                <div class="formula-expr">h = v₀·t + ½·g·t²</div>
+                <div class="formula-desc">Desplazamiento vertical recorrido en el tiempo t</div>
+            </div>
+            <div class="caja-formula-cl">
+                <div class="formula-nombre">Velocidad y Altura</div>
+                <div class="formula-expr">vf² = v₀² + 2·g·h</div>
+                <div class="formula-desc">Relaciona velocidad final con altura, sin necesitar el tiempo</div>
+            </div>
+            <div class="caja-formula-cl">
+                <div class="formula-nombre">Caída desde el reposo</div>
+                <div class="formula-expr">h = ½·g·t²</div>
+                <div class="formula-desc">Caso especial cuando v₀ = 0 (objeto soltado sin velocidad inicial)</div>
+            </div>
+        </div>
+
+        <!-- TABLA DE VARIABLES -->
+        <h3 style="margin-top:30px; color:#4facfe; font-size:1.2rem;">📋 Significado de las Variables</h3>
+        <table class="tabla-vars">
+            <thead>
+                <tr><th>Símbolo</th><th>Variable</th><th>Unidad (SI)</th><th>Descripción</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><span class="var-simbolo">vf</span></td><td>Velocidad final</td><td>m/s</td><td>Velocidad al terminar el movimiento o en un instante dado</td></tr>
+                <tr><td><span class="var-simbolo">v₀</span></td><td>Velocidad inicial</td><td>m/s</td><td>Velocidad al inicio. En caída libre pura, v₀ = 0</td></tr>
+                <tr><td><span class="var-simbolo">g</span></td><td>Gravedad</td><td>m/s²</td><td>Aceleración gravitacional = 9.8 m/s² (reemplaza a "a")</td></tr>
+                <tr><td><span class="var-simbolo">t</span></td><td>Tiempo</td><td>s</td><td>Duración del movimiento en segundos</td></tr>
+                <tr><td><span class="var-simbolo">h</span></td><td>Altura</td><td>m</td><td>Desplazamiento vertical (reemplaza a "d")</td></tr>
+            </tbody>
+        </table>
+
+        <!-- ENLACE A DESPEJES -->
+        <div style="margin-top:25px; padding:20px; background:rgba(52,152,219,0.07); border-radius:10px; border:1px solid rgba(52,152,219,0.2);">
+            <h3 style="color:#4facfe; margin-bottom:10px; font-size:1.2rem;"><i class="fas fa-calculator"></i> ¿Quieres practicar despejes de estas fórmulas?</h3>
+            <p style="color:#ddd; margin-bottom:12px;">Las fórmulas de Caída Libre se despejan exactamente igual que las de M.R.U.V. Puedes ir a esa sección para ver todos los despejes explicados paso a paso.</p>
+            <a href="fisica10_mruv.html#despejes" class="btn-despejes">
+                <i class="fas fa-external-link-alt"></i> Ir a Despejes de M.R.U.V. →
+            </a>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 4: EJERCICIOS RESUELTOS -->
+    <div class="seccion-contenido">
+        <h2><i class="fas fa-pencil-alt"></i> Ejercicios Resueltos</h2>
+        <p>Analiza con cuidado cada ejercicio. Observa cómo se identifican los datos, se elige la fórmula correcta y se aplica el signo de la gravedad.</p>
+
+        <!-- EJERCICIO 1: SUBIDA -->
+        <div class="ejercicio-tarjeta">
+            <h3>🏀 Ejercicio 1 — Tiro Vertical hacia Arriba</h3>
+            <div class="enunciado">
+                Una pelota es lanzada verticalmente hacia arriba con una velocidad inicial de <strong>20 m/s</strong>. ¿Cuánto tiempo tarda en llegar al punto más alto? ¿A qué altura máxima llega?
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">📋 Paso 1 — Identificar datos</div>
+                <ul class="lista-datos">
+                    <li><strong>v₀ =</strong> 20 m/s ↑ (hacia arriba)</li>
+                    <li><strong>vf =</strong> 0 m/s (en el punto más alto, el objeto se detiene momentáneamente)</li>
+                    <li><strong>g =</strong> −9.8 m/s² (negativa porque la gravedad actúa hacia abajo, opuesta al movimiento)</li>
+                    <li><strong>t =</strong> <span class="dato-ausente">? → Incógnita 1</span></li>
+                    <li><strong>h =</strong> <span class="dato-ausente">? → Incógnita 2</span></li>
+                </ul>
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">📐 Paso 2 — Calcular el tiempo hasta el punto más alto</div>
+                <p style="color:#ddd; margin-bottom:8px;">Usamos: <strong>vf = v₀ + g·t</strong>, despejando t:</p>
+                <div class="formula-usada">t = (vf − v₀) / g</div>
+                <div class="sustitucion">t = (0 − 20) / (−9.8)</div>
+                <div class="resultado-final">✅ t = 2.04 segundos</div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">📏 Paso 3 — Calcular la altura máxima</div>
+                <p style="color:#ddd; margin-bottom:8px;">Usamos: <strong>vf² = v₀² + 2·g·h</strong>, despejando h:</p>
+                <div class="formula-usada">h = (vf² − v₀²) / (2·g)</div>
+                <div class="sustitucion">h = (0² − 20²) / (2 × −9.8) = −400 / −19.6</div>
+                <div class="resultado-final">✅ h = 20.41 metros de altura máxima</div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 2: BAJADA -->
+        <div class="ejercicio-tarjeta">
+            <h3>🪨 Ejercicio 2 — Caída Libre desde Reposo</h3>
+            <div class="enunciado">
+                Una piedra se suelta (sin velocidad inicial) desde lo alto de un acantilado de <strong>45 metros</strong> de altura. ¿Con qué velocidad llega al suelo? ¿Cuánto tiempo tarda en caer?
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">📋 Paso 1 — Identificar datos</div>
+                <ul class="lista-datos">
+                    <li><strong>v₀ =</strong> 0 m/s (se suelta desde el reposo)</li>
+                    <li><strong>g =</strong> +9.8 m/s² (positiva, hacia abajo, en el sentido del movimiento)</li>
+                    <li><strong>h =</strong> 45 m</li>
+                    <li><strong>vf =</strong> <span class="dato-ausente">? → Incógnita 1</span></li>
+                    <li><strong>t =</strong> <span class="dato-ausente">? → Incógnita 2</span></li>
+                </ul>
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">⚡ Paso 2 — Calcular la velocidad final</div>
+                <p style="color:#ddd; margin-bottom:8px;">Usamos: <strong>vf² = v₀² + 2·g·h</strong></p>
+                <div class="formula-usada">vf = √(v₀² + 2·g·h)</div>
+                <div class="sustitucion">vf = √(0 + 2 × 9.8 × 45) = √(882)</div>
+                <div class="resultado-final">✅ vf ≈ 29.7 m/s</div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">⏱️ Paso 3 — Calcular el tiempo de caída</div>
+                <p style="color:#ddd; margin-bottom:8px;">Usamos: <strong>vf = v₀ + g·t</strong>, despejando t:</p>
+                <div class="formula-usada">t = (vf − v₀) / g</div>
+                <div class="sustitucion">t = (29.7 − 0) / 9.8</div>
+                <div class="resultado-final">✅ t ≈ 3.03 segundos</div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 3: COMBINADO (SUBE Y BAJA) -->
+        <div class="ejercicio-tarjeta">
+            <h3>🚀 Ejercicio 3 — Tiro Vertical Combinado (Sube y Baja)</h3>
+            <div class="enunciado">
+                Un cohete de juguete es lanzado verticalmente hacia arriba con una velocidad inicial de <strong>30 m/s</strong>. Calcula: a) el tiempo que tarda en llegar al punto más alto, b) la altura máxima alcanzada, y c) el tiempo total hasta regresar al punto de lanzamiento.
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">📋 Paso 1 — Identificar datos</div>
+                <ul class="lista-datos">
+                    <li><strong>v₀ =</strong> 30 m/s ↑</li>
+                    <li><strong>g =</strong> −9.8 m/s²</li>
+                    <li><strong>vf(punto más alto) =</strong> 0 m/s</li>
+                </ul>
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">⏱️ Paso 2a — Tiempo hasta la cima</div>
+                <div class="formula-usada">t_subida = (vf − v₀) / g = (0 − 30) / (−9.8)</div>
+                <div class="resultado-final">✅ t_subida = 3.06 segundos</div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">📏 Paso 2b — Altura máxima</div>
+                <div class="formula-usada">h = (vf² − v₀²) / (2·g) = (0 − 900) / (−19.6)</div>
+                <div class="resultado-final">✅ h_max = 45.92 metros</div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-titulo">⏱️ Paso 2c — Tiempo total (subida + bajada)</div>
+                <p style="color:#ddd; margin-bottom:8px;">Por simetría del movimiento, el tiempo de bajada es igual al de subida:</p>
+                <div class="formula-usada">t_total = 2 × t_subida</div>
+                <div class="sustitucion">t_total = 2 × 3.06 s</div>
+                <div class="resultado-final">✅ t_total = 6.12 segundos</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTONES INFERIORES -->
+    <div class="botones-navegacion">
+        <a href="fisica10_caida_libre_practica.html" class="btn-nav btn-practica">
+            <i class="fas fa-gamepad"></i> Práctica Interactiva
+        </a>
+        <a href="fisica10_caida_libre_evaluacion.html" class="btn-nav btn-evaluacion">
+            <i class="fas fa-clipboard-check"></i> Evaluación
+        </a>
+    </div>
+</div>
+
+<footer>
+    <p>LabVirtual W · Física 10° · Caída Libre &copy; 2025</p>
+</footer>
+
+<!-- Prof. IA -->
+<script src="profe-ia.js"></script>
+</body>
+</html>
