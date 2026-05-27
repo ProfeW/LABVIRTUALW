@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notación Científica - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; background-position: center; }
+
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 40px; padding: 40px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
+        .emoji-tema { font-size: 4rem; margin-bottom: 15px; display: inline-block; animation: bounce 2s infinite; }
+        .header-tema h1 { font-size: 3rem; color: #4facfe; margin-bottom: 15px; }
+
+        .seccion { background: rgba(20, 20, 35, 0.8); border-radius: 15px; padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .seccion h2 { font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .seccion h2 i { color: var(--color-fisica); }
+        .seccion p { font-size: 1.1rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
+
+        .caja-formula { background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.05)); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 25px; text-align: center; margin: 20px 0; }
+        .formula { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 15px; }
+        
+        .ejercicio { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .ejercicio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.2rem; }
+        .paso { display: flex; margin-bottom: 10px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .paso-num { background: var(--color-fisica); color: #fff; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
+        .paso-texto { color: #ddd; align-self: center; }
+        .resultado-final { background: rgba(46, 204, 113, 0.15); border-left: 4px solid #2ecc71; padding: 15px; border-radius: 5px; margin-top: 15px; font-weight: 600; color: #fff; }
+
+        .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+        .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .btn-practica { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
+        .btn-practica:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(230, 126, 34, 0.4); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+        .btn-evaluacion:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(231, 76, 60, 0.4); }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin-top: 20px; }
+        .video-card { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .video-header { background: rgba(0,0,0,0.5); padding: 10px; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; color: #4facfe; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10</a>
+
+        <div class="header-tema">
+            <span class="emoji-tema">🔬</span>
+            <h1>Notación Científica</h1>
+            <p>Descubre cómo la física logra escribir distancias intergalácticas y el tamaño de los átomos de forma simple usando potencias de base 10.</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-book-open"></i> ¿Qué es la Notación Científica?</h2>
+            <p>En el universo, nos encontramos con números gigantescos (como la distancia de la Tierra al Sol: 149,600,000,000 m) y números diminutos (como el diámetro de un electrón: 0.00000000000000282 m).</p>
+            <p>La notación científica es una forma estandarizada de escribir estos números basada en potencias de 10, permitiéndonos ahorrar espacio y facilitar los cálculos matemáticos.</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-calculator"></i> La Estructura General</h2>
+            <p>Todo número escrito en notación científica debe cumplir con la siguiente estructura matemática estricta:</p>
+            
+            <div class="caja-formula">
+                <div class="formula">$$ a \times 10^n $$</div>
+                <ul style="text-align: left; margin-left: 20px; color: #ddd; font-size: 1.1rem; line-height: 1.8;">
+                    <li><strong>$a$ (El coeficiente):</strong> Debe ser un número mayor o igual a 1, pero estrictamente menor que 10. ($1 \leq a < 10$).</li>
+                    <li><strong>$10$ (La base):</strong> Siempre es 10.</li>
+                    <li><strong>$n$ (El exponente):</strong> Es un número entero. Es positivo para números grandes (macros) y negativo para números decimales pequeños (micros).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-pencil"></i> Ejercicios Resueltos Paso a Paso</h2>
+
+            <div class="ejercicio">
+                <h3>Ejercicio 1: Expresando un número muy grande</h3>
+                <p style="margin-bottom: 15px; color: #fff;">La velocidad de la luz en el vacío es aproximadamente <strong>300,000,000 m/s</strong>. Escribe este número en notación científica.</p>
+                
+                <div class="paso">
+                    <div class="paso-num">1</div>
+                    <div class="paso-texto">Ubicamos la coma decimal imaginaria al final del número: 300000000,0</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">2</div>
+                    <div class="paso-texto">Movemos la coma hacia la <strong>izquierda</strong> hasta dejar un solo dígito diferente de cero a la izquierda (el 3).</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">3</div>
+                    <div class="paso-texto">Contamos cuántos lugares movimos la coma: Fueron <strong>8 posiciones</strong>. Este será el exponente positivo de la base 10.</div>
+                </div>
+                
+                <div class="resultado-final">
+                    Resultado: $$ 3 \times 10^8 \text{ m/s} $$
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <h3>Ejercicio 2: Expresando un número muy pequeño</h3>
+                <p style="margin-bottom: 15px; color: #fff;">El tamaño promedio de una bacteria es <strong>0.0000025 metros</strong>. Pásalo a notación científica.</p>
+                
+                <div class="paso">
+                    <div class="paso-num">1</div>
+                    <div class="paso-texto">Ubicamos la coma decimal original: 0.0000025</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">2</div>
+                    <div class="paso-texto">Movemos la coma hacia la <strong>derecha</strong> hasta dejar un número entre 1 y 9. La colocamos entre el 2 y el 5 (el número queda como 2.5).</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">3</div>
+                    <div class="paso-texto">Contamos los lugares movidos: <strong>6 posiciones</strong>. Como es un número pequeño decimal, el exponente será <strong>negativo</strong> (-6).</div>
+                </div>
+                
+                <div class="resultado-final">
+                    Resultado: $$ 2.5 \times 10^{-6} \text{ m} $$
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="seccion" style="background: rgba(30, 30, 45, 0.9);">
+            <h2><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Explicación en Video</h2>
+            <p>Selección de los mejores videos explicativos de Notación Científica en YouTube para reforzar la teoría:</p>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed?listType=search&list=profe+alex+notacion+cientifica" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Khan Academy Español</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed?listType=search&list=khan+academy+español+notacion+cientifica" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Unicoos (David Calle)</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed?listType=search&list=unicoos+notacion+cientifica" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Susi Profe</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed?listType=search&list=susi+profe+notacion+cientifica+ejercicios" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="botones-accion">
+            <a href="fisica10_notacion_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Práctica Interactiva
+            </a>
+            <a href="fisica10_notacion_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-clipboard-check"></i> Realizar Evaluación
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>LabVirtual W &copy; 2025 · Construido con inteligencia artificial para la educación</p>
+    </footer>
+
+    <script src="profe-ia.js"></script>
+</body>
+</html>
