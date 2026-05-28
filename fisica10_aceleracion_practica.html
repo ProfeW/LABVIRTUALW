@@ -3,445 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica Aceleración - LabVirtual W</title>
+    <title>Práctica: Aceleración - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        :root {
-            --color-fisica: #3498db;   
-            --color-quimica: #9b59b6;  
-            --color-biologia: #2ecc71; 
-            --color-oscuro: #1a1a2e;
-            --color-texto: #ffffff;
-            --color-exito: #2ecc71;
-            --color-error: #e74c3c;
-            --color-advertencia: #f39c12;
-        }
-
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
 
-        body {
-            background-color: var(--color-oscuro);
-            color: var(--color-texto);
-            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-attachment: fixed; min-height: 100vh;
-        }
-
-        /* --- NAVEGACIÓN --- */
-        nav {
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
-        }
-        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo i { color: var(--color-fisica); }
-        .menu { list-style: none; display: flex; gap: 20px; }
-        .menu > li { position: relative; }
-        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
-
-        .submenu {
-            display: none; position: absolute; top: 100%; left: 0;
-            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
-            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
-        }
-        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
-        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
-        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
-
-        /* --- CONTENIDO --- */
-        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-practica { text-align: center; margin-bottom: 30px; }
+        .header-practica h1 { color: #f39c12; font-size: 2.5rem; margin-bottom: 10px; }
         
-        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 20px 0 40px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, #f39c12, #e67e22); width: 0%; transition: width 0.5s ease; }
+
+        .ejercicio-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 20px; display: none; animation: slideIn 0.5s ease forwards; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ejercicio-card.activo { display: block; }
+        
+        .nivel-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; background: rgba(52, 152, 219, 0.2); color: #4facfe; border: 1px solid #3498db; }
+        .ejercicio-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .enunciado { font-size: 1.2rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; padding: 15px; background: rgba(0,0,0,0.3); border-left: 4px solid #f39c12; border-radius: 5px; }
+
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .opcion-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; color: #fff; font-size: 1.1rem; cursor: pointer; transition: 0.2s; text-align: center; }
+        .opcion-btn:hover:not(:disabled) { background: rgba(243, 156, 18, 0.2); border-color: #f39c12; transform: translateY(-2px); }
+        .opcion-btn.correcta { background: rgba(46, 204, 113, 0.2); border-color: var(--color-correcto); color: #fff; }
+        .opcion-btn.incorrecta { background: rgba(231, 76, 60, 0.2); border-color: var(--color-incorrecto); opacity: 0.7; }
+        .opcion-btn:disabled { cursor: not-allowed; }
+
+        .feedback { display: none; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: 500; font-size: 1.1rem; }
+        .feedback.correcto { display: block; background: rgba(46, 204, 113, 0.1); border: 1px solid var(--color-correcto); color: #2ecc71; }
+        .feedback.incorrecto { display: block; background: rgba(231, 76, 60, 0.1); border: 1px solid var(--color-incorrecto); color: #e74c3c; }
+
+        .btn-siguiente { display: none; width: 100%; padding: 15px; background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .btn-siguiente:hover { filter: brightness(1.1); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
 
-        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
-        .encabezado-leccion h1 { font-size: 2.5rem; color: var(--color-fisica); margin-bottom: 10px; }
-        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+        .pantalla-final { display: none; text-align: center; padding: 50px 20px; background: rgba(20, 20, 35, 0.9); border-radius: 15px; border: 1px solid rgba(243, 156, 18, 0.5); }
+        .pantalla-final.activo { display: block; animation: fadeIn 1s; }
+        .trofeo { font-size: 5rem; margin-bottom: 20px; animation: bounce 2s infinite; }
 
-        /* --- ESTILOS DE LOS EJERCICIOS --- */
-        .ejercicio {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 5px solid var(--color-fisica); border-radius: 12px; padding: 30px; margin-bottom: 30px;
-        }
-        
-        .ejercicio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
-        .enunciado { font-size: 1.1rem; line-height: 1.6; color: #ddd; margin-bottom: 20px; }
-
-        /* --- CONTROLES INTERACTIVOS --- */
-        .controles-practica { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; }
-        
-        .selector-formula {
-            width: 100%; padding: 12px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(20, 20, 35, 0.8); color: #fff; font-size: 1rem; font-family: 'Poppins', sans-serif;
-            margin-bottom: 20px; outline: none; cursor: pointer;
-        }
-        .selector-formula:focus { border-color: var(--color-fisica); }
-
-        .campos-datos {
-            display: none; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px;
-            margin-bottom: 20px; font-size: 1.2rem; font-weight: 600; color: #fff;
-        }
-
-        .grupo-input { display: flex; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 5px; overflow: hidden; }
-        .grupo-input input {
-            width: 90px; padding: 10px; border: none; background: transparent; color: #fff; 
-            font-size: 1.1rem; text-align: center; font-family: 'Poppins', sans-serif; outline: none;
-        }
-        .grupo-input input::placeholder { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
-        .grupo-input .unidad { background: rgba(52, 152, 219, 0.2); padding: 10px; font-size: 0.9rem; color: #4facfe; border-left: 1px solid rgba(255,255,255,0.1); }
-
-        .btn-validar {
-            width: 100%; padding: 12px; border: none; border-radius: 5px; background: var(--color-fisica);
-            color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
-        }
-        .btn-validar:hover { background: #2980b9; transform: translateY(-2px); }
-
-        .feedback {
-            margin-top: 15px; padding: 15px; border-radius: 5px; font-weight: 600; text-align: center; display: none; line-height: 1.5;
-        }
-        .feedback.exito { display: block; background: rgba(46, 204, 113, 0.2); border: 1px solid var(--color-exito); color: var(--color-exito); }
-        .feedback.error { display: block; background: rgba(231, 76, 60, 0.2); border: 1px solid var(--color-error); color: #ff7675; }
-        .feedback.advertencia { display: block; background: rgba(243, 156, 18, 0.2); border: 1px solid var(--color-advertencia); color: var(--color-advertencia); }
-
-        @media (max-width: 768px) {
-            .campos-datos { flex-direction: column; }
-            .grupo-input { width: 100%; }
-            .grupo-input input { width: 100%; }
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @media (max-width: 600px) { .opciones-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- NAVEGACIÓN -->
-    <header>
-        <nav>
-            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
-            <ul class="menu">
-                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="fisica_9.html">Grado Noveno</a></li>
-                        <li><a href="fisica_10.html">Grado Décimo</a></li>
-                        <li><a href="fisica_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <div class="contenedor">
+        <a href="fisica10_aceleracion.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
-    <main class="contenedor">
-        
-        <a href="fisica10_aceleracion.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Lección de Aceleración</a>
-
-        <div class="encabezado-leccion">
+        <div class="header-practica">
             <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
-            <p>Lee el problema, selecciona la fórmula, ubica los datos asegurándote de usar las unidades correctas, y valida tu respuesta.</p>
+            <p>Aprende a analizar los cambios de velocidad en el tiempo.</p>
         </div>
 
-        <!-- EJERCICIO 1 (Aceleración) -->
-        <div class="ejercicio" id="ej1" data-formula="a=(vf-vi)/t" data-val1="20" data-val2="0" data-val3="5" data-res="4">
-            <h3>Ejercicio 1</h3>
-            <p class="enunciado">Una chiva arranca desde la plaza principal (reposo) y alcanza una velocidad de <strong>20 m/s</strong> en <strong>5 segundos</strong>. Calcula su aceleración.</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej1')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej1')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
+        <div class="progreso-container">
+            <div class="progreso-barra" id="barra"></div>
+        </div>
+
+        <!-- EJERCICIO 1 -->
+        <div class="ejercicio-card activo" id="ej1">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Aceleración positiva)</span>
+            <h3>Reto 1: Arranque Rápido</h3>
+            <div class="enunciado">
+                Un ciclista está detenido en la línea de meta. Arranca y <strong>3 segundos</strong> después, su velocidad es de <strong>12 m/s</strong>. <br><br>
+                ¿Cuál es el valor de su aceleración?
             </div>
-        </div>
-
-        <!-- EJERCICIO 2 (Tiempo) -->
-        <div class="ejercicio" id="ej2" data-formula="t=(vf-vi)/a" data-val1="25" data-val2="10" data-val3="3" data-res="5">
-            <h3>Ejercicio 2</h3>
-            <p class="enunciado">Un camión cargado de café viaja a <strong>10 m/s</strong>. Pisa el acelerador a razón de <strong>3 m/s²</strong> hasta alcanzar <strong>25 m/s</strong>. ¿Cuánto tiempo aceleró?</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej2')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej2')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 3 (Velocidad Final) -->
-        <div class="ejercicio" id="ej3" data-formula="vf=vi+a*t" data-val1="5" data-val2="2" data-val3="6" data-res="17">
-            <h3>Ejercicio 3</h3>
-            <p class="enunciado">Un Willys entra a una pendiente a <strong>5 m/s</strong> y, por el peso, adquiere una aceleración de <strong>2 m/s²</strong> durante <strong>6 segundos</strong>. ¿Con qué velocidad termina el tramo?</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej3')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej3')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 4 (Velocidad Inicial - Desacelerando) -->
-        <div class="ejercicio" id="ej4" data-formula="vi=vf-a*t" data-val1="12" data-val2="-2" data-val3="4" data-res="20">
-            <h3>Ejercicio 4</h3>
-            <p class="enunciado">Una moto frena con una aceleración de <strong>-2 m/s²</strong> durante <strong>4 segundos</strong>. Si su velocidad final tras frenar es <strong>12 m/s</strong>, ¿A qué velocidad iba antes de frenar?</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej4')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej4')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 5 (Aceleración - Negativa) -->
-        <div class="ejercicio" id="ej5" data-formula="a=(vf-vi)/t" data-val1="5" data-val2="15" data-val3="2" data-res="-5">
-            <h3>Ejercicio 5</h3>
-            <p class="enunciado">Un tractor va a <strong>15 m/s</strong> y reduce su velocidad a <strong>5 m/s</strong> en <strong>2 segundos</strong> al pasar por un tramo en mal estado. ¿Cuál es su aceleración?</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej5')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej5')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 6 (Tiempo) -->
-        <div class="ejercicio" id="ej6" data-formula="t=(vf-vi)/a" data-val1="18" data-val2="0" data-val3="1.5" data-res="12">
-            <h3>Ejercicio 6</h3>
-            <p class="enunciado">Una zorra de carga arranca del reposo con una aceleración constante de <strong>1.5 m/s²</strong>. ¿Cuánto tiempo tarda en alcanzar los <strong>18 m/s</strong>?</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej6')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej6')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 7 (Velocidad Final) -->
-        <div class="ejercicio" id="ej7" data-formula="vf=vi+a*t" data-val1="8" data-val2="2.5" data-val3="4" data-res="18">
-            <h3>Ejercicio 7</h3>
-            <p class="enunciado">Un estudiante en bicicleta lleva una velocidad de <strong>8 m/s</strong>. Comienza a pedalear más rápido, acelerando a <strong>2.5 m/s²</strong> por <strong>4 segundos</strong>. ¿Cuál es su velocidad final?</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej7')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej7')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 8 (Velocidad Inicial) -->
-        <div class="ejercicio" id="ej8" data-formula="vi=vf-a*t" data-val1="0" data-val2="-3" data-val3="4" data-res="12">
-            <h3>Ejercicio 8</h3>
-            <p class="enunciado">Un vehículo frena por completo (velocidad final <strong>0 m/s</strong>) aplicando una aceleración de <strong>-3 m/s²</strong> durante <strong>4 segundos</strong>. ¿Qué velocidad inicial llevaba antes de empezar a frenar?</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej8')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej8')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 9 (Aceleración) -->
-        <div class="ejercicio" id="ej9" data-formula="a=(vf-vi)/t" data-val1="35" data-val2="5" data-val3="10" data-res="3">
-            <h3>Ejercicio 9</h3>
-            <p class="enunciado">En una recta larga, un bus pasa de <strong>5 m/s</strong> a <strong>35 m/s</strong> en un periodo de <strong>10 segundos</strong>. Determina su aceleración.</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej9')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej9')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 10 (Velocidad Inicial) -->
-        <div class="ejercicio" id="ej10" data-formula="vi=vf-a*t" data-val1="14" data-val2="4" data-val3="3" data-res="2">
-            <h3>Ejercicio 10</h3>
-            <p class="enunciado">Un costal de abono se desliza por una rampa acelerando a <strong>4 m/s²</strong> durante <strong>3 segundos</strong>. Alcanza una velocidad de <strong>14 m/s</strong> al final. ¿Con qué velocidad inicial empezó el recorrido?</p>
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej10')">
-                    <option value="">Selecciona la fórmula correcta...</option>
-                    <option value="a=(vf-vi)/t">a = (Vf - Vi) / t</option>
-                    <option value="t=(vf-vi)/a">t = (Vf - Vi) / a</option>
-                    <option value="vf=vi+a*t">Vf = Vi + (a × t)</option>
-                    <option value="vi=vf-a*t">Vi = Vf - (a × t)</option>
-                </select>
-                <div class="campos-datos"></div>
-                <button class="btn-validar" onclick="validarEjercicio('ej10')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- ========================================================= -->
-    <!-- LÓGICA JAVASCRIPT                                         -->
-    <!-- ========================================================= -->
-    <script>
-        // Muestra 3 campos de entrada y 1 de resultado, incluyendo unidades visuales.
-        function mostrarCampos(id) {
-            const ej = document.getElementById(id);
-            const formula = ej.querySelector('.selector-formula').value;
-            const contenedorCampos = ej.querySelector('.campos-datos');
-
-            ej.querySelector('.feedback').className = 'feedback';
-            ej.querySelector('.feedback').style.display = 'none';
-
-            if (!formula) {
-                contenedorCampos.style.display = 'none';
-                return;
-            }
-
-            let html = '';
             
-            // a = (Vf - Vi) / t
-            if (formula === 'a=(vf-vi)/t') {
-                html = `
-                    ( <div class="grupo-input"><input type="number" id="${id}_val1" placeholder="Vf"><span class="unidad">m/s</span></div> - 
-                    <div class="grupo-input"><input type="number" id="${id}_val2" placeholder="Vi"><span class="unidad">m/s</span></div> ) / 
-                    <div class="grupo-input"><input type="number" id="${id}_val3" placeholder="t"><span class="unidad">s</span></div> = 
-                    <div class="grupo-input"><input type="number" id="${id}_res" placeholder="a"><span class="unidad" style="color:var(--color-exito);">m/s&sup2;</span></div>
-                `;
-            } 
-            // t = (Vf - Vi) / a
-            else if (formula === 't=(vf-vi)/a') {
-                html = `
-                    ( <div class="grupo-input"><input type="number" id="${id}_val1" placeholder="Vf"><span class="unidad">m/s</span></div> - 
-                    <div class="grupo-input"><input type="number" id="${id}_val2" placeholder="Vi"><span class="unidad">m/s</span></div> ) / 
-                    <div class="grupo-input"><input type="number" id="${id}_val3" placeholder="a"><span class="unidad">m/s&sup2;</span></div> = 
-                    <div class="grupo-input"><input type="number" id="${id}_res" placeholder="t"><span class="unidad" style="color:var(--color-acento1);">s</span></div>
-                `;
-            } 
-            // Vf = Vi + (a * t)
-            else if (formula === 'vf=vi+a*t') {
-                html = `
-                    <div class="grupo-input"><input type="number" id="${id}_val1" placeholder="Vi"><span class="unidad">m/s</span></div> + 
-                    ( <div class="grupo-input"><input type="number" id="${id}_val2" placeholder="a"><span class="unidad">m/s&sup2;</span></div> × 
-                    <div class="grupo-input"><input type="number" id="${id}_val3" placeholder="t"><span class="unidad">s</span></div> ) = 
-                    <div class="grupo-input"><input type="number" id="${id}_res" placeholder="Vf"><span class="unidad" style="color:var(--color-acento2);">m/s</span></div>
-                `;
-            }
-            // Vi = Vf - (a * t)
-            else if (formula === 'vi=vf-a*t') {
-                html = `
-                    <div class="grupo-input"><input type="number" id="${id}_val1" placeholder="Vf"><span class="unidad">m/s</span></div> - 
-                    ( <div class="grupo-input"><input type="number" id="${id}_val2" placeholder="a"><span class="unidad">m/s&sup2;</span></div> × 
-                    <div class="grupo-input"><input type="number" id="${id}_val3" placeholder="t"><span class="unidad">s</span></div> ) = 
-                    <div class="grupo-input"><input type="number" id="${id}_res" placeholder="Vi"><span class="unidad" style="color:var(--color-acento3);">m/s</span></div>
-                `;
-            }
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te equivocaste. La aceleración es (Vf - Vi) / t.')">15 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'No hay que sumar. Es una división.')">36 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! a = (12 - 0) / 3 = 4 m/s².')">4 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Error de cálculo. Divide la velocidad final entre el tiempo.')">9 m/s²</button>
+            </div>
+            <div class="feedback" id="feed1"></div>
+            <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
 
-            contenedorCampos.innerHTML = html;
-            contenedorCampos.style.display = 'flex';
-        }
+        <!-- EJERCICIO 2 -->
+        <div class="ejercicio-card" id="ej2">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Desaceleración)</span>
+            <h3>Reto 2: El Frenazo</h3>
+            <div class="enunciado">
+                Una tractomula viaja a <strong>25 m/s</strong>. El conductor pisa el freno y se detiene por completo al cabo de <strong>5 segundos</strong>. <br><br>
+                ¿Cuál es la aceleración de la tractomula?
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! a = (0 - 25) / 5 = -5 m/s². El signo negativo indica que frena.')">-5 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Casi. Pero como está frenando (su velocidad final es cero), la resta da un número negativo.')">5 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Revisa la resta. Es (Vf - Vi), no al revés.')">30 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Error. Intenta dividir el cambio de velocidad (-25) entre el tiempo (5).')">-125 m/s²</button>
+            </div>
+            <div class="feedback" id="feed2"></div>
+            <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
 
-        function validarEjercicio(id) {
-            const ej = document.getElementById(id);
-            const formulaSeleccionada = ej.querySelector('.selector-formula').value;
-            const formulaCorrecta = ej.getAttribute('data-formula');
-            const fb = ej.querySelector('.feedback');
+        <!-- EJERCICIO 3 -->
+        <div class="ejercicio-card" id="ej3">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Cambio de Velocidad)</span>
+            <h3>Reto 3: Acelerando en la Autopista</h3>
+            <div class="enunciado">
+                Un carro va a <strong>10 m/s</strong>. El conductor pisa el acelerador durante <strong>2 segundos</strong> y su velocidad sube a <strong>20 m/s</strong>. <br><br>
+                ¿Cuál es su aceleración?
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, '¡Cuidado! Dividiste la velocidad final directamente. Primero debes restarle la velocidad inicial.')">10 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Sumaste las velocidades en lugar de restarlas.')">15 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! a = (20 - 10) / 2 = 10 / 2 = 5 m/s².')">5 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Revisa el cálculo. a = (Vf - Vi) / t.')">2 m/s²</button>
+            </div>
+            <div class="feedback" id="feed3"></div>
+            <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
 
-            if (!formulaSeleccionada) {
-                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-triangle-exclamation"></i> Debes seleccionar primero una fórmula del menú.');
-                return;
-            }
+        <!-- EJERCICIO 4 -->
+        <div class="ejercicio-card" id="ej4">
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Conceptos)</span>
+            <h3>Reto 4: Velocidad Constante</h3>
+            <div class="enunciado">
+                Un tren bala viaja a una asombrosa velocidad de <strong>300 km/h</strong> durante <strong>5 horas</strong> en línea recta sin variar en absoluto su ritmo. <br><br>
+                ¿Cuál es su aceleración?
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Esa es la velocidad constante, no la aceleración.')">300 km/h²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Correcto! Si la velocidad NO cambia, no hay aceleración (a = 0).')">0 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Dividiste la velocidad por el tiempo, pero la velocidad final y la inicial son iguales.')">60 km/h²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste. Esto daría la distancia recorrida (1500 km), no la aceleración.')">1500 m/s²</button>
+            </div>
+            <div class="feedback" id="feed4"></div>
+            <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        
+        <!-- EJERCICIO 5 -->
+        <div class="ejercicio-card" id="ej5">
+            <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto (Encontrar la Velocidad Final)</span>
+            <h3>Reto 5: Despegue del Avión</h3>
+            <div class="enunciado">
+                Un avión inicia su despegue desde el reposo ($v_i = 0$) con una aceleración constante de <strong>4 m/s²</strong>. <br><br>
+                ¿Cuál será su velocidad exacta después de <strong>10 segundos</strong>?
+                <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: Si despejas la fórmula $a = \frac{v_f - v_i}{t}$, obtienes $v_f = v_i + a \cdot t$).</span>
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Casi, pero te faltó multiplicarlo por el tiempo.')">4 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Dividiste en lugar de multiplicar. vf = a * t')">2.5 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Brillante! vf = 0 + (4 * 10) = 40 m/s.')">40 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Es un número muy grande. Usa la fórmula vf = a * t.')">400 m/s</button>
+            </div>
+            <div class="feedback" id="feed5"></div>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+        </div>
 
-            if (formulaSeleccionada !== formulaCorrecta) {
-                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-xmark"></i> <strong>Fórmula Incorrecta:</strong> Analiza qué variable te pide el problema y busca la ecuación que esté despejada para esa variable.');
-                return;
-            }
+        <div class="pantalla-final" id="pantalla-final">
+            <div class="trofeo">🏁</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">¡Excelente! Tienes claro cómo cambia la velocidad a través del tiempo.</p>
+            <a href="fisica10_aceleracion_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+        </div>
 
-            // Lectura de los 3 inputs y el resultado
-            const val1 = parseFloat(document.getElementById(`${id}_val1`).value);
-            const val2 = parseFloat(document.getElementById(`${id}_val2`).value);
-            const val3 = parseFloat(document.getElementById(`${id}_val3`).value);
-            const res = parseFloat(document.getElementById(`${id}_res`).value);
+    </div>
 
-            // Valores correctos del HTML
-            const val1Correcto = parseFloat(ej.getAttribute('data-val1'));
-            const val2Correcto = parseFloat(ej.getAttribute('data-val2'));
-            const val3Correcto = parseFloat(ej.getAttribute('data-val3'));
-            const resCorrecto = parseFloat(ej.getAttribute('data-res'));
+    <script>
+        const totalEjercicios = 5;
+        function verificarRespuesta(num, btn, esCorrecta, mensaje) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            
+            botones.forEach(b => {
+                b.disabled = true;
+                if(b === btn) { b.classList.add(esCorrecta ? 'correcta' : 'incorrecta'); } 
+                else if (!esCorrecta && b.getAttribute('onclick').includes('true')) { b.classList.add('correcta'); }
+            });
 
-            if (isNaN(val1) || isNaN(val2) || isNaN(val3) || isNaN(res)) {
-                mostrarMensaje(fb, 'advertencia', '<i class="fa-solid fa-triangle-exclamation"></i> Debes rellenar todos los campos numéricos. Asegúrate de incluir el signo si la aceleración es negativa.');
-                return;
-            }
-
-            // Validación estricta
-            if (val1 === val1Correcto && val2 === val2Correcto && val3 === val3Correcto && res === resCorrecto) {
-                mostrarMensaje(fb, 'exito', '<i class="fa-solid fa-check-double"></i> <strong>¡Excelente trabajo!</strong> Procedimiento y resultado perfectos.');
-            } else if (res === resCorrecto) {
-                mostrarMensaje(fb, 'advertencia', '<i class="fa-solid fa-circle-exclamation"></i> Tu resultado final está bien, pero acomodaste algunos datos en el lugar equivocado dentro de la fórmula.');
+            const feed = document.getElementById('feed' + num);
+            feed.innerHTML = esCorrecta ? `<i class="fa-solid fa-check-circle"></i> ${mensaje}` : `<i class="fa-solid fa-xmark-circle"></i> ${mensaje}`;
+            feed.className = 'feedback ' + (esCorrecta ? 'correcto' : 'incorrecto');
+            
+            if(esCorrecta) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#f39c12', '#e67e22', '#f1c40f'] });
+                document.getElementById('btnSig' + num).style.display = 'block';
+                actualizarBarra(num);
             } else {
-                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-xmark"></i> <strong>Cálculo Incorrecto:</strong> Hay un error en las matemáticas o pusiste los datos al revés. Revisa de nuevo (¡Cuidado con los signos negativos!).');
+                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding: 8px 15px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">Intentar de nuevo</button>`;
             }
         }
 
-        function mostrarMensaje(elemento, tipo, texto) {
-            elemento.innerHTML = texto;
-            elemento.className = `feedback ${tipo}`;
-            elemento.style.display = 'block';
+        function reiniciarEjercicio(num) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            botones.forEach(b => { b.disabled = false; b.classList.remove('correcta', 'incorrecta'); });
+            const feed = document.getElementById('feed' + num);
+            feed.className = 'feedback';
+            feed.innerHTML = '';
+        }
+
+        function actualizarBarra(num) { document.getElementById('barra').style.width = ((num / totalEjercicios) * 100) + '%'; }
+        function siguiente(actual) {
+            document.getElementById('ej' + actual).classList.remove('activo');
+            document.getElementById('ej' + (actual + 1)).classList.add('activo');
+            window.scrollTo(0, 0);
+        }
+        function finalizar() {
+            document.getElementById('ej' + totalEjercicios).classList.remove('activo');
+            document.getElementById('pantalla-final').classList.add('activo');
+            confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
+            window.scrollTo(0, 0);
         }
     </script>
-
-    <!-- Prof. IA - Asistente Virtual de Fisica 10 -->
-    <script src="profe-ia.js"></script>
 </body>
 </html>
