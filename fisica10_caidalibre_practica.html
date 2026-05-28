@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Caída Libre - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-practica { text-align: center; margin-bottom: 30px; }
+        .header-practica h1 { color: #f39c12; font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 20px 0 40px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, #f39c12, #e67e22); width: 0%; transition: width 0.5s ease; }
+
+        .ejercicio-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 20px; display: none; animation: slideIn 0.5s ease forwards; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ejercicio-card.activo { display: block; }
+        
+        .nivel-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; background: rgba(52, 152, 219, 0.2); color: #4facfe; border: 1px solid #3498db; }
+        .ejercicio-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .enunciado { font-size: 1.2rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; padding: 15px; background: rgba(0,0,0,0.3); border-left: 4px solid #f39c12; border-radius: 5px; }
+
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .opcion-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; color: #fff; font-size: 1.1rem; cursor: pointer; transition: 0.2s; text-align: center; }
+        .opcion-btn:hover:not(:disabled) { background: rgba(243, 156, 18, 0.2); border-color: #f39c12; transform: translateY(-2px); }
+        .opcion-btn.correcta { background: rgba(46, 204, 113, 0.2); border-color: var(--color-correcto); color: #fff; }
+        .opcion-btn.incorrecta { background: rgba(231, 76, 60, 0.2); border-color: var(--color-incorrecto); opacity: 0.7; }
+        .opcion-btn:disabled { cursor: not-allowed; }
+
+        .feedback { display: none; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: 500; font-size: 1.1rem; }
+        .feedback.correcto { display: block; background: rgba(46, 204, 113, 0.1); border: 1px solid var(--color-correcto); color: #2ecc71; }
+        .feedback.incorrecto { display: block; background: rgba(231, 76, 60, 0.1); border: 1px solid var(--color-incorrecto); color: #e74c3c; }
+
+        .btn-siguiente { display: none; width: 100%; padding: 15px; background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .btn-siguiente:hover { filter: brightness(1.1); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .pantalla-final { display: none; text-align: center; padding: 50px 20px; background: rgba(20, 20, 35, 0.9); border-radius: 15px; border: 1px solid rgba(243, 156, 18, 0.5); }
+        .pantalla-final.activo { display: block; animation: fadeIn 1s; }
+        .trofeo { font-size: 5rem; margin-bottom: 20px; animation: bounce 2s infinite; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @media (max-width: 600px) { .opciones-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <a href="fisica10_caidalibre.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+
+        <div class="header-practica">
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <p>Calcula tiempos y alturas usando la gravedad terrestre.</p>
+            <p style="font-size: 0.9rem; color: #aaa;">(Para esta práctica, usa <strong style="color: #4facfe;">g = 9.8 m/s²</strong>)</p>
+        </div>
+
+        <div class="progreso-container">
+            <div class="progreso-barra" id="barra"></div>
+        </div>
+
+        <!-- EJERCICIO 1 -->
+        <div class="ejercicio-card activo" id="ej1">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Velocidad de Caída)</span>
+            <h3>Reto 1: La moneda en el pozo</h3>
+            <div class="enunciado">
+                Si dejas caer una moneda en un pozo ciego y escuchas el impacto en exactamente <strong>2 segundos</strong>. <br><br>
+                ¿A qué velocidad iba la moneda justo antes de tocar el agua?<br>
+                <em>(Recuerda: $v_i = 0$, $v_f = v_i + g \cdot t$)</em>
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Esa es la velocidad al cabo de 1 segundo (1 * 9.8).')">9.8 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! vf = 0 + (9.8 * 2) = 19.6 m/s.')">19.6 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Recuerda multiplicar la gravedad (9.8) por el tiempo (2).')">4.9 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, '¡Uy! Ese cálculo es muy alto. Es solo 9.8 * 2.')">39.2 m/s</button>
+            </div>
+            <div class="feedback" id="feed1"></div>
+            <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 2 -->
+        <div class="ejercicio-card" id="ej2">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Altura)</span>
+            <h3>Reto 2: ¿Qué tan profundo es el pozo?</h3>
+            <div class="enunciado">
+                En el mismo ejercicio anterior, la moneda tardó <strong>2 segundos</strong> en caer. <br><br>
+                ¿Cuál es la profundidad del pozo? (es decir, la altura $h$).<br>
+                <em>Fórmula: $h = v_i \cdot t + \frac{g \cdot t^2}{2}$</em>
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Te faltó dividir entre 2 al final.')">39.2 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esa es la distancia recorrida en solo 1 segundo.')">4.9 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esa era la velocidad, pero estamos calculando altura (metros).')">19.6 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Perfecto! h = 0 + (9.8 * 2²) / 2 = (9.8 * 4) / 2 = 39.2 / 2 = 19.6 metros.')">19.6 m</button>
+            </div>
+            <div class="feedback" id="feed2"></div>
+            <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 3 -->
+        <div class="ejercicio-card" id="ej3">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Uso de Gravedad 10)</span>
+            <h3>Reto 3: Salto en Paracaídas</h3>
+            <div class="enunciado">
+                (Para este ejercicio, por facilidad, usaremos la gravedad como <strong style="color: #4facfe;">g = 10 m/s²</strong>).<br><br>
+                Un paracaidista se lanza desde un helicóptero. Antes de abrir el paracaídas, cae libremente durante <strong>5 segundos</strong>. ¿Qué distancia cayó en esos 5 segundos?
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! h = (10 * 5²) / 2 = (10 * 25) / 2 = 250 / 2 = 125 metros.')">125 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Cuidado, sumaste el tiempo en lugar de elevarlo al cuadrado (5² = 25).')">25 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Multiplicaste mal o no dividiste entre 2 al final.')">250 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Esa sería su velocidad final (10 * 5 = 50), pero preguntamos por la altura.')">50 m</button>
+            </div>
+            <div class="feedback" id="feed3"></div>
+            <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 4 -->
+        <div class="ejercicio-card" id="ej4">
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Sin tiempo)</span>
+            <h3>Reto 4: Caída desde la ventana</h3>
+            <div class="enunciado">
+                Se te cae el celular por la ventana desde una altura de <strong>5 metros</strong>. ¿Con qué velocidad chocará contra el piso? (Usa $g = 9.8 \text{ m/s}^2$).<br><br>
+                <em>Fórmula: $v_f^2 = v_i^2 + 2 \cdot g \cdot h$</em>
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Ese es el valor de la velocidad AL CUADRADO (98). ¡Debes sacarle la raíz cuadrada!')">98 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Te faltó multiplicarlo por el número 2 en la fórmula.')">49 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Exacto! vf² = 0 + 2(9.8)(5) = 98. La raíz cuadrada de 98 es aproximadamente 9.9 m/s.')">9.9 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste la altura por sí misma y no le sacaste raíz.')">25 m/s</button>
+            </div>
+            <div class="feedback" id="feed4"></div>
+            <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        
+        <!-- EJERCICIO 5 -->
+        <div class="ejercicio-card" id="ej5">
+            <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto (Despejar el tiempo)</span>
+            <h3>Reto 5: Salto desde el trampolín</h3>
+            <div class="enunciado">
+                Un clavadista se deja caer desde una plataforma a <strong>20 metros</strong> sobre la piscina. ¿Cuánto tiempo tarda en tocar el agua? (Usa $g = 10 \text{ m/s}^2$ por facilidad).<br><br>
+                <em>Pista: Despeja $t$ de la fórmula $h = \frac{g \cdot t^2}{2}$. Quedará $t = \sqrt{\frac{2 \cdot h}{g}}$</em>
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Olvidaste sacarle la raíz cuadrada al resultado.')">4 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Increíble! t = √( (2 * 20) / 10 ) = √( 40 / 10 ) = √4 = 2 segundos.')">2 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Cálculo incorrecto. Multiplica 2 por 20, divide entre 10, y saca raíz cuadrada.')">1 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Demasiado tiempo. Caería de mucho más alto.')">10 s</button>
+            </div>
+            <div class="feedback" id="feed5"></div>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+        </div>
+
+        <div class="pantalla-final" id="pantalla-final">
+            <div class="trofeo">🏁</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">¡Excelente! Ahora entiendes cómo funciona la gravedad de la Tierra sobre los objetos en caída libre.</p>
+            <a href="fisica10_caidalibre_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+        </div>
+
+    </div>
+
+    <script>
+        const totalEjercicios = 5;
+        function verificarRespuesta(num, btn, esCorrecta, mensaje) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            
+            botones.forEach(b => {
+                b.disabled = true;
+                if(b === btn) { b.classList.add(esCorrecta ? 'correcta' : 'incorrecta'); } 
+                else if (!esCorrecta && b.getAttribute('onclick').includes('true')) { b.classList.add('correcta'); }
+            });
+
+            const feed = document.getElementById('feed' + num);
+            feed.innerHTML = esCorrecta ? `<i class="fa-solid fa-check-circle"></i> ${mensaje}` : `<i class="fa-solid fa-xmark-circle"></i> ${mensaje}`;
+            feed.className = 'feedback ' + (esCorrecta ? 'correcto' : 'incorrecto');
+            
+            if(esCorrecta) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#f39c12', '#e67e22', '#f1c40f'] });
+                document.getElementById('btnSig' + num).style.display = 'block';
+                actualizarBarra(num);
+            } else {
+                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding: 8px 15px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">Intentar de nuevo</button>`;
+            }
+        }
+
+        function reiniciarEjercicio(num) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            botones.forEach(b => { b.disabled = false; b.classList.remove('correcta', 'incorrecta'); });
+            const feed = document.getElementById('feed' + num);
+            feed.className = 'feedback';
+            feed.innerHTML = '';
+        }
+
+        function actualizarBarra(num) { document.getElementById('barra').style.width = ((num / totalEjercicios) * 100) + '%'; }
+        function siguiente(actual) {
+            document.getElementById('ej' + actual).classList.remove('activo');
+            document.getElementById('ej' + (actual + 1)).classList.add('activo');
+            window.scrollTo(0, 0);
+        }
+        function finalizar() {
+            document.getElementById('ej' + totalEjercicios).classList.remove('activo');
+            document.getElementById('pantalla-final').classList.add('activo');
+            confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
