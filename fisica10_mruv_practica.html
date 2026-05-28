@@ -3,475 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica M.R.U.V. - LabVirtual W</title>
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+    <title>Práctica: Movimiento Variado (MRUV) - LabVirtual W</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        :root {
-            --color-fisica: #3498db;   
-            --color-oscuro: #1a1a2e;
-            --color-texto: #ffffff;
-            --color-exito: #2ecc71;
-            --color-error: #e74c3c;
-            --color-alerta: #f39c12;
-        }
-
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
 
-        body {
-            background-color: var(--color-oscuro); color: var(--color-texto);
-            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-attachment: fixed; min-height: 100vh;
-        }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-practica { text-align: center; margin-bottom: 30px; }
+        .header-practica h1 { color: #f39c12; font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 20px 0 40px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, #f39c12, #e67e22); width: 0%; transition: width 0.5s ease; }
 
-        /* --- NAVEGACIÓN --- */
-        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo i { color: var(--color-fisica); }
-        .menu { list-style: none; display: flex; gap: 20px; }
-        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+        .ejercicio-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 20px; display: none; animation: slideIn 0.5s ease forwards; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ejercicio-card.activo { display: block; }
+        
+        .nivel-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; background: rgba(52, 152, 219, 0.2); color: #4facfe; border: 1px solid #3498db; }
+        .ejercicio-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .enunciado { font-size: 1.2rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; padding: 15px; background: rgba(0,0,0,0.3); border-left: 4px solid #f39c12; border-radius: 5px; }
 
-        /* --- CONTENIDO --- */
-        .contenedor { max-width: 950px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
-        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .opcion-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; color: #fff; font-size: 1.1rem; cursor: pointer; transition: 0.2s; text-align: center; }
+        .opcion-btn:hover:not(:disabled) { background: rgba(243, 156, 18, 0.2); border-color: #f39c12; transform: translateY(-2px); }
+        .opcion-btn.correcta { background: rgba(46, 204, 113, 0.2); border-color: var(--color-correcto); color: #fff; }
+        .opcion-btn.incorrecta { background: rgba(231, 76, 60, 0.2); border-color: var(--color-incorrecto); opacity: 0.7; }
+        .opcion-btn:disabled { cursor: not-allowed; }
+
+        .feedback { display: none; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: 500; font-size: 1.1rem; }
+        .feedback.correcto { display: block; background: rgba(46, 204, 113, 0.1); border: 1px solid var(--color-correcto); color: #2ecc71; }
+        .feedback.incorrecto { display: block; background: rgba(231, 76, 60, 0.1); border: 1px solid var(--color-incorrecto); color: #e74c3c; }
+
+        .btn-siguiente { display: none; width: 100%; padding: 15px; background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .btn-siguiente:hover { filter: brightness(1.1); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
 
-        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
-        .encabezado-leccion h1 { font-size: 3rem; color: var(--color-fisica); margin-bottom: 10px; }
-        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+        .pantalla-final { display: none; text-align: center; padding: 50px 20px; background: rgba(20, 20, 35, 0.9); border-radius: 15px; border: 1px solid rgba(243, 156, 18, 0.5); }
+        .pantalla-final.activo { display: block; animation: fadeIn 1s; }
+        .trofeo { font-size: 5rem; margin-bottom: 20px; animation: bounce 2s infinite; }
 
-        /* --- LEYENDA E INSTRUCCIONES --- */
-        .leyenda-global {
-            background: rgba(52, 152, 219, 0.1); border-left: 5px solid var(--color-fisica);
-            padding: 20px; border-radius: 8px; margin-bottom: 30px; line-height: 1.6;
-        }
-        .leyenda-global h3 { color: var(--color-fisica); margin-bottom: 10px; font-size: 1.3rem;}
-        .leyenda-global ul { margin-left: 20px; color: #ddd; }
-        .leyenda-global li { margin-bottom: 5px; }
-        .marcador { background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px; font-family: monospace; font-weight: bold; color: #f39c12; }
-        .marcador-x { color: #e74c3c; }
-
-        /* --- EJERCICIOS --- */
-        .ejercicio-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; margin-bottom: 40px; border-top: 4px solid var(--color-fisica); }
-        .ejercicio-box h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.5rem; }
-        .enunciado { font-style: italic; color: #ddd; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.1rem; border-left: 4px solid #f39c12; }
-        
-        /* --- PASOS INTERACTIVOS EN CASCADA --- */
-        .paso-contenedor { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 8px; margin-bottom: 15px; border-left: 3px solid #555; transition: 0.3s; position: relative; }
-        .paso-contenedor.activo { border-left-color: var(--color-fisica); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1); }
-        .paso-contenedor.completado { border-left-color: var(--color-exito); opacity: 0.7; pointer-events: none; }
-        .paso-titulo { font-weight: 800; color: #fff; font-size: 1.15rem; text-transform: uppercase; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .icono-check { color: var(--color-exito); display: none; font-size: 1.5rem; }
-        .completado .icono-check { display: block; }
-        
-        .oculto { display: none; }
-
-        /* Inputs de Datos */
-        .grid-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 20px; }
-        .input-grupo { display: flex; align-items: stretch; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 5px; overflow: hidden; }
-        .input-grupo label { background: rgba(0,0,0,0.5); padding: 10px; color: #fff; font-weight: bold; min-width: 45px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
-        .input-grupo input { flex: 1; padding: 10px; border: none; background: transparent; color: #fff; font-size: 1.1rem; text-align: center; font-family: 'Poppins', sans-serif; outline: none; width: 100%;}
-        .input-grupo input:focus { background: rgba(255,255,255,0.1); }
-        .input-grupo .unidad { background: rgba(52, 152, 219, 0.2); padding: 10px; font-size: 0.9rem; color: #4facfe; border-left: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; }
-
-        select { width: 100%; padding: 15px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.2); background: rgba(20, 20, 35, 0.8); color: #fff; font-size: 1.1rem; outline: none; cursor: pointer; }
-        select:focus { border-color: var(--color-fisica); }
-
-        .btn-validar { background: var(--color-fisica); color: #fff; border: none; padding: 12px 25px; border-radius: 5px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 1.05rem; margin-top: 15px; }
-        .btn-validar:hover { background: #2980b9; transform: translateY(-2px); }
-
-        /* Estructura del Paso 3 (Reemplazo) */
-        .reemplazo-box { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 600; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); }
-        .reemplazo-box input { width: 70px; padding: 8px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.5); color: #fff; text-align: center; font-size: 1.1rem; font-family: 'Poppins', sans-serif;}
-        .reemplazo-box input.res-final { width: 100px; border-color: var(--color-exito); background: rgba(46, 204, 113, 0.1); color: var(--color-exito); font-weight: 800;}
-        .simbolo { color: #aaa; margin: 0 5px; }
-
-        /* Mensajes Flotantes (Toast) */
-        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .toast { padding: 15px 25px; border-radius: 8px; color: #fff; font-weight: 600; box-shadow: 0 10px 20px rgba(0,0,0,0.3); animation: slideIn 0.3s ease forwards; display: flex; align-items: center; gap: 10px; }
-        .toast.exito { background: var(--color-exito); }
-        .toast.error { background: var(--color-error); }
-        .toast.fade-out { animation: fadeOut 0.5s ease forwards; }
-
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
-
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @media (max-width: 600px) { .opciones-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <div id="toast-container"></div>
+    <div class="contenedor">
+        <a href="fisica10_mruv.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
-    <header>
-        <nav>
-            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
-            <ul class="menu">
-                <li><a href="fisica10_mruv.html"><i class="fa-solid fa-arrow-left"></i> Volver a Lección</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="contenedor">
-        
-        <div class="encabezado-leccion">
-            <h1>Práctica Interactiva M.R.U.V.</h1>
-            <p>Sigue la secuencia de pasos lógicos para resolver cada problema con éxito.</p>
+        <div class="header-practica">
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <p>Despeja fórmulas y encuentra el dato oculto.</p>
         </div>
 
-        <div class="leyenda-global">
-            <h3><i class="fa-solid fa-clipboard-list"></i> Instrucciones de la Práctica</h3>
-            <ul>
-                <li><strong>¡Cuidado con las conversiones!</strong> Algunos datos están en <code style="color:#f39c12">km/h</code> o <code style="color:#f39c12">minutos</code>. Fíjate bien en la unidad que te pide el recuadro gris oscuro antes de meter el número.</li>
-                <li>En el Paso 1, coloca una <span class="marcador">?</span> en la casilla de la variable que te piden calcular.</li>
-                <li>En el Paso 1, coloca una <span class="marcador marcador-x">x</span> (letra equis minúscula) en el dato ausente (el que no te dan y no te piden).</li>
-                <li>Debes validar cada paso para desbloquear el siguiente.</li>
-            </ul>
+        <div class="progreso-container">
+            <div class="progreso-barra" id="barra"></div>
         </div>
 
-        <!-- ============================================================== -->
         <!-- EJERCICIO 1 -->
-        <!-- ============================================================== -->
-        <div class="ejercicio-box" id="ej1">
-            <h3>Ejercicio 1: El Willys en la Recta</h3>
-            <div class="enunciado">"Un Willys viaja por una vereda a 36 km/h. Al llegar a un tramo recto, acelera a 2 m/s² durante 0.1 minutos. ¿Qué distancia alcanzó a recorrer en ese tramo recto?"</div>
+        <div class="ejercicio-card activo" id="ej1">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Elección de Fórmula)</span>
+            <h3>Reto 1: Identificación de Datos</h3>
+            <div class="enunciado">
+                "Un coche parte del reposo y acelera a 2 m/s² durante 5 segundos. ¿Qué distancia recorre?"<br><br>
+                En este problema, ¿cuál de las 5 variables ($v_i, v_f, a, t, d$) <strong>NO te dan y TAMPOCO te piden</strong>?
+            </div>
             
-            <!-- E1 PASO 1: DATOS -->
-            <div class="paso-contenedor activo" id="ej1-p1">
-                <div class="paso-titulo">Paso 1: Organizar y Convertir Datos <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <div class="grid-datos">
-                    <div class="input-grupo"><label>Vi</label><input type="text" id="ej1-vi"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>Vf</label><input type="text" id="ej1-vf"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>a</label><input type="text" id="ej1-a"><span class="unidad">m/s²</span></div>
-                    <div class="input-grupo"><label>t</label><input type="text" id="ej1-t"><span class="unidad">s</span></div>
-                    <div class="input-grupo"><label>d</label><input type="text" id="ej1-d"><span class="unidad">m</span></div>
-                </div>
-                <button class="btn-validar" onclick="validarP1('ej1', '10', 'x', '2', '6', '?')">Validar Datos</button>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te piden la distancia, así que esta sí participa en el problema.')">Distancia ($d$)</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te dicen que acelera a 2 m/s², por lo tanto sí te dan este dato.')">Aceleración ($a$)</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! No sabes cuál es la velocidad final y tampoco te la piden calcular. Usarás la fórmula #3.')">Velocidad Final ($v_f$)</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te dicen que el tiempo es de 5 segundos.')">Tiempo ($t$)</button>
             </div>
-
-            <!-- E1 PASO 2: FÓRMULA -->
-            <div class="paso-contenedor oculto" id="ej1-p2">
-                <div class="paso-titulo">Paso 2: Escoger Fórmula <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <p style="color: #ccc; margin-bottom: 10px;">Basado en tu dato ausente, ¿Qué fórmula utilizarás?</p>
-                <select id="ej1-form" onchange="validarP2('ej1', 'f2')">
-                    <option value="">Selecciona una opción...</option>
-                    <option value="f1">a = (Vf - Vi) / t</option>
-                    <option value="f2">d = Vi·t + 0.5·a·t²</option>
-                    <option value="f3">Vf² = Vi² + 2·a·d</option>
-                    <option value="f4">d = ((Vi + Vf) / 2) · t</option>
-                </select>
-            </div>
-
-            <!-- E1 PASO 3: REEMPLAZO Y RESULTADO -->
-            <div class="paso-contenedor oculto" id="ej1-p3">
-                <div class="paso-titulo">Paso 3: Reemplazar Datos y Calcular <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <p style="color: #ccc; margin-bottom: 15px;">Llena los recuadros con los números correspondientes a la fórmula elegida y calcula el resultado final.</p>
-                
-                <div class="reemplazo-box">
-                    <span>d = </span>
-                    <input type="number" id="ej1-b1" placeholder="Vi"><span class="simbolo">×</span>
-                    <input type="number" id="ej1-b2" placeholder="t"><span class="simbolo">+  0.5 ×</span>
-                    <input type="number" id="ej1-b3" placeholder="a"><span class="simbolo">×</span>
-                    <input type="number" id="ej1-b4" placeholder="t"><span>²</span>
-                    <span class="simbolo" style="margin-left: 15px; color:var(--color-fisica); font-weight:800;">&rArr;</span>
-                    <input type="number" id="ej1-res" class="res-final" placeholder="Res."><span>m</span>
-                </div>
-                <button class="btn-validar" onclick="validarP3('ej1', [10, 6, 2, 6, 96])">Validar Resultado</button>
-            </div>
+            <div class="feedback" id="feed1"></div>
+            <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
-        <!-- ============================================================== -->
         <!-- EJERCICIO 2 -->
-        <!-- ============================================================== -->
-        <div class="ejercicio-box" id="ej2">
-            <h3>Ejercicio 2: La Chiva Frenando</h3>
-            <div class="enunciado">"Una chiva escolar frena bruscamente con una aceleración de -3 m/s² hasta detenerse por completo. Si tardó 5 segundos en lograrlo, ¿Qué velocidad inicial llevaba antes de frenar?"</div>
+        <div class="ejercicio-card" id="ej2">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Cálculo de Distancia)</span>
+            <h3>Reto 2: Distancia Recorrida</h3>
+            <div class="enunciado">
+                Resuelve el problema anterior: "Un coche parte del reposo ($v_i = 0$) y acelera a <strong>2 m/s²</strong> durante <strong>5 segundos</strong>. ¿Qué distancia recorre?"<br><br>
+                Fórmula: $d = v_i \cdot t + \frac{a \cdot t^2}{2}$
+            </div>
             
-            <div class="paso-contenedor activo" id="ej2-p1">
-                <div class="paso-titulo">Paso 1: Organizar y Convertir Datos <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <div class="grid-datos">
-                    <div class="input-grupo"><label>Vi</label><input type="text" id="ej2-vi"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>Vf</label><input type="text" id="ej2-vf"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>a</label><input type="text" id="ej2-a"><span class="unidad">m/s²</span></div>
-                    <div class="input-grupo"><label>t</label><input type="text" id="ej2-t"><span class="unidad">s</span></div>
-                    <div class="input-grupo"><label>d</label><input type="text" id="ej2-d"><span class="unidad">m</span></div>
-                </div>
-                <button class="btn-validar" onclick="validarP1('ej2', '?', '0', '-3', '5', 'x')">Validar Datos</button>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! d = 0 + (2 * 5²) / 2 = (2 * 25) / 2 = 50 / 2 = 25 metros.')">25 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esa sería la distancia si el tiempo fuera 10 segundos, no 5.')">100 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Cuidado, te faltó elevar el tiempo al cuadrado (5² = 25).')">5 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Te olvidaste de dividir entre 2 al final.')">50 m</button>
             </div>
-
-            <div class="paso-contenedor oculto" id="ej2-p2">
-                <div class="paso-titulo">Paso 2: Escoger Fórmula <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <select id="ej2-form" onchange="validarP2('ej2', 'f1')">
-                    <option value="">Selecciona una opción...</option>
-                    <option value="f1">a = (Vf - Vi) / t</option>
-                    <option value="f2">d = Vi·t + 0.5·a·t²</option>
-                    <option value="f3">Vf² = Vi² + 2·a·d</option>
-                    <option value="f4">d = ((Vi + Vf) / 2) · t</option>
-                </select>
-            </div>
-
-            <div class="paso-contenedor oculto" id="ej2-p3">
-                <div class="paso-titulo">Paso 3: Reemplazar Datos y Calcular <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <p style="color: #ccc; margin-bottom: 15px;">Utilizando el despeje: <strong>Vi = Vf - (a × t)</strong></p>
-                <div class="reemplazo-box">
-                    <span>Vi = </span>
-                    <input type="number" id="ej2-b1" placeholder="Vf"><span class="simbolo">- (</span>
-                    <input type="number" id="ej2-b2" placeholder="a"><span class="simbolo">×</span>
-                    <input type="number" id="ej2-b3" placeholder="t"><span>)</span>
-                    <span class="simbolo" style="margin-left: 15px; color:var(--color-fisica); font-weight:800;">&rArr;</span>
-                    <input type="number" id="ej2-res" class="res-final" placeholder="Res."><span>m/s</span>
-                </div>
-                <button class="btn-validar" onclick="validarP3('ej2', [0, -3, 5, 15])">Validar Resultado</button>
-            </div>
+            <div class="feedback" id="feed2"></div>
+            <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
-        <!-- ============================================================== -->
         <!-- EJERCICIO 3 -->
-        <!-- ============================================================== -->
-        <div class="ejercicio-box" id="ej3">
-            <h3>Ejercicio 3: Aceleración del Recolector</h3>
-            <div class="enunciado">"Un camión recolector entra a un tramo recto de 75 metros a una velocidad de 36 km/h y sale de ese tramo a 72 km/h. ¿Cuál fue su aceleración exacta en m/s²?"</div>
+        <div class="ejercicio-card" id="ej3">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Velocidad Final)</span>
+            <h3>Reto 3: Aceleración en Vía Libre</h3>
+            <div class="enunciado">
+                Una motocicleta viaja a <strong>10 m/s</strong> y acelera a <strong>3 m/s²</strong> durante <strong>4 segundos</strong>. <br><br>
+                ¿Cuál es su velocidad al final de esos 4 segundos?<br>
+                Fórmula: $v_f = v_i + a \cdot t$
+            </div>
             
-            <div class="paso-contenedor activo" id="ej3-p1">
-                <div class="paso-titulo">Paso 1: Organizar y Convertir Datos <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <div class="grid-datos">
-                    <div class="input-grupo"><label>Vi</label><input type="text" id="ej3-vi"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>Vf</label><input type="text" id="ej3-vf"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>a</label><input type="text" id="ej3-a"><span class="unidad">m/s²</span></div>
-                    <div class="input-grupo"><label>t</label><input type="text" id="ej3-t"><span class="unidad">s</span></div>
-                    <div class="input-grupo"><label>d</label><input type="text" id="ej3-d"><span class="unidad">m</span></div>
-                </div>
-                <button class="btn-validar" onclick="validarP1('ej3', '10', '20', '?', 'x', '75')">Validar Datos</button>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Error. Sumaste 10 + 3 y luego multiplicaste por 4. Recuerda la prioridad de las operaciones matemáticas (primero multiplicación).')">52 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Esa es solo la cantidad de velocidad que ganó (3 * 4), te falta sumarle la velocidad que ya tenía (10).')">12 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! vf = 10 + (3 * 4) = 10 + 12 = 22 m/s.')">22 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Multiplicaste mal. Revisa: 10 + (3*4).')">40 m/s</button>
             </div>
-
-            <div class="paso-contenedor oculto" id="ej3-p2">
-                <div class="paso-titulo">Paso 2: Escoger Fórmula <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <select id="ej3-form" onchange="validarP2('ej3', 'f3')">
-                    <option value="">Selecciona una opción...</option>
-                    <option value="f1">a = (Vf - Vi) / t</option>
-                    <option value="f2">d = Vi·t + 0.5·a·t²</option>
-                    <option value="f3">Vf² = Vi² + 2·a·d</option>
-                    <option value="f4">d = ((Vi + Vf) / 2) · t</option>
-                </select>
-            </div>
-
-            <div class="paso-contenedor oculto" id="ej3-p3">
-                <div class="paso-titulo">Paso 3: Reemplazar Datos y Calcular <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <p style="color: #ccc; margin-bottom: 15px;">Utilizando el despeje: <strong>a = (Vf² - Vi²) / (2 × d)</strong></p>
-                <div class="reemplazo-box">
-                    <span>a = (</span>
-                    <input type="number" id="ej3-b1" placeholder="Vf"><span>² <span class="simbolo">-</span></span>
-                    <input type="number" id="ej3-b2" placeholder="Vi"><span>² ) <span class="simbolo">/ ( 2 ×</span></span>
-                    <input type="number" id="ej3-b3" placeholder="d"><span>)</span>
-                    <span class="simbolo" style="margin-left: 15px; color:var(--color-fisica); font-weight:800;">&rArr;</span>
-                    <input type="number" id="ej3-res" class="res-final" placeholder="Res."><span>m/s²</span>
-                </div>
-                <button class="btn-validar" onclick="validarP3('ej3', [20, 10, 75, 2])">Validar Resultado</button>
-            </div>
+            <div class="feedback" id="feed3"></div>
+            <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
-        <!-- ============================================================== -->
         <!-- EJERCICIO 4 -->
-        <!-- ============================================================== -->
-        <div class="ejercicio-box" id="ej4">
-            <h3>Ejercicio 4: La Bicicleta de Carga</h3>
-            <div class="enunciado">"Una bicicleta de carga baja por una pendiente partiendo del reposo y acelerando uniformemente a 1.5 m/s². ¿Cuánto tiempo le toma alcanzar los 54 km/h al final de la bajada?"</div>
+        <div class="ejercicio-card" id="ej4">
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Fórmula 4)</span>
+            <h3>Reto 4: Pista de Carreras</h3>
+            <div class="enunciado">
+                Un auto de carreras parte del reposo y acelera a <strong>8 m/s²</strong>. <br><br>
+                ¿Qué velocidad tendrá luego de haber recorrido <strong>100 metros</strong>? (No sabemos el tiempo).<br>
+                Fórmula: $v_f^2 = v_i^2 + 2 \cdot a \cdot d$
+            </div>
             
-            <div class="paso-contenedor activo" id="ej4-p1">
-                <div class="paso-titulo">Paso 1: Organizar y Convertir Datos <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <div class="grid-datos">
-                    <div class="input-grupo"><label>Vi</label><input type="text" id="ej4-vi"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>Vf</label><input type="text" id="ej4-vf"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>a</label><input type="text" id="ej4-a"><span class="unidad">m/s²</span></div>
-                    <div class="input-grupo"><label>t</label><input type="text" id="ej4-t"><span class="unidad">s</span></div>
-                    <div class="input-grupo"><label>d</label><input type="text" id="ej4-d"><span class="unidad">m</span></div>
-                </div>
-                <button class="btn-validar" onclick="validarP1('ej4', '0', '15', '1.5', '?', 'x')">Validar Datos</button>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Ese es el valor de vf al cuadrado (1600). ¡Te falta sacarle la raíz cuadrada!')">1600 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Correcto! vf² = 0 + 2(8)(100) = 1600. La raíz cuadrada de 1600 es 40 m/s.')">40 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste mal adentro de la raíz.')">20 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Te faltó multiplicarlo por 2 en la fórmula.')">800 m/s</button>
             </div>
-
-            <div class="paso-contenedor oculto" id="ej4-p2">
-                <div class="paso-titulo">Paso 2: Escoger Fórmula <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <select id="ej4-form" onchange="validarP2('ej4', 'f1')">
-                    <option value="">Selecciona una opción...</option>
-                    <option value="f1">a = (Vf - Vi) / t</option>
-                    <option value="f2">d = Vi·t + 0.5·a·t²</option>
-                    <option value="f3">Vf² = Vi² + 2·a·d</option>
-                    <option value="f4">d = ((Vi + Vf) / 2) · t</option>
-                </select>
-            </div>
-
-            <div class="paso-contenedor oculto" id="ej4-p3">
-                <div class="paso-titulo">Paso 3: Reemplazar Datos y Calcular <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <p style="color: #ccc; margin-bottom: 15px;">Utilizando el despeje: <strong>t = (Vf - Vi) / a</strong></p>
-                <div class="reemplazo-box">
-                    <span>t = (</span>
-                    <input type="number" id="ej4-b1" placeholder="Vf"><span class="simbolo">-</span>
-                    <input type="number" id="ej4-b2" placeholder="Vi"><span>) <span class="simbolo">/</span></span>
-                    <input type="number" id="ej4-b3" placeholder="a">
-                    <span class="simbolo" style="margin-left: 15px; color:var(--color-fisica); font-weight:800;">&rArr;</span>
-                    <input type="number" id="ej4-res" class="res-final" placeholder="Res."><span>s</span>
-                </div>
-                <button class="btn-validar" onclick="validarP3('ej4', [15, 0, 1.5, 10])">Validar Resultado</button>
-            </div>
+            <div class="feedback" id="feed4"></div>
+            <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
         </div>
-
-        <!-- ============================================================== -->
+        
         <!-- EJERCICIO 5 -->
-        <!-- ============================================================== -->
-        <div class="ejercicio-box" id="ej5">
-            <h3>Ejercicio 5: El Caballo de Paso</h3>
-            <div class="enunciado">"Un caballo avanza reduciendo su velocidad uniformemente desde 18 km/h hasta detenerse (0 km/h) al llegar al establo. Si recorrió exactamente 12.5 metros frenando, ¿cuánto tiempo demoró en detenerse?"</div>
+        <div class="ejercicio-card" id="ej5">
+            <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto (Frenado)</span>
+            <h3>Reto 5: Frenos a fondo</h3>
+            <div class="enunciado">
+                Un camión viaja a <strong>20 m/s</strong>. Al ver un obstáculo, aplica los frenos con una desaceleración de <strong>-2 m/s²</strong> hasta detenerse. <br><br>
+                ¿Cuánto tiempo tardó en detenerse por completo?
+                <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: Usa $v_f = v_i + a \cdot t$. Recuerda que al detenerse $v_f = 0$ y que $a$ es negativa).</span>
+            </div>
             
-            <div class="paso-contenedor activo" id="ej5-p1">
-                <div class="paso-titulo">Paso 1: Organizar y Convertir Datos <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <div class="grid-datos">
-                    <div class="input-grupo"><label>Vi</label><input type="text" id="ej5-vi"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>Vf</label><input type="text" id="ej5-vf"><span class="unidad">m/s</span></div>
-                    <div class="input-grupo"><label>a</label><input type="text" id="ej5-a"><span class="unidad">m/s²</span></div>
-                    <div class="input-grupo"><label>t</label><input type="text" id="ej5-t"><span class="unidad">s</span></div>
-                    <div class="input-grupo"><label>d</label><input type="text" id="ej5-d"><span class="unidad">m</span></div>
-                </div>
-                <button class="btn-validar" onclick="validarP1('ej5', '5', '0', 'x', '?', '12.5')">Validar Datos</button>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'El camión iba a 20 m/s y perdía 2 m/s cada segundo. 40 segundos es demasiado.')">40 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'El tiempo nunca puede ser negativo.')">-10 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Brillante! 0 = 20 - 2t -> 2t = 20 -> t = 10 segundos.')">10 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Revisa tu despeje. No se suman.')">22 s</button>
             </div>
-
-            <div class="paso-contenedor oculto" id="ej5-p2">
-                <div class="paso-titulo">Paso 2: Escoger Fórmula <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <select id="ej5-form" onchange="validarP2('ej5', 'f4')">
-                    <option value="">Selecciona una opción...</option>
-                    <option value="f1">a = (Vf - Vi) / t</option>
-                    <option value="f2">d = Vi·t + 0.5·a·t²</option>
-                    <option value="f3">Vf² = Vi² + 2·a·d</option>
-                    <option value="f4">d = ((Vi + Vf) / 2) · t</option>
-                </select>
-            </div>
-
-            <div class="paso-contenedor oculto" id="ej5-p3">
-                <div class="paso-titulo">Paso 3: Reemplazar Datos y Calcular <i class="fa-solid fa-circle-check icono-check"></i></div>
-                <p style="color: #ccc; margin-bottom: 15px;">Utilizando el despeje: <strong>t = (2 × d) / (Vi + Vf)</strong></p>
-                <div class="reemplazo-box">
-                    <span>t = ( 2 × </span>
-                    <input type="number" id="ej5-b1" placeholder="d"><span> ) <span class="simbolo">/ (</span></span>
-                    <input type="number" id="ej5-b2" placeholder="Vi"><span class="simbolo">+</span>
-                    <input type="number" id="ej5-b3" placeholder="Vf"><span>)</span>
-                    <span class="simbolo" style="margin-left: 15px; color:var(--color-fisica); font-weight:800;">&rArr;</span>
-                    <input type="number" id="ej5-res" class="res-final" placeholder="Res."><span>s</span>
-                </div>
-                <button class="btn-validar" onclick="validarP3('ej5', [12.5, 5, 0, 5])">Validar Resultado</button>
-            </div>
+            <div class="feedback" id="feed5"></div>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
-    </main>
+        <div class="pantalla-final" id="pantalla-final">
+            <div class="trofeo">🏁</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">¡Excelente! Eres un experto en las 4 fórmulas del MRUV.</p>
+            <a href="fisica10_mruv_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+        </div>
 
-    <!-- ========================================================= -->
-    <!-- LÓGICA JAVASCRIPT                                         -->
-    <!-- ========================================================= -->
+    </div>
+
     <script>
-        // --- FUNCIÓN DE ALERTAS (TOAST) ---
-        function mostrarToast(mensaje, tipo) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `toast ${tipo}`;
+        const totalEjercicios = 5;
+        function verificarRespuesta(num, btn, esCorrecta, mensaje) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
             
-            let icono = tipo === 'exito' ? '<i class="fa-solid fa-circle-check"></i>' : '<i class="fa-solid fa-triangle-exclamation"></i>';
-            toast.innerHTML = `${icono} ${mensaje}`;
+            botones.forEach(b => {
+                b.disabled = true;
+                if(b === btn) { b.classList.add(esCorrecta ? 'correcta' : 'incorrecta'); } 
+                else if (!esCorrecta && b.getAttribute('onclick').includes('true')) { b.classList.add('correcta'); }
+            });
+
+            const feed = document.getElementById('feed' + num);
+            feed.innerHTML = esCorrecta ? `<i class="fa-solid fa-check-circle"></i> ${mensaje}` : `<i class="fa-solid fa-xmark-circle"></i> ${mensaje}`;
+            feed.className = 'feedback ' + (esCorrecta ? 'correcto' : 'incorrecto');
             
-            container.appendChild(toast);
-            
-            // Auto desaparecer
-            setTimeout(() => {
-                toast.classList.add('fade-out');
-                setTimeout(() => toast.remove(), 500); 
-            }, 3000);
-        }
-
-        // --- PASO 1: VALIDAR DATOS (INCLUYE CONVERSIONES Y ?/X) ---
-        function validarP1(ejId, ansVi, ansVf, ansA, ansT, ansD) {
-            let vi = document.getElementById(`${ejId}-vi`).value.trim().toLowerCase();
-            let vf = document.getElementById(`${ejId}-vf`).value.trim().toLowerCase();
-            let a = document.getElementById(`${ejId}-a`).value.trim().toLowerCase();
-            let t = document.getElementById(`${ejId}-t`).value.trim().toLowerCase();
-            let d = document.getElementById(`${ejId}-d`).value.trim().toLowerCase();
-
-            if(!vi || !vf || !a || !t || !d) {
-                mostrarToast("Debes llenar todos los recuadros del Paso 1.", "error");
-                return;
-            }
-
-            if(vi === ansVi && vf === ansVf && a === ansA && t === ansT && d === ansD) {
-                mostrarToast("¡Datos organizados y convertidos correctamente!", "exito");
-                document.getElementById(`${ejId}-p1`).classList.replace('activo', 'completado');
-                document.getElementById(`${ejId}-p2`).classList.remove('oculto');
-                document.getElementById(`${ejId}-p2`).classList.add('activo');
+            if(esCorrecta) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#f39c12', '#e67e22', '#f1c40f'] });
+                document.getElementById('btnSig' + num).style.display = 'block';
+                actualizarBarra(num);
             } else {
-                mostrarToast("Revisa tus datos. ¿Convertiste km/h a m/s? ¿Pusiste bien la '?' y la 'x'?", "error");
+                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding: 8px 15px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">Intentar de nuevo</button>`;
             }
         }
 
-        // --- PASO 2: VALIDAR FÓRMULA ---
-        function validarP2(ejId, ansForm) {
-            let form = document.getElementById(`${ejId}-form`).value;
-            
-            if(!form) return;
-
-            if(form === ansForm) {
-                mostrarToast("¡Fórmula correcta elegida!", "exito");
-                document.getElementById(`${ejId}-p2`).classList.replace('activo', 'completado');
-                document.getElementById(`${ejId}-p3`).classList.remove('oculto');
-                document.getElementById(`${ejId}-p3`).classList.add('activo');
-            } else {
-                mostrarToast("Piénsalo bien. Fíjate en la variable que tiene la letra 'x'.", "error");
-                document.getElementById(`${ejId}-form`).value = ""; // Reiniciar select
-            }
+        function reiniciarEjercicio(num) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            botones.forEach(b => { b.disabled = false; b.classList.remove('correcta', 'incorrecta'); });
+            const feed = document.getElementById('feed' + num);
+            feed.className = 'feedback';
+            feed.innerHTML = '';
         }
 
-        // --- PASO 3: VALIDAR REEMPLAZO Y RESULTADO ---
-        function validarP3(ejId, ansArray) {
-            // ansArray contiene [val_b1, val_b2, val_b3, val_b4 (opcional), ResultadoFinal]
-            
-            let b1 = parseFloat(document.getElementById(`${ejId}-b1`).value);
-            let b2 = parseFloat(document.getElementById(`${ejId}-b2`).value);
-            let b3 = parseFloat(document.getElementById(`${ejId}-b3`).value);
-            
-            // Algunos ejercicios no tienen b4, así que comprobamos si existe en el HTML
-            let b4_element = document.getElementById(`${ejId}-b4`);
-            let b4 = b4_element ? parseFloat(b4_element.value) : null;
-            
-            let res = parseFloat(document.getElementById(`${ejId}-res`).value);
-
-            let allFilled = !isNaN(b1) && !isNaN(b2) && !isNaN(b3) && !isNaN(res);
-            if(b4_element && isNaN(b4)) allFilled = false;
-
-            if(!allFilled) {
-                mostrarToast("Debes llenar todos los recuadros numéricos, incluido el resultado final.", "error");
-                return;
-            }
-
-            // Validar
-            let isValid = true;
-            if(b1 !== ansArray[0]) isValid = false;
-            if(b2 !== ansArray[1]) isValid = false;
-            if(b3 !== ansArray[2]) isValid = false;
-            if(b4_element && b4 !== ansArray[3]) isValid = false;
-            
-            let ansRes = ansArray[ansArray.length - 1]; // El último elemento es siempre el resultado
-            if(res !== ansRes) isValid = false;
-
-            if(isValid) {
-                mostrarToast("¡FELICITACIONES! Ejercicio completado perfectamente.", "exito");
-                document.getElementById(`${ejId}-p3`).classList.replace('activo', 'completado');
-            } else if (res === ansRes) {
-                mostrarToast("El resultado está bien, pero acomodaste mal los números en la fórmula.", "error");
-            } else {
-                mostrarToast("Hay un error en tu reemplazo o en tu cálculo final. Revisa de nuevo.", "error");
-            }
+        function actualizarBarra(num) { document.getElementById('barra').style.width = ((num / totalEjercicios) * 100) + '%'; }
+        function siguiente(actual) {
+            document.getElementById('ej' + actual).classList.remove('activo');
+            document.getElementById('ej' + (actual + 1)).classList.add('activo');
+            window.scrollTo(0, 0);
+        }
+        function finalizar() {
+            document.getElementById('ej' + totalEjercicios).classList.remove('activo');
+            document.getElementById('pantalla-final').classList.add('activo');
+            confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
+            window.scrollTo(0, 0);
         }
     </script>
-
-    <!-- Prof. IA - Asistente Virtual de Fisica 10 -->
-    <script src="profe-ia.js"></script>
 </body>
 </html>
