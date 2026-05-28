@@ -3,222 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación Cinemática - LabVirtual W</title>
+    <title>Evaluación: Movimiento Rectilíneo Uniforme - LabVirtual W</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root { 
-            --color-fisica: #3498db; 
-            --color-oscuro: #0f172a; 
-            --color-acento: #deff9a;
-            --color-texto: #ffffff; 
-        }
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; --color-evaluacion: #e74c3c; }
+        html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-evaluacion { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(231, 76, 60, 0.1); border-radius: 15px; border: 1px solid rgba(231, 76, 60, 0.3); }
+        .header-evaluacion h1 { color: var(--color-evaluacion); font-size: 2.5rem; margin-bottom: 10px; }
+
+        .info-estudiante { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 600; color: #ccc; }
+        .input-group input, .input-group select { padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem; }
+        .input-group input:focus, .input-group select:focus { outline: none; border-color: var(--color-fisica); }
+
+        .pregunta-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .pregunta-card:hover { border-color: rgba(52, 152, 219, 0.3); }
+        .pregunta-num { background: var(--color-evaluacion); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; }
+        .pregunta-texto { font-size: 1.15rem; margin-bottom: 20px; line-height: 1.6; }
+
+        .opciones-lista { display: flex; flex-direction: column; gap: 12px; }
+        .opcion-item { display: flex; align-items: center; gap: 15px; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .opcion-item:hover { background: rgba(255,255,255,0.08); }
+        .opcion-item input[type="radio"] { width: 20px; height: 20px; accent-color: var(--color-evaluacion); cursor: pointer; }
+        .opcion-item label { flex: 1; cursor: pointer; font-size: 1.05rem; }
+
+        .btn-enviar { width: 100%; padding: 20px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border: none; border-radius: 10px; font-size: 1.3rem; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4); margin-top: 20px; }
+        .btn-enviar:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(231, 76, 60, 0.6); }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        #pantalla-resultados { display: none; margin-top: 40px; text-align: center; background: rgba(20, 20, 35, 0.95); padding: 50px 30px; border-radius: 15px; border: 2px solid #2ecc71; animation: fadeIn 1s; }
+        .nota-final { font-size: 5rem; font-weight: 800; color: #2ecc71; margin: 20px 0; text-shadow: 0 0 20px rgba(46, 204, 113, 0.5); }
         
-        body {
-            background-color: var(--color-oscuro); 
-            color: var(--color-texto);
-            background-image: radial-gradient(circle at 50% 50%, rgba(52, 152, 219, 0.1), transparent 80%),
-                              url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-attachment: fixed; min-height: 100vh; padding: 20px;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .correccion-card { text-align: left; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #3498db; }
+        .resp-correcta { color: #2ecc71; font-weight: bold; }
+        .resp-incorrecta { color: #e74c3c; font-weight: bold; text-decoration: line-through; }
 
-        .contenedor { 
-            max-width: 850px; width: 100%; background: rgba(15, 23, 42, 0.85); 
-            backdrop-filter: blur(15px); padding: 50px; border-radius: 24px; 
-            border: 1px solid rgba(222, 255, 154, 0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            text-align: center; /* CENTRADO GENERAL */
-        }
-
-        /* --- AMBIENTACIÓN Y CABECERA --- */
-        .eval-header { margin-bottom: 30px; }
-        .eval-header i { font-size: 60px; color: var(--color-acento); margin-bottom: 15px; }
-        .eval-header h1 { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-        .eval-header span { color: var(--color-acento); }
-        .eval-header p { font-size: 1.1rem; color: #ddd; line-height: 1.6; padding: 0 20px; }
-
-        .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 40px; overflow: hidden; }
-        #progress-fill { width: 0%; height: 100%; background: var(--color-acento); transition: 0.5s; }
-
-        .pantalla { display: none; }
-        .activa { display: block; animation: fadeIn 0.6s ease; }
-
-        input[type="text"] { 
-            width: 80%; padding: 15px; margin: 20px auto; border-radius: 12px; 
-            border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); 
-            color: #fff; font-size: 1.1rem; text-align: center; display: block;
-        }
-        input[type="text"]:focus { border-color: var(--color-acento); outline: none; background: rgba(0,0,0,0.6); }
-
-        .pregunta-card { 
-            background: rgba(255,255,255,0.03); padding: 30px; border-radius: 15px; 
-            border-top: 5px solid var(--color-acento); margin-bottom: 30px; 
-            text-align: center; /* CENTRADO DE PREGUNTAS */
-        }
-        .pregunta-card h3 { margin-bottom: 25px; font-weight: 500; font-size: 1.3rem; }
-
-        .opciones-contenedor { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        
-        .opcion { 
-            display: flex; align-items: center; justify-content: center; gap: 15px; 
-            width: 80%; padding: 15px; background: rgba(255,255,255,0.05); 
-            border-radius: 10px; cursor: pointer; transition: 0.3s;
-        }
-        .opcion:hover { background: rgba(222, 255, 154, 0.1); }
-        .opcion input { accent-color: var(--color-acento); transform: scale(1.3); cursor: pointer; }
-
-        .btn { 
-            width: 80%; padding: 18px; border: none; border-radius: 12px; 
-            background: var(--color-acento); color: #000; font-size: 1.2rem; 
-            font-weight: 700; cursor: pointer; transition: 0.3s; margin: 20px auto 0; display: block;
-        }
-        .btn:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(222, 255, 154, 0.3); }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 30px; background: rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; }
-        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 1rem; }
-        th { background: rgba(222, 255, 154, 0.1); color: var(--color-acento); font-weight: 600; text-transform: uppercase; }
-        .correcto { color: #2ecc71; font-weight: bold; }
-        .incorrecto { color: #e74c3c; font-weight: bold; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        @media (max-width: 768px) {
-            .opcion, .btn, input[type="text"] { width: 100%; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 600px) { .info-estudiante { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div class="contenedor">
-        <div class="eval-header">
-            <i class="fa-solid fa-stopwatch"></i>
-            <h1>Evaluación <span>M.R.U.</span></h1>
-            <p>Demuestra tus conocimientos sobre el Movimiento Rectilíneo Uniforme. Lee detenidamente cada situación y selecciona la respuesta correcta. Cada acierto suma 1.0 a tu nota final.</p>
+        <a href="fisica10_mru_practica.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Práctica</a>
+
+        <div class="header-evaluacion">
+            <h1><i class="fa-solid fa-clipboard-list"></i> Evaluación Final</h1>
+            <p><strong>Tema: Cinemática (MRU)</strong></p>
         </div>
 
-        <div class="progress-bar"><div id="progress-fill"></div></div>
-
-        <div id="pantalla-inicio" class="pantalla activa">
-            <p style="color: #ccc; margin-bottom: 10px;">Para iniciar tu prueba en el Laboratorio Virtual, por favor identifícate:</p>
-            <input type="text" id="nombre-estudiante" placeholder="Escribe tu nombre y apellido">
-            <button class="btn" onclick="iniciar()">COMENZAR EXAMEN</button>
+        <div class="info-estudiante" id="datos-estudiante">
+            <div class="input-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" placeholder="Ej. Carlos Martínez" required>
+            </div>
+            <div class="input-group">
+                <label for="grado">Grado / Sección:</label>
+                <select id="grado" required>
+                    <option value="">Selecciona tu grado...</option>
+                    <option value="10-1">10-1</option>
+                    <option value="10-2">10-2</option>
+                    <option value="10-3">10-3</option>
+                    <option value="10-4">10-4</option>
+                </select>
+            </div>
         </div>
 
-        <div id="pantalla-test" class="pantalla">
-            <div id="cuestionario"></div>
-            <button class="btn" id="btn-finalizar" onclick="procesarEvaluacion()">ENVIAR RESULTADOS</button>
+        <div id="cuestionario">
+            <!-- P1 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 1</div>
+                <div class="pregunta-texto">En el Movimiento Rectilíneo Uniforme (MRU), la principal característica de la velocidad es que:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p1" value="a"> a) Aumenta constantemente.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="b"> b) Se mantiene constante en todo el recorrido.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="c"> c) Es siempre igual a cero.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="d"> d) Disminuye al pasar el tiempo.</label>
+                </div>
+            </div>
+
+            <!-- P2 -->
+            <div class="pregunta-card" data-correcta="d">
+                <div class="pregunta-num">Pregunta 2</div>
+                <div class="pregunta-texto">¿Cuál es el valor de la aceleración en cualquier problema de MRU?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p2" value="a"> a) 9.8 m/s²</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="b"> b) Positiva constante</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="c"> c) Depende de la velocidad</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="d"> d) Cero (0 m/s²)</label>
+                </div>
+            </div>
+
+            <!-- P3 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 3</div>
+                <div class="pregunta-texto">Si conoces la distancia y el tiempo de un viaje en MRU, ¿cómo calculas la velocidad?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p3" value="a"> a) Velocidad = Distancia ÷ Tiempo</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="b"> b) Velocidad = Distancia × Tiempo</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="c"> c) Velocidad = Tiempo ÷ Distancia</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="d"> d) Velocidad = Distancia + Tiempo</label>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 4</div>
+                <div class="pregunta-texto">Un corredor avanza en línea recta a 5 m/s durante 20 segundos. ¿Qué distancia recorrió?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p4" value="a"> a) 4 m</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="b"> b) 25 m</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="c"> c) 100 m</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="d"> d) 50 m</label>
+                </div>
+            </div>
+
+            <!-- P5 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 5</div>
+                <div class="pregunta-texto">Un dron debe recorrer 150 metros y puede volar a 15 m/s. ¿Cuánto tiempo se demorará en llegar?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p5" value="a"> a) 2250 s</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="b"> b) 10 s</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="c"> c) 15 s</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="d"> d) 0.1 s</label>
+                </div>
+            </div>
+
+            <!-- P6 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 6</div>
+                <div class="pregunta-texto">Si la gráfica de posición contra tiempo (x-t) de un objeto es una línea recta inclinada hacia arriba, significa que:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p6" value="a"> a) Está acelerando.</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="b"> b) Está en reposo (detenido).</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="c"> c) Se mueve con velocidad constante (MRU).</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="d"> d) Está regresando al punto de partida.</label>
+                </div>
+            </div>
+
+            <!-- P7 -->
+            <div class="pregunta-card" data-correcta="d">
+                <div class="pregunta-num">Pregunta 7</div>
+                <div class="pregunta-texto">¿Cuál es el factor correcto para convertir una velocidad de km/h a m/s?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p7" value="a"> a) Multiplicar por 1000</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="b"> b) Multiplicar por 3.6</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="c"> c) Dividir entre 60</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="d"> d) Dividir entre 3.6</label>
+                </div>
+            </div>
+
+            <!-- P8 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 8</div>
+                <div class="pregunta-texto">Un carro viaja a 72 km/h. ¿Cuál es su velocidad en m/s?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p8" value="a"> a) 72000 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="b"> b) 20 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="c"> c) 259 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="d"> d) 2 m/s</label>
+                </div>
+            </div>
+
+            <!-- P9 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 9</div>
+                <div class="pregunta-texto">Dos trenes parten en MRU. El Tren A recorre 100m en 5s. El Tren B recorre 120m en 10s. ¿Cuál es más rápido?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p9" value="a"> a) El Tren A (va a 20 m/s)</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="b"> b) El Tren B (va a 12 m/s)</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="c"> c) Van a la misma velocidad</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="d"> d) Faltan datos para saberlo</label>
+                </div>
+            </div>
+
+            <!-- P10 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 10</div>
+                <div class="pregunta-texto">En la vida real, el MRU perfecto es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p10" value="a"> a) Muy común, casi todos los carros en la ciudad van en MRU.</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="b"> b) Imposible de calcular matemáticamente.</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="c"> c) Una idealización teórica, difícil de mantener en la Tierra por la fricción y obstáculos.</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="d"> d) El movimiento natural de los planetas.</label>
+                </div>
+            </div>
+
+            <button class="btn-enviar" onclick="calificar()">
+                <i class="fa-solid fa-paper-plane"></i> Enviar Evaluación y Ver Calificación
+            </button>
         </div>
 
-        <div id="pantalla-final" class="pantalla">
-            <div id="resumen-visual"></div>
-            <div id="tabla-detalle"></div>
-            <button class="btn" onclick="window.location.reload()">REINTENTAR EXAMEN</button>
-            <button class="btn" style="background: transparent; border: 2px solid var(--color-acento); color: var(--color-acento); margin-top: 15px;" onclick="location.href='fisica10_mru.html'">VOLVER A LA LECCIÓN</button>
+        <div id="pantalla-resultados">
+            <h2>Resultados Oficiales</h2>
+            <p style="font-size: 1.2rem; margin-top: 10px;" id="info-res-estudiante">Estudiante</p>
+            <div class="nota-final" id="nota-numero">10/10</div>
+            <h3 id="mensaje-motivacional" style="margin-bottom: 30px;">¡Excelente trabajo!</h3>
+            
+            <button style="background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; color: #2ecc71; padding: 10px 20px; border-radius: 5px; margin-bottom: 40px;">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Resultado guardado en la plataforma
+            </button>
+
+            <div id="correcciones" style="text-align: left;"></div>
+            
+            <a href="fisica_10.html" class="btn-enviar" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none; background: linear-gradient(135deg, #3498db, #2980b9);">Volver al Menú Principal</a>
         </div>
+
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyRYwv-LHpep2UXLe2M8NhhJE6SFCNRod_dAUmWpwCposiYOb1fxLB6iFL0y45kotS_1w/exec';
-        let nombre = "";
-        
-        const preguntas = [
-            { p: "Si un objeto recorre 50m en 10s, su velocidad es:", o: ["2 m/s", "5 m/s", "10 m/s", "500 m/s"], c: 1 },
-            { p: "¿Qué distancia recorre un móvil a 4 m/s durante 20s?", o: ["5 m", "16 m", "80 m", "100 m"], c: 2 },
-            { p: "En el M.R.U., la aceleración es siempre:", o: ["Cero", "Constante", "Variable", "Infinita"], c: 0 },
-            { p: "Si la velocidad es 15 m/s y el tiempo es 3s, la distancia es:", o: ["5 m", "12 m", "18 m", "45 m"], c: 3 },
-            { p: "¿Cuánto tiempo tarda en recorrer 120m a una velocidad de 30 m/s?", o: ["2 s", "4 s", "6 s", "3600 s"], c: 1 }
-        ];
+        function calificar() {
+            const nombre = document.getElementById('nombre').value;
+            const grado = document.getElementById('grado').value;
+            if(!nombre || !grado) { alert("Por favor ingresa tu nombre y selecciona tu grado antes de enviar."); return; }
 
-        function iniciar() {
-            nombre = document.getElementById('nombre-estudiante').value.trim();
-            if(!nombre) return alert("Por favor, ingresa tu nombre para continuar.");
-            document.getElementById('pantalla-inicio').classList.remove('activa');
-            document.getElementById('pantalla-test').classList.add('activa');
-            document.getElementById('progress-fill').style.width = "50%";
-            pintarPreguntas();
-        }
+            let correctas = 0; const total = 10;
+            const correccionesDiv = document.getElementById('correcciones');
+            correccionesDiv.innerHTML = '<h3 style="color: #fff; margin-bottom: 20px;">Revisión Detallada:</h3>';
 
-        function pintarPreguntas() {
-            let html = "";
-            preguntas.forEach((q, i) => {
-                html += `<div class="pregunta-card"><h3>${i+1}. ${q.p}</h3><div class="opciones-contenedor">`;
-                q.o.forEach((opt, j) => {
-                    html += `<label class="opcion"><input type="radio" name="preg${i}" value="${j}"> ${opt}</label>`;
+            const preguntas = document.querySelectorAll('.pregunta-card');
+            preguntas.forEach((preg, index) => {
+                const respCorrecta = preg.getAttribute('data-correcta');
+                const radios = preg.querySelectorAll('input[type="radio"]');
+                let respUsuario = null, textoUsuario = "No respondida", textoCorrecto = "";
+
+                radios.forEach(r => {
+                    if(r.checked) respUsuario = r.value;
+                    if(r.value === respCorrecta) textoCorrecto = r.parentElement.innerText;
+                    if(r.checked) textoUsuario = r.parentElement.innerText;
                 });
-                html += `</div></div>`;
-            });
-            document.getElementById('cuestionario').innerHTML = html;
-        }
 
-        function procesarEvaluacion() {
-            let aciertos = 0;
-            let respuestasEstudiante = {};
-            
-            preguntas.forEach((q, i) => {
-                const seleccion = document.querySelector(`input[name="preg${i}"]:checked`);
-                let indiceMarcado = seleccion ? parseInt(seleccion.value) : -1;
+                if(respUsuario === respCorrecta) correctas++;
+
+                let claseCSS = (respUsuario === respCorrecta) ? "resp-correcta" : "resp-incorrecta";
+                let icono = (respUsuario === respCorrecta) ? "<i class='fa-solid fa-check' style='color:#2ecc71'></i>" : "<i class='fa-solid fa-xmark' style='color:#e74c3c'></i>";
                 
-                let esCorrecta = (indiceMarcado === q.c);
-                if(esCorrecta) aciertos++;
-                
-                respuestasEstudiante[`p${i+1}`] = esCorrecta ? "CORRECTO" : "ERROR (Marcó: " + (indiceMarcado === -1 ? "Ninguna" : q.o[indiceMarcado]) + ")";
+                let cardHTML = `<div class="correccion-card">
+                    <p style="color: #fff; margin-bottom: 10px;"><strong>Pregunta ${index + 1}:</strong> ${preg.querySelector('.pregunta-texto').innerHTML}</p>
+                    <p>Tu respuesta: <span class="${claseCSS}">${icono} ${textoUsuario}</span></p>`;
+                if(respUsuario !== respCorrecta) cardHTML += `<p style="margin-top: 5px;">Respuesta correcta: <span class="resp-correcta">${textoCorrecto}</span></p>`;
+                cardHTML += `</div>`;
+                correccionesDiv.innerHTML += cardHTML;
             });
 
-            // LÓGICA DE NOTA: 1 PUNTO POR ACIERTO (Ej: 2 aciertos = 2.0, 5 aciertos = 5.0)
-            let notaFinal = aciertos.toFixed(1);
-
-            // Enviar datos al Excel
-            const body = new FormData();
-            body.append('nombre', nombre);
-            body.append('nota', notaFinal);
-            body.append('p1', respuestasEstudiante.p1);
-            body.append('p2', respuestasEstudiante.p2);
-            body.append('p3', respuestasEstudiante.p3);
-            body.append('p4', respuestasEstudiante.p4);
-            body.append('p5', respuestasEstudiante.p5);
-
-            document.getElementById('btn-finalizar').innerText = "ENVIANDO RESULTADOS...";
-            document.getElementById('btn-finalizar').disabled = true;
-
-            fetch(scriptURL, { method: 'POST', body: body })
-                .then(() => {
-                    document.getElementById('pantalla-test').classList.remove('activa');
-                    document.getElementById('pantalla-final').classList.add('activa');
-                    document.getElementById('progress-fill').style.width = "100%";
-                    mostrarResultadosFinales(notaFinal, respuestasEstudiante);
-                })
-                .catch(() => {
-                    alert("Error de conexión. Verifica internet.");
-                    document.getElementById('btn-finalizar').innerText = "ENVIAR RESULTADOS";
-                    document.getElementById('btn-finalizar').disabled = false;
-                });
-        }
-
-        function mostrarResultadosFinales(nota, r) {
-            let colorNota = nota >= 3.0 ? "#2ecc71" : "#e74c3c";
-            let icono = nota >= 3.0 ? "fa-solid fa-medal" : "fa-solid fa-triangle-exclamation";
+            document.getElementById('datos-estudiante').style.display = 'none';
+            document.getElementById('cuestionario').style.display = 'none';
             
-            let htmlCabecera = `
-                <i class="${icono}" style="font-size: 50px; color: ${colorNota}; margin-bottom: 15px;"></i>
-                <h2 style="margin-bottom:10px;">¡Examen Finalizado!</h2>
-                <h3 style="font-size:4rem; color:${colorNota}; margin: 10px 0;">${nota}</h3>
-                <p style="font-size: 1.2rem;">Estudiante: <strong>${nombre}</strong></p>
-            `;
+            const pantallaRes = document.getElementById('pantalla-resultados');
+            pantallaRes.style.display = 'block';
+            window.scrollTo(0, 0);
+
+            document.getElementById('info-res-estudiante').innerText = `${nombre} | Grado ${grado}`;
+            const notaElement = document.getElementById('nota-numero');
+            notaElement.innerText = `${correctas}/${total}`;
             
-            let htmlTabla = `<table><thead><tr><th>Pregunta</th><th>Estado y Detalle</th></tr></thead><tbody>`;
-            for(let i=1; i<=5; i++) {
-                let clase = r[`p${i}`].startsWith("CORRECTO") ? "correcto" : "incorrecto";
-                htmlTabla += `<tr><td>${i}</td><td class="${clase}">${r[`p${i}`]}</td></tr>`;
-            }
-            htmlTabla += `</tbody></table>`;
-            
-            document.getElementById('resumen-visual').innerHTML = htmlCabecera;
-            document.getElementById('tabla-detalle').innerHTML = htmlTabla;
+            const mensaje = document.getElementById('mensaje-motivacional');
+            if(correctas === 10) { mensaje.innerText = "¡Excelente! Eres rápido y constante como el MRU."; notaElement.style.color = "#2ecc71"; }
+            else if(correctas >= 7) { mensaje.innerText = "¡Muy bien! Tienes buen manejo de las fórmulas."; notaElement.style.color = "#f1c40f"; }
+            else if(correctas >= 4) { mensaje.innerText = "Aprobado. Ojo con la conversión de unidades (km/h a m/s)."; notaElement.style.color = "#f39c12"; }
+            else { mensaje.innerText = "Debes repasar el uso del triángulo mágico."; notaElement.style.color = "#e74c3c"; }
         }
     </script>
-
-    <!-- Prof. IA - Asistente Virtual de Fisica 10 -->
-    <script src="profe-ia.js"></script>
 </body>
 </html>
