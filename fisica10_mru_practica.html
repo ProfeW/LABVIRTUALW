@@ -3,353 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica M.R.U. - LabVirtual W</title>
+    <title>Práctica: Movimiento Rectilíneo Uniforme - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        :root {
-            --color-fisica: #3498db;   
-            --color-quimica: #9b59b6;  
-            --color-biologia: #2ecc71; 
-            --color-oscuro: #1a1a2e;
-            --color-texto: #ffffff;
-            --color-exito: #2ecc71;
-            --color-error: #e74c3c;
-            --color-advertencia: #f39c12;
-        }
-
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
 
-        body {
-            background-color: var(--color-oscuro);
-            color: var(--color-texto);
-            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-attachment: fixed; min-height: 100vh;
-        }
-
-        /* --- NAVEGACIÓN --- */
-        nav {
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
-        }
-        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo i { color: var(--color-fisica); }
-        .menu { list-style: none; display: flex; gap: 20px; }
-        .menu > li { position: relative; }
-        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
-
-        .submenu {
-            display: none; position: absolute; top: 100%; left: 0;
-            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
-            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
-        }
-        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
-        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
-        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
-
-        /* --- CONTENIDO --- */
-        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-practica { text-align: center; margin-bottom: 30px; }
+        .header-practica h1 { color: #f39c12; font-size: 2.5rem; margin-bottom: 10px; }
         
-        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 20px 0 40px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, #f39c12, #e67e22); width: 0%; transition: width 0.5s ease; }
+
+        .ejercicio-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 20px; display: none; animation: slideIn 0.5s ease forwards; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ejercicio-card.activo { display: block; }
+        
+        .nivel-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; background: rgba(52, 152, 219, 0.2); color: #4facfe; border: 1px solid #3498db; }
+        .ejercicio-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .enunciado { font-size: 1.2rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; padding: 15px; background: rgba(0,0,0,0.3); border-left: 4px solid #f39c12; border-radius: 5px; }
+
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .opcion-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; color: #fff; font-size: 1.1rem; cursor: pointer; transition: 0.2s; text-align: center; }
+        .opcion-btn:hover:not(:disabled) { background: rgba(243, 156, 18, 0.2); border-color: #f39c12; transform: translateY(-2px); }
+        .opcion-btn.correcta { background: rgba(46, 204, 113, 0.2); border-color: var(--color-correcto); color: #fff; }
+        .opcion-btn.incorrecta { background: rgba(231, 76, 60, 0.2); border-color: var(--color-incorrecto); opacity: 0.7; }
+        .opcion-btn:disabled { cursor: not-allowed; }
+
+        .feedback { display: none; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: 500; font-size: 1.1rem; }
+        .feedback.correcto { display: block; background: rgba(46, 204, 113, 0.1); border: 1px solid var(--color-correcto); color: #2ecc71; }
+        .feedback.incorrecto { display: block; background: rgba(231, 76, 60, 0.1); border: 1px solid var(--color-incorrecto); color: #e74c3c; }
+
+        .btn-siguiente { display: none; width: 100%; padding: 15px; background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .btn-siguiente:hover { filter: brightness(1.1); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
 
-        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
-        .encabezado-leccion h1 { font-size: 2.5rem; color: var(--color-fisica); margin-bottom: 10px; }
-        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+        .pantalla-final { display: none; text-align: center; padding: 50px 20px; background: rgba(20, 20, 35, 0.9); border-radius: 15px; border: 1px solid rgba(243, 156, 18, 0.5); }
+        .pantalla-final.activo { display: block; animation: fadeIn 1s; }
+        .trofeo { font-size: 5rem; margin-bottom: 20px; animation: bounce 2s infinite; }
 
-        /* --- ESTILOS DE LOS EJERCICIOS --- */
-        .ejercicio {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 5px solid var(--color-fisica); border-radius: 12px; padding: 30px; margin-bottom: 30px;
-        }
-        
-        .ejercicio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
-        .enunciado { font-size: 1.1rem; line-height: 1.6; color: #ddd; margin-bottom: 20px; }
-
-        /* --- CONTROLES INTERACTIVOS --- */
-        .controles-practica { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; }
-        
-        .selector-formula {
-            width: 100%; padding: 12px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(20, 20, 35, 0.8); color: #fff; font-size: 1rem; font-family: 'Poppins', sans-serif;
-            margin-bottom: 20px; outline: none; cursor: pointer;
-        }
-        .selector-formula:focus { border-color: var(--color-fisica); }
-
-        .campos-datos {
-            display: none; align-items: center; justify-content: center; flex-wrap: wrap; gap: 15px;
-            margin-bottom: 20px; font-size: 1.5rem; font-weight: 600; color: #fff;
-        }
-
-        .campos-datos input {
-            width: 120px; padding: 10px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem; text-align: center;
-            font-family: 'Poppins', sans-serif; outline: none;
-        }
-        .campos-datos input:focus { border-color: var(--color-fisica); background: rgba(255,255,255,0.15); }
-        .campos-datos input::placeholder { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
-
-        .btn-validar {
-            width: 100%; padding: 12px; border: none; border-radius: 5px; background: var(--color-fisica);
-            color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
-        }
-        .btn-validar:hover { background: #2980b9; transform: translateY(-2px); }
-
-        .feedback {
-            margin-top: 15px; padding: 15px; border-radius: 5px; font-weight: 600; text-align: center; display: none;
-        }
-        .feedback.exito { display: block; background: rgba(46, 204, 113, 0.2); border: 1px solid var(--color-exito); color: var(--color-exito); }
-        .feedback.error { display: block; background: rgba(231, 76, 60, 0.2); border: 1px solid var(--color-error); color: #ff7675; }
-        .feedback.advertencia { display: block; background: rgba(243, 156, 18, 0.2); border: 1px solid var(--color-advertencia); color: var(--color-advertencia); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 600px) {
-            .campos-datos { flex-direction: column; }
-            .campos-datos input { width: 100%; }
-        }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @media (max-width: 600px) { .opciones-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
-            <ul class="menu">
-                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="fisica_9.html">Grado Noveno</a></li>
-                        <li><a href="fisica_10.html">Grado Décimo</a></li>
-                        <li><a href="fisica_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="quimica_9.html">Grado Noveno</a></li>
-                        <li><a href="quimica_10.html">Grado Décimo</a></li>
-                        <li><a href="quimica_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="biologia_9.html">Grado Noveno</a></li>
-                        <li><a href="biologia_10.html">Grado Décimo</a></li>
-                        <li><a href="biologia_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="contenedor">
+        <a href="fisica10_mru.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
-    <main class="contenedor">
-        
-        <a href="fisica10_mru.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Lección M.R.U.</a>
-
-        <div class="encabezado-leccion">
+        <div class="header-practica">
             <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
-            <p>Lee el problema, elige la fórmula correcta, reemplaza los datos y valida tu respuesta.</p>
+            <p>Calcula velocidades, tiempos y distancias en línea recta.</p>
         </div>
 
-        <div class="ejercicio" id="ej1" data-formula="d=v*t" data-val1="12" data-val2="30" data-res="360">
-            <h3>Ejercicio 1</h3>
-            <p class="enunciado">Un Willys cargado de café viaja por una vía recta a una velocidad constante de <strong>12 m/s</strong>. ¿Qué distancia recorrerá en <strong>30 segundos</strong>?</p>
-            
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej1')">
-                    <option value="">1. Selecciona la fórmula a utilizar...</option>
-                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
-                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
-                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
-                </select>
-                
-                <div class="campos-datos"></div>
-                
-                <button class="btn-validar" onclick="validarEjercicio('ej1')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
+        <div class="progreso-container">
+            <div class="progreso-barra" id="barra"></div>
+        </div>
+
+        <!-- EJERCICIO 1 -->
+        <div class="ejercicio-card activo" id="ej1">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Cálculo de Distancia)</span>
+            <h3>Reto 1: El Tren Rápido</h3>
+            <div class="enunciado">
+                Un tren viaja en línea recta a una velocidad constante de <strong>30 m/s</strong>. <br><br>
+                ¿Qué distancia recorrerá en <strong>10 segundos</strong>?
             </div>
-        </div>
-
-        <div class="ejercicio" id="ej2" data-formula="t=d/v" data-val1="1500" data-val2="1.5" data-res="1000">
-            <h3>Ejercicio 2</h3>
-            <p class="enunciado">Un estudiante camina desde su finca hasta la I.E. Gallego en línea recta. Si la escuela está a <strong>1500 metros</strong> y él camina a una velocidad constante de <strong>1.5 m/s</strong>, ¿cuántos segundos tardará en llegar?</p>
             
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej2')">
-                    <option value="">1. Selecciona la fórmula a utilizar...</option>
-                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
-                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
-                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
-                </select>
-                
-                <div class="campos-datos"></div>
-                
-                <button class="btn-validar" onclick="validarEjercicio('ej2')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te equivocaste. La fórmula de la distancia es velocidad POR tiempo.')">3 metros</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'No hay que sumar. Es un producto (multiplicación).')">40 metros</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! Distancia = v × t. Entonces, d = 30 × 10 = 300 metros.')">300 metros</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Error de cálculo. Multiplica 30 por 10 con cuidado.')">3000 metros</button>
             </div>
+            <div class="feedback" id="feed1"></div>
+            <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
-        <div class="ejercicio" id="ej3" data-formula="v=d/t" data-val1="200" data-val2="40" data-res="5">
-            <h3>Ejercicio 3</h3>
-            <p class="enunciado">Una garrucha transporta racimos de plátano recorriendo una distancia de <strong>200 metros</strong> en exactamente <strong>40 segundos</strong>. ¿Cuál es su velocidad constante?</p>
+        <!-- EJERCICIO 2 -->
+        <div class="ejercicio-card" id="ej2">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Cálculo de Velocidad)</span>
+            <h3>Reto 2: El Perro Corredor</h3>
+            <div class="enunciado">
+                Un perro corre en línea recta para atrapar su pelota. Recorre <strong>40 metros</strong> en exactamente <strong>5 segundos</strong>. <br><br>
+                ¿Cuál fue su velocidad constante?
+            </div>
             
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej3')">
-                    <option value="">1. Selecciona la fórmula a utilizar...</option>
-                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
-                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
-                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
-                </select>
-                
-                <div class="campos-datos"></div>
-                
-                <button class="btn-validar" onclick="validarEjercicio('ej3')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! Velocidad = distancia ÷ tiempo. Entonces, v = 40 ÷ 5 = 8 m/s.')">8 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Multiplicaste. Para hallar la velocidad, se divide la distancia sobre el tiempo.')">200 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esta sería la respuesta si se tardara 10 segundos. Pero tardó 5.')">4 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Error. Intenta dividir 40 entre 5 nuevamente.')">6 m/s</button>
             </div>
+            <div class="feedback" id="feed2"></div>
+            <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
-        <div class="ejercicio" id="ej4" data-formula="d=v*t" data-val1="0.8" data-val2="50" data-res="40">
-            <h3>Ejercicio 4</h3>
-            <p class="enunciado">El agua de un canal de riego fluye uniformemente a <strong>0.8 m/s</strong>. ¿Qué distancia recorrerá una hoja seca que flota en el agua después de <strong>50 segundos</strong>?</p>
+        <!-- EJERCICIO 3 -->
+        <div class="ejercicio-card" id="ej3">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Cálculo de Tiempo)</span>
+            <h3>Reto 3: El Viaje en Auto</h3>
+            <div class="enunciado">
+                Un automóvil viaja por una carretera recta a una velocidad de <strong>80 km/h</strong>. El próximo pueblo está a una distancia de <strong>240 km</strong>. <br><br>
+                ¿Cuántas horas tardará en llegar?
+            </div>
             
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej4')">
-                    <option value="">1. Selecciona la fórmula a utilizar...</option>
-                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
-                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
-                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
-                </select>
-                
-                <div class="campos-datos"></div>
-                
-                <button class="btn-validar" onclick="validarEjercicio('ej4')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, '¡Cuidado! Multiplicaste. Para hallar el tiempo, debes dividir la distancia sobre la velocidad (t = d / v).')">19,200 h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Hiciste mal la división. Revisa: 240 / 80.')">4 h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! Tiempo = distancia ÷ velocidad. t = 240 ÷ 80 = 3 horas.')">3 h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'El auto no va tan rápido. Revisa tu división.')">2 h</button>
             </div>
+            <div class="feedback" id="feed3"></div>
+            <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
-        <div class="ejercicio" id="ej5" data-formula="t=d/v" data-val1="450" data-val2="3" data-res="150">
-            <h3>Ejercicio 5</h3>
-            <p class="enunciado">Un caballo de paso fino avanza por un camino veredal recto a una velocidad de <strong>3 m/s</strong>. ¿Cuántos segundos le tomará recorrer un tramo recto de <strong>450 metros</strong>?</p>
+        <!-- EJERCICIO 4 -->
+        <div class="ejercicio-card" id="ej4">
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Conversión)</span>
+            <h3>Reto 4: Velocidades Incompatibles</h3>
+            <div class="enunciado">
+                Un leopardo puede correr a una velocidad sostenida de <strong>108 km/h</strong>. <br><br>
+                ¿Qué distancia en <strong>metros</strong> logrará recorrer en apenas <strong>4 segundos</strong>?
+                <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: Primero convierte km/h a m/s dividiendo por 3.6).</span>
+            </div>
             
-            <div class="controles-practica">
-                <select class="selector-formula" onchange="mostrarCampos('ej5')">
-                    <option value="">1. Selecciona la fórmula a utilizar...</option>
-                    <option value="v=d/t">Velocidad (v) = Distancia / Tiempo</option>
-                    <option value="d=v*t">Distancia (d) = Velocidad × Tiempo</option>
-                    <option value="t=d/v">Tiempo (t) = Distancia / Velocidad</option>
-                </select>
-                
-                <div class="campos-datos"></div>
-                
-                <button class="btn-validar" onclick="validarEjercicio('ej5')"><i class="fa-solid fa-check"></i> Validar Respuesta</button>
-                <div class="feedback"></div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Esa fue la respuesta multiplicando directamente 108 x 4 sin convertir. ¡No puedes mezclar horas con segundos!')">432 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Correcto! 1) v = 108 / 3.6 = 30 m/s. 2) Distancia = 30 m/s × 4 s = 120 metros.')">120 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Revisa la conversión de la velocidad.')">400 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'No, esta es solo la velocidad en m/s. Te falta multiplicarlo por el tiempo.')">30 m</button>
             </div>
+            <div class="feedback" id="feed4"></div>
+            <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        
+        <!-- EJERCICIO 5 -->
+        <div class="ejercicio-card" id="ej5">
+            <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto (Encuentro)</span>
+            <h3>Reto 5: Eco del Sonido</h3>
+            <div class="enunciado">
+                Una persona grita frente a una montaña. El sonido viaja en MRU a <strong>340 m/s</strong>. La persona escucha el "eco" (el regreso de su propia voz) <strong>6 segundos</strong> después de haber gritado. <br><br>
+                ¿A qué distancia se encuentra la montaña?
+                <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: El sonido tuvo que ir y volver en esos 6 segundos).</span>
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, '¡Casi! 2040 m es la distancia total que viajó el sonido (ida y vuelta). A ti te preguntan la distancia a la montaña (solo la ida).')">2040 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Error de cálculo. Si d = v*t, el resultado total no es este.')">1000 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Brillante! El sonido viaja en total 6 segundos (3 s para ir y 3 s para volver). Distancia = 340 m/s × 3 s = 1020 m.')">1020 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Multiplicaste mal o no tuviste en cuenta que el sonido viaja ida y vuelta.')">680 m</button>
+            </div>
+            <div class="feedback" id="feed5"></div>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
-    </main>
+        <div class="pantalla-final" id="pantalla-final">
+            <div class="trofeo">🏁</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">¡Excelente! Tienes el control total sobre la velocidad, el tiempo y el espacio en línea recta.</p>
+            <a href="fisica10_mru_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+        </div>
+
+    </div>
 
     <script>
-        // Función para mostrar los cajones de texto correctos según la fórmula elegida
-        function mostrarCampos(id) {
-            const ej = document.getElementById(id);
-            const formula = ej.querySelector('.selector-formula').value;
-            const contenedorCampos = ej.querySelector('.campos-datos');
+        const totalEjercicios = 5;
+        function verificarRespuesta(num, btn, esCorrecta, mensaje) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            
+            botones.forEach(b => {
+                b.disabled = true;
+                if(b === btn) { b.classList.add(esCorrecta ? 'correcta' : 'incorrecta'); } 
+                else if (!esCorrecta && b.getAttribute('onclick').includes('true')) { b.classList.add('correcta'); }
+            });
 
-            // Limpiamos mensajes anteriores
-            ej.querySelector('.feedback').className = 'feedback';
-            ej.querySelector('.feedback').style.display = 'none';
-
-            if (!formula) {
-                contenedorCampos.style.display = 'none';
-                return;
-            }
-
-            let html = '';
-            if (formula === 'v=d/t') {
-                html = `<input type="number" id="${id}_val1" placeholder="Distancia"> /
-                        <input type="number" id="${id}_val2" placeholder="Tiempo"> =
-                        <input type="number" id="${id}_res" placeholder="Velocidad">`;
-            } else if (formula === 'd=v*t') {
-                html = `<input type="number" id="${id}_val1" placeholder="Velocidad"> ×
-                        <input type="number" id="${id}_val2" placeholder="Tiempo"> =
-                        <input type="number" id="${id}_res" placeholder="Distancia">`;
-            } else if (formula === 't=d/v') {
-                html = `<input type="number" id="${id}_val1" placeholder="Distancia"> /
-                        <input type="number" id="${id}_val2" placeholder="Velocidad"> =
-                        <input type="number" id="${id}_res" placeholder="Tiempo">`;
-            }
-
-            contenedorCampos.innerHTML = html;
-            contenedorCampos.style.display = 'flex';
-        }
-
-        // Función para validar si lo que escribió el estudiante está bien
-        function validarEjercicio(id) {
-            const ej = document.getElementById(id);
-            const formulaSeleccionada = ej.querySelector('.selector-formula').value;
-            const formulaCorrecta = ej.getAttribute('data-formula');
-            const fb = ej.querySelector('.feedback');
-
-            // 1. Validar que haya seleccionado una fórmula
-            if (!formulaSeleccionada) {
-                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-triangle-exclamation"></i> Primero debes seleccionar qué fórmula utilizarás.');
-                return;
-            }
-
-            // 2. Validar que la fórmula sea la correcta para lo que pide el problema
-            if (formulaSeleccionada !== formulaCorrecta) {
-                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-xmark"></i> <strong>Fórmula Incorrecta:</strong> Analiza bien la pregunta. ¿Qué te están pidiendo calcular?');
-                return;
-            }
-
-            // Capturamos los valores que escribió el estudiante
-            const val1 = parseFloat(document.getElementById(`${id}_val1`).value);
-            const val2 = parseFloat(document.getElementById(`${id}_val2`).value);
-            const res = parseFloat(document.getElementById(`${id}_res`).value);
-
-            // Capturamos las respuestas correctas ocultas en el HTML
-            const val1Correcto = parseFloat(ej.getAttribute('data-val1'));
-            const val2Correcto = parseFloat(ej.getAttribute('data-val2'));
-            const resCorrecto = parseFloat(ej.getAttribute('data-res'));
-
-            // 3. Validar que no haya campos vacíos
-            if (isNaN(val1) || isNaN(val2) || isNaN(res)) {
-                mostrarMensaje(fb, 'advertencia', '<i class="fa-solid fa-triangle-exclamation"></i> Completa todos los campos numéricos para poder validar.');
-                return;
-            }
-
-            // 4. Validar resultado y procedimiento
-            if (val1 === val1Correcto && val2 === val2Correcto && res === resCorrecto) {
-                mostrarMensaje(fb, 'exito', '<i class="fa-solid fa-check-double"></i> <strong>¡Excelente!</strong> Procedimiento y resultado perfectos.');
-            } else if (res === resCorrecto) {
-                mostrarMensaje(fb, 'advertencia', '<i class="fa-solid fa-circle-exclamation"></i> El resultado final es correcto, pero ubicaste los datos al revés en la fórmula.');
+            const feed = document.getElementById('feed' + num);
+            feed.innerHTML = esCorrecta ? `<i class="fa-solid fa-check-circle"></i> ${mensaje}` : `<i class="fa-solid fa-xmark-circle"></i> ${mensaje}`;
+            feed.className = 'feedback ' + (esCorrecta ? 'correcto' : 'incorrecto');
+            
+            if(esCorrecta) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#f39c12', '#e67e22', '#f1c40f'] });
+                document.getElementById('btnSig' + num).style.display = 'block';
+                actualizarBarra(num);
             } else {
-                mostrarMensaje(fb, 'error', '<i class="fa-solid fa-xmark"></i> <strong>Cálculo Incorrecto:</strong> Revisa la operación matemática o asegúrate de haber puesto los datos correctos.');
+                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding: 8px 15px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">Intentar de nuevo</button>`;
             }
         }
 
-        // Función auxiliar para pintar los mensajes de colores
-        function mostrarMensaje(elemento, tipo, texto) {
-            elemento.innerHTML = texto;
-            elemento.className = `feedback ${tipo}`;
-            elemento.style.display = 'block';
+        function reiniciarEjercicio(num) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            botones.forEach(b => { b.disabled = false; b.classList.remove('correcta', 'incorrecta'); });
+            const feed = document.getElementById('feed' + num);
+            feed.className = 'feedback';
+            feed.innerHTML = '';
+        }
+
+        function actualizarBarra(num) { document.getElementById('barra').style.width = ((num / totalEjercicios) * 100) + '%'; }
+        function siguiente(actual) {
+            document.getElementById('ej' + actual).classList.remove('activo');
+            document.getElementById('ej' + (actual + 1)).classList.add('activo');
+            window.scrollTo(0, 0);
+        }
+        function finalizar() {
+            document.getElementById('ej' + totalEjercicios).classList.remove('activo');
+            document.getElementById('pantalla-final').classList.add('activo');
+            confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
+            window.scrollTo(0, 0);
         }
     </script>
-
-
-    <!-- Prof. IA - Asistente Virtual de Fisica 10 -->
-    <script src="profe-ia.js"></script>
 </body>
 </html>
