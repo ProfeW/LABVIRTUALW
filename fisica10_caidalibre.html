@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caída Libre - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; background-position: center; }
+
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 40px; padding: 40px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
+        .emoji-tema { font-size: 4rem; margin-bottom: 15px; display: inline-block; animation: fallDown 2s ease infinite; }
+        .header-tema h1 { font-size: 3rem; color: #4facfe; margin-bottom: 15px; }
+
+        .seccion { background: rgba(20, 20, 35, 0.8); border-radius: 15px; padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .seccion h2 { font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .seccion h2 i { color: var(--color-fisica); }
+        .seccion p { font-size: 1.1rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
+
+        .importancia-box { background: rgba(46, 204, 113, 0.1); border-left: 4px solid #2ecc71; padding: 20px; border-radius: 5px; margin: 20px 0; }
+        .importancia-box h3 { color: #2ecc71; margin-bottom: 10px; font-size: 1.2rem; }
+
+        .alerta-mruv { background: rgba(243, 156, 18, 0.15); border: 1px solid rgba(243, 156, 18, 0.5); padding: 20px; border-radius: 10px; text-align: center; margin: 20px 0; }
+        .alerta-mruv h3 { color: #f39c12; margin-bottom: 10px; }
+        .cambio-variable { font-size: 1.5rem; font-weight: bold; color: #fff; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; display: inline-block; margin: 10px; }
+
+        .formulas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .formula-box { background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.05)); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 25px; text-align: center; }
+        .formula-math { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 1px; margin-bottom: 10px; }
+        .formula-desc { font-size: 0.9rem; color: #aaa; }
+
+        .ejercicio { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .ejercicio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.2rem; }
+        .paso { display: flex; margin-bottom: 10px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .paso-num { background: var(--color-fisica); color: #fff; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
+        .paso-texto { color: #ddd; align-self: center; }
+        .resultado-final { background: rgba(46, 204, 113, 0.15); border-left: 4px solid #2ecc71; padding: 15px; border-radius: 5px; margin-top: 15px; font-weight: 600; color: #fff; }
+
+        .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+        .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .btn-practica { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
+        .btn-practica:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(230, 126, 34, 0.4); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+        .btn-evaluacion:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(231, 76, 60, 0.4); }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin-top: 20px; }
+        .video-card { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .video-header { background: rgba(0,0,0,0.5); padding: 10px; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; color: #4facfe; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fallDown { 0% { transform: translateY(-15px); } 100% { transform: translateY(15px); } }
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; margin-top: 50px; }
+        @media (max-width: 768px) { .formulas-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10</a>
+
+        <div class="header-tema">
+            <span class="emoji-tema">🍎</span>
+            <h1>Caída Libre</h1>
+            <p>El movimiento vertical donde el único motor es la atracción del planeta.</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-meteor"></i> ¿Qué es la Caída Libre?</h2>
+            <p>La caída libre es un movimiento rectilíneo uniformemente acelerado (MRUA) en el que se deja caer un cuerpo verticalmente desde cierta altura y no encuentra resistencia que se oponga a su movimiento (como el aire).</p>
+            <p>La principal característica es que <strong>cualquier cuerpo, sin importar su masa o su forma, caerá con la misma aceleración</strong> provocada por la gravedad de la Tierra.</p>
+            
+            <div class="importancia-box">
+                <h3><i class="fa-solid fa-lightbulb"></i> Su Importancia en la Física</h3>
+                <p>Estudiar la caída libre fue uno de los mayores hitos científicos liderados por Galileo Galilei. Nos permitió entender que la gravedad terrestre es una fuerza constante y que, si quitamos el aire, una pluma y un martillo caen exactamente al mismo tiempo al suelo.</p>
+            </div>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-square-root-variable"></i> Fórmulas de Caída Libre</h2>
+            <p>¡Buenas noticias! Para resolver problemas de caída libre, <strong>no tienes que aprender fórmulas nuevas</strong>. Las fórmulas de Caída Libre son exactamente las mismas del MRUV, solo debes considerar dos cambios importantes:</p>
+            
+            <div class="alerta-mruv">
+                <h3><i class="fa-solid fa-right-left"></i> Transformación del MRUV a Caída Libre</h3>
+                <p>Dado que el movimiento ahora es vertical y provocado por la Tierra:</p>
+                <div class="cambio-variable">Aceleración ($a$) $\rightarrow$ Gravedad ($g$)</div>
+                <div class="cambio-variable">Distancia ($d$) $\rightarrow$ Altura ($h$)</div>
+                <p style="margin-top: 10px; color: #ddd;">* En la Tierra, la gravedad es constante: <strong>$g = 9.8 \text{ m/s}^2$</strong></p>
+                <p style="color: #ddd;">* Cuando "se deja caer" un objeto, su velocidad inicial siempre es cero: <strong>$v_i = 0$</strong></p>
+            </div>
+
+            <p>Con estas consideraciones claras, las 4 fórmulas generales quedan así:</p>
+
+            <div class="formulas-grid">
+                <div class="formula-box">
+                    <div class="formula-math">$$ v_f = v_i + g \cdot t $$</div>
+                    <div class="formula-desc">Para encontrar Velocidad Final sin usar altura.</div>
+                </div>
+                <div class="formula-box">
+                    <div class="formula-math">$$ h = \left( \frac{v_f + v_i}{2} \right) \cdot t $$</div>
+                    <div class="formula-desc">Para encontrar Altura sin usar gravedad (aunque casi siempre se sabe).</div>
+                </div>
+                <div class="formula-box">
+                    <div class="formula-math">$$ h = v_i \cdot t + \frac{g \cdot t^2}{2} $$</div>
+                    <div class="formula-desc">Para encontrar Altura sin usar velocidad final.</div>
+                </div>
+                <div class="formula-box">
+                    <div class="formula-math">$$ v_f^2 = v_i^2 + 2 \cdot g \cdot h $$</div>
+                    <div class="formula-desc">Para encontrar Velocidad Final sin usar el tiempo.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-pencil"></i> Ejercicios Resueltos Paso a Paso</h2>
+
+            <div class="ejercicio">
+                <h3>Ejercicio 1: La Manzana de Newton</h3>
+                <p style="margin-bottom: 15px; color: #fff;">Se deja caer una manzana desde la rama de un árbol. Si tarda <strong>1.5 segundos</strong> en golpear el suelo, ¿desde qué altura cayó?</p>
+                
+                <div class="paso">
+                    <div class="paso-num">1</div>
+                    <div class="paso-texto">Extraer datos: $v_i = 0$ ("se deja caer"), $t = 1.5 \text{ s}$, $g = 9.8 \text{ m/s}^2$. Nos piden la Altura ($h$).</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">2</div>
+                    <div class="paso-texto">Fórmula a usar: Como no tenemos Velocidad Final, usamos: $h = v_i \cdot t + \frac{g \cdot t^2}{2}$</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">3</div>
+                    <div class="paso-texto">Reemplazar: $$ h = (0)(1.5) + \frac{9.8 \cdot (1.5)^2}{2} $$</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">4</div>
+                    <div class="paso-texto">Calcular: $$ h = 0 + \frac{9.8 \cdot 2.25}{2} = \frac{22.05}{2} = 11.025 $$</div>
+                </div>
+                
+                <div class="resultado-final">
+                    Resultado: La manzana cayó desde una altura de 11.025 metros.
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <h3>Ejercicio 2: Velocidad de Impacto</h3>
+                <p style="margin-bottom: 15px; color: #fff;">Una piedra se deja caer desde un puente que está a <strong>45 metros</strong> de altura sobre el agua. ¿Con qué velocidad chocará contra el agua?</p>
+                
+                <div class="paso">
+                    <div class="paso-num">1</div>
+                    <div class="paso-texto">Extraer datos: $v_i = 0$, $h = 45 \text{ m}$, $g = 9.8 \text{ m/s}^2$. Nos piden la Velocidad Final ($v_f$).</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">2</div>
+                    <div class="paso-texto">Fórmula a usar: Como no tenemos el tiempo, usamos: $v_f^2 = v_i^2 + 2 \cdot g \cdot h$</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">3</div>
+                    <div class="paso-texto">Reemplazar: $$ v_f^2 = 0^2 + 2(9.8)(45) = 2(9.8)(45) = 882 $$</div>
+                </div>
+                <div class="paso">
+                    <div class="paso-num">4</div>
+                    <div class="paso-texto">Despejar (Raíz cuadrada): $$ v_f = \sqrt{882} = 29.69 $$</div>
+                </div>
+                
+                <div class="resultado-final">
+                    Resultado: La piedra impacta el agua a una velocidad de 29.69 m/s.
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion" style="background: rgba(30, 30, 45, 0.9);">
+            <h2><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Explicación en Video</h2>
+            <p>Selección de los mejores videos explicativos del Profe Alex sobre Caída Libre, cargados directamente con sus IDs originales para asegurar la reproducción:</p>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex - Introducción</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed/0xH6M5p819E" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex - Fórmulas</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed/hB9i3R6dJb0" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex - Se deja caer</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed/Jm0P_4M1Z80" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex - Lanzamiento abajo</div>
+                    <iframe width="100%" height="240" src="https://www.youtube.com/embed/9g2p86-ZqgQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="botones-accion">
+            <a href="fisica10_caidalibre_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Práctica Interactiva
+            </a>
+            <a href="fisica10_caidalibre_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-clipboard-check"></i> Realizar Evaluación
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>LabVirtual W &copy; 2025 · Construido con inteligencia artificial para la educación</p>
+    </footer>
+
+    <script src="profe-ia.js"></script>
+</body>
+</html>
