@@ -3,244 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación Aceleración - LabVirtual W</title>
+    <title>Evaluación: Aceleración - LabVirtual W</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root { 
-            --color-fisica: #3498db; 
-            --color-oscuro: #0f172a; 
-            --color-acento: #deff9a;
-            --color-texto: #ffffff; 
-        }
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; --color-evaluacion: #e74c3c; }
+        html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-evaluacion { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(231, 76, 60, 0.1); border-radius: 15px; border: 1px solid rgba(231, 76, 60, 0.3); }
+        .header-evaluacion h1 { color: var(--color-evaluacion); font-size: 2.5rem; margin-bottom: 10px; }
+
+        .info-estudiante { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 600; color: #ccc; }
+        .input-group input, .input-group select { padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem; }
+        .input-group input:focus, .input-group select:focus { outline: none; border-color: var(--color-fisica); }
+
+        .pregunta-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .pregunta-card:hover { border-color: rgba(52, 152, 219, 0.3); }
+        .pregunta-num { background: var(--color-evaluacion); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; }
+        .pregunta-texto { font-size: 1.15rem; margin-bottom: 20px; line-height: 1.6; }
+
+        .opciones-lista { display: flex; flex-direction: column; gap: 12px; }
+        .opcion-item { display: flex; align-items: center; gap: 15px; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .opcion-item:hover { background: rgba(255,255,255,0.08); }
+        .opcion-item input[type="radio"] { width: 20px; height: 20px; accent-color: var(--color-evaluacion); cursor: pointer; }
+        .opcion-item label { flex: 1; cursor: pointer; font-size: 1.05rem; }
+
+        .btn-enviar { width: 100%; padding: 20px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border: none; border-radius: 10px; font-size: 1.3rem; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4); margin-top: 20px; }
+        .btn-enviar:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(231, 76, 60, 0.6); }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        #pantalla-resultados { display: none; margin-top: 40px; text-align: center; background: rgba(20, 20, 35, 0.95); padding: 50px 30px; border-radius: 15px; border: 2px solid #2ecc71; animation: fadeIn 1s; }
+        .nota-final { font-size: 5rem; font-weight: 800; color: #2ecc71; margin: 20px 0; text-shadow: 0 0 20px rgba(46, 204, 113, 0.5); }
         
-        body {
-            background-color: var(--color-oscuro); 
-            color: var(--color-texto);
-            background-image: radial-gradient(circle at 50% 50%, rgba(52, 152, 219, 0.1), transparent 80%),
-                              url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-attachment: fixed; min-height: 100vh; padding: 20px;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .correccion-card { text-align: left; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #3498db; }
+        .resp-correcta { color: #2ecc71; font-weight: bold; }
+        .resp-incorrecta { color: #e74c3c; font-weight: bold; text-decoration: line-through; }
 
-        .contenedor { 
-            max-width: 850px; width: 100%; background: rgba(15, 23, 42, 0.85); 
-            backdrop-filter: blur(15px); padding: 50px; border-radius: 24px; 
-            border: 1px solid rgba(222, 255, 154, 0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-
-        /* --- AMBIENTACIÓN Y CABECERA --- */
-        .eval-header { margin-bottom: 30px; }
-        .eval-header i { font-size: 60px; color: var(--color-acento); margin-bottom: 15px; }
-        .eval-header h1 { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-        .eval-header span { color: var(--color-acento); }
-        .eval-header p { font-size: 1.1rem; color: #ddd; line-height: 1.6; padding: 0 20px; }
-
-        .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 40px; overflow: hidden; }
-        #progress-fill { width: 0%; height: 100%; background: var(--color-acento); transition: 0.5s; }
-
-        .pantalla { display: none; }
-        .activa { display: block; animation: fadeIn 0.6s ease; }
-
-        input[type="text"] { 
-            width: 80%; padding: 15px; margin: 20px auto; border-radius: 12px; 
-            border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); 
-            color: #fff; font-size: 1.1rem; text-align: center; display: block;
-        }
-        input[type="text"]:focus { border-color: var(--color-acento); outline: none; background: rgba(0,0,0,0.6); }
-
-        .pregunta-card { 
-            background: rgba(255,255,255,0.03); padding: 30px; border-radius: 15px; 
-            border-top: 5px solid var(--color-acento); margin-bottom: 30px; 
-            text-align: center; 
-        }
-        .pregunta-card h3 { margin-bottom: 25px; font-weight: 500; font-size: 1.25rem; line-height: 1.5; color: #fff;}
-
-        .opciones-contenedor { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        
-        .opcion { 
-            display: flex; align-items: center; justify-content: center; gap: 15px; 
-            width: 80%; padding: 15px; background: rgba(255,255,255,0.05); 
-            border-radius: 10px; cursor: pointer; transition: 0.3s;
-            font-size: 1.05rem;
-        }
-        .opcion:hover { background: rgba(222, 255, 154, 0.1); }
-        .opcion input { accent-color: var(--color-acento); transform: scale(1.3); cursor: pointer; }
-
-        .btn { 
-            width: 80%; padding: 18px; border: none; border-radius: 12px; 
-            background: var(--color-acento); color: #000; font-size: 1.2rem; 
-            font-weight: 700; cursor: pointer; transition: 0.3s; margin: 20px auto 0; display: block;
-        }
-        .btn:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(222, 255, 154, 0.3); }
-        .btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 30px; background: rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; }
-        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 1rem; }
-        th { background: rgba(222, 255, 154, 0.1); color: var(--color-acento); font-weight: 600; text-transform: uppercase; }
-        .correcto { color: #2ecc71; font-weight: bold; }
-        .incorrecto { color: #e74c3c; font-weight: bold; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        @media (max-width: 768px) {
-            .opcion, .btn, input[type="text"] { width: 100%; }
-            .contenedor { padding: 30px 20px; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 600px) { .info-estudiante { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div class="contenedor">
-        <div class="eval-header">
-            <i class="fa-solid fa-rocket"></i>
-            <h1>Evaluación <span>Aceleración</span></h1>
-            <p>El test consta de 10 preguntas (3 teóricas y 7 prácticas). Cada respuesta correcta suma 0.5 puntos a tu calificación final.</p>
+        <a href="fisica10_aceleracion_practica.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Práctica</a>
+
+        <div class="header-evaluacion">
+            <h1><i class="fa-solid fa-clipboard-list"></i> Evaluación Final</h1>
+            <p><strong>Tema: Concepto de Aceleración</strong></p>
         </div>
 
-        <div class="progress-bar"><div id="progress-fill"></div></div>
-
-        <div id="pantalla-inicio" class="pantalla activa">
-            <p style="color: #ccc; margin-bottom: 10px;">Para iniciar tu prueba en el Laboratorio Virtual, por favor identifícate:</p>
-            <input type="text" id="nombre-estudiante" placeholder="Escribe tu nombre y apellido completos">
-            <button class="btn" onclick="iniciar()">COMENZAR EXAMEN</button>
+        <div class="info-estudiante" id="datos-estudiante">
+            <div class="input-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" placeholder="Ej. Ana García" required>
+            </div>
+            <div class="input-group">
+                <label for="grado">Grado / Sección:</label>
+                <select id="grado" required>
+                    <option value="">Selecciona tu grado...</option>
+                    <option value="10-1">10-1</option>
+                    <option value="10-2">10-2</option>
+                    <option value="10-3">10-3</option>
+                    <option value="10-4">10-4</option>
+                </select>
+            </div>
         </div>
 
-        <div id="pantalla-test" class="pantalla">
-            <div id="cuestionario"></div>
-            <button class="btn" id="btn-finalizar" onclick="procesarEvaluacion()">ENVIAR RESULTADOS Y CALIFICAR</button>
+        <div id="cuestionario">
+            <!-- P1 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 1</div>
+                <div class="pregunta-texto">En física, la aceleración se define como:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p1" value="a"> a) La velocidad máxima que puede alcanzar un cuerpo.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="b"> b) El cambio de la velocidad en un determinado tiempo.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="c"> c) La distancia total recorrida por un objeto.</label>
+                    <label class="opcion-item"><input type="radio" name="p1" value="d"> d) El tiempo que tarda en detenerse un objeto.</label>
+                </div>
+            </div>
+
+            <!-- P2 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 2</div>
+                <div class="pregunta-texto">¿Cuál es la unidad de medida de la aceleración en el Sistema Internacional (SI)?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p2" value="a"> a) m/s²</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="b"> b) m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="c"> c) km/h</label>
+                    <label class="opcion-item"><input type="radio" name="p2" value="d"> d) m²</label>
+                </div>
+            </div>
+
+            <!-- P3 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 3</div>
+                <div class="pregunta-texto">Si un carro viaja con velocidad constante de 60 km/h en línea recta, su aceleración es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p3" value="a"> a) 60 m/s²</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="b"> b) -60 m/s²</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="c"> c) 0 m/s²</label>
+                    <label class="opcion-item"><input type="radio" name="p3" value="d"> d) 9.8 m/s²</label>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="pregunta-card" data-correcta="d">
+                <div class="pregunta-num">Pregunta 4</div>
+                <div class="pregunta-texto">Un signo negativo en la aceleración (aceleración negativa) normalmente indica que:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p4" value="a"> a) El objeto va en reversa siempre.</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="b"> b) El objeto se desintegró.</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="c"> c) La velocidad es cero.</label>
+                    <label class="opcion-item"><input type="radio" name="p4" value="d"> d) El objeto está disminuyendo su velocidad (frenando).</label>
+                </div>
+            </div>
+
+            <!-- P5 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 5</div>
+                <div class="pregunta-texto">Si un objeto parte del reposo, su velocidad inicial ($v_i$) es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p5" value="a"> a) 9.8 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="b"> b) 0 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="c"> c) Igual a la velocidad final</label>
+                    <label class="opcion-item"><input type="radio" name="p5" value="d"> d) Imposible de saber</label>
+                </div>
+            </div>
+
+            <!-- P6 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 6</div>
+                <div class="pregunta-texto">Un corredor aumenta su velocidad de 2 m/s a 8 m/s en 3 segundos. Su aceleración es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p6" value="a"> a) 2 m/s²</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="b"> b) 3 m/s²</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="c"> c) 6 m/s²</label>
+                    <label class="opcion-item"><input type="radio" name="p6" value="d"> d) 10 m/s²</label>
+                </div>
+            </div>
+
+            <!-- P7 -->
+            <div class="pregunta-card" data-correcta="c">
+                <div class="pregunta-num">Pregunta 7</div>
+                <div class="pregunta-texto">Un auto que frena hasta detenerse por completo tiene una velocidad final ($v_f$) igual a:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p7" value="a"> a) 10 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="b"> b) Igual a su velocidad inicial</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="c"> c) 0 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p7" value="d"> d) -1 m/s</label>
+                </div>
+            </div>
+
+            <!-- P8 -->
+            <div class="pregunta-card" data-correcta="d">
+                <div class="pregunta-num">Pregunta 8</div>
+                <div class="pregunta-texto">La fórmula correcta para calcular la aceleración es:</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p8" value="a"> a) a = (vi - vf) / t</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="b"> b) a = d / t</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="c"> c) a = vf + vi * t</label>
+                    <label class="opcion-item"><input type="radio" name="p8" value="d"> d) a = (vf - vi) / t</label>
+                </div>
+            </div>
+
+            <!-- P9 -->
+            <div class="pregunta-card" data-correcta="b">
+                <div class="pregunta-num">Pregunta 9</div>
+                <div class="pregunta-texto">Un guepardo acelera a razón de 5 m/s² desde el reposo. ¿Qué velocidad tendrá a los 4 segundos?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p9" value="a"> a) 1.25 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="b"> b) 20 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="c"> c) 9 m/s</label>
+                    <label class="opcion-item"><input type="radio" name="p9" value="d"> d) 0 m/s</label>
+                </div>
+            </div>
+
+            <!-- P10 -->
+            <div class="pregunta-card" data-correcta="a">
+                <div class="pregunta-num">Pregunta 10</div>
+                <div class="pregunta-texto">Si un tren se mueve en círculo a 50 km/h constantes, ¿está acelerando?</div>
+                <div class="opciones-lista">
+                    <label class="opcion-item"><input type="radio" name="p10" value="a"> a) Sí, porque su dirección cambia constantemente.</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="b"> b) No, porque su velocidad de 50 km/h es constante.</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="c"> c) Sí, pero solo cuando frena.</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="d"> d) No, en los círculos no hay aceleración.</label>
+                </div>
+            </div>
+
+            <button class="btn-enviar" onclick="calificar()">
+                <i class="fa-solid fa-paper-plane"></i> Enviar Evaluación y Ver Calificación
+            </button>
         </div>
 
-        <div id="pantalla-final" class="pantalla">
-            <div id="resumen-visual"></div>
-            <div id="tabla-detalle"></div>
-            <button class="btn" onclick="window.location.reload()">VOLVER A INTENTAR</button>
-            <button class="btn" style="background: transparent; border: 2px solid var(--color-acento); color: var(--color-acento); margin-top: 15px;" onclick="location.href='fisica10_aceleracion.html'">REGRESAR A LA LECCIÓN</button>
+        <div id="pantalla-resultados">
+            <h2>Resultados Oficiales</h2>
+            <p style="font-size: 1.2rem; margin-top: 10px;" id="info-res-estudiante">Estudiante</p>
+            <div class="nota-final" id="nota-numero">10/10</div>
+            <h3 id="mensaje-motivacional" style="margin-bottom: 30px;">¡Excelente trabajo!</h3>
+            
+            <button style="background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; color: #2ecc71; padding: 10px 20px; border-radius: 5px; margin-bottom: 40px;">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Resultado guardado en la plataforma
+            </button>
+
+            <div id="correcciones" style="text-align: left;"></div>
+            
+            <a href="fisica_10.html" class="btn-enviar" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none; background: linear-gradient(135deg, #3498db, #2980b9);">Volver al Menú Principal</a>
         </div>
+
     </div>
 
     <script>
-        // ¡NUEVO ENLACE CONECTADO!
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyo_VQiQSYXgHmzDw9p971nUF66g5e6gpCUfEiYY7sOfU5-aH1vMoTJPniYQgtD1gKQ/exec';
-        let nombre = "";
-        
-        // Banco de 10 preguntas (3 Teóricas, 7 Prácticas)
-        const preguntas = [
-            // TEÓRICAS
-            { p: "¿Cuál es la definición correcta de aceleración en física?", o: ["Es mantener una velocidad alta constantemente.", "Es el cambio de velocidad en un intervalo de tiempo.", "Es la distancia que recorre un objeto en un segundo.", "Es la fuerza con la que un motor empuja."], c: 1 },
-            { p: "¿En qué unidades se mide la aceleración según el Sistema Internacional (SI)?", o: ["Metros (m)", "Metros por segundo (m/s)", "Metros por segundo al cuadrado (m/s²)", "Kilómetros por hora (km/h)"], c: 2 },
-            { p: "Si un vehículo va muy rápido y repentinamente pisa los frenos para detenerse, matemáticamente su aceleración es:", o: ["Positiva", "Nula (Cero)", "Infinita", "Negativa"], c: 3 },
-            // PRÁCTICAS
-            { p: "Una chiva arranca desde la plaza principal (reposo) y alcanza 15 m/s en 5 segundos. Su aceleración es:", o: ["75 m/s²", "10 m/s²", "3 m/s²", "0.33 m/s²"], c: 2 },
-            { p: "Un camión que viaja a 20 m/s ve un bache y reduce su velocidad a 10 m/s en 2 segundos. Su aceleración es:", o: ["5 m/s²", "-5 m/s²", "10 m/s²", "-10 m/s²"], c: 1 },
-            { p: "Una motocicleta acelera a razón de 4 m/s². Si parte del reposo, ¿cuánto tiempo tarda en llegar a 24 m/s?", o: ["6 s", "96 s", "20 s", "0.16 s"], c: 0 },
-            { p: "Un tractor va a 18 m/s y frena a -3 m/s² hasta detenerse por completo. ¿Cuánto tiempo le tomó frenar?", o: ["54 s", "15 s", "6 s", "9 s"], c: 2 },
-            { p: "Un ciclista entra a una pendiente a 5 m/s y acelera a 2 m/s² durante 4 segundos. ¿Qué velocidad tendrá al final?", o: ["13 m/s", "11 m/s", "40 m/s", "8 m/s"], c: 0 },
-            { p: "Un transporte escolar va a 22 m/s y frena con una aceleración de -2 m/s² por 5 segundos. Su velocidad final es:", o: ["32 m/s", "12 m/s", "10 m/s", "15 m/s"], c: 1 },
-            { p: "Un bulto de abono se desliza por una rampa acelerando a 3 m/s² por 3 segundos, alcanzando 14 m/s al final. ¿Con qué velocidad inicial empezó?", o: ["5 m/s", "23 m/s", "9 m/s", "4 m/s"], c: 0 }
-        ];
+        function calificar() {
+            const nombre = document.getElementById('nombre').value;
+            const grado = document.getElementById('grado').value;
+            if(!nombre || !grado) { alert("Por favor ingresa tu nombre y selecciona tu grado antes de enviar."); return; }
 
-        function iniciar() {
-            nombre = document.getElementById('nombre-estudiante').value.trim();
-            if(!nombre) return alert("Por favor, ingresa tu nombre completo para continuar.");
-            
-            document.getElementById('pantalla-inicio').classList.remove('activa');
-            document.getElementById('pantalla-test').classList.add('activa');
-            document.getElementById('progress-fill').style.width = "50%";
-            pintarPreguntas();
-        }
+            let correctas = 0; const total = 10;
+            const correccionesDiv = document.getElementById('correcciones');
+            correccionesDiv.innerHTML = '<h3 style="color: #fff; margin-bottom: 20px;">Revisión Detallada:</h3>';
 
-        function pintarPreguntas() {
-            let html = "";
-            preguntas.forEach((q, i) => {
-                html += `<div class="pregunta-card"><h3>${i+1}. ${q.p}</h3><div class="opciones-contenedor">`;
-                q.o.forEach((opt, j) => {
-                    html += `<label class="opcion"><input type="radio" name="preg${i}" value="${j}"> ${opt}</label>`;
+            const preguntas = document.querySelectorAll('.pregunta-card');
+            preguntas.forEach((preg, index) => {
+                const respCorrecta = preg.getAttribute('data-correcta');
+                const radios = preg.querySelectorAll('input[type="radio"]');
+                let respUsuario = null, textoUsuario = "No respondida", textoCorrecto = "";
+
+                radios.forEach(r => {
+                    if(r.checked) respUsuario = r.value;
+                    if(r.value === respCorrecta) textoCorrecto = r.parentElement.innerText;
+                    if(r.checked) textoUsuario = r.parentElement.innerText;
                 });
-                html += `</div></div>`;
-            });
-            document.getElementById('cuestionario').innerHTML = html;
-        }
 
-        function procesarEvaluacion() {
-            let aciertos = 0;
-            let respuestasEstudiante = {};
-            
-            preguntas.forEach((q, i) => {
-                const seleccion = document.querySelector(`input[name="preg${i}"]:checked`);
-                let indiceMarcado = seleccion ? parseInt(seleccion.value) : -1;
+                if(respUsuario === respCorrecta) correctas++;
+
+                let claseCSS = (respUsuario === respCorrecta) ? "resp-correcta" : "resp-incorrecta";
+                let icono = (respUsuario === respCorrecta) ? "<i class='fa-solid fa-check' style='color:#2ecc71'></i>" : "<i class='fa-solid fa-xmark' style='color:#e74c3c'></i>";
                 
-                let esCorrecta = (indiceMarcado === q.c);
-                if(esCorrecta) aciertos++;
-                
-                respuestasEstudiante[`p${i+1}`] = esCorrecta ? "CORRECTO" : "ERROR (Marcó: " + (indiceMarcado === -1 ? "Ninguna" : q.o[indiceMarcado]) + ")";
+                let cardHTML = `<div class="correccion-card">
+                    <p style="color: #fff; margin-bottom: 10px;"><strong>Pregunta ${index + 1}:</strong> ${preg.querySelector('.pregunta-texto').innerHTML}</p>
+                    <p>Tu respuesta: <span class="${claseCSS}">${icono} ${textoUsuario}</span></p>`;
+                if(respUsuario !== respCorrecta) cardHTML += `<p style="margin-top: 5px;">Respuesta correcta: <span class="resp-correcta">${textoCorrecto}</span></p>`;
+                cardHTML += `</div>`;
+                correccionesDiv.innerHTML += cardHTML;
             });
 
-            // LÓGICA DE NOTA: 0.5 puntos por cada acierto. Mínimo 1.0. Máximo 5.0.
-            let calculoNota = aciertos * 0.5;
-            if(calculoNota < 1.0) calculoNota = 1.0; 
-            let notaFinal = calculoNota.toFixed(1);
-
-            // Preparar datos para enviar a Excel
-            const body = new FormData();
-            body.append('nombre', nombre);
-            body.append('nota', notaFinal);
-            body.append('p1', respuestasEstudiante.p1);
-            body.append('p2', respuestasEstudiante.p2);
-            body.append('p3', respuestasEstudiante.p3);
-            body.append('p4', respuestasEstudiante.p4);
-            body.append('p5', respuestasEstudiante.p5);
-            body.append('p6', respuestasEstudiante.p6);
-            body.append('p7', respuestasEstudiante.p7);
-            body.append('p8', respuestasEstudiante.p8);
-            body.append('p9', respuestasEstudiante.p9);
-            body.append('p10', respuestasEstudiante.p10);
-
-            document.getElementById('btn-finalizar').innerText = "ENVIANDO RESULTADOS A EXCEL...";
-            document.getElementById('btn-finalizar').disabled = true;
-
-            // Se añadió { mode: 'no-cors' } para evitar bloqueos del navegador
-            fetch(scriptURL, { method: 'POST', body: body, mode: 'no-cors' })
-                .then(() => {
-                    // Como usamos no-cors, asumimos que el envío fue exitoso si no entra al catch
-                    document.getElementById('pantalla-test').classList.remove('activa');
-                    document.getElementById('pantalla-final').classList.add('activa');
-                    document.getElementById('progress-fill').style.width = "100%";
-                    mostrarResultadosFinales(notaFinal, respuestasEstudiante);
-                })
-                .catch((error) => {
-                    alert("No pudimos conectar con la base de datos. Verifica tu internet e intenta de nuevo.");
-                    document.getElementById('btn-finalizar').innerText = "ENVIAR RESULTADOS Y CALIFICAR";
-                    document.getElementById('btn-finalizar').disabled = false;
-                });
-        }
-
-        function mostrarResultadosFinales(nota, r) {
-            let colorNota = nota >= 3.0 ? "#2ecc71" : "#e74c3c";
-            let icono = nota >= 3.0 ? "fa-solid fa-medal" : "fa-solid fa-triangle-exclamation";
+            document.getElementById('datos-estudiante').style.display = 'none';
+            document.getElementById('cuestionario').style.display = 'none';
             
-            let htmlCabecera = `
-                <i class="${icono}" style="font-size: 60px; color: ${colorNota}; margin-bottom: 15px;"></i>
-                <h2 style="margin-bottom:10px;">¡Examen Finalizado!</h2>
-                <h3 style="font-size:4.5rem; color:${colorNota}; margin: 10px 0;">${nota}</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 20px;">Estudiante: <strong>${nombre}</strong></p>
-            `;
+            const pantallaRes = document.getElementById('pantalla-resultados');
+            pantallaRes.style.display = 'block';
+            window.scrollTo(0, 0);
+
+            document.getElementById('info-res-estudiante').innerText = `${nombre} | Grado ${grado}`;
+            const notaElement = document.getElementById('nota-numero');
+            notaElement.innerText = `${correctas}/${total}`;
             
-            let htmlTabla = `<table><thead><tr><th>N°</th><th>Estado de Respuesta</th></tr></thead><tbody>`;
-            for(let i=1; i<=10; i++) {
-                let clase = r[`p${i}`].startsWith("CORRECTO") ? "correcto" : "incorrecto";
-                htmlTabla += `<tr><td>P${i}</td><td class="${clase}">${r[`p${i}`]}</td></tr>`;
-            }
-            htmlTabla += `</tbody></table>`;
-            
-            document.getElementById('resumen-visual').innerHTML = htmlCabecera;
-            document.getElementById('tabla-detalle').innerHTML = htmlTabla;
+            const mensaje = document.getElementById('mensaje-motivacional');
+            if(correctas === 10) { mensaje.innerText = "¡Excelente! Comprendes los cambios de velocidad a la perfección."; notaElement.style.color = "#2ecc71"; }
+            else if(correctas >= 7) { mensaje.innerText = "¡Muy bien! Tienes buen manejo de las fórmulas."; notaElement.style.color = "#f1c40f"; }
+            else if(correctas >= 4) { mensaje.innerText = "Aprobado. Repasa la diferencia entre velocidad final e inicial."; notaElement.style.color = "#f39c12"; }
+            else { mensaje.innerText = "Debes repasar la teoría, ¡no te rindas!"; notaElement.style.color = "#e74c3c"; }
         }
     </script>
-
-    <!-- Prof. IA - Asistente Virtual de Fisica 10 -->
-    <script src="profe-ia.js"></script>
 </body>
 </html>
