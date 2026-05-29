@@ -3,218 +3,478 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movimiento Variado (MRUV) - LabVirtual W</title>
-    
+    <title>M.R.U.V. - LabVirtual W</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+    <!-- CONEXIÓN CON FUENTES DE GOOGLE -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- ICONOS GRATUITOS DE FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
+        :root {
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-acento1: #f39c12; /* Naranja */
+            --color-acento2: #e74c3c; /* Rojo */
+            --color-acento3: #9b59b6; /* Morado */
+        }
+
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; background-position: center; }
 
-        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .logo i { color: var(--color-fisica); }
         .menu { list-style: none; display: flex; gap: 20px; }
-        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; }
-        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+        .menu > li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
 
+        .submenu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
+            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+        }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+
+        /* --- CONTENIDO DE LA LECCIÓN --- */
         .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        
         .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
 
-        .header-tema { text-align: center; margin-bottom: 40px; padding: 40px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
-        .emoji-tema { font-size: 4rem; margin-bottom: 15px; display: inline-block; animation: moveRight 3s ease infinite alternate; }
-        .header-tema h1 { font-size: 3rem; color: #4facfe; margin-bottom: 15px; }
+        /* CABECERA CENTRADA Y LLAMATIVA */
+        .encabezado-leccion { 
+            border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; 
+            margin-bottom: 30px; text-align: center; 
+        }
+        .encabezado-leccion h1 { 
+            font-size: 4rem; color: var(--color-fisica); margin-bottom: 10px; 
+            text-shadow: 0px 4px 10px rgba(0,0,0,0.5); letter-spacing: 2px;
+        }
+        .encabezado-leccion p { color: #ccc; font-size: 1.2rem; }
 
-        .seccion { background: rgba(20, 20, 35, 0.8); border-radius: 15px; padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .seccion h2 { font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .seccion h2 i { color: var(--color-fisica); }
-        .seccion p { font-size: 1.1rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
+        .seccion-contenido {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px; padding: 30px; margin-bottom: 30px;
+        }
+        
+        .seccion-contenido h2 { color: #4facfe; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; border-left: 4px solid var(--color-fisica); padding-left: 15px;}
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
+        
+        /* --- ESTILOS DE FÓRMULAS Y DESPEJES --- */
+        .seccion-formula {
+            background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px; padding: 25px; margin-bottom: 30px;
+        }
+        .seccion-formula h3 { color: #fff; margin-bottom: 15px; font-size: 1.4rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        
+        .caja-formula {
+            background: rgba(52, 152, 219, 0.05); border: 2px dashed var(--color-fisica);
+            border-radius: 10px; padding: 20px; text-align: center; margin: 20px 0;
+        }
+        .formula-principal { font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: 1px; }
+        
+        .grid-despejes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
+        .despeje-caja { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border-left: 3px solid var(--color-fisica); }
+        .formula-despejada { font-size: 1.4rem; font-weight: 800; text-align: center; margin: 10px 0; color: #4facfe; }
 
-        .formulas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .formula-box { background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.05)); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 25px; text-align: center; }
-        .formula-box h3 { color: #f39c12; margin-bottom: 15px; font-size: 1.1rem; }
-        .formula-math { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 1px; }
+        /* --- ESTILOS DE EJERCICIOS --- */
+        .pista-resolucion {
+            background: rgba(243, 156, 18, 0.1); border-left: 4px solid var(--color-acento1);
+            padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 25px; font-size: 1.05rem;
+        }
 
-        .ejercicio { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
-        .ejercicio h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.2rem; }
-        .paso { display: flex; margin-bottom: 10px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; }
-        .paso-num { background: var(--color-fisica); color: #fff; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
-        .paso-texto { color: #ddd; align-self: center; }
-        .resultado-final { background: rgba(46, 204, 113, 0.15); border-left: 4px solid #2ecc71; padding: 15px; border-radius: 5px; margin-top: 15px; font-weight: 600; color: #fff; }
+        .ejercicio-tarjeta {
+            background: rgba(20, 20, 35, 0.6); border-left: 4px solid var(--color-fisica);
+            padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0;
+        }
+        .ejercicio-tarjeta h3 { margin-bottom: 10px; font-size: 1.3rem; color: var(--color-fisica); }
 
-        .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
-        .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .btn-practica { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
-        .btn-practica:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(230, 126, 34, 0.4); }
-        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
-        .btn-evaluacion:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(231, 76, 60, 0.4); }
+        .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
+        .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;}
+        
+        .lista-datos { list-style-type: none; margin-left: 10px; color: #ddd; line-height: 1.8; }
+        .lista-datos li strong { color: #fff; font-size: 1.1rem; display: inline-block; width: 40px;}
+        .dato-ausente { color: #e74c3c; font-weight: 600; background: rgba(231, 76, 60, 0.1); padding: 2px 8px; border-radius: 4px;}
 
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin-top: 20px; }
-        .video-card { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        .video-header { background: rgba(0,0,0,0.5); padding: 10px; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; color: #4facfe; }
+        /* --- VIDEOS RESPONSIVOS EN GRID 2x2 --- */
+        .grid-videos {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;
+        }
+        .video-contenedor {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            background: #000;
+        }
+        .video-contenedor iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .titulo-video { background: rgba(0,0,0,0.5); padding: 10px; text-align: center; color: #ccc; font-size: 0.9rem; margin-bottom: 10px; border-radius: 5px;}
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes moveRight { 0% { transform: translateX(-30px); } 100% { transform: translateX(30px); } }
-        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; margin-top: 50px; }
-        @media (max-width: 768px) { .formulas-grid { grid-template-columns: 1fr; } }
+        /* --- BOTONES DE ACCIÓN FINAL --- */
+        .botones-accion-final {
+            display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;
+            margin-top: 40px; margin-bottom: 20px;
+        }
+        .btn-accion {
+            padding: 15px 25px; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
+            text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px;
+            transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3); flex: 1; text-align: center; justify-content: center; min-width: 250px;
+        }
+        .btn-avanzados { background: #9b59b6; }
+        .btn-avanzados:hover { background: #8e44ad; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4); }
+        .btn-practica { background: #2ecc71; }
+        .btn-practica:hover { background: #27ae60; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
+        .btn-evaluacion { background: #e74c3c; }
+        .btn-evaluacion:hover { background: #c0392b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4); }
+
+        @media (max-width: 768px) {
+            .grid-despejes, .grid-videos { grid-template-columns: 1fr; }
+            .botones-accion-final { flex-direction: column; }
+            .btn-accion { width: 100%; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
+    <!-- NAVEGACIÓN -->
     <header>
         <nav>
             <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="quimica_9.html">Grado Noveno</a></li>
+                        <li><a href="quimica_10.html">Grado Décimo</a></li>
+                        <li><a href="quimica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="biologia_9.html">Grado Noveno</a></li>
+                        <li><a href="biologia_10.html">Grado Décimo</a></li>
+                        <li><a href="biologia_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10</a>
+        
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Temas de Décimo</a>
 
-        <div class="header-tema">
-            <span class="emoji-tema">🏎️💨</span>
-            <h1>Movimiento Variado (MRUV)</h1>
-            <p>El movimiento más real: acelerar para rebasar o frenar para no chocar. La velocidad cambia de manera constante.</p>
+        <div class="encabezado-leccion">
+            <h1>M.R.U.V.</h1>
+            <p><i class="fa-solid fa-chart-line"></i> Unidad 2: Cinemática (Movimiento Rectilíneo Uniformemente Variado)</p>
         </div>
 
-        <div class="seccion">
-            <h2><i class="fa-solid fa-road"></i> ¿Qué es el MRUV (o MRUA)?</h2>
-            <p>El Movimiento Rectilíneo Uniformemente Variado (MRUV), también llamado Uniformemente Acelerado (MRUA), ocurre cuando un objeto se desplaza en línea recta pero su velocidad <strong>cambia cantidades iguales en tiempos iguales</strong>.</p>
-            <p>La característica principal de este movimiento es que <strong>su aceleración ($a$) es CONSTANTE y diferente de cero</strong>.</p>
-        </div>
-
-        <div class="seccion">
-            <h2><i class="fa-solid fa-square-root-variable"></i> Las 4 Fórmulas Fundamentales</h2>
-            <p>En el MRUV, tenemos 5 variables clave: Velocidad inicial ($v_i$), Velocidad final ($v_f$), Aceleración ($a$), Tiempo ($t$) y Distancia ($d$). Para resolver cualquier problema, siempre te darán 3 datos y te pedirán 1. Dependiendo del dato que <strong>no te den y no te pidan</strong>, eliges una de estas 4 fórmulas:</p>
+        <!-- SECCIÓN 1: DEFINICIÓN Y DESGLOSE -->
+        <section class="seccion-contenido">
+            <h2>1. ¿Qué es el M.R.U.V.?</h2>
+            <p>Ya dominamos el M.R.U. (velocidad constante) y entendimos qué es la Aceleración. Ahora vamos a juntar ambos conceptos para analizar el <strong>Movimiento Rectilíneo Uniformemente Variado</strong>. Desglosemos sus siglas para entenderlo:</p>
             
-            <div class="formulas-grid">
-                <div class="formula-box">
-                    <h3>1. Cuando NO hay Distancia ($d$)</h3>
-                    <div class="formula-math">$$ v_f = v_i + a \cdot t $$</div>
-                </div>
-                <div class="formula-box">
-                    <h3>2. Cuando NO hay Aceleración ($a$)</h3>
-                    <div class="formula-math">$$ d = \left( \frac{v_f + v_i}{2} \right) \cdot t $$</div>
-                </div>
-                <div class="formula-box">
-                    <h3>3. Cuando NO hay Velocidad Final ($v_f$)</h3>
-                    <div class="formula-math">$$ d = v_i \cdot t + \frac{a \cdot t^2}{2} $$</div>
-                </div>
-                <div class="formula-box">
-                    <h3>4. Cuando NO hay Tiempo ($t$)</h3>
-                    <div class="formula-math">$$ v_f^2 = v_i^2 + 2 \cdot a \cdot d $$</div>
-                </div>
+            <ul style="margin-left: 20px; color: #ddd; line-height: 1.8; margin-bottom: 20px;">
+                <li><strong>M - Movimiento:</strong> El objeto cambia de posición respecto a un punto fijo con el paso del tiempo.</li>
+                <li><strong>R - Rectilíneo:</strong> El trayecto sigue siendo una <strong>línea recta</strong>, como un tramo recto de la carretera de nuestra vereda.</li>
+                <li><strong>U - Uniformemente:</strong> Esto significa que la <strong>aceleración es constante</strong>. Es decir, la velocidad cambia, pero siempre cambia en la misma proporción en cada segundo.</li>
+                <li><strong>V - Variado:</strong> Nos recuerda que la <strong>velocidad ya no es la misma</strong>; el objeto va cada vez más rápido (acelera) o cada vez más despacio (frena).</li>
+            </ul>
+
+            <div style="background: rgba(46, 204, 113, 0.1); border-left: 4px solid #2ecc71; padding: 15px; border-radius: 0 8px 8px 0;">
+                <p><strong>Definición formal:</strong> Un cuerpo describe un M.R.U.V. cuando su trayectoria es recta y su aceleración es constante y distinta de cero. Esto implica que su velocidad aumenta o disminuye de manera uniforme a medida que pasa el tiempo.</p>
             </div>
-            
-            <p style="font-size: 0.95rem; color: #f39c12; margin-top: 15px;"><i class="fa-solid fa-circle-info"></i> Nota: Si el objeto frena, asegúrate de colocar la aceleración con signo negativo ($-a$). Si el objeto parte del reposo, $v_i = 0$.</p>
-        </div>
+        </section>
 
-        <div class="seccion">
-            <h2><i class="fa-solid fa-pencil"></i> Ejercicios Resueltos Paso a Paso</h2>
+        <!-- SECCIÓN 2: LAS FÓRMULAS Y SUS DESPEJES -->
+        <section class="seccion-contenido">
+            <h2>2. Las Fórmulas del M.R.U.V.</h2>
+            <p>A continuación se presentan las 4 fórmulas fundamentales que rigen este movimiento. Analizaremos cada una y extraeremos detalladamente todos sus despejes posibles.</p>
 
-            <div class="ejercicio">
-                <h3>Ejercicio 1: Buscando la Distancia</h3>
-                <p style="margin-bottom: 15px; color: #fff;">Un avión parte del reposo ($v_i = 0$) y acelera por la pista a <strong>4 m/s²</strong> durante <strong>12 segundos</strong> antes de despegar. ¿Qué distancia recorrió en la pista?</p>
-                
-                <div class="paso">
-                    <div class="paso-num">1</div>
-                    <div class="paso-texto">Extraer datos: $v_i = 0$, $a = 4 \text{ m/s}^2$, $t = 12 \text{ s}$. Nos piden Distancia ($d$).</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-num">2</div>
-                    <div class="paso-texto">¿Qué falta?: No tenemos Velocidad Final ($v_f$) ni nos la piden. Usamos la Fórmula #3.</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-num">3</div>
-                    <div class="paso-texto">Aplicar fórmula: $$ d = v_i \cdot t + \frac{a \cdot t^2}{2} $$</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-num">4</div>
-                    <div class="paso-texto">Reemplazar y calcular: $$ d = (0)(12) + \frac{4 \cdot (12)^2}{2} = 0 + \frac{4 \cdot 144}{2} = \frac{576}{2} = 288 $$</div>
+            <!-- FÓRMULA 1 (ACELERACIÓN) -->
+            <div class="seccion-formula" style="border-color: var(--color-acento2);">
+                <h3><i class="fa-solid fa-gauge-high"></i> Fórmula 1: Aceleración</h3>
+                <p style="color: #bbb;">Esta es la fórmula original que ya estudiamos a fondo en la lección anterior. La utilizamos cuando <strong>NO conocemos la distancia</strong>.</p>
+                <div class="caja-formula">
+                    <div class="formula-principal">a = (v<sub>f</sub> - v<sub>i</sub>) / t</div>
                 </div>
                 
-                <div class="resultado-final">
-                    Resultado: El avión recorrió una distancia de 288 metros antes de despegar.
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="fisica10_aceleracion.html" class="btn-accion btn-evaluacion" style="display: inline-block; padding: 10px 20px; font-size: 1rem; flex: none; min-width: auto; width: auto;"><i class="fa-solid fa-arrow-rotate-left"></i> Repasar Aceleración y sus 3 despejes</a>
                 </div>
             </div>
 
-            <div class="ejercicio">
-                <h3>Ejercicio 2: Frenado sin tiempo</h3>
-                <p style="margin-bottom: 15px; color: #fff;">Un ciclista viaja a <strong>15 m/s</strong> y aplica los frenos con una desaceleración de <strong>-3 m/s²</strong> hasta detenerse por completo. ¿Qué distancia recorrió mientras frenaba?</p>
-                
-                <div class="paso">
-                    <div class="paso-num">1</div>
-                    <div class="paso-texto">Extraer datos: $v_i = 15 \text{ m/s}$, $v_f = 0$ (se detiene), $a = -3 \text{ m/s}^2$. Nos piden Distancia ($d$).</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-num">2</div>
-                    <div class="paso-texto">¿Qué falta?: No tenemos Tiempo ($t$) ni nos lo piden. Usamos la Fórmula #4.</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-num">3</div>
-                    <div class="paso-texto">Aplicar fórmula y despejar: $$ v_f^2 = v_i^2 + 2 \cdot a \cdot d $$</div>
-                </div>
-                <div class="paso">
-                    <div class="paso-num">4</div>
-                    <div class="paso-texto">Reemplazar: $$ 0^2 = 15^2 + 2(-3)(d) \implies 0 = 225 - 6d \implies 6d = 225 \implies d = 37.5 $$</div>
+            <!-- FÓRMULA 2 -->
+            <div class="seccion-formula">
+                <h3><i class="fa-solid fa-ruler"></i> Fórmula 2: Distancia con Aceleración y Tiempo</h3>
+                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos la Velocidad Final (v<sub>f</sub>)</strong> y necesitamos calcular la distancia recorrida.</p>
+                <div class="caja-formula">
+                    <div class="formula-principal">d = v<sub>i</sub> &middot; t + &frac12; &middot; a &middot; t<sup>2</sup></div>
                 </div>
                 
-                <div class="resultado-final">
-                    Resultado: El ciclista recorrió 37.5 metros frenando antes de lograr detenerse.
+                <div class="grid-despejes">
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Aceleración (a)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos el término de la velocidad inicial por el tiempo <code>(v<sub>i</sub> &middot; t)</code> al otro lado a restar a la distancia. Luego, el <code>2</code> de la fracción pasa a multiplicar todo ese resultado, y finalmente el tiempo al cuadrado <code>(t<sup>2</sup>)</code> pasa a dividir.</p>
+                        <div class="formula-despejada">a = 2 &middot; (d - v<sub>i</sub> &middot; t) / t<sup>2</sup></div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Vel. Inicial (v<sub>i</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos el bloque completo de la aceleración <code>(&frac12; &middot; a &middot; t<sup>2</sup>)</code> a restar al otro lado. Luego, el tiempo <code>(t)</code> que multiplica a la velocidad inicial pasa a dividir a todo el conjunto.</p>
+                        <div class="formula-despejada">v<sub>i</sub> = (d - &frac12; &middot; a &middot; t<sup>2</sup>) / t</div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Tiempo (t)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">¡Ojo aquí! Como la variable tiempo está elevada al cuadrado <code>(t<sup>2</sup>)</code> y también está lineal <code>(t)</code>, se debe usar la famosa ecuación cuadrática para despejarla. El resultado es:</p>
+                        <div class="formula-despejada">t = (-v<sub>i</sub> + &radic;(v<sub>i</sub><sup>2</sup> + 2&middot;a&middot;d)) / a</div>
+                    </div>
                 </div>
             </div>
-            
-        </div>
 
-        <div class="seccion" style="background: rgba(30, 30, 45, 0.9);">
-            <h2><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Explicación en Video</h2>
-            <p>Selección de los mejores videos explicativos del Profe Alex sobre el MRUV para dominar las fórmulas:</p>
-            
-            <div class="video-grid">
-                <div class="video-card">
-                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex - Introducción</div>
-                    <iframe width="100%" height="240" src="https://www.youtube-nocookie.com/embed/R0iB9i4b4Jk" frameborder="0" allowfullscreen></iframe>
+            <!-- FÓRMULA 3 -->
+            <div class="seccion-formula">
+                <h3><i class="fa-solid fa-gauge-simple-high"></i> Fórmula 3: Velocidades al Cuadrado</h3>
+                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos el Tiempo (t)</strong> pero tenemos las velocidades, aceleración y distancia.</p>
+                <div class="caja-formula">
+                    <div class="formula-principal">v<sub>f</sub><sup>2</sup> = v<sub>i</sub><sup>2</sup> + 2 &middot; a &middot; d</div>
                 </div>
-                <div class="video-card">
-                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex - Fórmulas</div>
-                    <iframe width="100%" height="240" src="https://www.youtube-nocookie.com/embed/Q7-QW118S4Y" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-card">
-                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex - Ejercicio 1</div>
-                    <iframe width="100%" height="240" src="https://www.youtube-nocookie.com/embed/R1d_1-iT9Z0" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-card">
-                    <div class="video-header"><i class="fa-solid fa-play"></i> Matemáticas Profe Alex - Datos Ocultos</div>
-                    <iframe width="100%" height="240" src="https://www.youtube-nocookie.com/embed/l_N9rU2mJ30" frameborder="0" allowfullscreen></iframe>
+                
+                <div class="grid-despejes">
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Vel. Inicial (v<sub>i</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos el bloque <code>(2 &middot; a &middot; d)</code> a restar al otro lado de la igualdad. Para eliminar el cuadrado de la velocidad inicial, aplicamos raíz cuadrada a todo.</p>
+                        <div class="formula-despejada">v<sub>i</sub> = &radic;(v<sub>f</sub><sup>2</sup> - 2 &middot; a &middot; d)</div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Distancia (d)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos la velocidad inicial al cuadrado <code>(v<sub>i</sub><sup>2</sup>)</code> a restar a la velocidad final. Luego, el bloque <code>(2 &middot; a)</code> que multiplica a la distancia, pasa a dividir.</p>
+                        <div class="formula-despejada">d = (v<sub>f</sub><sup>2</sup> - v<sub>i</sub><sup>2</sup>) / (2 &middot; a)</div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Aceleración (a)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Pasamos la velocidad inicial al cuadrado <code>(v<sub>i</sub><sup>2</sup>)</code> a restar. Luego, el bloque <code>(2 &middot; d)</code> que acompaña a la aceleración multiplicándola, pasa a dividir al otro lado.</p>
+                        <div class="formula-despejada">a = (v<sub>f</sub><sup>2</sup> - v<sub>i</sub><sup>2</sup>) / (2 &middot; d)</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="botones-accion">
+            <!-- FÓRMULA 4 -->
+            <div class="seccion-formula">
+                <h3><i class="fa-solid fa-arrows-left-right"></i> Fórmula 4: Distancia Promedio</h3>
+                <p style="color: #bbb;">Se utiliza cuando <strong>NO conocemos la Aceleración (a)</strong> pero tenemos velocidades inicial, final y tiempo.</p>
+                <div class="caja-formula">
+                    <div class="formula-principal">d = ( (v<sub>i</sub> + v<sub>f</sub>) / 2 ) &middot; t</div>
+                </div>
+                
+                <div class="grid-despejes">
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Tiempo (t)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">El <code>2</code> que está dividiendo pasa a multiplicar a la distancia <code>(2 &middot; d)</code>, y todo el bloque de la suma de velocidades <code>(v<sub>i</sub> + v<sub>f</sub>)</code> pasa a dividir.</p>
+                        <div class="formula-despejada">t = 2 &middot; d / (v<sub>i</sub> + v<sub>f</sub>)</div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Vel. Final (v<sub>f</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">El <code>2</code> pasa a multiplicar a la distancia <code>(2 &middot; d)</code> y el tiempo <code>(t)</code> pasa a dividir. Finalmente, la velocidad inicial <code>(v<sub>i</sub>)</code> que está sumando, pasa a restar.</p>
+                        <div class="formula-despejada">v<sub>f</sub> = (2 &middot; d / t) - v<sub>i</sub></div>
+                    </div>
+                    <div class="despeje-caja">
+                        <div class="paso-titulo">Despeje para Vel. Inicial (v<sub>i</sub>)</div>
+                        <p style="font-size: 0.85rem; color: #ccc;">Hacemos el mismo procedimiento anterior: el <code>2</code> pasa a multiplicar a la distancia, el tiempo pasa a dividir. Y esta vez, la velocidad final <code>(v<sub>f</sub>)</code> que suma, pasa a restar.</p>
+                        <div class="formula-despejada">v<sub>i</sub> = (2 &middot; d / t) - v<sub>f</sub></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: EJERCICIOS RESUELTOS Y PISTAS -->
+        <section class="seccion-contenido">
+            <h2>3. Ejercicios Resueltos (El Truco para Elegir Fórmula)</h2>
+            
+            <div class="pista-resolucion">
+                <i class="fa-solid fa-lightbulb"></i> <strong>La Gran Pista para Resolver:</strong> En los ejercicios de M.R.U.V. siempre hay 5 variables posibles (d, a, t, v<sub>i</sub>, v<sub>f</sub>). El problema <strong>siempre</strong> te dará 3 datos conocidos y te pedirá calcular 1. Por lo tanto, siempre habrá <strong>1 dato que no te dan y tampoco te piden</strong>. ¡Ese dato ausente es tu guía secreta para elegir la fórmula correcta!
+            </div>
+
+            <!-- EJERCICIO 1 (Fórmula 2) -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 1: Aplicando la Fórmula 2 (Distancia con aceleración)</h3>
+                <div class="enunciado">
+                    "Un camión de carga sale del reposo acelerando a 2 m/s² durante 8 segundos. ¿Qué distancia recorrió en ese tiempo?"
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Lista de Datos</div>
+                    <ul class="lista-datos">
+                        <li><strong>v<sub>i</sub>:</strong> 0 m/s (porque parte del reposo)</li>
+                        <li><strong>a:</strong> 2 m/s&sup2;</li>
+                        <li><strong>t:</strong> 8 s</li>
+                        <li><strong>d:</strong> ? (La incógnita que buscamos)</li>
+                        <li class="dato-ausente"><strong>v<sub>f</sub>:</strong> Ausente (No lo dan y no lo piden)</li>
+                    </ul>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Elegir fórmula y reemplazar</div>
+                    <p>Como nuestro dato ausente es <strong>v<sub>f</sub></strong>, usamos la Fórmula 2:<br>
+                    d = v<sub>i</sub> &middot; t + &frac12; &middot; a &middot; t<sup>2</sup><br>
+                    d = 0 &middot; 8 + 0.5 &middot; 2 &middot; (8)<sup>2</sup><br>
+                    d = 0 + 1 &middot; 64</p>
+                    <p style="color: #3498db; font-size: 1.1rem; font-weight: bold; margin-top: 5px;">d = 64 metros</p>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 (Fórmula 3) -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 2: Aplicando la Fórmula 3 (Velocidades al cuadrado)</h3>
+                <div class="enunciado">
+                    "Un Willys viaja a 10 m/s y acelera a 3 m/s² para rebasar, recorriendo una distancia de 50 metros. ¿Cuál fue su velocidad al terminar de rebasar?"
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Lista de Datos</div>
+                    <ul class="lista-datos">
+                        <li><strong>v<sub>i</sub>:</strong> 10 m/s</li>
+                        <li><strong>a:</strong> 3 m/s&sup2;</li>
+                        <li><strong>d:</strong> 50 m</li>
+                        <li><strong>v<sub>f</sub>:</strong> ? (La incógnita que buscamos)</li>
+                        <li class="dato-ausente"><strong>t:</strong> Ausente (No lo dan y no lo piden)</li>
+                    </ul>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Elegir fórmula y reemplazar</div>
+                    <p>Como nuestro dato ausente es el <strong>tiempo (t)</strong>, usamos la Fórmula 3:<br>
+                    v<sub>f</sub><sup>2</sup> = v<sub>i</sub><sup>2</sup> + 2 &middot; a &middot; d<br>
+                    v<sub>f</sub><sup>2</sup> = (10)<sup>2</sup> + 2 &middot; 3 &middot; 50<br>
+                    v<sub>f</sub><sup>2</sup> = 100 + 300<br>
+                    v<sub>f</sub> = &radic;400</p>
+                    <p style="color: #3498db; font-size: 1.1rem; font-weight: bold; margin-top: 5px;">v<sub>f</sub> = 20 m/s</p>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 (Fórmula 4 despejada) -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 3: Aplicando la Fórmula 4 (Despeje para Tiempo)</h3>
+                <div class="enunciado">
+                    "Una motocicleta frena reduciendo su velocidad desde 25 m/s hasta 5 m/s, recorriendo una distancia exacta de 150 metros. ¿Cuánto tiempo le tomó frenar?"
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Lista de Datos</div>
+                    <ul class="lista-datos">
+                        <li><strong>v<sub>i</sub>:</strong> 25 m/s</li>
+                        <li><strong>v<sub>f</sub>:</strong> 5 m/s</li>
+                        <li><strong>d:</strong> 150 m</li>
+                        <li><strong>t:</strong> ? (La incógnita que buscamos)</li>
+                        <li class="dato-ausente"><strong>a:</strong> Ausente (No la dan y no la piden)</li>
+                    </ul>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Elegir fórmula y reemplazar</div>
+                    <p>Como nuestro dato ausente es la <strong>aceleración (a)</strong>, usamos el despeje de tiempo de la Fórmula 4:<br>
+                    t = 2 &middot; d / (v<sub>i</sub> + v<sub>f</sub>)<br>
+                    t = 2(150) / (25 + 5)<br>
+                    t = 300 / 30</p>
+                    <p style="color: #3498db; font-size: 1.1rem; font-weight: bold; margin-top: 5px;">t = 10 segundos</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SECCIÓN 4: VIDEOS EDUCATIVOS -->
+        <section class="seccion-contenido" style="border-color: #34495e;">
+            <h2><i class="fa-brands fa-youtube" style="color: #e74c3c;"></i> 4. Explicaciones en Video</h2>
+            <p>Refuerza tu aprendizaje viendo cómo resolver los distintos tipos de problemas para cada fórmula del M.R.U.V.</p>
+            
+            <div class="grid-videos">
+                <!-- VIDEO 1 -->
+                <div>
+                    <div class="titulo-video">1. Fórmula de Distancia (Sin Vf)</div>
+                    <div class="video-contenedor">
+                        <!-- PEGA TU ENLACE DE YOUTUBE AQUÍ REEMPLAZANDO EL 'src' -->
+                        <iframe src="https://www.youtube.com/embed/XXXXXXX" title="Video 1" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- VIDEO 2 -->
+                <div>
+                    <div class="titulo-video">2. Fórmula de Velocidades al cuadrado (Sin t)</div>
+                    <div class="video-contenedor">
+                        <!-- PEGA TU ENLACE DE YOUTUBE AQUÍ REEMPLAZANDO EL 'src' -->
+                        <iframe src="https://www.youtube.com/embed/XXXXXXX" title="Video 2" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- VIDEO 3 -->
+                <div>
+                    <div class="titulo-video">3. Fórmula Distancia Promedio (Sin a)</div>
+                    <div class="video-contenedor">
+                        <!-- PEGA TU ENLACE DE YOUTUBE AQUÍ REEMPLAZANDO EL 'src' -->
+                        <iframe src="https://www.youtube.com/embed/XXXXXXX" title="Video 3" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- VIDEO 4 -->
+                <div>
+                    <div class="titulo-video">4. Análisis y Tipos de Gráficas MRUV</div>
+                    <div class="video-contenedor">
+                        <!-- PEGA TU ENLACE DE YOUTUBE AQUÍ REEMPLAZANDO EL 'src' -->
+                        <iframe src="https://youtu.be/YAp7ErHHTFU" title="Video 4" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: BOTONES DE ACCIÓN FINAL -->
+        <section class="botones-accion-final">
+            
+            <!-- Botón de Ejercicios Avanzados -->
+            <a href="fisica10_mruv_avanzado.html" class="btn-accion btn-avanzados">
+                <i class="fa-solid fa-brain"></i> Ejercicios Avanzados
+            </a>
+
+            <!-- Botón de Práctica -->
             <a href="fisica10_mruv_practica.html" class="btn-accion btn-practica">
                 <i class="fa-solid fa-gamepad"></i> Práctica Interactiva
             </a>
+
+            <!-- Botón de Evaluación -->
             <a href="fisica10_mruv_evaluacion.html" class="btn-accion btn-evaluacion">
-                <i class="fa-solid fa-clipboard-check"></i> Realizar Evaluación
+                <i class="fa-solid fa-file-signature"></i> Evaluación
             </a>
-        </div>
+            
+        </section>
+
     </main>
 
-    <footer>
-        <p>LabVirtual W &copy; 2025 · Construido con inteligencia artificial para la educación</p>
-    </footer>
-
-    <script src="profe-ia.js"></script>
 </body>
 </html>
-
