@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Final Cinemática - LabVirtual W</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --color-fisica: #3498db;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-correcta: #2ecc71;
+            --color-incorrecta: #e74c3c;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+
+        .btn-volver {
+            color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s;
+            display: inline-block; margin-bottom: 20px;
+        }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        /* --- CONTENEDORES --- */
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+
+        .tarjeta-bienvenida {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px; padding: 40px; text-align: center; backdrop-filter: blur(10px);
+        }
+        .tarjeta-bienvenida h1 { color: #e74c3c; font-size: 2.5rem; margin-bottom: 15px; }
+        .tarjeta-bienvenida p { font-size: 1.1rem; color: #ccc; margin-bottom: 25px; line-height: 1.6; }
+
+        .input-nombre {
+            width: 80%; max-width: 400px; padding: 15px; border-radius: 8px; border: 2px solid rgba(52, 152, 219, 0.5);
+            background: rgba(0,0,0,0.3); color: #fff; font-size: 1.1rem; text-align: center; outline: none; margin-bottom: 20px;
+        }
+        .input-nombre:focus { border-color: var(--color-fisica); }
+        .alerta-nombre { color: #e74c3c; font-size: 0.9rem; margin-top: -15px; margin-bottom: 15px; display: none; }
+
+        .btn-iniciar {
+            background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; border: none;
+            padding: 15px 40px; font-size: 1.2rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.3s;
+        }
+        .btn-iniciar:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3); }
+
+        /* --- EVALUACIÓN UI --- */
+        #seccion-evaluacion { display: none; animation: fadeIn 0.5s ease; }
+        
+        .header-eval {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.5); padding: 15px 20px; border-radius: 10px; margin-bottom: 25px; border-bottom: 3px solid var(--color-fisica);
+        }
+        .estudiante-badge { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #4facfe; }
+
+        /* BARRA PROGRESO */
+        .progreso-container { background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 30px; position: relative; }
+        .progreso-fill { background: var(--color-fisica); height: 100%; width: 0%; transition: width 0.3s ease; }
+        .progreso-texto { text-align: center; font-size: 0.85rem; color: #aaa; margin-top: 5px; }
+
+        /* PREGUNTA ICFES */
+        .pregunta-card {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px; padding: 30px; margin-bottom: 20px; position: relative;
+        }
+        .tag-fase {
+            position: absolute; top: -15px; right: 20px; background: #e74c3c; color: white;
+            padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;
+        }
+        .pregunta-numero { font-size: 1.2rem; color: #4facfe; font-weight: 700; margin-bottom: 15px; }
+        .pregunta-texto { font-size: 1.2rem; line-height: 1.6; margin-bottom: 25px; }
+        
+        .opciones-lista { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+        .opcion-item {
+            background: rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.1); border-radius: 10px;
+            padding: 15px 20px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 15px;
+        }
+        .opcion-item:hover { border-color: rgba(52, 152, 219, 0.5); background: rgba(52, 152, 219, 0.1); }
+        .opcion-item.seleccionada { border-color: var(--color-fisica); background: rgba(52, 152, 219, 0.15); }
+        .opcion-letra {
+            background: rgba(255,255,255,0.1); width: 35px; height: 35px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-weight: 700; border: 2px solid transparent;
+        }
+
+        /* RETO CASCADA */
+        .cascada-container {
+            background: rgba(26, 26, 46, 0.8); border: 1px solid #4facfe; border-radius: 15px; padding: 30px;
+        }
+        .cascada-contexto {
+            background: rgba(52, 152, 219, 0.1); padding: 20px; border-left: 5px solid #4facfe; border-radius: 8px; margin-bottom: 30px; font-style: italic; color: #ddd;
+        }
+        .intervalo-bloque {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 20px; margin-bottom: 20px;
+            display: none; /* Se muestran progresivamente */
+        }
+        .intervalo-bloque.activo { display: block; animation: fadeIn 0.5s ease; }
+        .intervalo-titulo { font-size: 1.2rem; color: #f39c12; margin-bottom: 10px; font-weight: 700; border-bottom: 1px solid rgba(243, 156, 18, 0.3); padding-bottom: 5px;}
+        .intervalo-desc { font-size: 1.1rem; margin-bottom: 20px; color: #bbb; }
+        
+        .paso-cascada {
+            background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px;
+            display: none; border-left: 3px solid #ccc;
+        }
+        .paso-cascada.activo { display: block; animation: fadeIn 0.3s ease; }
+        .paso-pregunta { font-weight: 600; margin-bottom: 10px; color: #fff; }
+        
+        .paso-opciones { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+        .paso-opcion {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 5px; cursor: pointer; transition: 0.2s;
+        }
+        .paso-opcion:hover { background: rgba(52, 152, 219, 0.2); }
+        .paso-opcion.seleccionada { border-color: #4facfe; background: rgba(52, 152, 219, 0.3); }
+
+        .paso-input {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px; border-radius: 5px; width: 150px; text-align: center; font-size: 1.1rem;
+        }
+
+        .btn-verificar-paso {
+            background: #2ecc71; color: #fff; border: none; padding: 8px 20px; border-radius: 5px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: 0.2s;
+        }
+        .btn-verificar-paso:hover { background: #27ae60; }
+        .btn-verificar-paso:disabled { background: #7f8c8d; cursor: not-allowed; }
+
+        .feedback-paso { margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.95rem; display: none; }
+        .feedback-paso.ok { background: rgba(46, 204, 113, 0.2); border-left: 4px solid #2ecc71; color: #2ecc71; display: block; }
+        .feedback-paso.error { background: rgba(231, 76, 60, 0.2); border-left: 4px solid #e74c3c; color: #e74c3c; display: block; }
+
+        /* CONTROLES */
+        .controles { display: flex; justify-content: space-between; margin-top: 20px; }
+        .btn-nav {
+            background: rgba(255,255,255,0.1); color: #fff; border: none; padding: 12px 25px;
+            font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: 0.3s;
+        }
+        .btn-nav:hover { background: rgba(255,255,255,0.2); }
+        .btn-finalizar { background: #e74c3c; }
+        .btn-finalizar:hover { background: #c0392b; box-shadow: 0 5px 15px rgba(231,76,60,0.4); }
+
+        /* PANTALLA RESULTADOS */
+        #pantalla-resultado { display: none; animation: fadeIn 0.5s ease; text-align: center; }
+        #pantalla-resultado.activo { display: block; }
+        .res-emoji { font-size: 5rem; margin-bottom: 10px; }
+        .res-titulo { font-size: 2.5rem; color: #4facfe; margin-bottom: 10px; }
+        .res-score { font-size: 4rem; font-weight: 800; color: #fff; margin: 20px 0; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .res-score span { font-size: 1.5rem; color: #aaa; }
+
+        .desglose-container {
+            background: rgba(0,0,0,0.4); border-radius: 15px; padding: 30px; margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left;
+        }
+        .desglose-item { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-left: 4px solid; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <!-- PANTALLA INICIO -->
+        <div id="pantalla-inicio" class="tarjeta-bienvenida">
+            <a href="fisica_10.html" class="btn-volver" style="float: left; margin-top: -20px;"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+            <div style="clear: both;"></div>
+
+            <div style="font-size: 4rem; margin-bottom: 20px;">🚀</div>
+            <h1>Evaluación Final de Cinemática</h1>
+            <p>Esta prueba evalúa tu comprensión de los tipos de movimiento.<br>Consta de <strong>9 preguntas ICFES</strong> (50%) y un <strong>Reto Interactivo en Cascada</strong> de 3 pasos (50%).</p>
+            
+            <input type="text" id="input-nombre" class="input-nombre" placeholder="Escribe tu nombre completo" autocomplete="off">
+            <div id="alerta-nombre" class="alerta-nombre">Por favor ingresa tu nombre para continuar</div>
+            <br>
+            <button class="btn-iniciar" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Iniciar Evaluación</button>
+        </div>
+
+        <!-- EVALUACION -->
+        <div id="seccion-evaluacion">
+            <div class="header-eval">
+                <div class="estudiante-badge"><i class="fa-solid fa-user-graduate"></i> <span id="nombre-top"></span></div>
+                <div style="color: #bbb; font-size: 0.9rem;"><i class="fa-solid fa-stopwatch"></i> Sin límite de tiempo</div>
+            </div>
+
+            <div class="progreso-container">
+                <div class="progreso-fill" id="barra-prog"></div>
+            </div>
+            <div class="progreso-texto" id="prog-texto">Fase 1: Preguntas (1 de 9)</div>
+
+            <!-- CONTENEDOR DINÁMICO -->
+            <div id="contenedor-pregunta"></div>
+
+            <div class="controles">
+                <button id="btn-ant" class="btn-nav" onclick="irAnterior()" style="display:none;"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+                <div style="flex-grow: 1;"></div>
+                <button id="btn-sig" class="btn-nav" onclick="irSiguiente()">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
+                <button id="btn-final" class="btn-nav btn-finalizar" onclick="mostrarResultados()" style="display:none;"><i class="fa-solid fa-check-double"></i> Terminar y Ver Resultados</button>
+            </div>
+        </div>
+
+        <!-- RESULTADOS -->
+        <div id="pantalla-resultado">
+            <div class="res-emoji" id="emoji-resultado">🎉</div>
+            <h2 class="res-titulo" id="titulo-resultado">¡Evaluación Completada!</h2>
+            <div style="font-size: 1.2rem; color: #ddd;" id="nombre-resultado"></div>
+            
+            <div class="res-score"><span id="score-total"></span> <span>/ 18 pts</span> <br><span style="font-size:1.2rem; color:#4facfe;" id="score-pct"></span></div>
+            
+            <p id="subtitulo-resultado" style="color: #bbb; margin-bottom: 20px;"></p>
+
+            <div class="desglose-container">
+                <div class="desglose-item" style="border-left-color: #3498db;">
+                    <h3 style="color:#3498db; margin-bottom:10px;"><i class="fa-solid fa-list-check"></i> Fase 1: Preguntas (ICFES)</h3>
+                    <p style="font-size: 2rem; font-weight: 800; color: #fff;" id="res-icfes">0/9</p>
+                    <p style="color: #aaa; font-size: 0.9rem;">Conceptos básicos de cinemática.</p>
+                </div>
+                <div class="desglose-item" style="border-left-color: #f39c12;">
+                    <h3 style="color:#f39c12; margin-bottom:10px;"><i class="fa-solid fa-layer-group"></i> Fase 2: Reto Cascada</h3>
+                    <p style="font-size: 2rem; font-weight: 800; color: #fff;" id="res-cascada">0/9</p>
+                    <p style="color: #aaa; font-size: 0.9rem;">Análisis paso a paso del Dron Agrícola.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <a href="fisica_10.html" class="btn-nav" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Volver a Física 10</a>
+            </div>
+        </div>
+
+    </main>
+
+<script>
+// ============================================================
+//   CONFIGURACIÓN Y DATOS
+// ============================================================
+const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbzitvYZZarQok90MbWJHmepB6Dn2MNKu5HUevk63SbWoRxpPkNN5NB35y_Av7T-eKEp/exec'; 
+
+// Banco de preguntas conceptuales (Se seleccionan 9)
+const bancoICFES = [
+    { texto: "En un Movimiento Rectilíneo Uniforme (M.R.U.), la característica principal es que:", opciones: ["A. La aceleración es constante y positiva", "B. La velocidad aumenta con el tiempo", "C. La velocidad permanece constante", "D. El objeto siempre está en caída libre"], respuesta: 2 },
+    { texto: "Si un auto frena frente a un semáforo, su aceleración se considera:", opciones: ["A. Positiva, porque sigue avanzando", "B. Cero, porque es M.R.U.", "C. Negativa, porque se opone a la velocidad", "D. Igual a la gravedad"], respuesta: 2 },
+    { texto: "Un objeto en caída libre desde el reposo aumenta su velocidad debido a:", opciones: ["A. Su masa", "B. La fricción del aire", "C. La fuerza inicial de lanzamiento", "D. La aceleración de la gravedad"], respuesta: 3 },
+    { texto: "En un movimiento parabólico, la velocidad en el eje X (horizontal) es:", opciones: ["A. Acelerada por la gravedad", "B. Cero en el punto más alto", "C. Constante en todo el trayecto (M.R.U.)", "D. Variable dependiente del peso"], respuesta: 2 },
+    { texto: "En el M.R.U.V., si la velocidad inicial es 0, la distancia recorrida es proporcional a:", opciones: ["A. El cuadrado del tiempo", "B. Solo al tiempo", "C. La masa del objeto", "D. La altura inicial"], respuesta: 0 },
+    { texto: "Una piedra se lanza verticalmente hacia arriba. En su punto más alto:", opciones: ["A. Su aceleración es cero", "B. Su velocidad es cero", "C. Su velocidad es máxima", "D. Su peso desaparece"], respuesta: 1 },
+    { texto: "En el movimiento circular uniforme (M.C.U.), la aceleración centrípeta apunta hacia:", opciones: ["A. Afuera de la curva", "B. El centro de la trayectoria circular", "C. La dirección del movimiento", "D. Arriba, contra la gravedad"], respuesta: 1 },
+    { texto: "¿Cuál de las siguientes unidades corresponde a la aceleración en el SI?", opciones: ["A. m/s", "B. km/h", "C. m/s²", "D. N/m"], respuesta: 2 },
+    { texto: "Un gráfico de Distancia vs Tiempo que muestra una línea recta diagonal indica:", opciones: ["A. Que el objeto está quieto", "B. M.R.U. (velocidad constante)", "C. M.R.U.V. (aceleración constante)", "D. Caída libre"], respuesta: 1 },
+    { texto: "Si la aceleración de un cuerpo es 0 m/s², significa que:", opciones: ["A. Obligatoriamente está quieto", "B. Se mueve en círculos", "C. Su velocidad es constante o está en reposo", "D. Está frenando"], respuesta: 2 },
+    { texto: "El tiempo que tarda un proyectil parabólico en subir es ___ al tiempo que tarda en bajar al mismo nivel.", opciones: ["A. Mayor", "B. Menor", "C. Igual", "D. No tienen relación"], respuesta: 2 },
+    { texto: "La gravedad en la Tierra produce una aceleración aproximada de:", opciones: ["A. 9.8 m/s", "B. 9.8 m/s²", "C. 10 km/h", "D. Cero"], respuesta: 1 }
+];
+
+// Reto en Cascada
+const retoCascada = {
+    contexto: "Un Dron Agrícola en la Institución Educativa Gallego realiza una misión en 3 intervalos de vuelo distintos. Analiza cada etapa paso a paso.",
+    intervalos: [
+        {
+            titulo: "Intervalo 1: Vuelo de reconocimiento",
+            desc: "El dron se desplaza en línea recta y de forma horizontal cubriendo 120 metros en 10 segundos, manteniendo el mismo ritmo de vuelo sin acelerar ni frenar.",
+            pasos: [
+                { tipo: "select", pregunta: "1. ¿Qué tipo de movimiento realiza el dron?", opciones: ["M.R.U. (Uniforme)", "M.R.U.V. (Variado)", "Caída Libre", "M. Circular"], respuesta: 0, exp: "Correcto. Como mantiene el mismo ritmo (velocidad constante), es M.R.U." },
+                { tipo: "select", pregunta: "2. ¿Qué fórmula utilizarías para hallar su velocidad?", opciones: ["a = (Vf - Vi) / t", "V = d / t", "h = 1/2 * g * t²", "d = Vi * t + 1/2 * a * t²"], respuesta: 1, exp: "Exacto. En M.R.U. la velocidad es distancia sobre tiempo." },
+                { tipo: "input", pregunta: "3. Calcula la velocidad (en m/s):", respuesta: "12", exp: "¡Perfecto! V = 120m / 10s = 12 m/s." }
+            ]
+        },
+        {
+            titulo: "Intervalo 2: Ascenso rápido",
+            desc: "Para evadir un árbol alto, el dron aumenta su velocidad desde los 12 m/s que llevaba hasta alcanzar 20 m/s, tardando 4 segundos en lograrlo.",
+            pasos: [
+                { tipo: "select", pregunta: "1. ¿Qué tipo de movimiento realiza ahora?", opciones: ["M.R.U. (Uniforme)", "M.R.U.V. (Variado)", "Caída Libre", "M. Parabólico"], respuesta: 1, exp: "Correcto. Como cambia su velocidad, hay aceleración (M.R.U.V.)." },
+                { tipo: "select", pregunta: "2. ¿Qué fórmula utilizas para hallar la aceleración?", opciones: ["V = d / t", "h = 1/2 * g * t²", "a = (Vf - Vi) / t", "d = Vi * t"], respuesta: 2, exp: "¡Muy bien! Aceleración es la variación de velocidad sobre tiempo." },
+                { tipo: "input", pregunta: "3. Calcula la aceleración (en m/s²):", respuesta: "2", exp: "¡Excelente! a = (20 - 12) / 4 = 8 / 4 = 2 m/s²." }
+            ]
+        },
+        {
+            titulo: "Intervalo 3: Entrega de semillas",
+            desc: "El dron se detiene (reposo) en el aire y deja caer un paquete de semillas verticalmente, el cual tarda 3 segundos en tocar el suelo. (Asume g = 10 m/s² para simplificar)",
+            pasos: [
+                { tipo: "select", pregunta: "1. ¿Qué tipo de movimiento experimenta el paquete?", opciones: ["M.R.U. Horizontal", "M.R.U.V. Ascendente", "Caída Libre", "M. Parabólico"], respuesta: 2, exp: "Correcto. El paquete cae bajo efecto de la gravedad desde el reposo." },
+                { tipo: "select", pregunta: "2. ¿Qué fórmula usas para hallar la altura desde la que cayó?", opciones: ["h = 1/2 * g * t²", "h = (Vf - Vi) / t", "V = d / t", "h = m * g"], respuesta: 0, exp: "Exacto. Como se deja caer, Vi = 0, así que la altura depende de g y t²." },
+                { tipo: "input", pregunta: "3. Calcula la altura (en metros):", respuesta: "45", exp: "¡Perfecto! h = 0.5 * 10 * (3)² = 5 * 9 = 45 m." }
+            ]
+        }
+    ]
+};
+
+// ============================================================
+//   ESTADO DE LA APP
+// ============================================================
+let nombreEstudiante = '';
+let preguntasFase1 = [];
+let respuestasFase1 = new Array(9).fill(null);
+let faseActual = 1; // 1: ICFES (0-8), 2: Cascada (9)
+let indiceActual = 0; 
+let puntosIcfes = 0;
+let puntosCascada = 0; // Se suman al instante al verificar
+let cascadaProgreso = { intervalo: 0, paso: 0 }; // Controla en qué paso de la cascada va
+
+function iniciarEvaluacion() {
+    const input = document.getElementById('input-nombre');
+    nombreEstudiante = input.value.trim();
+    if (!nombreEstudiante) { document.getElementById('alerta-nombre').style.display = 'block'; input.focus(); return; }
+    document.getElementById('alerta-nombre').style.display = 'none';
+
+    // Seleccionar 9 preguntas aleatorias
+    preguntasFase1 = [...bancoICFES].sort(() => Math.random() - 0.5).slice(0, 9);
+
+    document.getElementById('pantalla-inicio').style.display = 'none';
+    document.getElementById('seccion-evaluacion').style.display = 'block';
+    document.getElementById('nombre-top').textContent = nombreEstudiante;
+    
+    mostrarVista();
+}
+
+function mostrarVista() {
+    const btnAnt = document.getElementById('btn-ant');
+    const btnSig = document.getElementById('btn-sig');
+    const btnFin = document.getElementById('btn-final');
+    
+    if (faseActual === 1) {
+        // VISTA ICFES
+        const p = preguntasFase1[indiceActual];
+        const letras = ['A', 'B', 'C', 'D'];
+        
+        let html = `<div class="pregunta-card">
+            <span class="tag-fase">Fase 1: ICFES</span>
+            <div class="pregunta-numero">Pregunta ${indiceActual + 1} de 9</div>
+            <div class="pregunta-texto">${p.texto}</div>
+            <ul class="opciones-lista">`;
+        
+        p.opciones.forEach((op, i) => {
+            const sel = respuestasFase1[indiceActual] === i ? 'seleccionada' : '';
+            html += `<li class="opcion-item ${sel}" onclick="seleccionarOpcionICFES(${i})">
+                <div class="opcion-letra">${letras[i]}</div><span>${op.replace(/^[A-D]\.\s/, '')}</span>
+            </li>`;
+        });
+        html += `</ul></div>`;
+        document.getElementById('contenedor-pregunta').innerHTML = html;
+
+        // Progreso UI
+        const pct = Math.round(((indiceActual + 1) / 10) * 100);
+        document.getElementById('barra-prog').style.width = pct + '%';
+        document.getElementById('prog-texto').textContent = `Fase 1: ICFES (${indiceActual + 1}/9)`;
+
+        btnAnt.style.display = indiceActual === 0 ? 'none' : 'inline-block';
+        btnSig.style.display = 'inline-block';
+        btnSig.innerHTML = indiceActual === 8 ? 'Ir a Fase 2 (Cascada) <i class="fa-solid fa-arrow-right"></i>' : 'Siguiente <i class="fa-solid fa-chevron-right"></i>';
+        btnFin.style.display = 'none';
+
+    } else {
+        // VISTA CASCADA (Reto interactivo)
+        btnAnt.style.display = 'inline-block'; // Permite volver al ICFES
+        btnAnt.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Volver a ICFES';
+        btnSig.style.display = 'none';
+        
+        // Solo mostramos el boton de finalizar si ya terminó la cascada
+        const terminoCascada = cascadaProgreso.intervalo >= retoCascada.intervalos.length;
+        btnFin.style.display = terminoCascada ? 'inline-block' : 'none';
+
+        document.getElementById('barra-prog').style.width = '100%';
+        document.getElementById('prog-texto').textContent = `Fase 2: Reto Cascada (Paso final)`;
+
+        // Renderizar la cascada completa con el estado actual
+        renderCascada();
+    }
+}
+
+function seleccionarOpcionICFES(idx) {
+    respuestasFase1[indiceActual] = idx;
+    mostrarVista(); // Re-render para mostrar selección
+}
+
+function irSiguiente() {
+    if (faseActual === 1) {
+        if (indiceActual < 8) { indiceActual++; mostrarVista(); }
+        else { faseActual = 2; mostrarVista(); } // Pasa a cascada
+    }
+}
+
+function irAnterior() {
+    if (faseActual === 1 && indiceActual > 0) { indiceActual--; mostrarVista(); }
+    else if (faseActual === 2) { faseActual = 1; indiceActual = 8; mostrarVista(); } // Vuelve al ICFES
+}
+
+// ============================================================
+//   LÓGICA CASCADA
+// ============================================================
+function renderCascada() {
+    let html = `<div class="cascada-container">
+        <span class="tag-fase" style="background:#f39c12;">Fase 2: Reto Práctico</span>
+        <h3 style="color:#f39c12; margin-bottom:15px; font-size:1.5rem;">El Dron Agrícola</h3>
+        <div class="cascada-contexto">${retoCascada.contexto}</div>`;
+
+    retoCascada.intervalos.forEach((int, iIdx) => {
+        const activoClase = iIdx <= cascadaProgreso.intervalo ? 'activo' : '';
+        html += `<div class="intervalo-bloque ${activoClase}" id="int-${iIdx}">
+            <div class="intervalo-titulo">${int.titulo}</div>
+            <div class="intervalo-desc">${int.desc}</div>`;
+        
+        int.pasos.forEach((paso, pIdx) => {
+            // Solo mostramos pasos hasta donde va el progreso
+            const mostrarPaso = (iIdx < cascadaProgreso.intervalo) || (iIdx === cascadaProgreso.intervalo && pIdx <= cascadaProgreso.paso);
+            if (!mostrarPaso) return;
+
+            const estado = paso.estado || 'pendiente'; // 'pendiente', 'correcto', 'incorrecto'
+            
+            html += `<div class="paso-cascada activo" style="border-left-color: ${estado==='correcto'?'#2ecc71':(estado==='incorrecto'?'#e74c3c':'#ccc')}">
+                <div class="paso-pregunta">${paso.pregunta}</div>`;
+
+            if (paso.tipo === 'select') {
+                html += `<div class="paso-opciones">`;
+                paso.opciones.forEach((op, oIdx) => {
+                    const sel = paso.seleccion === oIdx ? 'seleccionada' : '';
+                    html += `<div class="paso-opcion ${sel}" onclick="seleccionarPasoCascada(${iIdx}, ${pIdx}, ${oIdx})" ${estado!=='pendiente'?'style="pointer-events:none;"':''}>${op}</div>`;
+                });
+                html += `</div>`;
+            } else if (paso.tipo === 'input') {
+                html += `<input type="number" id="input-${iIdx}-${pIdx}" class="paso-input" placeholder="Ej: 5" value="${paso.seleccion||''}" ${estado!=='pendiente'?'disabled':''}> `;
+            }
+
+            if (estado === 'pendiente') {
+                html += `<button class="btn-verificar-paso" onclick="verificarPasoCascada(${iIdx}, ${pIdx})">Verificar</button>`;
+            } else {
+                const icono = estado === 'correcto' ? '✅' : '❌';
+                const claseFeed = estado === 'correcto' ? 'ok' : 'error';
+                html += `<div class="feedback-paso ${claseFeed}"><strong>${icono} ${estado==='correcto'?'¡Punto para ti!':'Respuesta incorrecta (0 pts).'}</strong><br>${paso.exp}</div>`;
+            }
+            html += `</div>`;
+        });
+        html += `</div>`;
+    });
+
+    html += `</div>`;
+    document.getElementById('contenedor-pregunta').innerHTML = html;
+}
+
+function seleccionarPasoCascada(iIdx, pIdx, oIdx) {
+    retoCascada.intervalos[iIdx].pasos[pIdx].seleccion = oIdx;
+    renderCascada();
+}
+
+function verificarPasoCascada(iIdx, pIdx) {
+    const paso = retoCascada.intervalos[iIdx].pasos[pIdx];
+    let esCorrecto = false;
+
+    if (paso.tipo === 'select') {
+        if (paso.seleccion === undefined) { alert("Selecciona una opción."); return; }
+        esCorrecto = (paso.seleccion === paso.respuesta);
+    } else {
+        const val = document.getElementById(`input-${iIdx}-${pIdx}`).value.trim();
+        if (val === '') { alert("Ingresa un valor numérico."); return; }
+        paso.seleccion = val;
+        esCorrecto = (val === paso.respuesta);
+    }
+
+    paso.estado = esCorrecto ? 'correcto' : 'incorrecto';
+    if (esCorrecto) puntosCascada++;
+
+    // Avanzar progreso
+    cascadaProgreso.paso++;
+    if (cascadaProgreso.paso >= retoCascada.intervalos[iIdx].pasos.length) {
+        cascadaProgreso.intervalo++;
+        cascadaProgreso.paso = 0;
+    }
+
+    mostrarVista();
+}
+
+// ============================================================
+//   FINALIZAR Y RESULTADOS
+// ============================================================
+function mostrarResultados() {
+    const sinResp = respuestasFase1.filter(r => r === null).length;
+    if (sinResp > 0 && !confirm(`Tienes ${sinResp} pregunta(s) de la Fase 1 sin responder. ¿Deseas finalizar?`)) return;
+
+    // Calcular puntos ICFES
+    puntosIcfes = 0;
+    respuestasFase1.forEach((r, i) => { if (r === preguntasFase1[i].respuesta) puntosIcfes++; });
+
+    const totalPuntos = puntosIcfes + puntosCascada; // max 9 + 9 = 18
+    const pct = Math.round((totalPuntos / 18) * 100);
+
+    let emoji, titulo, sub;
+    if (pct >= 90) { emoji = '🏆'; titulo = '¡Sobresaliente!'; sub = 'Eres un experto en Cinemática.'; }
+    else if (pct >= 75) { emoji = '🌟'; titulo = '¡Muy bien!'; sub = 'Dominas los conceptos y la resolución de problemas.'; }
+    else if (pct >= 60) { emoji = '📚'; titulo = 'Aprobado'; sub = 'Buen trabajo, aunque hay detalles que afinar.'; }
+    else { emoji = '🔄'; titulo = 'Necesitas repasar'; sub = 'La cinemática requiere práctica, revisa la teoría nuevamente.'; }
+
+    document.getElementById('seccion-evaluacion').style.display = 'none';
+    const pr = document.getElementById('pantalla-resultado');
+    pr.classList.add('activo');
+
+    document.getElementById('nombre-resultado').textContent = '👤 ' + nombreEstudiante;
+    document.getElementById('emoji-resultado').textContent = emoji;
+    document.getElementById('titulo-resultado').textContent = titulo;
+    document.getElementById('subtitulo-resultado').textContent = sub;
+    document.getElementById('score-total').textContent = totalPuntos;
+    document.getElementById('score-pct').textContent = pct + '%';
+    
+    document.getElementById('res-icfes').textContent = `${puntosIcfes}/9`;
+    document.getElementById('res-cascada').textContent = `${puntosCascada}/9`;
+
+    if (URL_GOOGLE_SCRIPT !== '') {
+        const formData = new URLSearchParams();
+        formData.append('nombre', nombreEstudiante + " (Cinemática 10)");
+        formData.append('puntaje', totalPuntos); 
+        formData.append('porcentaje', pct);
+        formData.append('tema_ondas', puntosIcfes); 
+        formData.append('tema_fenomenos', puntosCascada); 
+        formData.append('tema_acustica', 0);
+        formData.append('tema_optica', 0);
+
+        fetch(URL_GOOGLE_SCRIPT, { method: 'POST', body: formData })
+            .then(response => console.log('Enviado a Google Script'))
+            .catch(error => console.error('Error enviando:', error));
+    }
+
+    if (pct >= 60) confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
