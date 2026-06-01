@@ -319,8 +319,11 @@ const banco = {
 };
 
 // ============================================================
-//   VARIABLES
+//   VARIABLES Y CONFIGURACIÓN
 // ============================================================
+// AQUÍ IRA EL ENLACE DEL GOOGLE SCRIPT QUE CREAREMOS
+const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbzitvYZZarQok90MbWJHmepB6Dn2MNKu5HUevk63SbWoRxpPkNN5NB35y_Av7T-eKEp/exec'; 
+
 let preguntasSeleccionadas = [];
 let respuestasUsuario = [];
 let preguntaActual = 0;
@@ -457,6 +460,22 @@ function finalizarEvaluacion() {
     });
 
     document.getElementById('revision-container').innerHTML = revHTML;
+
+    // === ENVIAR RESULTADOS AL PROFESOR EN SEGUNDO PLANO ===
+    if (URL_GOOGLE_SCRIPT !== '') {
+        const formData = new URLSearchParams();
+        formData.append('nombre', nombreEstudiante);
+        formData.append('puntaje', total);
+        formData.append('porcentaje', pct);
+        formData.append('tema_ondas', porTema['ondas'].ok);
+        formData.append('tema_fenomenos', porTema['fenomenos'].ok);
+        formData.append('tema_acustica', porTema['acustica'].ok);
+        formData.append('tema_optica', porTema['optica'].ok);
+
+        fetch(URL_GOOGLE_SCRIPT, { method: 'POST', body: formData })
+            .then(response => console.log('Resultados enviados exitosamente.'))
+            .catch(error => console.error('Error enviando resultados:', error));
+    }
 
     if (pct >= 75) confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
     window.scrollTo({ top: 0, behavior: 'smooth' });
