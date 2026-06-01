@@ -3,155 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Física Grado 11 - Laboratorio Virtual W. Temas de Energía y Movimiento Ondulatorio para undécimo grado.">
     <title>Física 11 - LabVirtual W</title>
-    
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --color-fisica: #3498db;   
-            --color-quimica: #9b59b6;  
-            --color-biologia: #2ecc71; 
+            --color-fisica: #3498db;
+            --color-quimica: #9b59b6;
+            --color-biologia: #2ecc71;
             --color-oscuro: #1a1a2e;
             --color-texto: #ffffff;
         }
 
+        html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         body {
             background-color: var(--color-oscuro);
             color: var(--color-texto);
-            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)),
+                url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-attachment: fixed;
             min-height: 100vh;
         }
 
-        /* --- NAVEGACIÓN (IDÉNTICA A LA PRINCIPAL) --- */
+        /* --- NAVEGACIÓN --- */
         nav {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px); 
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
         }
-
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .logo i { color: var(--color-fisica); }
-
         .menu { list-style: none; display: flex; gap: 20px; }
-        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+        .menu > li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+        .submenu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
+            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
+        }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+        .fisica:hover { border-left: 4px solid var(--color-fisica); }
+        .quimica:hover { border-left: 4px solid var(--color-quimica); }
+        .biologia:hover { border-left: 4px solid var(--color-biologia); }
 
         /* --- CONTENIDO --- */
         .contenedor { max-width: 1000px; margin: 50px auto; padding: 20px; }
 
         .header-tema { margin-bottom: 40px; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
-        .header-tema h1 { font-size: 2.5rem; color: var(--color-fisica); }
+        .header-tema h1 { font-size: 2.5rem; color: var(--color-fisica); margin-bottom: 8px; }
+        .header-tema p { color: #aaa; font-size: 1rem; }
 
         .titulo-seccion {
             border-left: 5px solid var(--color-fisica);
-            padding-left: 15px; margin: 40px 0 20px 0; font-size: 24px; color: #4facfe;
+            padding-left: 15px; margin: 40px 0 20px 0;
+            font-size: 22px; color: #4facfe;
+            display: flex; align-items: center; gap: 12px;
         }
+        .titulo-seccion.ondas { border-left-color: #9b59b6; color: #c39bd3; }
 
         .lista-temas { display: flex; flex-direction: column; gap: 15px; }
-        
+
         .entrada-tema {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 25px;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            transition: 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
+            border-radius: 12px; padding: 25px;
+            display: flex; align-items: center; gap: 25px;
+            transition: 0.3s; cursor: pointer;
+            text-decoration: none; color: white;
         }
-
         .entrada-tema:hover {
             background: rgba(79, 172, 254, 0.1);
             transform: translateX(10px);
             border-color: var(--color-fisica);
         }
+        .entrada-tema.ondas-tema:hover {
+            background: rgba(155, 89, 182, 0.1);
+            border-color: #9b59b6;
+        }
 
         .numero-tema {
-            font-size: 32px; font-weight: 800; color: rgba(52, 152, 219, 0.3);
+            font-size: 32px; font-weight: 800;
+            color: rgba(52, 152, 219, 0.3);
             min-width: 60px; text-align: center;
         }
+        .numero-tema.ondas { color: rgba(155, 89, 182, 0.3); }
 
         .info-tema h3 { font-size: 20px; margin-bottom: 8px; color: #fff; }
         .info-tema p { font-size: 15px; color: #bbb; line-height: 1.5; }
 
+        .badge-nuevo {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white; font-size: 10px; font-weight: 700;
+            padding: 3px 8px; border-radius: 10px; letter-spacing: 1px;
+            margin-left: auto; white-space: nowrap;
+        }
+
         .btn-volver {
-            display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600;
+            display: inline-block; margin-bottom: 20px;
+            color: #4facfe; text-decoration: none; font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">
-            <i class="fa-solid fa-microscope"></i> LabVirtual W
-        </a>
-        <ul class="menu">
-            <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-            <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-microscope"></i> LabVirtual W
+            </a>
+            <ul class="menu">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html" class="fisica">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html" class="fisica">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html" class="fisica">Grado Undécimo</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="quimica_9.html" class="quimica">Grado Noveno</a></li>
+                        <li><a href="quimica_10.html" class="quimica">Grado Décimo</a></li>
+                        <li><a href="quimica_11.html" class="quimica">Grado Undécimo</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="biologia_9.html" class="biologia">Grado Noveno</a></li>
+                        <li><a href="biologia_10.html" class="biologia">Grado Décimo</a></li>
+                        <li><a href="biologia_11.html" class="biologia">Grado Undécimo</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main class="contenedor">
         <a href="index.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
 
         <div class="header-tema">
-            <h1>Física - Grado 11°</h1>
-            <p>Unidad Temática: Trabajo, Potencia y Energía</p>
+            <h1><i class="fa-solid fa-atom"></i> Física — Grado 11°</h1>
+            <p>Selecciona una unidad temática para explorar sus conceptos, fórmulas, ejercicios y evaluaciones.</p>
         </div>
 
-        <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> Sección: Energía</h2>
-        
+        <!-- ==============================
+             SECCIÓN 1: ENERGÍA
+        =============================== -->
+        <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> Unidad 1: Energía y Trabajo</h2>
+
         <div class="lista-temas">
-            
+
             <div class="entrada-tema">
                 <div class="numero-tema">01</div>
                 <div class="info-tema">
-                    <h3>Energía Cinética (Ec)</h3>
-                    <p>Analiza el movimiento: ¿Cuánta energía posee un Jeep Willys cargado bajando por las pendientes de Gallego? Descubre la relación entre masa y velocidad.</p>
+                    <h3>Trabajo Mecánico</h3>
+                    <p>¿Cuándo decimos que una fuerza realiza trabajo? Aprende la relación entre fuerza, desplazamiento y el ángulo entre ellos con ejemplos de la vida cotidiana.</p>
                 </div>
             </div>
 
             <div class="entrada-tema">
                 <div class="numero-tema">02</div>
                 <div class="info-tema">
-                    <h3>Energía Potencial Gravitacional (Epg)</h3>
-                    <p>La energía de la posición: Calculamos la energía almacenada en los tanques de agua elevados que usamos para el beneficio del café.</p>
+                    <h3>Energía Potencial Gravitacional</h3>
+                    <p>La energía almacenada por la posición: ¿cuánta energía tiene un tanque de agua elevado o un bulto de café en la cima de la montaña?</p>
                 </div>
             </div>
 
             <div class="entrada-tema">
                 <div class="numero-tema">03</div>
                 <div class="info-tema">
-                    <h3>Energía Potencial Elástica (Epe)</h3>
-                    <p>La física de los resortes: Observa cómo funcionan las básculas de resorte al pesar los bultos de café en la cosecha.</p>
+                    <h3>Energía Cinética</h3>
+                    <p>La energía del movimiento: analiza cuánta energía tiene el Jeep Willys al bajar la pendiente de Gallego o el agua corriendo por el canal.</p>
                 </div>
             </div>
 
             <div class="entrada-tema">
                 <div class="numero-tema">04</div>
                 <div class="info-tema">
-                    <h3>Energía Mecánica (Em)</h3>
-                    <p>La suma total: Aprende cómo la energía se transforma pero no se destruye en un sistema de poleas o garruchas de transporte de carga.</p>
+                    <h3>Energía Mecánica y su Conservación</h3>
+                    <p>La gran suma: aprende cómo la energía se transforma entre potencial y cinética en un sistema de poleas o en el deslizamiento del café por las canoas.</p>
+                </div>
+            </div>
+
+            <div class="entrada-tema">
+                <div class="numero-tema">05</div>
+                <div class="info-tema">
+                    <h3>Energía Potencial Elástica</h3>
+                    <p>La física de los resortes: observa cómo funcionan las básculas de resorte al pesar los bultos de café en la cosecha y calcula su energía almacenada.</p>
                 </div>
             </div>
 
         </div>
+
+        <!-- ==============================
+             SECCIÓN 2: MOVIMIENTO ONDULATORIO
+        =============================== -->
+        <h2 class="titulo-seccion ondas"><i class="fa-solid fa-wave-square"></i> Unidad 2: Movimiento Ondulatorio</h2>
+
+        <div class="lista-temas">
+
+            <a href="fisica11_ondas.html" class="entrada-tema ondas-tema">
+                <div class="numero-tema ondas">06</div>
+                <div class="info-tema">
+                    <h3>La Onda y sus Elementos</h3>
+                    <p>Descubre qué es una onda, cómo se clasifica y cuáles son sus elementos fundamentales: amplitud, longitud de onda, frecuencia, período y velocidad de propagación.</p>
+                </div>
+                <span class="badge-nuevo">NUEVO</span>
+            </a>
+
+            <a href="fisica11_fenomenos.html" class="entrada-tema ondas-tema">
+                <div class="numero-tema ondas">07</div>
+                <div class="info-tema">
+                    <h3>Fenómenos Ondulatorios</h3>
+                    <p>Reflexión, refracción, difracción, interferencia y resonancia: comprende los fenómenos que exhiben las ondas al interactuar con obstáculos y medios distintos.</p>
+                </div>
+                <span class="badge-nuevo">NUEVO</span>
+            </a>
+
+            <a href="fisica11_acustica.html" class="entrada-tema ondas-tema">
+                <div class="numero-tema ondas">08</div>
+                <div class="info-tema">
+                    <h3>Acústica — El Sonido</h3>
+                    <p>El sonido como onda mecánica: velocidad, intensidad, timbre, efecto Doppler y niveles de decibelios aplicados al entorno cotidiano.</p>
+                </div>
+                <span class="badge-nuevo">NUEVO</span>
+            </a>
+
+            <a href="fisica11_optica.html" class="entrada-tema ondas-tema">
+                <div class="numero-tema ondas">09</div>
+                <div class="info-tema">
+                    <h3>Óptica — La Luz</h3>
+                    <p>La luz como onda electromagnética: reflexión en espejos, refracción en lentes, dispersión, color y aplicaciones en instrumentos ópticos.</p>
+                </div>
+                <span class="badge-nuevo">NUEVO</span>
+            </a>
+
+        </div>
+
+        <!-- ==============================
+             EVALUACIÓN FINAL UNIDAD 2
+        =============================== -->
+        <div style="
+            background: linear-gradient(135deg, rgba(231,76,60,0.15), rgba(192,57,43,0.1));
+            border: 2px solid rgba(231,76,60,0.5);
+            border-radius: 16px;
+            padding: 35px 30px;
+            margin-top: 40px;
+            text-align: center;
+        ">
+            <div style="font-size:3rem; margin-bottom:12px;">🎓</div>
+            <h2 style="font-size:1.7rem; color:#e74c3c; margin-bottom:10px;">Evaluación Final — Unidad 2</h2>
+            <p style="color:#bbb; font-size:1rem; margin-bottom:8px; line-height:1.6;">
+                ¿Ya estudiaste todos los temas? Esta evaluación combina preguntas de <strong style="color:#fff;">La Onda y sus Elementos</strong>,
+                <strong style="color:#fff;">Fenómenos Ondulatorios</strong>, <strong style="color:#fff;">Acústica</strong> y <strong style="color:#fff;">Óptica</strong>.
+            </p>
+            <p style="color:#aaa; font-size:0.9rem; margin-bottom:25px;">
+                <i class="fa-solid fa-shuffle"></i> 20 preguntas aleatorias · 5 por cada tema · Cambia cada vez que ingresas
+            </p>
+            <a href="fisica11_evaluacion_final_ondulatorio.html" id="btn-evaluacion-final-ondulatorio" style="
+                display: inline-block;
+                padding: 16px 40px;
+                background: linear-gradient(135deg, #e74c3c, #c0392b);
+                color: #fff;
+                border-radius: 12px;
+                text-decoration: none;
+                font-size: 1.15rem;
+                font-weight: 700;
+                box-shadow: 0 8px 25px rgba(231,76,60,0.4);
+                transition: all 0.3s;
+            " onmouseover="this.style.filter='brightness(1.15)'; this.style.transform='translateY(-3px)';"
+               onmouseout="this.style.filter=''; this.style.transform='';">
+                <i class="fa-solid fa-graduation-cap"></i> &nbsp;Ir a la Evaluación Final
+            </a>
+        </div>
+
     </main>
 
 </body>

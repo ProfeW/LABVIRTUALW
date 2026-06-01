@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Óptica - La Luz - Física 11 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --color-tema: #d4ac0d; --color-oscuro: #1a1a2e; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+        body { background-color:var(--color-oscuro); color:#fff; background-image:linear-gradient(rgba(26,26,46,0.92),rgba(26,26,46,0.97)),url('https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=1920&q=80'); background-size:cover; background-attachment:fixed; min-height:100vh; }
+        .contenedor { max-width:900px; margin:40px auto; padding:20px; }
+        .header-practica { text-align:center; margin-bottom:30px; }
+        .header-practica h1 { color:var(--color-tema); font-size:2.4rem; margin-bottom:10px; }
+        .header-practica p { color:#aaa; }
+        .btn-volver { display:inline-block; margin-bottom:25px; color:#f7dc6f; text-decoration:none; font-weight:600; transition:0.3s; }
+        .btn-volver:hover { color:#fff; transform:translateX(-5px); }
+        .progreso-texto { text-align:right; font-size:0.8rem; color:#aaa; margin-bottom:5px; }
+        .progreso-container { width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:10px; margin-bottom:40px; overflow:hidden; }
+        .progreso-barra { height:100%; background:linear-gradient(90deg,var(--color-tema),#f1c40f); width:0%; transition:width 0.5s ease; border-radius:10px; }
+        .ejercicio-card { background:rgba(20,20,35,0.9); border:1px solid rgba(255,255,255,0.1); border-radius:15px; padding:30px; display:none; animation:slideIn 0.5s ease forwards; box-shadow:0 10px 30px rgba(0,0,0,0.5); }
+        .ejercicio-card.activo { display:block; }
+        .nivel-badge { display:inline-block; padding:5px 12px; border-radius:20px; font-size:0.8rem; font-weight:bold; margin-bottom:15px; background:rgba(212,172,13,0.2); color:#f7dc6f; border:1px solid var(--color-tema); }
+        .ejercicio-card h3 { font-size:1.5rem; margin-bottom:15px; color:#fff; }
+        .enunciado { font-size:1.1rem; line-height:1.6; color:#ccc; margin-bottom:25px; padding:15px; background:rgba(0,0,0,0.3); border-left:4px solid var(--color-tema); border-radius:5px; }
+        .formula-ref { display:inline-block; background:rgba(212,172,13,0.1); border:1px dashed var(--color-tema); padding:8px 15px; border-radius:6px; font-size:0.9rem; color:#f7dc6f; margin-bottom:20px; }
+        .opciones-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:20px; }
+        .opcion-btn { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.2); border-radius:10px; padding:15px; color:#fff; font-size:1rem; cursor:pointer; transition:0.2s; text-align:center; font-family:'Poppins',sans-serif; }
+        .opcion-btn:hover:not(:disabled) { background:rgba(212,172,13,0.2); border-color:var(--color-tema); transform:translateY(-2px); }
+        .opcion-btn.correcta { background:rgba(46,204,113,0.2); border-color:var(--color-correcto); }
+        .opcion-btn.incorrecta { background:rgba(231,76,60,0.2); border-color:var(--color-incorrecto); opacity:0.7; }
+        .opcion-btn:disabled { cursor:not-allowed; }
+        .feedback { display:none; padding:15px; border-radius:10px; margin-top:15px; font-weight:500; font-size:1rem; line-height:1.6; }
+        .feedback.correcto { display:block; background:rgba(46,204,113,0.1); border:1px solid var(--color-correcto); color:#2ecc71; }
+        .feedback.incorrecto { display:block; background:rgba(231,76,60,0.1); border:1px solid var(--color-incorrecto); color:#e74c3c; }
+        .btn-siguiente { display:none; width:100%; padding:14px; background:linear-gradient(135deg,var(--color-tema),#b7950b); color:#fff; border:none; border-radius:10px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin-top:15px; transition:0.3s; font-family:'Poppins',sans-serif; }
+        .btn-siguiente:hover { filter:brightness(1.15); }
+        .pantalla-final { display:none; text-align:center; padding:50px 20px; background:rgba(20,20,35,0.9); border-radius:15px; border:1px solid rgba(212,172,13,0.5); }
+        .pantalla-final.activo { display:block; animation:fadeIn 1s; }
+        .trofeo { font-size:5rem; margin-bottom:20px; animation:bounce 2s infinite; }
+        .puntaje-badge { display:inline-block; background:linear-gradient(135deg,var(--color-tema),#b7950b); padding:10px 30px; border-radius:50px; font-size:1.5rem; font-weight:800; margin-bottom:20px; }
+        @keyframes slideIn { from{opacity:0;transform:translateX(50px);}to{opacity:1;transform:translateX(0);} }
+        @keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
+        @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);} }
+        @media (max-width:600px) { .opciones-grid{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body>
+<div class="contenedor">
+    <a href="fisica11_optica.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+    <div class="header-practica">
+        <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+        <p>Óptica — La Luz · Física 11° · Responde y comprueba al instante</p>
+    </div>
+    <div class="progreso-texto" id="textoProgreso">Ejercicio 1 de 6</div>
+    <div class="progreso-container"><div class="progreso-barra" id="barra"></div></div>
+
+    <!-- EJ 1 -->
+    <div class="ejercicio-card activo" id="ej1">
+        <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico — Naturaleza</span>
+        <h3>Reto 1: La Velocidad de la Luz</h3>
+        <div class="enunciado">La luz es la señal más rápida que puede transmitir información en el universo. ¿Cuál es su velocidad en el vacío?</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(1,this,false,'❌ 340 m/s es la velocidad del sonido en el aire, no de la luz.')">340 m/s</button>
+            <button class="opcion-btn" onclick="verificar(1,this,false,'❌ 3×10⁵ m/s = 300 km/s, que es mucho menor. La luz viaja a 300,000 km/s.')">3×10⁵ m/s</button>
+            <button class="opcion-btn" onclick="verificar(1,this,true,'✅ ¡Correcto! c = 3×10⁸ m/s = 300,000 km/s. En un segundo la luz rodea la Tierra ≈7.5 veces.')">3×10⁸ m/s</button>
+            <button class="opcion-btn" onclick="verificar(1,this,false,'❌ 3×10¹⁰ m/s es 100 veces la velocidad real de la luz.')">3×10¹⁰ m/s</button>
+        </div>
+        <div class="feedback" id="feed1"></div>
+        <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 2 -->
+    <div class="ejercicio-card" id="ej2">
+        <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico — Espectro</span>
+        <h3>Reto 2: Colores del Arcoíris</h3>
+        <div class="enunciado">El arcoíris muestra los colores del espectro visible. ¿Cuál color tiene la mayor longitud de onda y cuál tiene la menor?</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(2,this,false,'❌ Es al contrario. El rojo tiene mayor longitud de onda (~700 nm) y el violeta la menor (~380 nm).')">Violeta: mayor · Rojo: menor</button>
+            <button class="opcion-btn" onclick="verificar(2,this,true,'✅ ¡Perfecto! Rojo (~700 nm) tiene la mayor longitud de onda y mayor período. Violeta (~380 nm) tiene la menor, y por eso la mayor frecuencia.')">Rojo: mayor · Violeta: menor</button>
+            <button class="opcion-btn" onclick="verificar(2,this,false,'❌ El verde está en la región media del espectro visible, no en los extremos.')">Verde: mayor · Azul: menor</button>
+            <button class="opcion-btn" onclick="verificar(2,this,false,'❌ El naranja está cerca del rojo pero no en el extremo. El amarillo tampoco es el de menor longitud.')">Naranja: mayor · Amarillo: menor</button>
+        </div>
+        <div class="feedback" id="feed2"></div>
+        <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 3 -->
+    <div class="ejercicio-card" id="ej3">
+        <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio — Índice de refracción</span>
+        <h3>Reto 3: La Lupa del Detective</h3>
+        <div class="enunciado">El vidrio de una lupa tiene un índice de refracción n = 1.5. Si la velocidad de la luz en el vacío es c = 3×10⁸ m/s, ¿cuál es la velocidad de la luz dentro del vidrio?</div>
+        <div class="formula-ref">📐 v = c / n</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(3,this,false,'❌ Multiplicaste: 3×10⁸ × 1.5 = 4.5×10⁸. Debes dividir: v = c / n.')">4.5×10⁸ m/s</button>
+            <button class="opcion-btn" onclick="verificar(3,this,true,'✅ ¡Exacto! v = (3×10⁸) / 1.5 = 2×10⁸ m/s. La luz va un tercio más lenta dentro del vidrio que en el vacío.')">2×10⁸ m/s</button>
+            <button class="opcion-btn" onclick="verificar(3,this,false,'❌ 3×10⁸ es la velocidad en el vacío (n=1). Con n=1.5, la luz debe ir más lento.')">3×10⁸ m/s</button>
+            <button class="opcion-btn" onclick="verificar(3,this,false,'❌ Eso no es correcto. Divide correctamente: 3×10⁸ / 1.5 = 2×10⁸.')">1×10⁸ m/s</button>
+        </div>
+        <div class="feedback" id="feed3"></div>
+        <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 4 -->
+    <div class="ejercicio-card" id="ej4">
+        <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio — Espejos</span>
+        <h3>Reto 4: El Espejo del Salón</h3>
+        <div class="enunciado">Te paras frente a un espejo plano a 1.5 metros de distancia. ¿A qué distancia parece estar tu imagen dentro del espejo?</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(4,this,false,'❌ En un espejo plano la imagen parece estar a la misma distancia detrás del espejo que el objeto al frente.')">0.75 metros</button>
+            <button class="opcion-btn" onclick="verificar(4,this,false,'❌ 3 metros sería la distancia total entre el objeto y su imagen. La imagen en sí está a 1.5 m detrás del espejo.')">3 metros</button>
+            <button class="opcion-btn" onclick="verificar(4,this,true,'✅ ¡Correcto! En un espejo plano, la imagen virtual está a la misma distancia detrás del espejo que el objeto al frente. Si estás a 1.5 m, la imagen parece a 1.5 m dentro del espejo.')">1.5 metros</button>
+            <button class="opcion-btn" onclick="verificar(4,this,false,'❌ La distancia de la imagen depende de dónde estés tú, no es una constante.')">Infinito</button>
+        </div>
+        <div class="feedback" id="feed4"></div>
+        <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 5 -->
+    <div class="ejercicio-card" id="ej5">
+        <span class="nivel-badge" style="color:#f39c12; border-color:#f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado — Lentes</span>
+        <h3>Reto 5: El Ojo Miope</h3>
+        <div class="enunciado">Una persona miope no puede ver con claridad los objetos lejanos porque su imagen se forma antes de llegar a la retina. ¿Qué tipo de lente se usa para corregir la miopía?</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(5,this,false,'❌ La lente convergente (convexa) se usa para la hipermetropía (dificultad para ver de cerca), no para la miopía.')">Lente convergente (convexa)</button>
+            <button class="opcion-btn" onclick="verificar(5,this,true,'✅ ¡Brillante! La lente divergente (cóncava) hace que los rayos de luz se dispersen antes de entrar al ojo, moviendo el punto focal hacia atrás para que coincida con la retina.')">Lente divergente (cóncava)</button>
+            <button class="opcion-btn" onclick="verificar(5,this,false,'❌ Un espejo cóncavo no es una lente y no se usa para corregir defectos visuales.')">Espejo cóncavo</button>
+            <button class="opcion-btn" onclick="verificar(5,this,false,'❌ Un espejo convexo tampoco se usa para corregir la visión.')">Espejo convexo</button>
+        </div>
+        <div class="feedback" id="feed5"></div>
+        <button class="btn-siguiente" id="btnSig5" onclick="siguiente(5)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 6 -->
+    <div class="ejercicio-card" id="ej6">
+        <span class="nivel-badge" style="color:#e74c3c; border-color:#e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto — Cálculo de λ</span>
+        <h3>Reto 6: La Longitud de Onda de la Luz Violeta</h3>
+        <div class="enunciado">La luz violeta tiene una frecuencia de aproximadamente 7.5×10¹⁴ Hz y viaja en el vacío a c = 3×10⁸ m/s. ¿Cuál es su longitud de onda en nanómetros?</div>
+        <div class="formula-ref">📐 λ = c / f &nbsp;&nbsp;|&nbsp;&nbsp; 1 m = 10⁹ nm</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(6,this,false,'❌ 700 nm corresponde a la luz roja, no a la violeta. La violeta tiene menor longitud de onda.')">700 nm</button>
+            <button class="opcion-btn" onclick="verificar(6,this,true,'✅ ¡Magistral! λ = (3×10⁸) / (7.5×10¹⁴) = 4×10⁻⁷ m = 400 nm. La luz violeta está en el extremo de menor longitud de onda del espectro visible.')">400 nm</button>
+            <button class="opcion-btn" onclick="verificar(6,this,false,'❌ 2.5×10²³ es el resultado de multiplicar en vez de dividir.')">2.5×10²³ nm</button>
+            <button class="opcion-btn" onclick="verificar(6,this,false,'❌ 550 nm corresponde aproximadamente a la luz verde-amarilla.')">550 nm</button>
+        </div>
+        <div class="feedback" id="feed6"></div>
+        <button class="btn-siguiente" id="btnSig6" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+    </div>
+
+    <div class="pantalla-final" id="pantalla-final">
+        <div class="trofeo">💡</div>
+        <h1 style="color:var(--color-tema); margin-bottom:15px;">¡Práctica Completada!</h1>
+        <div class="puntaje-badge" id="puntaje-badge">0 / 6 correctas</div>
+        <p id="mensaje-final" style="font-size:1.1rem; color:#ddd; margin-bottom:30px;"></p>
+        <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+            <a href="fisica11_optica_evaluacion.html" style="padding:14px 28px; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; border-radius:8px; text-decoration:none; font-weight:600;">
+                <i class="fa-solid fa-file-signature"></i> Ir a la Evaluación
+            </a>
+            <button onclick="location.reload()" style="padding:14px 28px; background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.2); border-radius:8px; cursor:pointer; font-size:1rem; font-family:'Poppins',sans-serif;">
+                <i class="fa-solid fa-rotate-right"></i> Intentar de Nuevo
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    const totalEjercicios=6; let aciertos=0; let respondidas=new Set();
+    function verificar(num,btn,esCorrecta,mensaje){
+        if(respondidas.has(num))return;
+        const card=document.getElementById('ej'+num);const botones=card.querySelectorAll('.opcion-btn');
+        botones.forEach(b=>{b.disabled=true;if(b===btn)b.classList.add(esCorrecta?'correcta':'incorrecta');else if(!esCorrecta&&b.getAttribute('onclick').includes('true'))b.classList.add('correcta');});
+        const feed=document.getElementById('feed'+num);feed.innerHTML=mensaje;feed.className='feedback '+(esCorrecta?'correcto':'incorrecto');
+        if(esCorrecta){aciertos++;respondidas.add(num);confetti({particleCount:80,spread:60,origin:{y:0.6},colors:['#f1c40f','#d4ac0d','#f7dc6f']});}
+        else{feed.innerHTML+=`<br><br><button onclick="reiniciarEjercicio(${num})" style="padding:8px 15px;background:#e74c3c;color:white;border:none;border-radius:5px;cursor:pointer;font-family:'Poppins',sans-serif;">🔄 Intentar de nuevo</button>`;}
+        document.getElementById('btnSig'+num).style.display='block';
+        document.getElementById('barra').style.width=((respondidas.size/totalEjercicios)*100)+'%';
+        document.getElementById('textoProgreso').textContent=`Ejercicio ${Math.min(respondidas.size+1,totalEjercicios)} de ${totalEjercicios}`;
+    }
+    function reiniciarEjercicio(num){const card=document.getElementById('ej'+num);card.querySelectorAll('.opcion-btn').forEach(b=>{b.disabled=false;b.classList.remove('correcta','incorrecta');});const feed=document.getElementById('feed'+num);feed.className='feedback';feed.innerHTML='';}
+    function siguiente(actual){document.getElementById('ej'+actual).classList.remove('activo');document.getElementById('ej'+(actual+1)).classList.add('activo');window.scrollTo({top:0,behavior:'smooth'});}
+    function finalizar(){
+        document.getElementById('ej'+totalEjercicios).classList.remove('activo');document.getElementById('pantalla-final').classList.add('activo');
+        document.getElementById('puntaje-badge').textContent=`${aciertos} / ${totalEjercicios} correctas`;
+        const pct=aciertos/totalEjercicios;
+        let msg=pct===1?'🏆 ¡Perfecto! Dominas completamente la óptica.':pct>=0.7?'🌟 ¡Muy bien! Continúa a la evaluación.':pct>=0.5?'📚 Buen esfuerzo. Repasa reflexión y refracción.':'💪 Necesitas repasar la teoría de óptica antes de continuar.';
+        document.getElementById('mensaje-final').textContent=msg;
+        confetti({particleCount:200,spread:120,origin:{y:0.4}});window.scrollTo({top:0,behavior:'smooth'});
+    }
+</script>
+</body>
+</html>

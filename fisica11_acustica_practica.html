@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Acústica - El Sonido - Física 11 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --color-tema: #27ae60; --color-oscuro: #1a1a2e; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: #fff; background-image: linear-gradient(rgba(26,26,46,0.92), rgba(26,26,46,0.97)), url('https://images.unsplash.com/photo-1511735111819-9a3efd16269e?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; min-height: 100vh; }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-practica { text-align: center; margin-bottom: 30px; }
+        .header-practica h1 { color: var(--color-tema); font-size: 2.4rem; margin-bottom: 10px; }
+        .header-practica p { color: #aaa; }
+        .btn-volver { display: inline-block; margin-bottom: 25px; color: #58d68d; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+        .progreso-texto { text-align: right; font-size: 0.8rem; color: #aaa; margin-bottom: 5px; }
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 40px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, var(--color-tema), #2ecc71); width: 0%; transition: width 0.5s ease; border-radius: 10px; }
+        .ejercicio-card { background: rgba(20,20,35,0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; display: none; animation: slideIn 0.5s ease forwards; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ejercicio-card.activo { display: block; }
+        .nivel-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; background: rgba(39,174,96,0.2); color: #58d68d; border: 1px solid var(--color-tema); }
+        .ejercicio-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .enunciado { font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; padding: 15px; background: rgba(0,0,0,0.3); border-left: 4px solid var(--color-tema); border-radius: 5px; }
+        .formula-ref { display: inline-block; background: rgba(39,174,96,0.1); border: 1px dashed var(--color-tema); padding: 8px 15px; border-radius: 6px; font-size: 0.9rem; color: #58d68d; margin-bottom: 20px; }
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .opcion-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; color: #fff; font-size: 1rem; cursor: pointer; transition: 0.2s; text-align: center; font-family: 'Poppins', sans-serif; }
+        .opcion-btn:hover:not(:disabled) { background: rgba(39,174,96,0.2); border-color: var(--color-tema); transform: translateY(-2px); }
+        .opcion-btn.correcta { background: rgba(46,204,113,0.2); border-color: var(--color-correcto); }
+        .opcion-btn.incorrecta { background: rgba(231,76,60,0.2); border-color: var(--color-incorrecto); opacity: 0.7; }
+        .opcion-btn:disabled { cursor: not-allowed; }
+        .feedback { display: none; padding: 15px; border-radius: 10px; margin-top: 15px; font-weight: 500; font-size: 1rem; line-height: 1.6; }
+        .feedback.correcto { display: block; background: rgba(46,204,113,0.1); border: 1px solid var(--color-correcto); color: #2ecc71; }
+        .feedback.incorrecto { display: block; background: rgba(231,76,60,0.1); border: 1px solid var(--color-incorrecto); color: #e74c3c; }
+        .btn-siguiente { display: none; width: 100%; padding: 14px; background: linear-gradient(135deg, var(--color-tema), #1e8449); color: #fff; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; font-family: 'Poppins', sans-serif; }
+        .btn-siguiente:hover { filter: brightness(1.15); }
+        .pantalla-final { display: none; text-align: center; padding: 50px 20px; background: rgba(20,20,35,0.9); border-radius: 15px; border: 1px solid rgba(39,174,96,0.5); }
+        .pantalla-final.activo { display: block; animation: fadeIn 1s; }
+        .trofeo { font-size: 5rem; margin-bottom: 20px; animation: bounce 2s infinite; }
+        .puntaje-badge { display: inline-block; background: linear-gradient(135deg, var(--color-tema), #1e8449); padding: 10px 30px; border-radius: 50px; font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @media (max-width: 600px) { .opciones-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="contenedor">
+    <a href="fisica11_acustica.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+    <div class="header-practica">
+        <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+        <p>Acústica — El Sonido · Física 11° · Responde y comprueba al instante</p>
+    </div>
+    <div class="progreso-texto" id="textoProgreso">Ejercicio 1 de 6</div>
+    <div class="progreso-container"><div class="progreso-barra" id="barra"></div></div>
+
+    <!-- EJ 1 -->
+    <div class="ejercicio-card activo" id="ej1">
+        <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico — Concepto</span>
+        <h3>Reto 1: El Tipo de Onda Sonora</h3>
+        <div class="enunciado">El sonido necesita un medio material para propagarse y sus partículas vibran en la misma dirección que avanza la onda. ¿Cómo se clasifica el sonido?</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(1,this,false,'❌ Las ondas electromagnéticas no necesitan medio (luz, radio). El sonido sí necesita medio.')">Electromagnética y transversal</button>
+            <button class="opcion-btn" onclick="verificar(1,this,false,'❌ Mecánica es correcto, pero el sonido es longitudinal (vibra paralelo a la propagación), no transversal.')">Mecánica y transversal</button>
+            <button class="opcion-btn" onclick="verificar(1,this,true,'✅ ¡Correcto! El sonido es una onda mecánica (necesita medio) y longitudinal (partículas vibran paralelas a la dirección de propagación).')">Mecánica y longitudinal</button>
+            <button class="opcion-btn" onclick="verificar(1,this,false,'❌ Las ondas electromagnéticas longitudinales no existen. La luz es electromagnética y transversal.')">Electromagnética y longitudinal</button>
+        </div>
+        <div class="feedback" id="feed1"></div>
+        <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 2 -->
+    <div class="ejercicio-card" id="ej2">
+        <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico — Características</span>
+        <h3>Reto 2: El Tono de la Voz</h3>
+        <div class="enunciado">La voz de un cantante de ópera puede ser muy aguda (soprano) o muy grave (bajo). ¿Qué característica del sonido determina si es agudo o grave?</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(2,this,false,'❌ La amplitud determina el volumen (fuerte o suave), no si es agudo o grave.')">La amplitud de la onda</button>
+            <button class="opcion-btn" onclick="verificar(2,this,true,'✅ ¡Perfecto! El tono (agudo o grave) depende de la frecuencia. Alta frecuencia = agudo; baja frecuencia = grave.')">La frecuencia de la onda</button>
+            <button class="opcion-btn" onclick="verificar(2,this,false,'❌ La velocidad del sonido depende del medio, no del tono de la voz.')">La velocidad del sonido</button>
+            <button class="opcion-btn" onclick="verificar(2,this,false,'❌ El timbre diferencia dos instrumentos o voces con el mismo tono, no si es agudo o grave.')">El timbre de la voz</button>
+        </div>
+        <div class="feedback" id="feed2"></div>
+        <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 3 -->
+    <div class="ejercicio-card" id="ej3">
+        <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio — Cálculo</span>
+        <h3>Reto 3: La Distancia del Trueno</h3>
+        <div class="enunciado">Un relámpago ilumina el cielo y 3 segundos después escuchas el trueno. Si la velocidad del sonido es 343 m/s, ¿a qué distancia cayó el rayo?</div>
+        <div class="formula-ref">📐 Fórmula: d = v × t</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(3,this,false,'❌ 3 km serían 3000 m. Recuerda que v = 343 m/s, no 1000 m/s.')">3 km</button>
+            <button class="opcion-btn" onclick="verificar(3,this,true,'✅ ¡Exacto! d = 343 m/s × 3 s = 1029 metros ≈ 1 km. Por eso el truco popular de contar segundos entre relámpago y trueno.')">1029 m ≈ 1 km</button>
+            <button class="opcion-btn" onclick="verificar(3,this,false,'❌ 114.3 m sería si dividieras. La fórmula es d = v × t, no d = v / t.')">114.3 m</button>
+            <button class="opcion-btn" onclick="verificar(3,this,false,'❌ Revisa: 343 × 3 = 1029, no 343.')">343 m</button>
+        </div>
+        <div class="feedback" id="feed3"></div>
+        <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 4 -->
+    <div class="ejercicio-card" id="ej4">
+        <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio — Decibelios</span>
+        <h3>Reto 4: Protegiendo la Audición</h3>
+        <div class="enunciado">Un concierto de rock puede alcanzar 110 dB. Un estudio de audiología indica que la exposición prolongada a más de 85 dB puede causar daño auditivo. ¿Cuántos dB por encima del límite seguro está el concierto?</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(4,this,false,'❌ Revisa la resta: 110 - 85 = 25 dB, no 35.')">35 dB</button>
+            <button class="opcion-btn" onclick="verificar(4,this,true,'✅ ¡Correcto! 110 - 85 = 25 dB por encima del límite. La escala de decibelios es logarítmica, así que 25 dB más significa muchísima más energía sonora.')">25 dB</button>
+            <button class="opcion-btn" onclick="verificar(4,this,false,'❌ Eso es 110 + 85. Debes restar, no sumar.')">195 dB</button>
+            <button class="opcion-btn" onclick="verificar(4,this,false,'❌ No es una división. Es resta simple: 110 - 85.')">1.29 dB</button>
+        </div>
+        <div class="feedback" id="feed4"></div>
+        <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 5 -->
+    <div class="ejercicio-card" id="ej5">
+        <span class="nivel-badge" style="color:#f39c12; border-color:#f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado — Efecto Doppler</span>
+        <h3>Reto 5: La Ambulancia en el Cruce</h3>
+        <div class="enunciado">Una ambulancia con su sirena encendida se aproxima rápidamente a la institución. A medida que pasa y se aleja, ¿qué cambio percibes en el tono de la sirena?</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(5,this,false,'❌ El volumen puede variar, pero el fenómeno del Doppler afecta específicamente el tono (frecuencia percibida).')">El volumen aumenta sin cambiar el tono</button>
+            <button class="opcion-btn" onclick="verificar(5,this,false,'❌ El tono sí cambia. Es lo característico del efecto Doppler.')">El tono no cambia, solo la distancia</button>
+            <button class="opcion-btn" onclick="verificar(5,this,false,'❌ Es al contrario. Al acercarse el tono es más agudo (mayor frecuencia percibida).')">El tono pasa de grave a agudo mientras se aleja</button>
+            <button class="opcion-btn" onclick="verificar(5,this,true,'✅ ¡Brillante! Efecto Doppler: al acercarse la sirena suena más aguda (mayor f percibida), y al alejarse más grave (menor f percibida).')">El tono pasa de agudo a grave al alejarse</button>
+        </div>
+        <div class="feedback" id="feed5"></div>
+        <button class="btn-siguiente" id="btnSig5" onclick="siguiente(5)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- EJ 6 -->
+    <div class="ejercicio-card" id="ej6">
+        <span class="nivel-badge" style="color:#e74c3c; border-color:#e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto — Velocidad y temperatura</span>
+        <h3>Reto 6: El Sonido en el Desierto</h3>
+        <div class="enunciado">En el desierto del Sahara la temperatura puede llegar a 50°C. Usando la fórmula v ≈ 331 + 0.6·T, ¿cuál es la velocidad del sonido a esa temperatura?</div>
+        <div class="formula-ref">📐 v ≈ 331 + 0.6 × T</div>
+        <div class="opciones-grid">
+            <button class="opcion-btn" onclick="verificar(6,this,false,'❌ Eso sería con T = 20°C (v = 331 + 12 = 343). Aquí T = 50°C.')">343 m/s</button>
+            <button class="opcion-btn" onclick="verificar(6,this,false,'❌ Revisa la operación: 0.6 × 50 = 30, y 331 + 30 = 361.')">381 m/s</button>
+            <button class="opcion-btn" onclick="verificar(6,this,true,'✅ ¡Perfecto! v = 331 + 0.6 × 50 = 331 + 30 = 361 m/s. En lugares más cálidos el sonido viaja más rápido.')">361 m/s</button>
+            <button class="opcion-btn" onclick="verificar(6,this,false,'❌ Multiplicaste 331 × 0.6 = 198.6. Debes sumar 331 + (0.6 × 50).')">198.6 m/s</button>
+        </div>
+        <div class="feedback" id="feed6"></div>
+        <button class="btn-siguiente" id="btnSig6" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+    </div>
+
+    <div class="pantalla-final" id="pantalla-final">
+        <div class="trofeo">🔊</div>
+        <h1 style="color: var(--color-tema); margin-bottom: 15px;">¡Práctica Completada!</h1>
+        <div class="puntaje-badge" id="puntaje-badge">0 / 6 correctas</div>
+        <p id="mensaje-final" style="font-size: 1.1rem; color: #ddd; margin-bottom: 30px;"></p>
+        <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+            <a href="fisica11_acustica_evaluacion.html" style="padding:14px 28px; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; border-radius:8px; text-decoration:none; font-weight:600;">
+                <i class="fa-solid fa-file-signature"></i> Ir a la Evaluación
+            </a>
+            <button onclick="location.reload()" style="padding:14px 28px; background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.2); border-radius:8px; cursor:pointer; font-size:1rem; font-family:'Poppins',sans-serif;">
+                <i class="fa-solid fa-rotate-right"></i> Intentar de Nuevo
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    const totalEjercicios = 6; let aciertos = 0; let respondidas = new Set();
+    function verificar(num, btn, esCorrecta, mensaje) {
+        if (respondidas.has(num)) return;
+        const card = document.getElementById('ej'+num); const botones = card.querySelectorAll('.opcion-btn');
+        botones.forEach(b => { b.disabled=true; if(b===btn) b.classList.add(esCorrecta?'correcta':'incorrecta'); else if(!esCorrecta&&b.getAttribute('onclick').includes('true')) b.classList.add('correcta'); });
+        const feed=document.getElementById('feed'+num); feed.innerHTML=mensaje; feed.className='feedback '+(esCorrecta?'correcto':'incorrecto');
+        if(esCorrecta){aciertos++;respondidas.add(num);confetti({particleCount:80,spread:60,origin:{y:0.6},colors:['#27ae60','#2ecc71','#58d68d']});}
+        else{feed.innerHTML+=`<br><br><button onclick="reiniciarEjercicio(${num})" style="padding:8px 15px;background:#e74c3c;color:white;border:none;border-radius:5px;cursor:pointer;font-family:'Poppins',sans-serif;">🔄 Intentar de nuevo</button>`;}
+        document.getElementById('btnSig'+num).style.display='block';
+        document.getElementById('barra').style.width=((respondidas.size/totalEjercicios)*100)+'%';
+        document.getElementById('textoProgreso').textContent=`Ejercicio ${Math.min(respondidas.size+1,totalEjercicios)} de ${totalEjercicios}`;
+    }
+    function reiniciarEjercicio(num){const card=document.getElementById('ej'+num);card.querySelectorAll('.opcion-btn').forEach(b=>{b.disabled=false;b.classList.remove('correcta','incorrecta');});const feed=document.getElementById('feed'+num);feed.className='feedback';feed.innerHTML='';}
+    function siguiente(actual){document.getElementById('ej'+actual).classList.remove('activo');document.getElementById('ej'+(actual+1)).classList.add('activo');window.scrollTo({top:0,behavior:'smooth'});}
+    function finalizar(){
+        document.getElementById('ej'+totalEjercicios).classList.remove('activo');document.getElementById('pantalla-final').classList.add('activo');
+        document.getElementById('puntaje-badge').textContent=`${aciertos} / ${totalEjercicios} correctas`;
+        const pct=aciertos/totalEjercicios;
+        let msg=pct===1?'🏆 ¡Perfecto! Dominas la acústica completamente.':pct>=0.7?'🌟 ¡Muy bien! Sigue adelante.':pct>=0.5?'📚 Buen esfuerzo. Repasa la teoría.':'💪 Necesitas repasar el tema de acústica.';
+        document.getElementById('mensaje-final').textContent=msg;
+        confetti({particleCount:200,spread:120,origin:{y:0.4}});window.scrollTo({top:0,behavior:'smooth'});
+    }
+</script>
+</body>
+</html>

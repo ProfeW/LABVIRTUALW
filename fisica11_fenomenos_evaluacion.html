@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación: Fenómenos Ondulatorios - Física 11 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --color-tema: #e67e22; --color-oscuro: #1a1a2e; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: #fff; background-image: linear-gradient(rgba(26,26,46,0.93), rgba(26,26,46,0.98)), url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; min-height: 100vh; }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .pantalla-inicio { background: rgba(20,20,35,0.95); border: 1px solid rgba(230,126,34,0.4); border-radius: 20px; padding: 50px 40px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+        .pantalla-inicio h1 { color: var(--color-tema); font-size: 2.4rem; margin-bottom: 10px; }
+        .pantalla-inicio p { color: #aaa; margin-bottom: 30px; }
+        .reglas { text-align: left; background: rgba(0,0,0,0.3); padding: 20px 25px; border-radius: 10px; margin-bottom: 30px; }
+        .reglas li { color: #ddd; margin-bottom: 8px; list-style: none; }
+        .reglas li i { color: var(--color-tema); margin-right: 10px; }
+        .input-nombre { width: 100%; max-width: 400px; padding: 14px 20px; border-radius: 10px; border: 2px solid rgba(230,126,34,0.5); background: rgba(0,0,0,0.4); color: #fff; font-size: 1.1rem; font-family: 'Poppins', sans-serif; outline: none; transition: 0.3s; display: block; margin: 0 auto 20px; }
+        .input-nombre:focus { border-color: var(--color-tema); }
+        .input-nombre::placeholder { color: #666; }
+        .btn-inicio { padding: 15px 40px; background: linear-gradient(135deg, var(--color-tema), #d35400); color: #fff; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Poppins', sans-serif; }
+        .btn-inicio:hover { filter: brightness(1.15); transform: translateY(-2px); }
+        .alerta-nombre { display: none; color: #e74c3c; font-size: 0.9rem; margin-top: 10px; }
+        .seccion-evaluacion { display: none; }
+        .header-eval { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px; }
+        .bienvenida-nombre { font-size: 1rem; color: #f0a84e; }
+        .timer-badge { background: rgba(230,126,34,0.15); border: 1px solid var(--color-tema); padding: 8px 16px; border-radius: 20px; color: #f0a84e; font-weight: 700; }
+        .progreso-container { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 25px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, var(--color-tema), #f39c12); width: 0%; transition: width 0.4s ease; border-radius: 10px; }
+        .pregunta-card { background: rgba(20,20,35,0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; animation: slideIn 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .pregunta-numero { font-size: 0.85rem; color: #f0a84e; font-weight: 600; margin-bottom: 10px; }
+        .pregunta-texto { font-size: 1.1rem; color: #eee; line-height: 1.65; margin-bottom: 20px; }
+        .contexto-icfes { background: rgba(0,0,0,0.3); border-left: 3px solid var(--color-tema); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; font-style: italic; }
+        .opciones-lista { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .opcion-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 12px; color: #eee; }
+        .opcion-item:hover { background: rgba(230,126,34,0.15); border-color: var(--color-tema); }
+        .opcion-item.seleccionada { background: rgba(230,126,34,0.2); border-color: var(--color-tema); }
+        .opcion-letra { width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(230,126,34,0.5); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; color: #f0a84e; }
+        .opcion-item.seleccionada .opcion-letra { background: var(--color-tema); border-color: var(--color-tema); color: white; }
+        .navegacion-preguntas { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); justify-content: space-between; align-items: center; }
+        .btn-nav { padding: 12px 24px; border-radius: 8px; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; transition: 0.3s; font-family: 'Poppins', sans-serif; }
+        .btn-anterior { background: rgba(255,255,255,0.1); color: #fff; }
+        .btn-anterior:hover { background: rgba(255,255,255,0.2); }
+        .btn-siguiente-p { background: linear-gradient(135deg, var(--color-tema), #d35400); color: #fff; }
+        .btn-siguiente-p:hover { filter: brightness(1.15); }
+        .btn-finalizar { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+        .btn-finalizar:hover { filter: brightness(1.15); }
+        .pantalla-resultado { display: none; background: rgba(20,20,35,0.95); border-radius: 20px; padding: 40px; border: 1px solid rgba(230,126,34,0.4); }
+        .pantalla-resultado.activo { display: block; animation: fadeIn 0.8s; }
+        .resultado-header { text-align: center; margin-bottom: 35px; }
+        .resultado-emoji { font-size: 5rem; display: block; margin-bottom: 15px; }
+        .resultado-titulo { font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+        .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }
+        .score-card { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; text-align: center; border-top: 3px solid var(--color-tema); }
+        .score-num { font-size: 2.2rem; font-weight: 800; color: var(--color-tema); }
+        .score-label { font-size: 0.85rem; color: #aaa; margin-top: 5px; }
+        .revision-titulo { font-size: 1.3rem; font-weight: 700; color: #f0a84e; margin-bottom: 20px; }
+        .revision-item { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 15px 20px; margin-bottom: 12px; border-left: 4px solid; }
+        .revision-item.correcta { border-left-color: var(--color-correcto); }
+        .revision-item.incorrecta { border-left-color: var(--color-incorrecto); }
+        .revision-item .pregunta-r { color: #eee; font-size: 0.95rem; margin-bottom: 8px; }
+        .revision-item .tu-resp { color: #e74c3c; font-size: 0.9rem; }
+        .revision-item .resp-correcta { color: #2ecc71; font-size: 0.9rem; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 600px) { .score-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+<div class="contenedor">
+
+    <div id="pantalla-inicio" class="pantalla-inicio">
+        <h1><i class="fa-solid fa-file-signature"></i> Evaluación</h1>
+        <p>Fenómenos Ondulatorios · Física 11° · Tipo ICFES</p>
+        <ul class="reglas">
+            <li><i class="fa-solid fa-check"></i> <strong>10 preguntas aleatorias</strong> de un banco de 25 preguntas.</li>
+            <li><i class="fa-solid fa-check"></i> Cada evaluación es <strong>diferente</strong> al ingresar.</li>
+            <li><i class="fa-solid fa-check"></i> Puedes navegar entre preguntas antes de finalizar.</li>
+            <li><i class="fa-solid fa-check"></i> Al finalizar verás tu puntaje y revisión completa.</li>
+        </ul>
+        <input type="text" id="input-nombre" class="input-nombre" placeholder="✏️ Escribe tu nombre completo" maxlength="60">
+        <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre.</div><br>
+        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar Evaluación</button>
+    </div>
+
+    <div id="seccion-evaluacion" class="seccion-evaluacion">
+        <div class="header-eval">
+            <div class="bienvenida-nombre" id="bienvenida-nombre"></div>
+            <div class="timer-badge">Pregunta <span id="num-actual">1</span> de 10</div>
+        </div>
+        <div class="progreso-container"><div class="progreso-barra" id="barra-eval"></div></div>
+        <div id="contenedor-pregunta"></div>
+        <div class="navegacion-preguntas">
+            <button class="btn-nav btn-anterior" id="btn-anterior" onclick="irAnterior()"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+            <button class="btn-nav btn-siguiente-p" id="btn-sig-p" onclick="irSiguiente()">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="btn-nav btn-finalizar" id="btn-finalizar" onclick="finalizarEvaluacion()" style="display:none;"><i class="fa-solid fa-check-double"></i> Finalizar y Ver Resultados</button>
+        </div>
+    </div>
+
+    <div id="pantalla-resultado" class="pantalla-resultado">
+        <div class="resultado-header">
+            <div style="font-size:1rem; color:#aaa; margin-bottom:15px;" id="resultado-nombre"></div>
+            <span class="resultado-emoji" id="resultado-emoji">📊</span>
+            <div class="resultado-titulo" id="resultado-titulo"></div>
+        </div>
+        <div class="score-grid">
+            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">✅ Correctas</div></div>
+            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">❌ Incorrectas</div></div>
+            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">📊 Porcentaje</div></div>
+        </div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión de Respuestas</div>
+        <div id="revision-container"></div>
+        <div style="text-align:center; margin-top:30px; display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+            <button onclick="location.reload()" style="padding:14px 28px; background:linear-gradient(135deg,var(--color-tema),#d35400); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:1rem; font-family:'Poppins',sans-serif; font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva Evaluación</button>
+            <a href="fisica11_fenomenos.html" style="padding:14px 28px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:8px; text-decoration:none; font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const bancoPreguntas = [
+    { texto:"¿Cuál fenómeno ondulatorio ocurre cuando el sonido rebota en una pared y lo escuchamos de nuevo?", opciones:["A. Refracción","B. Difracción","C. Reflexión","D. Resonancia"], respuesta:2 },
+    { texto:"La Ley de Reflexión establece que:", opciones:["A. El ángulo de incidencia es el doble del ángulo de reflexión","B. El ángulo de incidencia es igual al ángulo de reflexión","C. La onda reflejada tiene menor frecuencia","D. La velocidad de la onda aumenta al reflejarse"], respuesta:1 },
+    { texto:"Un palo introducido en el agua parece 'doblado'. Esto se debe a:", opciones:["A. Reflexión total interna","B. Resonancia del palo","C. Difracción en la superficie","D. Refracción de la luz al cambiar de medio"], respuesta:3 },
+    { texto:"¿En qué fenómeno ondulatorio la frecuencia se conserva pero cambia la velocidad y longitud de onda?", opciones:["A. Reflexión","B. Resonancia","C. Refracción","D. Difracción"], respuesta:2 },
+    { texto:"La difracción es más evidente cuando:", opciones:["A. La velocidad de la onda es muy alta","B. El tamaño del obstáculo es mucho mayor que la longitud de onda","C. El tamaño del obstáculo es comparable a la longitud de onda","D. La amplitud de la onda es pequeña"], respuesta:2 },
+    { contexto:"Dos altavoces emiten el mismo sonido. En ciertos puntos del cuarto el sonido es más fuerte, y en otros apenas se escucha.", texto:"¿Qué fenómeno explica estos puntos de mayor y menor intensidad?", opciones:["A. Difracción del sonido","B. Interferencia de ondas","C. Reflexión múltiple","D. Resonancia acústica"], respuesta:1 },
+    { texto:"Cuando la cresta de una onda coincide con el valle de otra onda de igual amplitud, el resultado es:", opciones:["A. Interferencia constructiva: se suman","B. Resonancia: se amplifican","C. Interferencia destructiva: se anulan","D. Difracción: se dispersan"], respuesta:2 },
+    { texto:"¿Por qué los militares no deben marchar al mismo paso sobre un puente?", opciones:["A. Porque generan ondas sonoras que dañan el concreto","B. Porque la resonancia puede acumular energía y dañar la estructura","C. Porque la difracción de sus pasos debilita el puente","D. Porque la reflexión del sonido afecta la comunicación"], respuesta:1 },
+    { texto:"El arcoíris se forma principalmente por:", opciones:["A. Reflexión y refracción de la luz en las gotas de lluvia","B. Difracción de la luz en las nubes","C. Interferencia constructiva de ondas de luz","D. Resonancia de la luz con las gotas de agua"], respuesta:0 },
+    { texto:"La cancelación de ruido activa en auriculares usa:", opciones:["A. Resonancia para absorber el ruido","B. Difracción para desviar las ondas de ruido","C. Interferencia destructiva generando ondas opuestas","D. Reflexión para devolver el ruido a la fuente"], respuesta:2 },
+    { texto:"Un rayo de luz pasa del agua al aire. Al pasar a un medio menos denso, el rayo refractado:", opciones:["A. Se acerca a la normal","B. Sigue en línea recta","C. Se aleja de la normal","D. Se refleja completamente"], respuesta:2 },
+    { contexto:"Un estudiante observa que puede escuchar la música del cuarto de al lado aunque la puerta esté cerrada.", texto:"¿Qué fenómeno ondulatorio explica mejor esta situación?", opciones:["A. Reflexión del sonido en las paredes","B. Resonancia de la puerta con la música","C. Difracción del sonido por las ranuras de la puerta","D. Interferencia del sonido con el ruido ambiental"], respuesta:2 },
+    { texto:"Al hablar por teléfono satelital, la señal viaja del teléfono al satélite y de regreso. ¿En cuántos medios distintos se propaga la señal?", opciones:["A. Solo en el vacío","B. En el aire y en el vacío","C. En el satélite únicamente","D. Solo en la atmósfera"], respuesta:1 },
+    { texto:"¿Cuándo ocurre la reflexión total interna?", opciones:["A. Cuando el rayo va de un medio menos denso a uno más denso","B. Cuando el rayo va de un medio más denso a uno menos denso y el ángulo supera el ángulo crítico","C. Cuando la frecuencia de la onda supera el umbral del medio","D. Cuando la amplitud de la onda se iguala a la longitud de onda"], respuesta:1 },
+    { texto:"La superposición de dos ondas que viajan en el mismo sentido con la misma fase produce:", opciones:["A. Interferencia destructiva","B. Difracción doble","C. Interferencia constructiva","D. Resonancia estable"], respuesta:2 },
+    { texto:"¿Qué magnitud se conserva siempre cuando una onda cambia de medio (refracción)?", opciones:["A. Velocidad","B. Longitud de onda","C. Amplitud","D. Frecuencia"], respuesta:3 },
+    { contexto:"Una guitarra acústica tiene una caja de resonancia hueca.", texto:"¿Para qué sirve esta caja de resonancia?", opciones:["A. Para producir interferencia destructiva y reducir el ruido","B. Para difractar el sonido y hacerlo más suave","C. Para reflejar el sonido y dirigirlo hacia el suelo","D. Para amplificar el sonido mediante resonancia a la frecuencia de las cuerdas"], respuesta:3 },
+    { texto:"Un rayo de luz incide con un ángulo de 45° sobre un espejo. ¿Con qué ángulo se refleja medido desde la normal?", opciones:["A. 90°","B. 45°","C. 135°","D. 30°"], respuesta:1 },
+    { texto:"La difracción de las ondas de radio permite recibirlas incluso en valles o detrás de montañas porque:", opciones:["A. Las ondas de radio viajan en línea recta sin ningún obstáculo","B. Las ondas de radio se refractan en la atmósfera hacia abajo","C. Las ondas de radio se doblan alrededor de los obstáculos geográficos","D. Las ondas de radio se reflejan en el suelo múltiples veces"], respuesta:2 },
+    { texto:"¿Cuál fenómeno ondulatorio aprovecha el sonar de un submarino para detectar objetos en el fondo del mar?", opciones:["A. Difracción del ultrasonido en el agua","B. Resonancia del casco del submarino","C. Reflexión del ultrasonido en los objetos sumergidos","D. Interferencia de las ondas con la presión del agua"], respuesta:2 },
+    { texto:"La ley de Snell relaciona:", opciones:["A. Amplitudes de ondas en reflexión","B. Frecuencias de ondas al cambiar de medio","C. Ángulos de incidencia y refracción con los índices del medio","D. Velocidades de la onda en interferencia"], respuesta:2 },
+    { contexto:"En una piscina de olas artificiales, dos generadores de olas crean patrones donde algunas zonas tienen olas muy grandes y otras están casi en calma.", texto:"Este patrón es resultado de:", opciones:["A. Resonancia de las olas con la piscina","B. Difracción de las olas en los bordes","C. Interferencia constructiva y destructiva de las dos ondas","D. Reflexión de las olas en el fondo de la piscina"], respuesta:2 },
+    { texto:"¿Cuándo una onda mecánica pasa de un medio blando a uno más rígido, su velocidad?", opciones:["A. Disminuye","B. Permanece igual","C. Aumenta","D. Se vuelve cero"], respuesta:2 },
+    { texto:"El fenómeno de interferencia en la luz produce:", opciones:["A. El eco en espacios cerrados","B. Colores iridiscentes en burbujas de jabón o alas de mariposa","C. La desviación de la luz al pasar por lentes","D. La formación del espectro solar"], respuesta:1 },
+    { texto:"¿Cuál es la diferencia principal entre reflexión especular y reflexión difusa?", opciones:["A. En la especular la luz se devuelve, en la difusa se refracta","B. En la especular la superficie es lisa y los rayos se reflejan paralelamente; en la difusa la superficie es rugosa y los rayos se dispersan","C. En la especular la frecuencia cambia; en la difusa no","D. La reflexión especular ocurre solo con sonido y la difusa solo con luz"], respuesta:1 }
+];
+
+let preguntasSeleccionadas = [], respuestasUsuario = [], preguntaActual = 0, nombreEstudiante = '';
+
+function iniciarEvaluacion() {
+    const input = document.getElementById('input-nombre');
+    nombreEstudiante = input.value.trim();
+    if (!nombreEstudiante) { document.getElementById('alerta-nombre').style.display = 'block'; input.focus(); return; }
+    document.getElementById('alerta-nombre').style.display = 'none';
+    preguntasSeleccionadas = [...bancoPreguntas].sort(() => Math.random() - 0.5).slice(0, 10);
+    respuestasUsuario = new Array(10).fill(null);
+    document.getElementById('pantalla-inicio').style.display = 'none';
+    document.getElementById('seccion-evaluacion').style.display = 'block';
+    document.getElementById('bienvenida-nombre').textContent = '👤 ' + nombreEstudiante;
+    mostrarPregunta(0);
+}
+
+function mostrarPregunta(idx) {
+    preguntaActual = idx;
+    const p = preguntasSeleccionadas[idx];
+    const letras = ['A','B','C','D'];
+    let html = `<div class="pregunta-card"><div class="pregunta-numero">Pregunta ${idx+1} de 10</div>`;
+    if (p.contexto) html += `<div class="contexto-icfes"><i class="fa-solid fa-quote-left"></i> ${p.contexto}</div>`;
+    html += `<div class="pregunta-texto">${p.texto}</div><ul class="opciones-lista">`;
+    p.opciones.forEach((op, i) => {
+        const sel = respuestasUsuario[idx] === i ? 'seleccionada' : '';
+        html += `<li class="opcion-item ${sel}" onclick="seleccionarOpcion(${i})"><div class="opcion-letra">${letras[i]}</div><span>${op.replace(/^[A-D]\.\s/,'')}</span></li>`;
+    });
+    html += `</ul></div>`;
+    document.getElementById('contenedor-pregunta').innerHTML = html;
+    document.getElementById('num-actual').textContent = idx + 1;
+    document.getElementById('barra-eval').style.width = ((idx+1)/10*100) + '%';
+    document.getElementById('btn-anterior').style.display = idx === 0 ? 'none' : 'inline-block';
+    document.getElementById('btn-sig-p').style.display = idx === 9 ? 'none' : 'inline-block';
+    document.getElementById('btn-finalizar').style.display = idx === 9 ? 'inline-block' : 'none';
+}
+
+function seleccionarOpcion(idx) {
+    respuestasUsuario[preguntaActual] = idx;
+    document.querySelectorAll('.opcion-item').forEach((el,i) => {
+        el.classList.toggle('seleccionada', i === idx);
+        const letra = el.querySelector('.opcion-letra');
+        letra.style.background = i === idx ? 'var(--color-tema)' : '';
+        letra.style.borderColor = i === idx ? 'var(--color-tema)' : '';
+        letra.style.color = i === idx ? 'white' : '';
+    });
+}
+
+function irSiguiente() { if (preguntaActual < 9) mostrarPregunta(preguntaActual + 1); }
+function irAnterior() { if (preguntaActual > 0) mostrarPregunta(preguntaActual - 1); }
+
+function finalizarEvaluacion() {
+    const sinResp = respuestasUsuario.filter(r => r === null).length;
+    if (sinResp > 0 && !confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¿Finalizar?`)) return;
+    let correctas = 0;
+    let revHTML = '';
+    preguntasSeleccionadas.forEach((p, i) => {
+        const resp = respuestasUsuario[i];
+        const ok = resp === p.respuesta;
+        if (ok) correctas++;
+        revHTML += `<div class="revision-item ${ok?'correcta':'incorrecta'}">
+            <div class="pregunta-r">${ok?'✅':'❌'} <strong>Pregunta ${i+1}:</strong> ${p.texto}</div>
+            <div>`;
+        if (!ok) revHTML += `<div class="tu-resp">Tu respuesta: ${resp !== null ? p.opciones[resp] : 'Sin responder'}</div>`;
+        revHTML += `<div class="resp-correcta">Correcta: ${p.opciones[p.respuesta]}</div></div></div>`;
+    });
+    const pct = Math.round(correctas/10*100);
+    let emoji, titulo;
+    if (pct>=90){emoji='🏆';titulo='¡Excelente! Dominas los fenómenos ondulatorios.';}
+    else if (pct>=70){emoji='🌟';titulo='¡Muy bien! Sigue practicando.';}
+    else if (pct>=50){emoji='📚';titulo='Aprobado. Repasa los temas con errores.';}
+    else {emoji='💪';titulo='Necesitas repasar la teoría de fenómenos ondulatorios.';}
+    document.getElementById('seccion-evaluacion').style.display = 'none';
+    const pr = document.getElementById('pantalla-resultado');
+    pr.classList.add('activo');
+    document.getElementById('resultado-nombre').textContent = '👤 ' + nombreEstudiante;
+    document.getElementById('resultado-emoji').textContent = emoji;
+    document.getElementById('resultado-titulo').textContent = titulo;
+    document.getElementById('score-correctas').textContent = correctas;
+    document.getElementById('score-incorrectas').textContent = 10 - correctas;
+    document.getElementById('score-pct').textContent = pct + '%';
+    document.getElementById('revision-container').innerHTML = revHTML;
+    if (pct >= 70) confetti({ particleCount: 200, spread: 120, origin: { y: 0.4 } });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

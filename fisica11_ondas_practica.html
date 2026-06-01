@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Práctica interactiva sobre La Onda y sus Elementos - Física 11 - LabVirtual W">
+    <title>Práctica: La Onda y sus Elementos - Física 11 - LabVirtual W</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root { --color-ondas: #9b59b6; --color-oscuro: #1a1a2e; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26,26,46,0.92), rgba(26,26,46,0.97)),
+                url('https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+
+        .header-practica { text-align: center; margin-bottom: 30px; }
+        .header-practica h1 { color: var(--color-ondas); font-size: 2.4rem; margin-bottom: 10px; }
+        .header-practica p { color: #aaa; font-size: 1rem; }
+
+        .btn-volver { display: inline-block; margin-bottom: 25px; color: #c39bd3; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 10px 0 40px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, var(--color-ondas), #c39bd3); width: 0%; transition: width 0.5s ease; border-radius: 10px; }
+        .progreso-texto { text-align: right; font-size: 0.8rem; color: #aaa; margin-bottom: 5px; }
+
+        .ejercicio-card {
+            background: rgba(20,20,35,0.9); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px; padding: 30px; margin-bottom: 20px;
+            display: none; animation: slideIn 0.5s ease forwards;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .ejercicio-card.activo { display: block; }
+
+        .nivel-badge {
+            display: inline-block; padding: 5px 12px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: bold; margin-bottom: 15px;
+            background: rgba(155,89,182,0.2); color: #c39bd3; border: 1px solid var(--color-ondas);
+        }
+        .ejercicio-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .enunciado {
+            font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 25px;
+            padding: 15px; background: rgba(0,0,0,0.3); border-left: 4px solid var(--color-ondas); border-radius: 5px;
+        }
+        .formula-ref {
+            display: inline-block; background: rgba(155,89,182,0.1); border: 1px dashed var(--color-ondas);
+            padding: 8px 15px; border-radius: 6px; font-size: 0.9rem; color: #c39bd3; margin-bottom: 20px;
+        }
+
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .opcion-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px; padding: 15px; color: #fff; font-size: 1rem;
+            cursor: pointer; transition: 0.2s; text-align: center; font-family: 'Poppins', sans-serif;
+        }
+        .opcion-btn:hover:not(:disabled) { background: rgba(155,89,182,0.2); border-color: var(--color-ondas); transform: translateY(-2px); }
+        .opcion-btn.correcta { background: rgba(46,204,113,0.2); border-color: var(--color-correcto); }
+        .opcion-btn.incorrecta { background: rgba(231,76,60,0.2); border-color: var(--color-incorrecto); opacity: 0.7; }
+        .opcion-btn:disabled { cursor: not-allowed; }
+
+        .feedback {
+            display: none; padding: 15px; border-radius: 10px;
+            margin-top: 15px; font-weight: 500; font-size: 1rem; line-height: 1.6;
+        }
+        .feedback.correcto { display: block; background: rgba(46,204,113,0.1); border: 1px solid var(--color-correcto); color: #2ecc71; }
+        .feedback.incorrecto { display: block; background: rgba(231,76,60,0.1); border: 1px solid var(--color-incorrecto); color: #e74c3c; }
+
+        .btn-siguiente {
+            display: none; width: 100%; padding: 14px;
+            background: linear-gradient(135deg, var(--color-ondas), #8e44ad);
+            color: #fff; border: none; border-radius: 10px;
+            font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-siguiente:hover { filter: brightness(1.15); box-shadow: 0 5px 15px rgba(155,89,182,0.4); }
+
+        .pantalla-final {
+            display: none; text-align: center; padding: 50px 20px;
+            background: rgba(20,20,35,0.9); border-radius: 15px;
+            border: 1px solid rgba(155,89,182,0.5);
+        }
+        .pantalla-final.activo { display: block; animation: fadeIn 1s; }
+        .trofeo { font-size: 5rem; margin-bottom: 20px; animation: bounce 2s infinite; }
+        .puntaje-badge {
+            display: inline-block; background: linear-gradient(135deg, var(--color-ondas), #8e44ad);
+            padding: 10px 30px; border-radius: 50px; font-size: 1.5rem; font-weight: 800;
+            margin-bottom: 20px; box-shadow: 0 5px 20px rgba(155,89,182,0.4);
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @media (max-width: 600px) { .opciones-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <a href="fisica11_ondas.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+
+        <div class="header-practica">
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <p>La Onda y sus Elementos · Física 11° · Responde y comprueba al instante</p>
+        </div>
+
+        <div class="progreso-texto" id="textoProgreso">Ejercicio 1 de 6</div>
+        <div class="progreso-container">
+            <div class="progreso-barra" id="barra"></div>
+        </div>
+
+        <!-- ======= EJERCICIO 1 ======= -->
+        <div class="ejercicio-card activo" id="ej1">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico — Concepto</span>
+            <h3>Reto 1: El Viajero Invisible</h3>
+            <div class="enunciado">
+                Una onda viaja desde una fuente hasta un receptor. ¿Qué transporta una onda de un punto a otro?
+            </div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificar(1, this, false, '❌ Las partículas del medio oscilan, pero no viajan de un extremo al otro.')">Partículas de materia</button>
+                <button class="opcion-btn" onclick="verificar(1, this, true, '✅ ¡Exacto! Una onda transporta energía sin transportar masa. Las partículas solo vibran en su posición.')">Energía</button>
+                <button class="opcion-btn" onclick="verificar(1, this, false, '❌ El calor es una forma de energía, pero no es la respuesta más general.')">Calor únicamente</button>
+                <button class="opcion-btn" onclick="verificar(1, this, false, '❌ La masa no se desplaza con la onda; solo la perturbación avanza.')">Masa y energía juntas</button>
+            </div>
+            <div class="feedback" id="feed1"></div>
+            <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- ======= EJERCICIO 2 ======= -->
+        <div class="ejercicio-card" id="ej2">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico — Clasificación</span>
+            <h3>Reto 2: ¿Mecánica o Electromagnética?</h3>
+            <div class="enunciado">
+                El sonido de un trueno y la luz del relámpago salen casi al mismo tiempo. El sonido NO puede viajar en el vacío, pero la luz sí. ¿Cómo se clasifica el sonido según su medio de propagación?
+            </div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificar(2, this, false, '❌ Las ondas electromagnéticas no necesitan medio (luz, ondas de radio). El sonido sí necesita materia.')">Onda Electromagnética</button>
+                <button class="opcion-btn" onclick="verificar(2, this, true, '✅ ¡Correcto! El sonido es una onda mecánica: necesita un medio material (aire, agua, sólidos) para propagarse.')">Onda Mecánica</button>
+                <button class="opcion-btn" onclick="verificar(2, this, false, '❌ El sonido puede ser transversal o longitudinal, pero esa clasificación se refiere a la dirección de vibración, no al medio.')">Onda Transversal</button>
+                <button class="opcion-btn" onclick="verificar(2, this, false, '❌ El sonido es concretamente una onda mecánica longitudinal.')">Onda de superficie</button>
+            </div>
+            <div class="feedback" id="feed2"></div>
+            <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- ======= EJERCICIO 3 ======= -->
+        <div class="ejercicio-card" id="ej3">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio — Fórmula</span>
+            <h3>Reto 3: Velocidad de la Onda</h3>
+            <div class="enunciado">
+                Una onda en una cuerda tiene una longitud de onda <strong>λ = 0.4 m</strong> y una frecuencia de <strong>f = 10 Hz</strong>. ¿A qué velocidad se propaga?
+            </div>
+            <div class="formula-ref">📐 Fórmula: v = λ · f</div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificar(3, this, false, '❌ Sumaste en vez de multiplicar. Recuerda que v = λ × f.')">0.4 m/s + 10 = 10.4 m/s</button>
+                <button class="opcion-btn" onclick="verificar(3, this, false, '❌ Dividiste: 10 / 0.4 = 25. No es la operación correcta.')">25 m/s</button>
+                <button class="opcion-btn" onclick="verificar(3, this, true, '✅ ¡Excelente! v = 0.4 m × 10 Hz = 4 m/s. Multiplicaste correctamente.')">4 m/s</button>
+                <button class="opcion-btn" onclick="verificar(3, this, false, '❌ Eso sería 0.4 × 100. Revisa los datos del problema.')">40 m/s</button>
+            </div>
+            <div class="feedback" id="feed3"></div>
+            <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- ======= EJERCICIO 4 ======= -->
+        <div class="ejercicio-card" id="ej4">
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio — Período</span>
+            <h3>Reto 4: El Sismógrafo</h3>
+            <div class="enunciado">
+                Un sismógrafo registra ondas sísmicas con una frecuencia de <strong>f = 2 Hz</strong>. ¿Cuánto tiempo tarda la onda en completar un ciclo completo (período T)?
+            </div>
+            <div class="formula-ref">📐 Fórmula: T = 1 / f</div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificar(4, this, true, '✅ ¡Perfecto! T = 1 / 2 Hz = 0.5 segundos por ciclo.')">0.5 s</button>
+                <button class="opcion-btn" onclick="verificar(4, this, false, '❌ No se divide 2/1. Es al revés: T = 1 / f.')">2 s</button>
+                <button class="opcion-btn" onclick="verificar(4, this, false, '❌ Ese sería el caso si f = 0.25 Hz. Revisa tu operación.')">4 s</button>
+                <button class="opcion-btn" onclick="verificar(4, this, false, '❌ Revisión necesaria: T = 1 ÷ 2 = 0.5 s.')">1 s</button>
+            </div>
+            <div class="feedback" id="feed4"></div>
+            <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- ======= EJERCICIO 5 ======= -->
+        <div class="ejercicio-card" id="ej5">
+            <span class="nivel-badge" style="color:#f39c12; border-color:#f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado — Longitud de onda</span>
+            <h3>Reto 5: La Emisora de Radio</h3>
+            <div class="enunciado">
+                Una emisora de radio emite ondas que viajan a la velocidad de la luz: <strong>v = 3×10⁸ m/s</strong>, con una frecuencia de <strong>f = 100 MHz</strong> (100×10⁶ Hz). ¿Cuál es la longitud de onda?
+            </div>
+            <div class="formula-ref">📐 Fórmula: λ = v / f</div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificar(5, this, false, '❌ Multiplicaste: 3×10⁸ × 10⁸ no es la operación. Debes dividir v / f.')">3×10¹⁶ m</button>
+                <button class="opcion-btn" onclick="verificar(5, this, true, '✅ ¡Brillante! λ = 3×10⁸ / 10⁸ = 3 metros. Las ondas de radio FM miden unos 3 metros de longitud de onda.')">3 m</button>
+                <button class="opcion-btn" onclick="verificar(5, this, false, '❌ Revisa la conversión de MHz a Hz: 100 MHz = 100×10⁶ Hz.')">30 m</button>
+                <button class="opcion-btn" onclick="verificar(5, this, false, '❌ Revisión de potencias: 3×10⁸ / 10⁸ = 3, no 0.3.')">0.3 m</button>
+            </div>
+            <div class="feedback" id="feed5"></div>
+            <button class="btn-siguiente" id="btnSig5" onclick="siguiente(5)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- ======= EJERCICIO 6 ======= -->
+        <div class="ejercicio-card" id="ej6">
+            <span class="nivel-badge" style="color:#e74c3c; border-color:#e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto — Análisis</span>
+            <h3>Reto 6: Onda en el Cambio de Medio</h3>
+            <div class="enunciado">
+                Una onda de luz pasa del aire al agua. Al cambiar de medio, ¿cuál de las siguientes afirmaciones es CORRECTA?
+            </div>
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificar(6, this, false, '❌ La frecuencia NO cambia cuando una onda cambia de medio. Es la propiedad más conservada.')">La frecuencia aumenta al entrar al agua</button>
+                <button class="opcion-btn" onclick="verificar(6, this, false, '❌ La amplitud puede cambiar por reflexión, pero no es la característica fundamental que se conserva.')">La amplitud se conserva exactamente</button>
+                <button class="opcion-btn" onclick="verificar(6, this, true, '✅ ¡Excelente análisis! La frecuencia siempre se conserva al cambiar de medio. La velocidad y la longitud de onda cambian, pero f permanece igual.')">La frecuencia se mantiene constante</button>
+                <button class="opcion-btn" onclick="verificar(6, this, false, '❌ La velocidad sí cambia al cambiar de medio (es precisamente eso lo que produce la refracción).')">La velocidad no cambia</button>
+            </div>
+            <div class="feedback" id="feed6"></div>
+            <button class="btn-siguiente" id="btnSig6" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+        </div>
+
+        <!-- PANTALLA FINAL -->
+        <div class="pantalla-final" id="pantalla-final">
+            <div class="trofeo">🌊</div>
+            <h1 style="color: var(--color-ondas); margin-bottom: 15px;">¡Práctica Completada!</h1>
+            <div class="puntaje-badge" id="puntaje-badge">0 / 6 correctas</div>
+            <p id="mensaje-final" style="font-size: 1.1rem; color: #ddd; margin-bottom: 30px;"></p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="fisica11_ondas_evaluacion.html" style="padding: 14px 28px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem;">
+                    <i class="fa-solid fa-file-signature"></i> Ir a la Evaluación
+                </a>
+                <button onclick="reiniciarPractica()" style="padding: 14px 28px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 1rem; font-family: 'Poppins', sans-serif;">
+                    <i class="fa-solid fa-rotate-right"></i> Intentar de Nuevo
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const totalEjercicios = 6;
+        let aciertos = 0;
+        let respondidas = new Set();
+
+        function verificar(num, btn, esCorrecta, mensaje) {
+            if (respondidas.has(num)) return;
+
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+
+            botones.forEach(b => {
+                b.disabled = true;
+                if (b === btn) b.classList.add(esCorrecta ? 'correcta' : 'incorrecta');
+                else if (!esCorrecta && b.getAttribute('onclick').includes('true')) b.classList.add('correcta');
+            });
+
+            const feed = document.getElementById('feed' + num);
+            feed.innerHTML = mensaje;
+            feed.className = 'feedback ' + (esCorrecta ? 'correcto' : 'incorrecto');
+
+            if (esCorrecta) {
+                aciertos++;
+                respondidas.add(num);
+                confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#9b59b6', '#c39bd3', '#8e44ad'] });
+            } else {
+                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding:8px 15px; background:#e74c3c; color:white; border:none; border-radius:5px; cursor:pointer; font-family:'Poppins',sans-serif;">🔄 Intentar de nuevo</button>`;
+            }
+
+            document.getElementById('btnSig' + num).style.display = 'block';
+            actualizarBarra(respondidas.size);
+        }
+
+        function reiniciarEjercicio(num) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            botones.forEach(b => { b.disabled = false; b.classList.remove('correcta', 'incorrecta'); });
+            const feed = document.getElementById('feed' + num);
+            feed.className = 'feedback';
+            feed.innerHTML = '';
+        }
+
+        function actualizarBarra(completados) {
+            document.getElementById('barra').style.width = ((completados / totalEjercicios) * 100) + '%';
+            document.getElementById('textoProgreso').textContent = `Ejercicio ${Math.min(completados + 1, totalEjercicios)} de ${totalEjercicios}`;
+        }
+
+        function siguiente(actual) {
+            document.getElementById('ej' + actual).classList.remove('activo');
+            const siguiente = actual + 1;
+            if (siguiente <= totalEjercicios) {
+                document.getElementById('ej' + siguiente).classList.add('activo');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function finalizar() {
+            document.getElementById('ej' + totalEjercicios).classList.remove('activo');
+            const pf = document.getElementById('pantalla-final');
+            pf.classList.add('activo');
+            document.getElementById('puntaje-badge').textContent = `${aciertos} / ${totalEjercicios} correctas`;
+
+            let mensaje = '';
+            const pct = aciertos / totalEjercicios;
+            if (pct === 1) mensaje = '🏆 ¡Perfecto! Dominas completamente los elementos de las ondas. ¡Eres un experto!';
+            else if (pct >= 0.7) mensaje = '🌟 ¡Muy bien! Tienes un sólido dominio del tema. Repasa los errores y ve a la evaluación.';
+            else if (pct >= 0.5) mensaje = '📚 Buen esfuerzo. Repasa las fórmulas y vuelve a intentarlo para mejorar tu puntaje.';
+            else mensaje = '💪 Necesitas repasar la teoría. Lee nuevamente la sección de elementos de la onda antes de continuar.';
+
+            document.getElementById('mensaje-final').textContent = mensaje;
+            confetti({ particleCount: 200, spread: 120, origin: { y: 0.4 }, zIndex: 1000 });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function reiniciarPractica() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>

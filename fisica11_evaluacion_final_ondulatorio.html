@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Evaluación Final - Unidad 2: Movimiento Ondulatorio - Física 11 - LabVirtual W. Ondas, Fenómenos Ondulatorios, Acústica y Óptica.">
+    <title>Evaluación Final: Movimiento Ondulatorio - Física 11 - LabVirtual W</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --color-oscuro: #1a1a2e;
+            --color-ondas: #9b59b6;
+            --color-fenomenos: #e67e22;
+            --color-acustica: #27ae60;
+            --color-optica: #d4ac0d;
+            --color-final: #e74c3c;
+            --color-correcto: #2ecc71;
+            --color-incorrecto: #e74c3c;
+        }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26,26,46,0.90), rgba(26,26,46,0.97)),
+                url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* === PANTALLA INICIO === */
+        .contenedor { max-width: 920px; margin: 40px auto; padding: 20px; }
+
+        .pantalla-inicio { background: rgba(20,20,35,0.97); border: 2px solid rgba(231,76,60,0.5); border-radius: 20px; padding: 50px 40px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
+        .badge-final { display: inline-block; background: linear-gradient(135deg, #e74c3c, #c0392b); padding: 6px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; }
+        .pantalla-inicio h1 { font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #e74c3c, #f39c12, #f1c40f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+        .pantalla-inicio .subtitulo { color: #aaa; font-size: 1.05rem; margin-bottom: 35px; }
+
+        .temas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 35px; }
+        .tema-chip { padding: 14px 18px; border-radius: 10px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; font-weight: 500; }
+        .chip-ondas { background: rgba(155,89,182,0.15); border: 1px solid rgba(155,89,182,0.4); color: #c39bd3; }
+        .chip-fenomenos { background: rgba(230,126,34,0.15); border: 1px solid rgba(230,126,34,0.4); color: #f0a84e; }
+        .chip-acustica { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); color: #58d68d; }
+        .chip-optica { background: rgba(212,172,13,0.15); border: 1px solid rgba(212,172,13,0.4); color: #f7dc6f; }
+
+        .reglas { text-align: left; background: rgba(0,0,0,0.4); padding: 20px 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.08); }
+        .reglas li { color: #ddd; margin-bottom: 10px; list-style: none; display: flex; align-items: flex-start; gap: 10px; }
+        .reglas li i { color: #e74c3c; margin-top: 3px; flex-shrink: 0; }
+
+        .input-nombre { width: 100%; max-width: 420px; padding: 16px 22px; border-radius: 12px; border: 2px solid rgba(231,76,60,0.5); background: rgba(0,0,0,0.5); color: #fff; font-size: 1.1rem; font-family: 'Poppins', sans-serif; outline: none; transition: 0.3s; display: block; margin: 0 auto 20px; }
+        .input-nombre:focus { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.2); }
+        .input-nombre::placeholder { color: #555; }
+        .alerta-nombre { display: none; color: #e74c3c; font-size: 0.9rem; margin-top: 10px; margin-bottom: 10px; }
+        .btn-comenzar { padding: 16px 45px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Poppins', sans-serif; box-shadow: 0 8px 25px rgba(231,76,60,0.4); }
+        .btn-comenzar:hover { filter: brightness(1.15); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(231,76,60,0.5); }
+
+        /* === EVALUACIÓN === */
+        .seccion-evaluacion { display: none; }
+
+        .top-bar { background: rgba(20,20,35,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 15px 25px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .nombre-eval { font-size: 1rem; color: #ddd; }
+        .contador-eval { font-size: 1rem; font-weight: 700; color: #e74c3c; background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); padding: 8px 18px; border-radius: 20px; }
+
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.08); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, #e74c3c, #f39c12, #f1c40f); width: 0%; transition: width 0.4s ease; border-radius: 10px; }
+        .progreso-leyenda { display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 25px; }
+
+        .tag-tema { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; margin-bottom: 15px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .tag-ondas { background: rgba(155,89,182,0.2); color: #c39bd3; border: 1px solid rgba(155,89,182,0.4); }
+        .tag-fenomenos { background: rgba(230,126,34,0.2); color: #f0a84e; border: 1px solid rgba(230,126,34,0.4); }
+        .tag-acustica { background: rgba(39,174,96,0.2); color: #58d68d; border: 1px solid rgba(39,174,96,0.4); }
+        .tag-optica { background: rgba(212,172,13,0.2); color: #f7dc6f; border: 1px solid rgba(212,172,13,0.4); }
+
+        .pregunta-card { background: rgba(20,20,35,0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; animation: slideIn 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .pregunta-numero { font-size: 0.85rem; color: #aaa; font-weight: 600; margin-bottom: 8px; }
+        .pregunta-texto { font-size: 1.1rem; color: #eee; line-height: 1.65; margin-bottom: 22px; }
+        .contexto-icfes { background: rgba(0,0,0,0.3); border-left: 3px solid #e74c3c; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; font-style: italic; line-height: 1.6; }
+
+        .opciones-lista { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .opcion-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 12px; color: #eee; }
+        .opcion-item:hover { background: rgba(231,76,60,0.12); border-color: rgba(231,76,60,0.5); }
+        .opcion-item.seleccionada { background: rgba(231,76,60,0.18); border-color: #e74c3c; }
+        .opcion-letra { width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(231,76,60,0.4); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; color: #e74c3c; }
+        .opcion-item.seleccionada .opcion-letra { background: #e74c3c; border-color: #e74c3c; color: white; }
+
+        .navegacion { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.07); justify-content: space-between; align-items: center; }
+        .btn-nav { padding: 13px 26px; border-radius: 9px; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; transition: 0.3s; font-family: 'Poppins', sans-serif; }
+        .btn-ant { background: rgba(255,255,255,0.1); color: #fff; }
+        .btn-ant:hover { background: rgba(255,255,255,0.18); }
+        .btn-sig { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+        .btn-sig:hover { filter: brightness(1.15); transform: translateY(-2px); }
+        .btn-final-eva { background: linear-gradient(135deg, #27ae60, #1e8449); color: #fff; }
+        .btn-final-eva:hover { filter: brightness(1.15); transform: translateY(-2px); }
+
+        /* === RESULTADOS === */
+        .pantalla-resultado { display: none; background: rgba(20,20,35,0.97); border-radius: 20px; padding: 45px; border: 2px solid rgba(231,76,60,0.4); box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
+        .pantalla-resultado.activo { display: block; animation: fadeIn 0.8s; }
+
+        .resultado-hero { text-align: center; margin-bottom: 40px; }
+        .emoji-resultado { font-size: 6rem; display: block; margin-bottom: 20px; animation: bounce 2s infinite; }
+        .nombre-resultado { font-size: 1rem; color: #aaa; margin-bottom: 8px; }
+        .titulo-resultado { font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; }
+        .subtitulo-resultado { font-size: 1rem; color: #aaa; }
+
+        .score-mega { display: flex; justify-content: center; align-items: center; gap: 20px; margin: 30px 0; flex-wrap: wrap; }
+        .score-circulo { width: 130px; height: 130px; border-radius: 50%; border: 5px solid #e74c3c; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(231,76,60,0.08); }
+        .score-num-grande { font-size: 2.8rem; font-weight: 800; color: #e74c3c; line-height: 1; }
+        .score-label-grande { font-size: 0.8rem; color: #aaa; }
+
+        .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 35px; }
+        .score-card { background: rgba(0,0,0,0.4); border-radius: 12px; padding: 18px 12px; text-align: center; }
+        .score-card.ondas-card { border-top: 3px solid var(--color-ondas); }
+        .score-card.fenomenos-card { border-top: 3px solid var(--color-fenomenos); }
+        .score-card.acustica-card { border-top: 3px solid var(--color-acustica); }
+        .score-card.optica-card { border-top: 3px solid var(--color-optica); }
+        .score-card-num { font-size: 1.8rem; font-weight: 800; }
+        .score-card-label { font-size: 0.78rem; color: #aaa; margin-top: 4px; }
+        .ondas-card .score-card-num { color: var(--color-ondas); }
+        .fenomenos-card .score-card-num { color: var(--color-fenomenos); }
+        .acustica-card .score-card-num { color: var(--color-acustica); }
+        .optica-card .score-card-num { color: var(--color-optica); }
+
+        .barra-temas { margin-bottom: 35px; }
+        .barra-temas h3 { color: #aaa; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .barra-item { margin-bottom: 12px; }
+        .barra-item-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; }
+        .barra-item-bg { width: 100%; height: 10px; background: rgba(255,255,255,0.07); border-radius: 10px; overflow: hidden; }
+        .barra-item-fill { height: 100%; border-radius: 10px; transition: width 1s ease; }
+
+        .revision-titulo { font-size: 1.3rem; font-weight: 700; color: #ddd; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .revision-item { background: rgba(0,0,0,0.25); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; border-left: 4px solid; }
+        .revision-item.correcta { border-left-color: var(--color-correcto); }
+        .revision-item.incorrecta { border-left-color: var(--color-incorrecto); }
+        .revision-item .r-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .revision-item .r-pregunta { color: #eee; font-size: 0.93rem; line-height: 1.5; margin-bottom: 6px; }
+        .r-tag { font-size: 0.7rem; padding: 2px 10px; border-radius: 10px; }
+        .revision-item .r-tu-resp { color: #e74c3c; font-size: 0.87rem; }
+        .revision-item .r-correcta { color: #2ecc71; font-size: 0.87rem; }
+
+        .btns-finales { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 35px; }
+        .btn-f { padding: 14px 28px; border-radius: 9px; font-size: 1rem; font-weight: 600; text-decoration: none; color: #fff; cursor: pointer; border: none; font-family: 'Poppins', sans-serif; transition: 0.3s; }
+        .btn-repetir { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .btn-repetir:hover { filter: brightness(1.15); transform: translateY(-2px); }
+        .btn-inicio-f { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+        .btn-inicio-f:hover { background: rgba(255,255,255,0.18); }
+
+        @keyframes slideIn { from { opacity:0; transform:translateX(30px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes bounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-15px); } }
+        @media (max-width:600px) { .temas-grid{grid-template-columns:1fr;} .score-grid{grid-template-columns:1fr 1fr;} .pantalla-inicio{padding:30px 20px;} }
+    </style>
+</head>
+<body>
+<div class="contenedor">
+
+    <!-- ======================== PANTALLA INICIO ======================== -->
+    <div id="pantalla-inicio" class="pantalla-inicio">
+        <div class="badge-final">🎓 EVALUACIÓN FINAL</div>
+        <h1>Movimiento Ondulatorio</h1>
+        <p class="subtitulo">Física Grado 11° · Unidad 2 · Todos los temas</p>
+
+        <div class="temas-grid">
+            <div class="tema-chip chip-ondas"><i class="fa-solid fa-wave-square"></i> La Onda y sus Elementos</div>
+            <div class="tema-chip chip-fenomenos"><i class="fa-solid fa-circle-nodes"></i> Fenómenos Ondulatorios</div>
+            <div class="tema-chip chip-acustica"><i class="fa-solid fa-volume-high"></i> Acústica — El Sonido</div>
+            <div class="tema-chip chip-optica"><i class="fa-solid fa-sun"></i> Óptica — La Luz</div>
+        </div>
+
+        <ul class="reglas">
+            <li><i class="fa-solid fa-bolt"></i> <span>Esta evaluación combina preguntas de <strong>todos los temas</strong> de la Unidad 2.</span></li>
+            <li><i class="fa-solid fa-shuffle"></i> <span>Se seleccionan <strong>20 preguntas aleatorias</strong> de un banco de más de 100 preguntas (5 de cada tema).</span></li>
+            <li><i class="fa-solid fa-rotate"></i> <span>Cada vez que ingreses, la evaluación es <strong>diferente</strong>: las preguntas y su orden cambian.</span></li>
+            <li><i class="fa-solid fa-chart-bar"></i> <span>Al finalizar verás tu puntaje <strong>desglosado por tema</strong> y la revisión completa.</span></li>
+            <li><i class="fa-solid fa-user"></i> <span>El nombre del estudiante quedará registrado en los resultados.</span></li>
+        </ul>
+
+        <input type="text" id="input-nombre" class="input-nombre" placeholder="✏️ Escribe tu nombre completo" maxlength="60">
+        <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre para comenzar.</div>
+        <br>
+        <button class="btn-comenzar" onclick="iniciarEvaluacion()">
+            <i class="fa-solid fa-play"></i> &nbsp;Comenzar Evaluación Final
+        </button>
+    </div>
+
+    <!-- ======================== EVALUACIÓN ======================== -->
+    <div id="seccion-evaluacion" class="seccion-evaluacion">
+        <div class="top-bar">
+            <div class="nombre-eval"><i class="fa-solid fa-user"></i> <span id="nombre-top"></span></div>
+            <div class="contador-eval"><i class="fa-solid fa-question-circle"></i> Pregunta <span id="num-actual">1</span> de 20</div>
+        </div>
+
+        <div class="progreso-container"><div class="progreso-barra" id="barra-prog"></div></div>
+        <div class="progreso-leyenda"><span id="prog-texto">0% completado</span><span>20 preguntas</span></div>
+
+        <div id="contenedor-pregunta"></div>
+
+        <div class="navegacion">
+            <button class="btn-nav btn-ant" id="btn-ant" onclick="irAnterior()"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+            <button class="btn-nav btn-sig" id="btn-sig" onclick="irSiguiente()">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="btn-nav btn-final-eva" id="btn-final" onclick="finalizarEvaluacion()" style="display:none;"><i class="fa-solid fa-check-double"></i> Finalizar y Ver Resultados</button>
+        </div>
+    </div>
+
+    <!-- ======================== RESULTADOS ======================== -->
+    <div id="pantalla-resultado" class="pantalla-resultado">
+        <div class="resultado-hero">
+            <div class="nombre-resultado" id="nombre-resultado"></div>
+            <span class="emoji-resultado" id="emoji-resultado">🎓</span>
+            <div class="titulo-resultado" id="titulo-resultado"></div>
+            <div class="subtitulo-resultado" id="subtitulo-resultado"></div>
+        </div>
+
+        <div class="score-mega">
+            <div class="score-circulo">
+                <div class="score-num-grande" id="score-total">0</div>
+                <div class="score-label-grande">de 20 correctas</div>
+            </div>
+            <div style="text-align:left;">
+                <div style="font-size:3.5rem; font-weight:800; background:linear-gradient(135deg,#e74c3c,#f39c12); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;" id="score-pct">0%</div>
+                <div style="color:#aaa; font-size:0.9rem;">Porcentaje de acierto</div>
+                <div style="margin-top:8px; font-size:0.9rem; color:#ddd;">Evaluación Unidad 2 — Física 11°</div>
+            </div>
+        </div>
+
+        <div class="score-grid">
+            <div class="score-card ondas-card"><div class="score-card-num" id="score-ondas">-</div><div class="score-card-label">🌊 Ondas</div></div>
+            <div class="score-card fenomenos-card"><div class="score-card-num" id="score-fenomenos">-</div><div class="score-card-label">🌀 Fenómenos</div></div>
+            <div class="score-card acustica-card"><div class="score-card-num" id="score-acustica">-</div><div class="score-card-label">🔊 Acústica</div></div>
+            <div class="score-card optica-card"><div class="score-card-num" id="score-optica">-</div><div class="score-card-label">💡 Óptica</div></div>
+        </div>
+
+        <div class="barra-temas">
+            <h3><i class="fa-solid fa-chart-bar"></i> Desempeño por tema</h3>
+            <div class="barra-item">
+                <div class="barra-item-label"><span>🌊 Ondas y sus Elementos</span><span id="pct-ondas">0%</span></div>
+                <div class="barra-item-bg"><div class="barra-item-fill" id="fill-ondas" style="background:var(--color-ondas); width:0%;"></div></div>
+            </div>
+            <div class="barra-item">
+                <div class="barra-item-label"><span>🌀 Fenómenos Ondulatorios</span><span id="pct-fenomenos">0%</span></div>
+                <div class="barra-item-bg"><div class="barra-item-fill" id="fill-fenomenos" style="background:var(--color-fenomenos); width:0%;"></div></div>
+            </div>
+            <div class="barra-item">
+                <div class="barra-item-label"><span>🔊 Acústica</span><span id="pct-acustica">0%</span></div>
+                <div class="barra-item-bg"><div class="barra-item-fill" id="fill-acustica" style="background:var(--color-acustica); width:0%;"></div></div>
+            </div>
+            <div class="barra-item">
+                <div class="barra-item-label"><span>💡 Óptica</span><span id="pct-optica">0%</span></div>
+                <div class="barra-item-bg"><div class="barra-item-fill" id="fill-optica" style="background:var(--color-optica); width:0%;"></div></div>
+            </div>
+        </div>
+
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión Detallada de Respuestas</div>
+        <div id="revision-container"></div>
+
+        <div class="btns-finales">
+            <button class="btn-f btn-repetir" onclick="location.reload()"><i class="fa-solid fa-rotate-right"></i> Nueva Evaluación</button>
+            <a href="fisica_11.html" class="btn-f btn-inicio-f"><i class="fa-solid fa-arrow-left"></i> Volver a Física 11°</a>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+//   BANCO COMBINADO — 5 preguntas por tema (mínimo)
+//   Total: 20 seleccionadas aleatoriamente (5 de cada grupo)
+// ============================================================
+const banco = {
+    ondas: [
+        {texto:"¿Qué transporta una onda de un punto a otro?",opciones:["A. Partículas del medio","B. Calor únicamente","C. Energía sin transportar masa","D. Masa y energía juntas"],respuesta:2},
+        {texto:"La longitud de onda (λ) es la distancia entre:",opciones:["A. Una cresta y el punto de equilibrio","B. Dos puntos consecutivos en igual estado de vibración","C. El inicio y el final de una onda","D. La cresta y el valle más cercano"],respuesta:1},
+        {texto:"Una onda tiene f = 4 Hz y λ = 0.5 m. ¿Cuál es su velocidad?",opciones:["A. 0.5 m/s","B. 8 m/s","C. 4.5 m/s","D. 2 m/s"],respuesta:3},
+        {texto:"Si T = 0.1 s, ¿cuál es la frecuencia de la onda?",opciones:["A. 0.1 Hz","B. 100 Hz","C. 10 Hz","D. 1 Hz"],respuesta:2},
+        {texto:"¿Cuál es la diferencia entre una onda transversal y una longitudinal?",opciones:["A. La transversal necesita medio; la longitudinal, no","B. En la transversal la vibración es perpendicular a la propagación; en la longitudinal, paralela","C. La transversal solo viaja en líquidos","D. La longitudinal tiene mayor velocidad siempre"],respuesta:1},
+        {texto:"Una onda de radio viaja a 3×10⁸ m/s con f = 100 MHz (10⁸ Hz). ¿Cuál es λ?",opciones:["A. 0.3 m","B. 30 m","C. 3 m","D. 300 m"],respuesta:2},
+        {texto:"La amplitud de una onda está relacionada con:",opciones:["A. Su frecuencia","B. Su longitud de onda","C. La energía transportada","D. La velocidad de propagación"],respuesta:2},
+        {texto:"El sonido es una onda mecánica. ¿Cuál de las siguientes NO es mecánica?",opciones:["A. Onda en el agua","B. Onda sísmica","C. Onda en una cuerda","D. Luz visible"],respuesta:3},
+        {texto:"Si se duplica la frecuencia y la velocidad permanece constante, ¿qué le pasa a λ?",opciones:["A. Se duplica","B. Se mantiene igual","C. Se reduce a la mitad","D. Se cuadruplica"],respuesta:2},
+        {texto:"¿Cuántos ciclos por segundo realiza una onda con T = 0.25 s?",opciones:["A. 0.25 Hz","B. 25 Hz","C. 4 Hz","D. 2 Hz"],respuesta:2}
+    ],
+    fenomenos: [
+        {texto:"El eco es un ejemplo de:",opciones:["A. Refracción","B. Difracción","C. Resonancia","D. Reflexión"],respuesta:3},
+        {texto:"Cuando una onda pasa de un medio a otro y cambia de dirección, esto se llama:",opciones:["A. Reflexión","B. Resonancia","C. Refracción","D. Difracción"],respuesta:2},
+        {texto:"¿Qué magnitud se conserva siempre al refractarse una onda?",opciones:["A. Velocidad","B. Longitud de onda","C. Amplitud","D. Frecuencia"],respuesta:3},
+        {contexto:"Los auriculares con cancelación de ruido activa generan ondas opuestas al ruido ambiente.",texto:"¿Qué fenómeno produce el silencio resultante?",opciones:["A. Reflexión","B. Resonancia","C. Interferencia destructiva","D. Difracción"],respuesta:2},
+        {texto:"La capacidad de las ondas de rodear obstáculos se llama:",opciones:["A. Reflexión","B. Resonancia","C. Refracción","D. Difracción"],respuesta:3},
+        {texto:"El puente de Tacoma Narrows colapsó por:",opciones:["A. Reflexión del viento","B. Difracción de las ondas sísmicas","C. Interferencia destructiva","D. Resonancia con el viento"],respuesta:3},
+        {texto:"La Ley de Snell relaciona:",opciones:["A. Amplitudes en reflexión","B. Velocidades en dos medios distintos","C. Ángulos de refracción con los índices del medio","D. Frecuencias al cambiar de medio"],respuesta:2},
+        {texto:"La interferencia constructiva ocurre cuando:",opciones:["A. Dos ondas viajan en sentidos opuestos","B. Las crestas de dos ondas coinciden en el mismo punto","C. Una onda rodea un obstáculo","D. La onda cambia de medio"],respuesta:1},
+        {texto:"Un rayo de luz pasa del agua al aire. El rayo refractado:",opciones:["A. Se acerca a la normal","B. Sigue recto sin cambiar","C. Se refleja completamente","D. Se aleja de la normal"],respuesta:3},
+        {texto:"¿Por qué escuchas música aunque haya una pared entre tú y el parlante?",opciones:["A. El sonido se refracta al cambiar de medio","B. El sonido se difracta alrededor de la pared","C. El sonido se refleja en el techo","D. El sonido resuena en tu cabeza"],respuesta:1}
+    ],
+    acustica: [
+        {texto:"¿En cuál medio el sonido NO puede propagarse?",opciones:["A. Agua","B. Acero","C. Vacío","D. Aire"],respuesta:2},
+        {texto:"El tono (agudo o grave) de un sonido depende de su:",opciones:["A. Amplitud","B. Velocidad","C. Timbre","D. Frecuencia"],respuesta:3},
+        {contexto:"Un trueno se escucha 3 segundos después del relámpago. v = 343 m/s.",texto:"¿A qué distancia cayó el rayo?",opciones:["A. 114 m","B. 686 m","C. 1029 m","D. 343 m"],respuesta:2},
+        {texto:"¿Qué permite distinguir una guitarra de un piano tocando la misma nota?",opciones:["A. La frecuencia","B. El timbre","C. La amplitud","D. La velocidad"],respuesta:1},
+        {texto:"¿Cuál es la velocidad aproximada del sonido en el aire a 20°C?",opciones:["A. 300 m/s","B. 1500 m/s","C. 5960 m/s","D. 343 m/s"],respuesta:3},
+        {texto:"El efecto Doppler explica por qué la sirena de una ambulancia:",opciones:["A. Suena igual al acercarse y alejarse","B. Suena más aguda al acercarse y más grave al alejarse","C. Suena más grave al acercarse y más aguda al alejarse","D. Solo cambia su volumen, no su tono"],respuesta:1},
+        {texto:"La exposición prolongada a sonidos por encima de 85 dB puede causar:",opciones:["A. Solo mareo temporal","B. Pérdida de la vista","C. Daño auditivo permanente","D. No causa ningún daño"],respuesta:2},
+        {texto:"Una guitarra produce 440 Hz (La4). Con v=343 m/s, ¿cuál es λ?",opciones:["A. 7.8 m","B. 0.078 m","C. 0.78 m","D. 78 m"],respuesta:2},
+        {texto:"¿En qué medio viaja más rápido el sonido?",opciones:["A. Aire","B. Agua","C. Acero","D. Madera"],respuesta:2},
+        {texto:"Los sonidos mayores de 20,000 Hz se denominan:",opciones:["A. Infrasonidos","B. Macrosonidos","C. Hipersonidos","D. Ultrasonidos"],respuesta:3}
+    ],
+    optica: [
+        {texto:"La velocidad de la luz en el vacío es:",opciones:["A. 340 m/s","B. 3×10⁶ m/s","C. 1500 m/s","D. 3×10⁸ m/s"],respuesta:3},
+        {texto:"¿Cuál color del espectro visible tiene la mayor longitud de onda?",opciones:["A. Violeta","B. Azul","C. Verde","D. Rojo"],respuesta:3},
+        {texto:"El índice de refracción del agua es n=1.33 y c=3×10⁸ m/s. ¿Cuál es la velocidad de la luz en el agua?",opciones:["A. 4×10⁸ m/s","B. 2.25×10⁸ m/s","C. 3×10⁸ m/s","D. 1.33×10⁸ m/s"],respuesta:1},
+        {texto:"¿Qué tipo de lente corrige la miopía?",opciones:["A. Convergente (convexa)","B. Plano-convexa","C. Divergente (cóncava)","D. Plano-cóncava simétrica"],respuesta:2},
+        {texto:"La dispersión de la luz blanca al pasar por un prisma produce:",opciones:["A. Luz más intensa","B. Una sola frecuencia","C. Los colores del espectro visible","D. Luz polarizada"],respuesta:2},
+        {texto:"¿Qué tipo de imagen forma siempre un espejo plano?",opciones:["A. Real e invertida","B. Virtual y derecha","C. Real y derecha","D. Virtual e invertida"],respuesta:1},
+        {texto:"La fibra óptica mantiene la luz dentro gracias a:",opciones:["A. Refracción hacia adelante","B. Difracción interna","C. Reflexión total interna","D. Interferencia constructiva"],respuesta:2},
+        {texto:"¿Cuál propiedad de la luz no cambia al pasar de un medio a otro?",opciones:["A. Velocidad","B. Longitud de onda","C. Amplitud","D. Frecuencia"],respuesta:3},
+        {texto:"La luz roja tiene f ≈ 4.3×10¹⁴ Hz y c=3×10⁸ m/s. ¿Cuál es λ?",opciones:["A. 580 nm","B. 430 nm","C. 700 nm","D. 380 nm"],respuesta:2},
+        {texto:"Un espejo convexo en la carretera sirve para:",opciones:["A. Ampliar una zona pequeña con imagen real","B. Dar una visión reducida pero amplia del área, con imagen virtual","C. Concentrar los rayos de luz en un punto","D. Crear imágenes invertidas de los vehículos"],respuesta:1}
+    ]
+};
+
+// ============================================================
+//   VARIABLES
+// ============================================================
+let preguntasSeleccionadas = [];
+let respuestasUsuario = [];
+let preguntaActual = 0;
+let nombreEstudiante = '';
+
+// ============================================================
+//   INICIO
+// ============================================================
+function iniciarEvaluacion() {
+    const input = document.getElementById('input-nombre');
+    nombreEstudiante = input.value.trim();
+    if (!nombreEstudiante) { document.getElementById('alerta-nombre').style.display = 'block'; input.focus(); return; }
+    document.getElementById('alerta-nombre').style.display = 'none';
+
+    // Seleccionar 5 de cada tema aleatoriamente
+    function pick(arr, n) { return [...arr].sort(() => Math.random() - 0.5).slice(0, n); }
+    const ondas5 = pick(banco.ondas, 5).map(p => ({ ...p, tema: 'ondas' }));
+    const fenomenos5 = pick(banco.fenomenos, 5).map(p => ({ ...p, tema: 'fenomenos' }));
+    const acustica5 = pick(banco.acustica, 5).map(p => ({ ...p, tema: 'acustica' }));
+    const optica5 = pick(banco.optica, 5).map(p => ({ ...p, tema: 'optica' }));
+
+    // Mezclar todas juntas
+    preguntasSeleccionadas = [...ondas5, ...fenomenos5, ...acustica5, ...optica5].sort(() => Math.random() - 0.5);
+    respuestasUsuario = new Array(20).fill(null);
+
+    document.getElementById('pantalla-inicio').style.display = 'none';
+    document.getElementById('seccion-evaluacion').style.display = 'block';
+    document.getElementById('nombre-top').textContent = nombreEstudiante;
+    mostrarPregunta(0);
+}
+
+// ============================================================
+//   MOSTRAR PREGUNTA
+// ============================================================
+function mostrarPregunta(idx) {
+    preguntaActual = idx;
+    const p = preguntasSeleccionadas[idx];
+    const letras = ['A', 'B', 'C', 'D'];
+    const temaLabels = { ondas: '🌊 Ondas', fenomenos: '🌀 Fenómenos', acustica: '🔊 Acústica', optica: '💡 Óptica' };
+    const temaTags = { ondas: 'tag-ondas', fenomenos: 'tag-fenomenos', acustica: 'tag-acustica', optica: 'tag-optica' };
+
+    let html = `<div class="pregunta-card">`;
+    html += `<span class="tag-tema ${temaTags[p.tema]}">${temaLabels[p.tema]}</span>`;
+    html += `<div class="pregunta-numero">Pregunta ${idx + 1} de 20</div>`;
+    if (p.contexto) html += `<div class="contexto-icfes"><i class="fa-solid fa-quote-left"></i> ${p.contexto}</div>`;
+    html += `<div class="pregunta-texto">${p.texto}</div><ul class="opciones-lista">`;
+    p.opciones.forEach((op, i) => {
+        const sel = respuestasUsuario[idx] === i ? 'seleccionada' : '';
+        html += `<li class="opcion-item ${sel}" onclick="seleccionarOpcion(${i})"><div class="opcion-letra">${letras[i]}</div><span>${op.replace(/^[A-D]\.\s/, '')}</span></li>`;
+    });
+    html += `</ul></div>`;
+    document.getElementById('contenedor-pregunta').innerHTML = html;
+
+    const pct = Math.round(((idx + 1) / 20) * 100);
+    document.getElementById('num-actual').textContent = idx + 1;
+    document.getElementById('barra-prog').style.width = pct + '%';
+    document.getElementById('prog-texto').textContent = pct + '% completado';
+
+    document.getElementById('btn-ant').style.display = idx === 0 ? 'none' : 'inline-block';
+    document.getElementById('btn-sig').style.display = idx === 19 ? 'none' : 'inline-block';
+    document.getElementById('btn-final').style.display = idx === 19 ? 'inline-block' : 'none';
+}
+
+function seleccionarOpcion(idx) {
+    respuestasUsuario[preguntaActual] = idx;
+    document.querySelectorAll('.opcion-item').forEach((el, i) => {
+        el.classList.toggle('seleccionada', i === idx);
+        const letra = el.querySelector('.opcion-letra');
+        letra.style.background = i === idx ? '#e74c3c' : '';
+        letra.style.borderColor = i === idx ? '#e74c3c' : '';
+        letra.style.color = i === idx ? 'white' : '';
+    });
+}
+
+function irSiguiente() { if (preguntaActual < 19) mostrarPregunta(preguntaActual + 1); }
+function irAnterior() { if (preguntaActual > 0) mostrarPregunta(preguntaActual - 1); }
+
+// ============================================================
+//   FINALIZAR
+// ============================================================
+function finalizarEvaluacion() {
+    const sinResp = respuestasUsuario.filter(r => r === null).length;
+    if (sinResp > 0 && !confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¿Deseas finalizar?`)) return;
+
+    // Calcular puntajes
+    let total = 0;
+    const porTema = { ondas: { ok: 0, total: 0 }, fenomenos: { ok: 0, total: 0 }, acustica: { ok: 0, total: 0 }, optica: { ok: 0, total: 0 } };
+    const temaLabels = { ondas: '🌊 Ondas', fenomenos: '🌀 Fenómenos', acustica: '🔊 Acústica', optica: '💡 Óptica' };
+    const temaTags = { ondas: 'tag-ondas', fenomenos: 'tag-fenomenos', acustica: 'tag-acustica', optica: 'tag-optica' };
+
+    let revHTML = '';
+    preguntasSeleccionadas.forEach((p, i) => {
+        const resp = respuestasUsuario[i];
+        const ok = resp === p.respuesta;
+        if (ok) { total++; porTema[p.tema].ok++; }
+        porTema[p.tema].total++;
+
+        revHTML += `<div class="revision-item ${ok ? 'correcta' : 'incorrecta'}">
+            <div class="r-header">
+                <span style="font-size:0.85rem;color:${ok ? '#2ecc71' : '#e74c3c'};font-weight:700;">${ok ? '✅' : '❌'} Pregunta ${i + 1}</span>
+                <span class="r-tag ${temaTags[p.tema]}">${temaLabels[p.tema]}</span>
+            </div>
+            <div class="r-pregunta">${p.texto}</div>`;
+        if (!ok) revHTML += `<div class="r-tu-resp">Tu respuesta: ${resp !== null ? p.opciones[resp] : 'Sin responder'}</div>`;
+        revHTML += `<div class="r-correcta">Correcta: ${p.opciones[p.respuesta]}</div></div>`;
+    });
+
+    const pct = Math.round((total / 20) * 100);
+    let emoji, titulo, sub;
+    if (pct >= 90) { emoji = '🏆'; titulo = '¡Excelente desempeño!'; sub = 'Dominas todos los temas de la Unidad 2.'; }
+    else if (pct >= 75) { emoji = '🌟'; titulo = '¡Muy bien!'; sub = 'Tienes un sólido dominio de la unidad. Repasa los temas con más errores.'; }
+    else if (pct >= 60) { emoji = '📚'; titulo = 'Aprobado'; sub = 'Buen esfuerzo. Hay temas que requieren refuerzo.'; }
+    else if (pct >= 50) { emoji = '💪'; titulo = 'Cerca de aprobar'; sub = 'Repasa los temas donde obtuviste menos puntaje antes de volver a intentar.'; }
+    else { emoji = '🔄'; titulo = 'Necesitas repasar'; sub = 'Te recomendamos volver a los temas de la unidad antes de esta evaluación.'; }
+
+    document.getElementById('seccion-evaluacion').style.display = 'none';
+    const pr = document.getElementById('pantalla-resultado');
+    pr.classList.add('activo');
+
+    document.getElementById('nombre-resultado').textContent = '👤 ' + nombreEstudiante;
+    document.getElementById('emoji-resultado').textContent = emoji;
+    document.getElementById('titulo-resultado').textContent = titulo;
+    document.getElementById('subtitulo-resultado').textContent = sub;
+    document.getElementById('score-total').textContent = total;
+    document.getElementById('score-pct').textContent = pct + '%';
+
+    // Puntaje por tema
+    ['ondas', 'fenomenos', 'acustica', 'optica'].forEach(t => {
+        const st = porTema[t];
+        const pctT = Math.round((st.ok / st.total) * 100);
+        document.getElementById(`score-${t}`).textContent = `${st.ok}/${st.total}`;
+        document.getElementById(`pct-${t}`).textContent = pctT + '%';
+        setTimeout(() => { document.getElementById(`fill-${t}`).style.width = pctT + '%'; }, 300);
+    });
+
+    document.getElementById('revision-container').innerHTML = revHTML;
+
+    if (pct >= 75) confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
