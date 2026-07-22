@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Método del Paralelogramo - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-secundario: #2980b9;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; background-position: center;
+        }
+
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .header-tema h1 { font-size: 2.5rem; color: #f39c12; margin-bottom: 10px; }
+        
+        .ejercicio-box { background: rgba(20, 20, 35, 0.9); border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 2px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .enunciado { font-size: 1.2rem; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        
+        .paso { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #ccc; display: none; opacity: 0; transform: translateY(10px); transition: all 0.5s ease; }
+        .paso.activo { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-fisica); }
+        .paso.completado { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-exito); }
+        
+        .input-group { display: flex; align-items: center; gap: 15px; margin-top: 15px; }
+        .input-group input { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 15px; border-radius: 8px; font-size: 1.1rem; width: 150px; text-align: center; outline: none; }
+        .input-group input:focus { border-color: var(--color-fisica); }
+        .btn-validar { background: var(--color-fisica); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .btn-validar:hover { background: var(--color-secundario); transform: translateY(-2px); }
+        
+        .feedback { margin-top: 15px; font-weight: 600; font-size: 1rem; display: none; padding: 10px; border-radius: 8px; }
+        .feedback.error { background: rgba(231, 76, 60, 0.2); color: #ff6b6b; display: block; }
+        .feedback.exito { background: rgba(46, 204, 113, 0.2); color: #2ecc71; display: block; }
+        .feedback.pista { background: rgba(243, 156, 18, 0.2); color: #f39c12; display: block; margin-top: 10px; font-style: italic; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica10_vectores_paralelogramo.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+
+        <div class="header-tema">
+            <h1>Reto de Práctica: Ley del Coseno</h1>
+            <p>Aplica el método del paralelogramo paso a paso.</p>
+        </div>
+
+        <div class="ejercicio-box" id="ejercicio1">
+            <div class="enunciado">
+                Dos mulas tiran de un tronco. La mula A aplica una fuerza de 3 N y la mula B aplica una fuerza de 4 N. <br>
+                El ángulo entre las cuerdas es de 60°. (Asume \( \cos(60°) = 0.5 \)) <br>
+                Encuentra la magnitud de la fuerza resultante usando el método del paralelogramo.
+            </div>
+
+            <div class="paso activo" id="paso1">
+                <h3>Paso 1: Elevar al cuadrado</h3>
+                <p>Calcula \( |\vec{A}|^2 \) y \( |\vec{B}|^2 \) y súmalos.</p>
+                <div class="input-group">
+                    <label>\(|\vec{A}|^2 + |\vec{B}|^2 =\)</label>
+                    <input type="number" id="input-paso1" placeholder="Ej. 10">
+                    <button class="btn-validar" onclick="validarPaso(1)">Comprobar</button>
+                </div>
+                <div class="feedback" id="feedback-paso1"></div>
+                <div class="feedback pista" id="pista-paso1" style="display:none;"></div>
+            </div>
+
+            <div class="paso" id="paso2">
+                <h3>Paso 2: Calcular el término de interacción</h3>
+                <p>Calcula el valor de \( 2 \cdot |\vec{A}| \cdot |\vec{B}| \cdot \cos(\theta) \).</p>
+                <div class="input-group">
+                    <label>Valor =</label>
+                    <input type="number" id="input-paso2" placeholder="Ej. 10">
+                    <button class="btn-validar" onclick="validarPaso(2)">Comprobar</button>
+                </div>
+                <div class="feedback" id="feedback-paso2"></div>
+                <div class="feedback pista" id="pista-paso2" style="display:none;"></div>
+            </div>
+
+            <div class="paso" id="paso3">
+                <h3>Paso 3: Magnitud resultante</h3>
+                <p>Suma los dos valores anteriores y sácale la raíz cuadrada para encontrar \(|\vec{R}|\). (Usa 1 decimal si es necesario, o busca el número exacto si es entero).</p>
+                <div class="input-group">
+                    <label>\(|\vec{R}| =\)</label>
+                    <input type="number" id="input-paso3" step="0.1" placeholder="Ej. 5">
+                    <button class="btn-validar" onclick="validarPaso(3)">Comprobar</button>
+                </div>
+                <div class="feedback" id="feedback-paso3"></div>
+                <div class="feedback pista" id="pista-paso3" style="display:none;"></div>
+            </div>
+
+            <div class="paso" id="paso4">
+                <h3>¡Excelente!</h3>
+                <p style="margin-top:10px; font-size:1.2rem; color:#2ecc71;">La magnitud resultante es \(\sqrt{37}\) o aproximadamente \(6.08\). Al redondear a 1 decimal usamos 6.1 (el sistema aceptó tu respuesta).</p>
+                <div style="margin-top: 20px; text-align: center;">
+                    <a href="fisica10_vectores_paralelogramo_evaluacion.html" style="background:#e74c3c; color:white; padding:12px 25px; text-decoration:none; border-radius:8px; font-weight:bold; display:inline-block;">Ir a la Evaluación</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const respuestas = {
+            1: { valor: 25, pista: "Pista: 3 al cuadrado es 9. 4 al cuadrado es 16. Súmalos." },
+            2: { valor: 12, pista: "Pista: 2 * 3 * 4 * 0.5. Multiplica." },
+            3: { valor: 6.1, toleracia: 0.2, pista: "Pista: Suma 25 + 12 = 37. La raíz de 37 está entre 6 y 6.2." }
+        };
+
+        let intentos = { 1: 0, 2: 0, 3: 0 };
+
+        function validarPaso(paso) {
+            const input = document.getElementById('input-paso' + paso);
+            const feedback = document.getElementById('feedback-paso' + paso);
+            const pista = document.getElementById('pista-paso' + paso);
+            const valorIngresado = parseFloat(input.value);
+
+            if(isNaN(valorIngresado)) {
+                feedback.className = "feedback error";
+                feedback.innerHTML = "Por favor ingresa un número.";
+                return;
+            }
+
+            let esCorrecto = false;
+            if(respuestas[paso].toleracia) {
+                if(Math.abs(valorIngresado - respuestas[paso].valor) <= respuestas[paso].toleracia) {
+                    esCorrecto = true;
+                }
+            } else {
+                if(valorIngresado === respuestas[paso].valor) {
+                    esCorrecto = true;
+                }
+            }
+
+            if(esCorrecto) {
+                feedback.className = "feedback exito";
+                feedback.innerHTML = "<i class='fa-solid fa-check'></i> ¡Correcto!";
+                input.disabled = true;
+                pista.style.display = 'none';
+                
+                document.getElementById('paso' + paso).classList.add('completado');
+                
+                // Mostrar siguiente paso
+                const nextPaso = document.getElementById('paso' + (paso + 1));
+                if(nextPaso) {
+                    setTimeout(() => {
+                        nextPaso.classList.add('activo');
+                    }, 500);
+                }
+            } else {
+                intentos[paso]++;
+                feedback.className = "feedback error";
+                feedback.innerHTML = "<i class='fa-solid fa-xmark'></i> Incorrecto, revisa tu cálculo.";
+                
+                if(intentos[paso] >= 2) {
+                    pista.innerHTML = "<i class='fa-solid fa-lightbulb'></i> " + respuestas[paso].pista;
+                    pista.style.display = 'block';
+                }
+            }
+        }
+    </script>
+    <script src="profe-ia.js"></script>
+</body>
+</html>

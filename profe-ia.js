@@ -44,7 +44,7 @@
   const SYSTEM_PROMPT = `Eres el "Prof. W", un asistente virtual de Física especializado en los temas de Física para estudiantes de décimo grado de bachillerato.
 
 Tu conocimiento cubre TODOS estos temas de Física 10°:
-1. Magnitudes y vectores (escalares, vectoriales, sistema SI)
+1. Magnitudes y Vectores: Concepto, representación cartesiana, suma y resta de vectores por componentes, cálculo de magnitud con Teorema de Pitágoras, y suma angular con el Método del Paralelogramo (Ley del coseno).
 2. Conversión de unidades y notación científica
 3. Cifras significativas
 4. Movimiento Rectilíneo Uniforme (MRU): velocidad constante, fórmula d = v·t y sus despejes.
@@ -580,7 +580,7 @@ REGLAS DE COMPORTAMIENTO:
           <button class="profe-ia-chip" data-msg="¿Qué es el MRU y cuál es su fórmula?">📏 ¿Qué es el MRU?</button>
           <button class="profe-ia-chip" data-msg="Dame un ejercicio de MRUV para practicar">🚀 Ejercicio MRUV</button>
           <button class="profe-ia-chip" data-msg="¿Cómo funciona la caída libre? ¿Cuál es el valor de g?">🍎 Caída libre</button>
-          <button class="profe-ia-chip" data-msg="¿Cuál es la diferencia entre MRU y MRUV?">⚡ MRU vs MRUV</button>
+          <button class="profe-ia-chip" data-msg="¿Cómo sumo dos vectores usando el método del paralelogramo?">📐 Suma de Vectores</button>
         </div>
 
         <!-- MENSAJES -->

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos de Vectores - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-secundario: #2980b9;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; background-position: center;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 40px; padding: 40px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
+        .emoji-tema { font-size: 4rem; margin-bottom: 15px; display: inline-block; animation: bounce 2s infinite; }
+        .header-tema h1 { font-size: 3rem; color: #4facfe; margin-bottom: 15px; }
+        .header-tema p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto; }
+
+        .seccion { background: rgba(20, 20, 35, 0.8); border-radius: 15px; padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .seccion h2 { font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .seccion h2 i { color: var(--color-fisica); }
+        .seccion p { font-size: 1.1rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
+
+        .caja-formula { background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.05)); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 25px; margin: 20px 0; }
+        .caja-formula h3 { color: #fff; margin-bottom: 15px; font-size: 1.3rem; }
+        .caja-formula ul { text-align: left; margin-left: 20px; color: #fff; line-height: 1.8; font-size: 1.1rem; }
+        
+        .imagen-container { text-align: center; margin: 20px 0; }
+        .imagen-container img { max-width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10</a>
+
+        <div class="header-tema">
+            <span class="emoji-tema">🏹</span>
+            <h1>Concepto de Vectores</h1>
+            <p>Descubre cómo representar cantidades físicas que necesitan más que solo un número para ser descritas: magnitud, dirección y sentido.</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-book-open"></i> ¿Qué es un Vector?</h2>
+            <p>Un vector es un segmento de recta dirigido (una flecha) en el espacio que representa una <strong>magnitud vectorial</strong>. Mientras que una magnitud escalar se define solo por un número y una unidad (ej. masa: 5 kg), una magnitud vectorial necesita de tres características fundamentales:</p>
+            <ul>
+                <li><strong>Magnitud o Módulo:</strong> Es la longitud de la flecha, que representa el "tamaño" o "cantidad" de la magnitud.</li>
+                <li><strong>Dirección:</strong> Es la recta sobre la que se apoya el vector o el ángulo que forma con un eje de referencia (ej. 30° respecto a la horizontal).</li>
+                <li><strong>Sentido:</strong> Es hacia dónde apunta la flecha (norte, sur, arriba, derecha).</li>
+            </ul>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-pencil"></i> Representación Gráfica</h2>
+            <p>Gráficamente, un vector se dibuja como una flecha. Matemáticamente se denota con una letra y una flecha encima, por ejemplo: \(\vec{v}\), \(\vec{F}\), \(\vec{a}\).</p>
+            <div class="caja-formula">
+                <h3>Partes del Vector</h3>
+                <ul>
+                    <li><strong>Origen o punto de aplicación:</strong> Donde inicia el vector.</li>
+                    <li><strong>Extremo:</strong> Donde termina el vector (la punta de la flecha).</li>
+                </ul>
+            </div>
+            <p>Los vectores son fundamentales en la física de grado décimo para describir conceptos como el desplazamiento, la velocidad, la aceleración y las fuerzas.</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-compass"></i> Vectores en el Plano Cartesiano</h2>
+            <p>Un vector se puede ubicar en el plano cartesiano usando coordenadas rectangulares (x, y).</p>
+            <p>El punto de inicio usualmente es el origen (0,0), y la punta de la flecha llega a una coordenada (x, y). Esta forma de expresarlo nos facilitará mucho las operaciones más adelante.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>LabVirtual W &copy; 2025 · Construido con inteligencia artificial para la educación</p>
+    </footer>
+
+    <script src="profe-ia.js"></script>
+</body>
+</html>

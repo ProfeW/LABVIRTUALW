@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método del Paralelogramo - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; background-position: center;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 40px; padding: 40px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .emoji-tema { font-size: 4rem; margin-bottom: 15px; display: inline-block; animation: bounce 2s infinite; }
+        .header-tema h1 { font-size: 3rem; color: #4facfe; margin-bottom: 15px; }
+        .header-tema p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto; }
+
+        .seccion { background: rgba(20, 20, 35, 0.8); border-radius: 15px; padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .seccion h2 { font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .seccion h2 i { color: var(--color-fisica); }
+        .seccion p { font-size: 1.1rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
+
+        .caja-formula { background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.05)); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 25px; margin: 20px 0; }
+        .caja-formula h3 { color: #fff; margin-bottom: 15px; font-size: 1.3rem; }
+        .caja-formula p { color: #fff; font-size: 1.1rem; text-align: center; font-weight: bold; }
+
+        .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+        .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .btn-practica { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
+        .btn-practica:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(230, 126, 34, 0.4); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+        .btn-evaluacion:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(231, 76, 60, 0.4); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10</a>
+
+        <div class="header-tema">
+            <span class="emoji-tema">🔲</span>
+            <h1>Método del Paralelogramo</h1>
+            <p>Suma vectores que tienen diferentes ángulos utilizando la geometría y la ley del coseno.</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-draw-polygon"></i> ¿En qué consiste?</h2>
+            <p>Para sumar dos vectores que comparten un mismo punto de origen, se dibuja un paralelogramo proyectando líneas paralelas a cada vector. La diagonal que parte del origen hasta el vértice opuesto representa el <strong>Vector Resultante</strong>.</p>
+            <p>Para calcular la magnitud de la diagonal, usamos una variante de la Ley del Coseno.</p>
+            <div class="caja-formula">
+                <h3>Ley de Cosenos (Suma de Vectores)</h3>
+                <p>$$ |\vec{R}| = \sqrt{|\vec{A}|^2 + |\vec{B}|^2 + 2|\vec{A}||\vec{B}|\cos(\theta)} $$</p>
+            </div>
+            <p>Donde \(\theta\) es el ángulo formado entre los dos vectores unidos por sus orígenes.</p>
+        </div>
+
+        <div class="botones-accion">
+            <a href="fisica10_vectores_paralelogramo_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Ejercicios Prácticos
+            </a>
+            <a href="fisica10_vectores_paralelogramo_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-clipboard-check"></i> Realizar Evaluación
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>LabVirtual W &copy; 2025 · Construido con inteligencia artificial para la educación</p>
+    </footer>
+
+    <script src="profe-ia.js"></script>
+</body>
+</html>
