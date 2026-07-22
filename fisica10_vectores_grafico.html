@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Gráfico de Vectores - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-secundario: #2980b9;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; background-position: center;
+        }
+
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-fisica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .contenedor { max-width: 1100px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .header-tema h1 { font-size: 2.5rem; color: #4facfe; margin-bottom: 10px; }
+        
+        .video-contenedor {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+        }
+        .video-contenedor iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        .simulador-grid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; margin-bottom: 40px; }
+        @media(max-width: 800px) { .simulador-grid { grid-template-columns: 1fr; } }
+
+        .canvas-container { background: #fff; border-radius: 10px; padding: 10px; display: flex; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        canvas { background: #fafafa; border: 1px solid #ccc; cursor: crosshair; border-radius: 5px; width: 100%; max-width: 500px; aspect-ratio: 1; }
+        
+        .panel-controles { background: rgba(20, 20, 35, 0.9); border-radius: 10px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .panel-controles h3 { color: #f39c12; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;}
+        
+        .btn-sim { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; justify-content: space-between; align-items: center;}
+        .btn-tut { background: rgba(52, 152, 219, 0.2); color: #3498db; border: 1px solid #3498db; }
+        .btn-tut:hover { background: #3498db; color: #fff; }
+        .btn-prac { background: rgba(243, 156, 18, 0.2); color: #f39c12; border: 1px solid #f39c12; }
+        .btn-prac:hover { background: #f39c12; color: #fff; }
+        
+        .btn-accion { background: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 5px;}
+        .btn-accion:hover { background: #c0392b; }
+        
+        .btn-validar { background: #2ecc71; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px;}
+        .btn-validar:hover { background: #27ae60; }
+
+        .info-sim { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; font-size: 0.95rem; line-height: 1.5; color: #ddd; margin-top: 20px; min-height: 100px;}
+        
+        .coordenadas { font-family: monospace; font-size: 1.2rem; text-align: center; color: #2ecc71; margin-top: 10px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10</a>
+
+        <div class="header-tema">
+            <h1>Suma de Vectores: Método Gráfico</h1>
+            <p>El método de la cabeza y la cola. Consiste en dibujar el primer vector, y desde la cabeza (flecha) de este, comenzar a dibujar la cola del siguiente.</p>
+        </div>
+
+        <div class="video-contenedor">
+            <iframe src="https://www.youtube.com/embed/A8pB2F7o8Ow?start=251" title="Método Gráfico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="simulador-grid">
+            <div class="canvas-container">
+                <canvas id="plano" width="500" height="500"></canvas>
+            </div>
+            
+            <div class="panel-controles">
+                <h3>1. Ver Tutoriales</h3>
+                <button class="btn-sim btn-tut" onclick="iniciarTutorial(0)">Tutorial 2 Vectores <i class="fa-solid fa-play"></i></button>
+                <button class="btn-sim btn-tut" onclick="iniciarTutorial(1)">Tutorial 3 Vectores <i class="fa-solid fa-play"></i></button>
+                <button class="btn-sim btn-tut" onclick="iniciarTutorial(2)">Tutorial 5 Vectores <i class="fa-solid fa-play"></i></button>
+                
+                <h3 style="margin-top: 20px;">2. Práctica Interactiva</h3>
+                <button class="btn-sim btn-prac" onclick="iniciarPractica(0)">Práctica 1 (2 Vect) <i class="fa-solid fa-pencil"></i></button>
+                <button class="btn-sim btn-prac" onclick="iniciarPractica(1)">Práctica 2 (3 Vect) <i class="fa-solid fa-pencil"></i></button>
+                <button class="btn-sim btn-prac" onclick="iniciarPractica(2)">Práctica 3 (5 Vect) <i class="fa-solid fa-pencil"></i></button>
+                
+                <div id="controles-practica" style="display: none;">
+                    <button class="btn-accion" onclick="deshacerPunto()"><i class="fa-solid fa-rotate-left"></i> Deshacer Trazo</button>
+                    <button class="btn-validar" onclick="validarPractica()"><i class="fa-solid fa-check"></i> Comprobar Dibujo</button>
+                </div>
+
+                <div class="info-sim" id="info-sim">
+                    Haz clic en un tutorial o práctica para empezar.
+                </div>
+                <div class="coordenadas" id="coordenadas">X: 0, Y: 0</div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const canvas = document.getElementById('plano');
+        const ctx = canvas.getContext('2d');
+        const infoSim = document.getElementById('info-sim');
+        const coorTxt = document.getElementById('coordenadas');
+        const ctrlsPrac = document.getElementById('controles-practica');
+
+        const UNIT = 25;
+        const MID = 250;
+        
+        let modo = 'idle'; // idle, tutorial, practica
+        let puntosDibujados = [{x:0, y:0}];
+        let vectoresObjetivo = [];
+        let pasoTutorial = 0;
+        let timerAnimacion = null;
+
+        const dataTutoriales = [
+            { txt: "Tutorial: 2 Vectores. A=(3,4), B=(4,-2)", vecs: [{x:3,y:4, n:'A'}, {x:4,y:-2, n:'B'}] },
+            { txt: "Tutorial: 3 Vectores. A=(-2,5), B=(5,1), C=(-3,-7)", vecs: [{x:-2,y:5, n:'A'}, {x:5,y:1, n:'B'}, {x:-3,y:-7, n:'C'}] },
+            { txt: "Tutorial: 5 Vectores. A=(1,2), B=(-3,4), C=(2,-1), D=(3,2), E=(-4,-5)", vecs: [{x:1,y:2, n:'A'}, {x:-3,y:4, n:'B'}, {x:2,y:-1, n:'C'}, {x:3,y:2, n:'D'}, {x:-4,y:-5, n:'E'}] }
+        ];
+
+        const dataPracticas = [
+            { txt: "Práctica 1: Dibuja A=(2,5) y B=(3,-3).<br><small>Haz clic en las coordenadas correspondientes formando el camino de cabeza y cola.</small>", vecs: [{x:2,y:5}, {x:3,y:-3}] },
+            { txt: "Práctica 2: Dibuja A=(-3,4), B=(5,0) y C=(1,-6).", vecs: [{x:-3,y:4}, {x:5,y:0}, {x:1,y:-6}] },
+            { txt: "Práctica 3 (Reto 5): Dibuja A=(2,2), B=(2,2), C=(-4,1), D=(-3,-5), E=(5,2).", vecs: [{x:2,y:2}, {x:2,y:2}, {x:-4,y:1}, {x:-3,y:-5}, {x:5,y:2}] }
+        ];
+
+        function toPx(x, y) {
+            return { px: MID + x * UNIT, py: MID - y * UNIT };
+        }
+        function toGrid(px, py) {
+            return { x: Math.round((px - MID) / UNIT), y: Math.round((MID - py) / UNIT) };
+        }
+
+        function dibujarCuadricula() {
+            ctx.clearRect(0,0,500,500);
+            ctx.lineWidth = 1;
+            
+            // Cuadricula
+            for(let i=0; i<=20; i++) {
+                ctx.strokeStyle = i === 10 ? '#333' : '#ddd';
+                
+                // Vertical
+                ctx.beginPath();
+                ctx.moveTo(i*UNIT, 0); ctx.lineTo(i*UNIT, 500);
+                ctx.stroke();
+                
+                // Horizontal
+                ctx.beginPath();
+                ctx.moveTo(0, i*UNIT); ctx.lineTo(500, i*UNIT);
+                ctx.stroke();
+            }
+
+            // Etiquetas
+            ctx.fillStyle = '#333';
+            ctx.font = '10px Arial';
+            for(let i=-10; i<=10; i++) {
+                if(i !== 0) {
+                    ctx.fillText(i, MID + i*UNIT - 5, MID + 15);
+                    ctx.fillText(i, MID - 20, MID - i*UNIT + 4);
+                }
+            }
+        }
+
+        function dibujarFlecha(x1, y1, x2, y2, color, label) {
+            let p1 = toPx(x1, y1);
+            let p2 = toPx(x2, y2);
+            
+            ctx.beginPath();
+            ctx.moveTo(p1.px, p1.py);
+            ctx.lineTo(p2.px, p2.py);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Punta
+            let angle = Math.atan2(p2.py - p1.py, p2.px - p1.px);
+            ctx.beginPath();
+            ctx.moveTo(p2.px, p2.py);
+            ctx.lineTo(p2.px - 10 * Math.cos(angle - Math.PI/6), p2.py - 10 * Math.sin(angle - Math.PI/6));
+            ctx.lineTo(p2.px - 10 * Math.cos(angle + Math.PI/6), p2.py - 10 * Math.sin(angle + Math.PI/6));
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            if(label) {
+                ctx.fillStyle = color;
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText(label, p1.px + (p2.px-p1.px)/2 + 5, p1.py + (p2.py-p1.py)/2 - 5);
+            }
+        }
+
+        function repintarTodo() {
+            dibujarCuadricula();
+            
+            // Dibujar trazado actual
+            for(let i=1; i<puntosDibujados.length; i++) {
+                let pPrev = puntosDibujados[i-1];
+                let pCur = puntosDibujados[i];
+                dibujarFlecha(pPrev.x, pPrev.y, pCur.x, pCur.y, '#3498db', 'V'+i);
+            }
+
+            // Si es práctica y hay comprobación, o si es tutorial terminado, dibujar Resultante
+            if(modo === 'practica_validada' || modo === 'tutorial_fin') {
+                let final = puntosDibujados[puntosDibujados.length-1];
+                if(final.x !== 0 || final.y !== 0) {
+                    dibujarFlecha(0, 0, final.x, final.y, '#e74c3c', 'R');
+                }
+            }
+        }
+
+        function iniciarTutorial(idx) {
+            clearTimeout(timerAnimacion);
+            modo = 'tutorial';
+            ctrlsPrac.style.display = 'none';
+            puntosDibujados = [{x:0, y:0}];
+            pasoTutorial = 0;
+            let tut = dataTutoriales[idx];
+            infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br>Observa cómo se conectan la cabeza y la cola...`;
+            
+            let pts = [{x:0, y:0}];
+            let curX = 0, curY = 0;
+            tut.vecs.forEach(v => {
+                curX += v.x; curY += v.y;
+                pts.push({x: curX, y: curY, n: v.n});
+            });
+
+            function animarPaso() {
+                pasoTutorial++;
+                if(pasoTutorial < pts.length) {
+                    puntosDibujados.push(pts[pasoTutorial]);
+                    repintarTodo();
+                    infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br>Dibujando vector ${pts[pasoTutorial].n}... (Cola en la cabeza del anterior).`;
+                    timerAnimacion = setTimeout(animarPaso, 1500);
+                } else {
+                    modo = 'tutorial_fin';
+                    repintarTodo();
+                    infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br><span style="color:#2ecc71;">¡Tutorial terminado!</span> La flecha roja es el vector Resultante (R) que va desde el inicio hasta la última cabeza.`;
+                }
+            }
+            repintarTodo();
+            timerAnimacion = setTimeout(animarPaso, 1000);
+        }
+
+        function iniciarPractica(idx) {
+            clearTimeout(timerAnimacion);
+            modo = 'practica';
+            ctrlsPrac.style.display = 'block';
+            puntosDibujados = [{x:0, y:0}];
+            vectoresObjetivo = dataPracticas[idx].vecs;
+            infoSim.innerHTML = `<strong>${dataPracticas[idx].txt}</strong>`;
+            repintarTodo();
+        }
+
+        function deshacerPunto() {
+            if(modo.startsWith('practica') && puntosDibujados.length > 1) {
+                modo = 'practica'; // Reset validacion
+                puntosDibujados.pop();
+                repintarTodo();
+            }
+        }
+
+        function validarPractica() {
+            if(modo !== 'practica') return;
+            
+            if(puntosDibujados.length - 1 !== vectoresObjetivo.length) {
+                infoSim.innerHTML += `<br><span style="color:#e74c3c;">Faltan o sobran vectores. Deben ser ${vectoresObjetivo.length}.</span>`;
+                return;
+            }
+
+            let correcto = true;
+            let cx = 0, cy = 0;
+            for(let i=0; i<vectoresObjetivo.length; i++) {
+                cx += vectoresObjetivo[i].x;
+                cy += vectoresObjetivo[i].y;
+                let pt = puntosDibujados[i+1];
+                if(pt.x !== cx || pt.y !== cy) {
+                    correcto = false; break;
+                }
+            }
+
+            if(correcto) {
+                modo = 'practica_validada';
+                infoSim.innerHTML = `<span style="color:#2ecc71; font-weight:bold;">¡Perfecto!</span> Has dibujado correctamente los vectores cabeza con cola. La flecha roja es la Resultante.`;
+                repintarTodo();
+            } else {
+                infoSim.innerHTML = `<span style="color:#e74c3c; font-weight:bold;">Hay un error.</span> Verifica si contaste bien las casillas X e Y para cada vector a partir de la cabeza del anterior. Usa 'Deshacer Trazo'.`;
+            }
+        }
+
+        // Eventos Canvas
+        canvas.addEventListener('mousemove', (e) => {
+            let rect = canvas.getBoundingClientRect();
+            let g = toGrid(e.clientX - rect.left, e.clientY - rect.top);
+            coorTxt.innerText = `X: ${g.x}, Y: ${g.y}`;
+        });
+
+        canvas.addEventListener('mousedown', (e) => {
+            if(!modo.startsWith('practica') || modo === 'practica_validada') return;
+            
+            let rect = canvas.getBoundingClientRect();
+            let g = toGrid(e.clientX - rect.left, e.clientY - rect.top);
+            
+            // Evitar clic fuera de la cuadricula útil
+            if(g.x < -10 || g.x > 10 || g.y < -10 || g.y > 10) return;
+            
+            // Añadir el punto
+            puntosDibujados.push(g);
+            repintarTodo();
+        });
+
+        dibujarCuadricula();
+    </script>
+</body>
+</html>

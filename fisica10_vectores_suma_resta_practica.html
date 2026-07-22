@@ -44,23 +44,38 @@
         .header-tema { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
         .header-tema h1 { font-size: 2.5rem; color: #f39c12; margin-bottom: 10px; }
         
-        .ejercicio-box { background: rgba(20, 20, 35, 0.9); border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 2px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .enunciado { font-size: 1.2rem; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        .progreso-container { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;}
+        .bola-progreso { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: bold; transition: 0.3s;}
+        .bola-progreso.activo { background: #f39c12; color: #fff; box-shadow: 0 0 10px #f39c12;}
+        .bola-progreso.completado { background: var(--color-exito); color: #fff; }
+
+        .ejercicio-box { background: rgba(20, 20, 35, 0.9); border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 2px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.5); display: none;}
+        .ejercicio-box.activo { display: block; animation: fadeIn 0.5s; }
         
-        .paso { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #ccc; display: none; opacity: 0; transform: translateY(10px); transition: all 0.5s ease; }
-        .paso.activo { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-fisica); }
-        .paso.completado { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-exito); }
+        .enunciado { font-size: 1.2rem; margin-bottom: 20px; text-align: center; font-weight: 600; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;}
         
-        .input-group { display: flex; align-items: center; gap: 15px; margin-top: 15px; }
-        .input-group input { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 15px; border-radius: 8px; font-size: 1.1rem; width: 150px; text-align: center; outline: none; }
-        .input-group input:focus { border-color: var(--color-fisica); }
-        .btn-validar { background: var(--color-fisica); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .tabla-columnas { margin: 0 auto; border-collapse: collapse; width: 100%; max-width: 400px; }
+        .tabla-columnas th { font-size: 1.2rem; color: #4facfe; padding: 10px; text-align: center; border-bottom: 2px solid rgba(255,255,255,0.1); }
+        .tabla-columnas td { padding: 10px; text-align: center; }
+        .tabla-columnas td.vector-nombre { font-weight: bold; font-size: 1.2rem; text-align: right; padding-right: 15px;}
+        
+        .fila-total td { border-top: 3px solid #fff; padding-top: 20px;}
+        .fila-total .vector-nombre { color: #f39c12; }
+
+        .input-coord { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px; border-radius: 5px; font-size: 1.1rem; width: 80px; text-align: center; outline: none; font-family: monospace;}
+        .input-coord:focus { border-color: var(--color-fisica); }
+        .input-coord.correcto { border-color: var(--color-exito); background: rgba(46, 204, 113, 0.1); pointer-events: none;}
+        .input-coord.incorrecto { border-color: var(--color-error); background: rgba(231, 76, 60, 0.1);}
+
+        .controles { text-align: center; margin-top: 30px; }
+        .btn-validar { background: var(--color-fisica); color: #fff; border: none; padding: 12px 25px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .btn-validar:hover { background: var(--color-secundario); transform: translateY(-2px); }
+        .btn-siguiente { background: var(--color-exito); display: none; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; margin-left: 10px;}
+        .btn-siguiente:hover { background: #27ae60; transform: translateY(-2px); }
         
-        .feedback { margin-top: 15px; font-weight: 600; font-size: 1rem; display: none; padding: 10px; border-radius: 8px; }
+        .feedback { margin-top: 15px; font-weight: 600; font-size: 1rem; padding: 10px; border-radius: 8px; display: none; text-align: center;}
         .feedback.error { background: rgba(231, 76, 60, 0.2); color: #ff6b6b; display: block; }
         .feedback.exito { background: rgba(46, 204, 113, 0.2); color: #2ecc71; display: block; }
-        .feedback.pista { background: rgba(243, 156, 18, 0.2); color: #f39c12; display: block; margin-top: 10px; font-style: italic; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -81,98 +96,138 @@
         <a href="fisica10_vectores_suma_resta.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
         <div class="header-tema">
-            <h1>Reto de Práctica: Suma de Vectores</h1>
-            <p>Demuestra tu habilidad en operaciones con vectores. Resuelve paso a paso.</p>
+            <h1>Práctica: Suma en Columnas</h1>
+            <p>Escribe los vectores en cada celda respetando la ley de signos (invierte si es resta) y calcula el total.</p>
         </div>
 
-        <div class="ejercicio-box" id="ejercicio1">
-            <div class="enunciado">
-                Dados los vectores: <br>
-                \(\vec{A} = (4, -2)\) <br>
-                \(\vec{B} = (-1, 5)\) <br>
-                Encuentra el vector resultante \(\vec{R} = \vec{A} + \vec{B}\)
-            </div>
-
-            <div class="paso activo" id="paso1">
-                <h3>Paso 1: Componente X</h3>
-                <p>Para hallar la componente X resultante (\(R_x\)), debemos sumar la componente X del vector A con la componente X del vector B. La fórmula es \(R_x = A_x + B_x\).</p>
-                <div class="input-group">
-                    <label>\(R_x =\)</label>
-                    <input type="number" id="input-paso1" placeholder="Ej. 5">
-                    <button class="btn-validar" onclick="validarPaso(1)">Comprobar</button>
-                </div>
-                <div class="feedback" id="feedback-paso1"></div>
-                <div class="feedback pista" id="pista-paso1" style="display:none;"></div>
-            </div>
-
-            <div class="paso" id="paso2">
-                <h3>Paso 2: Componente Y</h3>
-                <p>De igual forma, para hallar la componente Y resultante (\(R_y\)), suma la componente Y de A con la componente Y de B. La fórmula es \(R_y = A_y + B_y\).</p>
-                <div class="input-group">
-                    <label>\(R_y =\)</label>
-                    <input type="number" id="input-paso2" placeholder="Ej. 3">
-                    <button class="btn-validar" onclick="validarPaso(2)">Comprobar</button>
-                </div>
-                <div class="feedback" id="feedback-paso2"></div>
-                <div class="feedback pista" id="pista-paso2" style="display:none;"></div>
-            </div>
-
-            <div class="paso" id="paso3">
-                <h3>¡Excelente! Has completado el ejercicio.</h3>
-                <p style="margin-top:10px; font-size:1.2rem; color:#2ecc71;">El vector resultante es \(\vec{R} = (3, 3)\)</p>
-                <div style="margin-top: 20px; text-align: center;">
-                    <a href="fisica10_vectores_suma_resta_evaluacion.html" style="background:#e74c3c; color:white; padding:12px 25px; text-decoration:none; border-radius:8px; font-weight:bold; display:inline-block;">Ir a la Evaluación</a>
-                </div>
-            </div>
+        <div class="progreso-container" id="progreso-container">
+            <!-- Se generará con JS -->
         </div>
+
+        <div id="ejercicios-container">
+            <!-- Se generan con JS -->
+        </div>
+        
+        <div id="mensaje-final" style="display:none; text-align:center; padding: 40px; background: rgba(46,204,113,0.1); border-radius: 20px; border: 2px solid #2ecc71;">
+            <h2>¡Felicidades! Has completado los 10 ejercicios.</h2>
+            <p style="margin-bottom: 20px;">Dominas a la perfección la suma y resta de vectores en columnas.</p>
+            <a href="fisica10_vectores_suma_resta_evaluacion.html" class="btn-validar" style="text-decoration: none;">Ir a la Evaluación</a>
+        </div>
+
     </main>
 
     <script>
-        const respuestas = {
-            1: { valor: 3, pista: "Pista: Suma las primeras coordenadas de los vectores A y B. Es decir, 4 + (-1)." },
-            2: { valor: 3, pista: "Pista: Suma las segundas coordenadas de los vectores A y B. Es decir, -2 + 5." }
-        };
+        const ejercicios = [
+            { id: 1, text: "Calcula \\(\\vec{R} = \\vec{A} + \\vec{B}\\)<br> \\(\\vec{A}=(3, 2)\\) ; \\(\\vec{B}=(1, 4)\\)", vectors: [ {name: "\\vec{A}", x:3, y:2}, {name: "+\\vec{B}", x:1, y:4} ], res: {x:4, y:6} },
+            { id: 2, text: "Calcula \\(\\vec{R} = \\vec{P} + \\vec{Q}\\)<br> \\(\\vec{P}=(-2, 5)\\) ; \\(\\vec{Q}=(6, -1)\\)", vectors: [ {name: "\\vec{P}", x:-2, y:5}, {name: "+\\vec{Q}", x:6, y:-1} ], res: {x:4, y:4} },
+            { id: 3, text: "Calcula la resta \\(\\vec{R} = \\vec{M} - \\vec{N}\\)<br> \\(\\vec{M}=(5, 8)\\) ; \\(\\vec{N}=(2, 3)\\)<br><small>Recuerda invertir los signos del vector N al escribirlo.</small>", vectors: [ {name: "\\vec{M}", x:5, y:8}, {name: "-\\vec{N}", x:-2, y:-3} ], res: {x:3, y:5} },
+            { id: 4, text: "Calcula la resta \\(\\vec{R} = \\vec{C} - \\vec{D}\\)<br> \\(\\vec{C}=(-1, 4)\\) ; \\(\\vec{D}=(3, -2)\\)<br><small>Invierte los signos de D.</small>", vectors: [ {name: "\\vec{C}", x:-1, y:4}, {name: "-\\vec{D}", x:-3, y:2} ], res: {x:-4, y:6} },
+            { id: 5, text: "Calcula \\(\\vec{R} = \\vec{A} + \\vec{B} + \\vec{C}\\)<br> \\(\\vec{A}=(1, 1)\\) ; \\(\\vec{B}=(2, -3)\\) ; \\(\\vec{C}=(-4, 2)\\)", vectors: [ {name: "\\vec{A}", x:1, y:1}, {name: "\\vec{B}", x:2, y:-3}, {name: "+\\vec{C}", x:-4, y:2} ], res: {x:-1, y:0} },
+            { id: 6, text: "Operación Mixta \\(\\vec{R} = \\vec{P} - \\vec{Q} + \\vec{S}\\)<br> \\(\\vec{P}=(4, 0)\\) ; \\(\\vec{Q}=(2, -5)\\) ; \\(\\vec{S}=(-1, -1)\\)", vectors: [ {name: "\\vec{P}", x:4, y:0}, {name: "-\\vec{Q}", x:-2, y:5}, {name: "+\\vec{S}", x:-1, y:-1} ], res: {x:1, y:4} },
+            { id: 7, text: "Calcula \\(\\vec{R} = \\vec{A} + \\vec{B} + \\vec{C} + \\vec{D}\\)<br> \\(\\vec{A}=(2, 2)\\) ; \\(\\vec{B}=(-1, 3)\\) ; \\(\\vec{C}=(4, -4)\\) ; \\(\\vec{D}=(-2, -1)\\)", vectors: [ {name: "\\vec{A}", x:2, y:2}, {name: "\\vec{B}", x:-1, y:3}, {name: "\\vec{C}", x:4, y:-4}, {name: "+\\vec{D}", x:-2, y:-1} ], res: {x:3, y:0} },
+            { id: 8, text: "Operación Mixta 4 vectores \\(\\vec{R} = \\vec{A} - \\vec{B} - \\vec{C} + \\vec{D}\\)<br> \\(\\vec{A}=(5, 5)\\) ; \\(\\vec{B}=(1, 2)\\) ; \\(\\vec{C}=(-2, 1)\\) ; \\(\\vec{D}=(0, -3)\\)", vectors: [ {name: "\\vec{A}", x:5, y:5}, {name: "-\\vec{B}", x:-1, y:-2}, {name: "-\\vec{C}", x:2, y:-1}, {name: "+\\vec{D}", x:0, y:-3} ], res: {x:6, y:-1} },
+            { id: 9, text: "5 Vectores Mixtos \\(\\vec{R} = \\vec{V}_1 + \\vec{V}_2 - \\vec{V}_3 + \\vec{V}_4 - \\vec{V}_5\\)<br> \\(\\vec{V}_1=(1,1)\\) ; \\(\\vec{V}_2=(-3,2)\\) ; \\(\\vec{V}_3=(2,-2)\\) ; \\(\\vec{V}_4=(0,5)\\) ; \\(\\vec{V}_5=(-4,1)\\)", vectors: [ {name: "\\vec{V}_1", x:1, y:1}, {name: "\\vec{V}_2", x:-3, y:2}, {name: "-\\vec{V}_3", x:-2, y:2}, {name: "\\vec{V}_4", x:0, y:5}, {name: "-\\vec{V}_5", x:4, y:-1} ], res: {x:0, y:9} },
+            { id: 10, text: "El Gran Reto Final \\(\\vec{R} = \\vec{A} - \\vec{B} + \\vec{C} - \\vec{D} + \\vec{E}\\)<br> \\(\\vec{A}=(10,-5)\\) ; \\(\\vec{B}=(3,4)\\) ; \\(\\vec{C}=(-2,-2)\\) ; \\(\\vec{D}=(-5,0)\\) ; \\(\\vec{E}=(1,7)\\)", vectors: [ {name: "\\vec{A}", x:10, y:-5}, {name: "-\\vec{B}", x:-3, y:-4}, {name: "\\vec{C}", x:-2, y:-2}, {name: "-\\vec{D}", x:5, y:0}, {name: "+\\vec{E}", x:1, y:7} ], res: {x:11, y:-4} }
+        ];
 
-        let intentos = { 1: 0, 2: 0 };
+        let currentEx = 1;
 
-        function validarPaso(paso) {
-            const input = document.getElementById('input-paso' + paso);
-            const feedback = document.getElementById('feedback-paso' + paso);
-            const pista = document.getElementById('pista-paso' + paso);
-            const valorIngresado = parseFloat(input.value);
+        function init() {
+            const prog = document.getElementById('progreso-container');
+            const cont = document.getElementById('ejercicios-container');
+            
+            ejercicios.forEach(ex => {
+                // Progreso
+                let b = document.createElement('div');
+                b.className = 'bola-progreso' + (ex.id === 1 ? ' activo' : '');
+                b.id = 'bola-' + ex.id;
+                b.innerText = ex.id;
+                prog.appendChild(b);
 
-            if(isNaN(valorIngresado)) {
-                feedback.className = "feedback error";
-                feedback.innerHTML = "Por favor ingresa un número.";
-                return;
-            }
+                // HTML de la tabla
+                let tableHtml = `<table class="tabla-columnas">
+                    <tr><th></th><th>Eje X</th><th>Eje Y</th></tr>`;
+                
+                ex.vectors.forEach((v, idx) => {
+                    tableHtml += `<tr>
+                        <td class="vector-nombre">\\(${v.name}\\) =</td>
+                        <td><input type="number" class="input-coord" id="ex${ex.id}_v${idx}_x" data-ans="${v.x}" placeholder="X"></td>
+                        <td><input type="number" class="input-coord" id="ex${ex.id}_v${idx}_y" data-ans="${v.y}" placeholder="Y"></td>
+                    </tr>`;
+                });
 
-            if(valorIngresado === respuestas[paso].valor) {
+                tableHtml += `<tr class="fila-total">
+                    <td class="vector-nombre">\\(\\vec{R}\\) =</td>
+                    <td><input type="number" class="input-coord" id="ex${ex.id}_r_x" data-ans="${ex.res.x}" placeholder="Total X"></td>
+                    <td><input type="number" class="input-coord" id="ex${ex.id}_r_y" data-ans="${ex.res.y}" placeholder="Total Y"></td>
+                </tr></table>`;
+
+                let div = document.createElement('div');
+                div.className = 'ejercicio-box' + (ex.id === 1 ? ' activo' : '');
+                div.id = 'ejercicio-' + ex.id;
+                div.innerHTML = `
+                    <div class="enunciado">${ex.text}</div>
+                    ${tableHtml}
+                    <div class="feedback" id="feedback-${ex.id}"></div>
+                    <div class="controles">
+                        <button class="btn-validar" id="btn-val-${ex.id}" onclick="validar(${ex.id})">Comprobar Todo</button>
+                        <button class="btn-siguiente" id="btn-sig-${ex.id}" onclick="siguiente(${ex.id})">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                `;
+                cont.appendChild(div);
+            });
+            
+            if(window.MathJax) MathJax.typeset();
+        }
+
+        function validar(id) {
+            const inputs = document.querySelectorAll(`#ejercicio-${id} .input-coord`);
+            let todosCorrectos = true;
+            
+            inputs.forEach(inp => {
+                let val = parseFloat(inp.value);
+                let ans = parseFloat(inp.getAttribute('data-ans'));
+                
+                if(isNaN(val)) {
+                    todosCorrectos = false;
+                    inp.classList.remove('correcto', 'incorrecto');
+                } else if(val === ans) {
+                    inp.classList.remove('incorrecto');
+                    inp.classList.add('correcto');
+                } else {
+                    inp.classList.remove('correcto');
+                    inp.classList.add('incorrecto');
+                    todosCorrectos = false;
+                }
+            });
+
+            const feedback = document.getElementById(`feedback-${id}`);
+            if(todosCorrectos) {
                 feedback.className = "feedback exito";
-                feedback.innerHTML = "<i class='fa-solid fa-check'></i> ¡Correcto!";
-                input.disabled = true;
-                pista.style.display = 'none';
-                
-                document.getElementById('paso' + paso).classList.add('completado');
-                
-                // Mostrar siguiente paso
-                const nextPaso = document.getElementById('paso' + (paso + 1));
-                if(nextPaso) {
-                    setTimeout(() => {
-                        nextPaso.classList.add('activo');
-                    }, 500);
-                }
+                feedback.innerHTML = "¡Excelente! Los valores y las sumas están perfectos.";
+                document.getElementById(`btn-val-${id}`).style.display = 'none';
+                document.getElementById(`btn-sig-${id}`).style.display = 'inline-block';
+                document.getElementById(`bola-${id}`).classList.remove('activo');
+                document.getElementById(`bola-${id}`).classList.add('completado');
             } else {
-                intentos[paso]++;
                 feedback.className = "feedback error";
-                feedback.innerHTML = "<i class='fa-solid fa-xmark'></i> Incorrecto, revisa tu cálculo.";
-                
-                if(intentos[paso] >= 2) {
-                    pista.innerHTML = "<i class='fa-solid fa-lightbulb'></i> " + respuestas[paso].pista;
-                    pista.style.display = 'block';
-                }
+                feedback.innerHTML = "Hay errores en rojo. Revisa si invertiste bien los signos (si era resta) y tu suma vertical.";
             }
         }
+
+        function siguiente(id) {
+            document.getElementById(`ejercicio-${id}`).classList.remove('activo');
+            if(id < 10) {
+                let nextId = id + 1;
+                document.getElementById(`ejercicio-${nextId}`).classList.add('activo');
+                document.getElementById(`bola-${nextId}`).classList.add('activo');
+            } else {
+                document.getElementById('progreso-container').style.display = 'none';
+                document.getElementById('mensaje-final').style.display = 'block';
+            }
+        }
+
+        window.onload = init;
     </script>
     <script src="profe-ia.js"></script>
 </body>

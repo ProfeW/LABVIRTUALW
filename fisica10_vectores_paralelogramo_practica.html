@@ -44,9 +44,19 @@
         .header-tema { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
         .header-tema h1 { font-size: 2.5rem; color: #f39c12; margin-bottom: 10px; }
         
-        .ejercicio-box { background: rgba(20, 20, 35, 0.9); border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 2px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .enunciado { font-size: 1.2rem; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        .progreso-container { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;}
+        .bola-progreso { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: bold; transition: 0.3s;}
+        .bola-progreso.activo { background: #f39c12; color: #fff; box-shadow: 0 0 10px #f39c12;}
+        .bola-progreso.completado { background: var(--color-exito); color: #fff; }
+
+        .ejercicio-box { background: rgba(20, 20, 35, 0.9); border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 2px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.5); display: none;}
+        .ejercicio-box.activo { display: block; animation: fadeIn 0.5s; }
         
+        .enunciado { font-size: 1.2rem; margin-bottom: 20px; text-align: center; font-weight: 600; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; line-height: 1.6;}
+        
+        .formula-maestra { background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.05)); border: 1px solid #3498db; border-radius: 10px; padding: 15px; margin-bottom: 25px; text-align: center; font-size: 1.1rem;}
+
+        /* ESTILOS DE PASOS EN CASCADA */
         .paso { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #ccc; display: none; opacity: 0; transform: translateY(10px); transition: all 0.5s ease; }
         .paso.activo { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-fisica); }
         .paso.completado { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-exito); }
@@ -57,6 +67,9 @@
         .btn-validar { background: var(--color-fisica); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .btn-validar:hover { background: var(--color-secundario); transform: translateY(-2px); }
         
+        .btn-siguiente { background: var(--color-exito); display: none; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; margin-top: 20px; width: 100%;}
+        .btn-siguiente:hover { background: #27ae60; transform: translateY(-2px); }
+
         .feedback { margin-top: 15px; font-weight: 600; font-size: 1rem; display: none; padding: 10px; border-radius: 8px; }
         .feedback.error { background: rgba(231, 76, 60, 0.2); color: #ff6b6b; display: block; }
         .feedback.exito { background: rgba(46, 204, 113, 0.2); color: #2ecc71; display: block; }
@@ -82,120 +95,181 @@
 
         <div class="header-tema">
             <h1>Reto de Práctica: Ley del Coseno</h1>
-            <p>Aplica el método del paralelogramo paso a paso.</p>
+            <p>Aplica el método del paralelogramo paso a paso. Son 5 ejercicios donde pondrás a prueba la fórmula maestra.</p>
         </div>
 
-        <div class="ejercicio-box" id="ejercicio1">
-            <div class="enunciado">
-                Dos mulas tiran de un tronco. La mula A aplica una fuerza de 3 N y la mula B aplica una fuerza de 4 N. <br>
-                El ángulo entre las cuerdas es de 60°. (Asume \( \cos(60°) = 0.5 \)) <br>
-                Encuentra la magnitud de la fuerza resultante usando el método del paralelogramo.
-            </div>
-
-            <div class="paso activo" id="paso1">
-                <h3>Paso 1: Primera parte de la fórmula (Cuadrados)</h3>
-                <p>Vamos a calcular la primera parte de la fórmula: \(|\vec{A}|^2 + |\vec{B}|^2\). Recuerda que las barras \(|\vec{A}|\) solo significan el valor numérico o magnitud de la fuerza (sin signos). Reemplaza las fuerzas de las mulas, elévalas al cuadrado y suma los resultados.</p>
-                <div class="input-group">
-                    <label>\(|\vec{A}|^2 + |\vec{B}|^2 =\)</label>
-                    <input type="number" id="input-paso1" placeholder="Ej. 10">
-                    <button class="btn-validar" onclick="validarPaso(1)">Comprobar</button>
-                </div>
-                <div class="feedback" id="feedback-paso1"></div>
-                <div class="feedback pista" id="pista-paso1" style="display:none;"></div>
-            </div>
-
-            <div class="paso" id="paso2">
-                <h3>Paso 2: Calcular el término de interacción</h3>
-                <p>Ahora calcularemos el término de la fórmula que relaciona a ambos vectores con su ángulo: \( 2 \cdot |\vec{A}| \cdot |\vec{B}| \cdot \cos(\theta) \). Multiplica el número 2 por la fuerza de la mula A, por la fuerza de la mula B, y finalmente por el coseno del ángulo (0.5).</p>
-                <div class="input-group">
-                    <label>Valor =</label>
-                    <input type="number" id="input-paso2" placeholder="Ej. 10">
-                    <button class="btn-validar" onclick="validarPaso(2)">Comprobar</button>
-                </div>
-                <div class="feedback" id="feedback-paso2"></div>
-                <div class="feedback pista" id="pista-paso2" style="display:none;"></div>
-            </div>
-
-            <div class="paso" id="paso3">
-                <h3>Paso 3: Sumar y calcular Magnitud Resultante</h3>
-                <p>Finalmente, suma los dos resultados anteriores (el del Paso 1 y el del Paso 2). A ese gran total, sácale la raíz cuadrada para encontrar la fuerza resultante \(|\vec{R}|\). (Puedes escribir el valor con 1 decimal).</p>
-                <div class="input-group">
-                    <label>\(|\vec{R}| =\)</label>
-                    <input type="number" id="input-paso3" step="0.1" placeholder="Ej. 5">
-                    <button class="btn-validar" onclick="validarPaso(3)">Comprobar</button>
-                </div>
-                <div class="feedback" id="feedback-paso3"></div>
-                <div class="feedback pista" id="pista-paso3" style="display:none;"></div>
-            </div>
-
-            <div class="paso" id="paso4">
-                <h3>¡Excelente!</h3>
-                <p style="margin-top:10px; font-size:1.2rem; color:#2ecc71;">La magnitud resultante es \(\sqrt{37}\) o aproximadamente \(6.08\). Al redondear a 1 decimal usamos 6.1 (el sistema aceptó tu respuesta).</p>
-                <div style="margin-top: 20px; text-align: center;">
-                    <a href="fisica10_vectores_paralelogramo_evaluacion.html" style="background:#e74c3c; color:white; padding:12px 25px; text-decoration:none; border-radius:8px; font-weight:bold; display:inline-block;">Ir a la Evaluación</a>
-                </div>
-            </div>
+        <div class="progreso-container" id="progreso-container">
+            <!-- Se generará con JS -->
         </div>
+
+        <div id="ejercicios-container">
+            <!-- Se generan con JS -->
+        </div>
+        
+        <div id="mensaje-final" style="display:none; text-align:center; padding: 40px; background: rgba(46,204,113,0.1); border-radius: 20px; border: 2px solid #2ecc71;">
+            <h2>¡Reto Superado!</h2>
+            <p style="margin-bottom: 20px;">Has completado los 5 ejercicios del Método del Paralelogramo.</p>
+            <a href="fisica10_vectores_paralelogramo_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la Evaluación Final</a>
+        </div>
+
     </main>
 
     <script>
-        const respuestas = {
-            1: { valor: 25, pista: "Pista: 3 al cuadrado es 9. 4 al cuadrado es 16. Súmalos." },
-            2: { valor: 12, pista: "Pista: 2 * 3 * 4 * 0.5. Multiplica." },
-            3: { valor: 6.1, toleracia: 0.2, pista: "Pista: Suma 25 + 12 = 37. La raíz de 37 está entre 6 y 6.2." }
-        };
+        const dataEjercicios = [
+            { id: 1, text: "Dos mulas tiran de un tronco. Mula A con 3 N y Mula B con 4 N. Ángulo: 60°. (\\(\\cos(60^\\circ) = 0.5\\))", magA: 3, magB: 4, cosT: 0.5, pista1: "3 al cuadrado es 9. 4 al cuadrado es 16. Súmalos.", pista2: "Multiplica 2 * 3 * 4 * 0.5." },
+            
+            { id: 2, text: "Dos bueyes tiran de una carreta. El primero con 6 N y el segundo con 8 N. El ángulo es 60°. (\\(\\cos(60^\\circ) = 0.5\\))", magA: 6, magB: 8, cosT: 0.5, pista1: "Suma los cuadrados de 6 y 8 (36 + 64).", pista2: "2 * 6 * 8 * 0.5." },
+            
+            { id: 3, text: "Dos trabajadores jalan una malla protectora con fuerzas de 5 N y 5 N. Ángulo de 120°. (\\(\\cos(120^\\circ) = -0.5\\))", magA: 5, magB: 5, cosT: -0.5, pista1: "25 + 25.", pista2: "Ojo al signo: 2 * 5 * 5 * (-0.5)." },
+            
+            { id: 4, text: "Un tractor jala con 10 kN y otro con 15 kN. El ángulo entre ellos es 90°. (\\(\\cos(90^\\circ) = 0\\))", magA: 10, magB: 15, cosT: 0, pista1: "100 + 225.", pista2: "Todo multiplicado por cero da cero." },
+            
+            { id: 5, text: "Último reto: Fuerzas de 7 N y 10 N formando un ángulo agudo extremo donde \\(\\cos(\\theta) = 0.8\\).", magA: 7, magB: 10, cosT: 0.8, pista1: "49 + 100.", pista2: "2 * 7 * 10 * 0.8. Multiplica todo." }
+        ];
 
-        let intentos = { 1: 0, 2: 0, 3: 0 };
+        // Calcular respuestas esperadas automáticamente
+        dataEjercicios.forEach(ex => {
+            ex.cuadrados = ex.magA * ex.magA + ex.magB * ex.magB;
+            ex.interaccion = 2 * ex.magA * ex.magB * ex.cosT;
+            ex.total = parseFloat(Math.sqrt(ex.cuadrados + ex.interaccion).toFixed(1));
+        });
 
-        function validarPaso(paso) {
-            const input = document.getElementById('input-paso' + paso);
-            const feedback = document.getElementById('feedback-paso' + paso);
-            const pista = document.getElementById('pista-paso' + paso);
-            const valorIngresado = parseFloat(input.value);
+        let intentosPaso = {};
 
-            if(isNaN(valorIngresado)) {
+        function init() {
+            const prog = document.getElementById('progreso-container');
+            const cont = document.getElementById('ejercicios-container');
+            
+            dataEjercicios.forEach(ex => {
+                let b = document.createElement('div');
+                b.className = 'bola-progreso' + (ex.id === 1 ? ' activo' : '');
+                b.id = 'bola-' + ex.id;
+                b.innerText = ex.id;
+                prog.appendChild(b);
+
+                intentosPaso[ex.id] = { 1:0, 2:0, 3:0 };
+
+                let div = document.createElement('div');
+                div.className = 'ejercicio-box' + (ex.id === 1 ? ' activo' : '');
+                div.id = 'ejercicio-' + ex.id;
+                
+                div.innerHTML = `
+                    <div class="formula-maestra">
+                        Fórmula Maestra: \\( |\\vec{R}| = \\sqrt{|\\vec{A}|^2 + |\\vec{B}|^2 + 2|\\vec{A}||\\vec{B}|\\cos(\\theta)} \\)
+                    </div>
+                    <div class="enunciado">${ex.text}</div>
+                    
+                    <div class="paso activo" id="ex${ex.id}-paso1">
+                        <h3>Paso 1: Primera parte de la fórmula (Cuadrados)</h3>
+                        <p>Vamos a calcular la primera parte: \\(|\\vec{A}|^2 + |\\vec{B}|^2\\). Eleva al cuadrado ambas fuerzas numéricas y súmalas.</p>
+                        <div class="input-group">
+                            <label>Suma de cuadrados =</label>
+                            <input type="number" id="input-ex${ex.id}-p1" placeholder="Ej. 100">
+                            <button class="btn-validar" id="btn-ex${ex.id}-p1" onclick="validarPaso(${ex.id}, 1, ${ex.cuadrados})">Comprobar</button>
+                        </div>
+                        <div class="feedback" id="feedback-ex${ex.id}-p1"></div>
+                        <div class="feedback pista" id="pista-ex${ex.id}-p1" style="display:none;"></div>
+                    </div>
+
+                    <div class="paso" id="ex${ex.id}-paso2">
+                        <h3>Paso 2: Término de interacción (Coseno)</h3>
+                        <p>Ahora calculamos: \\( 2 \\cdot |\\vec{A}| \\cdot |\\vec{B}| \\cdot \\cos(\\theta) \\). Multiplica el número 2 por la magnitud A, luego por la B, y finalmente por el valor del coseno que te dieron.</p>
+                        <div class="input-group">
+                            <label>Término interacción =</label>
+                            <input type="number" step="0.1" id="input-ex${ex.id}-p2" placeholder="Ej. 50">
+                            <button class="btn-validar" id="btn-ex${ex.id}-p2" onclick="validarPaso(${ex.id}, 2, ${ex.interaccion})">Comprobar</button>
+                        </div>
+                        <div class="feedback" id="feedback-ex${ex.id}-p2"></div>
+                        <div class="feedback pista" id="pista-ex${ex.id}-p2" style="display:none;"></div>
+                    </div>
+
+                    <div class="paso" id="ex${ex.id}-paso3">
+                        <h3>Paso 3: Sumar todo y calcular Magnitud Resultante</h3>
+                        <p>Suma los resultados del Paso 1 y del Paso 2. A ese gran total, sácale la raíz cuadrada para hallar \\(|\\vec{R}|\\). (Redondea a 1 decimal si es necesario).</p>
+                        <div class="input-group">
+                            <label>\\(|\\vec{R}| =\\)</label>
+                            <input type="number" step="0.1" id="input-ex${ex.id}-p3" placeholder="Ej. 10.5">
+                            <button class="btn-validar" id="btn-ex${ex.id}-p3" onclick="validarPaso(${ex.id}, 3, ${ex.total})">Comprobar</button>
+                        </div>
+                        <div class="feedback" id="feedback-ex${ex.id}-p3"></div>
+                        <div class="feedback pista" id="pista-ex${ex.id}-p3" style="display:none;"></div>
+                    </div>
+
+                    <button class="btn-siguiente" id="btn-sig-${ex.id}" onclick="siguienteEx(${ex.id})">Siguiente Ejercicio <i class="fa-solid fa-arrow-right"></i></button>
+                `;
+                cont.appendChild(div);
+            });
+            
+            if(window.MathJax) MathJax.typeset();
+        }
+
+        function validarPaso(idEx, numPaso, ansOk) {
+            const input = document.getElementById(`input-ex${idEx}-p${numPaso}`);
+            const feedback = document.getElementById(`feedback-ex${idEx}-p${numPaso}`);
+            const pistaBox = document.getElementById(`pista-ex${idEx}-p${numPaso}`);
+            const btn = document.getElementById(`btn-ex${idEx}-p${numPaso}`);
+            const val = parseFloat(input.value);
+
+            if(isNaN(val)) {
                 feedback.className = "feedback error";
-                feedback.innerHTML = "Por favor ingresa un número.";
+                feedback.innerHTML = "Por favor ingresa un número válido.";
                 return;
             }
 
-            let esCorrecto = false;
-            if(respuestas[paso].toleracia) {
-                if(Math.abs(valorIngresado - respuestas[paso].valor) <= respuestas[paso].toleracia) {
-                    esCorrecto = true;
-                }
-            } else {
-                if(valorIngresado === respuestas[paso].valor) {
-                    esCorrecto = true;
-                }
-            }
+            // Validacion con tolerancia
+            let correcto = false;
+            if(Math.abs(val - ansOk) <= 0.2) correcto = true;
 
-            if(esCorrecto) {
+            if(correcto) {
                 feedback.className = "feedback exito";
                 feedback.innerHTML = "<i class='fa-solid fa-check'></i> ¡Correcto!";
                 input.disabled = true;
-                pista.style.display = 'none';
+                btn.style.display = 'none';
+                pistaBox.style.display = 'none';
                 
-                document.getElementById('paso' + paso).classList.add('completado');
+                document.getElementById(`ex${idEx}-paso${numPaso}`).classList.add('completado');
                 
-                // Mostrar siguiente paso
-                const nextPaso = document.getElementById('paso' + (paso + 1));
-                if(nextPaso) {
+                if(numPaso < 3) {
                     setTimeout(() => {
-                        nextPaso.classList.add('activo');
+                        document.getElementById(`ex${idEx}-paso${numPaso+1}`).classList.add('activo');
+                    }, 500);
+                } else {
+                    setTimeout(() => {
+                        document.getElementById(`btn-sig-${idEx}`).style.display = 'block';
+                        document.getElementById(`bola-${idEx}`).classList.remove('activo');
+                        document.getElementById(`bola-${idEx}`).classList.add('completado');
                     }, 500);
                 }
             } else {
-                intentos[paso]++;
+                intentosPaso[idEx][numPaso]++;
                 feedback.className = "feedback error";
                 feedback.innerHTML = "<i class='fa-solid fa-xmark'></i> Incorrecto, revisa tu cálculo.";
                 
-                if(intentos[paso] >= 2) {
-                    pista.innerHTML = "<i class='fa-solid fa-lightbulb'></i> " + respuestas[paso].pista;
-                    pista.style.display = 'block';
+                if(intentosPaso[idEx][numPaso] >= 2) {
+                    let dat = dataEjercicios[idEx-1];
+                    let textPista = "Suma el paso 1 y 2, y luego saca la raíz cuadrada.";
+                    if(numPaso===1) textPista = dat.pista1;
+                    if(numPaso===2) textPista = dat.pista2;
+                    
+                    pistaBox.innerHTML = "<i class='fa-solid fa-lightbulb'></i> Pista: " + textPista;
+                    pistaBox.style.display = 'block';
                 }
             }
         }
+
+        function siguienteEx(idActual) {
+            document.getElementById(`ejercicio-${idActual}`).classList.remove('activo');
+            if(idActual < 5) {
+                let nextId = idActual + 1;
+                document.getElementById(`ejercicio-${nextId}`).classList.add('activo');
+                document.getElementById(`bola-${nextId}`).classList.add('activo');
+            } else {
+                document.getElementById('progreso-container').style.display = 'none';
+                document.getElementById('mensaje-final').style.display = 'block';
+            }
+        }
+
+        window.onload = init;
     </script>
     <script src="profe-ia.js"></script>
 </body>

@@ -65,6 +65,13 @@
         .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
         .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
 
+        /* --- VIDEO RESPONSIVO --- */
+        .video-contenedor {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+        .video-contenedor iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
         .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
         .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
@@ -118,6 +125,13 @@
             <p>Por ejemplo, si tienes una fuerza de 50 N tirando hacia la izquierda (negativa en el plano), su magnitud \(|\vec{F}|\) será simplemente 50. ¡Nunca pongas signos negativos dentro de esta fórmula!</p>
         </div>
 
+        <div class="seccion" style="border-left-color: #e74c3c;">
+            <h2><i class="fa-brands fa-youtube" style="color: #e74c3c;"></i> Video Explicativo: Método del Paralelogramo</h2>
+            <div class="video-contenedor">
+                <iframe src="https://www.youtube.com/embed/v22yD8CqVuY" title="Método del Paralelogramo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
         <div class="seccion" style="border-left-color: #f39c12;">
             <h2><i class="fa-solid fa-list-check"></i> 3. Ejercicios Resueltos Paso a Paso</h2>
 
@@ -127,7 +141,8 @@
                     "Dos fuerzas de magnitudes 5 N y 10 N actúan sobre una caja. El ángulo entre ellas es de 60°. ¿Cuál es la fuerza resultante? (Usa \(\cos(60^\circ) = 0.5\))"
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Identificar datos y magnitudes</div>
+                    <div class="paso-titulo">Paso 1: Identificar fórmula y datos</div>
+                    <p>Fórmula maestra: \( |\vec{R}| = \sqrt{|\vec{A}|^2 + |\vec{B}|^2 + 2|\vec{A}||\vec{B}|\cos(\theta)} \)</p>
                     <p>\(|\vec{A}| = 5\)<br>
                     \(|\vec{B}| = 10\)<br>
                     \(\theta = 60^\circ \rightarrow \cos(60^\circ) = 0.5\)</p>
@@ -156,10 +171,11 @@
                     "Tenemos dos cuerdas tirando de un poste. Cuerda A con 8 N, cuerda B con 6 N. El ángulo entre ellas es 120°. (Usa \(\cos(120^\circ) = -0.5\))"
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Identificar datos</div>
+                    <div class="paso-titulo">Paso 1: Identificar fórmula y datos</div>
+                    <p>Fórmula maestra: \( |\vec{R}| = \sqrt{|\vec{A}|^2 + |\vec{B}|^2 + 2|\vec{A}||\vec{B}|\cos(\theta)} \)</p>
                     <p>\(|\vec{A}| = 8\)<br>
                     \(|\vec{B}| = 6\)<br>
-                    \(\cos(120^\circ) = -0.5\)</p>
+                    \(\theta = 120^\circ \rightarrow \cos(120^\circ) = -0.5\)</p>
                 </div>
                 <div class="paso">
                     <div class="paso-titulo">Paso 2: Cuadrados</div>
@@ -185,8 +201,9 @@
                     "Aplica la fórmula del paralelogramo para magnitudes de 3 y 4 con un ángulo de 90°. (Recuerda que \(\cos(90^\circ) = 0\))"
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Término de Coseno</div>
-                    <p>\(2 \times 3 \times 4 \times \cos(90^\circ) = 24 \times 0 = 0\)</p>
+                    <div class="paso-titulo">Paso 1: Analizar la fórmula maestra y el Coseno</div>
+                    <p>Fórmula maestra: \( |\vec{R}| = \sqrt{|\vec{A}|^2 + |\vec{B}|^2 + 2|\vec{A}||\vec{B}|\cos(\theta)} \)</p>
+                    <p>El término \(2 \times 3 \times 4 \times \cos(90^\circ)\) se vuelve \(24 \times 0 = 0\)</p>
                 </div>
                 <div class="paso">
                     <div class="paso-titulo">Paso 2: Suma de Cuadrados</div>

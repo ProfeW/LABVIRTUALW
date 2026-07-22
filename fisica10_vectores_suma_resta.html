@@ -67,6 +67,20 @@
         .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
         .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
         .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
+        
+        /* --- VIDEO RESPONSIVO --- */
+        .video-contenedor {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .video-contenedor iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+            background: rgba(20, 20, 35, 0.6); border-left: 4px solid #4facfe;
+            padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0;
+        }
+        .ejercicio-tarjeta h3 { color: #4facfe; margin-bottom: 10px; font-size: 1.3rem; }
+        .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
+        .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
 
         .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
         .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
@@ -123,9 +137,16 @@
             </div>
         </div>
 
+        <div class="seccion" style="border-left-color: #e74c3c;">
+            <h2><i class="fa-brands fa-youtube" style="color: #e74c3c;"></i> Video Explicativo: Suma y Resta</h2>
+            <div class="video-contenedor">
+                <iframe src="https://www.youtube.com/embed/nQnxMF1Jwso" title="Suma y Resta de Vectores" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
         <div class="seccion" style="border-left-color: #f39c12;">
             <h2><i class="fa-solid fa-list-check"></i> 3. Ejercicios Resueltos Paso a Paso</h2>
-            <p>Veamos cómo se aplican las fórmulas de suma y resta analíticamente en distintos casos. Presta mucha atención a cómo se agrupan las componentes.</p>
+            <p>Veamos cómo se aplican las fórmulas de suma y resta acomodando los componentes en <strong>columnas</strong> (X con X, Y con Y). Este método hace que sumar varios vectores sea muy fácil visualmente.</p>
 
             <div class="ejercicio-tarjeta">
                 <h3>Ejercicio 1: Suma Básica</h3>
@@ -133,64 +154,91 @@
                     "Dado el vector \(\vec{A} = (3, 2)\) y el vector \(\vec{B} = (4, 5)\). Calcula el vector resultante de su suma \(\vec{R} = \vec{A} + \vec{B}\)."
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Identificar la fórmula y los datos</div>
-                    <p>Fórmula: \(\vec{R} = (A_x + B_x , A_y + B_y)\)<br>
-                    Componentes X: \(A_x = 3\) , \(B_x = 4\)<br>
-                    Componentes Y: \(A_y = 2\) , \(B_y = 5\)</p>
-                </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 2: Sumar las componentes en X</div>
-                    <p>\(R_x = 3 + 4 = 7\)</p>
-                </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 3: Sumar las componentes en Y</div>
-                    <p>\(R_y = 2 + 5 = 7\)</p>
+                    <p>Ordenamos los vectores en columnas (X e Y) y sumamos hacia abajo:</p>
+                    $$
+                    \begin{array}{rrc}
+                     & \mathbf{X} & \mathbf{Y} \\
+                    \vec{A} = & 3 & 2 \\
+                    +\vec{B} = & 4 & 5 \\
+                    \hline
+                    \vec{R} = & 7 & 7
+                    \end{array}
+                    $$
                     <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: El vector resultante es \(\vec{R} = (7, 7)\).</em></p>
                 </div>
             </div>
 
             <div class="ejercicio-tarjeta">
-                <h3>Ejercicio 2: Resta de Vectores</h3>
+                <h3>Ejercicio 2: Resta de Vectores (El truco del signo)</h3>
                 <div class="enunciado">
-                    "Teniendo \(\vec{P} = (8, 6)\) y \(\vec{Q} = (3, 1)\). Calcula la resta \(\vec{R} = \vec{P} - \vec{Q}\)."
+                    "Teniendo \(\vec{P} = (8, 6)\) y \(\vec{Q} = (3, -1)\). Calcula la resta \(\vec{R} = \vec{P} - \vec{Q}\)."
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Identificar la fórmula y los datos</div>
-                    <p>Fórmula: \(\vec{R} = (P_x - Q_x , P_y - Q_y)\)<br>
-                    Componentes X: \(P_x = 8\) , \(Q_x = 3\)<br>
-                    Componentes Y: \(P_y = 6\) , \(Q_y = 1\)</p>
+                    <div class="paso-titulo">Paso 1: Invertir el signo del vector a restar</div>
+                    <p>Como vamos a restar \(\vec{Q}\), la forma más fácil es <strong>invertirle los signos</strong> y luego sumarlo normalmente: \(-\vec{Q} = (-3, 1)\).</p>
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 2: Restar las componentes en X</div>
-                    <p>Al valor en X del primer vector le quitamos el del segundo: \(R_x = 8 - 3 = 5\)</p>
-                </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 3: Restar las componentes en Y</div>
-                    <p>Hacemos lo mismo para el eje Y: \(R_y = 6 - 1 = 5\)</p>
-                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: El vector resultante de la resta es \(\vec{R} = (5, 5)\).</em></p>
+                    <div class="paso-titulo">Paso 2: Acomodar y sumar en columnas</div>
+                    $$
+                    \begin{array}{rrc}
+                     & \mathbf{X} & \mathbf{Y} \\
+                    \vec{P} = & 8 & 6 \\
+                    -\vec{Q} = & -3 & 1 \\
+                    \hline
+                    \vec{R} = & 5 & 7
+                    \end{array}
+                    $$
+                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: El vector resultante de la resta es \(\vec{R} = (5, 7)\).</em></p>
                 </div>
             </div>
 
             <div class="ejercicio-tarjeta">
-                <h3>Ejercicio 3: Suma con Valores Negativos (Atención a los Signos)</h3>
+                <h3>Ejercicio 3: Suma Combinada de 3 Vectores</h3>
                 <div class="enunciado">
-                    "Calcula \(\vec{R} = \vec{M} + \vec{N}\) sabiendo que \(\vec{M} = (-4, 7)\) y \(\vec{N} = (2, -3)\)."
+                    "Calcula \(\vec{R} = \vec{A} + \vec{B} + \vec{C}\) sabiendo que \(\vec{A} = (-4, 7)\), \(\vec{B} = (2, -3)\) y \(\vec{C} = (5, -2)\)."
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Identificar componentes con su signo</div>
-                    <p>Componentes X: \(M_x = -4\) , \(N_x = 2\)<br>
-                    Componentes Y: \(M_y = 7\) , \(N_y = -3\)</p>
+                    <p>Alineamos todos los vectores en su respectiva columna y sumamos, respetando signos:</p>
+                    $$
+                    \begin{array}{rrc}
+                     & \mathbf{X} & \mathbf{Y} \\
+                    \vec{A} = & -4 & 7 \\
+                    \vec{B} = & 2 & -3 \\
+                    +\vec{C} = & 5 & -2 \\
+                    \hline
+                    \vec{R} = & 3 & 2
+                    \end{array}
+                    $$
+                    <p style="font-size: 0.9em; color: #ccc;">En X: \(-4 + 2 + 5 = 3\) <br> En Y: \(7 - 3 - 2 = 2\)</p>
+                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: El vector resultante es \(\vec{R} = (3, 2)\).</em></p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 4: Operación Larga con 5 Vectores (Suma y Resta)</h3>
+                <div class="enunciado">
+                    "Se tienen 5 vectores: \(\vec{A}=(1,2)\), \(\vec{B}=(-3,4)\), \(\vec{C}=(0,-5)\), \(\vec{D}=(2,1)\) y \(\vec{E}=(-1,-1)\). Calcula \(\vec{R} = \vec{A} + \vec{B} - \vec{C} + \vec{D} - \vec{E}\)."
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 2: Sumar las componentes en X respetando la ley de signos</div>
-                    <p>\(R_x = (-4) + (2)\)<br>
-                    Como tienen signos diferentes, se restan y queda el signo del mayor: \(R_x = -2\)</p>
+                    <div class="paso-titulo">Paso 1: Invertir las restas</div>
+                    <p>Vector \(-\vec{C}\) invierte sus signos: \((0, 5)\)<br>
+                    Vector \(-\vec{E}\) invierte sus signos: \((1, 1)\)</p>
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 3: Sumar las componentes en Y</div>
-                    <p>\(R_y = (7) + (-3)\)<br>
-                    Más por menos es menos, así que: \(R_y = 7 - 3 = 4\)</p>
-                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: El vector resultante es \(\vec{R} = (-2, 4)\).</em></p>
+                    <div class="paso-titulo">Paso 2: Suma directa en columnas</div>
+                    $$
+                    \begin{array}{rrc}
+                     & \mathbf{X} & \mathbf{Y} \\
+                    \vec{A} = & 1 & 2 \\
+                    \vec{B} = & -3 & 4 \\
+                    -\vec{C} = & 0 & 5 \\
+                    \vec{D} = & 2 & 1 \\
+                    -\vec{E} = & 1 & 1 \\
+                    \hline
+                    \vec{R} = & 1 & 13
+                    \end{array}
+                    $$
+                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: \(\vec{R} = (1, 13)\).</em></p>
                 </div>
             </div>
         </div>

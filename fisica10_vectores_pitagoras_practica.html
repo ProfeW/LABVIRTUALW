@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica: Teorema de Pitágoras - LabVirtual W</title>
+    <title>Práctica: Método de Pitágoras - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -44,9 +44,17 @@
         .header-tema { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
         .header-tema h1 { font-size: 2.5rem; color: #f39c12; margin-bottom: 10px; }
         
-        .ejercicio-box { background: rgba(20, 20, 35, 0.9); border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 2px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .enunciado { font-size: 1.2rem; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        .progreso-container { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;}
+        .bola-progreso { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: bold; transition: 0.3s;}
+        .bola-progreso.activo { background: #f39c12; color: #fff; box-shadow: 0 0 10px #f39c12;}
+        .bola-progreso.completado { background: var(--color-exito); color: #fff; }
+
+        .ejercicio-box { background: rgba(20, 20, 35, 0.9); border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 2px solid var(--color-fisica); box-shadow: 0 10px 20px rgba(0,0,0,0.5); display: none;}
+        .ejercicio-box.activo { display: block; animation: fadeIn 0.5s; }
         
+        .enunciado { font-size: 1.2rem; margin-bottom: 20px; text-align: center; font-weight: 600; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; line-height: 1.6;}
+        
+        /* ESTILOS DE PASOS EN CASCADA */
         .paso { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #ccc; display: none; opacity: 0; transform: translateY(10px); transition: all 0.5s ease; }
         .paso.activo { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-fisica); }
         .paso.completado { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-exito); }
@@ -57,6 +65,9 @@
         .btn-validar { background: var(--color-fisica); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .btn-validar:hover { background: var(--color-secundario); transform: translateY(-2px); }
         
+        .btn-siguiente { background: var(--color-exito); display: none; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; margin-top: 20px; width: 100%;}
+        .btn-siguiente:hover { background: #27ae60; transform: translateY(-2px); }
+
         .feedback { margin-top: 15px; font-weight: 600; font-size: 1rem; display: none; padding: 10px; border-radius: 8px; }
         .feedback.error { background: rgba(231, 76, 60, 0.2); color: #ff6b6b; display: block; }
         .feedback.exito { background: rgba(46, 204, 113, 0.2); color: #2ecc71; display: block; }
@@ -81,109 +92,220 @@
         <a href="fisica10_vectores_pitagoras.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
         <div class="header-tema">
-            <h1>Reto de Práctica: Pitágoras</h1>
-            <p>Calcula la magnitud resultante paso a paso.</p>
+            <h1>Reto de Práctica: Pitágoras y Ángulos</h1>
+            <p>Calcula la magnitud usando el Teorema de Pitágoras. Algunos ejercicios requerirán además que uses la tangente para encontrar la dirección.</p>
         </div>
 
-        <div class="ejercicio-box" id="ejercicio1">
-            <div class="enunciado">
-                Un tractor agrícola se desplaza 6 km hacia el norte (\(\vec{y}\)) y luego 8 km hacia el este (\(\vec{x}\)).<br>
-                Encuentra la magnitud del desplazamiento total.
-            </div>
-
-            <div class="paso activo" id="paso1">
-                <h3>Paso 1: Identificar componente X</h3>
-                <p>Para usar la fórmula de Pitágoras, primero debemos ubicar nuestras componentes. El movimiento "hacia el este" representa el eje horizontal o eje X. Identifica este valor en el enunciado e ingrésalo como \(d_x\).</p>
-                <div class="input-group">
-                    <label>\(d_x =\)</label>
-                    <input type="number" id="input-paso1" placeholder="Ej. 5">
-                    <button class="btn-validar" onclick="validarPaso(1)">Comprobar</button>
-                </div>
-                <div class="feedback" id="feedback-paso1"></div>
-                <div class="feedback pista" id="pista-paso1" style="display:none;"></div>
-            </div>
-
-            <div class="paso" id="paso2">
-                <h3>Paso 2: Identificar componente Y</h3>
-                <p>Ahora buscamos el movimiento vertical. El movimiento "hacia el norte" corresponde al eje Y. Identifica este valor en el enunciado e ingrésalo como \(d_y\).</p>
-                <div class="input-group">
-                    <label>\(d_y =\)</label>
-                    <input type="number" id="input-paso2" placeholder="Ej. 5">
-                    <button class="btn-validar" onclick="validarPaso(2)">Comprobar</button>
-                </div>
-                <div class="feedback" id="feedback-paso2"></div>
-                <div class="feedback pista" id="pista-paso2" style="display:none;"></div>
-            </div>
-
-            <div class="paso" id="paso3">
-                <h3>Paso 3: Aplicar Pitágoras</h3>
-                <p>Ahora usaremos el Teorema de Pitágoras: \( |\vec{d}| = \sqrt{d_x^2 + d_y^2} \). Reemplaza tus valores \(d_x\) y \(d_y\) en la fórmula, eleva ambos al cuadrado, suma esos resultados y finalmente sácale la raíz cuadrada. ¿Cuál es la magnitud final?</p>
-                <div class="input-group">
-                    <label>\(|\vec{d}| =\)</label>
-                    <input type="number" id="input-paso3" placeholder="Ej. 5">
-                    <button class="btn-validar" onclick="validarPaso(3)">Comprobar</button>
-                </div>
-                <div class="feedback" id="feedback-paso3"></div>
-                <div class="feedback pista" id="pista-paso3" style="display:none;"></div>
-            </div>
-
-            <div class="paso" id="paso4">
-                <h3>¡Excelente!</h3>
-                <p style="margin-top:10px; font-size:1.2rem; color:#2ecc71;">La magnitud del desplazamiento total es 10 km.</p>
-                <div style="margin-top: 20px; text-align: center;">
-                    <a href="fisica10_vectores_pitagoras_evaluacion.html" style="background:#e74c3c; color:white; padding:12px 25px; text-decoration:none; border-radius:8px; font-weight:bold; display:inline-block;">Ir a la Evaluación</a>
-                </div>
-            </div>
+        <div class="progreso-container" id="progreso-container">
+            <!-- Se generará con JS -->
         </div>
+
+        <div id="ejercicios-container">
+            <!-- Se generan con JS -->
+        </div>
+        
+        <div id="mensaje-final" style="display:none; text-align:center; padding: 40px; background: rgba(46,204,113,0.1); border-radius: 20px; border: 2px solid #2ecc71;">
+            <h2>¡Magnífico trabajo!</h2>
+            <p style="margin-bottom: 20px;">Has completado los 10 ejercicios interactivos aplicando magnitudes y direcciones.</p>
+            <a href="fisica10_vectores_pitagoras_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la Evaluación Final</a>
+        </div>
+
     </main>
 
     <script>
-        const respuestas = {
-            1: { valor: 8, pista: "Pista: El este corresponde al eje horizontal X. Revisa los datos del problema." },
-            2: { valor: 6, pista: "Pista: El norte corresponde al eje vertical Y. Revisa los datos del problema." },
-            3: { valor: 10, pista: "Pista: Eleva al cuadrado 8 y 6 (64 + 36 = 100) y saca la raíz cuadrada." }
-        };
+        const dataEjercicios = [
+            { id: 1, text: "Un tractor se desplaza 4 km en la horizontal (Este) y luego 3 km en la vertical (Norte).", hor: 4, ver: 3, ang: false, pistaHor: "Busca el valor del movimiento horizontal en el texto.", pistaVer: "Busca el valor del movimiento vertical en el texto.", pistaMag: "Eleva ambos al cuadrado, súmalos y saca raíz cuadrada (4^2 + 3^2)." },
+            
+            { id: 2, text: "Una polea aplica una fuerza de 6 N en la horizontal y otra de 8 N en la vertical.", hor: 6, ver: 8, ang: false, pistaHor: "Revisa la fuerza horizontal.", pistaVer: "Revisa la fuerza vertical.", pistaMag: "Raíz de (6^2 + 8^2). 36 + 64." },
+            
+            { id: 3, text: "Un dron vuela 5 m en la horizontal y 12 m en la vertical.", hor: 5, ver: 12, ang: true, pistaHor: "Movimiento horizontal.", pistaVer: "Movimiento vertical.", pistaMag: "Raíz de 25 + 144.", pistaAng: "Usa tan^-1(vertical / horizontal) = tan^-1(12 / 5). Redondea a 1 decimal." },
+            
+            { id: 4, text: "Una mula camina 9 m en la horizontal y 12 m en la vertical.", hor: 9, ver: 12, ang: false, pistaHor: "Lee el enunciado, ¿cuánto es la horizontal?", pistaVer: "¿Cuánto es la vertical?", pistaMag: "Raíz de (81 + 144) = Raíz de 225." },
+            
+            { id: 5, text: "Se aplica una fuerza de 15 N en la horizontal y 8 N en la vertical.", hor: 15, ver: 8, ang: true, pistaHor: "Identifica la horizontal.", pistaVer: "Identifica la vertical.", pistaMag: "Raíz de 225 + 64.", pistaAng: "Usa tan^-1(8 / 15). Redondea a 1 decimal." },
+            
+            { id: 6, text: "Un camión se desplaza 7 km en la horizontal y 24 km en la vertical.", hor: 7, ver: 24, ang: false, pistaHor: "Movimiento horizontal.", pistaVer: "Movimiento vertical.", pistaMag: "Raíz de 49 + 576." },
+            
+            { id: 7, text: "Un trabajador empuja una carretilla con 10 N en la horizontal y 10 N en la vertical.", hor: 10, ver: 10, ang: true, pistaHor: "Horizontal.", pistaVer: "Vertical.", pistaMag: "Raíz de 100 + 100. (Usa 1 decimal)", pistaAng: "tan^-1(10 / 10). ¿Cuál es el ángulo de tan^-1(1)?" },
+            
+            { id: 8, text: "El viento desvía un avión 20 m/s en la horizontal y 21 m/s en la vertical.", hor: 20, ver: 21, ang: false, pistaHor: "Velocidad horizontal.", pistaVer: "Velocidad vertical.", pistaMag: "Raíz de 400 + 441." },
+            
+            { id: 9, text: "Un sistema de riego lanza agua 12 m en la horizontal y 16 m en la vertical.", hor: 12, ver: 16, ang: true, pistaHor: "Movimiento horizontal del agua.", pistaVer: "Movimiento vertical del agua.", pistaMag: "Raíz de (144 + 256).", pistaAng: "tan^-1(16 / 12). Redondea a 1 decimal." },
+            
+            { id: 10, text: "El vector final de un recorrido marca -8 en la horizontal y 15 en la vertical.", hor: -8, ver: 15, ang: true, pistaHor: "Atención al signo negativo.", pistaVer: "Movimiento vertical.", pistaMag: "Recuerda que (-8)^2 da 64 positivo.", pistaAng: "Para la magnitud de ángulo, asume valores positivos: tan^-1(15 / 8). Redondea a 1 decimal." }
+        ];
 
-        let intentos = { 1: 0, 2: 0, 3: 0 };
+        // Calcular respuestas esperadas automáticamente
+        dataEjercicios.forEach(ex => {
+            ex.mag = parseFloat(Math.sqrt(ex.hor*ex.hor + ex.ver*ex.ver).toFixed(1));
+            // Si piden angulo, guardamos angulo absoluto (ignorando cuadrantes para decimo basico)
+            if(ex.ang) {
+                let r = Math.atan(Math.abs(ex.ver) / Math.abs(ex.hor)) * (180 / Math.PI);
+                ex.angVal = parseFloat(r.toFixed(1));
+            }
+        });
 
-        function validarPaso(paso) {
-            const input = document.getElementById('input-paso' + paso);
-            const feedback = document.getElementById('feedback-paso' + paso);
-            const pista = document.getElementById('pista-paso' + paso);
-            const valorIngresado = parseFloat(input.value);
+        let intentosPaso = {};
 
-            if(isNaN(valorIngresado)) {
+        function init() {
+            const prog = document.getElementById('progreso-container');
+            const cont = document.getElementById('ejercicios-container');
+            
+            dataEjercicios.forEach(ex => {
+                // Bolas de progreso
+                let b = document.createElement('div');
+                b.className = 'bola-progreso' + (ex.id === 1 ? ' activo' : '');
+                b.id = 'bola-' + ex.id;
+                b.innerText = ex.id;
+                prog.appendChild(b);
+
+                intentosPaso[ex.id] = { 1:0, 2:0, 3:0, 4:0 };
+
+                let htmlAngulo = '';
+                if(ex.ang) {
+                    htmlAngulo = `
+                    <div class="paso" id="ex${ex.id}-paso4">
+                        <h3>Paso 4: Calcular la dirección (Ángulo)</h3>
+                        <p>Aplica la tangente inversa: \\( \\theta = \\tan^{-1}(\\text{vertical} / \\text{horizontal}) \\). Usa tu calculadora y escribe el resultado (con 1 decimal si es necesario).</p>
+                        <div class="input-group">
+                            <label>\\(\\theta =\\)</label>
+                            <input type="number" step="0.1" id="input-ex${ex.id}-p4" placeholder="Ej. 45.5">
+                            <button class="btn-validar" id="btn-ex${ex.id}-p4" onclick="validarPaso(${ex.id}, 4, ${ex.angVal})">Comprobar</button>
+                        </div>
+                        <div class="feedback" id="feedback-ex${ex.id}-p4"></div>
+                        <div class="feedback pista" id="pista-ex${ex.id}-p4" style="display:none;"></div>
+                    </div>`;
+                }
+
+                let div = document.createElement('div');
+                div.className = 'ejercicio-box' + (ex.id === 1 ? ' activo' : '');
+                div.id = 'ejercicio-' + ex.id;
+                
+                div.innerHTML = `
+                    <div class="enunciado">${ex.text}</div>
+                    
+                    <div class="paso activo" id="ex${ex.id}-paso1">
+                        <h3>Paso 1: Identificar componente Horizontal</h3>
+                        <p>Lee el enunciado y ubica el valor del movimiento o fuerza en la horizontal.</p>
+                        <div class="input-group">
+                            <label>Horizontal =</label>
+                            <input type="number" id="input-ex${ex.id}-p1" placeholder="Ej. 5">
+                            <button class="btn-validar" id="btn-ex${ex.id}-p1" onclick="validarPaso(${ex.id}, 1, ${ex.hor})">Comprobar</button>
+                        </div>
+                        <div class="feedback" id="feedback-ex${ex.id}-p1"></div>
+                        <div class="feedback pista" id="pista-ex${ex.id}-p1" style="display:none;"></div>
+                    </div>
+
+                    <div class="paso" id="ex${ex.id}-paso2">
+                        <h3>Paso 2: Identificar componente Vertical</h3>
+                        <p>Ahora ubica el valor correspondiente a la vertical.</p>
+                        <div class="input-group">
+                            <label>Vertical =</label>
+                            <input type="number" id="input-ex${ex.id}-p2" placeholder="Ej. 5">
+                            <button class="btn-validar" id="btn-ex${ex.id}-p2" onclick="validarPaso(${ex.id}, 2, ${ex.ver})">Comprobar</button>
+                        </div>
+                        <div class="feedback" id="feedback-ex${ex.id}-p2"></div>
+                        <div class="feedback pista" id="pista-ex${ex.id}-p2" style="display:none;"></div>
+                    </div>
+
+                    <div class="paso" id="ex${ex.id}-paso3">
+                        <h3>Paso 3: Calcular Magnitud (Pitágoras)</h3>
+                        <p>Aplica la fórmula: \\( |\\vec{R}| = \\sqrt{\\text{hor}^2 + \\text{ver}^2} \\). (Usa 1 decimal si no es entero).</p>
+                        <div class="input-group">
+                            <label>Magnitud =</label>
+                            <input type="number" step="0.1" id="input-ex${ex.id}-p3" placeholder="Ej. 10.5">
+                            <button class="btn-validar" id="btn-ex${ex.id}-p3" onclick="validarPaso(${ex.id}, 3, ${ex.mag})">Comprobar</button>
+                        </div>
+                        <div class="feedback" id="feedback-ex${ex.id}-p3"></div>
+                        <div class="feedback pista" id="pista-ex${ex.id}-p3" style="display:none;"></div>
+                    </div>
+
+                    ${htmlAngulo}
+
+                    <button class="btn-siguiente" id="btn-sig-${ex.id}" onclick="siguienteEx(${ex.id})">Siguiente Ejercicio <i class="fa-solid fa-arrow-right"></i></button>
+                `;
+                cont.appendChild(div);
+            });
+            
+            if(window.MathJax) MathJax.typeset();
+        }
+
+        function validarPaso(idEx, numPaso, ansOk) {
+            const input = document.getElementById(`input-ex${idEx}-p${numPaso}`);
+            const feedback = document.getElementById(`feedback-ex${idEx}-p${numPaso}`);
+            const pistaBox = document.getElementById(`pista-ex${idEx}-p${numPaso}`);
+            const btn = document.getElementById(`btn-ex${idEx}-p${numPaso}`);
+            const val = parseFloat(input.value);
+
+            if(isNaN(val)) {
                 feedback.className = "feedback error";
-                feedback.innerHTML = "Por favor ingresa un número.";
+                feedback.innerHTML = "Por favor ingresa un número válido.";
                 return;
             }
 
-            if(valorIngresado === respuestas[paso].valor) {
+            // Validacion con pequeña tolerancia para decimales (paso 3 y 4)
+            let correcto = false;
+            if(numPaso >= 3) {
+                if(Math.abs(val - ansOk) <= 0.2) correcto = true;
+            } else {
+                if(val === ansOk) correcto = true;
+            }
+
+            if(correcto) {
                 feedback.className = "feedback exito";
                 feedback.innerHTML = "<i class='fa-solid fa-check'></i> ¡Correcto!";
                 input.disabled = true;
-                pista.style.display = 'none';
+                btn.style.display = 'none';
+                pistaBox.style.display = 'none';
                 
-                document.getElementById('paso' + paso).classList.add('completado');
+                document.getElementById(`ex${idEx}-paso${numPaso}`).classList.add('completado');
                 
-                // Mostrar siguiente paso
-                const nextPaso = document.getElementById('paso' + (paso + 1));
-                if(nextPaso) {
+                // Siguiente paso lógico
+                let maxPasos = dataEjercicios[idEx-1].ang ? 4 : 3;
+                if(numPaso < maxPasos) {
                     setTimeout(() => {
-                        nextPaso.classList.add('activo');
+                        document.getElementById(`ex${idEx}-paso${numPaso+1}`).classList.add('activo');
+                    }, 500);
+                } else {
+                    // Fin del ejercicio
+                    setTimeout(() => {
+                        document.getElementById(`btn-sig-${idEx}`).style.display = 'block';
+                        document.getElementById(`bola-${idEx}`).classList.remove('activo');
+                        document.getElementById(`bola-${idEx}`).classList.add('completado');
                     }, 500);
                 }
             } else {
-                intentos[paso]++;
+                intentosPaso[idEx][numPaso]++;
                 feedback.className = "feedback error";
                 feedback.innerHTML = "<i class='fa-solid fa-xmark'></i> Incorrecto, revisa tu cálculo.";
                 
-                if(intentos[paso] >= 2) {
-                    pista.innerHTML = "<i class='fa-solid fa-lightbulb'></i> " + respuestas[paso].pista;
-                    pista.style.display = 'block';
+                if(intentosPaso[idEx][numPaso] >= 2) {
+                    let textPista = "";
+                    let dat = dataEjercicios[idEx-1];
+                    if(numPaso===1) textPista = dat.pistaHor;
+                    if(numPaso===2) textPista = dat.pistaVer;
+                    if(numPaso===3) textPista = dat.pistaMag;
+                    if(numPaso===4) textPista = dat.pistaAng;
+                    
+                    pistaBox.innerHTML = "<i class='fa-solid fa-lightbulb'></i> Pista: " + textPista;
+                    pistaBox.style.display = 'block';
                 }
             }
         }
+
+        function siguienteEx(idActual) {
+            document.getElementById(`ejercicio-${idActual}`).classList.remove('activo');
+            if(idActual < 10) {
+                let nextId = idActual + 1;
+                document.getElementById(`ejercicio-${nextId}`).classList.add('activo');
+                document.getElementById(`bola-${nextId}`).classList.add('activo');
+            } else {
+                document.getElementById('progreso-container').style.display = 'none';
+                document.getElementById('mensaje-final').style.display = 'block';
+            }
+        }
+
+        window.onload = init;
     </script>
     <script src="profe-ia.js"></script>
 </body>
