@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanceo de Ecuaciones Químicas - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --color-quimica: #9b59b6;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-secundario: #8e44ad;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; background-position: center;
+        }
+
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-quimica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 40px; padding: 40px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .emoji-tema { font-size: 4rem; margin-bottom: 15px; display: inline-block; animation: bounce 2s infinite; }
+        .header-tema h1 { font-size: 3rem; color: var(--color-quimica); margin-bottom: 15px; text-shadow: 0 0 10px rgba(155, 89, 182, 0.5); }
+        .header-tema p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto; line-height: 1.6;}
+
+        .seccion { background: rgba(20, 20, 35, 0.8); border-radius: 15px; padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--color-quimica); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .seccion h2 { font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .seccion h2 i { color: var(--color-quimica); }
+        .seccion p { font-size: 1.1rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
+
+        .caja-formula { background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(142, 68, 173, 0.05)); border: 1px solid rgba(155, 89, 182, 0.3); border-radius: 10px; padding: 25px; margin: 20px 0; text-align: center;}
+        
+        .partes-ecuacion { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .parte { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: center; width: 45%; }
+        .parte h4 { color: #f39c12; margin-bottom: 10px; font-size: 1.2rem; }
+        .parte p { font-size: 0.95rem; line-height: 1.4; margin-bottom: 0; }
+
+        /* ESTILO TIPO TABLERO PARA ECUACIONES */
+        .tablero-ecuacion { background: #111; border: 2px solid #333; border-radius: 10px; padding: 20px; margin: 25px 0; font-family: 'Fira Code', monospace; position: relative;}
+        .ecuacion-texto { font-size: 1.8rem; text-align: center; color: #fff; margin-bottom: 10px; font-weight: bold; }
+        .flecha-separador { font-size: 2rem; color: #f39c12; margin: 0 15px; }
+        .coeficiente { color: #e74c3c; font-weight: 800; font-size: 2rem;}
+        .subindice { font-size: 1.1rem; color: #8e44ad; vertical-align: sub;}
+        
+        .linea-punteada { border-top: 2px dashed #555; margin: 15px 0; width: 100%; position: relative; display: flex; justify-content: center;}
+        .linea-punteada::after { content: ''; position: absolute; height: 120%; width: 2px; background-image: linear-gradient(to bottom, #555 50%, transparent 50%); background-size: 100% 10px; top: -10px;}
+
+        .tabla-conteo { display: flex; justify-content: space-between; font-size: 1.2rem; color: #ddd; padding: 0 10%;}
+        .columna-conteo { width: 40%; text-align: center; }
+        .columna-conteo div { margin-bottom: 5px; display: flex; justify-content: space-between;}
+        .elemento-sym { color: #4facfe; font-weight: bold; }
+        .cambio-conteo { animation: highlight 1.5s ease; color: #f1c40f; font-weight: bold;}
+        .conteo-ok { color: #2ecc71; font-weight: bold;}
+
+        /* --- ESTILOS DE EJERCICIOS --- */
+        .ejercicio-tarjeta { background: rgba(20, 20, 35, 0.6); border-left: 4px solid #f39c12; padding: 25px; margin-bottom: 30px; border-radius: 0 8px 8px 0; }
+        .ejercicio-tarjeta h3 { color: #f39c12; margin-bottom: 10px; font-size: 1.3rem; }
+        .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 600; color: #3498db; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;}
+
+        .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+        .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .btn-practica { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
+        .btn-practica:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(230, 126, 34, 0.4); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+        .btn-evaluacion:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(231, 76, 60, 0.4); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes highlight { 0% { background: rgba(241, 196, 15, 0.5); } 100% { background: transparent; } }
+
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="quimica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Química 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="quimica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Química 10</a>
+
+        <div class="header-tema">
+            <span class="emoji-tema">⚖️</span>
+            <h1>Ecuaciones Químicas y Balanceo por Tanteo</h1>
+            <p>La Ley de Conservación de la Masa nos dice que la materia no se crea ni se destruye. Por lo tanto, debemos tener la misma cantidad de átomos a ambos lados de la ecuación.</p>
+        </div>
+
+        <div class="seccion">
+            <h2><i class="fa-solid fa-magnifying-glass"></i> 1. ¿Qué es una Ecuación Química?</h2>
+            <p>Es la representación escrita de una reacción química. Nos indica qué sustancias iniciales reaccionan y qué sustancias nuevas se producen.</p>
+            
+            <div class="caja-formula">
+                <div class="ecuacion-texto" style="font-size: 2.2rem; color: #fff;">
+                    <span class="coeficiente">2</span>H<span class="subindice">2</span> + O<span class="subindice">2</span> 
+                    <span class="flecha-separador">⟶</span> 
+                    <span class="coeficiente">2</span>H<span class="subindice">2</span>O
+                </div>
+            </div>
+
+            <div class="partes-ecuacion">
+                <div class="parte">
+                    <h4>Reactivos (Izquierda)</h4>
+                    <p>Las sustancias que van a reaccionar. En el ejemplo: <strong>H<span class="subindice">2</span></strong> y <strong>O<span class="subindice">2</span></strong>.</p>
+                </div>
+                <div class="parte">
+                    <h4>Productos (Derecha)</h4>
+                    <p>Las sustancias nuevas que se forman después de la flecha (\(\rightarrow\)). En el ejemplo: <strong>H<span class="subindice">2</span>O</strong>.</p>
+                </div>
+                <div class="parte">
+                    <h4>Coeficientes (<span style="color:#e74c3c;">Rojos</span>)</h4>
+                    <p>Números GRANDES a la izquierda de cada fórmula. Indican cuántas <strong>moléculas</strong> enteras hay. <strong>¡Es el ÚNICO número que puedes modificar para balancear!</strong></p>
+                </div>
+                <div class="parte">
+                    <h4>Subíndices (<span style="color:#8e44ad;">Morados</span>)</h4>
+                    <p>Números pequeños debajo de los símbolos. Indican la cantidad de <strong>átomos</strong> en esa molécula. <strong>¡NUNCA debes cambiarlos!</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion" style="border-left-color: #2ecc71;">
+            <h2><i class="fa-solid fa-list-ol"></i> 2. El Método de Tanteo (Ensayo y Error)</h2>
+            <p>El balanceo por tanteo es exactamente eso: probar números enteros (coeficientes) hasta que la cantidad de átomos de cada elemento sea idéntica a la izquierda y a la derecha.</p>
+            <p><strong>El truco de la Línea Punteada:</strong> En el tablero, trazaremos una línea hacia abajo desde la flecha. Listaremos los elementos a cada lado y contaremos. Cada vez que pongas un coeficiente nuevo, tachas el valor antiguo y actualizas el conteo.</p>
+        </div>
+
+        <div class="seccion" style="border-left-color: #f39c12;">
+            <h2><i class="fa-solid fa-chalkboard-user"></i> 3. Ejemplos Paso a Paso</h2>
+            
+            <!-- EJEMPLO 1 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 1: Formación de Agua (Básico)</h3>
+                <div class="paso">
+                    <div class="paso-titulo">Ecuación Desbalanceada</div>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            H<span class="subindice">2</span> + O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> H<span class="subindice">2</span>O
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">H</span> = 2</div>
+                                <div><span class="elemento-sym">O</span> = 2</div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">H</span> = 2</div>
+                                <div><span class="elemento-sym">O</span> = 1 <span style="color:#e74c3c; font-size:0.8em;">(Faltan oxígenos)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Agregamos un Coeficiente 2 al Agua</div>
+                    <p>Para igualar el Oxígeno, ponemos un 2 gigante antes del H2O. <em>Ojo, este 2 multiplica a todo (al H y al O).</em></p>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            H<span class="subindice">2</span> + O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> <span class="coeficiente">2</span>H<span class="subindice">2</span>O
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">H</span> = 2</div>
+                                <div><span class="elemento-sym">O</span> = 2</div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div class="cambio-conteo"><span class="elemento-sym">H</span> = <s>2</s> 4</div>
+                                <div class="cambio-conteo"><span class="elemento-sym">O</span> = <s>1</s> 2 <span class="conteo-ok">✓</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Balanceamos el Hidrógeno final</div>
+                    <p>Ahora el Oxígeno está bien (2 y 2), pero el Hidrógeno se nos descuadró (2 y 4). Ponemos un 2 antes del H2 a la izquierda.</p>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            <span class="coeficiente">2</span>H<span class="subindice">2</span> + O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> <span class="coeficiente">2</span>H<span class="subindice">2</span>O
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div class="cambio-conteo"><span class="elemento-sym">H</span> = <s>2</s> 4 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">O</span> = 2 <span class="conteo-ok">✓</span></div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">H</span> = 4 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">O</span> = 2 <span class="conteo-ok">✓</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align:center; color:#2ecc71; margin-top: 10px; font-weight:bold;">¡Balanceada!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJEMPLO 2 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 2: Síntesis del Amoníaco (Intermedio)</h3>
+                <div class="paso">
+                    <div class="paso-titulo">Ecuación Desbalanceada</div>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            N<span class="subindice">2</span> + H<span class="subindice">2</span> <span class="flecha-separador">⟶</span> NH<span class="subindice">3</span>
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">N</span> = 2</div>
+                                <div><span class="elemento-sym">H</span> = 2</div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">N</span> = 1</div>
+                                <div><span class="elemento-sym">H</span> = 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Mínimo Común Múltiplo para el Hidrógeno</div>
+                    <p>Vemos que a la izquierda hay 2 H, y a la derecha hay 3 H. Para igualarlos, cruzamos los números: ponemos un 3 en el H2, y un 2 en el NH3. Ambos quedarán con 6.</p>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            N<span class="subindice">2</span> + <span class="coeficiente">3</span>H<span class="subindice">2</span> <span class="flecha-separador">⟶</span> <span class="coeficiente">2</span>NH<span class="subindice">3</span>
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">N</span> = 2 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">H</span> = <s>2</s> 6 <span class="conteo-ok">✓</span></div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div class="cambio-conteo"><span class="elemento-sym">N</span> = <s>1</s> 2 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">H</span> = <s>3</s> 6 <span class="conteo-ok">✓</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align:center; color:#2ecc71; margin-top: 10px; font-weight:bold;">Al arreglar el H, mágicamente el N también se balanceó. ¡Terminamos!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJEMPLO 3 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 3: Uso de Paréntesis - Complejo</h3>
+                <p style="color:#ddd; font-style:italic;"><strong>Regla de oro:</strong> Si hay un número fuera de un paréntesis, este multiplica a todos los átomos dentro de él. Ej: En Ca(OH)2 hay 2 O y 2 H.</p>
+                <div class="paso">
+                    <div class="paso-titulo">Ecuación Desbalanceada</div>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto" style="font-size: 1.5rem;">
+                            Al<span class="subindice">2</span>(SO<span class="subindice">4</span>)<span class="subindice">3</span> + Ca(OH)<span class="subindice">2</span> <span class="flecha-separador">⟶</span> Al(OH)<span class="subindice">3</span> + CaSO<span class="subindice">4</span>
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">Al</span> = 2</div>
+                                <div><span class="elemento-sym">S</span> = 3</div>
+                                <div><span class="elemento-sym">O</span> = 12 + 2 = 14</div>
+                                <div><span class="elemento-sym">Ca</span> = 1</div>
+                                <div><span class="elemento-sym">H</span> = 2</div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">Al</span> = 1</div>
+                                <div><span class="elemento-sym">S</span> = 1</div>
+                                <div><span class="elemento-sym">O</span> = 3 + 4 = 7</div>
+                                <div><span class="elemento-sym">Ca</span> = 1</div>
+                                <div><span class="elemento-sym">H</span> = 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Solución Final con Coeficientes</div>
+                    <p>Al ajustar los metales y el ion sulfato paso a paso llegamos a esta configuración:</p>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto" style="font-size: 1.5rem;">
+                            Al<span class="subindice">2</span>(SO<span class="subindice">4</span>)<span class="subindice">3</span> + <span class="coeficiente">3</span>Ca(OH)<span class="subindice">2</span> <span class="flecha-separador">⟶</span> <span class="coeficiente">2</span>Al(OH)<span class="subindice">3</span> + <span class="coeficiente">3</span>CaSO<span class="subindice">4</span>
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">Al</span> = 2 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">S</span> = 3 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">O</span> = 12 + 6 = 18 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">Ca</span> = 3 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">H</span> = 6 <span class="conteo-ok">✓</span></div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">Al</span> = 2 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">S</span> = 3 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">O</span> = 6 + 12 = 18 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">Ca</span> = 3 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">H</span> = 6 <span class="conteo-ok">✓</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJEMPLO 4 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 4: Reacción con Ácido (Metal + Ácido)</h3>
+                <div class="paso">
+                    <div class="paso-titulo">Ecuación Desbalanceada</div>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            Fe + HCl <span class="flecha-separador">⟶</span> FeCl<span class="subindice">3</span> + H<span class="subindice">2</span>
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">Fe</span> = 1</div>
+                                <div><span class="elemento-sym">H</span> = 1</div>
+                                <div><span class="elemento-sym">Cl</span> = 1</div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">Fe</span> = 1</div>
+                                <div><span class="elemento-sym">H</span> = 2</div>
+                                <div><span class="elemento-sym">Cl</span> = 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Ajuste por Mínimo Común Múltiplo (H y Cl)</div>
+                    <p>Necesitamos que el número de H sea par (porque a la derecha hay 2) y múltiplo de 3 (porque a la derecha hay 3 Cl). Usamos el 6 para el HCl.</p>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            <span class="coeficiente">2</span>Fe + <span class="coeficiente">6</span>HCl <span class="flecha-separador">⟶</span> <span class="coeficiente">2</span>FeCl<span class="subindice">3</span> + <span class="coeficiente">3</span>H<span class="subindice">2</span>
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div class="cambio-conteo"><span class="elemento-sym">Fe</span> = 2 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">H</span> = 6 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">Cl</span> = 6 <span class="conteo-ok">✓</span></div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div class="cambio-conteo"><span class="elemento-sym">Fe</span> = 2 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">H</span> = 6 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">Cl</span> = 6 <span class="conteo-ok">✓</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJEMPLO 5 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 5: Combustión Completa del Propano</h3>
+                <p style="color:#ddd; font-style:italic;"><strong>Consejo:</strong> En combustiones, balancea siempre en este orden: Carbono, Hidrógeno, y por último el Oxígeno.</p>
+                <div class="paso">
+                    <div class="paso-titulo">Ecuación Desbalanceada</div>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            C<span class="subindice">3</span>H<span class="subindice">8</span> + O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> CO<span class="subindice">2</span> + H<span class="subindice">2</span>O
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">C</span> = 3</div>
+                                <div><span class="elemento-sym">H</span> = 8</div>
+                                <div><span class="elemento-sym">O</span> = 2</div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">C</span> = 1</div>
+                                <div><span class="elemento-sym">H</span> = 2</div>
+                                <div><span class="elemento-sym">O</span> = 2 + 1 = 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Balanceo Secuencial (C -> H -> O)</div>
+                    <p>1. Ajustamos C con un 3 en el CO2. <br>2. Ajustamos H con un 4 en el H2O. <br>3. Ahora contamos los O a la derecha: (3x2) + (4x1) = 6 + 4 = 10. <br>4. Ajustamos O a la izquierda con un 5.</p>
+                    <div class="tablero-ecuacion">
+                        <div class="ecuacion-texto">
+                            C<span class="subindice">3</span>H<span class="subindice">8</span> + <span class="coeficiente">5</span>O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> <span class="coeficiente">3</span>CO<span class="subindice">2</span> + <span class="coeficiente">4</span>H<span class="subindice">2</span>O
+                        </div>
+                        <div class="linea-punteada"></div>
+                        <div class="tabla-conteo">
+                            <div class="columna-conteo">
+                                <div><span class="elemento-sym">C</span> = 3 <span class="conteo-ok">✓</span></div>
+                                <div><span class="elemento-sym">H</span> = 8 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">O</span> = 10 <span class="conteo-ok">✓</span></div>
+                            </div>
+                            <div class="columna-conteo">
+                                <div class="cambio-conteo"><span class="elemento-sym">C</span> = 3 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">H</span> = 8 <span class="conteo-ok">✓</span></div>
+                                <div class="cambio-conteo"><span class="elemento-sym">O</span> = 6 + 4 = 10 <span class="conteo-ok">✓</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="botones-accion">
+            <a href="quimica10_balanceo_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Ir a la Práctica de Balanceo
+            </a>
+            <a href="quimica10_balanceo_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-clipboard-check"></i> Realizar Evaluación
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>LabVirtual W &copy; 2025 · Construido con inteligencia artificial para la educación</p>
+    </footer>
+
+    <script src="profe-ia.js"></script>
+</body>
+</html>

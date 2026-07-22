@@ -263,8 +263,25 @@
                 if(pasoTutorial < pts.length) {
                     puntosDibujados.push(pts[pasoTutorial]);
                     repintarTodo();
-                    infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br>Dibujando vector ${pts[pasoTutorial].n}... (Cola en la cabeza del anterior).`;
-                    timerAnimacion = setTimeout(animarPaso, 1500);
+                    
+                    // Generar explicacion detallada
+                    let vOrig = tut.vecs[pasoTutorial-1];
+                    let isFirst = pasoTutorial === 1;
+                    let tx = isFirst ? `Vamos a dibujar el vector ${vOrig.n} desde el origen. ` : `Ahora el vector ${vOrig.n}. Desde la flecha anterior, `;
+                    
+                    if (vOrig.x > 0) tx += `contamos ${vOrig.x} a la DERECHA (porque el signo de X es positivo), `;
+                    else if (vOrig.x < 0) tx += `contamos ${Math.abs(vOrig.x)} a la IZQUIERDA (porque el signo de X es negativo), `;
+                    else tx += `no nos movemos horizontalmente, `;
+                    
+                    tx += `y luego `;
+                    
+                    if (vOrig.y > 0) tx += `contamos ${vOrig.y} hacia ARRIBA (porque el signo de Y es positivo). `;
+                    else if (vOrig.y < 0) tx += `contamos ${Math.abs(vOrig.y)} hacia ABAJO (porque el signo de Y es negativo). `;
+                    else tx += `no nos movemos verticalmente. `;
+                    
+                    infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br><span style="color:#f39c12; font-size:1.1rem; line-height:1.6;">${tx} ¡Ahí marcamos la punta!</span>`;
+                    
+                    timerAnimacion = setTimeout(animarPaso, 4500); // Dar tiempo de leer
                 } else {
                     modo = 'tutorial_fin';
                     repintarTodo();
@@ -321,18 +338,29 @@
             }
         }
 
+        // Ajuste de escala para precisión del mouse
+        function getPos(e) {
+            let rect = canvas.getBoundingClientRect();
+            let scaleX = canvas.width / rect.width;
+            let scaleY = canvas.height / rect.height;
+            return {
+                px: (e.clientX - rect.left) * scaleX,
+                py: (e.clientY - rect.top) * scaleY
+            };
+        }
+
         // Eventos Canvas
         canvas.addEventListener('mousemove', (e) => {
-            let rect = canvas.getBoundingClientRect();
-            let g = toGrid(e.clientX - rect.left, e.clientY - rect.top);
+            let p = getPos(e);
+            let g = toGrid(p.px, p.py);
             coorTxt.innerText = `X: ${g.x}, Y: ${g.y}`;
         });
 
         canvas.addEventListener('mousedown', (e) => {
             if(!modo.startsWith('practica') || modo === 'practica_validada') return;
             
-            let rect = canvas.getBoundingClientRect();
-            let g = toGrid(e.clientX - rect.left, e.clientY - rect.top);
+            let p = getPos(e);
+            let g = toGrid(p.px, p.py);
             
             // Evitar clic fuera de la cuadricula útil
             if(g.x < -10 || g.x > 10 || g.y < -10 || g.y > 10) return;

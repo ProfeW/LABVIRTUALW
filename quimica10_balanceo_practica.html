@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Balanceo de Ecuaciones - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --color-quimica: #9b59b6;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-aviso: #f39c12;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed;
+        }
+
+        nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap:10px;}
+        .logo i { color: var(--color-quimica); }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .header-tema { text-align: center; margin-bottom: 30px; padding: 30px; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .header-tema h1 { font-size: 2.5rem; color: var(--color-quimica); margin-bottom: 10px; }
+        
+        .progreso-container { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;}
+        .bola-progreso { width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: bold; transition: 0.3s;}
+        .bola-progreso.activo { background: var(--color-quimica); color: #fff; box-shadow: 0 0 10px var(--color-quimica);}
+        .bola-progreso.completado { background: var(--color-exito); color: #fff; }
+
+        .ejercicio-box { background: rgba(20, 20, 35, 0.9); border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 2px solid var(--color-quimica); box-shadow: 0 10px 20px rgba(0,0,0,0.5); display: none;}
+        .ejercicio-box.activo { display: block; animation: fadeIn 0.5s; }
+        
+        .tipo-badge { background: #4facfe; color: #fff; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-bottom: 15px;}
+        .tipo-badge.reto { background: var(--color-aviso); }
+
+        .paso { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #ccc; display: none; opacity: 0; transform: translateY(10px); transition: all 0.5s ease; }
+        .paso.activo { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-quimica); }
+        .paso.completado { display: block; opacity: 1; transform: translateY(0); border-left-color: var(--color-exito); }
+        
+        .tablero-ecuacion { background: #111; border: 2px solid #333; border-radius: 10px; padding: 25px 20px; margin: 15px 0; font-family: 'Fira Code', monospace; text-align: center;}
+        .ecuacion-html { font-size: 1.6rem; color: #fff; font-weight: bold; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 5px;}
+        .flecha-separador { font-size: 1.8rem; color: #f39c12; margin: 0 15px; }
+        .subindice { font-size: 1.1rem; color: #8e44ad; vertical-align: sub;}
+        
+        .coef-input { width: 50px; height: 40px; font-size: 1.5rem; text-align: center; background: rgba(231, 76, 60, 0.1); border: 2px solid #e74c3c; color: #e74c3c; border-radius: 8px; font-weight: bold; margin-right: 5px; outline: none; transition: 0.3s;}
+        .coef-input:focus { background: rgba(231, 76, 60, 0.3); box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);}
+
+        .linea-punteada { border-top: 2px dashed #555; margin: 15px 0; width: 100%; position: relative; display: flex; justify-content: center;}
+        .linea-punteada::after { content: ''; position: absolute; height: 180%; width: 2px; background-image: linear-gradient(to bottom, #555 50%, transparent 50%); background-size: 100% 10px; top: -10px;}
+
+        .tabla-conteo { display: flex; justify-content: space-between; font-size: 1.2rem; color: #ddd; padding: 0 10%;}
+        .columna-conteo { width: 45%; }
+        
+        .fila-elemento { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; background: rgba(255,255,255,0.02); padding: 5px 10px; border-radius: 5px; transition: 0.3s;}
+        .fila-elemento.correcto { background: rgba(46, 204, 113, 0.1); border-left: 3px solid #2ecc71; }
+        .fila-elemento.incorrecto { background: rgba(231, 76, 60, 0.1); border-left: 3px solid #e74c3c; }
+
+        .elem-input { width: 60px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid #4facfe; color: #4facfe; padding: 5px; border-radius: 5px; font-weight: bold; text-transform: capitalize; outline: none;}
+        .num-input { width: 60px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid #aaa; color: #fff; padding: 5px; border-radius: 5px; font-weight: bold; outline: none;}
+
+        .btn-validar { background: var(--color-quimica); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .btn-validar:hover { background: var(--color-secundario); transform: translateY(-2px); }
+        .btn-siguiente { background: var(--color-exito); display: none; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; transition: 0.3s; margin-top: 20px; width: 100%;}
+        .btn-siguiente:hover { background: #27ae60; transform: translateY(-2px); }
+
+        .feedback { margin-top: 15px; font-weight: 600; font-size: 1rem; display: none; padding: 10px; border-radius: 8px; }
+        .feedback.error { background: rgba(231, 76, 60, 0.2); color: #ff6b6b; display: block; }
+        .feedback.exito { background: rgba(46, 204, 113, 0.2); color: #2ecc71; display: block; }
+        .feedback.aviso { background: rgba(243, 156, 18, 0.2); color: #f39c12; display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="quimica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Química 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="quimica10_balanceo.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+
+        <div class="header-tema">
+            <h1>Reto de Práctica: Balanceo por Tanteo</h1>
+            <p>10 ecuaciones químicas. Las primeras 5 te guiarán con colores, las últimas 5 son un reto a ciegas. Usa la técnica de la línea punteada.</p>
+        </div>
+
+        <div class="progreso-container" id="progreso-container"></div>
+        <div id="ejercicios-container"></div>
+        
+        <div id="mensaje-final" style="display:none; text-align:center; padding: 40px; background: rgba(46,204,113,0.1); border-radius: 20px; border: 2px solid #2ecc71;">
+            <h2>¡Magnífico trabajo Químico!</h2>
+            <p style="margin-bottom: 20px;">Has dominado el balanceo por tanteo respetando la Ley de la Conservación de la Masa.</p>
+            <a href="quimica10_balanceo_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la Evaluación Final</a>
+        </div>
+    </main>
+
+    <script>
+        // Funciones auxiliares para renderizar subíndices
+        function f(str) { return str.replace(/(\d+)/g, "<span class='subindice'>$1</span>"); }
+        function inpC(id, i) { return `<input type="number" min="1" class="coef-input" id="coef-${id}-${i}" placeholder="1">`; }
+
+        const dataEx = [
+            { 
+                id: 1, type: 'guiado',
+                eqStr: "H2 + O2 ⟶ H2O", 
+                html: (id) => `${inpC(id,0)}H<span class="subindice">2</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}H<span class="subindice">2</span>O`,
+                elements: ["H", "O"],
+                initL: [2, 2], initR: [2, 1],
+                calc: (c) => ({ "H": [c[0]*2, c[2]*2], "O": [c[1]*2, c[2]*1] })
+            },
+            { 
+                id: 2, type: 'guiado',
+                eqStr: "N2 + H2 ⟶ NH3",
+                html: (id) => `${inpC(id,0)}N<span class="subindice">2</span> + ${inpC(id,1)}H<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}NH<span class="subindice">3</span>`,
+                elements: ["N", "H"],
+                initL: [2, 2], initR: [1, 3],
+                calc: (c) => ({ "N": [c[0]*2, c[2]*1], "H": [c[1]*2, c[2]*3] })
+            },
+            { 
+                id: 3, type: 'guiado',
+                eqStr: "Fe + O2 ⟶ Fe2O3",
+                html: (id) => `${inpC(id,0)}Fe + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}Fe<span class="subindice">2</span>O<span class="subindice">3</span>`,
+                elements: ["Fe", "O"],
+                initL: [1, 2], initR: [2, 3],
+                calc: (c) => ({ "Fe": [c[0]*1, c[2]*2], "O": [c[1]*2, c[2]*3] })
+            },
+            { 
+                id: 4, type: 'guiado',
+                eqStr: "CH4 + O2 ⟶ CO2 + H2O",
+                html: (id) => `${inpC(id,0)}CH<span class="subindice">4</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}CO<span class="subindice">2</span> + ${inpC(id,3)}H<span class="subindice">2</span>O`,
+                elements: ["C", "H", "O"],
+                initL: [1, 4, 2], initR: [1, 2, 3],
+                calc: (c) => ({ "C": [c[0]*1, c[2]*1], "H": [c[0]*4, c[3]*2], "O": [c[1]*2, c[2]*2 + c[3]*1] })
+            },
+            { 
+                id: 5, type: 'guiado',
+                eqStr: "Al + HCl ⟶ AlCl3 + H2",
+                html: (id) => `${inpC(id,0)}Al + ${inpC(id,1)}HCl <span class="flecha-separador">⟶</span> ${inpC(id,2)}AlCl<span class="subindice">3</span> + ${inpC(id,3)}H<span class="subindice">2</span>`,
+                elements: ["Al", "H", "Cl"],
+                initL: [1, 1, 1], initR: [1, 2, 3],
+                calc: (c) => ({ "Al": [c[0]*1, c[2]*1], "H": [c[1]*1, c[3]*2], "Cl": [c[1]*1, c[2]*3] })
+            },
+            { 
+                id: 6, type: 'reto',
+                eqStr: "KClO3 ⟶ KCl + O2",
+                html: (id) => `${inpC(id,0)}KClO<span class="subindice">3</span> <span class="flecha-separador">⟶</span> ${inpC(id,1)}KCl + ${inpC(id,2)}O<span class="subindice">2</span>`,
+                elements: ["K", "Cl", "O"],
+                initL: [1, 1, 3], initR: [1, 1, 2],
+                calc: (c) => ({ "K": [c[0]*1, c[1]*1], "Cl": [c[0]*1, c[1]*1], "O": [c[0]*3, c[2]*2] })
+            },
+            { 
+                id: 7, type: 'reto',
+                eqStr: "Na + H2O ⟶ NaOH + H2",
+                html: (id) => `${inpC(id,0)}Na + ${inpC(id,1)}H<span class="subindice">2</span>O <span class="flecha-separador">⟶</span> ${inpC(id,2)}NaOH + ${inpC(id,3)}H<span class="subindice">2</span>`,
+                elements: ["Na", "H", "O"],
+                initL: [1, 2, 1], initR: [1, 3, 1],
+                calc: (c) => ({ "Na": [c[0]*1, c[2]*1], "H": [c[1]*2, c[2]*1 + c[3]*2], "O": [c[1]*1, c[2]*1] })
+            },
+            { 
+                id: 8, type: 'reto',
+                eqStr: "C3H8 + O2 ⟶ CO2 + H2O",
+                html: (id) => `${inpC(id,0)}C<span class="subindice">3</span>H<span class="subindice">8</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}CO<span class="subindice">2</span> + ${inpC(id,3)}H<span class="subindice">2</span>O`,
+                elements: ["C", "H", "O"],
+                initL: [3, 8, 2], initR: [1, 2, 3],
+                calc: (c) => ({ "C": [c[0]*3, c[2]*1], "H": [c[0]*8, c[3]*2], "O": [c[1]*2, c[2]*2 + c[3]*1] })
+            },
+            { 
+                id: 9, type: 'reto',
+                eqStr: "P4 + O2 ⟶ P2O5",
+                html: (id) => `${inpC(id,0)}P<span class="subindice">4</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}P<span class="subindice">2</span>O<span class="subindice">5</span>`,
+                elements: ["P", "O"],
+                initL: [4, 2], initR: [2, 5],
+                calc: (c) => ({ "P": [c[0]*4, c[2]*2], "O": [c[1]*2, c[2]*5] })
+            },
+            { 
+                id: 10, type: 'reto',
+                eqStr: "Al2(SO4)3 + Ca(OH)2 ⟶ Al(OH)3 + CaSO4",
+                html: (id) => `${inpC(id,0)}Al<span class="subindice">2</span>(SO<span class="subindice">4</span>)<span class="subindice">3</span> + ${inpC(id,1)}Ca(OH)<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}Al(OH)<span class="subindice">3</span> + ${inpC(id,3)}CaSO<span class="subindice">4</span>`,
+                elements: ["Al", "S", "O", "Ca", "H"],
+                initL: [2, 3, 14, 1, 2], initR: [1, 1, 7, 1, 3],
+                calc: (c) => ({ 
+                    "Al": [c[0]*2, c[2]*1], 
+                    "S": [c[0]*3, c[3]*1], 
+                    "O": [c[0]*12 + c[1]*2, c[2]*3 + c[3]*4],
+                    "Ca": [c[1]*1, c[3]*1],
+                    "H": [c[1]*2, c[2]*3]
+                })
+            }
+        ];
+
+        function init() {
+            const prog = document.getElementById('progreso-container');
+            const cont = document.getElementById('ejercicios-container');
+            
+            dataEx.forEach(ex => {
+                let b = document.createElement('div');
+                b.className = 'bola-progreso' + (ex.id === 1 ? ' activo' : '');
+                b.id = 'bola-' + ex.id;
+                b.innerText = ex.id;
+                prog.appendChild(b);
+
+                let div = document.createElement('div');
+                div.className = 'ejercicio-box' + (ex.id === 1 ? ' activo' : '');
+                div.id = 'ejercicio-' + ex.id;
+                
+                let badge = ex.type === 'guiado' ? '<span class="tipo-badge">Modo Guiado</span>' : '<span class="tipo-badge reto">Modo Reto (Sin Pistas)</span>';
+
+                // Generar HTML de filas para tabla inicial (Paso 2)
+                let filasInitHTML = '';
+                for(let i=0; i<ex.elements.length; i++) {
+                    filasInitHTML += `
+                    <div class="fila-elemento">
+                        <input type="text" class="elem-input" id="init-sym-${ex.id}-${i}" placeholder="Ejem: H"> = 
+                        <input type="number" class="num-input" id="init-L-${ex.id}-${i}" placeholder="0">
+                    </div>`;
+                }
+
+                div.innerHTML = `
+                    ${badge}
+                    <h3 style="margin-bottom: 15px;">Ecuación: ${f(ex.eqStr)}</h3>
+                    
+                    <div class="paso activo" id="ex${ex.id}-paso1">
+                        <div class="paso-titulo">Paso 1: Análisis</div>
+                        <p>Observa la ecuación. ¿Cuántos elementos químicos distintos participan en la reacción?</p>
+                        <div style="display:flex; gap:10px; margin-top:10px;">
+                            <input type="number" id="inp-elems-${ex.id}" class="num-input" style="width: 80px;">
+                            <button class="btn-validar" onclick="validarPaso1(${ex.id}, ${ex.elements.length})">Comprobar</button>
+                        </div>
+                        <div class="feedback" id="fb-${ex.id}-p1"></div>
+                    </div>
+
+                    <div class="paso" id="ex${ex.id}-paso2">
+                        <div class="paso-titulo">Paso 2: Conteo Inicial</div>
+                        <p>Escribe el símbolo de cada elemento y cuántos átomos hay inicialmente en reactivos (izquierda) y productos (derecha).</p>
+                        <div class="tablero-ecuacion">
+                            <div class="ecuacion-html">${f(ex.eqStr)}</div>
+                            <div class="linea-punteada"></div>
+                            <div class="tabla-conteo">
+                                <div class="columna-conteo" id="col-L-${ex.id}">${filasInitHTML}</div>
+                                <div class="columna-conteo" id="col-R-${ex.id}">
+                                    ${filasInitHTML.replace(/init-L/g, 'init-R')}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-validar" style="width:100%" onclick="validarPaso2(${ex.id})">Validar Tabla Inicial</button>
+                        <div class="feedback" id="fb-${ex.id}-p2"></div>
+                    </div>
+
+                    <div class="paso" id="ex${ex.id}-paso3">
+                        <div class="paso-titulo">Paso 3: Balanceo</div>
+                        <p>Modifica los coeficientes rojos en la ecuación y actualiza tus conteos en la tabla hasta que ambos lados sean iguales.</p>
+                        <div class="tablero-ecuacion">
+                            <div class="ecuacion-html">${ex.html(ex.id)}</div>
+                            <div class="linea-punteada"></div>
+                            <div class="tabla-conteo">
+                                <div class="columna-conteo" id="final-L-${ex.id}"></div>
+                                <div class="columna-conteo" id="final-R-${ex.id}"></div>
+                            </div>
+                        </div>
+                        <button class="btn-validar" style="width:100%; background:#2980b9;" onclick="validarPaso3(${ex.id})"><i class="fa-solid fa-scale-balanced"></i> Comprobar Balanceo</button>
+                        <div class="feedback" id="fb-${ex.id}-p3"></div>
+                    </div>
+
+                    <button class="btn-siguiente" id="btn-sig-${ex.id}" onclick="siguienteEx(${ex.id})">Siguiente Ecuación <i class="fa-solid fa-arrow-right"></i></button>
+                `;
+                cont.appendChild(div);
+            });
+            if(window.MathJax) MathJax.typeset();
+        }
+
+        function validarPaso1(id, len) {
+            const inp = document.getElementById(`inp-elems-${id}`);
+            const fb = document.getElementById(`fb-${id}-p1`);
+            if(parseInt(inp.value) === len) {
+                fb.className = "feedback exito"; fb.innerHTML = "¡Correcto!";
+                inp.disabled = true;
+                document.getElementById(`ex${id}-paso1`).classList.add('completado');
+                setTimeout(()=> document.getElementById(`ex${id}-paso2`).classList.add('activo'), 400);
+            } else {
+                fb.className = "feedback error"; fb.innerHTML = "Incorrecto. Cuenta bien los símbolos distintos.";
+            }
+        }
+
+        function validarPaso2(id) {
+            let ex = dataEx.find(e => e.id === id);
+            let fb = document.getElementById(`fb-${id}-p2`);
+            let correcto = true;
+
+            // Validar que los símbolos y los numeros iniciales coincidan con ex.elements, ex.initL, ex.initR
+            // (El orden no importa, pero para simplificar obligamos a que pongan los elementos tal cual o los buscamos)
+            let usrElements = [];
+            for(let i=0; i<ex.elements.length; i++) {
+                let sym = document.getElementById(`init-sym-${id}-${i}`).value.trim().replace(/^./, str => str.toUpperCase());
+                let L = parseInt(document.getElementById(`init-L-${id}-${i}`).value) || 0;
+                let R = parseInt(document.getElementById(`init-R-${id}-${i}`).value) || 0;
+                
+                let idx = ex.elements.indexOf(sym);
+                if(idx === -1 || L !== ex.initL[idx] || R !== ex.initR[idx]) {
+                    correcto = false;
+                }
+                usrElements.push({sym: sym, L: L, R: R, idx: idx});
+            }
+
+            if(correcto) {
+                fb.className = "feedback exito"; fb.innerHTML = "¡Tabla inicial perfecta!";
+                document.getElementById(`ex${id}-paso2`).classList.add('completado');
+                
+                // Preparar Paso 3 usando el orden de elementos del usuario
+                let htmlL = '', htmlR = '';
+                for(let i=0; i<ex.elements.length; i++) {
+                    let s = usrElements[i].sym;
+                    htmlL += `<div class="fila-elemento" id="row-L-${id}-${i}"><span class="elemento-sym">${s}</span> = <input type="number" class="num-input" id="bal-L-${id}-${i}" value="${usrElements[i].L}"></div>`;
+                    htmlR += `<div class="fila-elemento" id="row-R-${id}-${i}"><span class="elemento-sym">${s}</span> = <input type="number" class="num-input" id="bal-R-${id}-${i}" value="${usrElements[i].R}"></div>`;
+                }
+                document.getElementById(`final-L-${id}`).innerHTML = htmlL;
+                document.getElementById(`final-R-${id}`).innerHTML = htmlR;
+
+                setTimeout(()=> document.getElementById(`ex${id}-paso3`).classList.add('activo'), 400);
+            } else {
+                fb.className = "feedback error"; fb.innerHTML = "Hay un error en los símbolos o en el conteo de átomos. Revisa bien la ecuación.";
+            }
+        }
+
+        function validarPaso3(id) {
+            let ex = dataEx.find(e => e.id === id);
+            let fb = document.getElementById(`fb-${id}-p3`);
+            
+            // Leer coeficientes de la ecuacion
+            let coefs = [];
+            // Count how many inputs for this equation
+            let numInputs = 0;
+            while(document.getElementById(`coef-${id}-${numInputs}`) !== null) { numInputs++; }
+            for(let i=0; i<numInputs; i++) {
+                let val = parseInt(document.getElementById(`coef-${id}-${i}`).value);
+                if(isNaN(val) || val < 1) val = 1; // Default to 1 if empty
+                coefs.push(val);
+            }
+
+            // Calcular valores reales matematicos
+            let reales = ex.calc(coefs);
+
+            let matematicamenteCorrecto = true;
+            let balanceado = true;
+
+            // Leer valores de la tabla escrita por el usuario y comparar
+            for(let i=0; i<ex.elements.length; i++) {
+                // Recuperar que elemento esta en esta fila
+                let sym = document.getElementById(`row-L-${id}-${i}`).innerText.split('=')[0].trim();
+                let uL = parseInt(document.getElementById(`bal-L-${id}-${i}`).value) || 0;
+                let uR = parseInt(document.getElementById(`bal-R-${id}-${i}`).value) || 0;
+                
+                let rL = reales[sym][0];
+                let rR = reales[sym][1];
+
+                // Limpiar clases de colores
+                document.getElementById(`row-L-${id}-${i}`).className = "fila-elemento";
+                document.getElementById(`row-R-${id}-${i}`).className = "fila-elemento";
+
+                if(uL !== rL || uR !== rR) {
+                    matematicamenteCorrecto = false;
+                }
+
+                if(rL !== rR) {
+                    balanceado = false;
+                    if(ex.type === 'guiado' && uL === rL && uR === rR) {
+                        // Marcar rojo si matematicamente bien pero no balanceado
+                        document.getElementById(`row-L-${id}-${i}`).classList.add("incorrecto");
+                        document.getElementById(`row-R-${id}-${i}`).classList.add("incorrecto");
+                    }
+                } else {
+                    if(ex.type === 'guiado' && uL === rL && uR === rR) {
+                        document.getElementById(`row-L-${id}-${i}`).classList.add("correcto");
+                        document.getElementById(`row-R-${id}-${i}`).classList.add("correcto");
+                    }
+                }
+            }
+
+            if(!matematicamenteCorrecto) {
+                fb.className = "feedback error"; 
+                fb.innerHTML = "Tus conteos en la tabla no coinciden con los coeficientes que pusiste arriba. ¡Calcula de nuevo!";
+            } else if(!balanceado) {
+                fb.className = "feedback aviso"; 
+                fb.innerHTML = ex.type === 'guiado' ? "Cuentas bien, pero aún no está balanceado. Observa los colores rojos." : "Aún no está balanceado. Sigue intentando.";
+            } else {
+                fb.className = "feedback exito"; 
+                fb.innerHTML = "¡Excelente! Ecuación balanceada correctamente.";
+                document.getElementById(`ex${id}-paso3`).classList.add('completado');
+                document.getElementById(`btn-sig-${id}`).style.display = 'block';
+                document.getElementById(`bola-${id}`).classList.replace('activo', 'completado');
+            }
+        }
+
+        function siguienteEx(idActual) {
+            document.getElementById(`ejercicio-${idActual}`).classList.remove('activo');
+            if(idActual < 10) {
+                let nextId = idActual + 1;
+                document.getElementById(`ejercicio-${nextId}`).classList.add('activo');
+                document.getElementById(`bola-${nextId}`).classList.add('activo');
+            } else {
+                document.getElementById('progreso-container').style.display = 'none';
+                document.getElementById('mensaje-final').style.display = 'block';
+            }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
