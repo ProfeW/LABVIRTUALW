@@ -55,6 +55,17 @@
         .caja-formula h3 { color: #fff; margin-bottom: 15px; font-size: 1.3rem; }
         .caja-formula p { color: #fff; font-size: 1.1rem; text-align: center; font-weight: bold; }
 
+        /* --- ESTILOS DE EJERCICIOS --- */
+        .ejercicio-tarjeta {
+            background: rgba(20, 20, 35, 0.6); border-left: 4px solid #4facfe;
+            padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0;
+        }
+        .ejercicio-tarjeta h3 { color: #4facfe; margin-bottom: 10px; font-size: 1.3rem; }
+        .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
+        .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
+
+
         .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
         .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         .btn-practica { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
@@ -98,6 +109,95 @@
                 <p>$$ |\vec{R}| = \sqrt{|\vec{A}|^2 + |\vec{B}|^2 + 2|\vec{A}||\vec{B}|\cos(\theta)} $$</p>
             </div>
             <p>Donde \(\theta\) es el ángulo formado entre los dos vectores unidos por sus orígenes.</p>
+        </div>
+
+        <div class="seccion" style="background: rgba(46, 204, 113, 0.1); border-left-color: #2ecc71;">
+            <h2><i class="fa-solid fa-circle-exclamation"></i> Nota Importante: El Valor Absoluto</h2>
+            <p>¿Notaste las líneas rectas alrededor de la letra, así: <strong>\(|\vec{A}|\)</strong>? En física y matemáticas, esas barras indican el <strong>Valor Absoluto o Magnitud</strong> del vector.</p>
+            <p>Significa que al usar la fórmula, <strong>solo nos importa la cantidad o tamaño numérico (siempre positivo)</strong>, sin importar hacia dónde apunta la flecha en el dibujo.</p>
+            <p>Por ejemplo, si tienes una fuerza de 50 N tirando hacia la izquierda (negativa en el plano), su magnitud \(|\vec{F}|\) será simplemente 50. ¡Nunca pongas signos negativos dentro de esta fórmula!</p>
+        </div>
+
+        <div class="seccion" style="border-left-color: #f39c12;">
+            <h2><i class="fa-solid fa-list-check"></i> 3. Ejercicios Resueltos Paso a Paso</h2>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 1: Ángulo Agudo (menor a 90°)</h3>
+                <div class="enunciado">
+                    "Dos fuerzas de magnitudes 5 N y 10 N actúan sobre una caja. El ángulo entre ellas es de 60°. ¿Cuál es la fuerza resultante? (Usa \(\cos(60^\circ) = 0.5\))"
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Identificar datos y magnitudes</div>
+                    <p>\(|\vec{A}| = 5\)<br>
+                    \(|\vec{B}| = 10\)<br>
+                    \(\theta = 60^\circ \rightarrow \cos(60^\circ) = 0.5\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Calcular el cuadrado de las magnitudes</div>
+                    <p>\(|\vec{A}|^2 = 5^2 = 25\)<br>
+                    \(|\vec{B}|^2 = 10^2 = 100\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Calcular el término con coseno</div>
+                    <p>\(2 \times |\vec{A}| \times |\vec{B}| \times \cos(60^\circ) = 2 \times 5 \times 10 \times 0.5\)<br>
+                    \(2 \times 50 \times 0.5 = 50\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 4: Sumar todo y sacar raíz</div>
+                    <p>\(25 + 100 + 50 = 175\)<br>
+                    \(|\vec{R}| = \sqrt{175} \approx 13.23\)</p>
+                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: La fuerza resultante es aproximadamente 13.23 N.</em></p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 2: Ángulo Obtuso (mayor a 90°)</h3>
+                <div class="enunciado">
+                    "Tenemos dos cuerdas tirando de un poste. Cuerda A con 8 N, cuerda B con 6 N. El ángulo entre ellas es 120°. (Usa \(\cos(120^\circ) = -0.5\))"
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Identificar datos</div>
+                    <p>\(|\vec{A}| = 8\)<br>
+                    \(|\vec{B}| = 6\)<br>
+                    \(\cos(120^\circ) = -0.5\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Cuadrados</div>
+                    <p>\(8^2 = 64\)<br>
+                    \(6^2 = 36\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Término con coseno (¡Cuidado con el signo!)</div>
+                    <p>\(2 \times 8 \times 6 \times (-0.5) = 96 \times (-0.5) = -48\)<br>
+                    <em>Nota: Como el ángulo es mayor a 90°, el coseno es negativo y se resta en la suma final.</em></p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 4: Sumar y raíz</div>
+                    <p>\(64 + 36 + (-48) = 100 - 48 = 52\)<br>
+                    \(|\vec{R}| = \sqrt{52} \approx 7.21\)</p>
+                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: La resultante es 7.21 N.</em></p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 3: ¿Qué pasa a los 90°? (Conexión con Pitágoras)</h3>
+                <div class="enunciado">
+                    "Aplica la fórmula del paralelogramo para magnitudes de 3 y 4 con un ángulo de 90°. (Recuerda que \(\cos(90^\circ) = 0\))"
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Término de Coseno</div>
+                    <p>\(2 \times 3 \times 4 \times \cos(90^\circ) = 24 \times 0 = 0\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Suma de Cuadrados</div>
+                    <p>\(3^2 + 4^2 = 9 + 16 = 25\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Conclusión</div>
+                    <p>\(|\vec{R}| = \sqrt{25 + 0} = \sqrt{25} = 5\)<br>
+                    <em>Nota importante: Cuando el ángulo es 90°, toda la última parte de la fórmula desaparece y ¡queda exactamente igual al Teorema de Pitágoras!</em></p>
+                </div>
+            </div>
         </div>
 
         <div class="botones-accion">

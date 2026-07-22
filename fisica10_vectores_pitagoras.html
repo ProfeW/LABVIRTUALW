@@ -55,6 +55,17 @@
         .caja-formula h3 { color: #fff; margin-bottom: 15px; font-size: 1.3rem; }
         .caja-formula p { color: #fff; font-size: 1.1rem; text-align: center; font-weight: bold; }
 
+        /* --- ESTILOS DE EJERCICIOS --- */
+        .ejercicio-tarjeta {
+            background: rgba(20, 20, 35, 0.6); border-left: 4px solid #4facfe;
+            padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0;
+        }
+        .ejercicio-tarjeta h3 { color: #4facfe; margin-bottom: 10px; font-size: 1.3rem; }
+        .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
+        .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
+
+
         .botones-accion { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
         .btn-accion { padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         .btn-practica { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
@@ -98,6 +109,82 @@
                 <p>$$ |\vec{R}| = \sqrt{R_x^2 + R_y^2} $$</p>
             </div>
             <p>Donde \(|\vec{R}|\) es la magnitud del vector resultante, y \(R_x\), \(R_y\) son las componentes o los vectores que estamos sumando en cada eje.</p>
+        </div>
+
+        <div class="seccion" style="border-left-color: #f39c12;">
+            <h2><i class="fa-solid fa-list-check"></i> 3. Ejercicios Resueltos Paso a Paso</h2>
+            <p>Veamos cómo aplicar el Teorema de Pitágoras con vectores. Presta atención a cómo los valores negativos se vuelven positivos al elevarlos al cuadrado.</p>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 1: Magnitud Básica</h3>
+                <div class="enunciado">
+                    "Un vector tiene componentes \(R_x = 3\) y \(R_y = 4\). Calcula su magnitud \(|\vec{R}|\)."
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Identificar la fórmula y los datos</div>
+                    <p>Fórmula: \( |\vec{R}| = \sqrt{R_x^2 + R_y^2} \)<br>
+                    Componentes: \(R_x = 3\) , \(R_y = 4\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Elevar al cuadrado</div>
+                    <p>\(3^2 = 9\)<br>
+                    \(4^2 = 16\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Sumar y sacar raíz</div>
+                    <p>\(9 + 16 = 25\)<br>
+                    \(\sqrt{25} = 5\)</p>
+                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: La magnitud del vector es 5.</em></p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 2: Magnitud con Componentes Negativas</h3>
+                <div class="enunciado">
+                    "Determina la magnitud del vector fuerza \(\vec{F} = (-5, -12)\) N."
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Identificar datos</div>
+                    <p>\(F_x = -5\) N<br>
+                    \(F_y = -12\) N</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Elevar al cuadrado (¡Ojo al signo!)</div>
+                    <p>\((-5)^2 = (-5) \times (-5) = 25\)<br>
+                    \((-12)^2 = (-12) \times (-12) = 144\)<br>
+                    <em>Nota: Todo número negativo elevado al cuadrado da positivo.</em></p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Sumar y sacar raíz</div>
+                    <p>\(25 + 144 = 169\)<br>
+                    \(\sqrt{169} = 13\)</p>
+                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: La magnitud de la fuerza es 13 N.</em></p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 3: Aplicación a un Problema Físico</h3>
+                <div class="enunciado">
+                    "Un perro corre 8 metros hacia el Este (\(+X\)) y luego 6 metros hacia el Norte (\(+Y\)). ¿Cuál es la magnitud de su desplazamiento total?"
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Traducir los movimientos a componentes</div>
+                    <p>Como son direcciones perpendiculares, forman un triángulo rectángulo.<br>
+                    Eje X (Este): \(d_x = 8\)<br>
+                    Eje Y (Norte): \(d_y = 6\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Elevar al cuadrado y sumar</div>
+                    <p>\(8^2 = 64\)<br>
+                    \(6^2 = 36\)<br>
+                    \(64 + 36 = 100\)</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Calcular la raíz cuadrada final</div>
+                    <p>\(\sqrt{100} = 10\)</p>
+                    <p style="color: #2ecc71; margin-top: 5px;"><em>Respuesta: El desplazamiento total del perro tiene una magnitud de 10 metros.</em></p>
+                </div>
+            </div>
         </div>
 
         <div class="botones-accion">
