@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -42,7 +42,7 @@
         .menu > li { position: relative; }
         .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
         .menu > li > a:hover { background: rgba(255,255,255,0.1); color: #c39bd3; }
-        .submenu {
+        .submenu { z-index: 1000;
             display: none; position: absolute; top: 100%; left: 0;
             background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
             min-width: 180px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
