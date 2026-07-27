@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica: Suma de Vectores - LabVirtual W</title>
+    <title>PrÃ¡ctica: Suma de Vectores - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -87,21 +87,21 @@
             <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> FÃ­sica 10</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <a href="fisica10_vectores_suma_resta.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="fisica10_vectores_suma_resta.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
 
         <div class="header-tema">
-            <h1>Práctica: Suma en Columnas</h1>
+            <h1>PrÃ¡ctica: Suma en Columnas</h1>
             <p>Escribe los vectores en cada celda respetando la ley de signos (invierte si es resta) y calcula el total.</p>
         </div>
 
         <div class="progreso-container" id="progreso-container">
-            <!-- Se generará con JS -->
+            <!-- Se generarÃ¡ con JS -->
         </div>
 
         <div id="ejercicios-container">
@@ -109,9 +109,9 @@
         </div>
         
         <div id="mensaje-final" style="display:none; text-align:center; padding: 40px; background: rgba(46,204,113,0.1); border-radius: 20px; border: 2px solid #2ecc71;">
-            <h2>¡Felicidades! Has completado los 10 ejercicios.</h2>
-            <p style="margin-bottom: 20px;">Dominas a la perfección la suma y resta de vectores en columnas.</p>
-            <a href="fisica10_vectores_suma_resta_evaluacion.html" class="btn-validar" style="text-decoration: none;">Ir a la Evaluación</a>
+            <h2>Â¡Felicidades! Has completado los 10 ejercicios.</h2>
+            <p style="margin-bottom: 20px;">Dominas a la perfecciÃ³n la suma y resta de vectores en columnas.</p>
+            <a href="fisica10_vectores_suma_resta_evaluacion.html" class="btn-validar" style="text-decoration: none;">Ir a la EvaluaciÃ³n</a>
         </div>
 
     </main>
@@ -123,9 +123,9 @@
             { id: 3, text: "Calcula la resta \\(\\vec{R} = \\vec{M} - \\vec{N}\\)<br> \\(\\vec{M}=(5, 8)\\) ; \\(\\vec{N}=(2, 3)\\)<br><small>Recuerda invertir los signos del vector N al escribirlo.</small>", vectors: [ {name: "\\vec{M}", x:5, y:8}, {name: "-\\vec{N}", x:-2, y:-3} ], res: {x:3, y:5} },
             { id: 4, text: "Calcula la resta \\(\\vec{R} = \\vec{C} - \\vec{D}\\)<br> \\(\\vec{C}=(-1, 4)\\) ; \\(\\vec{D}=(3, -2)\\)<br><small>Invierte los signos de D.</small>", vectors: [ {name: "\\vec{C}", x:-1, y:4}, {name: "-\\vec{D}", x:-3, y:2} ], res: {x:-4, y:6} },
             { id: 5, text: "Calcula \\(\\vec{R} = \\vec{A} + \\vec{B} + \\vec{C}\\)<br> \\(\\vec{A}=(1, 1)\\) ; \\(\\vec{B}=(2, -3)\\) ; \\(\\vec{C}=(-4, 2)\\)", vectors: [ {name: "\\vec{A}", x:1, y:1}, {name: "\\vec{B}", x:2, y:-3}, {name: "+\\vec{C}", x:-4, y:2} ], res: {x:-1, y:0} },
-            { id: 6, text: "Operación Mixta \\(\\vec{R} = \\vec{P} - \\vec{Q} + \\vec{S}\\)<br> \\(\\vec{P}=(4, 0)\\) ; \\(\\vec{Q}=(2, -5)\\) ; \\(\\vec{S}=(-1, -1)\\)", vectors: [ {name: "\\vec{P}", x:4, y:0}, {name: "-\\vec{Q}", x:-2, y:5}, {name: "+\\vec{S}", x:-1, y:-1} ], res: {x:1, y:4} },
+            { id: 6, text: "OperaciÃ³n Mixta \\(\\vec{R} = \\vec{P} - \\vec{Q} + \\vec{S}\\)<br> \\(\\vec{P}=(4, 0)\\) ; \\(\\vec{Q}=(2, -5)\\) ; \\(\\vec{S}=(-1, -1)\\)", vectors: [ {name: "\\vec{P}", x:4, y:0}, {name: "-\\vec{Q}", x:-2, y:5}, {name: "+\\vec{S}", x:-1, y:-1} ], res: {x:1, y:4} },
             { id: 7, text: "Calcula \\(\\vec{R} = \\vec{A} + \\vec{B} + \\vec{C} + \\vec{D}\\)<br> \\(\\vec{A}=(2, 2)\\) ; \\(\\vec{B}=(-1, 3)\\) ; \\(\\vec{C}=(4, -4)\\) ; \\(\\vec{D}=(-2, -1)\\)", vectors: [ {name: "\\vec{A}", x:2, y:2}, {name: "\\vec{B}", x:-1, y:3}, {name: "\\vec{C}", x:4, y:-4}, {name: "+\\vec{D}", x:-2, y:-1} ], res: {x:3, y:0} },
-            { id: 8, text: "Operación Mixta 4 vectores \\(\\vec{R} = \\vec{A} - \\vec{B} - \\vec{C} + \\vec{D}\\)<br> \\(\\vec{A}=(5, 5)\\) ; \\(\\vec{B}=(1, 2)\\) ; \\(\\vec{C}=(-2, 1)\\) ; \\(\\vec{D}=(0, -3)\\)", vectors: [ {name: "\\vec{A}", x:5, y:5}, {name: "-\\vec{B}", x:-1, y:-2}, {name: "-\\vec{C}", x:2, y:-1}, {name: "+\\vec{D}", x:0, y:-3} ], res: {x:6, y:-1} },
+            { id: 8, text: "OperaciÃ³n Mixta 4 vectores \\(\\vec{R} = \\vec{A} - \\vec{B} - \\vec{C} + \\vec{D}\\)<br> \\(\\vec{A}=(5, 5)\\) ; \\(\\vec{B}=(1, 2)\\) ; \\(\\vec{C}=(-2, 1)\\) ; \\(\\vec{D}=(0, -3)\\)", vectors: [ {name: "\\vec{A}", x:5, y:5}, {name: "-\\vec{B}", x:-1, y:-2}, {name: "-\\vec{C}", x:2, y:-1}, {name: "+\\vec{D}", x:0, y:-3} ], res: {x:6, y:-1} },
             { id: 9, text: "5 Vectores Mixtos \\(\\vec{R} = \\vec{V}_1 + \\vec{V}_2 - \\vec{V}_3 + \\vec{V}_4 - \\vec{V}_5\\)<br> \\(\\vec{V}_1=(1,1)\\) ; \\(\\vec{V}_2=(-3,2)\\) ; \\(\\vec{V}_3=(2,-2)\\) ; \\(\\vec{V}_4=(0,5)\\) ; \\(\\vec{V}_5=(-4,1)\\)", vectors: [ {name: "\\vec{V}_1", x:1, y:1}, {name: "\\vec{V}_2", x:-3, y:2}, {name: "-\\vec{V}_3", x:-2, y:2}, {name: "\\vec{V}_4", x:0, y:5}, {name: "-\\vec{V}_5", x:4, y:-1} ], res: {x:0, y:9} },
             { id: 10, text: "El Gran Reto Final \\(\\vec{R} = \\vec{A} - \\vec{B} + \\vec{C} - \\vec{D} + \\vec{E}\\)<br> \\(\\vec{A}=(10,-5)\\) ; \\(\\vec{B}=(3,4)\\) ; \\(\\vec{C}=(-2,-2)\\) ; \\(\\vec{D}=(-5,0)\\) ; \\(\\vec{E}=(1,7)\\)", vectors: [ {name: "\\vec{A}", x:10, y:-5}, {name: "-\\vec{B}", x:-3, y:-4}, {name: "\\vec{C}", x:-2, y:-2}, {name: "-\\vec{D}", x:5, y:0}, {name: "+\\vec{E}", x:1, y:7} ], res: {x:11, y:-4} }
         ];
@@ -204,7 +204,7 @@
             const feedback = document.getElementById(`feedback-${id}`);
             if(todosCorrectos) {
                 feedback.className = "feedback exito";
-                feedback.innerHTML = "¡Excelente! Los valores y las sumas están perfectos.";
+                feedback.innerHTML = "Â¡Excelente! Los valores y las sumas estÃ¡n perfectos.";
                 document.getElementById(`btn-val-${id}`).style.display = 'none';
                 document.getElementById(`btn-sig-${id}`).style.display = 'inline-block';
                 document.getElementById(`bola-${id}`).classList.remove('activo');
@@ -230,5 +230,6 @@
         window.onload = init;
     </script>
     <script src="profe-ia.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>

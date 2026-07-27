@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Evaluación sobre La Onda y sus Elementos - Física 11 - LabVirtual W - Tipo ICFES">
-    <title>Evaluación: La Onda y sus Elementos - Física 11 - LabVirtual W</title>
+    <meta name="description" content="EvaluaciÃ³n sobre La Onda y sus Elementos - FÃ­sica 11 - LabVirtual W - Tipo ICFES">
+    <title>EvaluaciÃ³n: La Onda y sus Elementos - FÃ­sica 11 - LabVirtual W</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸ“</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -57,7 +57,7 @@
             display: none; color: #e74c3c; font-size: 0.9rem; margin-top: 10px;
         }
 
-        /* SECCIÓN DE EVALUACIÓN */
+        /* SECCIÃ“N DE EVALUACIÃ“N */
         .seccion-evaluacion { display: none; }
 
         .header-eval { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px; }
@@ -165,27 +165,27 @@
          PANTALLA DE INICIO
     ========================= -->
     <div id="pantalla-inicio" class="pantalla-inicio">
-        <h1><i class="fa-solid fa-file-signature"></i> Evaluación</h1>
-        <p>La Onda y sus Elementos · Física 11° · Tipo ICFES</p>
+        <h1><i class="fa-solid fa-file-signature"></i> EvaluaciÃ³n</h1>
+        <p>La Onda y sus Elementos Â· FÃ­sica 11Â° Â· Tipo ICFES</p>
 
         <ul class="reglas">
-            <li><i class="fa-solid fa-check"></i> Se seleccionarán <strong>10 preguntas aleatorias</strong> de un banco de 30 preguntas.</li>
-            <li><i class="fa-solid fa-check"></i> Cada evaluación es <strong>diferente</strong>: las preguntas cambian cada vez que ingresas.</li>
+            <li><i class="fa-solid fa-check"></i> Se seleccionarÃ¡n <strong>10 preguntas aleatorias</strong> de un banco de 30 preguntas.</li>
+            <li><i class="fa-solid fa-check"></i> Cada evaluaciÃ³n es <strong>diferente</strong>: las preguntas cambian cada vez que ingresas.</li>
             <li><i class="fa-solid fa-check"></i> Puedes navegar entre preguntas y cambiar tu respuesta antes de finalizar.</li>
-            <li><i class="fa-solid fa-check"></i> Al finalizar verás tu puntaje y la revisión completa con respuestas.</li>
+            <li><i class="fa-solid fa-check"></i> Al finalizar verÃ¡s tu puntaje y la revisiÃ³n completa con respuestas.</li>
             <li><i class="fa-solid fa-check"></i> Formato tipo <strong>ICFES</strong>: cuatro opciones (A, B, C, D).</li>
         </ul>
 
-        <input type="text" id="input-nombre" class="input-nombre" placeholder="✏️ Escribe tu nombre completo" maxlength="60">
+        <input type="text" id="input-nombre" class="input-nombre" placeholder="âœï¸ Escribe tu nombre completo" maxlength="60">
         <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre para continuar.</div>
         <br>
         <button class="btn-inicio" onclick="iniciarEvaluacion()">
-            <i class="fa-solid fa-play"></i> Comenzar Evaluación
+            <i class="fa-solid fa-play"></i> Comenzar EvaluaciÃ³n
         </button>
     </div>
 
     <!-- ========================
-         SECCIÓN DE EVALUACIÓN
+         SECCIÃ“N DE EVALUACIÃ“N
     ========================= -->
     <div id="seccion-evaluacion" class="seccion-evaluacion">
         <div class="header-eval">
@@ -218,35 +218,35 @@
     <div id="pantalla-resultado" class="pantalla-resultado">
         <div class="resultado-header">
             <div class="resultado-nombre" id="resultado-nombre"></div>
-            <span class="resultado-emoji" id="resultado-emoji">📊</span>
+            <span class="resultado-emoji" id="resultado-emoji">ðŸ“Š</span>
             <div class="resultado-titulo" id="resultado-titulo"></div>
         </div>
 
         <div class="score-grid">
             <div class="score-card">
                 <div class="score-num" id="score-correctas">0</div>
-                <div class="score-label">✅ Correctas</div>
+                <div class="score-label">âœ… Correctas</div>
             </div>
             <div class="score-card">
                 <div class="score-num" id="score-incorrectas">0</div>
-                <div class="score-label">❌ Incorrectas</div>
+                <div class="score-label">âŒ Incorrectas</div>
             </div>
             <div class="score-card">
                 <div class="score-num" id="score-pct">0%</div>
-                <div class="score-label">📊 Porcentaje</div>
+                <div class="score-label">ðŸ“Š Porcentaje</div>
             </div>
         </div>
 
-        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión de Respuestas</div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> RevisiÃ³n de Respuestas</div>
         <div id="revision-container"></div>
 
         <div style="text-align:center; margin-top:30px;">
             <button onclick="location.reload()" class="btn-volver-inicio">
-                <i class="fa-solid fa-rotate-right"></i> Nueva Evaluación
+                <i class="fa-solid fa-rotate-right"></i> Nueva EvaluaciÃ³n
             </button>
             &nbsp;&nbsp;
             <a href="fisica11_ondas.html" class="btn-volver-inicio" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);">
-                <i class="fa-solid fa-book-open"></i> Repasar Teoría
+                <i class="fa-solid fa-book-open"></i> Repasar TeorÃ­a
             </a>
         </div>
     </div>
@@ -255,141 +255,141 @@
 
 <script>
 // ============================================================
-//   BANCO DE PREGUNTAS — 30 preguntas tipo ICFES
+//   BANCO DE PREGUNTAS â€” 30 preguntas tipo ICFES
 // ============================================================
 const bancoPreguntas = [
     {
         texto: "Una onda transporta de un punto a otro principalmente:",
-        opciones: ["A. Partículas de materia del medio", "B. Energía sin desplazamiento de masa", "C. Calor y temperatura", "D. La densidad del medio"],
+        opciones: ["A. PartÃ­culas de materia del medio", "B. EnergÃ­a sin desplazamiento de masa", "C. Calor y temperatura", "D. La densidad del medio"],
         respuesta: 1
     },
     {
-        texto: "La longitud de onda (λ) se define como:",
-        opciones: ["A. El tiempo en completar un ciclo", "B. El desplazamiento máximo desde el equilibrio", "C. La distancia entre dos puntos consecutivos en igual estado de vibración", "D. La cantidad de ciclos por segundo"],
+        texto: "La longitud de onda (Î») se define como:",
+        opciones: ["A. El tiempo en completar un ciclo", "B. El desplazamiento mÃ¡ximo desde el equilibrio", "C. La distancia entre dos puntos consecutivos en igual estado de vibraciÃ³n", "D. La cantidad de ciclos por segundo"],
         respuesta: 2
     },
     {
-        texto: "Si la frecuencia de una onda es f = 5 Hz, ¿cuál es su período T?",
+        texto: "Si la frecuencia de una onda es f = 5 Hz, Â¿cuÃ¡l es su perÃ­odo T?",
         opciones: ["A. 5 s", "B. 0.5 s", "C. 0.2 s", "D. 2 s"],
         respuesta: 2
     },
     {
-        texto: "Una onda sonora tiene λ = 0.5 m y f = 680 Hz. ¿Cuál es su velocidad de propagación?",
+        texto: "Una onda sonora tiene Î» = 0.5 m y f = 680 Hz. Â¿CuÃ¡l es su velocidad de propagaciÃ³n?",
         opciones: ["A. 680 m/s", "B. 340 m/s", "C. 1360 m/s", "D. 0.5 m/s"],
         respuesta: 1
     },
     {
-        texto: "La amplitud de una onda está relacionada directamente con:",
-        opciones: ["A. Su frecuencia", "B. Su longitud de onda", "C. La energía que transporta", "D. La velocidad de propagación"],
+        texto: "La amplitud de una onda estÃ¡ relacionada directamente con:",
+        opciones: ["A. Su frecuencia", "B. Su longitud de onda", "C. La energÃ­a que transporta", "D. La velocidad de propagaciÃ³n"],
         respuesta: 2
     },
     {
-        texto: "Un resorte vibra 50 veces en 10 segundos. ¿Cuál es su frecuencia?",
+        texto: "Un resorte vibra 50 veces en 10 segundos. Â¿CuÃ¡l es su frecuencia?",
         opciones: ["A. 500 Hz", "B. 0.2 Hz", "C. 5 Hz", "D. 10 Hz"],
         respuesta: 2
     },
     {
         texto: "El sonido es una onda:",
-        opciones: ["A. Electromagnética y transversal", "B. Mecánica y longitudinal", "C. Mecánica y transversal", "D. Electromagnética y longitudinal"],
+        opciones: ["A. ElectromagnÃ©tica y transversal", "B. MecÃ¡nica y longitudinal", "C. MecÃ¡nica y transversal", "D. ElectromagnÃ©tica y longitudinal"],
         respuesta: 1
     },
     {
         texto: "La luz visible es una onda:",
-        opciones: ["A. Mecánica que necesita medio para propagarse", "B. Longitudinal que viaja en el vacío", "C. Electromagnética y transversal", "D. Mecánica y transversal"],
+        opciones: ["A. MecÃ¡nica que necesita medio para propagarse", "B. Longitudinal que viaja en el vacÃ­o", "C. ElectromagnÃ©tica y transversal", "D. MecÃ¡nica y transversal"],
         respuesta: 2
     },
     {
-        texto: "Cuando una onda pasa de un medio a otro, ¿qué magnitud se conserva?",
+        texto: "Cuando una onda pasa de un medio a otro, Â¿quÃ© magnitud se conserva?",
         opciones: ["A. La velocidad", "B. La longitud de onda", "C. La frecuencia", "D. La amplitud"],
         respuesta: 2
     },
     {
-        texto: "Una onda de radio viaja a 3×10⁸ m/s con λ = 3 m. ¿Cuál es su frecuencia?",
-        opciones: ["A. 9×10⁸ Hz", "B. 10⁸ Hz", "C. 10⁷ Hz", "D. 3×10⁸ Hz"],
+        texto: "Una onda de radio viaja a 3Ã—10â¸ m/s con Î» = 3 m. Â¿CuÃ¡l es su frecuencia?",
+        opciones: ["A. 9Ã—10â¸ Hz", "B. 10â¸ Hz", "C. 10â· Hz", "D. 3Ã—10â¸ Hz"],
         respuesta: 1
     },
     {
-        texto: "¿Cuál es la diferencia entre ondas transversales y longitudinales?",
+        texto: "Â¿CuÃ¡l es la diferencia entre ondas transversales y longitudinales?",
         opciones: [
             "A. Las transversales necesitan medio; las longitudinales, no.",
-            "B. En las transversales la vibración es perpendicular a la propagación; en las longitudinales, paralela.",
+            "B. En las transversales la vibraciÃ³n es perpendicular a la propagaciÃ³n; en las longitudinales, paralela.",
             "C. Las transversales tienen mayor velocidad que las longitudinales.",
             "D. Las longitudinales tienen mayor amplitud que las transversales."
         ],
         respuesta: 1
     },
     {
-        texto: "El período de una onda es T = 0.25 s. ¿Cuántos ciclos completos realiza en 1 segundo?",
+        texto: "El perÃ­odo de una onda es T = 0.25 s. Â¿CuÃ¡ntos ciclos completos realiza en 1 segundo?",
         opciones: ["A. 0.25 ciclos", "B. 2 ciclos", "C. 4 ciclos", "D. 10 ciclos"],
         respuesta: 2
     },
     {
         texto: "La cresta de una onda representa:",
         opciones: [
-            "A. El punto de desplazamiento máximo negativo",
-            "B. El punto donde la onda tiene velocidad cero de propagación",
-            "C. El punto de desplazamiento máximo positivo",
-            "D. La posición de equilibrio"
+            "A. El punto de desplazamiento mÃ¡ximo negativo",
+            "B. El punto donde la onda tiene velocidad cero de propagaciÃ³n",
+            "C. El punto de desplazamiento mÃ¡ximo positivo",
+            "D. La posiciÃ³n de equilibrio"
         ],
         respuesta: 2
     },
     {
-        texto: "Una onda tiene una velocidad de 340 m/s y un período de 0.01 s. ¿Cuál es su longitud de onda?",
+        texto: "Una onda tiene una velocidad de 340 m/s y un perÃ­odo de 0.01 s. Â¿CuÃ¡l es su longitud de onda?",
         opciones: ["A. 34000 m", "B. 3.4 m", "C. 340 m", "D. 0.34 m"],
         respuesta: 1
     },
     {
         contexto: "En un experimento se genera una onda en una cuerda larga. Se observa que 4 crestas pasan por un punto fijo en 2 segundos.",
-        texto: "¿Cuál es la frecuencia de la onda?",
+        texto: "Â¿CuÃ¡l es la frecuencia de la onda?",
         opciones: ["A. 8 Hz", "B. 0.5 Hz", "C. 2 Hz", "D. 4 Hz"],
         respuesta: 2
     },
     {
-        texto: "¿Cuál de los siguientes fenómenos corresponde a una onda mecánica?",
+        texto: "Â¿CuÃ¡l de los siguientes fenÃ³menos corresponde a una onda mecÃ¡nica?",
         opciones: ["A. Ondas de radio", "B. Rayos X", "C. Ondas en el agua al lanzar una piedra", "D. Luz ultravioleta"],
         respuesta: 2
     },
     {
         contexto: "Dos ondas tienen la misma frecuencia de 200 Hz. La onda A viaja en el agua a 1500 m/s y la onda B en el aire a 340 m/s.",
-        texto: "¿Cuál de las dos ondas tiene mayor longitud de onda?",
-        opciones: ["A. La onda B, porque el aire es menos denso", "B. La onda A, porque viaja más rápido a la misma frecuencia", "C. Ambas tienen la misma longitud de onda", "D. La onda B, porque tiene mayor período"],
+        texto: "Â¿CuÃ¡l de las dos ondas tiene mayor longitud de onda?",
+        opciones: ["A. La onda B, porque el aire es menos denso", "B. La onda A, porque viaja mÃ¡s rÃ¡pido a la misma frecuencia", "C. Ambas tienen la misma longitud de onda", "D. La onda B, porque tiene mayor perÃ­odo"],
         respuesta: 1
     },
     {
-        texto: "La relación matemática correcta entre velocidad, longitud de onda y frecuencia es:",
-        opciones: ["A. f = λ · v", "B. v = λ / f", "C. v = λ · f", "D. λ = v · f"],
+        texto: "La relaciÃ³n matemÃ¡tica correcta entre velocidad, longitud de onda y frecuencia es:",
+        opciones: ["A. f = Î» Â· v", "B. v = Î» / f", "C. v = Î» Â· f", "D. Î» = v Â· f"],
         respuesta: 2
     },
     {
-        texto: "Si se duplica la frecuencia de una onda y su velocidad permanece constante, ¿qué ocurre con la longitud de onda?",
+        texto: "Si se duplica la frecuencia de una onda y su velocidad permanece constante, Â¿quÃ© ocurre con la longitud de onda?",
         opciones: ["A. Se duplica", "B. Se cuadruplica", "C. Se mantiene igual", "D. Se reduce a la mitad"],
         respuesta: 3
     },
     {
-        contexto: "Un murciélago emite ultrasonidos a 50,000 Hz. La velocidad del sonido en el aire es 340 m/s.",
-        texto: "¿Cuál es la longitud de onda del ultrasonido emitido?",
+        contexto: "Un murciÃ©lago emite ultrasonidos a 50,000 Hz. La velocidad del sonido en el aire es 340 m/s.",
+        texto: "Â¿CuÃ¡l es la longitud de onda del ultrasonido emitido?",
         opciones: ["A. 0.0068 m", "B. 0.068 m", "C. 6.8 m", "D. 68 m"],
         respuesta: 0
     },
     {
-        texto: "Una onda sísmica longitudinal de período T = 5 s viaja a 8000 m/s. ¿Cuál es su longitud de onda?",
+        texto: "Una onda sÃ­smica longitudinal de perÃ­odo T = 5 s viaja a 8000 m/s. Â¿CuÃ¡l es su longitud de onda?",
         opciones: ["A. 1600 m", "B. 40000 m", "C. 400 m", "D. 8000 m"],
         respuesta: 1
     },
     {
-        texto: "El número de ciclos completos que una onda realiza por unidad de tiempo se llama:",
-        opciones: ["A. Amplitud", "B. Período", "C. Longitud de onda", "D. Frecuencia"],
+        texto: "El nÃºmero de ciclos completos que una onda realiza por unidad de tiempo se llama:",
+        opciones: ["A. Amplitud", "B. PerÃ­odo", "C. Longitud de onda", "D. Frecuencia"],
         respuesta: 3
     },
     {
-        texto: "¿En cuál de los siguientes medios puede propagarse la luz pero NO el sonido?",
-        opciones: ["A. En el agua", "B. En el aire", "C. En el vacío", "D. En los sólidos"],
+        texto: "Â¿En cuÃ¡l de los siguientes medios puede propagarse la luz pero NO el sonido?",
+        opciones: ["A. En el agua", "B. En el aire", "C. En el vacÃ­o", "D. En los sÃ³lidos"],
         respuesta: 2
     },
     {
         contexto: "Se analizan dos ondas. La onda X tiene el doble de amplitud que la onda Y, pero la misma frecuencia y longitud de onda.",
-        texto: "¿Qué propiedad es diferente entre las dos ondas?",
-        opciones: ["A. La velocidad de propagación", "B. La frecuencia", "C. La energía transportada", "D. La longitud de onda"],
+        texto: "Â¿QuÃ© propiedad es diferente entre las dos ondas?",
+        opciones: ["A. La velocidad de propagaciÃ³n", "B. La frecuencia", "C. La energÃ­a transportada", "D. La longitud de onda"],
         respuesta: 2
     },
     {
@@ -398,18 +398,18 @@ const bancoPreguntas = [
         respuesta: 2
     },
     {
-        texto: "¿Cuántos metros tiene la longitud de onda de una onda cuya frecuencia es 4 Hz y velocidad es 20 m/s?",
+        texto: "Â¿CuÃ¡ntos metros tiene la longitud de onda de una onda cuya frecuencia es 4 Hz y velocidad es 20 m/s?",
         opciones: ["A. 80 m", "B. 16 m", "C. 5 m", "D. 0.2 m"],
         respuesta: 2
     },
     {
-        texto: "La frecuencia audible del oído humano está aproximadamente entre:",
+        texto: "La frecuencia audible del oÃ­do humano estÃ¡ aproximadamente entre:",
         opciones: ["A. 20 Hz y 20,000 Hz", "B. 1 Hz y 100 Hz", "C. 100 Hz y 200,000 Hz", "D. 0.1 Hz y 10 Hz"],
         respuesta: 0
     },
     {
-        contexto: "Una onda viaja por una cuerda y luego pasa a una cuerda más gruesa. Se sabe que la velocidad disminuye al cambiar de cuerda.",
-        texto: "Si la frecuencia se mantiene constante al cambiar de medio, ¿qué le ocurre a la longitud de onda en la cuerda más gruesa?",
+        contexto: "Una onda viaja por una cuerda y luego pasa a una cuerda mÃ¡s gruesa. Se sabe que la velocidad disminuye al cambiar de cuerda.",
+        texto: "Si la frecuencia se mantiene constante al cambiar de medio, Â¿quÃ© le ocurre a la longitud de onda en la cuerda mÃ¡s gruesa?",
         opciones: [
             "A. Aumenta, porque la frecuencia aumenta",
             "B. Disminuye, porque la velocidad disminuye y f es constante",
@@ -419,13 +419,13 @@ const bancoPreguntas = [
         respuesta: 1
     },
     {
-        texto: "Una fuente genera ondas con período T = 0.002 s. ¿Cuántos ciclos completa en 1 minuto?",
+        texto: "Una fuente genera ondas con perÃ­odo T = 0.002 s. Â¿CuÃ¡ntos ciclos completa en 1 minuto?",
         opciones: ["A. 500 ciclos", "B. 3000 ciclos", "C. 30,000 ciclos", "D. 300 ciclos"],
         respuesta: 2
     },
     {
         texto: "La diferencia entre el valle y la cresta de una onda transversal equivale a:",
-        opciones: ["A. Una longitud de onda (λ)", "B. La amplitud (A)", "C. El doble de la amplitud (2A)", "D. El período (T)"],
+        opciones: ["A. Una longitud de onda (Î»)", "B. La amplitud (A)", "C. El doble de la amplitud (2A)", "D. El perÃ­odo (T)"],
         respuesta: 2
     }
 ];
@@ -459,7 +459,7 @@ function iniciarEvaluacion() {
 
     document.getElementById('pantalla-inicio').style.display = 'none';
     document.getElementById('seccion-evaluacion').style.display = 'block';
-    document.getElementById('bienvenida-nombre').textContent = '👤 ' + nombreEstudiante;
+    document.getElementById('bienvenida-nombre').textContent = 'ðŸ‘¤ ' + nombreEstudiante;
 
     mostrarPregunta(0);
 }
@@ -495,7 +495,7 @@ function mostrarPregunta(idx) {
     document.getElementById('num-actual').textContent = idx + 1;
     document.getElementById('barra-eval').style.width = ((idx + 1) / 10 * 100) + '%';
 
-    // Botones de navegación
+    // Botones de navegaciÃ³n
     document.getElementById('btn-anterior').style.display = idx === 0 ? 'none' : 'inline-block';
     document.getElementById('btn-sig-p').style.display = idx === 9 ? 'none' : 'inline-block';
     document.getElementById('btn-finalizar').style.display = idx === 9 ? 'inline-block' : 'none';
@@ -522,7 +522,7 @@ function irAnterior() {
 function finalizarEvaluacion() {
     const sinResponder = respuestasUsuario.filter(r => r === null).length;
     if (sinResponder > 0) {
-        if (!confirm(`Tienes ${sinResponder} pregunta(s) sin responder. ¿Deseas finalizar de todas formas?`)) return;
+        if (!confirm(`Tienes ${sinResponder} pregunta(s) sin responder. Â¿Deseas finalizar de todas formas?`)) return;
     }
 
     // Calcular resultados
@@ -536,7 +536,7 @@ function finalizarEvaluacion() {
         if (esCorrecta) correctas++;
 
         const claseRev = esCorrecta ? 'correcta' : 'incorrecta';
-        const iconoRev = esCorrecta ? '✅' : '❌';
+        const iconoRev = esCorrecta ? 'âœ…' : 'âŒ';
 
         revisionHTML += `
             <div class="revision-item ${claseRev}">
@@ -553,15 +553,15 @@ function finalizarEvaluacion() {
 
     const pct = Math.round((correctas / 10) * 100);
     let emoji, titulo;
-    if (pct >= 90) { emoji = '🏆'; titulo = '¡Excelente! Dominas el tema.'; }
-    else if (pct >= 70) { emoji = '🌟'; titulo = '¡Muy bien! Sigue practicando.'; }
-    else if (pct >= 50) { emoji = '📚'; titulo = 'Aprobado. Repasa los temas con errores.'; }
-    else { emoji = '💪'; titulo = 'Necesitas repasar la teoría antes de continuar.'; }
+    if (pct >= 90) { emoji = 'ðŸ†'; titulo = 'Â¡Excelente! Dominas el tema.'; }
+    else if (pct >= 70) { emoji = 'ðŸŒŸ'; titulo = 'Â¡Muy bien! Sigue practicando.'; }
+    else if (pct >= 50) { emoji = 'ðŸ“š'; titulo = 'Aprobado. Repasa los temas con errores.'; }
+    else { emoji = 'ðŸ’ª'; titulo = 'Necesitas repasar la teorÃ­a antes de continuar.'; }
 
     document.getElementById('seccion-evaluacion').style.display = 'none';
     const pr = document.getElementById('pantalla-resultado');
     pr.classList.add('activo');
-    document.getElementById('resultado-nombre').textContent = '👤 ' + nombreEstudiante;
+    document.getElementById('resultado-nombre').textContent = 'ðŸ‘¤ ' + nombreEstudiante;
     document.getElementById('resultado-emoji').textContent = emoji;
     document.getElementById('resultado-titulo').textContent = titulo;
     document.getElementById('score-correctas').textContent = correctas;
@@ -575,5 +575,6 @@ function finalizarEvaluacion() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
+<script src="auth.js"></script>
 </body>
 </html>

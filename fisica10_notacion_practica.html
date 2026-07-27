@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica: Notación Científica - LabVirtual W</title>
+    <title>PrÃ¡ctica: NotaciÃ³n CientÃ­fica - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -61,10 +61,10 @@
 <body>
 
     <div class="contenedor">
-        <a href="fisica10_notacion.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="fisica10_notacion.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
 
         <div class="header-practica">
-            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <h1><i class="fa-solid fa-gamepad"></i> PrÃ¡ctica Interactiva</h1>
             <p>Domina los poderes de la base 10.</p>
         </div>
 
@@ -74,18 +74,18 @@
 
         <!-- EJERCICIO 1 -->
         <div class="ejercicio-card activo" id="ej1">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Números Grandes)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (NÃºmeros Grandes)</span>
             <h3>Reto 1: La masa de la Tierra</h3>
             <div class="enunciado">
-                La distancia media de la Tierra al Sol es de aproximadamente <strong>150,000,000 kilómetros</strong>. <br><br>
-                ¿Cómo escribimos este número en notación científica?
+                La distancia media de la Tierra al Sol es de aproximadamente <strong>150,000,000 kilÃ³metros</strong>. <br><br>
+                Â¿CÃ³mo escribimos este nÃºmero en notaciÃ³n cientÃ­fica?
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Recuerda que el coeficiente debe ser menor a 10. (15 no sirve)')">$$ 15 \times 10^7 $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! Moviste la coma 8 lugares a la izquierda: 1.5 y el exponente es 8.')">$$ 1.5 \times 10^8 $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Contaste un cero de más. La coma se mueve 8 espacios, no 9.')">$$ 1.5 \times 10^9 $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'El exponente no puede ser negativo porque es un número muy grande.')">$$ 1.5 \times 10^{-8} $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, 'Â¡Correcto! Moviste la coma 8 lugares a la izquierda: 1.5 y el exponente es 8.')">$$ 1.5 \times 10^8 $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Contaste un cero de mÃ¡s. La coma se mueve 8 espacios, no 9.')">$$ 1.5 \times 10^9 $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'El exponente no puede ser negativo porque es un nÃºmero muy grande.')">$$ 1.5 \times 10^{-8} $$</button>
             </div>
             <div class="feedback" id="feed1"></div>
             <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -93,18 +93,18 @@
 
         <!-- EJERCICIO 2 -->
         <div class="ejercicio-card" id="ej2">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Números Pequeños)</span>
-            <h3>Reto 2: El átomo</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (NÃºmeros PequeÃ±os)</span>
+            <h3>Reto 2: El Ã¡tomo</h3>
             <div class="enunciado">
-                El radio de un átomo de hidrógeno es aproximadamente <strong>0.000000053 metros</strong>. <br><br>
-                ¿Cómo escribimos este número en notación científica?
+                El radio de un Ã¡tomo de hidrÃ³geno es aproximadamente <strong>0.000000053 metros</strong>. <br><br>
+                Â¿CÃ³mo escribimos este nÃºmero en notaciÃ³n cientÃ­fica?
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Cuenta bien los espacios. Hay 7 ceros antes del 5 y luego mueves la coma entre el 5 y el 3 (8 espacios en total).')">$$ 5.3 \times 10^{-7} $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, '¡Cuidado! El exponente debe ser negativo para números decimales (menores a 1).')">$$ 5.3 \times 10^8 $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Ese coeficiente (53) es mayor que 10, lo cual viola la regla de la notación científica.')">$$ 53 \times 10^{-9} $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! Moviste la coma 8 posiciones hacia la derecha. Por eso el exponente es -8.')">$$ 5.3 \times 10^{-8} $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Â¡Cuidado! El exponente debe ser negativo para nÃºmeros decimales (menores a 1).')">$$ 5.3 \times 10^8 $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Ese coeficiente (53) es mayor que 10, lo cual viola la regla de la notaciÃ³n cientÃ­fica.')">$$ 53 \times 10^{-9} $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, 'Â¡Excelente! Moviste la coma 8 posiciones hacia la derecha. Por eso el exponente es -8.')">$$ 5.3 \times 10^{-8} $$</button>
             </div>
             <div class="feedback" id="feed2"></div>
             <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -112,18 +112,18 @@
 
         <!-- EJERCICIO 3 -->
         <div class="ejercicio-card" id="ej3">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (De Notación a Normal)</span>
-            <h3>Reto 3: Expandiendo el número</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (De NotaciÃ³n a Normal)</span>
+            <h3>Reto 3: Expandiendo el nÃºmero</h3>
             <div class="enunciado">
-                Un problema de física te arroja un resultado de <strong>$$ 4.02 \times 10^5 $$</strong> Joules de energía. <br><br>
-                ¿Qué número representa en formato decimal estándar?
+                Un problema de fÃ­sica te arroja un resultado de <strong>$$ 4.02 \times 10^5 $$</strong> Joules de energÃ­a. <br><br>
+                Â¿QuÃ© nÃºmero representa en formato decimal estÃ¡ndar?
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Solo agregaste dos ceros. Debes mover la coma 5 lugares en total a la derecha.')">40,200</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! Al mover la coma 5 lugares a la derecha desde 4.02, agregas tres ceros (402,000).')">402,000</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, 'Â¡Correcto! Al mover la coma 5 lugares a la derecha desde 4.02, agregas tres ceros (402,000).')">402,000</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Agregaste demasiados ceros.')">4,020,000</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'El exponente es positivo, por lo tanto el número es mayor a 1, no decimal.')">0.0000402</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'El exponente es positivo, por lo tanto el nÃºmero es mayor a 1, no decimal.')">0.0000402</button>
             </div>
             <div class="feedback" id="feed3"></div>
             <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -131,16 +131,16 @@
 
         <!-- EJERCICIO 4 -->
         <div class="ejercicio-card" id="ej4">
-            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Multiplicación)</span>
-            <h3>Reto 4: Operando con notación</h3>
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (MultiplicaciÃ³n)</span>
+            <h3>Reto 4: Operando con notaciÃ³n</h3>
             <div class="enunciado">
                 Multiplica estos dos valores: <br>
                 <strong>$$ (2 \times 10^3) \times (4 \times 10^4) $$</strong>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, '¡No multipliques los exponentes! En las leyes de exponentes, bases iguales se SUMAN sus exponentes.')">$$ 8 \times 10^{12} $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Correcto! Se multiplican los coeficientes (2×4=8) y se SUMAN los exponentes (3+4=7).')">$$ 8 \times 10^7 $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Â¡No multipliques los exponentes! En las leyes de exponentes, bases iguales se SUMAN sus exponentes.')">$$ 8 \times 10^{12} $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, 'Â¡Correcto! Se multiplican los coeficientes (2Ã—4=8) y se SUMAN los exponentes (3+4=7).')">$$ 8 \times 10^7 $$</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Error al multiplicar los coeficientes.')">$$ 6 \times 10^7 $$</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Revisa la regla de la suma de exponentes.')">$$ 8 \times 10^{34} $$</button>
             </div>
@@ -151,27 +151,27 @@
         <!-- EJERCICIO 5 -->
         <div class="ejercicio-card" id="ej5">
             <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto</span>
-            <h3>Reto 5: División microscópica</h3>
+            <h3>Reto 5: DivisiÃ³n microscÃ³pica</h3>
             <div class="enunciado">
                 Divide estos dos valores: <br>
                 <strong>$$ \frac{6 \times 10^8}{3 \times 10^2} $$</strong>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Brillante! Divides los coeficientes (6÷3=2) y RESTAS los exponentes de la base 10 (8-2=6).')">$$ 2 \times 10^6 $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, '¡Cuidado! En la división, los exponentes de bases iguales se RESTAN, no se dividen.')">$$ 2 \times 10^4 $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Te equivocaste en la operación con los exponentes.')">$$ 2 \times 10^{10} $$</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Error en la división del coeficiente (6/3=2, no 3).')">$$ 3 \times 10^6 $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, 'Â¡Brillante! Divides los coeficientes (6Ã·3=2) y RESTAS los exponentes de la base 10 (8-2=6).')">$$ 2 \times 10^6 $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Â¡Cuidado! En la divisiÃ³n, los exponentes de bases iguales se RESTAN, no se dividen.')">$$ 2 \times 10^4 $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Te equivocaste en la operaciÃ³n con los exponentes.')">$$ 2 \times 10^{10} $$</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Error en la divisiÃ³n del coeficiente (6/3=2, no 3).')">$$ 3 \times 10^6 $$</button>
             </div>
             <div class="feedback" id="feed5"></div>
-            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar PrÃ¡ctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
         <div class="pantalla-final" id="pantalla-final">
-            <div class="trofeo">🎓</div>
-            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <div class="trofeo">ðŸŽ“</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">Â¡MisiÃ³n Cumplida!</h1>
             <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Ahora controlas el poder de escribir los secretos del universo en muy poco espacio.</p>
-            <a href="fisica10_notacion_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+            <a href="fisica10_notacion_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la EvaluaciÃ³n</a>
         </div>
 
     </div>
@@ -224,5 +224,6 @@
             window.scrollTo(0, 0);
         }
     </script>
+<script src="auth.js"></script>
 </body>
 </html>

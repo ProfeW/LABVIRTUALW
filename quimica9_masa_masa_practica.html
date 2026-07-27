@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica % m/m - LabVirtual W</title>
+    <title>PrÃ¡ctica % m/m - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -68,21 +68,21 @@
         <a href="index.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
         <ul class="menu">
             <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-            <li><a href="quimica_9.html"><i class="fa-solid fa-arrow-left"></i> Química 9</a></li>
+            <li><a href="quimica_9.html"><i class="fa-solid fa-arrow-left"></i> QuÃ­mica 9</a></li>
         </ul>
     </nav>
 
     <div class="contenedor">
-        <a href="quimica9_masa_masa.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="quimica9_masa_masa.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
         
         <div class="encabezado-leccion">
-            <h1>🎮 Práctica Interactiva: % m/m</h1>
+            <h1>ðŸŽ® PrÃ¡ctica Interactiva: % m/m</h1>
             <p>10 Ejercicios paso a paso para dominar el Porcentaje Masa a Masa</p>
         </div>
 
         <div class="barra-progreso-contenedor">
             <div class="barra-progreso-titulo">
-                <span>📊 Progreso General</span>
+                <span>ðŸ“Š Progreso General</span>
                 <span id="texto-progreso">0 / 10 ejercicios completados</span>
             </div>
             <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
@@ -95,90 +95,90 @@
         const ejercicios = [
             {
                 titulo: "Ejercicio 1: Directo separando soluto y solvente",
-                enunciado: "Se disuelven 15 g de cloruro de sodio (sal) en 85 g de agua. ¿Cuál es el % m/m de la solución?",
+                enunciado: "Se disuelven 15 g de cloruro de sodio (sal) en 85 g de agua. Â¿CuÃ¡l es el % m/m de la soluciÃ³n?",
                 pasos: [
                     { tipo: 'datos', inputs: ['m_soluto', 'm_solvente'], valores: [15, 85], labels: ['m. Soluto', 'm. Solvente'], unidades: ['g', 'g'] },
-                    { tipo: 'calculo', label: 'm. Solución', valor: 100, formula: "Suma soluto + solvente para hallar la masa de la solución", unidad: 'g' },
+                    { tipo: 'calculo', label: 'm. SoluciÃ³n', valor: 100, formula: "Suma soluto + solvente para hallar la masa de la soluciÃ³n", unidad: 'g' },
                     { tipo: 'formula', seleccion: '%m/m' },
-                    { tipo: 'calculo', label: '% m/m', valor: 15, formula: "Aplica la fórmula: (m. Soluto / m. Solución) × 100", unidad: '%' }
+                    { tipo: 'calculo', label: '% m/m', valor: 15, formula: "Aplica la fÃ³rmula: (m. Soluto / m. SoluciÃ³n) Ã— 100", unidad: '%' }
                 ]
             },
             {
-                titulo: "Ejercicio 2: Calculando % con masa de solución dada",
-                enunciado: "Tenemos una solución acuosa de 200 g que contiene 40 g de azúcar. Calcula su % m/m.",
+                titulo: "Ejercicio 2: Calculando % con masa de soluciÃ³n dada",
+                enunciado: "Tenemos una soluciÃ³n acuosa de 200 g que contiene 40 g de azÃºcar. Calcula su % m/m.",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_soluto', 'm_solucion'], valores: [40, 200], labels: ['m. Soluto', 'm. Solución'], unidades: ['g', 'g'], extra: "Nota que ya te dan el total de la solución." },
+                    { tipo: 'datos', inputs: ['m_soluto', 'm_solucion'], valores: [40, 200], labels: ['m. Soluto', 'm. SoluciÃ³n'], unidades: ['g', 'g'], extra: "Nota que ya te dan el total de la soluciÃ³n." },
                     { tipo: 'formula', seleccion: '%m/m' },
-                    { tipo: 'calculo', label: '% m/m', valor: 20, formula: "Aplica: (40 / 200) × 100", unidad: '%' }
+                    { tipo: 'calculo', label: '% m/m', valor: 20, formula: "Aplica: (40 / 200) Ã— 100", unidad: '%' }
                 ]
             },
             {
-                titulo: "Ejercicio 3: Otro básico",
-                enunciado: "Si preparas un jugo con 25 g de polvo para jugo y 475 g de agua, ¿cuál es el porcentaje masa a masa?",
+                titulo: "Ejercicio 3: Otro bÃ¡sico",
+                enunciado: "Si preparas un jugo con 25 g de polvo para jugo y 475 g de agua, Â¿cuÃ¡l es el porcentaje masa a masa?",
                 pasos: [
                     { tipo: 'datos', inputs: ['m_soluto', 'm_solvente'], valores: [25, 475], labels: ['m. Soluto', 'm. Solvente'], unidades: ['g', 'g'] },
-                    { tipo: 'calculo', label: 'm. Solución', valor: 500, formula: "Calcula la masa total de la solución", unidad: 'g' },
-                    { tipo: 'calculo', label: '% m/m', valor: 5, formula: "Aplica la fórmula de % m/m", unidad: '%' }
+                    { tipo: 'calculo', label: 'm. SoluciÃ³n', valor: 500, formula: "Calcula la masa total de la soluciÃ³n", unidad: 'g' },
+                    { tipo: 'calculo', label: '% m/m', valor: 5, formula: "Aplica la fÃ³rmula de % m/m", unidad: '%' }
                 ]
             },
             {
                 titulo: "Ejercicio 4: Hallando la masa del Soluto",
-                enunciado: "¿Cuántos gramos de hidróxido de sodio (NaOH) hay en 300 g de una solución al 15% m/m?",
+                enunciado: "Â¿CuÃ¡ntos gramos de hidrÃ³xido de sodio (NaOH) hay en 300 g de una soluciÃ³n al 15% m/m?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_solucion', 'porcentaje'], valores: [300, 15], labels: ['m. Solución', '% m/m'], unidades: ['g', '%'] },
+                    { tipo: 'datos', inputs: ['m_solucion', 'porcentaje'], valores: [300, 15], labels: ['m. SoluciÃ³n', '% m/m'], unidades: ['g', '%'] },
                     { tipo: 'formula', seleccion: 'soluto' },
-                    { tipo: 'calculo', label: 'm. Soluto', valor: 45, formula: "Aplica el despeje: (15 × 300) / 100", unidad: 'g' }
+                    { tipo: 'calculo', label: 'm. Soluto', valor: 45, formula: "Aplica el despeje: (15 Ã— 300) / 100", unidad: 'g' }
                 ]
             },
             {
                 titulo: "Ejercicio 5: Hallando masa del Soluto",
-                enunciado: "Una crema hidratante de 120 g tiene vitamina E al 2% m/m. ¿Cuántos gramos de vitamina E contiene?",
+                enunciado: "Una crema hidratante de 120 g tiene vitamina E al 2% m/m. Â¿CuÃ¡ntos gramos de vitamina E contiene?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_solucion', 'porcentaje'], valores: [120, 2], labels: ['m. Solución', '% m/m'], unidades: ['g', '%'] },
-                    { tipo: 'calculo', label: 'm. Soluto', valor: 2.4, formula: "Usa la fórmula para soluto", unidad: 'g' }
+                    { tipo: 'datos', inputs: ['m_solucion', 'porcentaje'], valores: [120, 2], labels: ['m. SoluciÃ³n', '% m/m'], unidades: ['g', '%'] },
+                    { tipo: 'calculo', label: 'm. Soluto', valor: 2.4, formula: "Usa la fÃ³rmula para soluto", unidad: 'g' }
                 ]
             },
             {
-                titulo: "Ejercicio 6: Hallando la masa de la Solución",
-                enunciado: "Se sabe que una solución al 20% m/m contiene 60 g de soluto. ¿Cuál es la masa total de la solución?",
+                titulo: "Ejercicio 6: Hallando la masa de la SoluciÃ³n",
+                enunciado: "Se sabe que una soluciÃ³n al 20% m/m contiene 60 g de soluto. Â¿CuÃ¡l es la masa total de la soluciÃ³n?",
                 pasos: [
                     { tipo: 'datos', inputs: ['m_soluto', 'porcentaje'], valores: [60, 20], labels: ['m. Soluto', '% m/m'], unidades: ['g', '%'] },
                     { tipo: 'formula', seleccion: 'solucion' },
-                    { tipo: 'calculo', label: 'm. Solución', valor: 300, formula: "Aplica el despeje: (60 × 100) / 20", unidad: 'g' }
+                    { tipo: 'calculo', label: 'm. SoluciÃ³n', valor: 300, formula: "Aplica el despeje: (60 Ã— 100) / 20", unidad: 'g' }
                 ]
             },
             {
-                titulo: "Ejercicio 7: Hallando masa de Solución",
-                enunciado: "Para un experimento necesitas 5 g de un reactivo. Si el frasco dice 'Solución al 10% m/m', ¿cuántos gramos de solución debes pesar?",
+                titulo: "Ejercicio 7: Hallando masa de SoluciÃ³n",
+                enunciado: "Para un experimento necesitas 5 g de un reactivo. Si el frasco dice 'SoluciÃ³n al 10% m/m', Â¿cuÃ¡ntos gramos de soluciÃ³n debes pesar?",
                 pasos: [
                     { tipo: 'datos', inputs: ['m_soluto', 'porcentaje'], valores: [5, 10], labels: ['m. Soluto', '% m/m'], unidades: ['g', '%'] },
-                    { tipo: 'calculo', label: 'm. Solución', valor: 50, formula: "Usa la fórmula para solución", unidad: 'g' }
+                    { tipo: 'calculo', label: 'm. SoluciÃ³n', valor: 50, formula: "Usa la fÃ³rmula para soluciÃ³n", unidad: 'g' }
                 ]
             },
             {
                 titulo: "Ejercicio 8: Hallando masa de Solvente (Reto)",
-                enunciado: "Quieres preparar 250 g de solución al 8% m/m. ¿Cuántos gramos de solvente (agua) necesitas?",
+                enunciado: "Quieres preparar 250 g de soluciÃ³n al 8% m/m. Â¿CuÃ¡ntos gramos de solvente (agua) necesitas?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_solucion', 'porcentaje'], valores: [250, 8], labels: ['m. Solución', '% m/m'], unidades: ['g', '%'] },
+                    { tipo: 'datos', inputs: ['m_solucion', 'porcentaje'], valores: [250, 8], labels: ['m. SoluciÃ³n', '% m/m'], unidades: ['g', '%'] },
                     { tipo: 'calculo', label: 'm. Soluto', valor: 20, formula: "Primero, calcula la masa del soluto", unidad: 'g' },
-                    { tipo: 'calculo', label: 'm. Solvente', valor: 230, formula: "Como Solución = Soluto + Solvente, entonces Solvente = Solución - Soluto", unidad: 'g' }
+                    { tipo: 'calculo', label: 'm. Solvente', valor: 230, formula: "Como SoluciÃ³n = Soluto + Solvente, entonces Solvente = SoluciÃ³n - Soluto", unidad: 'g' }
                 ]
             },
             {
                 titulo: "Ejercicio 9: Otro de Solvente",
-                enunciado: "Si tienes 500 g de solución al 12% m/m de ácido nítrico, ¿cuánta masa es exclusivamente agua (solvente)?",
+                enunciado: "Si tienes 500 g de soluciÃ³n al 12% m/m de Ã¡cido nÃ­trico, Â¿cuÃ¡nta masa es exclusivamente agua (solvente)?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_solucion', 'porcentaje'], valores: [500, 12], labels: ['m. Solución', '% m/m'], unidades: ['g', '%'] },
+                    { tipo: 'datos', inputs: ['m_solucion', 'porcentaje'], valores: [500, 12], labels: ['m. SoluciÃ³n', '% m/m'], unidades: ['g', '%'] },
                     { tipo: 'calculo', label: 'm. Soluto', valor: 60, formula: "Calcula soluto primero", unidad: 'g' },
-                    { tipo: 'calculo', label: 'm. Solvente', valor: 440, formula: "Resta el soluto a la solución", unidad: 'g' }
+                    { tipo: 'calculo', label: 'm. Solvente', valor: 440, formula: "Resta el soluto a la soluciÃ³n", unidad: 'g' }
                 ]
             },
             {
-                titulo: "Ejercicio 10: Desafío Final",
-                enunciado: "Si disuelves 40 g de cloruro de potasio (KCl) en 160 g de agua, ¿qué porcentaje de la mezcla representa el solvente (agua)? (Pista: es 100% - %m/m, o (solvente/solucion)*100)",
+                titulo: "Ejercicio 10: DesafÃ­o Final",
+                enunciado: "Si disuelves 40 g de cloruro de potasio (KCl) en 160 g de agua, Â¿quÃ© porcentaje de la mezcla representa el solvente (agua)? (Pista: es 100% - %m/m, o (solvente/solucion)*100)",
                 pasos: [
                     { tipo: 'datos', inputs: ['m_soluto', 'm_solvente'], valores: [40, 160], labels: ['m. Soluto', 'm. Solvente'], unidades: ['g', 'g'] },
-                    { tipo: 'calculo', label: 'm. Solución', valor: 200, formula: "Suma para obtener solución", unidad: 'g' },
+                    { tipo: 'calculo', label: 'm. SoluciÃ³n', valor: 200, formula: "Suma para obtener soluciÃ³n", unidad: 'g' },
                     { tipo: 'calculo', label: '% m/m (soluto)', valor: 20, formula: "Calcula el % m/m normal (del soluto)", unidad: '%' },
                     { tipo: 'calculo', label: '% m/m (solvente)', valor: 80, formula: "El resto hasta el 100% es el solvente", unidad: '%' }
                 ]
@@ -187,10 +187,10 @@
 
         const formulasHTML = `
             <select class="select-formula">
-                <option value="">-- Selecciona la fórmula correcta --</option>
-                <option value="%m/m">% m/m = (m. Soluto / m. Solución) × 100</option>
-                <option value="soluto">m. Soluto = (% m/m × m. Solución) / 100</option>
-                <option value="solucion">m. Solución = (m. Soluto × 100) / % m/m</option>
+                <option value="">-- Selecciona la fÃ³rmula correcta --</option>
+                <option value="%m/m">% m/m = (m. Soluto / m. SoluciÃ³n) Ã— 100</option>
+                <option value="soluto">m. Soluto = (% m/m Ã— m. SoluciÃ³n) / 100</option>
+                <option value="solucion">m. SoluciÃ³n = (m. Soluto Ã— 100) / % m/m</option>
             </select>
         `;
 
@@ -208,7 +208,7 @@
                     html += `<div class="paso-contenedor ${activo}" id="ej${index}-p${pIndex}">`;
                     
                     if (paso.tipo === 'datos') {
-                        html += `<div class="paso-titulo">📋 Identificar Datos <span class="icono-check">✔</span></div>`;
+                        html += `<div class="paso-titulo">ðŸ“‹ Identificar Datos <span class="icono-check">âœ”</span></div>`;
                         if(paso.extra) html += `<p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">${paso.extra}</p>`;
                         html += `<div class="grid-datos">`;
                         paso.inputs.forEach((input, i) => {
@@ -220,10 +220,10 @@
                         });
                         html += `</div>`;
                     } else if (paso.tipo === 'formula') {
-                        html += `<div class="paso-titulo">📐 Seleccionar Fórmula <span class="icono-check">✔</span></div>`;
+                        html += `<div class="paso-titulo">ðŸ“ Seleccionar FÃ³rmula <span class="icono-check">âœ”</span></div>`;
                         html += formulasHTML.replace('class="select-formula"', `id="input-${index}-${pIndex}-0"`);
                     } else if (paso.tipo === 'calculo') {
-                        html += `<div class="paso-titulo">🔢 Calcular <span class="icono-check">✔</span></div>`;
+                        html += `<div class="paso-titulo">ðŸ”¢ Calcular <span class="icono-check">âœ”</span></div>`;
                         html += `<p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">${paso.formula}</p>`;
                         html += `<div class="input-grupo" style="max-width:250px;">
                             <label>${paso.label}</label>
@@ -263,7 +263,7 @@
 
             if (valido) {
                 fb.className = 'feedback correcto';
-                fb.textContent = '¡Correcto! ✔️';
+                fb.textContent = 'Â¡Correcto! âœ”ï¸';
                 pasoEl.classList.remove('activo');
                 pasoEl.classList.add('completado');
 
@@ -278,11 +278,12 @@
                 }
             } else {
                 fb.className = 'feedback incorrecto';
-                fb.textContent = 'Incorrecto. Revisa tus cálculos y vuelve a intentar. ❌';
+                fb.textContent = 'Incorrecto. Revisa tus cÃ¡lculos y vuelve a intentar. âŒ';
             }
         };
 
         generarHTML();
     </script>
+<script src="auth.js"></script>
 </body>
 </html>

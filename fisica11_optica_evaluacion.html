@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación: Óptica - La Luz - Física 11 - LabVirtual W</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+    <title>EvaluaciÃ³n: Ã“ptica - La Luz - FÃ­sica 11 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸ“</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -68,16 +68,16 @@
 <body>
 <div class="contenedor">
     <div id="pantalla-inicio" class="pantalla-inicio">
-        <h1><i class="fa-solid fa-file-signature"></i> Evaluación</h1>
-        <p>Óptica — La Luz · Física 11° · Tipo ICFES</p>
+        <h1><i class="fa-solid fa-file-signature"></i> EvaluaciÃ³n</h1>
+        <p>Ã“ptica â€” La Luz Â· FÃ­sica 11Â° Â· Tipo ICFES</p>
         <ul class="reglas">
             <li><i class="fa-solid fa-check"></i> <strong>10 preguntas aleatorias</strong> de un banco de 25 preguntas.</li>
-            <li><i class="fa-solid fa-check"></i> Cada evaluación es <strong>diferente</strong>.</li>
+            <li><i class="fa-solid fa-check"></i> Cada evaluaciÃ³n es <strong>diferente</strong>.</li>
             <li><i class="fa-solid fa-check"></i> Puedes navegar entre preguntas antes de finalizar.</li>
         </ul>
-        <input type="text" id="input-nombre" class="input-nombre" placeholder="✏️ Escribe tu nombre completo" maxlength="60">
+        <input type="text" id="input-nombre" class="input-nombre" placeholder="âœï¸ Escribe tu nombre completo" maxlength="60">
         <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre.</div><br>
-        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar Evaluación</button>
+        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar EvaluaciÃ³n</button>
     </div>
     <div id="seccion-evaluacion" class="seccion-evaluacion">
         <div class="header-eval"><div class="bienvenida-nombre" id="bienvenida-nombre"></div><div class="timer-badge">Pregunta <span id="num-actual">1</span> de 10</div></div>
@@ -92,49 +92,49 @@
     <div id="pantalla-resultado" class="pantalla-resultado">
         <div class="resultado-header">
             <div style="font-size:1rem;color:#aaa;margin-bottom:15px;" id="resultado-nombre"></div>
-            <span class="resultado-emoji" id="resultado-emoji">📊</span>
+            <span class="resultado-emoji" id="resultado-emoji">ðŸ“Š</span>
             <div class="resultado-titulo" id="resultado-titulo"></div>
         </div>
         <div class="score-grid">
-            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">✅ Correctas</div></div>
-            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">❌ Incorrectas</div></div>
-            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">📊 Porcentaje</div></div>
+            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">âœ… Correctas</div></div>
+            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">âŒ Incorrectas</div></div>
+            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">ðŸ“Š Porcentaje</div></div>
         </div>
-        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión de Respuestas</div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> RevisiÃ³n de Respuestas</div>
         <div id="revision-container"></div>
         <div style="text-align:center;margin-top:30px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
-            <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#b7950b);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva Evaluación</button>
-            <a href="fisica11_optica.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
+            <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#b7950b);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva EvaluaciÃ³n</button>
+            <a href="fisica11_optica.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar TeorÃ­a</a>
         </div>
     </div>
 </div>
 <script>
 const bancoPreguntas=[
-    {texto:"La luz es una onda electromagnética. ¿Qué tipo de onda es?",opciones:["A. Mecánica y longitudinal","B. Mecánica y transversal","C. Electromagnética y transversal","D. Electromagnética y longitudinal"],respuesta:2},
-    {texto:"La velocidad de la luz en el vacío es:",opciones:["A. 343 m/s","B. 3×10⁶ m/s","C. 3×10⁸ m/s","D. 1500 m/s"],respuesta:2},
-    {texto:"¿Cuál color del espectro visible tiene la mayor frecuencia?",opciones:["A. Rojo","B. Naranja","C. Verde","D. Violeta"],respuesta:3},
-    {texto:"El índice de refracción de un medio se define como:",opciones:["A. La velocidad de la luz en ese medio","B. La relación entre la velocidad de la luz en el vacío y en el medio (n = c/v)","C. La longitud de onda de la luz en ese medio","D. El ángulo de refracción en ese medio"],respuesta:1},
-    {contexto:"La luz pasa del aire (n=1) al diamante (n=2.42).",texto:"¿Qué le ocurre a la velocidad de la luz al entrar al diamante?",opciones:["A. Se mantiene igual porque la frecuencia es constante","B. Aumenta porque el diamante es muy denso","C. Disminuye porque el índice de refracción aumenta","D. Se vuelve cero en el interior del diamante"],respuesta:2},
-    {texto:"La Ley de Snell relaciona:",opciones:["A. Las amplitudes de luz en reflexión","B. Los ángulos de incidencia y refracción con los índices de refracción de los medios","C. Las frecuencias de la luz al cambiar de medio","D. Las velocidades de la luz en dos medios adyacentes"],respuesta:1},
-    {texto:"¿Qué tipo de imagen forma un espejo plano?",opciones:["A. Real, invertida y aumentada","B. Virtual, derecha y del mismo tamaño","C. Real, derecha y reducida","D. Virtual, invertida y reducida"],respuesta:1},
-    {texto:"¿Cuál tipo de espejo forma siempre imágenes virtuales, derechas y reducidas?",opciones:["A. Espejo plano","B. Espejo cóncavo","C. Espejo convexo","D. Ningún tipo de espejo forma imágenes virtuales"],respuesta:2},
-    {contexto:"Un espejo cóncavo se usa en los faros de los automóviles.",texto:"¿Por qué se usa un espejo cóncavo y no uno convexo?",opciones:["A. El espejo cóncavo diverge la luz, creando un haz amplio y difuso","B. El espejo cóncavo concentra y dirige la luz en un haz paralelo hacia adelante","C. El espejo convexo no refleja la luz del foco","D. El espejo cóncavo tiene menor costo de fabricación"],respuesta:1},
-    {texto:"¿Cuál lente se utiliza para corregir la hipermetropía (dificultad para ver de cerca)?",opciones:["A. Lente divergente (cóncava)","B. Prisma óptico","C. Lente convergente (convexa)","D. Espejo semitransparente"],respuesta:2},
-    {texto:"El fenómeno que separa la luz blanca en sus colores componentes se llama:",opciones:["A. Interferencia","B. Difracción","C. Dispersión","D. Polarización"],respuesta:2},
-    {contexto:"La luz blanca pasa a través de un prisma de vidrio y se separa en los colores del arcoíris.",texto:"Esto ocurre porque:",opciones:["A. Cada color tiene diferente amplitud dentro del prisma","B. El prisma absorbe selectivamente ciertos colores","C. Cada color tiene un índice de refracción ligeramente diferente en el vidrio","D. La velocidad de cada color cambia de igual forma en el vidrio"],respuesta:2},
-    {texto:"El arcoíris se forma porque las gotas de lluvia actúan como:",opciones:["A. Espejos planos que reflejan la luz del sol","B. Prismas que refractan y dispersan la luz solar","C. Filtros que absorben ciertos colores de la luz","D. Lentes convergentes que concentran la luz"],respuesta:1},
-    {texto:"Si la velocidad de la luz en el vacío es 3×10⁸ m/s y en un material es 2×10⁸ m/s, ¿cuál es el índice de refracción de ese material?",opciones:["A. 0.67","B. 6×10⁸","C. 1.5","D. 1"],respuesta:2},
-    {contexto:"Un rayo de luz pasa del agua (n=1.33) al aire (n=1). El ángulo de incidencia es 30°.",texto:"¿El rayo refractado se acerca o se aleja de la normal al aire?",opciones:["A. Se acerca, porque pasa a un medio más denso","B. Se aleja, porque pasa a un medio menos denso con mayor velocidad","C. Sigue paralelo, porque la frecuencia no cambia","D. Se refleja completamente sin refractarse"],respuesta:1},
-    {texto:"¿En qué parte del espectro electromagnético se ubica la luz visible?",opciones:["A. Entre las microondas y el infrarrojo","B. Entre el infrarrojo y el ultravioleta","C. Entre el ultravioleta y los rayos X","D. Entre las ondas de radio y las microondas"],respuesta:1},
-    {texto:"La longitud de onda de la luz visible está aproximadamente entre:",opciones:["A. 1 nm y 100 nm","B. 380 nm y 700 nm","C. 700 nm y 1000 nm","D. 10 nm y 380 nm"],respuesta:1},
-    {texto:"Un microscopio óptico usa lentes para:",opciones:["A. Reducir el tamaño aparente de los objetos","B. Producir imágenes reducidas y virtuales de microorganismos","C. Ampliar la imagen de objetos muy pequeños","D. Deflectar los rayos de luz para detectar objetos lejanos"],respuesta:2},
-    {texto:"¿Cuál de los siguientes fenómenos se produce cuando la luz pasa por un orificio muy pequeño?",opciones:["A. Reflexión total interna","B. Dispersión cromática","C. Difracción de la luz","D. Absorción selectiva"],respuesta:2},
-    {texto:"La reflexión total interna ocurre cuando:",opciones:["A. Un rayo de luz pasa de un medio menos denso a uno más denso","B. Un rayo de luz llega a la interfaz con un ángulo mayor al ángulo crítico, viajando de un medio más denso a uno menos denso","C. La frecuencia de la luz supera el umbral de energía del medio","D. La amplitud de la luz disminuye hasta cero en el segundo medio"],respuesta:1},
-    {texto:"¿Por qué los diamantes brillan tanto?",opciones:["A. Emiten luz propia por fluorescencia","B. Tienen un índice de refracción bajo que permite más transmisión de luz","C. Su alto índice de refracción (n=2.42) produce reflexión total interna que atrapa y redirige la luz","D. Absorben la luz y la emiten con mayor intensidad"],respuesta:2},
-    {contexto:"La fibra óptica transmite datos a través de pulsos de luz. La luz viaja dentro de un núcleo de vidrio rodeado por un revestimiento de menor índice de refracción.",texto:"¿Qué fenómeno mantiene la luz confinada dentro de la fibra?",opciones:["A. Refracción hacia adelante","B. Reflexión total interna","C. Dispersión en el núcleo de vidrio","D. Interferencia constructiva"],respuesta:1},
-    {texto:"¿Cuál es la longitud de onda de la luz roja si su frecuencia es 4.3×10¹⁴ Hz y c=3×10⁸ m/s?",opciones:["A. 1.29×10²³ m","B. 700 nm","C. 430 nm","D. 380 nm"],respuesta:1},
-    {texto:"Una lupa funciona como una lente convergente. ¿Qué tipo de imagen produce cuando el objeto está muy cerca?",opciones:["A. Real, invertida y reducida","B. Real, derecha y aumentada","C. Virtual, derecha y aumentada","D. Virtual, invertida y reducida"],respuesta:2},
-    {texto:"¿Cuál propiedad de la luz no cambia cuando pasa de un medio a otro?",opciones:["A. Velocidad","B. Longitud de onda","C. Frecuencia","D. Índice de refracción"],respuesta:2}
+    {texto:"La luz es una onda electromagnÃ©tica. Â¿QuÃ© tipo de onda es?",opciones:["A. MecÃ¡nica y longitudinal","B. MecÃ¡nica y transversal","C. ElectromagnÃ©tica y transversal","D. ElectromagnÃ©tica y longitudinal"],respuesta:2},
+    {texto:"La velocidad de la luz en el vacÃ­o es:",opciones:["A. 343 m/s","B. 3Ã—10â¶ m/s","C. 3Ã—10â¸ m/s","D. 1500 m/s"],respuesta:2},
+    {texto:"Â¿CuÃ¡l color del espectro visible tiene la mayor frecuencia?",opciones:["A. Rojo","B. Naranja","C. Verde","D. Violeta"],respuesta:3},
+    {texto:"El Ã­ndice de refracciÃ³n de un medio se define como:",opciones:["A. La velocidad de la luz en ese medio","B. La relaciÃ³n entre la velocidad de la luz en el vacÃ­o y en el medio (n = c/v)","C. La longitud de onda de la luz en ese medio","D. El Ã¡ngulo de refracciÃ³n en ese medio"],respuesta:1},
+    {contexto:"La luz pasa del aire (n=1) al diamante (n=2.42).",texto:"Â¿QuÃ© le ocurre a la velocidad de la luz al entrar al diamante?",opciones:["A. Se mantiene igual porque la frecuencia es constante","B. Aumenta porque el diamante es muy denso","C. Disminuye porque el Ã­ndice de refracciÃ³n aumenta","D. Se vuelve cero en el interior del diamante"],respuesta:2},
+    {texto:"La Ley de Snell relaciona:",opciones:["A. Las amplitudes de luz en reflexiÃ³n","B. Los Ã¡ngulos de incidencia y refracciÃ³n con los Ã­ndices de refracciÃ³n de los medios","C. Las frecuencias de la luz al cambiar de medio","D. Las velocidades de la luz en dos medios adyacentes"],respuesta:1},
+    {texto:"Â¿QuÃ© tipo de imagen forma un espejo plano?",opciones:["A. Real, invertida y aumentada","B. Virtual, derecha y del mismo tamaÃ±o","C. Real, derecha y reducida","D. Virtual, invertida y reducida"],respuesta:1},
+    {texto:"Â¿CuÃ¡l tipo de espejo forma siempre imÃ¡genes virtuales, derechas y reducidas?",opciones:["A. Espejo plano","B. Espejo cÃ³ncavo","C. Espejo convexo","D. NingÃºn tipo de espejo forma imÃ¡genes virtuales"],respuesta:2},
+    {contexto:"Un espejo cÃ³ncavo se usa en los faros de los automÃ³viles.",texto:"Â¿Por quÃ© se usa un espejo cÃ³ncavo y no uno convexo?",opciones:["A. El espejo cÃ³ncavo diverge la luz, creando un haz amplio y difuso","B. El espejo cÃ³ncavo concentra y dirige la luz en un haz paralelo hacia adelante","C. El espejo convexo no refleja la luz del foco","D. El espejo cÃ³ncavo tiene menor costo de fabricaciÃ³n"],respuesta:1},
+    {texto:"Â¿CuÃ¡l lente se utiliza para corregir la hipermetropÃ­a (dificultad para ver de cerca)?",opciones:["A. Lente divergente (cÃ³ncava)","B. Prisma Ã³ptico","C. Lente convergente (convexa)","D. Espejo semitransparente"],respuesta:2},
+    {texto:"El fenÃ³meno que separa la luz blanca en sus colores componentes se llama:",opciones:["A. Interferencia","B. DifracciÃ³n","C. DispersiÃ³n","D. PolarizaciÃ³n"],respuesta:2},
+    {contexto:"La luz blanca pasa a travÃ©s de un prisma de vidrio y se separa en los colores del arcoÃ­ris.",texto:"Esto ocurre porque:",opciones:["A. Cada color tiene diferente amplitud dentro del prisma","B. El prisma absorbe selectivamente ciertos colores","C. Cada color tiene un Ã­ndice de refracciÃ³n ligeramente diferente en el vidrio","D. La velocidad de cada color cambia de igual forma en el vidrio"],respuesta:2},
+    {texto:"El arcoÃ­ris se forma porque las gotas de lluvia actÃºan como:",opciones:["A. Espejos planos que reflejan la luz del sol","B. Prismas que refractan y dispersan la luz solar","C. Filtros que absorben ciertos colores de la luz","D. Lentes convergentes que concentran la luz"],respuesta:1},
+    {texto:"Si la velocidad de la luz en el vacÃ­o es 3Ã—10â¸ m/s y en un material es 2Ã—10â¸ m/s, Â¿cuÃ¡l es el Ã­ndice de refracciÃ³n de ese material?",opciones:["A. 0.67","B. 6Ã—10â¸","C. 1.5","D. 1"],respuesta:2},
+    {contexto:"Un rayo de luz pasa del agua (n=1.33) al aire (n=1). El Ã¡ngulo de incidencia es 30Â°.",texto:"Â¿El rayo refractado se acerca o se aleja de la normal al aire?",opciones:["A. Se acerca, porque pasa a un medio mÃ¡s denso","B. Se aleja, porque pasa a un medio menos denso con mayor velocidad","C. Sigue paralelo, porque la frecuencia no cambia","D. Se refleja completamente sin refractarse"],respuesta:1},
+    {texto:"Â¿En quÃ© parte del espectro electromagnÃ©tico se ubica la luz visible?",opciones:["A. Entre las microondas y el infrarrojo","B. Entre el infrarrojo y el ultravioleta","C. Entre el ultravioleta y los rayos X","D. Entre las ondas de radio y las microondas"],respuesta:1},
+    {texto:"La longitud de onda de la luz visible estÃ¡ aproximadamente entre:",opciones:["A. 1 nm y 100 nm","B. 380 nm y 700 nm","C. 700 nm y 1000 nm","D. 10 nm y 380 nm"],respuesta:1},
+    {texto:"Un microscopio Ã³ptico usa lentes para:",opciones:["A. Reducir el tamaÃ±o aparente de los objetos","B. Producir imÃ¡genes reducidas y virtuales de microorganismos","C. Ampliar la imagen de objetos muy pequeÃ±os","D. Deflectar los rayos de luz para detectar objetos lejanos"],respuesta:2},
+    {texto:"Â¿CuÃ¡l de los siguientes fenÃ³menos se produce cuando la luz pasa por un orificio muy pequeÃ±o?",opciones:["A. ReflexiÃ³n total interna","B. DispersiÃ³n cromÃ¡tica","C. DifracciÃ³n de la luz","D. AbsorciÃ³n selectiva"],respuesta:2},
+    {texto:"La reflexiÃ³n total interna ocurre cuando:",opciones:["A. Un rayo de luz pasa de un medio menos denso a uno mÃ¡s denso","B. Un rayo de luz llega a la interfaz con un Ã¡ngulo mayor al Ã¡ngulo crÃ­tico, viajando de un medio mÃ¡s denso a uno menos denso","C. La frecuencia de la luz supera el umbral de energÃ­a del medio","D. La amplitud de la luz disminuye hasta cero en el segundo medio"],respuesta:1},
+    {texto:"Â¿Por quÃ© los diamantes brillan tanto?",opciones:["A. Emiten luz propia por fluorescencia","B. Tienen un Ã­ndice de refracciÃ³n bajo que permite mÃ¡s transmisiÃ³n de luz","C. Su alto Ã­ndice de refracciÃ³n (n=2.42) produce reflexiÃ³n total interna que atrapa y redirige la luz","D. Absorben la luz y la emiten con mayor intensidad"],respuesta:2},
+    {contexto:"La fibra Ã³ptica transmite datos a travÃ©s de pulsos de luz. La luz viaja dentro de un nÃºcleo de vidrio rodeado por un revestimiento de menor Ã­ndice de refracciÃ³n.",texto:"Â¿QuÃ© fenÃ³meno mantiene la luz confinada dentro de la fibra?",opciones:["A. RefracciÃ³n hacia adelante","B. ReflexiÃ³n total interna","C. DispersiÃ³n en el nÃºcleo de vidrio","D. Interferencia constructiva"],respuesta:1},
+    {texto:"Â¿CuÃ¡l es la longitud de onda de la luz roja si su frecuencia es 4.3Ã—10Â¹â´ Hz y c=3Ã—10â¸ m/s?",opciones:["A. 1.29Ã—10Â²Â³ m","B. 700 nm","C. 430 nm","D. 380 nm"],respuesta:1},
+    {texto:"Una lupa funciona como una lente convergente. Â¿QuÃ© tipo de imagen produce cuando el objeto estÃ¡ muy cerca?",opciones:["A. Real, invertida y reducida","B. Real, derecha y aumentada","C. Virtual, derecha y aumentada","D. Virtual, invertida y reducida"],respuesta:2},
+    {texto:"Â¿CuÃ¡l propiedad de la luz no cambia cuando pasa de un medio a otro?",opciones:["A. Velocidad","B. Longitud de onda","C. Frecuencia","D. Ãndice de refracciÃ³n"],respuesta:2}
 ];
 
 let preguntasSeleccionadas=[],respuestasUsuario=[],preguntaActual=0,nombreEstudiante='';
@@ -146,7 +146,7 @@ function iniciarEvaluacion(){
     respuestasUsuario=new Array(10).fill(null);
     document.getElementById('pantalla-inicio').style.display='none';
     document.getElementById('seccion-evaluacion').style.display='block';
-    document.getElementById('bienvenida-nombre').textContent='👤 '+nombreEstudiante;
+    document.getElementById('bienvenida-nombre').textContent='ðŸ‘¤ '+nombreEstudiante;
     mostrarPregunta(0);
 }
 function mostrarPregunta(idx){
@@ -175,23 +175,23 @@ function irSiguiente(){if(preguntaActual<9)mostrarPregunta(preguntaActual+1);}
 function irAnterior(){if(preguntaActual>0)mostrarPregunta(preguntaActual-1);}
 function finalizarEvaluacion(){
     const sinResp=respuestasUsuario.filter(r=>r===null).length;
-    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¿Finalizar?`))return;
+    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. Â¿Finalizar?`))return;
     let correctas=0,revHTML='';
     preguntasSeleccionadas.forEach((p,i)=>{
         const resp=respuestasUsuario[i];const ok=resp===p.respuesta;if(ok)correctas++;
-        revHTML+=`<div class="revision-item ${ok?'correcta':'incorrecta'}"><div class="pregunta-r">${ok?'✅':'❌'} <strong>P${i+1}:</strong> ${p.texto}</div><div>`;
+        revHTML+=`<div class="revision-item ${ok?'correcta':'incorrecta'}"><div class="pregunta-r">${ok?'âœ…':'âŒ'} <strong>P${i+1}:</strong> ${p.texto}</div><div>`;
         if(!ok)revHTML+=`<div class="tu-resp">Tu respuesta: ${resp!==null?p.opciones[resp]:'Sin responder'}</div>`;
         revHTML+=`<div class="resp-correcta">Correcta: ${p.opciones[p.respuesta]}</div></div></div>`;
     });
     const pct=Math.round(correctas/10*100);
     let emoji,titulo;
-    if(pct>=90){emoji='🏆';titulo='¡Excelente! Dominas la óptica.';}
-    else if(pct>=70){emoji='🌟';titulo='¡Muy bien! Sigue practicando.';}
-    else if(pct>=50){emoji='📚';titulo='Aprobado. Repasa los temas con errores.';}
-    else{emoji='💪';titulo='Necesitas repasar la teoría de óptica.';}
+    if(pct>=90){emoji='ðŸ†';titulo='Â¡Excelente! Dominas la Ã³ptica.';}
+    else if(pct>=70){emoji='ðŸŒŸ';titulo='Â¡Muy bien! Sigue practicando.';}
+    else if(pct>=50){emoji='ðŸ“š';titulo='Aprobado. Repasa los temas con errores.';}
+    else{emoji='ðŸ’ª';titulo='Necesitas repasar la teorÃ­a de Ã³ptica.';}
     document.getElementById('seccion-evaluacion').style.display='none';
     const pr=document.getElementById('pantalla-resultado');pr.classList.add('activo');
-    document.getElementById('resultado-nombre').textContent='👤 '+nombreEstudiante;
+    document.getElementById('resultado-nombre').textContent='ðŸ‘¤ '+nombreEstudiante;
     document.getElementById('resultado-emoji').textContent=emoji;
     document.getElementById('resultado-titulo').textContent=titulo;
     document.getElementById('score-correctas').textContent=correctas;
@@ -202,5 +202,6 @@ function finalizarEvaluacion(){
     window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
+<script src="auth.js"></script>
 </body>
 </html>

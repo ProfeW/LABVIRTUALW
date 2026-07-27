@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica: Aceleración - LabVirtual W</title>
+    <title>PrÃ¡ctica: AceleraciÃ³n - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,10 +60,10 @@
 <body>
 
     <div class="contenedor">
-        <a href="fisica10_aceleracion.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="fisica10_aceleracion.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
 
         <div class="header-practica">
-            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <h1><i class="fa-solid fa-gamepad"></i> PrÃ¡ctica Interactiva</h1>
             <p>Aprende a analizar los cambios de velocidad en el tiempo.</p>
         </div>
 
@@ -73,18 +73,18 @@
 
         <!-- EJERCICIO 1 -->
         <div class="ejercicio-card activo" id="ej1">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Aceleración positiva)</span>
-            <h3>Reto 1: Arranque Rápido</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (AceleraciÃ³n positiva)</span>
+            <h3>Reto 1: Arranque RÃ¡pido</h3>
             <div class="enunciado">
-                Un ciclista está detenido en la línea de meta. Arranca y <strong>3 segundos</strong> después, su velocidad es de <strong>12 m/s</strong>. <br><br>
-                ¿Cuál es el valor de su aceleración?
+                Un ciclista estÃ¡ detenido en la lÃ­nea de meta. Arranca y <strong>3 segundos</strong> despuÃ©s, su velocidad es de <strong>12 m/s</strong>. <br><br>
+                Â¿CuÃ¡l es el valor de su aceleraciÃ³n?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te equivocaste. La aceleración es (Vf - Vi) / t.')">15 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'No hay que sumar. Es una división.')">36 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! a = (12 - 0) / 3 = 4 m/s².')">4 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Error de cálculo. Divide la velocidad final entre el tiempo.')">9 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te equivocaste. La aceleraciÃ³n es (Vf - Vi) / t.')">15 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'No hay que sumar. Es una divisiÃ³n.')">36 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, 'Â¡Correcto! a = (12 - 0) / 3 = 4 m/sÂ².')">4 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Error de cÃ¡lculo. Divide la velocidad final entre el tiempo.')">9 m/sÂ²</button>
             </div>
             <div class="feedback" id="feed1"></div>
             <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -92,18 +92,18 @@
 
         <!-- EJERCICIO 2 -->
         <div class="ejercicio-card" id="ej2">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Desaceleración)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (DesaceleraciÃ³n)</span>
             <h3>Reto 2: El Frenazo</h3>
             <div class="enunciado">
                 Una tractomula viaja a <strong>25 m/s</strong>. El conductor pisa el freno y se detiene por completo al cabo de <strong>5 segundos</strong>. <br><br>
-                ¿Cuál es la aceleración de la tractomula?
+                Â¿CuÃ¡l es la aceleraciÃ³n de la tractomula?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! a = (0 - 25) / 5 = -5 m/s². El signo negativo indica que frena.')">-5 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Casi. Pero como está frenando (su velocidad final es cero), la resta da un número negativo.')">5 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Revisa la resta. Es (Vf - Vi), no al revés.')">30 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Error. Intenta dividir el cambio de velocidad (-25) entre el tiempo (5).')">-125 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, 'Â¡Excelente! a = (0 - 25) / 5 = -5 m/sÂ². El signo negativo indica que frena.')">-5 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Casi. Pero como estÃ¡ frenando (su velocidad final es cero), la resta da un nÃºmero negativo.')">5 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Revisa la resta. Es (Vf - Vi), no al revÃ©s.')">30 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Error. Intenta dividir el cambio de velocidad (-25) entre el tiempo (5).')">-125 m/sÂ²</button>
             </div>
             <div class="feedback" id="feed2"></div>
             <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -115,14 +115,14 @@
             <h3>Reto 3: Acelerando en la Autopista</h3>
             <div class="enunciado">
                 Un carro va a <strong>10 m/s</strong>. El conductor pisa el acelerador durante <strong>2 segundos</strong> y su velocidad sube a <strong>20 m/s</strong>. <br><br>
-                ¿Cuál es su aceleración?
+                Â¿CuÃ¡l es su aceleraciÃ³n?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, '¡Cuidado! Dividiste la velocidad final directamente. Primero debes restarle la velocidad inicial.')">10 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Sumaste las velocidades en lugar de restarlas.')">15 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! a = (20 - 10) / 2 = 10 / 2 = 5 m/s².')">5 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Revisa el cálculo. a = (Vf - Vi) / t.')">2 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Â¡Cuidado! Dividiste la velocidad final directamente. Primero debes restarle la velocidad inicial.')">10 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Sumaste las velocidades en lugar de restarlas.')">15 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, 'Â¡Correcto! a = (20 - 10) / 2 = 10 / 2 = 5 m/sÂ².')">5 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Revisa el cÃ¡lculo. a = (Vf - Vi) / t.')">2 m/sÂ²</button>
             </div>
             <div class="feedback" id="feed3"></div>
             <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -133,15 +133,15 @@
             <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Conceptos)</span>
             <h3>Reto 4: Velocidad Constante</h3>
             <div class="enunciado">
-                Un tren bala viaja a una asombrosa velocidad de <strong>300 km/h</strong> durante <strong>5 horas</strong> en línea recta sin variar en absoluto su ritmo. <br><br>
-                ¿Cuál es su aceleración?
+                Un tren bala viaja a una asombrosa velocidad de <strong>300 km/h</strong> durante <strong>5 horas</strong> en lÃ­nea recta sin variar en absoluto su ritmo. <br><br>
+                Â¿CuÃ¡l es su aceleraciÃ³n?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Esa es la velocidad constante, no la aceleración.')">300 km/h²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Correcto! Si la velocidad NO cambia, no hay aceleración (a = 0).')">0 m/s²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Dividiste la velocidad por el tiempo, pero la velocidad final y la inicial son iguales.')">60 km/h²</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste. Esto daría la distancia recorrida (1500 km), no la aceleración.')">1500 m/s²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Esa es la velocidad constante, no la aceleraciÃ³n.')">300 km/hÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, 'Â¡Correcto! Si la velocidad NO cambia, no hay aceleraciÃ³n (a = 0).')">0 m/sÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Dividiste la velocidad por el tiempo, pero la velocidad final y la inicial son iguales.')">60 km/hÂ²</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste. Esto darÃ­a la distancia recorrida (1500 km), no la aceleraciÃ³n.')">1500 m/sÂ²</button>
             </div>
             <div class="feedback" id="feed4"></div>
             <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -150,28 +150,28 @@
         <!-- EJERCICIO 5 -->
         <div class="ejercicio-card" id="ej5">
             <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto (Encontrar la Velocidad Final)</span>
-            <h3>Reto 5: Despegue del Avión</h3>
+            <h3>Reto 5: Despegue del AviÃ³n</h3>
             <div class="enunciado">
-                Un avión inicia su despegue desde el reposo ($v_i = 0$) con una aceleración constante de <strong>4 m/s²</strong>. <br><br>
-                ¿Cuál será su velocidad exacta después de <strong>10 segundos</strong>?
-                <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: Si despejas la fórmula $a = \frac{v_f - v_i}{t}$, obtienes $v_f = v_i + a \cdot t$).</span>
+                Un aviÃ³n inicia su despegue desde el reposo ($v_i = 0$) con una aceleraciÃ³n constante de <strong>4 m/sÂ²</strong>. <br><br>
+                Â¿CuÃ¡l serÃ¡ su velocidad exacta despuÃ©s de <strong>10 segundos</strong>?
+                <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: Si despejas la fÃ³rmula $a = \frac{v_f - v_i}{t}$, obtienes $v_f = v_i + a \cdot t$).</span>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Casi, pero te faltó multiplicarlo por el tiempo.')">4 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Casi, pero te faltÃ³ multiplicarlo por el tiempo.')">4 m/s</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Dividiste en lugar de multiplicar. vf = a * t')">2.5 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Brillante! vf = 0 + (4 * 10) = 40 m/s.')">40 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Es un número muy grande. Usa la fórmula vf = a * t.')">400 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, 'Â¡Brillante! vf = 0 + (4 * 10) = 40 m/s.')">40 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Es un nÃºmero muy grande. Usa la fÃ³rmula vf = a * t.')">400 m/s</button>
             </div>
             <div class="feedback" id="feed5"></div>
-            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar PrÃ¡ctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
         <div class="pantalla-final" id="pantalla-final">
-            <div class="trofeo">🏁</div>
-            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
-            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">¡Excelente! Tienes claro cómo cambia la velocidad a través del tiempo.</p>
-            <a href="fisica10_aceleracion_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+            <div class="trofeo">ðŸ</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">Â¡MisiÃ³n Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Â¡Excelente! Tienes claro cÃ³mo cambia la velocidad a travÃ©s del tiempo.</p>
+            <a href="fisica10_aceleracion_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la EvaluaciÃ³n</a>
         </div>
 
     </div>
@@ -223,5 +223,6 @@
             window.scrollTo(0, 0);
         }
     </script>
+<script src="auth.js"></script>
 </body>
 </html>

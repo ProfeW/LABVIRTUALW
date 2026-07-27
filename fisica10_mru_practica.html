@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica: Movimiento Rectilíneo Uniforme - LabVirtual W</title>
+    <title>PrÃ¡ctica: Movimiento RectilÃ­neo Uniforme - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,11 +60,11 @@
 <body>
 
     <div class="contenedor">
-        <a href="fisica10_mru.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="fisica10_mru.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
 
         <div class="header-practica">
-            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
-            <p>Calcula velocidades, tiempos y distancias en línea recta.</p>
+            <h1><i class="fa-solid fa-gamepad"></i> PrÃ¡ctica Interactiva</h1>
+            <p>Calcula velocidades, tiempos y distancias en lÃ­nea recta.</p>
         </div>
 
         <div class="progreso-container">
@@ -73,18 +73,18 @@
 
         <!-- EJERCICIO 1 -->
         <div class="ejercicio-card activo" id="ej1">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Cálculo de Distancia)</span>
-            <h3>Reto 1: El Tren Rápido</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (CÃ¡lculo de Distancia)</span>
+            <h3>Reto 1: El Tren RÃ¡pido</h3>
             <div class="enunciado">
-                Un tren viaja en línea recta a una velocidad constante de <strong>30 m/s</strong>. <br><br>
-                ¿Qué distancia recorrerá en <strong>10 segundos</strong>?
+                Un tren viaja en lÃ­nea recta a una velocidad constante de <strong>30 m/s</strong>. <br><br>
+                Â¿QuÃ© distancia recorrerÃ¡ en <strong>10 segundos</strong>?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te equivocaste. La fórmula de la distancia es velocidad POR tiempo.')">3 metros</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'No hay que sumar. Es un producto (multiplicación).')">40 metros</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! Distancia = v × t. Entonces, d = 30 × 10 = 300 metros.')">300 metros</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Error de cálculo. Multiplica 30 por 10 con cuidado.')">3000 metros</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te equivocaste. La fÃ³rmula de la distancia es velocidad POR tiempo.')">3 metros</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'No hay que sumar. Es un producto (multiplicaciÃ³n).')">40 metros</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, 'Â¡Correcto! Distancia = v Ã— t. Entonces, d = 30 Ã— 10 = 300 metros.')">300 metros</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Error de cÃ¡lculo. Multiplica 30 por 10 con cuidado.')">3000 metros</button>
             </div>
             <div class="feedback" id="feed1"></div>
             <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -92,17 +92,17 @@
 
         <!-- EJERCICIO 2 -->
         <div class="ejercicio-card" id="ej2">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Cálculo de Velocidad)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (CÃ¡lculo de Velocidad)</span>
             <h3>Reto 2: El Perro Corredor</h3>
             <div class="enunciado">
-                Un perro corre en línea recta para atrapar su pelota. Recorre <strong>40 metros</strong> en exactamente <strong>5 segundos</strong>. <br><br>
-                ¿Cuál fue su velocidad constante?
+                Un perro corre en lÃ­nea recta para atrapar su pelota. Recorre <strong>40 metros</strong> en exactamente <strong>5 segundos</strong>. <br><br>
+                Â¿CuÃ¡l fue su velocidad constante?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! Velocidad = distancia ÷ tiempo. Entonces, v = 40 ÷ 5 = 8 m/s.')">8 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, 'Â¡Excelente! Velocidad = distancia Ã· tiempo. Entonces, v = 40 Ã· 5 = 8 m/s.')">8 m/s</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Multiplicaste. Para hallar la velocidad, se divide la distancia sobre el tiempo.')">200 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esta sería la respuesta si se tardara 10 segundos. Pero tardó 5.')">4 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esta serÃ­a la respuesta si se tardara 10 segundos. Pero tardÃ³ 5.')">4 m/s</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Error. Intenta dividir 40 entre 5 nuevamente.')">6 m/s</button>
             </div>
             <div class="feedback" id="feed2"></div>
@@ -111,18 +111,18 @@
 
         <!-- EJERCICIO 3 -->
         <div class="ejercicio-card" id="ej3">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Cálculo de Tiempo)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (CÃ¡lculo de Tiempo)</span>
             <h3>Reto 3: El Viaje en Auto</h3>
             <div class="enunciado">
-                Un automóvil viaja por una carretera recta a una velocidad de <strong>80 km/h</strong>. El próximo pueblo está a una distancia de <strong>240 km</strong>. <br><br>
-                ¿Cuántas horas tardará en llegar?
+                Un automÃ³vil viaja por una carretera recta a una velocidad de <strong>80 km/h</strong>. El prÃ³ximo pueblo estÃ¡ a una distancia de <strong>240 km</strong>. <br><br>
+                Â¿CuÃ¡ntas horas tardarÃ¡ en llegar?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, '¡Cuidado! Multiplicaste. Para hallar el tiempo, debes dividir la distancia sobre la velocidad (t = d / v).')">19,200 h</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Hiciste mal la división. Revisa: 240 / 80.')">4 h</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! Tiempo = distancia ÷ velocidad. t = 240 ÷ 80 = 3 horas.')">3 h</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'El auto no va tan rápido. Revisa tu división.')">2 h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Â¡Cuidado! Multiplicaste. Para hallar el tiempo, debes dividir la distancia sobre la velocidad (t = d / v).')">19,200 h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Hiciste mal la divisiÃ³n. Revisa: 240 / 80.')">4 h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, 'Â¡Correcto! Tiempo = distancia Ã· velocidad. t = 240 Ã· 80 = 3 horas.')">3 h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'El auto no va tan rÃ¡pido. Revisa tu divisiÃ³n.')">2 h</button>
             </div>
             <div class="feedback" id="feed3"></div>
             <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -130,18 +130,18 @@
 
         <!-- EJERCICIO 4 -->
         <div class="ejercicio-card" id="ej4">
-            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Conversión)</span>
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (ConversiÃ³n)</span>
             <h3>Reto 4: Velocidades Incompatibles</h3>
             <div class="enunciado">
                 Un leopardo puede correr a una velocidad sostenida de <strong>108 km/h</strong>. <br><br>
-                ¿Qué distancia en <strong>metros</strong> logrará recorrer en apenas <strong>4 segundos</strong>?
+                Â¿QuÃ© distancia en <strong>metros</strong> lograrÃ¡ recorrer en apenas <strong>4 segundos</strong>?
                 <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: Primero convierte km/h a m/s dividiendo por 3.6).</span>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Esa fue la respuesta multiplicando directamente 108 x 4 sin convertir. ¡No puedes mezclar horas con segundos!')">432 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Correcto! 1) v = 108 / 3.6 = 30 m/s. 2) Distancia = 30 m/s × 4 s = 120 metros.')">120 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Revisa la conversión de la velocidad.')">400 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Esa fue la respuesta multiplicando directamente 108 x 4 sin convertir. Â¡No puedes mezclar horas con segundos!')">432 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, 'Â¡Correcto! 1) v = 108 / 3.6 = 30 m/s. 2) Distancia = 30 m/s Ã— 4 s = 120 metros.')">120 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Revisa la conversiÃ³n de la velocidad.')">400 m</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'No, esta es solo la velocidad en m/s. Te falta multiplicarlo por el tiempo.')">30 m</button>
             </div>
             <div class="feedback" id="feed4"></div>
@@ -153,26 +153,26 @@
             <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto (Encuentro)</span>
             <h3>Reto 5: Eco del Sonido</h3>
             <div class="enunciado">
-                Una persona grita frente a una montaña. El sonido viaja en MRU a <strong>340 m/s</strong>. La persona escucha el "eco" (el regreso de su propia voz) <strong>6 segundos</strong> después de haber gritado. <br><br>
-                ¿A qué distancia se encuentra la montaña?
+                Una persona grita frente a una montaÃ±a. El sonido viaja en MRU a <strong>340 m/s</strong>. La persona escucha el "eco" (el regreso de su propia voz) <strong>6 segundos</strong> despuÃ©s de haber gritado. <br><br>
+                Â¿A quÃ© distancia se encuentra la montaÃ±a?
                 <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: El sonido tuvo que ir y volver en esos 6 segundos).</span>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, '¡Casi! 2040 m es la distancia total que viajó el sonido (ida y vuelta). A ti te preguntan la distancia a la montaña (solo la ida).')">2040 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Error de cálculo. Si d = v*t, el resultado total no es este.')">1000 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Brillante! El sonido viaja en total 6 segundos (3 s para ir y 3 s para volver). Distancia = 340 m/s × 3 s = 1020 m.')">1020 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Â¡Casi! 2040 m es la distancia total que viajÃ³ el sonido (ida y vuelta). A ti te preguntan la distancia a la montaÃ±a (solo la ida).')">2040 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Error de cÃ¡lculo. Si d = v*t, el resultado total no es este.')">1000 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, 'Â¡Brillante! El sonido viaja en total 6 segundos (3 s para ir y 3 s para volver). Distancia = 340 m/s Ã— 3 s = 1020 m.')">1020 m</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Multiplicaste mal o no tuviste en cuenta que el sonido viaja ida y vuelta.')">680 m</button>
             </div>
             <div class="feedback" id="feed5"></div>
-            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar PrÃ¡ctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
         <div class="pantalla-final" id="pantalla-final">
-            <div class="trofeo">🏁</div>
-            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
-            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">¡Excelente! Tienes el control total sobre la velocidad, el tiempo y el espacio en línea recta.</p>
-            <a href="fisica10_mru_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+            <div class="trofeo">ðŸ</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">Â¡MisiÃ³n Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Â¡Excelente! Tienes el control total sobre la velocidad, el tiempo y el espacio en lÃ­nea recta.</p>
+            <a href="fisica10_mru_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la EvaluaciÃ³n</a>
         </div>
 
     </div>
@@ -224,5 +224,6 @@
             window.scrollTo(0, 0);
         }
     </script>
+<script src="auth.js"></script>
 </body>
 </html>

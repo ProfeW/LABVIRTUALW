@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
+    <style>
+        :root {
+            --color-quimica: #9b59b6;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; display: flex; justify-content: center; align-items: center; min-height: 100vh;
+        }
+        .auth-container {
+            background: rgba(20, 20, 35, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px; border-radius: 15px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            animation: fadeIn 0.5s ease;
+        }
+        .logo-icono { font-size: 3rem; color: var(--color-quimica); margin-bottom: 10px; }
+        h1 { font-size: 1.8rem; margin-bottom: 20px; }
+        .input-group { margin-bottom: 20px; text-align: left; position: relative; }
+        .input-group label { display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 5px; margin-left: 5px; }
+        .input-group i { position: absolute; left: 15px; top: 38px; color: #888; }
+        .input-group input {
+            width: 100%; padding: 12px 15px 12px 45px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; border-radius: 8px; font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        .input-group input:focus { border-color: var(--color-quimica); background: rgba(0,0,0,0.5); }
+        .btn-submit {
+            width: 100%; padding: 12px; background: var(--color-quimica); color: #fff; border: none; border-radius: 8px;
+            font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        .btn-submit:hover { background: #8e44ad; transform: translateY(-2px); }
+        .btn-submit:disabled { background: #555; cursor: not-allowed; transform: none; }
+        
+        .links-bottom { margin-top: 20px; font-size: 0.9rem; }
+        .links-bottom a { color: var(--color-quimica); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .links-bottom a:hover { color: #fff; }
+        .error-msg { color: #e74c3c; font-size: 0.9rem; margin-bottom: 15px; display: none; background: rgba(231,76,60,0.1); padding: 10px; border-radius: 5px;}
+        .success-msg { color: #2ecc71; font-size: 0.9rem; margin-bottom: 15px; display: none; background: rgba(46,204,113,0.1); padding: 10px; border-radius: 5px;}
+        
+        .volver-inicio { position: absolute; top: 20px; left: 20px; color: #fff; text-decoration: none; font-size: 1.2rem; transition: 0.3s; }
+        .volver-inicio:hover { color: var(--color-quimica); }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <a href="login.html" class="volver-inicio"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+
+    <div class="auth-container">
+        <i class="fa-solid fa-envelope-open-text logo-icono"></i>
+        <h1>Recuperar Contraseña</h1>
+        <p style="color: #aaa; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5;">Ingresa tu usuario o el correo electrónico con el que te registraste. Te enviaremos tu contraseña al correo.</p>
+        
+        <div id="error-msg" class="error-msg"></div>
+        <div id="success-msg" class="success-msg"></div>
+
+        <form id="recover-form">
+            <div class="input-group">
+                <label>Usuario o Correo</label>
+                <i class="fa-solid fa-user-tag"></i>
+                <input type="text" id="identificador" placeholder="Tu usuario o correo" required>
+            </div>
+            <button type="submit" class="btn-submit" id="btn-recover">Enviar Contraseña</button>
+        </form>
+
+        <div class="links-bottom">
+            <p style="color: #aaa;">¿Recordaste tu contraseña? <a href="login.html">Inicia sesión</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('recover-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-recover');
+            const errorMsg = document.getElementById('error-msg');
+            const successMsg = document.getElementById('success-msg');
+            const id = document.getElementById('identificador').value;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-paper-plane fa-beat"></i> Enviando...';
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            try {
+                const res = await window.LabAuth.recuperar(id);
+                if (res.success) {
+                    successMsg.innerHTML = '<i class="fa-solid fa-check-circle"></i> ' + res.message;
+                    successMsg.style.display = 'block';
+                    btn.innerHTML = 'Correo Enviado';
+                } else {
+                    errorMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> ' + res.message;
+                    errorMsg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.innerHTML = 'Enviar Contraseña';
+                }
+            } catch (err) {
+                errorMsg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error al contactar el servidor.';
+                errorMsg.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = 'Enviar Contraseña';
+            }
+        });
+    </script>
+</body>
+</html>

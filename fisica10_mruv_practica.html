@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica: Movimiento Variado (MRUV) - LabVirtual W</title>
+    <title>PrÃ¡ctica: Movimiento Variado (MRUV) - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,11 +60,11 @@
 <body>
 
     <div class="contenedor">
-        <a href="fisica10_mruv.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="fisica10_mruv.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
 
         <div class="header-practica">
-            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
-            <p>Despeja fórmulas y encuentra el dato oculto.</p>
+            <h1><i class="fa-solid fa-gamepad"></i> PrÃ¡ctica Interactiva</h1>
+            <p>Despeja fÃ³rmulas y encuentra el dato oculto.</p>
         </div>
 
         <div class="progreso-container">
@@ -73,17 +73,17 @@
 
         <!-- EJERCICIO 1 -->
         <div class="ejercicio-card activo" id="ej1">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Elección de Fórmula)</span>
-            <h3>Reto 1: Identificación de Datos</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (ElecciÃ³n de FÃ³rmula)</span>
+            <h3>Reto 1: IdentificaciÃ³n de Datos</h3>
             <div class="enunciado">
-                "Un coche parte del reposo y acelera a 2 m/s² durante 5 segundos. ¿Qué distancia recorre?"<br><br>
-                En este problema, ¿cuál de las 5 variables ($v_i, v_f, a, t, d$) <strong>NO te dan y TAMPOCO te piden</strong>?
+                "Un coche parte del reposo y acelera a 2 m/sÂ² durante 5 segundos. Â¿QuÃ© distancia recorre?"<br><br>
+                En este problema, Â¿cuÃ¡l de las 5 variables ($v_i, v_f, a, t, d$) <strong>NO te dan y TAMPOCO te piden</strong>?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te piden la distancia, así que esta sí participa en el problema.')">Distancia ($d$)</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te dicen que acelera a 2 m/s², por lo tanto sí te dan este dato.')">Aceleración ($a$)</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! No sabes cuál es la velocidad final y tampoco te la piden calcular. Usarás la fórmula #3.')">Velocidad Final ($v_f$)</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te piden la distancia, asÃ­ que esta sÃ­ participa en el problema.')">Distancia ($d$)</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te dicen que acelera a 2 m/sÂ², por lo tanto sÃ­ te dan este dato.')">AceleraciÃ³n ($a$)</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, 'Â¡Correcto! No sabes cuÃ¡l es la velocidad final y tampoco te la piden calcular. UsarÃ¡s la fÃ³rmula #3.')">Velocidad Final ($v_f$)</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Te dicen que el tiempo es de 5 segundos.')">Tiempo ($t$)</button>
             </div>
             <div class="feedback" id="feed1"></div>
@@ -92,17 +92,17 @@
 
         <!-- EJERCICIO 2 -->
         <div class="ejercicio-card" id="ej2">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Cálculo de Distancia)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (CÃ¡lculo de Distancia)</span>
             <h3>Reto 2: Distancia Recorrida</h3>
             <div class="enunciado">
-                Resuelve el problema anterior: "Un coche parte del reposo ($v_i = 0$) y acelera a <strong>2 m/s²</strong> durante <strong>5 segundos</strong>. ¿Qué distancia recorre?"<br><br>
-                Fórmula: $d = v_i \cdot t + \frac{a \cdot t^2}{2}$
+                Resuelve el problema anterior: "Un coche parte del reposo ($v_i = 0$) y acelera a <strong>2 m/sÂ²</strong> durante <strong>5 segundos</strong>. Â¿QuÃ© distancia recorre?"<br><br>
+                FÃ³rmula: $d = v_i \cdot t + \frac{a \cdot t^2}{2}$
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! d = 0 + (2 * 5²) / 2 = (2 * 25) / 2 = 50 / 2 = 25 metros.')">25 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esa sería la distancia si el tiempo fuera 10 segundos, no 5.')">100 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Cuidado, te faltó elevar el tiempo al cuadrado (5² = 25).')">5 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, 'Â¡Excelente! d = 0 + (2 * 5Â²) / 2 = (2 * 25) / 2 = 50 / 2 = 25 metros.')">25 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esa serÃ­a la distancia si el tiempo fuera 10 segundos, no 5.')">100 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Cuidado, te faltÃ³ elevar el tiempo al cuadrado (5Â² = 25).')">5 m</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Te olvidaste de dividir entre 2 al final.')">50 m</button>
             </div>
             <div class="feedback" id="feed2"></div>
@@ -112,17 +112,17 @@
         <!-- EJERCICIO 3 -->
         <div class="ejercicio-card" id="ej3">
             <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Velocidad Final)</span>
-            <h3>Reto 3: Aceleración en Vía Libre</h3>
+            <h3>Reto 3: AceleraciÃ³n en VÃ­a Libre</h3>
             <div class="enunciado">
-                Una motocicleta viaja a <strong>10 m/s</strong> y acelera a <strong>3 m/s²</strong> durante <strong>4 segundos</strong>. <br><br>
-                ¿Cuál es su velocidad al final de esos 4 segundos?<br>
-                Fórmula: $v_f = v_i + a \cdot t$
+                Una motocicleta viaja a <strong>10 m/s</strong> y acelera a <strong>3 m/sÂ²</strong> durante <strong>4 segundos</strong>. <br><br>
+                Â¿CuÃ¡l es su velocidad al final de esos 4 segundos?<br>
+                FÃ³rmula: $v_f = v_i + a \cdot t$
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Error. Sumaste 10 + 3 y luego multiplicaste por 4. Recuerda la prioridad de las operaciones matemáticas (primero multiplicación).')">52 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Esa es solo la cantidad de velocidad que ganó (3 * 4), te falta sumarle la velocidad que ya tenía (10).')">12 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! vf = 10 + (3 * 4) = 10 + 12 = 22 m/s.')">22 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Error. Sumaste 10 + 3 y luego multiplicaste por 4. Recuerda la prioridad de las operaciones matemÃ¡ticas (primero multiplicaciÃ³n).')">52 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Esa es solo la cantidad de velocidad que ganÃ³ (3 * 4), te falta sumarle la velocidad que ya tenÃ­a (10).')">12 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, 'Â¡Correcto! vf = 10 + (3 * 4) = 10 + 12 = 22 m/s.')">22 m/s</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Multiplicaste mal. Revisa: 10 + (3*4).')">40 m/s</button>
             </div>
             <div class="feedback" id="feed3"></div>
@@ -131,19 +131,19 @@
 
         <!-- EJERCICIO 4 -->
         <div class="ejercicio-card" id="ej4">
-            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Fórmula 4)</span>
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (FÃ³rmula 4)</span>
             <h3>Reto 4: Pista de Carreras</h3>
             <div class="enunciado">
-                Un auto de carreras parte del reposo y acelera a <strong>8 m/s²</strong>. <br><br>
-                ¿Qué velocidad tendrá luego de haber recorrido <strong>100 metros</strong>? (No sabemos el tiempo).<br>
-                Fórmula: $v_f^2 = v_i^2 + 2 \cdot a \cdot d$
+                Un auto de carreras parte del reposo y acelera a <strong>8 m/sÂ²</strong>. <br><br>
+                Â¿QuÃ© velocidad tendrÃ¡ luego de haber recorrido <strong>100 metros</strong>? (No sabemos el tiempo).<br>
+                FÃ³rmula: $v_f^2 = v_i^2 + 2 \cdot a \cdot d$
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Ese es el valor de vf al cuadrado (1600). ¡Te falta sacarle la raíz cuadrada!')">1600 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Correcto! vf² = 0 + 2(8)(100) = 1600. La raíz cuadrada de 1600 es 40 m/s.')">40 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste mal adentro de la raíz.')">20 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Te faltó multiplicarlo por 2 en la fórmula.')">800 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Ese es el valor de vf al cuadrado (1600). Â¡Te falta sacarle la raÃ­z cuadrada!')">1600 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, 'Â¡Correcto! vfÂ² = 0 + 2(8)(100) = 1600. La raÃ­z cuadrada de 1600 es 40 m/s.')">40 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste mal adentro de la raÃ­z.')">20 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Te faltÃ³ multiplicarlo por 2 en la fÃ³rmula.')">800 m/s</button>
             </div>
             <div class="feedback" id="feed4"></div>
             <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -154,26 +154,26 @@
             <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto (Frenado)</span>
             <h3>Reto 5: Frenos a fondo</h3>
             <div class="enunciado">
-                Un camión viaja a <strong>20 m/s</strong>. Al ver un obstáculo, aplica los frenos con una desaceleración de <strong>-2 m/s²</strong> hasta detenerse. <br><br>
-                ¿Cuánto tiempo tardó en detenerse por completo?
+                Un camiÃ³n viaja a <strong>20 m/s</strong>. Al ver un obstÃ¡culo, aplica los frenos con una desaceleraciÃ³n de <strong>-2 m/sÂ²</strong> hasta detenerse. <br><br>
+                Â¿CuÃ¡nto tiempo tardÃ³ en detenerse por completo?
                 <br><br><span style="font-size: 0.9rem; color:#aaa;">(Pista: Usa $v_f = v_i + a \cdot t$. Recuerda que al detenerse $v_f = 0$ y que $a$ es negativa).</span>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'El camión iba a 20 m/s y perdía 2 m/s cada segundo. 40 segundos es demasiado.')">40 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'El camiÃ³n iba a 20 m/s y perdÃ­a 2 m/s cada segundo. 40 segundos es demasiado.')">40 s</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'El tiempo nunca puede ser negativo.')">-10 s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Brillante! 0 = 20 - 2t -> 2t = 20 -> t = 10 segundos.')">10 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, 'Â¡Brillante! 0 = 20 - 2t -> 2t = 20 -> t = 10 segundos.')">10 s</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Revisa tu despeje. No se suman.')">22 s</button>
             </div>
             <div class="feedback" id="feed5"></div>
-            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar PrÃ¡ctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
         <div class="pantalla-final" id="pantalla-final">
-            <div class="trofeo">🏁</div>
-            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
-            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">¡Excelente! Eres un experto en las 4 fórmulas del MRUV.</p>
-            <a href="fisica10_mruv_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+            <div class="trofeo">ðŸ</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">Â¡MisiÃ³n Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Â¡Excelente! Eres un experto en las 4 fÃ³rmulas del MRUV.</p>
+            <a href="fisica10_mruv_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la EvaluaciÃ³n</a>
         </div>
 
     </div>
@@ -225,5 +225,6 @@
             window.scrollTo(0, 0);
         }
     </script>
+<script src="auth.js"></script>
 </body>
 </html>

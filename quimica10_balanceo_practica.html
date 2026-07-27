@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica: Balanceo de Ecuaciones - LabVirtual W</title>
+    <title>PrÃ¡ctica: Balanceo de Ecuaciones - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -96,111 +96,111 @@
             <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="quimica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Química 10</a></li>
+                <li><a href="quimica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> QuÃ­mica 10</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <a href="quimica10_balanceo.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="quimica10_balanceo.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
 
         <div class="header-tema">
-            <h1>Reto de Práctica: Balanceo por Tanteo</h1>
-            <p>10 ecuaciones químicas. Las primeras 5 te guiarán con colores, las últimas 5 son un reto a ciegas. Usa la técnica de la línea punteada.</p>
+            <h1>Reto de PrÃ¡ctica: Balanceo por Tanteo</h1>
+            <p>10 ecuaciones quÃ­micas. Las primeras 5 te guiarÃ¡n con colores, las Ãºltimas 5 son un reto a ciegas. Usa la tÃ©cnica de la lÃ­nea punteada.</p>
         </div>
 
         <div class="progreso-container" id="progreso-container"></div>
         <div id="ejercicios-container"></div>
         
         <div id="mensaje-final" style="display:none; text-align:center; padding: 40px; background: rgba(46,204,113,0.1); border-radius: 20px; border: 2px solid #2ecc71;">
-            <h2>¡Magnífico trabajo Químico!</h2>
-            <p style="margin-bottom: 20px;">Has dominado el balanceo por tanteo respetando la Ley de la Conservación de la Masa.</p>
-            <a href="quimica10_balanceo_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la Evaluación Final</a>
+            <h2>Â¡MagnÃ­fico trabajo QuÃ­mico!</h2>
+            <p style="margin-bottom: 20px;">Has dominado el balanceo por tanteo respetando la Ley de la ConservaciÃ³n de la Masa.</p>
+            <a href="quimica10_balanceo_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la EvaluaciÃ³n Final</a>
         </div>
     </main>
 
     <script>
-        // Funciones auxiliares para renderizar subíndices
+        // Funciones auxiliares para renderizar subÃ­ndices
         function f(str) { return str.replace(/(\d+)/g, "<span class='subindice'>$1</span>"); }
         function inpC(id, i) { return `<input type="number" min="1" class="coef-input" id="coef-${id}-${i}" placeholder="1">`; }
 
         const dataEx = [
             { 
                 id: 1, type: 'guiado',
-                eqStr: "H2 + O2 ⟶ H2O", 
-                html: (id) => `${inpC(id,0)}H<span class="subindice">2</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}H<span class="subindice">2</span>O`,
+                eqStr: "H2 + O2 âŸ¶ H2O", 
+                html: (id) => `${inpC(id,0)}H<span class="subindice">2</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}H<span class="subindice">2</span>O`,
                 elements: ["H", "O"],
                 initL: [2, 2], initR: [2, 1],
                 calc: (c) => ({ "H": [c[0]*2, c[2]*2], "O": [c[1]*2, c[2]*1] })
             },
             { 
                 id: 2, type: 'guiado',
-                eqStr: "N2 + H2 ⟶ NH3",
-                html: (id) => `${inpC(id,0)}N<span class="subindice">2</span> + ${inpC(id,1)}H<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}NH<span class="subindice">3</span>`,
+                eqStr: "N2 + H2 âŸ¶ NH3",
+                html: (id) => `${inpC(id,0)}N<span class="subindice">2</span> + ${inpC(id,1)}H<span class="subindice">2</span> <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}NH<span class="subindice">3</span>`,
                 elements: ["N", "H"],
                 initL: [2, 2], initR: [1, 3],
                 calc: (c) => ({ "N": [c[0]*2, c[2]*1], "H": [c[1]*2, c[2]*3] })
             },
             { 
                 id: 3, type: 'guiado',
-                eqStr: "Fe + O2 ⟶ Fe2O3",
-                html: (id) => `${inpC(id,0)}Fe + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}Fe<span class="subindice">2</span>O<span class="subindice">3</span>`,
+                eqStr: "Fe + O2 âŸ¶ Fe2O3",
+                html: (id) => `${inpC(id,0)}Fe + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}Fe<span class="subindice">2</span>O<span class="subindice">3</span>`,
                 elements: ["Fe", "O"],
                 initL: [1, 2], initR: [2, 3],
                 calc: (c) => ({ "Fe": [c[0]*1, c[2]*2], "O": [c[1]*2, c[2]*3] })
             },
             { 
                 id: 4, type: 'guiado',
-                eqStr: "CH4 + O2 ⟶ CO2 + H2O",
-                html: (id) => `${inpC(id,0)}CH<span class="subindice">4</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}CO<span class="subindice">2</span> + ${inpC(id,3)}H<span class="subindice">2</span>O`,
+                eqStr: "CH4 + O2 âŸ¶ CO2 + H2O",
+                html: (id) => `${inpC(id,0)}CH<span class="subindice">4</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}CO<span class="subindice">2</span> + ${inpC(id,3)}H<span class="subindice">2</span>O`,
                 elements: ["C", "H", "O"],
                 initL: [1, 4, 2], initR: [1, 2, 3],
                 calc: (c) => ({ "C": [c[0]*1, c[2]*1], "H": [c[0]*4, c[3]*2], "O": [c[1]*2, c[2]*2 + c[3]*1] })
             },
             { 
                 id: 5, type: 'guiado',
-                eqStr: "Al + HCl ⟶ AlCl3 + H2",
-                html: (id) => `${inpC(id,0)}Al + ${inpC(id,1)}HCl <span class="flecha-separador">⟶</span> ${inpC(id,2)}AlCl<span class="subindice">3</span> + ${inpC(id,3)}H<span class="subindice">2</span>`,
+                eqStr: "Al + HCl âŸ¶ AlCl3 + H2",
+                html: (id) => `${inpC(id,0)}Al + ${inpC(id,1)}HCl <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}AlCl<span class="subindice">3</span> + ${inpC(id,3)}H<span class="subindice">2</span>`,
                 elements: ["Al", "H", "Cl"],
                 initL: [1, 1, 1], initR: [1, 2, 3],
                 calc: (c) => ({ "Al": [c[0]*1, c[2]*1], "H": [c[1]*1, c[3]*2], "Cl": [c[1]*1, c[2]*3] })
             },
             { 
                 id: 6, type: 'reto',
-                eqStr: "KClO3 ⟶ KCl + O2",
-                html: (id) => `${inpC(id,0)}KClO<span class="subindice">3</span> <span class="flecha-separador">⟶</span> ${inpC(id,1)}KCl + ${inpC(id,2)}O<span class="subindice">2</span>`,
+                eqStr: "KClO3 âŸ¶ KCl + O2",
+                html: (id) => `${inpC(id,0)}KClO<span class="subindice">3</span> <span class="flecha-separador">âŸ¶</span> ${inpC(id,1)}KCl + ${inpC(id,2)}O<span class="subindice">2</span>`,
                 elements: ["K", "Cl", "O"],
                 initL: [1, 1, 3], initR: [1, 1, 2],
                 calc: (c) => ({ "K": [c[0]*1, c[1]*1], "Cl": [c[0]*1, c[1]*1], "O": [c[0]*3, c[2]*2] })
             },
             { 
                 id: 7, type: 'reto',
-                eqStr: "Na + H2O ⟶ NaOH + H2",
-                html: (id) => `${inpC(id,0)}Na + ${inpC(id,1)}H<span class="subindice">2</span>O <span class="flecha-separador">⟶</span> ${inpC(id,2)}NaOH + ${inpC(id,3)}H<span class="subindice">2</span>`,
+                eqStr: "Na + H2O âŸ¶ NaOH + H2",
+                html: (id) => `${inpC(id,0)}Na + ${inpC(id,1)}H<span class="subindice">2</span>O <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}NaOH + ${inpC(id,3)}H<span class="subindice">2</span>`,
                 elements: ["Na", "H", "O"],
                 initL: [1, 2, 1], initR: [1, 3, 1],
                 calc: (c) => ({ "Na": [c[0]*1, c[2]*1], "H": [c[1]*2, c[2]*1 + c[3]*2], "O": [c[1]*1, c[2]*1] })
             },
             { 
                 id: 8, type: 'reto',
-                eqStr: "C3H8 + O2 ⟶ CO2 + H2O",
-                html: (id) => `${inpC(id,0)}C<span class="subindice">3</span>H<span class="subindice">8</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}CO<span class="subindice">2</span> + ${inpC(id,3)}H<span class="subindice">2</span>O`,
+                eqStr: "C3H8 + O2 âŸ¶ CO2 + H2O",
+                html: (id) => `${inpC(id,0)}C<span class="subindice">3</span>H<span class="subindice">8</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}CO<span class="subindice">2</span> + ${inpC(id,3)}H<span class="subindice">2</span>O`,
                 elements: ["C", "H", "O"],
                 initL: [3, 8, 2], initR: [1, 2, 3],
                 calc: (c) => ({ "C": [c[0]*3, c[2]*1], "H": [c[0]*8, c[3]*2], "O": [c[1]*2, c[2]*2 + c[3]*1] })
             },
             { 
                 id: 9, type: 'reto',
-                eqStr: "P4 + O2 ⟶ P2O5",
-                html: (id) => `${inpC(id,0)}P<span class="subindice">4</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}P<span class="subindice">2</span>O<span class="subindice">5</span>`,
+                eqStr: "P4 + O2 âŸ¶ P2O5",
+                html: (id) => `${inpC(id,0)}P<span class="subindice">4</span> + ${inpC(id,1)}O<span class="subindice">2</span> <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}P<span class="subindice">2</span>O<span class="subindice">5</span>`,
                 elements: ["P", "O"],
                 initL: [4, 2], initR: [2, 5],
                 calc: (c) => ({ "P": [c[0]*4, c[2]*2], "O": [c[1]*2, c[2]*5] })
             },
             { 
                 id: 10, type: 'reto',
-                eqStr: "Al2(SO4)3 + Ca(OH)2 ⟶ Al(OH)3 + CaSO4",
-                html: (id) => `${inpC(id,0)}Al<span class="subindice">2</span>(SO<span class="subindice">4</span>)<span class="subindice">3</span> + ${inpC(id,1)}Ca(OH)<span class="subindice">2</span> <span class="flecha-separador">⟶</span> ${inpC(id,2)}Al(OH)<span class="subindice">3</span> + ${inpC(id,3)}CaSO<span class="subindice">4</span>`,
+                eqStr: "Al2(SO4)3 + Ca(OH)2 âŸ¶ Al(OH)3 + CaSO4",
+                html: (id) => `${inpC(id,0)}Al<span class="subindice">2</span>(SO<span class="subindice">4</span>)<span class="subindice">3</span> + ${inpC(id,1)}Ca(OH)<span class="subindice">2</span> <span class="flecha-separador">âŸ¶</span> ${inpC(id,2)}Al(OH)<span class="subindice">3</span> + ${inpC(id,3)}CaSO<span class="subindice">4</span>`,
                 elements: ["Al", "S", "O", "Ca", "H"],
                 initL: [2, 3, 14, 1, 2], initR: [1, 1, 7, 1, 3],
                 calc: (c) => ({ 
@@ -242,11 +242,11 @@
 
                 div.innerHTML = `
                     ${badge}
-                    <h3 style="margin-bottom: 15px;">Ecuación: ${f(ex.eqStr)}</h3>
+                    <h3 style="margin-bottom: 15px;">EcuaciÃ³n: ${f(ex.eqStr)}</h3>
                     
                     <div class="paso activo" id="ex${ex.id}-paso1">
-                        <div class="paso-titulo">Paso 1: Análisis</div>
-                        <p>Observa la ecuación. ¿Cuántos elementos químicos distintos participan en la reacción?</p>
+                        <div class="paso-titulo">Paso 1: AnÃ¡lisis</div>
+                        <p>Observa la ecuaciÃ³n. Â¿CuÃ¡ntos elementos quÃ­micos distintos participan en la reacciÃ³n?</p>
                         <div style="display:flex; gap:10px; margin-top:10px;">
                             <input type="number" id="inp-elems-${ex.id}" class="num-input" style="width: 80px;">
                             <button class="btn-validar" onclick="validarPaso1(${ex.id}, ${ex.elements.length})">Comprobar</button>
@@ -256,7 +256,7 @@
 
                     <div class="paso" id="ex${ex.id}-paso2">
                         <div class="paso-titulo">Paso 2: Conteo Inicial</div>
-                        <p>Escribe el símbolo de cada elemento y cuántos átomos hay inicialmente en reactivos (izquierda) y productos (derecha).</p>
+                        <p>Escribe el sÃ­mbolo de cada elemento y cuÃ¡ntos Ã¡tomos hay inicialmente en reactivos (izquierda) y productos (derecha).</p>
                         <div class="tablero-ecuacion">
                             <div class="ecuacion-html">${f(ex.eqStr)}</div>
                             <div class="linea-punteada"></div>
@@ -273,7 +273,7 @@
 
                     <div class="paso" id="ex${ex.id}-paso3">
                         <div class="paso-titulo">Paso 3: Balanceo</div>
-                        <p>Modifica los coeficientes rojos en la ecuación y actualiza tus conteos en la tabla hasta que ambos lados sean iguales.</p>
+                        <p>Modifica los coeficientes rojos en la ecuaciÃ³n y actualiza tus conteos en la tabla hasta que ambos lados sean iguales.</p>
                         <div class="tablero-ecuacion">
                             <div class="ecuacion-html">${ex.html(ex.id)}</div>
                             <div class="linea-punteada"></div>
@@ -286,7 +286,7 @@
                         <div class="feedback" id="fb-${ex.id}-p3"></div>
                     </div>
 
-                    <button class="btn-siguiente" id="btn-sig-${ex.id}" onclick="siguienteEx(${ex.id})">Siguiente Ecuación <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="btn-siguiente" id="btn-sig-${ex.id}" onclick="siguienteEx(${ex.id})">Siguiente EcuaciÃ³n <i class="fa-solid fa-arrow-right"></i></button>
                 `;
                 cont.appendChild(div);
             });
@@ -297,12 +297,12 @@
             const inp = document.getElementById(`inp-elems-${id}`);
             const fb = document.getElementById(`fb-${id}-p1`);
             if(parseInt(inp.value) === len) {
-                fb.className = "feedback exito"; fb.innerHTML = "¡Correcto!";
+                fb.className = "feedback exito"; fb.innerHTML = "Â¡Correcto!";
                 inp.disabled = true;
                 document.getElementById(`ex${id}-paso1`).classList.add('completado');
                 setTimeout(()=> document.getElementById(`ex${id}-paso2`).classList.add('activo'), 400);
             } else {
-                fb.className = "feedback error"; fb.innerHTML = "Incorrecto. Cuenta bien los símbolos distintos.";
+                fb.className = "feedback error"; fb.innerHTML = "Incorrecto. Cuenta bien los sÃ­mbolos distintos.";
             }
         }
 
@@ -311,7 +311,7 @@
             let fb = document.getElementById(`fb-${id}-p2`);
             let correcto = true;
 
-            // Validar que los símbolos y los numeros iniciales coincidan con ex.elements, ex.initL, ex.initR
+            // Validar que los sÃ­mbolos y los numeros iniciales coincidan con ex.elements, ex.initL, ex.initR
             // (El orden no importa, pero para simplificar obligamos a que pongan los elementos tal cual o los buscamos)
             let usrElements = [];
             for(let i=0; i<ex.elements.length; i++) {
@@ -327,7 +327,7 @@
             }
 
             if(correcto) {
-                fb.className = "feedback exito"; fb.innerHTML = "¡Tabla inicial perfecta!";
+                fb.className = "feedback exito"; fb.innerHTML = "Â¡Tabla inicial perfecta!";
                 document.getElementById(`ex${id}-paso2`).classList.add('completado');
                 
                 // Preparar Paso 3 usando el orden de elementos del usuario
@@ -342,7 +342,7 @@
 
                 setTimeout(()=> document.getElementById(`ex${id}-paso3`).classList.add('activo'), 400);
             } else {
-                fb.className = "feedback error"; fb.innerHTML = "Hay un error en los símbolos o en el conteo de átomos. Revisa bien la ecuación.";
+                fb.className = "feedback error"; fb.innerHTML = "Hay un error en los sÃ­mbolos o en el conteo de Ã¡tomos. Revisa bien la ecuaciÃ³n.";
             }
         }
 
@@ -402,13 +402,13 @@
 
             if(!matematicamenteCorrecto) {
                 fb.className = "feedback error"; 
-                fb.innerHTML = "Tus conteos en la tabla no coinciden con los coeficientes que pusiste arriba. ¡Calcula de nuevo!";
+                fb.innerHTML = "Tus conteos en la tabla no coinciden con los coeficientes que pusiste arriba. Â¡Calcula de nuevo!";
             } else if(!balanceado) {
                 fb.className = "feedback aviso"; 
-                fb.innerHTML = ex.type === 'guiado' ? "Cuentas bien, pero aún no está balanceado. Observa los colores rojos." : "Aún no está balanceado. Sigue intentando.";
+                fb.innerHTML = ex.type === 'guiado' ? "Cuentas bien, pero aÃºn no estÃ¡ balanceado. Observa los colores rojos." : "AÃºn no estÃ¡ balanceado. Sigue intentando.";
             } else {
                 fb.className = "feedback exito"; 
-                fb.innerHTML = "¡Excelente! Ecuación balanceada correctamente.";
+                fb.innerHTML = "Â¡Excelente! EcuaciÃ³n balanceada correctamente.";
                 document.getElementById(`ex${id}-paso3`).classList.add('completado');
                 document.getElementById(`btn-sig-${id}`).style.display = 'block';
                 document.getElementById(`bola-${id}`).classList.replace('activo', 'completado');
@@ -429,5 +429,6 @@
 
         window.onload = init;
     </script>
+<script src="auth.js"></script>
 </body>
 </html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
+    <style>
+        :root {
+            --color-biologia: #2ecc71;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px 0;
+        }
+        .auth-container {
+            background: rgba(20, 20, 35, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px; border-radius: 15px; width: 100%; max-width: 500px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            animation: fadeIn 0.5s ease;
+        }
+        .logo-icono { font-size: 3rem; color: var(--color-biologia); margin-bottom: 10px; }
+        h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        .input-group { margin-bottom: 15px; text-align: left; position: relative; }
+        .input-group label { display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 5px; margin-left: 5px; }
+        .input-group i { position: absolute; left: 15px; top: 38px; color: #888; }
+        .input-group input, .input-group select {
+            width: 100%; padding: 12px 15px 12px 45px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; border-radius: 8px; font-size: 0.95rem; outline: none; transition: 0.3s;
+        }
+        .input-group select { padding-left: 45px; appearance: none; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--color-biologia); background: rgba(0,0,0,0.5); }
+        .btn-submit {
+            width: 100%; padding: 12px; background: var(--color-biologia); color: #111; border: none; border-radius: 8px;
+            font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; margin-top: 15px;
+        }
+        .btn-submit:hover { background: #27ae60; transform: translateY(-2px); }
+        .btn-submit:disabled { background: #555; color: #888; cursor: not-allowed; transform: none; }
+        
+        .links-bottom { margin-top: 20px; font-size: 0.9rem; color: #aaa; }
+        .links-bottom a { color: var(--color-biologia); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .links-bottom a:hover { color: #fff; }
+        .error-msg { color: #e74c3c; font-size: 0.9rem; margin-bottom: 15px; display: none; background: rgba(231,76,60,0.1); padding: 10px; border-radius: 5px; }
+        .success-msg { color: #2ecc71; font-size: 0.9rem; margin-bottom: 15px; display: none; background: rgba(46,204,113,0.1); padding: 10px; border-radius: 5px; }
+        
+        .volver-inicio { position: absolute; top: 20px; left: 20px; color: #fff; text-decoration: none; font-size: 1.2rem; transition: 0.3s; }
+        .volver-inicio:hover { color: var(--color-biologia); }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="volver-inicio"><i class="fa-solid fa-arrow-left"></i> Inicio</a>
+
+    <div class="auth-container">
+        <i class="fa-solid fa-user-plus logo-icono"></i>
+        <h1>Registro de Estudiante</h1>
+        <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 25px;">Crea tu cuenta para acceder a todo el contenido.</p>
+        
+        <div id="error-msg" class="error-msg"></div>
+        <div id="success-msg" class="success-msg"></div>
+
+        <form id="register-form">
+            <div class="input-group">
+                <label>Nombre Completo</label>
+                <i class="fa-solid fa-id-card"></i>
+                <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
+            </div>
+            <div class="input-group">
+                <label>Correo Electrónico</label>
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="correo" placeholder="ejemplo@correo.com" required>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="input-group">
+                    <label>Teléfono</label>
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" id="telefono" placeholder="3000000000" required>
+                </div>
+                <div class="input-group">
+                    <label>Grado</label>
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <select id="grado" required>
+                        <option value="">Selecciona...</option>
+                        <option value="9">Noveno (9°)</option>
+                        <option value="10">Décimo (10°)</option>
+                        <option value="11">Undécimo (11°)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Usuario (para iniciar sesión)</label>
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="usuario" placeholder="Crea un nombre de usuario" required>
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="contrasena" placeholder="Crea una contraseña segura" required minlength="4">
+            </div>
+
+            <button type="submit" class="btn-submit" id="btn-register">Registrarse</button>
+        </form>
+
+        <div class="links-bottom">
+            <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-register');
+            const errorMsg = document.getElementById('error-msg');
+            const successMsg = document.getElementById('success-msg');
+
+            const datos = {
+                nombre_completo: document.getElementById('nombre').value,
+                correo_electronico: document.getElementById('correo').value,
+                numero_telefono: document.getElementById('telefono').value,
+                grado: document.getElementById('grado').value,
+                usuario: document.getElementById('usuario').value,
+                contrasena: document.getElementById('contrasena').value
+            };
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Registrando...';
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            try {
+                const res = await window.LabAuth.registrar(datos);
+                if (res.success) {
+                    successMsg.textContent = "¡Registro exitoso! Redirigiendo al login...";
+                    successMsg.style.display = 'block';
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Completado';
+                    setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+                } else {
+                    errorMsg.textContent = res.message;
+                    errorMsg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.innerHTML = 'Registrarse';
+                }
+            } catch (err) {
+                errorMsg.textContent = "Error de conexión con la base de datos.";
+                errorMsg.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = 'Registrarse';
+            }
+        });
+    </script>
+</body>
+</html>
