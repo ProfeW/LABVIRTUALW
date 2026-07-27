@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porcentaje Masa - Volumen (% m/v) - LabVirtual W</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-quimica: #9b59b6;  
+            --color-quim-secundario: #f1c40f; /* Amarillo/Dorado para sólido en líquido */
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.92), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-quimica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu > li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: var(--color-quimica); }
+
+        /* --- CONTENIDO DE LA LECCIÓN --- */
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: var(--color-quimica); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-leccion { border-bottom: 2px solid rgba(241, 196, 15, 0.3); padding-bottom: 20px; margin-bottom: 30px; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-quim-secundario); margin-bottom: 10px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+
+        .seccion-contenido {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px; padding: 30px; margin-bottom: 30px;
+        }
+        
+        .seccion-contenido h2 { color: var(--color-quim-secundario); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; border-left: 4px solid var(--color-quim-secundario); padding-left: 15px;}
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
+        
+        /* --- ESTILOS DE FÓRMULAS --- */
+        .caja-formula {
+            background: rgba(241, 196, 15, 0.05); border: 2px dashed var(--color-quim-secundario);
+            border-radius: 10px; padding: 25px; text-align: center; margin: 20px 0;
+        }
+        .formula-principal { font-size: 2rem; font-weight: 800; color: #fff; letter-spacing: 1px; }
+        .formula-leyenda { font-size: 1rem; color: #aaa; margin-top: 10px; }
+        
+        .grid-despejes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .despeje-caja { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; border-top: 3px solid #e74c3c; }
+        .despeje-caja.solucion { border-top-color: #3498db; }
+        .formula-despejada { font-size: 1.5rem; font-weight: 800; text-align: center; margin: 15px 0; color: #fff; }
+
+        /* --- ESTILOS DE EJERCICIOS --- */
+        .ejercicio-tarjeta {
+            background: rgba(20, 20, 35, 0.6); border-left: 4px solid var(--color-quim-secundario);
+            padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0;
+        }
+        .ejercicio-tarjeta h3 { color: var(--color-quim-secundario); margin-bottom: 10px; font-size: 1.3rem; }
+        .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
+        .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
+        .resultado-final { color: #2ecc71; font-weight: 600; margin-top: 5px; }
+
+        /* --- NUEVOS BOTONES DE ACCIÓN FINAL --- */
+        .botones-accion-final {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+            margin-top: 40px; margin-bottom: 20px;
+        }
+        
+        .btn-accion {
+            padding: 15px 25px; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
+            text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px;
+            transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .btn-practica { background: #2ecc71; }
+        .btn-practica:hover { background: #27ae60; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
+        
+        .btn-evaluacion { background: #e74c3c; }
+        .btn-evaluacion:hover { background: #c0392b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4); }
+
+        @media (max-width: 768px) {
+            .grid-despejes { grid-template-columns: 1fr; }
+            .botones-accion-final { flex-direction: column; }
+            .btn-accion { justify-content: center; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="quimica_9.html"><i class="fa-solid fa-arrow-left"></i> Química 9</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <a href="quimica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Estequiometría</a>
+
+        <div class="encabezado-leccion">
+            <h1>Porcentaje Masa - Volumen (% m/v)</h1>
+            <p><i class="fa-solid fa-scale-balanced"></i> Solutos sólidos en solventes líquidos</p>
+        </div>
+
+        <section class="seccion-contenido">
+            <h2>1. ¿Qué es el % m/v y por qué es importante?</h2>
+            <p>El <strong>porcentaje masa a volumen (% m/v)</strong>, también llamado porcentaje peso a volumen (% p/v), nos indica la cantidad de gramos (g) de soluto que hay disueltos por cada 100 mililitros (mL) de solución.</p>
+            
+            <p><strong>Importancia:</strong> Esta unidad es una de las más utilizadas en la vida cotidiana y en medicina, especialmente cuando se preparan soluciones disolviendo un polvo (sólido) en agua u otro líquido. Por ejemplo, el suero fisiológico (cloruro de sodio al 0.9% m/v) o muchas soluciones intravenosas y jarabes.</p>
+            
+            <p style="color: #f39c12; font-size: 0.95rem; margin-top: 15px;"><i class="fa-solid fa-circle-exclamation"></i> <strong>Recuerda:</strong> A diferencia de % m/m y % v/v, aquí las unidades son mezcladas: <strong>gramos (g)</strong> para el soluto y <strong>mililitros (mL)</strong> para la solución.</p>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2>2. La Fórmula Principal y Despejes</h2>
+
+            <div class="caja-formula">
+                <div class="formula-principal">% m/v = (Masa Soluto / Volumen Solución) × 100</div>
+                <div class="formula-leyenda">Masa siempre en gramos (g) y Volumen siempre en mililitros (mL).</div>
+            </div>
+
+            <p>Podemos despejar esta fórmula si necesitamos hallar los gramos de soluto o los mililitros de solución:</p>
+
+            <div class="grid-despejes">
+                <div class="despeje-caja">
+                    <h3 style="color: #e74c3c; margin-bottom: 10px;"><i class="fa-solid fa-cube"></i> Despeje para Masa del Soluto</h3>
+                    <p style="font-size: 0.9rem; color: #ccc;">Pasamos el <em>Vol. Solución</em> a multiplicar y el <em>100</em> a dividir.</p>
+                    <div class="formula-despejada">m. Soluto = (% m/v × v. Solución) / 100</div>
+                </div>
+
+                <div class="despeje-caja solucion">
+                    <h3 style="color: #3498db; margin-bottom: 10px;"><i class="fa-solid fa-flask"></i> Despeje para Vol. de Solución</h3>
+                    <p style="font-size: 0.9rem; color: #ccc;">Intercambiamos posiciones.</p>
+                    <div class="formula-despejada">v. Solución = (m. Soluto × 100) / % m/v</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2>3. Ejemplos Resueltos Paso a Paso</h2>
+            <p>Observemos cómo calcular estos porcentajes mezclando masas y volúmenes.</p>
+
+            <!-- EJEMPLO 1 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 1: Cálculo directo del porcentaje</h3>
+                <div class="enunciado">
+                    Se disuelven 15 g de azúcar en agua suficiente para completar 250 mL de solución. ¿Cuál es la concentración de la solución en % m/v?
+                </div>
+                
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Identificar los datos</div>
+                    <p>Masa Soluto (azúcar) = 15 g<br>Vol. Solución = 250 mL</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Aplicar la fórmula principal</div>
+                    <p>% m/v = (15 g / 250 mL) × 100<br>% m/v = 0.06 × 100 = <strong>6 %</strong></p>
+                    <p class="resultado-final">Respuesta: La concentración de la solución es del 6% m/v.</p>
+                </div>
+            </div>
+
+            <!-- EJEMPLO 2 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 2: Calculando la masa del soluto</h3>
+                <div class="enunciado">
+                    El suero fisiológico es una solución de cloruro de sodio (NaCl) al 0.9% m/v. ¿Cuántos gramos de NaCl hay en una bolsa de suero de 500 mL?
+                </div>
+                
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Identificar los datos</div>
+                    <p>% m/v = 0.9 %<br>Vol. Solución = 500 mL<br>Masa Soluto = ?</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Usar fórmula despejada</div>
+                    <p>m. Soluto = (% m/v × v. Solución) / 100</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Reemplazar y resolver</div>
+                    <p>m. Soluto = (0.9 × 500) / 100<br>m. Soluto = 450 / 100 = <strong>4.5 g</strong></p>
+                    <p class="resultado-final">Respuesta: Hay 4.5 gramos de sal en la bolsa de suero.</p>
+                </div>
+            </div>
+
+            <!-- EJEMPLO 3 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 3: Calculando el volumen de la solución</h3>
+                <div class="enunciado">
+                    ¿Qué volumen de solución al 20% m/v de sulfato de cobre se puede preparar si solo se dispone de 50 g de esta sal?
+                </div>
+                
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Identificar los datos</div>
+                    <p>% m/v = 20 %<br>Masa Soluto = 50 g<br>Vol. Solución = ?</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Usar fórmula despejada</div>
+                    <p>v. Solución = (m. Soluto × 100) / % m/v</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Reemplazar y resolver</div>
+                    <p>v. Solución = (50 × 100) / 20<br>v. Solución = 5000 / 20 = <strong>250 mL</strong></p>
+                    <p class="resultado-final">Respuesta: Se pueden preparar 250 mL de solución.</p>
+                </div>
+            </div>
+            
+            <!-- EJEMPLO 4 -->
+            <div class="ejercicio-tarjeta">
+                <h3>Ejemplo 4: Concentración a partir de gramos y litros</h3>
+                <div class="enunciado">
+                    Se disuelven 40 g de hidróxido de potasio (KOH) en agua hasta alcanzar un volumen de 2 Litros. ¿Cuál es su % m/v?
+                </div>
+                
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Identificar y convertir datos</div>
+                    <p>Masa Soluto = 40 g<br>Vol. Solución = 2 Litros = <strong>2000 mL</strong> <em>(Recuerda que 1 L = 1000 mL)</em></p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Aplicar la fórmula</div>
+                    <p>% m/v = (40 g / 2000 mL) × 100<br>% m/v = 0.02 × 100 = <strong>2 %</strong></p>
+                    <p class="resultado-final">Respuesta: La concentración es 2% m/v.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="botones-accion-final">
+            <a href="quimica9_masa_volumen_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Práctica Interactiva
+            </a>
+
+            <a href="quimica9_masa_volumen_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-file-signature"></i> Evaluación
+            </a>
+        </section>
+
+    </main>
+
+</body>
+</html>

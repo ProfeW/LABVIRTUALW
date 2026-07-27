@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación % m/v - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-quimica: #9b59b6;
+            --color-evaluacion: #c0392b; /* Rojo oscuro para evaluación */
+            --color-oscuro: #1a1a2e;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+        }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: #fff; background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; min-height: 100vh; }
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-quimica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255,255,255,0.1); color: var(--color-evaluacion); }
+        
+        .contenedor { max-width: 960px; margin: 40px auto; padding: 20px; }
+        .btn-volver { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: #aaa; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+        .encabezado-leccion { border-bottom: 2px solid rgba(192,57,43,0.4); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-evaluacion); margin-bottom: 8px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+
+        .barra-progreso-contenedor { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.08); }
+        .barra-progreso-titulo { font-weight: 700; color: #fff; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .barra { background: rgba(255,255,255,0.1); border-radius: 20px; height: 10px; overflow: hidden; }
+        .barra-fill { background: linear-gradient(90deg, #e74c3c, var(--color-evaluacion)); height: 100%; border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+
+        .ejercicio-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 50px; border-top: 4px solid var(--color-evaluacion); }
+        .ejercicio-box h3 { color: var(--color-evaluacion); margin-bottom: 10px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .enunciado { font-style: italic; color: #ddd; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.05rem; border-left: 4px solid #f39c12; }
+
+        .paso-contenedor { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid #444; transition: 0.3s; }
+        .paso-contenedor.activo { border-left-color: var(--color-evaluacion); box-shadow: 0 5px 15px rgba(192,57,43,0.1); }
+        .paso-contenedor.completado { border-left-color: var(--color-exito); opacity: 0.7; pointer-events: none; }
+        .paso-titulo { font-weight: 800; color: #fff; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 12px; display: flex; justify-content: space-between; }
+        .icono-check { color: var(--color-exito); display: none; font-size: 1.4rem; }
+        .completado .icono-check { display: block; }
+        .oculto { display: none; }
+
+        .grid-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 15px; }
+        .input-grupo { display: flex; align-items: stretch; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; overflow: hidden; }
+        .input-grupo label { background: rgba(0,0,0,0.5); padding: 10px; color: #fff; font-weight: bold; min-width: 60px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+        .input-grupo input { flex: 1; padding: 10px; border: none; background: transparent; color: #fff; font-size: 1.05rem; text-align: center; outline: none; width: 100%; }
+        .input-grupo .unidad { background: rgba(192,57,43,0.15); padding: 10px; font-size: 0.85rem; color: #fff; border-left: 1px solid rgba(255,255,255,0.1); }
+        select { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(20,20,35,0.8); color: #fff; font-size: 1rem; margin-bottom: 15px; outline: none; }
+
+        .btn-validar { background: var(--color-evaluacion); color: #fff; border: none; padding: 12px 28px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .btn-validar:hover { opacity: 0.85; transform: translateY(-2px); }
+
+        .feedback { display: none; margin-top: 12px; padding: 10px 15px; border-radius: 6px; font-weight: 600; }
+        .feedback.correcto { display: block; background: rgba(46,204,113,0.15); border: 1px solid var(--color-exito); color: var(--color-exito); }
+        .feedback.incorrecto { display: block; background: rgba(231,76,60,0.15); border: 1px solid var(--color-error); color: var(--color-error); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+        <ul class="menu">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="quimica_9.html"><i class="fa-solid fa-arrow-left"></i> Química 9</a></li>
+        </ul>
+    </nav>
+
+    <div class="contenedor">
+        <a href="quimica9_masa_volumen.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        
+        <div class="encabezado-leccion">
+            <h1>📝 Evaluación: % m/v</h1>
+            <p>10 Ejercicios evaluativos. Completa todos los pasos sin saltarte ninguno.</p>
+        </div>
+
+        <div class="barra-progreso-contenedor">
+            <div class="barra-progreso-titulo">
+                <span>📊 Progreso de Evaluación</span>
+                <span id="texto-progreso">0 / 10 completados</span>
+            </div>
+            <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+        </div>
+
+        <div id="contenedor-ejercicios"></div>
+        
+        <div style="text-align: center; margin-top: 40px; display: none;" id="mensaje-final">
+            <h2 style="color: var(--color-exito); margin-bottom: 20px;"><i class="fa-solid fa-medal"></i> ¡Evaluación Completada!</h2>
+            <a href="quimica_9.html" class="btn-validar" style="background: var(--color-quimica); text-decoration: none;">Volver al Menú Principal</a>
+        </div>
+    </div>
+
+    <script>
+        const ejercicios = [
+            {
+                titulo: "Pregunta 1",
+                enunciado: "Se mezclan 25 g de glucosa en agua hasta completar 500 mL de solución. Determina la concentración % m/v.",
+                pasos: [
+                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [25, 500], labels: ['m. Soluto', 'v. Solución'], unidades: ['g', 'mL'] },
+                    { tipo: 'formula', seleccion: '%m/v' },
+                    { tipo: 'calculo', label: '% m/v', valor: 5, formula: "Aplica fórmula", unidad: '%' }
+                ]
+            },
+            {
+                titulo: "Pregunta 2",
+                enunciado: "¿Cuántos gramos de hidróxido de sodio (NaOH) se necesitan para preparar 300 mL de una solución al 10% m/v?",
+                pasos: [
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [300, 10], labels: ['v. Solución', '% m/v'], unidades: ['mL', '%'] },
+                    { tipo: 'formula', seleccion: 'soluto' },
+                    { tipo: 'calculo', label: 'm. Soluto', valor: 30, formula: "Aplica fórmula", unidad: 'g' }
+                ]
+            },
+            {
+                titulo: "Pregunta 3",
+                enunciado: "¿Qué volumen de solución al 8% m/v se obtiene si se utilizan 40 g de soluto?",
+                pasos: [
+                    { tipo: 'datos', inputs: ['m_soluto', 'porcentaje'], valores: [40, 8], labels: ['m. Soluto', '% m/v'], unidades: ['g', '%'] },
+                    { tipo: 'formula', seleccion: 'solucion' },
+                    { tipo: 'calculo', label: 'v. Solución', valor: 500, formula: "Aplica despeje de solución", unidad: 'mL' }
+                ]
+            },
+            {
+                titulo: "Pregunta 4",
+                enunciado: "Una taza de té de 250 mL contiene 15 g de azúcar disuelta. ¿Cuál es la concentración de azúcar en el té (% m/v)?",
+                pasos: [
+                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [15, 250], labels: ['m. Soluto', 'v. Solución'], unidades: ['g', 'mL'] },
+                    { tipo: 'formula', seleccion: '%m/v' },
+                    { tipo: 'calculo', label: '% m/v', valor: 6, formula: "Aplica fórmula", unidad: '%' }
+                ]
+            },
+            {
+                titulo: "Pregunta 5",
+                enunciado: "Si dispones de 20 g de yodo, ¿qué volumen en mL de solución de yodo al 4% m/v puedes preparar?",
+                pasos: [
+                    { tipo: 'datos', inputs: ['m_soluto', 'porcentaje'], valores: [20, 4], labels: ['m. Soluto', '% m/v'], unidades: ['g', '%'] },
+                    { tipo: 'formula', seleccion: 'solucion' },
+                    { tipo: 'calculo', label: 'v. Solución', valor: 500, formula: "Calcula el volumen", unidad: 'mL' }
+                ]
+            },
+            {
+                titulo: "Pregunta 6",
+                enunciado: "Un suero tiene una concentración de 5% m/v de dextrosa. Si se le administran a un paciente 1200 mL de dicho suero, ¿cuántos gramos de dextrosa recibió?",
+                pasos: [
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [1200, 5], labels: ['v. Solución', '% m/v'], unidades: ['mL', '%'] },
+                    { tipo: 'formula', seleccion: 'soluto' },
+                    { tipo: 'calculo', label: 'm. Soluto', valor: 60, formula: "Calcula los gramos", unidad: 'g' }
+                ]
+            },
+            {
+                titulo: "Pregunta 7",
+                enunciado: "Se disuelven 75 g de una sal en agua formando 1.5 Litros de solución. Calcula su concentración % m/v. (1 L = 1000 mL)",
+                pasos: [
+                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [75, 1500], labels: ['m. Soluto', 'v. Solución'], unidades: ['g', 'mL'] },
+                    { tipo: 'formula', seleccion: '%m/v' },
+                    { tipo: 'calculo', label: '% m/v', valor: 5, formula: "Aplica fórmula", unidad: '%' }
+                ]
+            },
+            {
+                titulo: "Pregunta 8",
+                enunciado: "Deseas preparar una solución madre al 25% m/v. Tienes un recipiente con 80 g de reactivo. ¿Qué volumen de solución puedes preparar como máximo?",
+                pasos: [
+                    { tipo: 'datos', inputs: ['m_soluto', 'porcentaje'], valores: [80, 25], labels: ['m. Soluto', '% m/v'], unidades: ['g', '%'] },
+                    { tipo: 'formula', seleccion: 'solucion' },
+                    { tipo: 'calculo', label: 'v. Solución', valor: 320, formula: "Halla la solución", unidad: 'mL' }
+                ]
+            },
+            {
+                titulo: "Pregunta 9",
+                enunciado: "Un colirio para los ojos de 10 mL tiene un medicamento al 0.5% m/v. ¿Cuántos gramos de medicamento tiene en total?",
+                pasos: [
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [10, 0.5], labels: ['v. Solución', '% m/v'], unidades: ['mL', '%'] },
+                    { tipo: 'formula', seleccion: 'soluto' },
+                    { tipo: 'calculo', label: 'm. Soluto', valor: 0.05, formula: "Aplica fórmula", unidad: 'g' }
+                ]
+            },
+            {
+                titulo: "Pregunta 10",
+                enunciado: "En un experimento disuelves 4000 mg de nitrato de plata en 200 mL de solución. Calcula la concentración % m/v sabiendo que 1 g = 1000 mg.",
+                pasos: [
+                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [4, 200], labels: ['m. Soluto', 'v. Solución'], unidades: ['g', 'mL'], extra: "Convierte mg a g" },
+                    { tipo: 'formula', seleccion: '%m/v' },
+                    { tipo: 'calculo', label: '% m/v', valor: 2, formula: "Calcula porcentaje final", unidad: '%' }
+                ]
+            }
+        ];
+
+        const formulasHTML = `
+            <select class="select-formula">
+                <option value="">-- Selecciona la fórmula correcta --</option>
+                <option value="%m/v">% m/v = (m. Soluto / v. Solución) × 100</option>
+                <option value="soluto">m. Soluto = (% m/v × v. Solución) / 100</option>
+                <option value="solucion">v. Solución = (m. Soluto × 100) / % m/v</option>
+            </select>
+        `;
+
+        const contenedor = document.getElementById('contenedor-ejercicios');
+        let completados = 0;
+
+        function generarHTML() {
+            ejercicios.forEach((ej, index) => {
+                let html = `<div class="ejercicio-box" id="ej${index}">`;
+                html += `<h3><i class="fa-solid fa-pen-clip"></i> ${ej.titulo}</h3>`;
+                html += `<div class="enunciado">${ej.enunciado}</div>`;
+                
+                ej.pasos.forEach((paso, pIndex) => {
+                    const activo = pIndex === 0 ? 'activo' : 'oculto';
+                    html += `<div class="paso-contenedor ${activo}" id="ej${index}-p${pIndex}">`;
+                    
+                    if (paso.tipo === 'datos') {
+                        html += `<div class="paso-titulo">📋 Ingresar Datos <span class="icono-check">✔</span></div>`;
+                        if(paso.extra) html += `<p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">${paso.extra}</p>`;
+                        html += `<div class="grid-datos">`;
+                        paso.inputs.forEach((input, i) => {
+                            html += `<div class="input-grupo">
+                                <label>${paso.labels[i]}</label>
+                                <input type="number" step="0.1" id="input-${index}-${pIndex}-${i}" placeholder="?">
+                                <div class="unidad">${paso.unidades[i]}</div>
+                            </div>`;
+                        });
+                        html += `</div>`;
+                    } else if (paso.tipo === 'formula') {
+                        html += `<div class="paso-titulo">📐 Fórmula Correcta <span class="icono-check">✔</span></div>`;
+                        html += formulasHTML.replace('class="select-formula"', `id="input-${index}-${pIndex}-0"`);
+                    } else if (paso.tipo === 'calculo') {
+                        html += `<div class="paso-titulo">🔢 Resultado <span class="icono-check">✔</span></div>`;
+                        html += `<div class="input-grupo" style="max-width:250px;">
+                            <label>${paso.label}</label>
+                            <input type="number" step="0.01" id="input-${index}-${pIndex}-0" placeholder="?">
+                            <div class="unidad">${paso.unidad}</div>
+                        </div>`;
+                    }
+                    
+                    html += `<button class="btn-validar" onclick="validar(${index}, ${pIndex})"><i class="fas fa-check"></i> Validar</button>`;
+                    html += `<div class="feedback" id="fb-${index}-${pIndex}"></div>`;
+                    html += `</div>`;
+                });
+                
+                html += `</div>`;
+                contenedor.innerHTML += html;
+            });
+        }
+
+        function cerca(val, esp) { return Math.abs(val - esp) <= Math.abs(esp * 0.05) + 0.05; }
+
+        window.validar = function(ejIdx, pasoIdx) {
+            const paso = ejercicios[ejIdx].pasos[pasoIdx];
+            let valido = true;
+            
+            if (paso.tipo === 'datos') {
+                paso.valores.forEach((val, i) => {
+                    if (!cerca(parseFloat(document.getElementById(`input-${ejIdx}-${pasoIdx}-${i}`).value), val)) valido = false;
+                });
+            } else if (paso.tipo === 'formula') {
+                if (document.getElementById(`input-${ejIdx}-${pasoIdx}-0`).value !== paso.seleccion) valido = false;
+            } else if (paso.tipo === 'calculo') {
+                if (!cerca(parseFloat(document.getElementById(`input-${ejIdx}-${pasoIdx}-0`).value), paso.valor)) valido = false;
+            }
+
+            const fb = document.getElementById(`fb-${ejIdx}-${pasoIdx}`);
+            const pasoEl = document.getElementById(`ej${ejIdx}-p${pasoIdx}`);
+
+            if (valido) {
+                fb.className = 'feedback correcto';
+                fb.textContent = '¡Correcto! ✔️';
+                pasoEl.classList.remove('activo');
+                pasoEl.classList.add('completado');
+
+                const sigPaso = document.getElementById(`ej${ejIdx}-p${pasoIdx + 1}`);
+                if (sigPaso) {
+                    sigPaso.classList.remove('oculto');
+                    sigPaso.classList.add('activo');
+                } else {
+                    completados++;
+                    document.getElementById('texto-progreso').textContent = `${completados} / 10 completados`;
+                    document.getElementById('barra-fill').style.width = (completados * 10) + '%';
+                    if(completados === 10) {
+                        document.getElementById('mensaje-final').style.display = 'block';
+                    }
+                }
+            } else {
+                fb.className = 'feedback incorrecto';
+                fb.textContent = 'Revisa tu respuesta. ❌';
+            }
+        };
+
+        generarHTML();
+    </script>
+</body>
+</html>
