@@ -134,6 +134,26 @@
             successMsg.style.display = 'none';
 
             try {
+                const users = await window.LabAuth.getUsers();
+                if (users.success && users.data) {
+                    const existeUsuario = users.data.some(u => u.usuario === datos.usuario);
+                    const existeCorreo = users.data.some(u => u.correo_electronico === datos.correo_electronico);
+                    const existeTelefono = users.data.some(u => u.numero_telefono === datos.numero_telefono);
+                    
+                    if (existeUsuario || existeCorreo || existeTelefono) {
+                        let errores = [];
+                        if (existeUsuario) errores.push("el usuario");
+                        if (existeCorreo) errores.push("el correo");
+                        if (existeTelefono) errores.push("el teléfono");
+                        
+                        errorMsg.textContent = "Error: " + errores.join(", ") + " ya se encuentra registrado.";
+                        errorMsg.style.display = 'block';
+                        btn.disabled = false;
+                        btn.innerHTML = 'Registrarse';
+                        return;
+                    }
+                }
+
                 const res = await window.LabAuth.registrar(datos);
                 if (res.success) {
                     successMsg.textContent = "¡Registro exitoso! Redirigiendo al login...";
