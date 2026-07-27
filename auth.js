@@ -14,9 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Páginas exclusivas para invitados (login, registro)
     const isAuthPage = currentPage === 'login.html' || currentPage === 'registro.html' || currentPage === 'recuperar.html';
 
+    const isAdminPage = currentPage === 'admin.html';
+
     // 1. Proteger las rutas directamente
     if (isProtected && !isAuth) {
         window.location.href = 'login.html';
+        return;
+    }
+
+    if (isAdminPage && (!isAuth || user.usuario !== 'profew')) {
+        window.location.href = 'index.html';
         return;
     }
 
@@ -35,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <i class="fa-solid fa-user"></i> Hola, ${user.nombre.split(' ')[0]} <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
                 </a>
                 <ul class="submenu">
+                    ${user.usuario === 'profew' ? '<li><a href="admin.html" style="color: #f1c40f;"><i class="fa-solid fa-gear"></i> Panel Admin</a></li>' : ''}
                     <li><a href="#" id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
                 </ul>
             `;
@@ -137,6 +145,47 @@ window.LabAuth = {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({ action: 'recover', usuario: usuario_o_correo })
+        });
+        return await req.json();
+    },
+
+    getUsers: async function() {
+        const req = await fetch(URL_REGISTRO, {
+            redirect: 'follow',
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'get_users' })
+        });
+        return await req.json();
+    },
+
+    updateUser: async function(datos) {
+        datos.action = 'update_user';
+        const req = await fetch(URL_REGISTRO, {
+            redirect: 'follow',
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(datos)
+        });
+        return await req.json();
+    },
+
+    deleteUser: async function(usuarioId) {
+        const req = await fetch(URL_REGISTRO, {
+            redirect: 'follow',
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'delete_user', usuario: usuarioId })
+        });
+        return await req.json();
+    },
+
+    getLogs: async function() {
+        const req = await fetch(URL_INGRESOS, {
+            redirect: 'follow',
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'get_logs' })
         });
         return await req.json();
     }

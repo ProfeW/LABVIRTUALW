@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
+    <style>
+        :root {
+            --color-admin: #f1c40f;   
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-card: rgba(20, 20, 35, 0.85);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* HEADER / NAVBAR */
+        header { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); padding: 15px 5%; border-bottom: 2px solid var(--color-admin); display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: var(--color-admin); font-size: 1.5rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .volver-inicio { color: #fff; text-decoration: none; font-size: 1rem; transition: 0.3s; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 5px; }
+        .volver-inicio:hover { background: var(--color-admin); color: #000; }
+
+        /* CONTENIDO PRINCIPAL */
+        .contenedor { max-width: 1200px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.5s ease; }
+        
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .panel-header h1 { font-size: 2rem; display: flex; align-items: center; gap: 10px; color: var(--color-admin); }
+        
+        /* TABS */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: 0.3s; }
+        .tab-btn:hover { background: rgba(255,255,255,0.2); }
+        .tab-btn.active { background: var(--color-admin); color: #000; border-color: var(--color-admin); }
+
+        .tab-content { display: none; background: var(--color-card); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+        /* TABLAS */
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(0,0,0,0.3); color: var(--color-admin); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; }
+        tr:hover { background: rgba(255,255,255,0.05); }
+        
+        .action-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1rem; margin-right: 10px; transition: 0.3s; }
+        .btn-edit { color: #3498db; }
+        .btn-edit:hover { color: #2980b9; }
+        .btn-delete { color: #e74c3c; }
+        .btn-delete:hover { color: #c0392b; }
+
+        .loading { text-align: center; padding: 40px; font-size: 1.2rem; color: #aaa; }
+        
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
+        .modal-content { background: var(--color-oscuro); padding: 30px; border-radius: 12px; width: 100%; max-width: 500px; border: 1px solid rgba(255,255,255,0.2); animation: scaleIn 0.3s ease; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-header h2 { color: var(--color-admin); font-size: 1.5rem; }
+        .close { color: #aaa; font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+        .close:hover { color: #fff; }
+        
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 5px; }
+        .input-group input { width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 5px; font-size: 0.95rem; }
+        
+        .btn-save { width: 100%; padding: 10px; background: var(--color-admin); color: #000; border: none; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        .btn-save:hover { background: #f39c12; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><i class="fa-solid fa-user-shield"></i> Admin Panel</a>
+        <a href="index.html" class="volver-inicio"><i class="fa-solid fa-arrow-left"></i> Volver a LabVirtual</a>
+    </header>
+
+    <div class="contenedor">
+        <div class="panel-header">
+            <h1><i class="fa-solid fa-users-gear"></i> Gestión del Laboratorio</h1>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('usuarios')"><i class="fa-solid fa-users"></i> Estudiantes</button>
+            <button class="tab-btn" onclick="openTab('ingresos')"><i class="fa-solid fa-chart-line"></i> Registro de Ingresos</button>
+        </div>
+
+        <div id="usuarios" class="tab-content active">
+            <h2 style="margin-bottom: 15px;"><i class="fa-solid fa-list"></i> Lista de Estudiantes</h2>
+            <div class="table-responsive">
+                <table id="table-users">
+                    <thead>
+                        <tr>
+                            <th>Nombre Completo</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Grado</th>
+                            <th>Usuario</th>
+                            <th>Contraseña</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="7" class="loading"><i class="fa-solid fa-circle-notch fa-spin"></i> Cargando usuarios...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="ingresos" class="tab-content">
+            <h2 style="margin-bottom: 15px;"><i class="fa-solid fa-clock-rotate-left"></i> Historial de Conexiones</h2>
+            <div class="table-responsive">
+                <table id="table-logs">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Nombre Completo</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="4" class="loading"><i class="fa-solid fa-circle-notch fa-spin"></i> Cargando historial...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR USUARIO -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-user-pen"></i> Editar Estudiante</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="editForm">
+                <input type="hidden" id="edit-original-usuario">
+                <div class="input-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="edit-nombre" required>
+                </div>
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="edit-correo" required>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <label>Teléfono</label>
+                        <input type="text" id="edit-telefono" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Grado</label>
+                        <input type="text" id="edit-grado" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Usuario (ID Único)</label>
+                    <input type="text" id="edit-usuario" readonly style="background: rgba(0,0,0,0.6); cursor: not-allowed;" title="El nombre de usuario no se puede cambiar">
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="text" id="edit-contrasena" required>
+                </div>
+                <button type="submit" class="btn-save" id="btn-save-edit"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de Pestañas
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            if (tabId === 'ingresos' && document.getElementById('table-logs').dataset.loaded !== 'true') {
+                loadLogs();
+            }
+        }
+
+        // Cargar Usuarios
+        async function loadUsers() {
+            const tbody = document.querySelector('#table-users tbody');
+            try {
+                const res = await window.LabAuth.getUsers();
+                if (res.success && res.data.length > 0) {
+                    tbody.innerHTML = '';
+                    res.data.forEach(user => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${user.nombre_completo}</td>
+                                <td>${user.correo_electronico}</td>
+                                <td>${user.numero_telefono}</td>
+                                <td>${user.grado}</td>
+                                <td>${user.usuario}</td>
+                                <td><span style="font-family: monospace; background: rgba(0,0,0,0.5); padding: 2px 5px; border-radius:3px;">${user.contrasena}</span></td>
+                                <td>
+                                    <button class="action-btn btn-edit" title="Editar" onclick="openEditModal('${user.nombre_completo}', '${user.correo_electronico}', '${user.numero_telefono}', '${user.grado}', '${user.usuario}', '${user.contrasena}')"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="action-btn btn-delete" title="Eliminar" onclick="deleteUser('${user.usuario}')"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:20px; color:#aaa;">No hay estudiantes registrados.</td></tr>`;
+                }
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:20px; color:#e74c3c;">Error cargando datos. Revisa la consola o los permisos del Apps Script.</td></tr>`;
+            }
+        }
+
+        // Cargar Ingresos
+        async function loadLogs() {
+            const tbody = document.querySelector('#table-logs tbody');
+            const table = document.getElementById('table-logs');
+            try {
+                const res = await window.LabAuth.getLogs();
+                table.dataset.loaded = 'true';
+                if (res.success && res.data.length > 0) {
+                    tbody.innerHTML = '';
+                    // Mostrar los más recientes primero
+                    res.data.reverse().forEach(log => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td><b>${log.usuario}</b></td>
+                                <td>${log.nombre_completo}</td>
+                                <td>${log.fecha}</td>
+                                <td>${log.hora}</td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:20px; color:#aaa;">No hay registros de ingresos.</td></tr>`;
+                }
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:20px; color:#e74c3c;">Error cargando historial.</td></tr>`;
+            }
+        }
+
+        // Editar Usuario (Modal)
+        function openEditModal(nombre, correo, telefono, grado, usuario, contrasena) {
+            document.getElementById('edit-original-usuario').value = usuario;
+            document.getElementById('edit-nombre').value = nombre;
+            document.getElementById('edit-correo').value = correo;
+            document.getElementById('edit-telefono').value = telefono;
+            document.getElementById('edit-grado').value = grado;
+            document.getElementById('edit-usuario').value = usuario;
+            document.getElementById('edit-contrasena').value = contrasena;
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        document.getElementById('editForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-save-edit');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Guardando...';
+            btn.disabled = true;
+
+            const datos = {
+                usuario_original: document.getElementById('edit-original-usuario').value, // ID único
+                nombre_completo: document.getElementById('edit-nombre').value,
+                correo_electronico: document.getElementById('edit-correo').value,
+                numero_telefono: document.getElementById('edit-telefono').value,
+                grado: document.getElementById('edit-grado').value,
+                usuario: document.getElementById('edit-usuario').value,
+                contrasena: document.getElementById('edit-contrasena').value
+            };
+
+            try {
+                const res = await window.LabAuth.updateUser(datos);
+                if(res.success) {
+                    closeModal();
+                    loadUsers(); // Recargar la tabla
+                } else {
+                    alert("Error: " + res.message);
+                }
+            } catch (err) {
+                alert("Error de conexión al intentar actualizar.");
+            }
+            btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios';
+            btn.disabled = false;
+        });
+
+        // Eliminar Usuario
+        async function deleteUser(usuario) {
+            if (confirm(`¿Estás seguro que deseas eliminar permanentemente al usuario '${usuario}'?`)) {
+                try {
+                    const res = await window.LabAuth.deleteUser(usuario);
+                    if(res.success) {
+                        loadUsers(); // Recargar
+                    } else {
+                        alert("Error: " + res.message);
+                    }
+                } catch(err) {
+                    alert("Error de conexión al intentar eliminar.");
+                }
+            }
+        }
+
+        // Iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar si el usuario que está intentando acceder es profew
+            const checkUser = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+            // La redirección de seguridad ya la hace auth.js en la línea 23, pero por precaución:
+            if (!checkUser || checkUser.usuario !== 'profew') {
+                document.body.innerHTML = '<h1 style="text-align:center; margin-top: 50px; color:#e74c3c;">Acceso Denegado</h1>';
+            } else {
+                loadUsers();
+            }
+        });
+    </script>
+</body>
+</html>
