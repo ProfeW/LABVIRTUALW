@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica: Cifras Significativas - LabVirtual W</title>
+    <title>Práctica: Cifras Significativas - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,11 +60,11 @@
 <body>
 
     <div class="contenedor">
-        <a href="fisica10_cifras.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
+        <a href="fisica10_cifras.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
         <div class="header-practica">
-            <h1><i class="fa-solid fa-gamepad"></i> PrÃ¡ctica Interactiva</h1>
-            <p>Demuestra tu precisiÃ³n contando las cifras correctas.</p>
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <p>Demuestra tu precisión contando las cifras correctas.</p>
         </div>
 
         <div class="progreso-container">
@@ -73,17 +73,17 @@
 
         <!-- EJERCICIO 1 -->
         <div class="ejercicio-card activo" id="ej1">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (Conteo)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Conteo)</span>
             <h3>Reto 1: Mediciones de laboratorio</h3>
             <div class="enunciado">
                 Mides una masa en la balanza del laboratorio y la pantalla arroja el valor: <strong>0.04050 g</strong>. <br><br>
-                Â¿CuÃ¡ntas cifras significativas tiene esta medida?
+                ¿Cuántas cifras significativas tiene esta medida?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Recuerda: Los ceros a la izquierda no cuentan, pero los que estÃ¡n entre nÃºmeros o al final de un decimal SÃ cuentan.')">2 cifras</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Casi. Te faltÃ³ contar el Ãºltimo cero, que en decimales sÃ­ es significativo porque indica precisiÃ³n.')">3 cifras</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, 'Â¡Correcto! Los ceros a la izquierda no cuentan. Cuentan el 4, el 0 intermedio, el 5 y el 0 final. (4 cifras).')">4 cifras</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Recuerda: Los ceros a la izquierda no cuentan, pero los que están entre números o al final de un decimal SÍ cuentan.')">2 cifras</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Casi. Te faltó contar el último cero, que en decimales sí es significativo porque indica precisión.')">3 cifras</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! Los ceros a la izquierda no cuentan. Cuentan el 4, el 0 intermedio, el 5 y el 0 final. (4 cifras).')">4 cifras</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Contaste los ceros de la izquierda. Esos nunca son significativos.')">6 cifras</button>
             </div>
             <div class="feedback" id="feed1"></div>
@@ -92,16 +92,16 @@
 
         <!-- EJERCICIO 2 -->
         <div class="ejercicio-card" id="ej2">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (Conteo)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Conteo)</span>
             <h3>Reto 2: Ceros a la derecha</h3>
             <div class="enunciado">
                 La distancia entre dos ciudades es de <strong>45,000 m</strong> (escrito sin punto decimal). <br><br>
-                En fÃ­sica clÃ¡sica (sin notaciÃ³n cientÃ­fica), Â¿cuÃ¡ntas cifras significativas asumimos que tiene por regla general?
+                En física clásica (sin notación científica), ¿cuántas cifras significativas asumimos que tiene por regla general?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, 'Â¡Excelente! Sin punto decimal, los ceros finales de un nÃºmero entero se consideran dudosos/no significativos. Solo el 4 y el 5 cuentan.')">2 cifras</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Â¡Cuidado! Los ceros finales en un entero sin decimal no se suelen contar como significativos.')">5 cifras</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! Sin punto decimal, los ceros finales de un número entero se consideran dudosos/no significativos. Solo el 4 y el 5 cuentan.')">2 cifras</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, '¡Cuidado! Los ceros finales en un entero sin decimal no se suelen contar como significativos.')">5 cifras</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Debes contar el 4 y el 5.')">3 cifras</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Demasiado pocas. Tanto el 4 como el 5 son cifras seguras.')">1 cifra</button>
             </div>
@@ -114,15 +114,15 @@
             <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Redondeo)</span>
             <h3>Reto 3: Redondeando en la calculadora</h3>
             <div class="enunciado">
-                La calculadora te da el resultado <strong>18.7645</strong>, pero tÃº necesitas reportarlo con solo <strong>3 cifras significativas</strong>. <br><br>
-                Â¿CÃ³mo debe quedar el nÃºmero redondeado?
+                La calculadora te da el resultado <strong>18.7645</strong>, pero tú necesitas reportarlo con solo <strong>3 cifras significativas</strong>. <br><br>
+                ¿Cómo debe quedar el número redondeado?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, '18.7 tiene 3 cifras, pero olvidaste revisar el siguiente nÃºmero (6) para saber si debÃ­as redondear hacia arriba.')">18.7</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, 'Â¡Correcto! Las primeras 3 cifras son 1, 8 y 7. El cuarto nÃºmero es 6 (mayor que 5), por lo tanto, el 7 sube a 8. Queda 18.8.')">18.8</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Ese nÃºmero tiene 4 cifras significativas. Solo te piden 3.')">18.76</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Ese nÃºmero tiene 2 cifras. Te estÃ¡n pidiendo 3.')">19</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, '18.7 tiene 3 cifras, pero olvidaste revisar el siguiente número (6) para saber si debías redondear hacia arriba.')">18.7</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! Las primeras 3 cifras son 1, 8 y 7. El cuarto número es 6 (mayor que 5), por lo tanto, el 7 sube a 8. Queda 18.8.')">18.8</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Ese número tiene 4 cifras significativas. Solo te piden 3.')">18.76</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Ese número tiene 2 cifras. Te están pidiendo 3.')">19</button>
             </div>
             <div class="feedback" id="feed3"></div>
             <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -130,18 +130,18 @@
 
         <!-- EJERCICIO 4 -->
         <div class="ejercicio-card" id="ej4">
-            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (MultiplicaciÃ³n)</span>
-            <h3>Reto 4: Operaciones y precisiÃ³n</h3>
+            <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Multiplicación)</span>
+            <h3>Reto 4: Operaciones y precisión</h3>
             <div class="enunciado">
                 Multiplicas <strong>2.5</strong> (2 cifras) por <strong>3.42</strong> (3 cifras). La calculadora dice que es <strong>8.55</strong>.<br><br>
-                Aplicando las reglas de operaciones con cifras significativas, Â¿cuÃ¡l es el resultado que debes entregar al profesor?
+                Aplicando las reglas de operaciones con cifras significativas, ¿cuál es el resultado que debes entregar al profesor?
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Casi. 8.55 tiene 3 cifras. La regla dice que el resultado debe tener tantas cifras como el dato original con MENOR cantidad de cifras (en este caso, 2).')">8.55</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, 'Â¡Correcto! El dato mÃ¡s pobre (2.5) tiene 2 cifras. Por tanto, debes redondear 8.55 a 2 cifras. Como termina en 5, redondea arriba: 8.6.')">8.6</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Correcto! El dato más pobre (2.5) tiene 2 cifras. Por tanto, debes redondear 8.55 a 2 cifras. Como termina en 5, redondea arriba: 8.6.')">8.6</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'La calculadora dio 8.55. Si redondeas a 2 cifras porque el dato menor tiene 2, el 8.55 debe subir a 8.6, no bajar a 8.5.')">8.5</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Eso serÃ­a dejar solo 1 cifra. Debes dejar 2 cifras.')">9</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Eso sería dejar solo 1 cifra. Debes dejar 2 cifras.')">9</button>
             </div>
             <div class="feedback" id="feed4"></div>
             <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -153,25 +153,25 @@
             <h3>Reto 5: La regla traicionera de la suma</h3>
             <div class="enunciado">
                 Sumas las masas: <strong>12.11 g + 18.0 g + 1.013 g</strong>. <br>
-                La regla para la <strong>suma/resta</strong> es distinta: el resultado no depende del total de cifras significativas, sino de quiÃ©n tiene <strong>menor cantidad de DECIMALES</strong>. <br><br>
-                Â¿CuÃ¡l es el resultado final correcto? (La suma total es 31.123).
+                La regla para la <strong>suma/resta</strong> es distinta: el resultado no depende del total de cifras significativas, sino de quién tiene <strong>menor cantidad de DECIMALES</strong>. <br><br>
+                ¿Cuál es el resultado final correcto? (La suma total es 31.123).
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Esa es la respuesta bruta de la calculadora. Debes aplicar la regla de los decimales.')">31.123 g</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'AhÃ­ dejaste 2 decimales. Revisa los datos originales de nuevo.')">31.12 g</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, 'Â¡Genial! 18.0 g solo tiene 1 decimal. Por lo tanto, el resultado final debe cortarse a 1 decimal: 31.1 g.')">31.1 g</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Le quitaste todos los decimales, perdiendo precisiÃ³n innecesariamente.')">31 g</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Ahí dejaste 2 decimales. Revisa los datos originales de nuevo.')">31.12 g</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Genial! 18.0 g solo tiene 1 decimal. Por lo tanto, el resultado final debe cortarse a 1 decimal: 31.1 g.')">31.1 g</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Le quitaste todos los decimales, perdiendo precisión innecesariamente.')">31 g</button>
             </div>
             <div class="feedback" id="feed5"></div>
-            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar PrÃ¡ctica <i class="fa-solid fa-check-double"></i></button>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
         <div class="pantalla-final" id="pantalla-final">
-            <div class="trofeo">ðŸŽ¯</div>
-            <h1 style="color: #f39c12; margin-bottom: 20px;">Â¡MisiÃ³n Cumplida!</h1>
-            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Ahora tienes la precisiÃ³n de un cientÃ­fico de laboratorio. Â¡DemuÃ©stralo en la evaluaciÃ³n!</p>
-            <a href="fisica10_cifras_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la EvaluaciÃ³n</a>
+            <div class="trofeo">🎯</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Ahora tienes la precisión de un científico de laboratorio. ¡Demuéstralo en la evaluación!</p>
+            <a href="fisica10_cifras_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
         </div>
 
     </div>

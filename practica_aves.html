@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GuÃ­a de Aves de Gallego - I.E. Gallego</title>
+    <title>Guía de Aves de Gallego - I.E. Gallego</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -357,7 +357,7 @@
         }
         .btn-imprimir:hover { background-color: #435e54; }
 
-        /* AJUSTE ESTRICTO PARA IMPRESIÃ“N (SOLUCIÃ“N AL ESPACIO EN BLANCO) */
+        /* AJUSTE ESTRICTO PARA IMPRESIÓN (SOLUCIÓN AL ESPACIO EN BLANCO) */
         @media print {
             @page { size: letter; margin: 0; }
             html, body { 
@@ -371,11 +371,11 @@
             .hoja {
                 box-shadow: none;
                 width: 100%;
-                height: 100vh; /* Fuerza al contenedor a ocupar el 100% de la pÃ¡gina de impresiÃ³n */
+                height: 100vh; /* Fuerza al contenedor a ocupar el 100% de la página de impresión */
                 padding: 0.3in 0.4in;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
-                justify-content: space-between; /* Distribuye equitativamente el espacio vacÃ­o restante */
+                justify-content: space-between; /* Distribuye equitativamente el espacio vacío restante */
             }
             textarea::-webkit-input-placeholder { color: transparent; }
             input::-webkit-input-placeholder { color: transparent; }
@@ -387,8 +387,8 @@
     <div class="hoja">
         
         <div class="header">
-            <h1>GUÃA DE AVES DE GALLEGO</h1>
-            <h2>INSTITUCIÃ“N EDUCATIVA GALLEGO â€¢ BIOLOGÃA</h2>
+            <h1>GUÍA DE AVES DE GALLEGO</h1>
+            <h2>INSTITUCIÓN EDUCATIVA GALLEGO • BIOLOGÍA</h2>
             <div class="header-bar"></div>
         </div>
 
@@ -410,8 +410,8 @@
             <div class="foto-container">
                 <div class="foto-box" onclick="document.getElementById('input-foto').click()">
                     <i class="fa-solid fa-camera"></i>
-                    <p>FOTOGRAFÃA O<br>ILUSTRACIÃ“N<br>DEL AVE</p>
-                    <img id="img-preview" src="" alt="Vista previa de la fotografÃ­a de ave">
+                    <p>FOTOGRAFÍA O<br>ILUSTRACIÓN<br>DEL AVE</p>
+                    <img id="img-preview" src="" alt="Vista previa de la fotografía de ave">
                 </div>
                 <input type="file" id="input-foto" class="foto-input" accept="image/*" onchange="cargarImagen(event)">
                 
@@ -426,16 +426,16 @@
                 <div class="name-fields">
                     <div>
                         <input type="text" style="font-size: 16px; font-weight: 700;">
-                        <label>NOMBRE COMÃšN</label>
+                        <label>NOMBRE COMÚN</label>
                     </div>
                     <div>
                         <input type="text" style="font-size: 14px; font-style: italic;">
-                        <label>NOMBRE CIENTÃFICO</label>
+                        <label>NOMBRE CIENTÍFICO</label>
                     </div>
                 </div>
 
                 <div class="identificador-row">
-                    <span style="font-size: 12px;">IDENTIFICADOR DE ESPECIE (NÂº)</span>
+                    <span style="font-size: 12px;">IDENTIFICADOR DE ESPECIE (Nº)</span>
                     <div class="id-boxes">
                         <input type="text" maxlength="1"> /
                         <input type="text" maxlength="1"> /
@@ -445,7 +445,7 @@
 
                 <div class="sub-grid">
                     <div class="box">
-                        <div class="box-title">TAXONOMÃA</div>
+                        <div class="box-title">TAXONOMÍA</div>
                         <div class="taxonomia-list">
                             <div class="tax-item"><label>Reino:</label><input type="text"></div>
                             <div class="tax-item"><label>Filo:</label><input type="text"></div>
@@ -456,7 +456,7 @@
                     </div>
 
                     <div class="box">
-                        <div class="box-title">CARACTERÃSTICAS CLAVE</div>
+                        <div class="box-title">CARACTERÍSTICAS CLAVE</div>
                         <div class="caract-grid">
                             <div class="caract-item">
                                 <div class="caract-header">
@@ -494,13 +494,13 @@
         </div>
 
         <div class="full-box">
-            <div class="box-title">DESCRIPCIÃ“N FÃSICA</div>
+            <div class="box-title">DESCRIPCIÓN FÍSICA</div>
             <textarea style="height: 3.2em;"></textarea>
         </div>
 
         <div class="bottom-grid">
             <div class="box">
-                <div class="box-title">ALIMENTACIÃ“N</div>
+                <div class="box-title">ALIMENTACIÓN</div>
                 <div class="alim-item">
                     <div class="alim-icon a-dieta"><i class="fa-solid fa-utensils"></i></div>
                     <div style="flex-grow: 1;"><label style="font-size:11px; font-weight:700;">Dieta principal</label><textarea style="height: 3.2em; font-size: 12px;"></textarea></div>
@@ -512,7 +512,7 @@
             </div>
             
             <div class="box">
-                <div class="box-title">HÃBITAT Y UBICACIÃ“N EN GALLEGO</div>
+                <div class="box-title">HÁBITAT Y UBICACIÓN EN GALLEGO</div>
                 <div style="text-align: center; font-size: 11px; margin-top:-5px; margin-bottom:5px;">Zonas donde se observa</div>
                 <textarea style="height: 6.4em;"></textarea>
             </div>
@@ -520,19 +520,19 @@
 
         <div class="bottom-grid" style="margin-bottom: 0;">
             <div class="box">
-                <div class="box-title">FUNCIÃ“N ECOSISTÃ‰MICA</div>
+                <div class="box-title">FUNCIÓN ECOSISTÉMICA</div>
                 <textarea style="height: 6.4em;"></textarea>
             </div>
             
             <div class="box iucn-fix">
-                <div class="box-title">ESTADO DE CONSERVACIÃ“N (IUCN)</div>
+                <div class="box-title">ESTADO DE CONSERVACIÓN (IUCN)</div>
                 <div class="iucn-container">
                     <div class="iucn-item">
                         <label>
                             <input type="radio" name="iucn" value="lc">
                             <div class="iucn-circle bg-lc">LC</div>
                         </label>
-                        <span>PreocupaciÃ³n Menor</span>
+                        <span>Preocupación Menor</span>
                     </div>
                     <div class="iucn-item">
                         <label>
@@ -553,7 +553,7 @@
                             <input type="radio" name="iucn" value="cr">
                             <div class="iucn-circle bg-cr">CR</div>
                         </label>
-                        <span>En Peligro CrÃ­tico</span>
+                        <span>En Peligro Crítico</span>
                     </div>
                 </div>
                 <div class="row-inline" style="margin-top: 5px;">
@@ -566,7 +566,7 @@
     </div>
 
     <button class="btn-imprimir" onclick="window.print()">
-        <i class="fa-solid fa-file-pdf"></i> DESCARGAR COMO PDF (TAMAÃ‘O CARTA)
+        <i class="fa-solid fa-file-pdf"></i> DESCARGAR COMO PDF (TAMAÑO CARTA)
     </button>
 
     <script>

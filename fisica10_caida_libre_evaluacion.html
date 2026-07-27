@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvaluaciÃ³n â€” CaÃ­da Libre Â· LabVirtual W</title>
-    <meta name="description" content="EvaluaciÃ³n de 10 preguntas de selecciÃ³n mÃºltiple sobre CaÃ­da Libre para FÃ­sica 10Â°.">
+    <title>Evaluación — Caída Libre · LabVirtual W</title>
+    <meta name="description" content="Evaluación de 10 preguntas de selección múltiple sobre Caída Libre para Física 10°.">
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸ“</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -68,7 +68,7 @@
         .opcion-label { display: flex; align-items: center; padding: 14px 18px; cursor: pointer; color: #ddd; font-size: 1rem; }
         .opcion-label input[type="radio"] { margin-right: 14px; cursor: pointer; transform: scale(1.2); accent-color: var(--color-caida); }
 
-        /* Estados ValidaciÃ³n */
+        /* Estados Validación */
         .opcion-item.correcta { background: rgba(46,204,113,0.2); border-color: var(--color-exito); }
         .opcion-item.correcta .opcion-label { color: #fff; font-weight: bold; }
         .opcion-item.incorrecta { background: rgba(231,76,60,0.2); border-color: var(--color-error); opacity: 0.7; }
@@ -78,7 +78,7 @@
         .incorrecta .icono-resultado { display: block; color: var(--color-error); }
         .elegida-incorrecta .icono-resultado { display: block; color: var(--color-error); }
 
-        /* EXPLICACIÃ“N DE RESPUESTA */
+        /* EXPLICACIÓN DE RESPUESTA */
         .explicacion { display: none; margin-top: 14px; padding: 12px 16px; background: rgba(46,204,113,0.08); border-left: 3px solid var(--color-exito); border-radius: 0 6px 6px 0; font-size: 0.9rem; color: #ccc; line-height: 1.6; }
 
         /* CONTROLES */
@@ -99,7 +99,7 @@
         .btn-reintentar { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 28px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; margin: 5px; }
         .btn-reintentar:hover { background: rgba(255,255,255,0.2); }
 
-        /* ENVÃO A DRIVE */
+        /* ENVÍO A DRIVE */
         .estado-envio { margin-top: 20px; padding: 12px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; display: none; }
         .envio-ok { background: rgba(46,204,113,0.15); border: 1px solid var(--color-exito); color: var(--color-exito); }
         .envio-error { background: rgba(231,76,60,0.15); border: 1px solid var(--color-error); color: var(--color-error); }
@@ -120,34 +120,34 @@
     <a href="index.html" class="logo"><i class="fas fa-flask"></i> LabVirtual W</a>
     <ul class="menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> FÃ­sica 10</a></li>
-        <li><a href="fisica10_caida_libre.html"><i class="fas fa-arrow-left"></i> CaÃ­da Libre</a></li>
+        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10</a></li>
+        <li><a href="fisica10_caida_libre.html"><i class="fas fa-arrow-left"></i> Caída Libre</a></li>
     </ul>
 </nav>
 
 <div class="contenedor">
-    <a href="fisica10_caida_libre.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a CaÃ­da Libre</a>
+    <a href="fisica10_caida_libre.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a Caída Libre</a>
 
     <div class="encabezado-eval">
-        <h1>ðŸ“ EvaluaciÃ³n â€” CaÃ­da Libre</h1>
-        <p>FÃ­sica 10Â° Â· 10 preguntas de selecciÃ³n mÃºltiple Â· Lee cada pregunta con cuidado y marca la opciÃ³n correcta.</p>
+        <h1>📝 Evaluación — Caída Libre</h1>
+        <p>Física 10° · 10 preguntas de selección múltiple · Lee cada pregunta con cuidado y marca la opción correcta.</p>
     </div>
 
     <!-- DATOS DEL ESTUDIANTE -->
     <div class="datos-estudiante">
         <div class="input-group">
             <label for="nombre-estudiante"><i class="fas fa-user"></i> Nombre completo</label>
-            <input type="text" id="nombre-estudiante" placeholder="Escribe tu nombre aquÃ­..." required>
+            <input type="text" id="nombre-estudiante" placeholder="Escribe tu nombre aquí..." required>
         </div>
         <div class="input-group">
             <label for="grado-estudiante"><i class="fas fa-graduation-cap"></i> Grado</label>
             <select id="grado-estudiante">
-                <option value="">â€” Selecciona â€”</option>
-                <option value="10A">10Â°A</option>
-                <option value="10B">10Â°B</option>
-                <option value="10C">10Â°C</option>
-                <option value="10D">10Â°D</option>
-                <option value="10E">10Â°E</option>
+                <option value="">— Selecciona —</option>
+                <option value="10A">10°A</option>
+                <option value="10B">10°B</option>
+                <option value="10C">10°C</option>
+                <option value="10D">10°D</option>
+                <option value="10E">10°E</option>
                 <option value="Otro">Otro</option>
             </select>
         </div>
@@ -155,7 +155,7 @@
 
     <!-- INSTRUCCIONES -->
     <div class="instrucciones">
-        <p>âš ï¸ <strong>Instrucciones:</strong> Lee cada pregunta con atenciÃ³n. Selecciona UNA respuesta por pregunta. Al finalizar, haz clic en <strong>"Enviar EvaluaciÃ³n"</strong> para ver tu calificaciÃ³n, la correcciÃ³n de cada pregunta y el resumen que se enviarÃ¡ al profesor.</p>
+        <p>⚠️ <strong>Instrucciones:</strong> Lee cada pregunta con atención. Selecciona UNA respuesta por pregunta. Al finalizar, haz clic en <strong>"Enviar Evaluación"</strong> para ver tu calificación, la corrección de cada pregunta y el resumen que se enviará al profesor.</p>
     </div>
 
     <!-- PREGUNTAS -->
@@ -163,122 +163,122 @@
 
         <!-- P1 -->
         <div class="pregunta-card" id="pc1">
-            <div class="pregunta-texto"><span class="num">1.</span> Â¿CuÃ¡l es el valor de la aceleraciÃ³n de la gravedad (g) en la superficie terrestre?</div>
+            <div class="pregunta-texto"><span class="num">1.</span> ¿Cuál es el valor de la aceleración de la gravedad (g) en la superficie terrestre?</div>
             <ul class="opciones-lista">
-                <li class="opcion-item" data-q="1" data-v="a"><label class="opcion-label"><input type="radio" name="q1" value="a"> a) 10 m/sÂ² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="1" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q1" value="b"> b) 9.8 m/sÂ² <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="1" data-v="a"><label class="opcion-label"><input type="radio" name="q1" value="a"> a) 10 m/s² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="1" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q1" value="b"> b) 9.8 m/s² <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="1" data-v="c"><label class="opcion-label"><input type="radio" name="q1" value="c"> c) 9.8 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="1" data-v="d"><label class="opcion-label"><input type="radio" name="q1" value="d"> d) 6.67 m/sÂ² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="1" data-v="d"><label class="opcion-label"><input type="radio" name="q1" value="d"> d) 6.67 m/s² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">La aceleraciÃ³n gravitacional en la superficie terrestre es exactamente <strong>g = 9.8 m/sÂ²</strong>. Este valor es una constante universal que actÃºa siempre hacia el centro de la Tierra.</div>
+            <div class="explicacion">La aceleración gravitacional en la superficie terrestre es exactamente <strong>g = 9.8 m/s²</strong>. Este valor es una constante universal que actúa siempre hacia el centro de la Tierra.</div>
         </div>
 
         <!-- P2 -->
         <div class="pregunta-card" id="pc2">
-            <div class="pregunta-texto"><span class="num">2.</span> Un objeto se lanza verticalmente hacia ARRIBA. Â¿QuÃ© signo tiene la gravedad si tomamos como positivo el sentido hacia arriba?</div>
+            <div class="pregunta-texto"><span class="num">2.</span> Un objeto se lanza verticalmente hacia ARRIBA. ¿Qué signo tiene la gravedad si tomamos como positivo el sentido hacia arriba?</div>
             <ul class="opciones-lista">
-                <li class="opcion-item" data-q="2" data-v="a"><label class="opcion-label"><input type="radio" name="q2" value="a"> a) g = +9.8 m/sÂ² (positiva) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="2" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q2" value="b"> b) g = âˆ’9.8 m/sÂ² (negativa) <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="2" data-v="c"><label class="opcion-label"><input type="radio" name="q2" value="c"> c) g = 0 (no actÃºa en la subida) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="2" data-v="a"><label class="opcion-label"><input type="radio" name="q2" value="a"> a) g = +9.8 m/s² (positiva) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="2" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q2" value="b"> b) g = −9.8 m/s² (negativa) <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="2" data-v="c"><label class="opcion-label"><input type="radio" name="q2" value="c"> c) g = 0 (no actúa en la subida) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="2" data-v="d"><label class="opcion-label"><input type="radio" name="q2" value="d"> d) Depende de la masa del objeto <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">Cuando el objeto <strong>sube</strong> y tomamos hacia arriba como positivo, la gravedad actÃºa en sentido contrario (hacia abajo), por tanto <strong>g = âˆ’9.8 m/sÂ²</strong>.</div>
+            <div class="explicacion">Cuando el objeto <strong>sube</strong> y tomamos hacia arriba como positivo, la gravedad actúa en sentido contrario (hacia abajo), por tanto <strong>g = −9.8 m/s²</strong>.</div>
         </div>
 
         <!-- P3 -->
         <div class="pregunta-card" id="pc3">
-            <div class="pregunta-texto"><span class="num">3.</span> En el punto mÃ¡s alto del tiro vertical, Â¿cuÃ¡l es el valor de la velocidad?</div>
+            <div class="pregunta-texto"><span class="num">3.</span> En el punto más alto del tiro vertical, ¿cuál es el valor de la velocidad?</div>
             <ul class="opciones-lista">
-                <li class="opcion-item" data-q="3" data-v="a"><label class="opcion-label"><input type="radio" name="q3" value="a"> a) Es mÃ¡xima <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="3" data-v="a"><label class="opcion-label"><input type="radio" name="q3" value="a"> a) Es máxima <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="3" data-v="b"><label class="opcion-label"><input type="radio" name="q3" value="b"> b) Es igual a la velocidad inicial <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="3" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q3" value="c"> c) Es 0 m/s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="3" data-v="d"><label class="opcion-label"><input type="radio" name="q3" value="d"> d) Es igual a g <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">En el punto mÃ¡s alto, el objeto se detiene momentÃ¡neamente antes de comenzar a bajar, por tanto <strong>vf = 0 m/s</strong>. Sin embargo, la aceleraciÃ³n gravitacional sigue siendo g = 9.8 m/sÂ² hacia abajo.</div>
+            <div class="explicacion">En el punto más alto, el objeto se detiene momentáneamente antes de comenzar a bajar, por tanto <strong>vf = 0 m/s</strong>. Sin embargo, la aceleración gravitacional sigue siendo g = 9.8 m/s² hacia abajo.</div>
         </div>
 
         <!-- P4 -->
         <div class="pregunta-card" id="pc4">
-            <div class="pregunta-texto"><span class="num">4.</span> Â¿CuÃ¡l de las siguientes fÃ³rmulas relaciona la velocidad final con la altura, SIN usar el tiempo?</div>
+            <div class="pregunta-texto"><span class="num">4.</span> ¿Cuál de las siguientes fórmulas relaciona la velocidad final con la altura, SIN usar el tiempo?</div>
             <ul class="opciones-lista">
-                <li class="opcion-item" data-q="4" data-v="a"><label class="opcion-label"><input type="radio" name="q4" value="a"> a) vf = vâ‚€ + gÂ·t <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="4" data-v="b"><label class="opcion-label"><input type="radio" name="q4" value="b"> b) h = vâ‚€Â·t + Â½Â·gÂ·tÂ² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="4" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q4" value="c"> c) vfÂ² = vâ‚€Â² + 2Â·gÂ·h <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="4" data-v="d"><label class="opcion-label"><input type="radio" name="q4" value="d"> d) h = Â½Â·gÂ·tÂ² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="4" data-v="a"><label class="opcion-label"><input type="radio" name="q4" value="a"> a) vf = v₀ + g·t <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="4" data-v="b"><label class="opcion-label"><input type="radio" name="q4" value="b"> b) h = v₀·t + ½·g·t² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="4" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q4" value="c"> c) vf² = v₀² + 2·g·h <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="4" data-v="d"><label class="opcion-label"><input type="radio" name="q4" value="d"> d) h = ½·g·t² <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion"><strong>vfÂ² = vâ‚€Â² + 2Â·gÂ·h</strong> es la fÃ³rmula que relaciona la velocidad final con la altura sin necesitar el tiempo. Es equivalente a la fÃ³rmula del MRUV con "d" reemplazada por "h" y "a" por "g".</div>
+            <div class="explicacion"><strong>vf² = v₀² + 2·g·h</strong> es la fórmula que relaciona la velocidad final con la altura sin necesitar el tiempo. Es equivalente a la fórmula del MRUV con "d" reemplazada por "h" y "a" por "g".</div>
         </div>
 
         <!-- P5 -->
         <div class="pregunta-card" id="pc5">
-            <div class="pregunta-texto"><span class="num">5.</span> Una pelota se suelta desde 20 m de altura (vâ‚€ = 0). Â¿CuÃ¡nto tiempo tarda en llegar al suelo? [Dato: h = Â½Â·gÂ·tÂ²]</div>
+            <div class="pregunta-texto"><span class="num">5.</span> Una pelota se suelta desde 20 m de altura (v₀ = 0). ¿Cuánto tiempo tarda en llegar al suelo? [Dato: h = ½·g·t²]</div>
             <ul class="opciones-lista">
-                <li class="opcion-item" data-q="5" data-v="a"><label class="opcion-label"><input type="radio" name="q5" value="a"> a) t â‰ˆ 1.02 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="5" data-v="b"><label class="opcion-label"><input type="radio" name="q5" value="b"> b) t â‰ˆ 3.00 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="5" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q5" value="c"> c) t â‰ˆ 2.02 s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="5" data-v="d"><label class="opcion-label"><input type="radio" name="q5" value="d"> d) t â‰ˆ 4.08 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="5" data-v="a"><label class="opcion-label"><input type="radio" name="q5" value="a"> a) t ≈ 1.02 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="5" data-v="b"><label class="opcion-label"><input type="radio" name="q5" value="b"> b) t ≈ 3.00 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="5" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q5" value="c"> c) t ≈ 2.02 s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="5" data-v="d"><label class="opcion-label"><input type="radio" name="q5" value="d"> d) t ≈ 4.08 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">Despejando t: t = âˆš(2h/g) = âˆš(2Ã—20/9.8) = âˆš(4.08) â‰ˆ <strong>2.02 segundos</strong>.</div>
+            <div class="explicacion">Despejando t: t = √(2h/g) = √(2×20/9.8) = √(4.08) ≈ <strong>2.02 segundos</strong>.</div>
         </div>
 
         <!-- P6 -->
         <div class="pregunta-card" id="pc6">
-            <div class="pregunta-texto"><span class="num">6.</span> Un objeto es lanzado verticalmente hacia arriba con 14.7 m/s. Â¿CuÃ¡nto tiempo tarda en llegar al punto mÃ¡s alto?</div>
+            <div class="pregunta-texto"><span class="num">6.</span> Un objeto es lanzado verticalmente hacia arriba con 14.7 m/s. ¿Cuánto tiempo tarda en llegar al punto más alto?</div>
             <ul class="opciones-lista">
                 <li class="opcion-item" data-q="6" data-v="a"><label class="opcion-label"><input type="radio" name="q6" value="a"> a) 0.5 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="6" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q6" value="b"> b) 1.5 s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="6" data-v="c"><label class="opcion-label"><input type="radio" name="q6" value="c"> c) 2.0 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="6" data-v="d"><label class="opcion-label"><input type="radio" name="q6" value="d"> d) 3.0 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">t = (vf âˆ’ vâ‚€)/g = (0 âˆ’ 14.7)/(âˆ’9.8) = <strong>1.5 segundos</strong>.</div>
+            <div class="explicacion">t = (vf − v₀)/g = (0 − 14.7)/(−9.8) = <strong>1.5 segundos</strong>.</div>
         </div>
 
         <!-- P7 -->
         <div class="pregunta-card" id="pc7">
-            <div class="pregunta-texto"><span class="num">7.</span> Si el tiempo de subida de un objeto lanzado hacia arriba es de 3 segundos, Â¿cuÃ¡nto tiempo tarda en regresar al punto de lanzamiento? (Suponiendo que cae al mismo nivel)</div>
+            <div class="pregunta-texto"><span class="num">7.</span> Si el tiempo de subida de un objeto lanzado hacia arriba es de 3 segundos, ¿cuánto tiempo tarda en regresar al punto de lanzamiento? (Suponiendo que cae al mismo nivel)</div>
             <ul class="opciones-lista">
                 <li class="opcion-item" data-q="7" data-v="a"><label class="opcion-label"><input type="radio" name="q7" value="a"> a) 3 s (solo el tiempo de bajada) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="7" data-v="b" data-correct="true"><label class="opcion-label"><input type="radio" name="q7" value="b"> b) 6 s (subida + bajada) <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="7" data-v="c"><label class="opcion-label"><input type="radio" name="q7" value="c"> c) 4.5 s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="7" data-v="d"><label class="opcion-label"><input type="radio" name="q7" value="d"> d) Depende de la velocidad inicial <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">Por simetrÃ­a del movimiento, el tiempo de bajada = tiempo de subida. Por tanto, <strong>t_total = 2 Ã— 3 = 6 segundos</strong>.</div>
+            <div class="explicacion">Por simetría del movimiento, el tiempo de bajada = tiempo de subida. Por tanto, <strong>t_total = 2 × 3 = 6 segundos</strong>.</div>
         </div>
 
         <!-- P8 -->
         <div class="pregunta-card" id="pc8">
-            <div class="pregunta-texto"><span class="num">8.</span> Un objeto en caÃ­da libre (vâ‚€ = 0) cae durante 4 segundos. Â¿Con quÃ© velocidad llega al suelo?</div>
+            <div class="pregunta-texto"><span class="num">8.</span> Un objeto en caída libre (v₀ = 0) cae durante 4 segundos. ¿Con qué velocidad llega al suelo?</div>
             <ul class="opciones-lista">
                 <li class="opcion-item" data-q="8" data-v="a"><label class="opcion-label"><input type="radio" name="q8" value="a"> a) 19.6 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="8" data-v="b"><label class="opcion-label"><input type="radio" name="q8" value="b"> b) 29.4 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="8" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q8" value="c"> c) 39.2 m/s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="8" data-v="d"><label class="opcion-label"><input type="radio" name="q8" value="d"> d) 78.4 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">vf = vâ‚€ + gÂ·t = 0 + (9.8)(4) = <strong>39.2 m/s</strong>.</div>
+            <div class="explicacion">vf = v₀ + g·t = 0 + (9.8)(4) = <strong>39.2 m/s</strong>.</div>
         </div>
 
         <!-- P9 -->
         <div class="pregunta-card" id="pc9">
-            <div class="pregunta-texto"><span class="num">9.</span> En el movimiento de CaÃ­da Libre, Â¿quÃ© variable de las fÃ³rmulas del M.R.U.V. es reemplazada por "h"?</div>
+            <div class="pregunta-texto"><span class="num">9.</span> En el movimiento de Caída Libre, ¿qué variable de las fórmulas del M.R.U.V. es reemplazada por "h"?</div>
             <ul class="opciones-lista">
                 <li class="opcion-item" data-q="9" data-v="a"><label class="opcion-label"><input type="radio" name="q9" value="a"> a) La velocidad (v) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="9" data-v="b"><label class="opcion-label"><input type="radio" name="q9" value="b"> b) El tiempo (t) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="9" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q9" value="c"> c) La distancia (d) <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
-                <li class="opcion-item" data-q="9" data-v="d"><label class="opcion-label"><input type="radio" name="q9" value="d"> d) La aceleraciÃ³n (a) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
+                <li class="opcion-item" data-q="9" data-v="d"><label class="opcion-label"><input type="radio" name="q9" value="d"> d) La aceleración (a) <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">En CaÃ­da Libre, "a" se reemplaza por "g" (gravedad) y <strong>"d" (distancia) se reemplaza por "h" (altura)</strong>. El resto de las fÃ³rmulas es idÃ©ntico al M.R.U.V.</div>
+            <div class="explicacion">En Caída Libre, "a" se reemplaza por "g" (gravedad) y <strong>"d" (distancia) se reemplaza por "h" (altura)</strong>. El resto de las fórmulas es idéntico al M.R.U.V.</div>
         </div>
 
         <!-- P10 -->
         <div class="pregunta-card" id="pc10">
-            <div class="pregunta-texto"><span class="num">10.</span> Una piedra es lanzada hacia arriba con 19.6 m/s desde el borde de un pozo. La piedra sube, baja y cae al fondo del pozo que estÃ¡ 20 m por debajo del punto de lanzamiento. Â¿Con quÃ© velocidad llega al fondo? [Dato: vfÂ² = vâ‚€Â² + 2Â·gÂ·h, con h = âˆ’20 m y g = âˆ’9.8 m/sÂ²]</div>
+            <div class="pregunta-texto"><span class="num">10.</span> Una piedra es lanzada hacia arriba con 19.6 m/s desde el borde de un pozo. La piedra sube, baja y cae al fondo del pozo que está 20 m por debajo del punto de lanzamiento. ¿Con qué velocidad llega al fondo? [Dato: vf² = v₀² + 2·g·h, con h = −20 m y g = −9.8 m/s²]</div>
             <ul class="opciones-lista">
                 <li class="opcion-item" data-q="10" data-v="a"><label class="opcion-label"><input type="radio" name="q10" value="a"> a) 19.6 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="10" data-v="b"><label class="opcion-label"><input type="radio" name="q10" value="b"> b) 24.1 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="10" data-v="c" data-correct="true"><label class="opcion-label"><input type="radio" name="q10" value="c"> c) 27.1 m/s <span class="icono-resultado"><i class="fas fa-check-circle"></i></span></label></li>
                 <li class="opcion-item" data-q="10" data-v="d"><label class="opcion-label"><input type="radio" name="q10" value="d"> d) 39.2 m/s <span class="icono-resultado"><i class="fas fa-times-circle"></i></span></label></li>
             </ul>
-            <div class="explicacion">vfÂ² = (19.6)Â² + 2(âˆ’9.8)(âˆ’20) = 384.16 + 392 = 776.16 â†’ vf = âˆš776.16 â‰ˆ <strong>27.1 m/s</strong> (hacia abajo).</div>
+            <div class="explicacion">vf² = (19.6)² + 2(−9.8)(−20) = 384.16 + 392 = 776.16 → vf = √776.16 ≈ <strong>27.1 m/s</strong> (hacia abajo).</div>
         </div>
 
     </div><!-- /.eval-form -->
@@ -286,7 +286,7 @@
     <!-- CONTROLES -->
     <div class="controles-eval">
         <button class="btn-enviar" id="btn-enviar" onclick="enviarEvaluacion()">
-            <i class="fas fa-paper-plane"></i> Enviar EvaluaciÃ³n
+            <i class="fas fa-paper-plane"></i> Enviar Evaluación
         </button>
 
         <!-- PANEL DE RESULTADOS -->
@@ -304,29 +304,29 @@
                 <i class="fas fa-redo"></i> Intentar de nuevo
             </button>
             <button class="btn-reintentar" onclick="location.href='fisica10_caida_libre_practica.html'">
-                <i class="fas fa-gamepad"></i> Ir a la PrÃ¡ctica
+                <i class="fas fa-gamepad"></i> Ir a la Práctica
             </button>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>LabVirtual W Â· FÃ­sica 10Â° Â· EvaluaciÃ³n â€” CaÃ­da Libre &copy; 2025</p>
+    <p>LabVirtual W · Física 10° · Evaluación — Caída Libre &copy; 2025</p>
 </footer>
 
 <!-- Prof. IA -->
 <script src="profe-ia.js"></script>
 
 <script>
-// â”€â”€â”€ URL DEL GOOGLE APPS SCRIPT (Web App) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// Para configurar el envÃ­o a Google Sheets:
+// ─── URL DEL GOOGLE APPS SCRIPT (Web App) ─────────────────────────────────────
+// Para configurar el envío a Google Sheets:
 // 1. Ve a tu Google Sheets y crea una hoja llamada "Caida Libre"
-// 2. En el menÃº, ve a Extensiones â†’ Apps Script
-// 3. Pega el cÃ³digo de Apps Script provisto por tu profesor/LabVirtual
-// 4. Despliega como "App web" y copia la URL aquÃ­ abajo
-const APPS_SCRIPT_URL = ""; // â† PEGAR AQUÃ LA URL DEL WEB APP DE GOOGLE APPS SCRIPT
+// 2. En el menú, ve a Extensiones → Apps Script
+// 3. Pega el código de Apps Script provisto por tu profesor/LabVirtual
+// 4. Despliega como "App web" y copia la URL aquí abajo
+const APPS_SCRIPT_URL = ""; // ← PEGAR AQUÍ LA URL DEL WEB APP DE GOOGLE APPS SCRIPT
 
-// â”€â”€â”€ RESPUESTAS CORRECTAS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── RESPUESTAS CORRECTAS ─────────────────────────────────────────────────────
 const CORRECTAS = { q1:'b', q2:'b', q3:'c', q4:'c', q5:'c', q6:'b', q7:'b', q8:'c', q9:'c', q10:'c' };
 
 function enviarEvaluacion() {
@@ -359,7 +359,7 @@ function enviarEvaluacion() {
             }
         });
 
-        // Mostrar explicaciÃ³n
+        // Mostrar explicación
         const cardId = `pc${q}`;
         const expl = document.querySelector(`#${cardId} .explicacion`);
         if (expl) expl.style.display = 'block';
@@ -377,21 +377,21 @@ function enviarEvaluacion() {
     const panel = document.getElementById('panel-resultado');
     panel.classList.add('activo');
 
-    document.getElementById('emoji-resultado').textContent = aprobado ? 'ðŸŽ‰' : 'ðŸ“š';
+    document.getElementById('emoji-resultado').textContent = aprobado ? '🎉' : '📚';
     const notaEl = document.getElementById('nota-final');
     notaEl.textContent = puntaje.toFixed(1) + ' / 10';
     notaEl.className = 'nota-final ' + (aprobado ? 'nota-aprobado' : 'nota-reprobado');
 
     document.getElementById('mensaje-nota').textContent = aprobado
-        ? 'Â¡Felicitaciones! Aprobaste la evaluaciÃ³n de CaÃ­da Libre.'
-        : 'No alcanzaste el mÃ­nimo. Â¡Repasa el tema y vuelve a intentarlo!';
+        ? '¡Felicitaciones! Aprobaste la evaluación de Caída Libre.'
+        : 'No alcanzaste el mínimo. ¡Repasa el tema y vuelve a intentarlo!';
 
     document.getElementById('detalle-nota').textContent =
-        `${nombre} Â· Grado ${grado} Â· Respuestas correctas: ${correctas}/10`;
+        `${nombre} · Grado ${grado} · Respuestas correctas: ${correctas}/10`;
 
     panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    // Enviar a Google Sheets si la URL estÃ¡ configurada
+    // Enviar a Google Sheets si la URL está configurada
     if (APPS_SCRIPT_URL) {
         const estadoEnvio = document.getElementById('estado-envio');
         estadoEnvio.className = 'estado-envio envio-loading';
@@ -402,7 +402,7 @@ function enviarEvaluacion() {
             timestamp: new Date().toLocaleString('es-CO'),
             nombre,
             grado,
-            tema: 'CaÃ­da Libre',
+            tema: 'Caída Libre',
             puntaje: puntaje.toFixed(1),
             correctas,
             total: 10,
@@ -416,10 +416,10 @@ function enviarEvaluacion() {
             body: JSON.stringify(payload)
         }).then(() => {
             estadoEnvio.className = 'estado-envio envio-ok';
-            estadoEnvio.innerHTML = '<i class="fas fa-check-circle"></i> âœ… Resultados enviados al profesor correctamente.';
+            estadoEnvio.innerHTML = '<i class="fas fa-check-circle"></i> ✅ Resultados enviados al profesor correctamente.';
         }).catch(() => {
             estadoEnvio.className = 'estado-envio envio-error';
-            estadoEnvio.innerHTML = '<i class="fas fa-exclamation-triangle"></i> âŒ No se pudieron enviar los resultados. MuÃ©strale esta pantalla al profesor.';
+            estadoEnvio.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ❌ No se pudieron enviar los resultados. Muéstrale esta pantalla al profesor.';
         });
     }
 }

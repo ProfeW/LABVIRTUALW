@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvaluaciÃ³n: Suma y Resta de Vectores - LabVirtual W</title>
+    <title>Evaluación: Suma y Resta de Vectores - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -57,11 +57,11 @@
         </a>
 
         <div class="evaluacion-container">
-            <h1>EvaluaciÃ³n: Suma y Resta</h1>
+            <h1>Evaluación: Suma y Resta</h1>
             
             <form id="quizForm">
                 <div class="pregunta">
-                    <h3>1. Si \(\vec{A} = (2, 4)\) y \(\vec{B} = (3, -1)\), Â¿CuÃ¡l es \(\vec{A} + \vec{B}\)?</h3>
+                    <h3>1. Si \(\vec{A} = (2, 4)\) y \(\vec{B} = (3, -1)\), ¿Cuál es \(\vec{A} + \vec{B}\)?</h3>
                     <div class="opciones">
                         <label><input type="radio" name="q1" value="a"> (5, 3)</label>
                         <label><input type="radio" name="q1" value="b"> (-1, 5)</label>
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="pregunta">
-                    <h3>2. Si \(\vec{P} = (5, 5)\) y \(\vec{Q} = (2, 2)\), Â¿CuÃ¡l es \(\vec{P} - \vec{Q}\)?</h3>
+                    <h3>2. Si \(\vec{P} = (5, 5)\) y \(\vec{Q} = (2, 2)\), ¿Cuál es \(\vec{P} - \vec{Q}\)?</h3>
                     <div class="opciones">
                         <label><input type="radio" name="q2" value="a"> (7, 7)</label>
                         <label><input type="radio" name="q2" value="b"> (3, 3)</label>
@@ -82,7 +82,7 @@
             </form>
 
             <div id="resultados">
-                <h2>Â¡EvaluaciÃ³n Completada!</h2>
+                <h2>¡Evaluación Completada!</h2>
                 <p id="puntajeTexto" style="font-size:1.2rem;"></p>
             </div>
         </div>
@@ -104,10 +104,10 @@
             form.style.display = 'none';
             const resultados = document.getElementById('resultados');
             resultados.style.display = 'block';
-            document.getElementById('puntajeTexto').innerText = `Tu calificaciÃ³n es: ${puntaje} / 100`;
+            document.getElementById('puntajeTexto').innerText = `Tu calificación es: ${puntaje} / 100`;
             
             if(puntaje < 100) {
-                resultados.innerHTML += `<p style="margin-top:15px; font-size:0.9rem;">Te sugerimos repasar la suma y resta analÃ­tica de componentes y volver a intentarlo.</p>`;
+                resultados.innerHTML += `<p style="margin-top:15px; font-size:0.9rem;">Te sugerimos repasar la suma y resta analítica de componentes y volver a intentarlo.</p>`;
             }
         }
     </script>

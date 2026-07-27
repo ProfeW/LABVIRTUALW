@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica: MÃ©todo del Paralelogramo - LabVirtual W</title>
+    <title>Práctica: Método del Paralelogramo - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -85,21 +85,21 @@
             <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> FÃ­sica 10</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <a href="fisica10_vectores_paralelogramo.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
+        <a href="fisica10_vectores_paralelogramo.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
         <div class="header-tema">
-            <h1>Reto de PrÃ¡ctica: Ley del Coseno</h1>
-            <p>Aplica el mÃ©todo del paralelogramo paso a paso. Son 5 ejercicios donde pondrÃ¡s a prueba la fÃ³rmula maestra.</p>
+            <h1>Reto de Práctica: Ley del Coseno</h1>
+            <p>Aplica el método del paralelogramo paso a paso. Son 5 ejercicios donde pondrás a prueba la fórmula maestra.</p>
         </div>
 
         <div class="progreso-container" id="progreso-container">
-            <!-- Se generarÃ¡ con JS -->
+            <!-- Se generará con JS -->
         </div>
 
         <div id="ejercicios-container">
@@ -107,27 +107,27 @@
         </div>
         
         <div id="mensaje-final" style="display:none; text-align:center; padding: 40px; background: rgba(46,204,113,0.1); border-radius: 20px; border: 2px solid #2ecc71;">
-            <h2>Â¡Reto Superado!</h2>
-            <p style="margin-bottom: 20px;">Has completado los 5 ejercicios del MÃ©todo del Paralelogramo.</p>
-            <a href="fisica10_vectores_paralelogramo_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la EvaluaciÃ³n Final</a>
+            <h2>¡Reto Superado!</h2>
+            <p style="margin-bottom: 20px;">Has completado los 5 ejercicios del Método del Paralelogramo.</p>
+            <a href="fisica10_vectores_paralelogramo_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la Evaluación Final</a>
         </div>
 
     </main>
 
     <script>
         const dataEjercicios = [
-            { id: 1, text: "Dos mulas tiran de un tronco. Mula A con 3 N y Mula B con 4 N. Ãngulo: 60Â°. (\\(\\cos(60^\\circ) = 0.5\\))", magA: 3, magB: 4, cosT: 0.5, pista1: "3 al cuadrado es 9. 4 al cuadrado es 16. SÃºmalos.", pista2: "Multiplica 2 * 3 * 4 * 0.5." },
+            { id: 1, text: "Dos mulas tiran de un tronco. Mula A con 3 N y Mula B con 4 N. Ángulo: 60°. (\\(\\cos(60^\\circ) = 0.5\\))", magA: 3, magB: 4, cosT: 0.5, pista1: "3 al cuadrado es 9. 4 al cuadrado es 16. Súmalos.", pista2: "Multiplica 2 * 3 * 4 * 0.5." },
             
-            { id: 2, text: "Dos bueyes tiran de una carreta. El primero con 6 N y el segundo con 8 N. El Ã¡ngulo es 60Â°. (\\(\\cos(60^\\circ) = 0.5\\))", magA: 6, magB: 8, cosT: 0.5, pista1: "Suma los cuadrados de 6 y 8 (36 + 64).", pista2: "2 * 6 * 8 * 0.5." },
+            { id: 2, text: "Dos bueyes tiran de una carreta. El primero con 6 N y el segundo con 8 N. El ángulo es 60°. (\\(\\cos(60^\\circ) = 0.5\\))", magA: 6, magB: 8, cosT: 0.5, pista1: "Suma los cuadrados de 6 y 8 (36 + 64).", pista2: "2 * 6 * 8 * 0.5." },
             
-            { id: 3, text: "Dos trabajadores jalan una malla protectora con fuerzas de 5 N y 5 N. Ãngulo de 120Â°. (\\(\\cos(120^\\circ) = -0.5\\))", magA: 5, magB: 5, cosT: -0.5, pista1: "25 + 25.", pista2: "Ojo al signo: 2 * 5 * 5 * (-0.5)." },
+            { id: 3, text: "Dos trabajadores jalan una malla protectora con fuerzas de 5 N y 5 N. Ángulo de 120°. (\\(\\cos(120^\\circ) = -0.5\\))", magA: 5, magB: 5, cosT: -0.5, pista1: "25 + 25.", pista2: "Ojo al signo: 2 * 5 * 5 * (-0.5)." },
             
-            { id: 4, text: "Un tractor jala con 10 kN y otro con 15 kN. El Ã¡ngulo entre ellos es 90Â°. (\\(\\cos(90^\\circ) = 0\\))", magA: 10, magB: 15, cosT: 0, pista1: "100 + 225.", pista2: "Todo multiplicado por cero da cero." },
+            { id: 4, text: "Un tractor jala con 10 kN y otro con 15 kN. El ángulo entre ellos es 90°. (\\(\\cos(90^\\circ) = 0\\))", magA: 10, magB: 15, cosT: 0, pista1: "100 + 225.", pista2: "Todo multiplicado por cero da cero." },
             
-            { id: 5, text: "Ãšltimo reto: Fuerzas de 7 N y 10 N formando un Ã¡ngulo agudo extremo donde \\(\\cos(\\theta) = 0.8\\).", magA: 7, magB: 10, cosT: 0.8, pista1: "49 + 100.", pista2: "2 * 7 * 10 * 0.8. Multiplica todo." }
+            { id: 5, text: "Último reto: Fuerzas de 7 N y 10 N formando un ángulo agudo extremo donde \\(\\cos(\\theta) = 0.8\\).", magA: 7, magB: 10, cosT: 0.8, pista1: "49 + 100.", pista2: "2 * 7 * 10 * 0.8. Multiplica todo." }
         ];
 
-        // Calcular respuestas esperadas automÃ¡ticamente
+        // Calcular respuestas esperadas automáticamente
         dataEjercicios.forEach(ex => {
             ex.cuadrados = ex.magA * ex.magA + ex.magB * ex.magB;
             ex.interaccion = 2 * ex.magA * ex.magB * ex.cosT;
@@ -155,13 +155,13 @@
                 
                 div.innerHTML = `
                     <div class="formula-maestra">
-                        FÃ³rmula Maestra: \\( |\\vec{R}| = \\sqrt{|\\vec{A}|^2 + |\\vec{B}|^2 + 2|\\vec{A}||\\vec{B}|\\cos(\\theta)} \\)
+                        Fórmula Maestra: \\( |\\vec{R}| = \\sqrt{|\\vec{A}|^2 + |\\vec{B}|^2 + 2|\\vec{A}||\\vec{B}|\\cos(\\theta)} \\)
                     </div>
                     <div class="enunciado">${ex.text}</div>
                     
                     <div class="paso activo" id="ex${ex.id}-paso1">
-                        <h3>Paso 1: Primera parte de la fÃ³rmula (Cuadrados)</h3>
-                        <p>Vamos a calcular la primera parte: \\(|\\vec{A}|^2 + |\\vec{B}|^2\\). Eleva al cuadrado ambas fuerzas numÃ©ricas y sÃºmalas.</p>
+                        <h3>Paso 1: Primera parte de la fórmula (Cuadrados)</h3>
+                        <p>Vamos a calcular la primera parte: \\(|\\vec{A}|^2 + |\\vec{B}|^2\\). Eleva al cuadrado ambas fuerzas numéricas y súmalas.</p>
                         <div class="input-group">
                             <label>Suma de cuadrados =</label>
                             <input type="number" id="input-ex${ex.id}-p1" placeholder="Ej. 100">
@@ -172,10 +172,10 @@
                     </div>
 
                     <div class="paso" id="ex${ex.id}-paso2">
-                        <h3>Paso 2: TÃ©rmino de interacciÃ³n (Coseno)</h3>
-                        <p>Ahora calculamos: \\( 2 \\cdot |\\vec{A}| \\cdot |\\vec{B}| \\cdot \\cos(\\theta) \\). Multiplica el nÃºmero 2 por la magnitud A, luego por la B, y finalmente por el valor del coseno que te dieron.</p>
+                        <h3>Paso 2: Término de interacción (Coseno)</h3>
+                        <p>Ahora calculamos: \\( 2 \\cdot |\\vec{A}| \\cdot |\\vec{B}| \\cdot \\cos(\\theta) \\). Multiplica el número 2 por la magnitud A, luego por la B, y finalmente por el valor del coseno que te dieron.</p>
                         <div class="input-group">
-                            <label>TÃ©rmino interacciÃ³n =</label>
+                            <label>Término interacción =</label>
                             <input type="number" step="0.1" id="input-ex${ex.id}-p2" placeholder="Ej. 50">
                             <button class="btn-validar" id="btn-ex${ex.id}-p2" onclick="validarPaso(${ex.id}, 2, ${ex.interaccion})">Comprobar</button>
                         </div>
@@ -185,7 +185,7 @@
 
                     <div class="paso" id="ex${ex.id}-paso3">
                         <h3>Paso 3: Sumar todo y calcular Magnitud Resultante</h3>
-                        <p>Suma los resultados del Paso 1 y del Paso 2. A ese gran total, sÃ¡cale la raÃ­z cuadrada para hallar \\(|\\vec{R}|\\). (Redondea a 1 decimal si es necesario).</p>
+                        <p>Suma los resultados del Paso 1 y del Paso 2. A ese gran total, sácale la raíz cuadrada para hallar \\(|\\vec{R}|\\). (Redondea a 1 decimal si es necesario).</p>
                         <div class="input-group">
                             <label>\\(|\\vec{R}| =\\)</label>
                             <input type="number" step="0.1" id="input-ex${ex.id}-p3" placeholder="Ej. 10.5">
@@ -212,7 +212,7 @@
 
             if(isNaN(val)) {
                 feedback.className = "feedback error";
-                feedback.innerHTML = "Por favor ingresa un nÃºmero vÃ¡lido.";
+                feedback.innerHTML = "Por favor ingresa un número válido.";
                 return;
             }
 
@@ -222,7 +222,7 @@
 
             if(correcto) {
                 feedback.className = "feedback exito";
-                feedback.innerHTML = "<i class='fa-solid fa-check'></i> Â¡Correcto!";
+                feedback.innerHTML = "<i class='fa-solid fa-check'></i> ¡Correcto!";
                 input.disabled = true;
                 btn.style.display = 'none';
                 pistaBox.style.display = 'none';
@@ -243,11 +243,11 @@
             } else {
                 intentosPaso[idEx][numPaso]++;
                 feedback.className = "feedback error";
-                feedback.innerHTML = "<i class='fa-solid fa-xmark'></i> Incorrecto, revisa tu cÃ¡lculo.";
+                feedback.innerHTML = "<i class='fa-solid fa-xmark'></i> Incorrecto, revisa tu cálculo.";
                 
                 if(intentosPaso[idEx][numPaso] >= 2) {
                     let dat = dataEjercicios[idEx-1];
-                    let textPista = "Suma el paso 1 y 2, y luego saca la raÃ­z cuadrada.";
+                    let textPista = "Suma el paso 1 y 2, y luego saca la raíz cuadrada.";
                     if(numPaso===1) textPista = dat.pista1;
                     if(numPaso===2) textPista = dat.pista2;
                     

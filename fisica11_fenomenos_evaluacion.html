@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvaluaciÃ³n: FenÃ³menos Ondulatorios - FÃ­sica 11 - LabVirtual W</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸ“</text></svg>">
+    <title>Evaluación: Fenómenos Ondulatorios - Física 11 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -75,17 +75,17 @@
 <div class="contenedor">
 
     <div id="pantalla-inicio" class="pantalla-inicio">
-        <h1><i class="fa-solid fa-file-signature"></i> EvaluaciÃ³n</h1>
-        <p>FenÃ³menos Ondulatorios Â· FÃ­sica 11Â° Â· Tipo ICFES</p>
+        <h1><i class="fa-solid fa-file-signature"></i> Evaluación</h1>
+        <p>Fenómenos Ondulatorios · Física 11° · Tipo ICFES</p>
         <ul class="reglas">
             <li><i class="fa-solid fa-check"></i> <strong>10 preguntas aleatorias</strong> de un banco de 25 preguntas.</li>
-            <li><i class="fa-solid fa-check"></i> Cada evaluaciÃ³n es <strong>diferente</strong> al ingresar.</li>
+            <li><i class="fa-solid fa-check"></i> Cada evaluación es <strong>diferente</strong> al ingresar.</li>
             <li><i class="fa-solid fa-check"></i> Puedes navegar entre preguntas antes de finalizar.</li>
-            <li><i class="fa-solid fa-check"></i> Al finalizar verÃ¡s tu puntaje y revisiÃ³n completa.</li>
+            <li><i class="fa-solid fa-check"></i> Al finalizar verás tu puntaje y revisión completa.</li>
         </ul>
-        <input type="text" id="input-nombre" class="input-nombre" placeholder="âœï¸ Escribe tu nombre completo" maxlength="60">
+        <input type="text" id="input-nombre" class="input-nombre" placeholder="✏️ Escribe tu nombre completo" maxlength="60">
         <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre.</div><br>
-        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar EvaluaciÃ³n</button>
+        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar Evaluación</button>
     </div>
 
     <div id="seccion-evaluacion" class="seccion-evaluacion">
@@ -105,50 +105,50 @@
     <div id="pantalla-resultado" class="pantalla-resultado">
         <div class="resultado-header">
             <div style="font-size:1rem; color:#aaa; margin-bottom:15px;" id="resultado-nombre"></div>
-            <span class="resultado-emoji" id="resultado-emoji">ðŸ“Š</span>
+            <span class="resultado-emoji" id="resultado-emoji">📊</span>
             <div class="resultado-titulo" id="resultado-titulo"></div>
         </div>
         <div class="score-grid">
-            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">âœ… Correctas</div></div>
-            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">âŒ Incorrectas</div></div>
-            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">ðŸ“Š Porcentaje</div></div>
+            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">✅ Correctas</div></div>
+            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">❌ Incorrectas</div></div>
+            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">📊 Porcentaje</div></div>
         </div>
-        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> RevisiÃ³n de Respuestas</div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión de Respuestas</div>
         <div id="revision-container"></div>
         <div style="text-align:center; margin-top:30px; display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
-            <button onclick="location.reload()" style="padding:14px 28px; background:linear-gradient(135deg,var(--color-tema),#d35400); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:1rem; font-family:'Poppins',sans-serif; font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva EvaluaciÃ³n</button>
-            <a href="fisica11_fenomenos.html" style="padding:14px 28px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:8px; text-decoration:none; font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar TeorÃ­a</a>
+            <button onclick="location.reload()" style="padding:14px 28px; background:linear-gradient(135deg,var(--color-tema),#d35400); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:1rem; font-family:'Poppins',sans-serif; font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva Evaluación</button>
+            <a href="fisica11_fenomenos.html" style="padding:14px 28px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:8px; text-decoration:none; font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
         </div>
     </div>
 </div>
 
 <script>
 const bancoPreguntas = [
-    { texto:"Â¿CuÃ¡l fenÃ³meno ondulatorio ocurre cuando el sonido rebota en una pared y lo escuchamos de nuevo?", opciones:["A. RefracciÃ³n","B. DifracciÃ³n","C. ReflexiÃ³n","D. Resonancia"], respuesta:2 },
-    { texto:"La Ley de ReflexiÃ³n establece que:", opciones:["A. El Ã¡ngulo de incidencia es el doble del Ã¡ngulo de reflexiÃ³n","B. El Ã¡ngulo de incidencia es igual al Ã¡ngulo de reflexiÃ³n","C. La onda reflejada tiene menor frecuencia","D. La velocidad de la onda aumenta al reflejarse"], respuesta:1 },
-    { texto:"Un palo introducido en el agua parece 'doblado'. Esto se debe a:", opciones:["A. ReflexiÃ³n total interna","B. Resonancia del palo","C. DifracciÃ³n en la superficie","D. RefracciÃ³n de la luz al cambiar de medio"], respuesta:3 },
-    { texto:"Â¿En quÃ© fenÃ³meno ondulatorio la frecuencia se conserva pero cambia la velocidad y longitud de onda?", opciones:["A. ReflexiÃ³n","B. Resonancia","C. RefracciÃ³n","D. DifracciÃ³n"], respuesta:2 },
-    { texto:"La difracciÃ³n es mÃ¡s evidente cuando:", opciones:["A. La velocidad de la onda es muy alta","B. El tamaÃ±o del obstÃ¡culo es mucho mayor que la longitud de onda","C. El tamaÃ±o del obstÃ¡culo es comparable a la longitud de onda","D. La amplitud de la onda es pequeÃ±a"], respuesta:2 },
-    { contexto:"Dos altavoces emiten el mismo sonido. En ciertos puntos del cuarto el sonido es mÃ¡s fuerte, y en otros apenas se escucha.", texto:"Â¿QuÃ© fenÃ³meno explica estos puntos de mayor y menor intensidad?", opciones:["A. DifracciÃ³n del sonido","B. Interferencia de ondas","C. ReflexiÃ³n mÃºltiple","D. Resonancia acÃºstica"], respuesta:1 },
-    { texto:"Cuando la cresta de una onda coincide con el valle de otra onda de igual amplitud, el resultado es:", opciones:["A. Interferencia constructiva: se suman","B. Resonancia: se amplifican","C. Interferencia destructiva: se anulan","D. DifracciÃ³n: se dispersan"], respuesta:2 },
-    { texto:"Â¿Por quÃ© los militares no deben marchar al mismo paso sobre un puente?", opciones:["A. Porque generan ondas sonoras que daÃ±an el concreto","B. Porque la resonancia puede acumular energÃ­a y daÃ±ar la estructura","C. Porque la difracciÃ³n de sus pasos debilita el puente","D. Porque la reflexiÃ³n del sonido afecta la comunicaciÃ³n"], respuesta:1 },
-    { texto:"El arcoÃ­ris se forma principalmente por:", opciones:["A. ReflexiÃ³n y refracciÃ³n de la luz en las gotas de lluvia","B. DifracciÃ³n de la luz en las nubes","C. Interferencia constructiva de ondas de luz","D. Resonancia de la luz con las gotas de agua"], respuesta:0 },
-    { texto:"La cancelaciÃ³n de ruido activa en auriculares usa:", opciones:["A. Resonancia para absorber el ruido","B. DifracciÃ³n para desviar las ondas de ruido","C. Interferencia destructiva generando ondas opuestas","D. ReflexiÃ³n para devolver el ruido a la fuente"], respuesta:2 },
-    { texto:"Un rayo de luz pasa del agua al aire. Al pasar a un medio menos denso, el rayo refractado:", opciones:["A. Se acerca a la normal","B. Sigue en lÃ­nea recta","C. Se aleja de la normal","D. Se refleja completamente"], respuesta:2 },
-    { contexto:"Un estudiante observa que puede escuchar la mÃºsica del cuarto de al lado aunque la puerta estÃ© cerrada.", texto:"Â¿QuÃ© fenÃ³meno ondulatorio explica mejor esta situaciÃ³n?", opciones:["A. ReflexiÃ³n del sonido en las paredes","B. Resonancia de la puerta con la mÃºsica","C. DifracciÃ³n del sonido por las ranuras de la puerta","D. Interferencia del sonido con el ruido ambiental"], respuesta:2 },
-    { texto:"Al hablar por telÃ©fono satelital, la seÃ±al viaja del telÃ©fono al satÃ©lite y de regreso. Â¿En cuÃ¡ntos medios distintos se propaga la seÃ±al?", opciones:["A. Solo en el vacÃ­o","B. En el aire y en el vacÃ­o","C. En el satÃ©lite Ãºnicamente","D. Solo en la atmÃ³sfera"], respuesta:1 },
-    { texto:"Â¿CuÃ¡ndo ocurre la reflexiÃ³n total interna?", opciones:["A. Cuando el rayo va de un medio menos denso a uno mÃ¡s denso","B. Cuando el rayo va de un medio mÃ¡s denso a uno menos denso y el Ã¡ngulo supera el Ã¡ngulo crÃ­tico","C. Cuando la frecuencia de la onda supera el umbral del medio","D. Cuando la amplitud de la onda se iguala a la longitud de onda"], respuesta:1 },
-    { texto:"La superposiciÃ³n de dos ondas que viajan en el mismo sentido con la misma fase produce:", opciones:["A. Interferencia destructiva","B. DifracciÃ³n doble","C. Interferencia constructiva","D. Resonancia estable"], respuesta:2 },
-    { texto:"Â¿QuÃ© magnitud se conserva siempre cuando una onda cambia de medio (refracciÃ³n)?", opciones:["A. Velocidad","B. Longitud de onda","C. Amplitud","D. Frecuencia"], respuesta:3 },
-    { contexto:"Una guitarra acÃºstica tiene una caja de resonancia hueca.", texto:"Â¿Para quÃ© sirve esta caja de resonancia?", opciones:["A. Para producir interferencia destructiva y reducir el ruido","B. Para difractar el sonido y hacerlo mÃ¡s suave","C. Para reflejar el sonido y dirigirlo hacia el suelo","D. Para amplificar el sonido mediante resonancia a la frecuencia de las cuerdas"], respuesta:3 },
-    { texto:"Un rayo de luz incide con un Ã¡ngulo de 45Â° sobre un espejo. Â¿Con quÃ© Ã¡ngulo se refleja medido desde la normal?", opciones:["A. 90Â°","B. 45Â°","C. 135Â°","D. 30Â°"], respuesta:1 },
-    { texto:"La difracciÃ³n de las ondas de radio permite recibirlas incluso en valles o detrÃ¡s de montaÃ±as porque:", opciones:["A. Las ondas de radio viajan en lÃ­nea recta sin ningÃºn obstÃ¡culo","B. Las ondas de radio se refractan en la atmÃ³sfera hacia abajo","C. Las ondas de radio se doblan alrededor de los obstÃ¡culos geogrÃ¡ficos","D. Las ondas de radio se reflejan en el suelo mÃºltiples veces"], respuesta:2 },
-    { texto:"Â¿CuÃ¡l fenÃ³meno ondulatorio aprovecha el sonar de un submarino para detectar objetos en el fondo del mar?", opciones:["A. DifracciÃ³n del ultrasonido en el agua","B. Resonancia del casco del submarino","C. ReflexiÃ³n del ultrasonido en los objetos sumergidos","D. Interferencia de las ondas con la presiÃ³n del agua"], respuesta:2 },
-    { texto:"La ley de Snell relaciona:", opciones:["A. Amplitudes de ondas en reflexiÃ³n","B. Frecuencias de ondas al cambiar de medio","C. Ãngulos de incidencia y refracciÃ³n con los Ã­ndices del medio","D. Velocidades de la onda en interferencia"], respuesta:2 },
-    { contexto:"En una piscina de olas artificiales, dos generadores de olas crean patrones donde algunas zonas tienen olas muy grandes y otras estÃ¡n casi en calma.", texto:"Este patrÃ³n es resultado de:", opciones:["A. Resonancia de las olas con la piscina","B. DifracciÃ³n de las olas en los bordes","C. Interferencia constructiva y destructiva de las dos ondas","D. ReflexiÃ³n de las olas en el fondo de la piscina"], respuesta:2 },
-    { texto:"Â¿CuÃ¡ndo una onda mecÃ¡nica pasa de un medio blando a uno mÃ¡s rÃ­gido, su velocidad?", opciones:["A. Disminuye","B. Permanece igual","C. Aumenta","D. Se vuelve cero"], respuesta:2 },
-    { texto:"El fenÃ³meno de interferencia en la luz produce:", opciones:["A. El eco en espacios cerrados","B. Colores iridiscentes en burbujas de jabÃ³n o alas de mariposa","C. La desviaciÃ³n de la luz al pasar por lentes","D. La formaciÃ³n del espectro solar"], respuesta:1 },
-    { texto:"Â¿CuÃ¡l es la diferencia principal entre reflexiÃ³n especular y reflexiÃ³n difusa?", opciones:["A. En la especular la luz se devuelve, en la difusa se refracta","B. En la especular la superficie es lisa y los rayos se reflejan paralelamente; en la difusa la superficie es rugosa y los rayos se dispersan","C. En la especular la frecuencia cambia; en la difusa no","D. La reflexiÃ³n especular ocurre solo con sonido y la difusa solo con luz"], respuesta:1 }
+    { texto:"¿Cuál fenómeno ondulatorio ocurre cuando el sonido rebota en una pared y lo escuchamos de nuevo?", opciones:["A. Refracción","B. Difracción","C. Reflexión","D. Resonancia"], respuesta:2 },
+    { texto:"La Ley de Reflexión establece que:", opciones:["A. El ángulo de incidencia es el doble del ángulo de reflexión","B. El ángulo de incidencia es igual al ángulo de reflexión","C. La onda reflejada tiene menor frecuencia","D. La velocidad de la onda aumenta al reflejarse"], respuesta:1 },
+    { texto:"Un palo introducido en el agua parece 'doblado'. Esto se debe a:", opciones:["A. Reflexión total interna","B. Resonancia del palo","C. Difracción en la superficie","D. Refracción de la luz al cambiar de medio"], respuesta:3 },
+    { texto:"¿En qué fenómeno ondulatorio la frecuencia se conserva pero cambia la velocidad y longitud de onda?", opciones:["A. Reflexión","B. Resonancia","C. Refracción","D. Difracción"], respuesta:2 },
+    { texto:"La difracción es más evidente cuando:", opciones:["A. La velocidad de la onda es muy alta","B. El tamaño del obstáculo es mucho mayor que la longitud de onda","C. El tamaño del obstáculo es comparable a la longitud de onda","D. La amplitud de la onda es pequeña"], respuesta:2 },
+    { contexto:"Dos altavoces emiten el mismo sonido. En ciertos puntos del cuarto el sonido es más fuerte, y en otros apenas se escucha.", texto:"¿Qué fenómeno explica estos puntos de mayor y menor intensidad?", opciones:["A. Difracción del sonido","B. Interferencia de ondas","C. Reflexión múltiple","D. Resonancia acústica"], respuesta:1 },
+    { texto:"Cuando la cresta de una onda coincide con el valle de otra onda de igual amplitud, el resultado es:", opciones:["A. Interferencia constructiva: se suman","B. Resonancia: se amplifican","C. Interferencia destructiva: se anulan","D. Difracción: se dispersan"], respuesta:2 },
+    { texto:"¿Por qué los militares no deben marchar al mismo paso sobre un puente?", opciones:["A. Porque generan ondas sonoras que dañan el concreto","B. Porque la resonancia puede acumular energía y dañar la estructura","C. Porque la difracción de sus pasos debilita el puente","D. Porque la reflexión del sonido afecta la comunicación"], respuesta:1 },
+    { texto:"El arcoíris se forma principalmente por:", opciones:["A. Reflexión y refracción de la luz en las gotas de lluvia","B. Difracción de la luz en las nubes","C. Interferencia constructiva de ondas de luz","D. Resonancia de la luz con las gotas de agua"], respuesta:0 },
+    { texto:"La cancelación de ruido activa en auriculares usa:", opciones:["A. Resonancia para absorber el ruido","B. Difracción para desviar las ondas de ruido","C. Interferencia destructiva generando ondas opuestas","D. Reflexión para devolver el ruido a la fuente"], respuesta:2 },
+    { texto:"Un rayo de luz pasa del agua al aire. Al pasar a un medio menos denso, el rayo refractado:", opciones:["A. Se acerca a la normal","B. Sigue en línea recta","C. Se aleja de la normal","D. Se refleja completamente"], respuesta:2 },
+    { contexto:"Un estudiante observa que puede escuchar la música del cuarto de al lado aunque la puerta esté cerrada.", texto:"¿Qué fenómeno ondulatorio explica mejor esta situación?", opciones:["A. Reflexión del sonido en las paredes","B. Resonancia de la puerta con la música","C. Difracción del sonido por las ranuras de la puerta","D. Interferencia del sonido con el ruido ambiental"], respuesta:2 },
+    { texto:"Al hablar por teléfono satelital, la señal viaja del teléfono al satélite y de regreso. ¿En cuántos medios distintos se propaga la señal?", opciones:["A. Solo en el vacío","B. En el aire y en el vacío","C. En el satélite únicamente","D. Solo en la atmósfera"], respuesta:1 },
+    { texto:"¿Cuándo ocurre la reflexión total interna?", opciones:["A. Cuando el rayo va de un medio menos denso a uno más denso","B. Cuando el rayo va de un medio más denso a uno menos denso y el ángulo supera el ángulo crítico","C. Cuando la frecuencia de la onda supera el umbral del medio","D. Cuando la amplitud de la onda se iguala a la longitud de onda"], respuesta:1 },
+    { texto:"La superposición de dos ondas que viajan en el mismo sentido con la misma fase produce:", opciones:["A. Interferencia destructiva","B. Difracción doble","C. Interferencia constructiva","D. Resonancia estable"], respuesta:2 },
+    { texto:"¿Qué magnitud se conserva siempre cuando una onda cambia de medio (refracción)?", opciones:["A. Velocidad","B. Longitud de onda","C. Amplitud","D. Frecuencia"], respuesta:3 },
+    { contexto:"Una guitarra acústica tiene una caja de resonancia hueca.", texto:"¿Para qué sirve esta caja de resonancia?", opciones:["A. Para producir interferencia destructiva y reducir el ruido","B. Para difractar el sonido y hacerlo más suave","C. Para reflejar el sonido y dirigirlo hacia el suelo","D. Para amplificar el sonido mediante resonancia a la frecuencia de las cuerdas"], respuesta:3 },
+    { texto:"Un rayo de luz incide con un ángulo de 45° sobre un espejo. ¿Con qué ángulo se refleja medido desde la normal?", opciones:["A. 90°","B. 45°","C. 135°","D. 30°"], respuesta:1 },
+    { texto:"La difracción de las ondas de radio permite recibirlas incluso en valles o detrás de montañas porque:", opciones:["A. Las ondas de radio viajan en línea recta sin ningún obstáculo","B. Las ondas de radio se refractan en la atmósfera hacia abajo","C. Las ondas de radio se doblan alrededor de los obstáculos geográficos","D. Las ondas de radio se reflejan en el suelo múltiples veces"], respuesta:2 },
+    { texto:"¿Cuál fenómeno ondulatorio aprovecha el sonar de un submarino para detectar objetos en el fondo del mar?", opciones:["A. Difracción del ultrasonido en el agua","B. Resonancia del casco del submarino","C. Reflexión del ultrasonido en los objetos sumergidos","D. Interferencia de las ondas con la presión del agua"], respuesta:2 },
+    { texto:"La ley de Snell relaciona:", opciones:["A. Amplitudes de ondas en reflexión","B. Frecuencias de ondas al cambiar de medio","C. Ángulos de incidencia y refracción con los índices del medio","D. Velocidades de la onda en interferencia"], respuesta:2 },
+    { contexto:"En una piscina de olas artificiales, dos generadores de olas crean patrones donde algunas zonas tienen olas muy grandes y otras están casi en calma.", texto:"Este patrón es resultado de:", opciones:["A. Resonancia de las olas con la piscina","B. Difracción de las olas en los bordes","C. Interferencia constructiva y destructiva de las dos ondas","D. Reflexión de las olas en el fondo de la piscina"], respuesta:2 },
+    { texto:"¿Cuándo una onda mecánica pasa de un medio blando a uno más rígido, su velocidad?", opciones:["A. Disminuye","B. Permanece igual","C. Aumenta","D. Se vuelve cero"], respuesta:2 },
+    { texto:"El fenómeno de interferencia en la luz produce:", opciones:["A. El eco en espacios cerrados","B. Colores iridiscentes en burbujas de jabón o alas de mariposa","C. La desviación de la luz al pasar por lentes","D. La formación del espectro solar"], respuesta:1 },
+    { texto:"¿Cuál es la diferencia principal entre reflexión especular y reflexión difusa?", opciones:["A. En la especular la luz se devuelve, en la difusa se refracta","B. En la especular la superficie es lisa y los rayos se reflejan paralelamente; en la difusa la superficie es rugosa y los rayos se dispersan","C. En la especular la frecuencia cambia; en la difusa no","D. La reflexión especular ocurre solo con sonido y la difusa solo con luz"], respuesta:1 }
 ];
 
 let preguntasSeleccionadas = [], respuestasUsuario = [], preguntaActual = 0, nombreEstudiante = '';
@@ -162,7 +162,7 @@ function iniciarEvaluacion() {
     respuestasUsuario = new Array(10).fill(null);
     document.getElementById('pantalla-inicio').style.display = 'none';
     document.getElementById('seccion-evaluacion').style.display = 'block';
-    document.getElementById('bienvenida-nombre').textContent = 'ðŸ‘¤ ' + nombreEstudiante;
+    document.getElementById('bienvenida-nombre').textContent = '👤 ' + nombreEstudiante;
     mostrarPregunta(0);
 }
 
@@ -202,7 +202,7 @@ function irAnterior() { if (preguntaActual > 0) mostrarPregunta(preguntaActual -
 
 function finalizarEvaluacion() {
     const sinResp = respuestasUsuario.filter(r => r === null).length;
-    if (sinResp > 0 && !confirm(`Tienes ${sinResp} pregunta(s) sin responder. Â¿Finalizar?`)) return;
+    if (sinResp > 0 && !confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¿Finalizar?`)) return;
     let correctas = 0;
     let revHTML = '';
     preguntasSeleccionadas.forEach((p, i) => {
@@ -210,21 +210,21 @@ function finalizarEvaluacion() {
         const ok = resp === p.respuesta;
         if (ok) correctas++;
         revHTML += `<div class="revision-item ${ok?'correcta':'incorrecta'}">
-            <div class="pregunta-r">${ok?'âœ…':'âŒ'} <strong>Pregunta ${i+1}:</strong> ${p.texto}</div>
+            <div class="pregunta-r">${ok?'✅':'❌'} <strong>Pregunta ${i+1}:</strong> ${p.texto}</div>
             <div>`;
         if (!ok) revHTML += `<div class="tu-resp">Tu respuesta: ${resp !== null ? p.opciones[resp] : 'Sin responder'}</div>`;
         revHTML += `<div class="resp-correcta">Correcta: ${p.opciones[p.respuesta]}</div></div></div>`;
     });
     const pct = Math.round(correctas/10*100);
     let emoji, titulo;
-    if (pct>=90){emoji='ðŸ†';titulo='Â¡Excelente! Dominas los fenÃ³menos ondulatorios.';}
-    else if (pct>=70){emoji='ðŸŒŸ';titulo='Â¡Muy bien! Sigue practicando.';}
-    else if (pct>=50){emoji='ðŸ“š';titulo='Aprobado. Repasa los temas con errores.';}
-    else {emoji='ðŸ’ª';titulo='Necesitas repasar la teorÃ­a de fenÃ³menos ondulatorios.';}
+    if (pct>=90){emoji='🏆';titulo='¡Excelente! Dominas los fenómenos ondulatorios.';}
+    else if (pct>=70){emoji='🌟';titulo='¡Muy bien! Sigue practicando.';}
+    else if (pct>=50){emoji='📚';titulo='Aprobado. Repasa los temas con errores.';}
+    else {emoji='💪';titulo='Necesitas repasar la teoría de fenómenos ondulatorios.';}
     document.getElementById('seccion-evaluacion').style.display = 'none';
     const pr = document.getElementById('pantalla-resultado');
     pr.classList.add('activo');
-    document.getElementById('resultado-nombre').textContent = 'ðŸ‘¤ ' + nombreEstudiante;
+    document.getElementById('resultado-nombre').textContent = '👤 ' + nombreEstudiante;
     document.getElementById('resultado-emoji').textContent = emoji;
     document.getElementById('resultado-titulo').textContent = titulo;
     document.getElementById('score-correctas').textContent = correctas;

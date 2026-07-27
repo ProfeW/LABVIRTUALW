@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PrÃ¡ctica interactiva sobre La Onda y sus Elementos - FÃ­sica 11 - LabVirtual W">
-    <title>PrÃ¡ctica: La Onda y sus Elementos - FÃ­sica 11 - LabVirtual W</title>
+    <meta name="description" content="Práctica interactiva sobre La Onda y sus Elementos - Física 11 - LabVirtual W">
+    <title>Práctica: La Onda y sus Elementos - Física 11 - LabVirtual W</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸŽ®</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -106,11 +106,11 @@
 </head>
 <body>
     <div class="contenedor">
-        <a href="fisica11_ondas.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
+        <a href="fisica11_ondas.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
         <div class="header-practica">
-            <h1><i class="fa-solid fa-gamepad"></i> PrÃ¡ctica Interactiva</h1>
-            <p>La Onda y sus Elementos Â· FÃ­sica 11Â° Â· Responde y comprueba al instante</p>
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <p>La Onda y sus Elementos · Física 11° · Responde y comprueba al instante</p>
         </div>
 
         <div class="progreso-texto" id="textoProgreso">Ejercicio 1 de 6</div>
@@ -120,16 +120,16 @@
 
         <!-- ======= EJERCICIO 1 ======= -->
         <div class="ejercicio-card activo" id="ej1">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico â€” Concepto</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico — Concepto</span>
             <h3>Reto 1: El Viajero Invisible</h3>
             <div class="enunciado">
-                Una onda viaja desde una fuente hasta un receptor. Â¿QuÃ© transporta una onda de un punto a otro?
+                Una onda viaja desde una fuente hasta un receptor. ¿Qué transporta una onda de un punto a otro?
             </div>
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificar(1, this, false, 'âŒ Las partÃ­culas del medio oscilan, pero no viajan de un extremo al otro.')">PartÃ­culas de materia</button>
-                <button class="opcion-btn" onclick="verificar(1, this, true, 'âœ… Â¡Exacto! Una onda transporta energÃ­a sin transportar masa. Las partÃ­culas solo vibran en su posiciÃ³n.')">EnergÃ­a</button>
-                <button class="opcion-btn" onclick="verificar(1, this, false, 'âŒ El calor es una forma de energÃ­a, pero no es la respuesta mÃ¡s general.')">Calor Ãºnicamente</button>
-                <button class="opcion-btn" onclick="verificar(1, this, false, 'âŒ La masa no se desplaza con la onda; solo la perturbaciÃ³n avanza.')">Masa y energÃ­a juntas</button>
+                <button class="opcion-btn" onclick="verificar(1, this, false, '❌ Las partículas del medio oscilan, pero no viajan de un extremo al otro.')">Partículas de materia</button>
+                <button class="opcion-btn" onclick="verificar(1, this, true, '✅ ¡Exacto! Una onda transporta energía sin transportar masa. Las partículas solo vibran en su posición.')">Energía</button>
+                <button class="opcion-btn" onclick="verificar(1, this, false, '❌ El calor es una forma de energía, pero no es la respuesta más general.')">Calor únicamente</button>
+                <button class="opcion-btn" onclick="verificar(1, this, false, '❌ La masa no se desplaza con la onda; solo la perturbación avanza.')">Masa y energía juntas</button>
             </div>
             <div class="feedback" id="feed1"></div>
             <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -137,16 +137,16 @@
 
         <!-- ======= EJERCICIO 2 ======= -->
         <div class="ejercicio-card" id="ej2">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico â€” ClasificaciÃ³n</span>
-            <h3>Reto 2: Â¿MecÃ¡nica o ElectromagnÃ©tica?</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico — Clasificación</span>
+            <h3>Reto 2: ¿Mecánica o Electromagnética?</h3>
             <div class="enunciado">
-                El sonido de un trueno y la luz del relÃ¡mpago salen casi al mismo tiempo. El sonido NO puede viajar en el vacÃ­o, pero la luz sÃ­. Â¿CÃ³mo se clasifica el sonido segÃºn su medio de propagaciÃ³n?
+                El sonido de un trueno y la luz del relámpago salen casi al mismo tiempo. El sonido NO puede viajar en el vacío, pero la luz sí. ¿Cómo se clasifica el sonido según su medio de propagación?
             </div>
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificar(2, this, false, 'âŒ Las ondas electromagnÃ©ticas no necesitan medio (luz, ondas de radio). El sonido sÃ­ necesita materia.')">Onda ElectromagnÃ©tica</button>
-                <button class="opcion-btn" onclick="verificar(2, this, true, 'âœ… Â¡Correcto! El sonido es una onda mecÃ¡nica: necesita un medio material (aire, agua, sÃ³lidos) para propagarse.')">Onda MecÃ¡nica</button>
-                <button class="opcion-btn" onclick="verificar(2, this, false, 'âŒ El sonido puede ser transversal o longitudinal, pero esa clasificaciÃ³n se refiere a la direcciÃ³n de vibraciÃ³n, no al medio.')">Onda Transversal</button>
-                <button class="opcion-btn" onclick="verificar(2, this, false, 'âŒ El sonido es concretamente una onda mecÃ¡nica longitudinal.')">Onda de superficie</button>
+                <button class="opcion-btn" onclick="verificar(2, this, false, '❌ Las ondas electromagnéticas no necesitan medio (luz, ondas de radio). El sonido sí necesita materia.')">Onda Electromagnética</button>
+                <button class="opcion-btn" onclick="verificar(2, this, true, '✅ ¡Correcto! El sonido es una onda mecánica: necesita un medio material (aire, agua, sólidos) para propagarse.')">Onda Mecánica</button>
+                <button class="opcion-btn" onclick="verificar(2, this, false, '❌ El sonido puede ser transversal o longitudinal, pero esa clasificación se refiere a la dirección de vibración, no al medio.')">Onda Transversal</button>
+                <button class="opcion-btn" onclick="verificar(2, this, false, '❌ El sonido es concretamente una onda mecánica longitudinal.')">Onda de superficie</button>
             </div>
             <div class="feedback" id="feed2"></div>
             <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -154,17 +154,17 @@
 
         <!-- ======= EJERCICIO 3 ======= -->
         <div class="ejercicio-card" id="ej3">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio â€” FÃ³rmula</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio — Fórmula</span>
             <h3>Reto 3: Velocidad de la Onda</h3>
             <div class="enunciado">
-                Una onda en una cuerda tiene una longitud de onda <strong>Î» = 0.4 m</strong> y una frecuencia de <strong>f = 10 Hz</strong>. Â¿A quÃ© velocidad se propaga?
+                Una onda en una cuerda tiene una longitud de onda <strong>λ = 0.4 m</strong> y una frecuencia de <strong>f = 10 Hz</strong>. ¿A qué velocidad se propaga?
             </div>
-            <div class="formula-ref">ðŸ“ FÃ³rmula: v = Î» Â· f</div>
+            <div class="formula-ref">📐 Fórmula: v = λ · f</div>
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificar(3, this, false, 'âŒ Sumaste en vez de multiplicar. Recuerda que v = Î» Ã— f.')">0.4 m/s + 10 = 10.4 m/s</button>
-                <button class="opcion-btn" onclick="verificar(3, this, false, 'âŒ Dividiste: 10 / 0.4 = 25. No es la operaciÃ³n correcta.')">25 m/s</button>
-                <button class="opcion-btn" onclick="verificar(3, this, true, 'âœ… Â¡Excelente! v = 0.4 m Ã— 10 Hz = 4 m/s. Multiplicaste correctamente.')">4 m/s</button>
-                <button class="opcion-btn" onclick="verificar(3, this, false, 'âŒ Eso serÃ­a 0.4 Ã— 100. Revisa los datos del problema.')">40 m/s</button>
+                <button class="opcion-btn" onclick="verificar(3, this, false, '❌ Sumaste en vez de multiplicar. Recuerda que v = λ × f.')">0.4 m/s + 10 = 10.4 m/s</button>
+                <button class="opcion-btn" onclick="verificar(3, this, false, '❌ Dividiste: 10 / 0.4 = 25. No es la operación correcta.')">25 m/s</button>
+                <button class="opcion-btn" onclick="verificar(3, this, true, '✅ ¡Excelente! v = 0.4 m × 10 Hz = 4 m/s. Multiplicaste correctamente.')">4 m/s</button>
+                <button class="opcion-btn" onclick="verificar(3, this, false, '❌ Eso sería 0.4 × 100. Revisa los datos del problema.')">40 m/s</button>
             </div>
             <div class="feedback" id="feed3"></div>
             <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -172,17 +172,17 @@
 
         <!-- ======= EJERCICIO 4 ======= -->
         <div class="ejercicio-card" id="ej4">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio â€” PerÃ­odo</span>
-            <h3>Reto 4: El SismÃ³grafo</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio — Período</span>
+            <h3>Reto 4: El Sismógrafo</h3>
             <div class="enunciado">
-                Un sismÃ³grafo registra ondas sÃ­smicas con una frecuencia de <strong>f = 2 Hz</strong>. Â¿CuÃ¡nto tiempo tarda la onda en completar un ciclo completo (perÃ­odo T)?
+                Un sismógrafo registra ondas sísmicas con una frecuencia de <strong>f = 2 Hz</strong>. ¿Cuánto tiempo tarda la onda en completar un ciclo completo (período T)?
             </div>
-            <div class="formula-ref">ðŸ“ FÃ³rmula: T = 1 / f</div>
+            <div class="formula-ref">📐 Fórmula: T = 1 / f</div>
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificar(4, this, true, 'âœ… Â¡Perfecto! T = 1 / 2 Hz = 0.5 segundos por ciclo.')">0.5 s</button>
-                <button class="opcion-btn" onclick="verificar(4, this, false, 'âŒ No se divide 2/1. Es al revÃ©s: T = 1 / f.')">2 s</button>
-                <button class="opcion-btn" onclick="verificar(4, this, false, 'âŒ Ese serÃ­a el caso si f = 0.25 Hz. Revisa tu operaciÃ³n.')">4 s</button>
-                <button class="opcion-btn" onclick="verificar(4, this, false, 'âŒ RevisiÃ³n necesaria: T = 1 Ã· 2 = 0.5 s.')">1 s</button>
+                <button class="opcion-btn" onclick="verificar(4, this, true, '✅ ¡Perfecto! T = 1 / 2 Hz = 0.5 segundos por ciclo.')">0.5 s</button>
+                <button class="opcion-btn" onclick="verificar(4, this, false, '❌ No se divide 2/1. Es al revés: T = 1 / f.')">2 s</button>
+                <button class="opcion-btn" onclick="verificar(4, this, false, '❌ Ese sería el caso si f = 0.25 Hz. Revisa tu operación.')">4 s</button>
+                <button class="opcion-btn" onclick="verificar(4, this, false, '❌ Revisión necesaria: T = 1 ÷ 2 = 0.5 s.')">1 s</button>
             </div>
             <div class="feedback" id="feed4"></div>
             <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -190,17 +190,17 @@
 
         <!-- ======= EJERCICIO 5 ======= -->
         <div class="ejercicio-card" id="ej5">
-            <span class="nivel-badge" style="color:#f39c12; border-color:#f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado â€” Longitud de onda</span>
+            <span class="nivel-badge" style="color:#f39c12; border-color:#f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado — Longitud de onda</span>
             <h3>Reto 5: La Emisora de Radio</h3>
             <div class="enunciado">
-                Una emisora de radio emite ondas que viajan a la velocidad de la luz: <strong>v = 3Ã—10â¸ m/s</strong>, con una frecuencia de <strong>f = 100 MHz</strong> (100Ã—10â¶ Hz). Â¿CuÃ¡l es la longitud de onda?
+                Una emisora de radio emite ondas que viajan a la velocidad de la luz: <strong>v = 3×10⁸ m/s</strong>, con una frecuencia de <strong>f = 100 MHz</strong> (100×10⁶ Hz). ¿Cuál es la longitud de onda?
             </div>
-            <div class="formula-ref">ðŸ“ FÃ³rmula: Î» = v / f</div>
+            <div class="formula-ref">📐 Fórmula: λ = v / f</div>
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificar(5, this, false, 'âŒ Multiplicaste: 3Ã—10â¸ Ã— 10â¸ no es la operaciÃ³n. Debes dividir v / f.')">3Ã—10Â¹â¶ m</button>
-                <button class="opcion-btn" onclick="verificar(5, this, true, 'âœ… Â¡Brillante! Î» = 3Ã—10â¸ / 10â¸ = 3 metros. Las ondas de radio FM miden unos 3 metros de longitud de onda.')">3 m</button>
-                <button class="opcion-btn" onclick="verificar(5, this, false, 'âŒ Revisa la conversiÃ³n de MHz a Hz: 100 MHz = 100Ã—10â¶ Hz.')">30 m</button>
-                <button class="opcion-btn" onclick="verificar(5, this, false, 'âŒ RevisiÃ³n de potencias: 3Ã—10â¸ / 10â¸ = 3, no 0.3.')">0.3 m</button>
+                <button class="opcion-btn" onclick="verificar(5, this, false, '❌ Multiplicaste: 3×10⁸ × 10⁸ no es la operación. Debes dividir v / f.')">3×10¹⁶ m</button>
+                <button class="opcion-btn" onclick="verificar(5, this, true, '✅ ¡Brillante! λ = 3×10⁸ / 10⁸ = 3 metros. Las ondas de radio FM miden unos 3 metros de longitud de onda.')">3 m</button>
+                <button class="opcion-btn" onclick="verificar(5, this, false, '❌ Revisa la conversión de MHz a Hz: 100 MHz = 100×10⁶ Hz.')">30 m</button>
+                <button class="opcion-btn" onclick="verificar(5, this, false, '❌ Revisión de potencias: 3×10⁸ / 10⁸ = 3, no 0.3.')">0.3 m</button>
             </div>
             <div class="feedback" id="feed5"></div>
             <button class="btn-siguiente" id="btnSig5" onclick="siguiente(5)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -208,30 +208,30 @@
 
         <!-- ======= EJERCICIO 6 ======= -->
         <div class="ejercicio-card" id="ej6">
-            <span class="nivel-badge" style="color:#e74c3c; border-color:#e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto â€” AnÃ¡lisis</span>
+            <span class="nivel-badge" style="color:#e74c3c; border-color:#e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto — Análisis</span>
             <h3>Reto 6: Onda en el Cambio de Medio</h3>
             <div class="enunciado">
-                Una onda de luz pasa del aire al agua. Al cambiar de medio, Â¿cuÃ¡l de las siguientes afirmaciones es CORRECTA?
+                Una onda de luz pasa del aire al agua. Al cambiar de medio, ¿cuál de las siguientes afirmaciones es CORRECTA?
             </div>
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificar(6, this, false, 'âŒ La frecuencia NO cambia cuando una onda cambia de medio. Es la propiedad mÃ¡s conservada.')">La frecuencia aumenta al entrar al agua</button>
-                <button class="opcion-btn" onclick="verificar(6, this, false, 'âŒ La amplitud puede cambiar por reflexiÃ³n, pero no es la caracterÃ­stica fundamental que se conserva.')">La amplitud se conserva exactamente</button>
-                <button class="opcion-btn" onclick="verificar(6, this, true, 'âœ… Â¡Excelente anÃ¡lisis! La frecuencia siempre se conserva al cambiar de medio. La velocidad y la longitud de onda cambian, pero f permanece igual.')">La frecuencia se mantiene constante</button>
-                <button class="opcion-btn" onclick="verificar(6, this, false, 'âŒ La velocidad sÃ­ cambia al cambiar de medio (es precisamente eso lo que produce la refracciÃ³n).')">La velocidad no cambia</button>
+                <button class="opcion-btn" onclick="verificar(6, this, false, '❌ La frecuencia NO cambia cuando una onda cambia de medio. Es la propiedad más conservada.')">La frecuencia aumenta al entrar al agua</button>
+                <button class="opcion-btn" onclick="verificar(6, this, false, '❌ La amplitud puede cambiar por reflexión, pero no es la característica fundamental que se conserva.')">La amplitud se conserva exactamente</button>
+                <button class="opcion-btn" onclick="verificar(6, this, true, '✅ ¡Excelente análisis! La frecuencia siempre se conserva al cambiar de medio. La velocidad y la longitud de onda cambian, pero f permanece igual.')">La frecuencia se mantiene constante</button>
+                <button class="opcion-btn" onclick="verificar(6, this, false, '❌ La velocidad sí cambia al cambiar de medio (es precisamente eso lo que produce la refracción).')">La velocidad no cambia</button>
             </div>
             <div class="feedback" id="feed6"></div>
-            <button class="btn-siguiente" id="btnSig6" onclick="finalizar()">Terminar PrÃ¡ctica <i class="fa-solid fa-check-double"></i></button>
+            <button class="btn-siguiente" id="btnSig6" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
         <!-- PANTALLA FINAL -->
         <div class="pantalla-final" id="pantalla-final">
-            <div class="trofeo">ðŸŒŠ</div>
-            <h1 style="color: var(--color-ondas); margin-bottom: 15px;">Â¡PrÃ¡ctica Completada!</h1>
+            <div class="trofeo">🌊</div>
+            <h1 style="color: var(--color-ondas); margin-bottom: 15px;">¡Práctica Completada!</h1>
             <div class="puntaje-badge" id="puntaje-badge">0 / 6 correctas</div>
             <p id="mensaje-final" style="font-size: 1.1rem; color: #ddd; margin-bottom: 30px;"></p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <a href="fisica11_ondas_evaluacion.html" style="padding: 14px 28px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem;">
-                    <i class="fa-solid fa-file-signature"></i> Ir a la EvaluaciÃ³n
+                    <i class="fa-solid fa-file-signature"></i> Ir a la Evaluación
                 </a>
                 <button onclick="reiniciarPractica()" style="padding: 14px 28px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 1rem; font-family: 'Poppins', sans-serif;">
                     <i class="fa-solid fa-rotate-right"></i> Intentar de Nuevo
@@ -267,7 +267,7 @@
                 respondidas.add(num);
                 confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#9b59b6', '#c39bd3', '#8e44ad'] });
             } else {
-                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding:8px 15px; background:#e74c3c; color:white; border:none; border-radius:5px; cursor:pointer; font-family:'Poppins',sans-serif;">ðŸ”„ Intentar de nuevo</button>`;
+                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding:8px 15px; background:#e74c3c; color:white; border:none; border-radius:5px; cursor:pointer; font-family:'Poppins',sans-serif;">🔄 Intentar de nuevo</button>`;
             }
 
             document.getElementById('btnSig' + num).style.display = 'block';
@@ -305,10 +305,10 @@
 
             let mensaje = '';
             const pct = aciertos / totalEjercicios;
-            if (pct === 1) mensaje = 'ðŸ† Â¡Perfecto! Dominas completamente los elementos de las ondas. Â¡Eres un experto!';
-            else if (pct >= 0.7) mensaje = 'ðŸŒŸ Â¡Muy bien! Tienes un sÃ³lido dominio del tema. Repasa los errores y ve a la evaluaciÃ³n.';
-            else if (pct >= 0.5) mensaje = 'ðŸ“š Buen esfuerzo. Repasa las fÃ³rmulas y vuelve a intentarlo para mejorar tu puntaje.';
-            else mensaje = 'ðŸ’ª Necesitas repasar la teorÃ­a. Lee nuevamente la secciÃ³n de elementos de la onda antes de continuar.';
+            if (pct === 1) mensaje = '🏆 ¡Perfecto! Dominas completamente los elementos de las ondas. ¡Eres un experto!';
+            else if (pct >= 0.7) mensaje = '🌟 ¡Muy bien! Tienes un sólido dominio del tema. Repasa los errores y ve a la evaluación.';
+            else if (pct >= 0.5) mensaje = '📚 Buen esfuerzo. Repasa las fórmulas y vuelve a intentarlo para mejorar tu puntaje.';
+            else mensaje = '💪 Necesitas repasar la teoría. Lee nuevamente la sección de elementos de la onda antes de continuar.';
 
             document.getElementById('mensaje-final').textContent = mensaje;
             confetti({ particleCount: 200, spread: 120, origin: { y: 0.4 }, zIndex: 1000 });

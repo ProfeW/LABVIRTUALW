@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica Interactiva: Ãcidos CarboxÃ­licos - LabVirtual W</title>
+    <title>Práctica Interactiva: Ácidos Carboxílicos - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -76,96 +76,96 @@
 
     <nav>
         <a href="#" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
-        <a href="acidos_carboxilicos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
+        <a href="acidos_carboxilicos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
     </nav>
 
     <main class="contenedor">
         <div class="encabezado">
-            <h1>DesafÃ­o: Ãcidos CarboxÃ­licos</h1>
-            <p>El reto final de la jerarquÃ­a IUPAC. Demuestra tu dominio frente a radicales, alcoholes, cetonas y alquenos.</p>
+            <h1>Desafío: Ácidos Carboxílicos</h1>
+            <p>El reto final de la jerarquía IUPAC. Demuestra tu dominio frente a radicales, alcoholes, cetonas y alquenos.</p>
         </div>
 
         <!-- LEYENDA -->
         <section class="leyenda">
             <h2><i class="fa-solid fa-circle-info"></i> Instrucciones de Nomenclatura</h2>
             <ul>
-                <li><i class="fa-solid fa-check"></i> Siempre debes iniciar con la palabra <span class="clave">Ã¡cido</span> y terminar en <span class="clave">-oico</span>.</li>
-                <li><i class="fa-solid fa-check"></i> Separa nÃºmeros de letras con guiones (-) y nÃºmeros de nÃºmeros con comas (,).</li>
+                <li><i class="fa-solid fa-check"></i> Siempre debes iniciar con la palabra <span class="clave">ácido</span> y terminar en <span class="clave">-oico</span>.</li>
+                <li><i class="fa-solid fa-check"></i> Separa números de letras con guiones (-) y números de números con comas (,).</li>
                 <li><i class="fa-solid fa-check"></i> El carbono 1 <strong>siempre</strong> es el del grupo carboxilo (-COOH).</li>
             </ul>
             <div class="nota-inteligente">
-                <strong><i class="fa-solid fa-robot"></i> Inteligencia del Simulador:</strong> Este sistema es flexible. Entiende ambas nomenclaturas vÃ¡lidas. Por ejemplo, si la molÃ©cula es un alqueno, puedes escribir tanto <strong>Ã¡cido 3-pentenoico</strong> como <strong>Ã¡cido pent-3-enoico</strong>, y ambas serÃ¡n calificadas como correctas. (Tampoco importa si olvidas las tildes).
+                <strong><i class="fa-solid fa-robot"></i> Inteligencia del Simulador:</strong> Este sistema es flexible. Entiende ambas nomenclaturas válidas. Por ejemplo, si la molécula es un alqueno, puedes escribir tanto <strong>ácido 3-pentenoico</strong> como <strong>ácido pent-3-enoico</strong>, y ambas serán calificadas como correctas. (Tampoco importa si olvidas las tildes).
             </div>
         </section>
 
         <!-- CONTENEDOR DE EJERCICIOS -->
         <div id="ejercicios-container">
-            <!-- Los ejercicios se cargan vÃ­a JS -->
+            <!-- Los ejercicios se cargan vía JS -->
         </div>
 
     </main>
 
     <script>
-        // Array de ejercicios con mÃºltiples opciones de respuesta vÃ¡lidas
+        // Array de ejercicios con múltiples opciones de respuesta válidas
         const ejercicios = [
             { 
                 id: 1, 
-                mol: "CHâ‚ƒ - CHâ‚‚ - CHâ‚‚ - COOH", 
+                mol: "CH₃ - CH₂ - CH₂ - COOH", 
                 ans: ["acido butanoico"] 
             },
             { 
                 id: 2, 
-                mol: "      CHâ‚ƒ\n      |\nCHâ‚ƒ - CH - CHâ‚‚ - COOH", 
+                mol: "      CH₃\n      |\nCH₃ - CH - CH₂ - COOH", 
                 ans: ["acido 3-metilbutanoico"] 
             },
             { 
                 id: 3, 
-                mol: "CHâ‚ƒ - CH = CH - CHâ‚‚ - COOH", 
+                mol: "CH₃ - CH = CH - CH₂ - COOH", 
                 ans: ["acido pent-3-enoico", "acido 3-pentenoico"] 
             },
             { 
                 id: 4, 
-                mol: "      CHâ‚ƒ\n      |\nCHâ‚ƒ - C = CH - COOH", 
+                mol: "      CH₃\n      |\nCH₃ - C = CH - COOH", 
                 ans: ["acido 3-metilbut-2-enoico", "acido 3-metil-2-butenoico"] 
             },
             { 
                 id: 5, 
-                mol: "CH â‰¡ C - CHâ‚‚ - COOH", 
+                mol: "CH ≡ C - CH₂ - COOH", 
                 ans: ["acido but-3-inoico", "acido 3-butinoico"] 
             },
             { 
                 id: 6, 
-                mol: "      OH\n      |\nCHâ‚ƒ - CH - CHâ‚‚ - COOH", 
+                mol: "      OH\n      |\nCH₃ - CH - CH₂ - COOH", 
                 ans: ["acido 3-hidroxibutanoico"] 
             },
             { 
                 id: 7, 
-                mol: "      O\n      ||\nCHâ‚ƒ - C - CHâ‚‚ - COOH", 
+                mol: "      O\n      ||\nCH₃ - C - CH₂ - COOH", 
                 ans: ["acido 3-oxobutanoico"] 
             },
             { 
                 id: 8, 
-                mol: "      CHO\n      |\nCHâ‚ƒ - CH - CHâ‚‚ - COOH", 
+                mol: "      CHO\n      |\nCH₃ - CH - CH₂ - COOH", 
                 ans: ["acido 3-formilbutanoico"] 
             },
             { 
                 id: 9, 
-                mol: "      Câ‚†Hâ‚…\n      |\nCHâ‚ƒ - CH - COOH", 
+                mol: "      C₆H₅\n      |\nCH₃ - CH - COOH", 
                 ans: ["acido 2-fenilpropanoico"] 
             },
             { 
                 id: 10, 
-                mol: "      CHâ‚ƒ        CHâ‚ƒ\n      |          |\nCHâ‚ƒ - C  - CHâ‚‚ - CH - COOH\n      |\n      CHâ‚ƒ", 
+                mol: "      CH₃        CH₃\n      |          |\nCH₃ - C  - CH₂ - CH - COOH\n      |\n      CH₃", 
                 ans: ["acido 2,4,4-trimetilpentanoico"] 
             },
             { 
                 id: 11, 
-                mol: "      OH\n      |\nCHâ‚ƒ - CH - CH = CH - COOH", 
+                mol: "      OH\n      |\nCH₃ - CH - CH = CH - COOH", 
                 ans: ["acido 4-hidroxipent-2-enoico", "acido 4-hidroxi-2-pentenoico"] 
             },
             { 
                 id: 12, 
-                mol: "      O\n      ||\nCHâ‚ƒ - C - CHâ‚‚ - CH - COOH\n                |\n                CHâ‚‚-CHâ‚ƒ", 
+                mol: "      O\n      ||\nCH₃ - C - CH₂ - CH - COOH\n                |\n                CH₂-CH₃", 
                 ans: ["acido 2-etil-4-oxopentanoico"] 
             }
         ];
@@ -181,7 +181,7 @@
                     <pre>${ej.mol}</pre>
                 </div>
                 <div class="input-group">
-                    <input type="text" class="input-nombre" id="input-${ej.id}" placeholder="Escribe el nombre IUPAC aquÃ­..." onkeypress="handleEnter(event, ${ej.id})">
+                    <input type="text" class="input-nombre" id="input-${ej.id}" placeholder="Escribe el nombre IUPAC aquí..." onkeypress="handleEnter(event, ${ej.id})">
                     <button class="btn-validar" onclick="validar(${ej.id})">Validar</button>
                 </div>
                 <div class="feedback" id="feedback-${ej.id}"></div>
@@ -196,7 +196,7 @@
             }
         }
 
-        // FunciÃ³n normalizadora extrema: quita tildes, convierte a minÃºscula, arregla espacios dobles y espacios en guiones
+        // Función normalizadora extrema: quita tildes, convierte a minúscula, arregla espacios dobles y espacios en guiones
         function normalizarTexto(str) {
             let s = str.toLowerCase();
             // Quitar tildes
@@ -207,7 +207,7 @@
             s = s.replace(/\s*-\s*/g, '-');
             // Quitar espacios alrededor de comas (ej: "2 , 2" -> "2,2")
             s = s.replace(/\s*,\s*/g, ',');
-            // Asegurar que si escribieron la palabra "acido", haya exactamente un espacio despuÃ©s
+            // Asegurar que si escribieron la palabra "acido", haya exactamente un espacio después
             s = s.replace(/^acido\s+/, 'acido ');
             return s;
         }
@@ -225,15 +225,15 @@
 
             feedback.style.display = 'flex';
 
-            // Validar si olvidÃ³ la palabra "Ã¡cido"
+            // Validar si olvidó la palabra "ácido"
             if (!valorNormalizado.startsWith("acido ")) {
-                feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Recuerda: Debes empezar el nombre con la palabra "Ã¡cido".`;
+                feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Recuerda: Debes empezar el nombre con la palabra "ácido".`;
                 feedback.className = 'feedback warning';
                 input.style.borderColor = 'var(--color-alerta)';
-                return; // Detiene la validaciÃ³n aquÃ­
+                return; // Detiene la validación aquí
             }
 
-            // Comprobar si el valor coincide con alguna de las opciones vÃ¡lidas
+            // Comprobar si el valor coincide con alguna de las opciones válidas
             let esCorrecto = false;
             for(let correcta of respuestasValidas) {
                 if (valorNormalizado === correcta) {
@@ -243,11 +243,11 @@
             }
 
             if (esCorrecto) {
-                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Â¡Excelente! El nombre es totalmente correcto.`;
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Excelente! El nombre es totalmente correcto.`;
                 feedback.className = 'feedback correct';
                 input.style.borderColor = 'var(--color-destaque)';
             } else {
-                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. Revisa bien los radicales, el orden alfabÃ©tico o la numeraciÃ³n. Â¡IntÃ©ntalo de nuevo!`;
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. Revisa bien los radicales, el orden alfabético o la numeración. ¡Inténtalo de nuevo!`;
                 feedback.className = 'feedback incorrect';
                 input.style.borderColor = 'var(--color-error)';
             }

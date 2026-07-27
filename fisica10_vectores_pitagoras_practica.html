@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica: MÃ©todo de PitÃ¡goras - LabVirtual W</title>
+    <title>Práctica: Método de Pitágoras - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -83,21 +83,21 @@
             <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> FÃ­sica 10</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> Física 10</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <a href="fisica10_vectores_pitagoras.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
+        <a href="fisica10_vectores_pitagoras.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
         <div class="header-tema">
-            <h1>Reto de PrÃ¡ctica: PitÃ¡goras y Ãngulos</h1>
-            <p>Calcula la magnitud usando el Teorema de PitÃ¡goras. Algunos ejercicios requerirÃ¡n ademÃ¡s que uses la tangente para encontrar la direcciÃ³n.</p>
+            <h1>Reto de Práctica: Pitágoras y Ángulos</h1>
+            <p>Calcula la magnitud usando el Teorema de Pitágoras. Algunos ejercicios requerirán además que uses la tangente para encontrar la dirección.</p>
         </div>
 
         <div class="progreso-container" id="progreso-container">
-            <!-- Se generarÃ¡ con JS -->
+            <!-- Se generará con JS -->
         </div>
 
         <div id="ejercicios-container">
@@ -105,37 +105,37 @@
         </div>
         
         <div id="mensaje-final" style="display:none; text-align:center; padding: 40px; background: rgba(46,204,113,0.1); border-radius: 20px; border: 2px solid #2ecc71;">
-            <h2>Â¡MagnÃ­fico trabajo!</h2>
+            <h2>¡Magnífico trabajo!</h2>
             <p style="margin-bottom: 20px;">Has completado los 10 ejercicios interactivos aplicando magnitudes y direcciones.</p>
-            <a href="fisica10_vectores_pitagoras_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la EvaluaciÃ³n Final</a>
+            <a href="fisica10_vectores_pitagoras_evaluacion.html" class="btn-validar" style="text-decoration: none; padding: 15px 30px;">Ir a la Evaluación Final</a>
         </div>
 
     </main>
 
     <script>
         const dataEjercicios = [
-            { id: 1, text: "Un tractor se desplaza 4 km en la horizontal (Este) y luego 3 km en la vertical (Norte).", hor: 4, ver: 3, ang: false, pistaHor: "Busca el valor del movimiento horizontal en el texto.", pistaVer: "Busca el valor del movimiento vertical en el texto.", pistaMag: "Eleva ambos al cuadrado, sÃºmalos y saca raÃ­z cuadrada (4^2 + 3^2)." },
+            { id: 1, text: "Un tractor se desplaza 4 km en la horizontal (Este) y luego 3 km en la vertical (Norte).", hor: 4, ver: 3, ang: false, pistaHor: "Busca el valor del movimiento horizontal en el texto.", pistaVer: "Busca el valor del movimiento vertical en el texto.", pistaMag: "Eleva ambos al cuadrado, súmalos y saca raíz cuadrada (4^2 + 3^2)." },
             
-            { id: 2, text: "Una polea aplica una fuerza de 6 N en la horizontal y otra de 8 N en la vertical.", hor: 6, ver: 8, ang: false, pistaHor: "Revisa la fuerza horizontal.", pistaVer: "Revisa la fuerza vertical.", pistaMag: "RaÃ­z de (6^2 + 8^2). 36 + 64." },
+            { id: 2, text: "Una polea aplica una fuerza de 6 N en la horizontal y otra de 8 N en la vertical.", hor: 6, ver: 8, ang: false, pistaHor: "Revisa la fuerza horizontal.", pistaVer: "Revisa la fuerza vertical.", pistaMag: "Raíz de (6^2 + 8^2). 36 + 64." },
             
-            { id: 3, text: "Un dron vuela 5 m en la horizontal y 12 m en la vertical.", hor: 5, ver: 12, ang: true, pistaHor: "Movimiento horizontal.", pistaVer: "Movimiento vertical.", pistaMag: "RaÃ­z de 25 + 144.", pistaAng: "Usa tan^-1(vertical / horizontal) = tan^-1(12 / 5). Redondea a 1 decimal." },
+            { id: 3, text: "Un dron vuela 5 m en la horizontal y 12 m en la vertical.", hor: 5, ver: 12, ang: true, pistaHor: "Movimiento horizontal.", pistaVer: "Movimiento vertical.", pistaMag: "Raíz de 25 + 144.", pistaAng: "Usa tan^-1(vertical / horizontal) = tan^-1(12 / 5). Redondea a 1 decimal." },
             
-            { id: 4, text: "Una mula camina 9 m en la horizontal y 12 m en la vertical.", hor: 9, ver: 12, ang: false, pistaHor: "Lee el enunciado, Â¿cuÃ¡nto es la horizontal?", pistaVer: "Â¿CuÃ¡nto es la vertical?", pistaMag: "RaÃ­z de (81 + 144) = RaÃ­z de 225." },
+            { id: 4, text: "Una mula camina 9 m en la horizontal y 12 m en la vertical.", hor: 9, ver: 12, ang: false, pistaHor: "Lee el enunciado, ¿cuánto es la horizontal?", pistaVer: "¿Cuánto es la vertical?", pistaMag: "Raíz de (81 + 144) = Raíz de 225." },
             
-            { id: 5, text: "Se aplica una fuerza de 15 N en la horizontal y 8 N en la vertical.", hor: 15, ver: 8, ang: true, pistaHor: "Identifica la horizontal.", pistaVer: "Identifica la vertical.", pistaMag: "RaÃ­z de 225 + 64.", pistaAng: "Usa tan^-1(8 / 15). Redondea a 1 decimal." },
+            { id: 5, text: "Se aplica una fuerza de 15 N en la horizontal y 8 N en la vertical.", hor: 15, ver: 8, ang: true, pistaHor: "Identifica la horizontal.", pistaVer: "Identifica la vertical.", pistaMag: "Raíz de 225 + 64.", pistaAng: "Usa tan^-1(8 / 15). Redondea a 1 decimal." },
             
-            { id: 6, text: "Un camiÃ³n se desplaza 7 km en la horizontal y 24 km en la vertical.", hor: 7, ver: 24, ang: false, pistaHor: "Movimiento horizontal.", pistaVer: "Movimiento vertical.", pistaMag: "RaÃ­z de 49 + 576." },
+            { id: 6, text: "Un camión se desplaza 7 km en la horizontal y 24 km en la vertical.", hor: 7, ver: 24, ang: false, pistaHor: "Movimiento horizontal.", pistaVer: "Movimiento vertical.", pistaMag: "Raíz de 49 + 576." },
             
-            { id: 7, text: "Un trabajador empuja una carretilla con 10 N en la horizontal y 10 N en la vertical.", hor: 10, ver: 10, ang: true, pistaHor: "Horizontal.", pistaVer: "Vertical.", pistaMag: "RaÃ­z de 100 + 100. (Usa 1 decimal)", pistaAng: "tan^-1(10 / 10). Â¿CuÃ¡l es el Ã¡ngulo de tan^-1(1)?" },
+            { id: 7, text: "Un trabajador empuja una carretilla con 10 N en la horizontal y 10 N en la vertical.", hor: 10, ver: 10, ang: true, pistaHor: "Horizontal.", pistaVer: "Vertical.", pistaMag: "Raíz de 100 + 100. (Usa 1 decimal)", pistaAng: "tan^-1(10 / 10). ¿Cuál es el ángulo de tan^-1(1)?" },
             
-            { id: 8, text: "El viento desvÃ­a un aviÃ³n 20 m/s en la horizontal y 21 m/s en la vertical.", hor: 20, ver: 21, ang: false, pistaHor: "Velocidad horizontal.", pistaVer: "Velocidad vertical.", pistaMag: "RaÃ­z de 400 + 441." },
+            { id: 8, text: "El viento desvía un avión 20 m/s en la horizontal y 21 m/s en la vertical.", hor: 20, ver: 21, ang: false, pistaHor: "Velocidad horizontal.", pistaVer: "Velocidad vertical.", pistaMag: "Raíz de 400 + 441." },
             
-            { id: 9, text: "Un sistema de riego lanza agua 12 m en la horizontal y 16 m en la vertical.", hor: 12, ver: 16, ang: true, pistaHor: "Movimiento horizontal del agua.", pistaVer: "Movimiento vertical del agua.", pistaMag: "RaÃ­z de (144 + 256).", pistaAng: "tan^-1(16 / 12). Redondea a 1 decimal." },
+            { id: 9, text: "Un sistema de riego lanza agua 12 m en la horizontal y 16 m en la vertical.", hor: 12, ver: 16, ang: true, pistaHor: "Movimiento horizontal del agua.", pistaVer: "Movimiento vertical del agua.", pistaMag: "Raíz de (144 + 256).", pistaAng: "tan^-1(16 / 12). Redondea a 1 decimal." },
             
-            { id: 10, text: "El vector final de un recorrido marca -8 en la horizontal y 15 en la vertical.", hor: -8, ver: 15, ang: true, pistaHor: "AtenciÃ³n al signo negativo.", pistaVer: "Movimiento vertical.", pistaMag: "Recuerda que (-8)^2 da 64 positivo.", pistaAng: "Para la magnitud de Ã¡ngulo, asume valores positivos: tan^-1(15 / 8). Redondea a 1 decimal." }
+            { id: 10, text: "El vector final de un recorrido marca -8 en la horizontal y 15 en la vertical.", hor: -8, ver: 15, ang: true, pistaHor: "Atención al signo negativo.", pistaVer: "Movimiento vertical.", pistaMag: "Recuerda que (-8)^2 da 64 positivo.", pistaAng: "Para la magnitud de ángulo, asume valores positivos: tan^-1(15 / 8). Redondea a 1 decimal." }
         ];
 
-        // Calcular respuestas esperadas automÃ¡ticamente
+        // Calcular respuestas esperadas automáticamente
         dataEjercicios.forEach(ex => {
             ex.mag = parseFloat(Math.sqrt(ex.hor*ex.hor + ex.ver*ex.ver).toFixed(1));
             // Si piden angulo, guardamos angulo absoluto (ignorando cuadrantes para decimo basico)
@@ -165,7 +165,7 @@
                 if(ex.ang) {
                     htmlAngulo = `
                     <div class="paso" id="ex${ex.id}-paso4">
-                        <h3>Paso 4: Calcular la direcciÃ³n (Ãngulo)</h3>
+                        <h3>Paso 4: Calcular la dirección (Ángulo)</h3>
                         <p>Aplica la tangente inversa: \\( \\theta = \\tan^{-1}(\\text{vertical} / \\text{horizontal}) \\). Usa tu calculadora y escribe el resultado (con 1 decimal si es necesario).</p>
                         <div class="input-group">
                             <label>\\(\\theta =\\)</label>
@@ -209,8 +209,8 @@
                     </div>
 
                     <div class="paso" id="ex${ex.id}-paso3">
-                        <h3>Paso 3: Calcular Magnitud (PitÃ¡goras)</h3>
-                        <p>Aplica la fÃ³rmula: \\( |\\vec{R}| = \\sqrt{\\text{hor}^2 + \\text{ver}^2} \\). (Usa 1 decimal si no es entero).</p>
+                        <h3>Paso 3: Calcular Magnitud (Pitágoras)</h3>
+                        <p>Aplica la fórmula: \\( |\\vec{R}| = \\sqrt{\\text{hor}^2 + \\text{ver}^2} \\). (Usa 1 decimal si no es entero).</p>
                         <div class="input-group">
                             <label>Magnitud =</label>
                             <input type="number" step="0.1" id="input-ex${ex.id}-p3" placeholder="Ej. 10.5">
@@ -239,11 +239,11 @@
 
             if(isNaN(val)) {
                 feedback.className = "feedback error";
-                feedback.innerHTML = "Por favor ingresa un nÃºmero vÃ¡lido.";
+                feedback.innerHTML = "Por favor ingresa un número válido.";
                 return;
             }
 
-            // Validacion con pequeÃ±a tolerancia para decimales (paso 3 y 4)
+            // Validacion con pequeña tolerancia para decimales (paso 3 y 4)
             let correcto = false;
             if(numPaso >= 3) {
                 if(Math.abs(val - ansOk) <= 0.2) correcto = true;
@@ -253,14 +253,14 @@
 
             if(correcto) {
                 feedback.className = "feedback exito";
-                feedback.innerHTML = "<i class='fa-solid fa-check'></i> Â¡Correcto!";
+                feedback.innerHTML = "<i class='fa-solid fa-check'></i> ¡Correcto!";
                 input.disabled = true;
                 btn.style.display = 'none';
                 pistaBox.style.display = 'none';
                 
                 document.getElementById(`ex${idEx}-paso${numPaso}`).classList.add('completado');
                 
-                // Siguiente paso lÃ³gico
+                // Siguiente paso lógico
                 let maxPasos = dataEjercicios[idEx-1].ang ? 4 : 3;
                 if(numPaso < maxPasos) {
                     setTimeout(() => {
@@ -277,7 +277,7 @@
             } else {
                 intentosPaso[idEx][numPaso]++;
                 feedback.className = "feedback error";
-                feedback.innerHTML = "<i class='fa-solid fa-xmark'></i> Incorrecto, revisa tu cÃ¡lculo.";
+                feedback.innerHTML = "<i class='fa-solid fa-xmark'></i> Incorrecto, revisa tu cálculo.";
                 
                 if(intentosPaso[idEx][numPaso] >= 2) {
                     let textPista = "";

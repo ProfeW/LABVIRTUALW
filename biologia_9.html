@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BiologÃ­a 9Â° - MenÃº Principal | LabVirtual W</title>
+    <title>Biología 9° - Menú Principal | LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,12 +22,12 @@
 
         body {
             background-color: var(--color-oscuro); color: var(--color-texto);
-            /* Fondo con imagen de naturaleza/biologÃ­a con un overlay oscuro para que el texto resalte */
+            /* Fondo con imagen de naturaleza/biología con un overlay oscuro para que el texto resalte */
             background-image: linear-gradient(rgba(18, 30, 20, 0.92), rgba(18, 30, 20, 0.98)), url('https://images.unsplash.com/photo-1530508953158-6927d30f40fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACIÃ“N --- */
+        /* --- NAVEGACIÓN --- */
         nav { 
             background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(15px); 
             border-bottom: 1px solid rgba(46, 204, 113, 0.2); 
@@ -49,7 +49,7 @@
         .encabezado-area h1 span { color: var(--color-bio-primario); }
         .encabezado-area p { color: #ccc; font-size: 1.15rem; max-width: 800px; margin: 0 auto; line-height: 1.6; }
 
-        /* --- GRID DE UNIDADES TEMÃTICAS --- */
+        /* --- GRID DE UNIDADES TEMÁTICAS --- */
         .grid-unidades { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
 
         /* --- TARJETA DE UNIDAD --- */
@@ -76,7 +76,7 @@
         .icono-unidad { font-size: 2.5rem; color: var(--color-bio-primario); background: rgba(46, 204, 113, 0.1); width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
         .unidad-header h2 { font-size: 1.6rem; color: #fff; line-height: 1.2; }
 
-        /* --- LISTA DE TEMAS (MENÃš INTERNO) --- */
+        /* --- LISTA DE TEMAS (MENÚ INTERNO) --- */
         .lista-temas { display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
         
         .tema-enlace {
@@ -103,7 +103,7 @@
         }
         .tema-enlace:hover i.fa-angle-right { color: var(--color-bio-primario); transform: translateX(3px); }
 
-        /* CategorÃ­as o Sub-bloques visuales dentro de una tarjeta */
+        /* Categorías o Sub-bloques visuales dentro de una tarjeta */
         .sub-categoria {
             font-size: 0.85rem;
             text-transform: uppercase;
@@ -137,99 +137,99 @@
         
         <div class="encabezado-area">
             <div class="badge-grado">GRADO NOVENO</div>
-            <h1>Explora la <span>BiologÃ­a</span></h1>
-            <p>Selecciona una unidad temÃ¡tica para comenzar. Descubre los secretos del ADN, cÃ³mo evolucionan las especies y los ecosistemas que conforman nuestro planeta.</p>
+            <h1>Explora la <span>Biología</span></h1>
+            <p>Selecciona una unidad temática para comenzar. Descubre los secretos del ADN, cómo evolucionan las especies y los ecosistemas que conforman nuestro planeta.</p>
         </div>
 
         <div class="grid-unidades">
 
             <!-- ============================================== -->
-            <!-- BLOQUE 1: FUNDAMENTOS DE LA GENÃ‰TICA           -->
+            <!-- BLOQUE 1: FUNDAMENTOS DE LA GENÉTICA           -->
             <!-- ============================================== -->
             <article class="tarjeta-unidad">
                 <div class="unidad-header">
                     <div class="icono-unidad"><i class="fa-solid fa-dna"></i></div>
-                    <h2>Fundamentos de la GenÃ©tica</h2>
+                    <h2>Fundamentos de la Genética</h2>
                 </div>
                 <div class="lista-temas">
-                    <div class="sub-categoria">Conceptos BÃ¡sicos</div>
-                    <!-- Cambia los href="#" por los enlaces a tus futuras pÃ¡ginas -->
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-open icono-tema"></i> La InformaciÃ³n Hereditaria<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">Conceptos Básicos</div>
+                    <!-- Cambia los href="#" por los enlaces a tus futuras páginas -->
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-open icono-tema"></i> La Información Hereditaria<i class="fa-solid fa-angle-right"></i></a>
                     
-                    <div class="sub-categoria">Los Ãcidos Nucleicos</div>
+                    <div class="sub-categoria">Los Ácidos Nucleicos</div>
                     <a href="#" class="tema-enlace"><i class="fa-solid fa-microscope icono-tema"></i> Estructura y Funcionamiento General<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-vial icono-tema"></i> Tipos: ProfundizaciÃ³n en ADN y ARN<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-vial icono-tema"></i> Tipos: Profundización en ADN y ARN<i class="fa-solid fa-angle-right"></i></a>
                     
-                    <div class="sub-categoria">Las ProteÃ­nas y el CÃ³digo</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-shapes icono-tema"></i> Estructura de las ProteÃ­nas<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-arrows-spin icono-tema"></i> FormaciÃ³n: TranscripciÃ³n y TraducciÃ³n<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-barcode icono-tema"></i> El CÃ³digo GenÃ©tico<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">Las Proteínas y el Código</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-shapes icono-tema"></i> Estructura de las Proteínas<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-arrows-spin icono-tema"></i> Formación: Transcripción y Traducción<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-barcode icono-tema"></i> El Código Genético<i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </article>
 
             <!-- ============================================== -->
-            <!-- BLOQUE 2: GENÃ‰TICA MOLECULAR Y APLICACIONES    -->
+            <!-- BLOQUE 2: GENÉTICA MOLECULAR Y APLICACIONES    -->
             <!-- ============================================== -->
             <article class="tarjeta-unidad">
                 <div class="unidad-header">
                     <div class="icono-unidad" style="color: #3498db; background: rgba(52, 152, 219, 0.1); border-color: #3498db;"><i class="fa-solid fa-flask-vial"></i></div>
-                    <h2>GenÃ©tica Molecular Aplicada</h2>
+                    <h2>Genética Molecular Aplicada</h2>
                 </div>
                 <div class="lista-temas">
-                    <div class="sub-categoria">Alteraciones GenÃ©ticas</div>
+                    <div class="sub-categoria">Alteraciones Genéticas</div>
                     <a href="#" class="tema-enlace"><i class="fa-solid fa-virus-covid icono-tema" style="color: #3498db;"></i> Las Mutaciones<i class="fa-solid fa-angle-right"></i></a>
                     
-                    <div class="sub-categoria">IngenierÃ­a y TecnologÃ­a</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-gears icono-tema" style="color: #3498db;"></i> Ing. GenÃ©tica: Riesgos e Implicaciones<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">Ingeniería y Tecnología</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-gears icono-tema" style="color: #3498db;"></i> Ing. Genética: Riesgos e Implicaciones<i class="fa-solid fa-angle-right"></i></a>
                     <a href="#" class="tema-enlace"><i class="fa-solid fa-users-viewfinder icono-tema" style="color: #3498db;"></i> El Genoma Humano<i class="fa-solid fa-angle-right"></i></a>
                     
-                    <div class="sub-categoria">Aplicaciones PrÃ¡cticas</div>
+                    <div class="sub-categoria">Aplicaciones Prácticas</div>
                     <a href="#" class="tema-enlace"><i class="fa-solid fa-heart-pulse icono-tema" style="color: #3498db;"></i> Aplicaciones en la Salud Humana<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-wheat-awn icono-tema" style="color: #3498db;"></i> Aplicaciones en ProducciÃ³n Animal y AgrÃ­cola<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-wheat-awn icono-tema" style="color: #3498db;"></i> Aplicaciones en Producción Animal y Agrícola<i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </article>
 
             <!-- ============================================== -->
-            <!-- BLOQUE 3: EVOLUCIÃ“N DE LOS SERES VIVOS         -->
+            <!-- BLOQUE 3: EVOLUCIÓN DE LOS SERES VIVOS         -->
             <!-- ============================================== -->
             <article class="tarjeta-unidad">
                 <div class="unidad-header">
                     <div class="icono-unidad" style="color: #f39c12; background: rgba(243, 156, 18, 0.1);"><i class="fa-solid fa-paw"></i></div>
-                    <h2>EvoluciÃ³n de los Seres Vivos</h2>
+                    <h2>Evolución de los Seres Vivos</h2>
                 </div>
                 <div class="lista-temas">
-                    <div class="sub-categoria">OrÃ­genes y TeorÃ­as</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-journal-whills icono-tema" style="color: #f39c12;"></i> TeorÃ­as del Origen de la Diversidad<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">Orígenes y Teorías</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-journal-whills icono-tema" style="color: #f39c12;"></i> Teorías del Origen de la Diversidad<i class="fa-solid fa-angle-right"></i></a>
                     <a href="#" class="tema-enlace"><i class="fa-solid fa-seedling icono-tema" style="color: #f39c12;"></i> El Origen de la Vida<i class="fa-solid fa-angle-right"></i></a>
                     <a href="#" class="tema-enlace"><i class="fa-solid fa-frog icono-tema" style="color: #f39c12;"></i> Origen de las Especies y Poblaciones<i class="fa-solid fa-angle-right"></i></a>
                     
                     <div class="sub-categoria">Proceso Evolutivo</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-bacterium icono-tema" style="color: #f39c12;"></i> EvoluciÃ³n de las CÃ©lulas Eucariotas<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-dove icono-tema" style="color: #f39c12;"></i> EvoluciÃ³n de Plantas y Animales<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-person-walking icono-tema" style="color: #f39c12;"></i> EvoluciÃ³n de la Especie Humana<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-bacterium icono-tema" style="color: #f39c12;"></i> Evolución de las Células Eucariotas<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-dove icono-tema" style="color: #f39c12;"></i> Evolución de Plantas y Animales<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-person-walking icono-tema" style="color: #f39c12;"></i> Evolución de la Especie Humana<i class="fa-solid fa-angle-right"></i></a>
 
-                    <div class="sub-categoria">ClasificaciÃ³n de la Vida</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-network-wired icono-tema" style="color: #f39c12;"></i> TaxonomÃ­a: Historia y CategorÃ­as<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-magnifying-glass-chart icono-tema" style="color: #f39c12;"></i> Herramientas de la SistemÃ¡tica<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">Clasificación de la Vida</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-network-wired icono-tema" style="color: #f39c12;"></i> Taxonomía: Historia y Categorías<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-magnifying-glass-chart icono-tema" style="color: #f39c12;"></i> Herramientas de la Sistemática<i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </article>
 
             <!-- ============================================== -->
-            <!-- BLOQUE 4: BIOMAS Y BIOGEOGRAFÃA                -->
+            <!-- BLOQUE 4: BIOMAS Y BIOGEOGRAFÍA                -->
             <!-- ============================================== -->
             <article class="tarjeta-unidad">
                 <div class="unidad-header">
                     <div class="icono-unidad" style="color: #e67e22; background: rgba(230, 126, 34, 0.1);"><i class="fa-solid fa-earth-americas"></i></div>
-                    <h2>Biomas y BiogeografÃ­a</h2>
+                    <h2>Biomas y Biogeografía</h2>
                 </div>
                 <div class="lista-temas">
                     <div class="sub-categoria">El Planeta y el Clima</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-cloud-sun-rain icono-tema" style="color: #e67e22;"></i> Patrones y Variaciones ClimÃ¡ticas<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-sun icono-tema" style="color: #e67e22;"></i> RadiaciÃ³n Solar e InclinaciÃ³n Terrestre<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-cloud-sun-rain icono-tema" style="color: #e67e22;"></i> Patrones y Variaciones Climáticas<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-sun icono-tema" style="color: #e67e22;"></i> Radiación Solar e Inclinación Terrestre<i class="fa-solid fa-angle-right"></i></a>
                     
-                    <div class="sub-categoria">DistribuciÃ³n de la Vida</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-map-location-dot icono-tema" style="color: #e67e22;"></i> DistribuciÃ³n de los Seres Vivos y sus Ambientes<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-mountain-sun icono-tema" style="color: #e67e22;"></i> DistribuciÃ³n de Ecosistemas Terrestres<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">Distribución de la Vida</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-map-location-dot icono-tema" style="color: #e67e22;"></i> Distribución de los Seres Vivos y sus Ambientes<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-mountain-sun icono-tema" style="color: #e67e22;"></i> Distribución de Ecosistemas Terrestres<i class="fa-solid fa-angle-right"></i></a>
                     <a href="#" class="tema-enlace"><i class="fa-solid fa-temperature-half icono-tema" style="color: #e67e22;"></i> Los Biomas y el Clima<i class="fa-solid fa-angle-right"></i></a>
                     
                     <div class="sub-categoria">Nuestro Entorno</div>

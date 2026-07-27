@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -38,7 +38,7 @@
             min-height: 100vh;
         }
 
-        /* --- BARRA DE NAVEGACIÃ“N --- */
+        /* --- BARRA DE NAVEGACIÓN --- */
         nav {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px); 
@@ -94,7 +94,7 @@
             color: #4facfe;
         }
 
-        /* --- SUBMENÃšS RESTAURADOS --- */
+        /* --- SUBMENÚS RESTAURADOS --- */
         .submenu {
             display: none;
             position: absolute;
@@ -134,7 +134,7 @@
         .quimica:hover { border-left: 4px solid var(--color-quimica); }
         .biologia:hover { border-left: 4px solid var(--color-biologia); }
 
-        /* --- SISTEMA DE PÃGINAS (SIN RECARGAR) --- */
+        /* --- SISTEMA DE PÁGINAS (SIN RECARGAR) --- */
         .contenedor {
             max-width: 1200px;
             margin: 50px auto;
@@ -197,7 +197,7 @@
             transform: translateY(-5px);
         }
 
-        /* --- ESTILOS FÃSICA DÃ‰CIMO (FRANJAS) --- */
+        /* --- ESTILOS FÍSICA DÉCIMO (FRANJAS) --- */
         .titulo-seccion {
             border-left: 5px solid var(--color-fisica);
             padding-left: 15px; margin: 40px 0 20px 0; font-size: 24px; color: #4facfe;
@@ -250,38 +250,38 @@
             <ul class="menu">
                 
                 <li>
-                    <a onclick="verPagina('inicio')" title="Ir a la pÃ¡gina principal"><i class="fa-solid fa-house"></i> Inicio</a>
+                    <a onclick="verPagina('inicio')" title="Ir a la página principal"><i class="fa-solid fa-house"></i> Inicio</a>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa-solid fa-atom"></i> FÃ­sica <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
                     <ul class="submenu">
                         <li><a href="#" class="fisica">Grado Noveno</a></li>
-                        <li><a onclick="verPagina('fisica-10')" class="fisica">Grado DÃ©cimo</a></li>
+                        <li><a onclick="verPagina('fisica-10')" class="fisica">Grado Décimo</a></li>
                         <li><a href="#" class="fisica">Grado 11</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa-solid fa-flask"></i> QuÃ­mica <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
                     <ul class="submenu">
                         <li><a href="#" class="quimica">Grado Noveno</a></li>
-                        <li><a href="#" class="quimica">Grado DÃ©cimo</a></li>
+                        <li><a href="#" class="quimica">Grado Décimo</a></li>
                         <li><a href="#" class="quimica">Grado 11</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa-solid fa-leaf"></i> BiologÃ­a <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
                     <ul class="submenu">
                         <li><a href="#" class="biologia">Grado Noveno</a></li>
-                        <li><a href="#" class="biologia">Grado DÃ©cimo</a></li>
+                        <li><a href="#" class="biologia">Grado Décimo</a></li>
                         <li><a href="#" class="biologia">Grado 11</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#" onclick="alert('Pronto crearemos la pÃ¡gina de recursos')"><i class="fa-solid fa-book-open"></i> Recursos</a>
+                    <a href="#" onclick="alert('Pronto crearemos la página de recursos')"><i class="fa-solid fa-book-open"></i> Recursos</a>
                 </li>
 
             </ul>
@@ -291,8 +291,8 @@
     <main id="inicio" class="contenedor pagina activa">
         
         <section class="bienvenida">
-            <h1>Laboratorio Virtual - InstituciÃ³n Educativa Gallego</h1>
-            <p>Explora, experimenta y aprende. Selecciona tu asignatura y grado en el menÃº superior para comenzar la aventura del conocimiento.</p>
+            <h1>Laboratorio Virtual - Institución Educativa Gallego</h1>
+            <p>Explora, experimenta y aprende. Selecciona tu asignatura y grado en el menú superior para comenzar la aventura del conocimiento.</p>
         </section>
 
         <section class="seccion-noticias">
@@ -300,18 +300,18 @@
             
             <div class="grid-noticias">
                 <article class="tarjeta">
-                    <h3>Â¡Nuevos Simuladores de Ondas!</h3>
-                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Ya estÃ¡n disponibles los simuladores de fÃ­sica para grado 11. Ingresa al menÃº superior para practicar antes de tu evaluaciÃ³n.</p>
+                    <h3>¡Nuevos Simuladores de Ondas!</h3>
+                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Ya están disponibles los simuladores de física para grado 11. Ingresa al menú superior para practicar antes de tu evaluación.</p>
                 </article>
 
                 <article class="tarjeta" style="border-color: var(--color-quimica);">
-                    <h3>Bingo QuÃ­mico interactivo</h3>
-                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Revisa la secciÃ³n de recursos. Hemos aÃ±adido herramientas interactivas para aprender la tabla periÃ³dica sin necesidad de conexiÃ³n.</p>
+                    <h3>Bingo Químico interactivo</h3>
+                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Revisa la sección de recursos. Hemos añadido herramientas interactivas para aprender la tabla periódica sin necesidad de conexión.</p>
                 </article>
 
                 <article class="tarjeta" style="border-color: var(--color-biologia);">
                     <h3>Ciencias y Contexto Cafetero</h3>
-                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Explora las nuevas guÃ­as sobre las fases del compostaje, el programa Guardianes del Planeta y la protecciÃ³n del ecosistema local.</p>
+                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Explora las nuevas guías sobre las fases del compostaje, el programa Guardianes del Planeta y la protección del ecosistema local.</p>
                 </article>
             </div>
         </section>
@@ -319,68 +319,68 @@
     </main>
 
     <main id="fisica-10" class="contenedor pagina">
-        <h1 style="color: var(--color-fisica); font-size: 2.5rem; margin-bottom: 10px;">FÃ­sica - Grado DÃ©cimo</h1>
-        <p style="color: #ccc; margin-bottom: 30px;">Explora los conceptos fundamentales del movimiento y la energÃ­a.</p>
+        <h1 style="color: var(--color-fisica); font-size: 2.5rem; margin-bottom: 10px;">Física - Grado Décimo</h1>
+        <p style="color: #ccc; margin-bottom: 30px;">Explora los conceptos fundamentales del movimiento y la energía.</p>
 
         <h2 class="titulo-seccion"><i class="fa-solid fa-compass"></i> 1. Fundamentos de la Medida</h2>
         <div class="lista-temas">
             <div class="entrada-tema">
                 <div class="numero-tema">01</div>
                 <div class="info-tema">
-                    <h3>Magnitudes FÃ­sicas</h3>
-                    <p>Â¿CÃ³mo medimos la altura de un cafetal o el peso de una carga? Aprende a diferenciar magnitudes escalares y vectoriales.</p>
+                    <h3>Magnitudes Físicas</h3>
+                    <p>¿Cómo medimos la altura de un cafetal o el peso de una carga? Aprende a diferenciar magnitudes escalares y vectoriales.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">02</div>
                 <div class="info-tema">
-                    <h3>ConversiÃ³n de Unidades</h3>
-                    <p>Transforma arrobas a kilogramos o litros de agua para lavado a metros cÃºbicos de forma exacta.</p>
+                    <h3>Conversión de Unidades</h3>
+                    <p>Transforma arrobas a kilogramos o litros de agua para lavado a metros cúbicos de forma exacta.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">03</div>
                 <div class="info-tema">
-                    <h3>NotaciÃ³n CientÃ­fica</h3>
-                    <p>Maneja nÃºmeros gigantescos o microscÃ³picos (como el tamaÃ±o de una plaga) de manera profesional.</p>
+                    <h3>Notación Científica</h3>
+                    <p>Maneja números gigantescos o microscópicos (como el tamaño de una plaga) de manera profesional.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">04</div>
                 <div class="info-tema">
                     <h3>Cifras Significativas</h3>
-                    <p>Aprende cuÃ¡nta precisiÃ³n necesitamos realmente en nuestras mediciones de laboratorio.</p>
+                    <p>Aprende cuánta precisión necesitamos realmente en nuestras mediciones de laboratorio.</p>
                 </div>
             </div>
         </div>
 
-        <h2 class="titulo-seccion"><i class="fa-solid fa-truck-fast"></i> 2. CinemÃ¡tica (El Movimiento)</h2>
+        <h2 class="titulo-seccion"><i class="fa-solid fa-truck-fast"></i> 2. Cinemática (El Movimiento)</h2>
         <div class="lista-temas">
             <div class="entrada-tema">
                 <div class="numero-tema">05</div>
                 <div class="info-tema">
-                    <h3>M.R.U. (Movimiento RectilÃ­neo Uniforme)</h3>
-                    <p>Velocidad constante: El viaje de un camiÃ³n en lÃ­nea recta por la carretera principal.</p>
+                    <h3>M.R.U. (Movimiento Rectilíneo Uniforme)</h3>
+                    <p>Velocidad constante: El viaje de un camión en línea recta por la carretera principal.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">06</div>
                 <div class="info-tema">
                     <h3>M.R.U.V. (Movimiento Variado)</h3>
-                    <p>AceleraciÃ³n: Cuando el transporte escolar aumenta su velocidad al salir del pueblo.</p>
+                    <p>Aceleración: Cuando el transporte escolar aumenta su velocidad al salir del pueblo.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">07</div>
                 <div class="info-tema">
-                    <h3>CaÃ­da Libre</h3>
-                    <p>Â¿QuÃ© cae mÃ¡s rÃ¡pido, un grano de cafÃ© o una piedra? Descubre la gravedad en acciÃ³n.</p>
+                    <h3>Caída Libre</h3>
+                    <p>¿Qué cae más rápido, un grano de café o una piedra? Descubre la gravedad en acción.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">08</div>
                 <div class="info-tema">
-                    <h3>Movimiento ParabÃ³lico</h3>
+                    <h3>Movimiento Parabólico</h3>
                     <p>El lanzamiento de un objeto o el chorro de agua en un sistema de riego.</p>
                 </div>
             </div>
@@ -388,57 +388,57 @@
                 <div class="numero-tema">09</div>
                 <div class="info-tema">
                     <h3>Movimiento Circular</h3>
-                    <p>Analiza el giro de las aspas en la despulpadora de cafÃ© de la finca.</p>
+                    <p>Analiza el giro de las aspas en la despulpadora de café de la finca.</p>
                 </div>
             </div>
         </div>
 
-        <h2 class="titulo-seccion"><i class="fa-solid fa-dumbbell"></i> 3. DinÃ¡mica (Fuerzas)</h2>
+        <h2 class="titulo-seccion"><i class="fa-solid fa-dumbbell"></i> 3. Dinámica (Fuerzas)</h2>
         <div class="lista-temas">
             <div class="entrada-tema">
                 <div class="numero-tema">10</div>
                 <div class="info-tema">
                     <h3>Leyes de Newton</h3>
-                    <p>Inercia, fuerza y acciÃ³n/reacciÃ³n aplicadas a la maquinaria agrÃ­cola y la vida diaria.</p>
+                    <p>Inercia, fuerza y acción/reacción aplicadas a la maquinaria agrícola y la vida diaria.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">11</div>
                 <div class="info-tema">
                     <h3>Principales Tipos de Fuerzas</h3>
-                    <p>TensiÃ³n en cables de garrucha, fricciÃ³n en el suelo y peso de los bultos.</p>
+                    <p>Tensión en cables de garrucha, fricción en el suelo y peso de los bultos.</p>
                 </div>
             </div>
         </div>
 
-        <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> 4. EnergÃ­a y Trabajo</h2>
+        <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> 4. Energía y Trabajo</h2>
         <div class="lista-temas">
             <div class="entrada-tema">
                 <div class="numero-tema">12</div>
                 <div class="info-tema">
-                    <h3>EnergÃ­a Potencial Gravitacional</h3>
-                    <p>La energÃ­a que tiene una carga de cafÃ© situada en la parte alta de la montaÃ±a.</p>
+                    <h3>Energía Potencial Gravitacional</h3>
+                    <p>La energía que tiene una carga de café situada en la parte alta de la montaña.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">13</div>
                 <div class="info-tema">
-                    <h3>EnergÃ­a CinÃ©tica</h3>
-                    <p>La energÃ­a del movimiento: el agua bajando por los canales de lavado.</p>
+                    <h3>Energía Cinética</h3>
+                    <p>La energía del movimiento: el agua bajando por los canales de lavado.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">14</div>
                 <div class="info-tema">
-                    <h3>EnergÃ­a Potencial ElÃ¡stica</h3>
-                    <p>Resortes y sistemas de suspensiÃ³n en la maquinaria pesada.</p>
+                    <h3>Energía Potencial Elástica</h3>
+                    <p>Resortes y sistemas de suspensión en la maquinaria pesada.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">15</div>
                 <div class="info-tema">
-                    <h3>EnergÃ­a MecÃ¡nica</h3>
-                    <p>La suma de todo: Â¿CÃ³mo se conserva la energÃ­a en un sistema cerrado?</p>
+                    <h3>Energía Mecánica</h3>
+                    <p>La suma de todo: ¿Cómo se conserva la energía en un sistema cerrado?</p>
                 </div>
             </div>
         </div>
@@ -450,7 +450,7 @@
             const paginas = document.querySelectorAll('.pagina');
             paginas.forEach(p => p.classList.remove('activa'));
             
-            // Muestra solo la pÃ¡gina que queremos
+            // Muestra solo la página que queremos
             document.getElementById(idPagina).classList.add('activa');
             
             // Sube la pantalla al inicio suavemente

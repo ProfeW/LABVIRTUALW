@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica: ConversiÃ³n de Unidades - LabVirtual W</title>
+    <title>Práctica: Conversión de Unidades - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Renderizado de fÃ³rmulas matemÃ¡ticas -->
+    <!-- Renderizado de fórmulas matemáticas -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -77,11 +77,11 @@
 <body>
 
     <div class="contenedor">
-        <a href="fisica10_conversiones.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
+        <a href="fisica10_conversiones.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
         <div class="header-practica">
-            <h1><i class="fa-solid fa-gamepad"></i> PrÃ¡ctica Interactiva</h1>
-            <p>Resuelve estos 5 retos de conversiÃ³n de unidades. Avanza paso a paso.</p>
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
+            <p>Resuelve estos 5 retos de conversión de unidades. Avanza paso a paso.</p>
         </div>
 
         <div class="progreso-container">
@@ -90,18 +90,18 @@
 
         <!-- EJERCICIO 1 -->
         <div class="ejercicio-card activo" id="ej1">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (Longitud)</span>
-            <h3>Reto 1: MediciÃ³n de un terreno</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Longitud)</span>
+            <h3>Reto 1: Medición de un terreno</h3>
             <div class="enunciado">
-                El largo de una finca cafetera es de <strong>2.5 kilÃ³metros</strong>. Se requiere saber esta medida en metros para comprar una cerca. <br><br>
-                Â¿A cuÃ¡ntos metros equivalen 2.5 km?
+                El largo de una finca cafetera es de <strong>2.5 kilómetros</strong>. Se requiere saber esta medida en metros para comprar una cerca. <br><br>
+                ¿A cuántos metros equivalen 2.5 km?
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Recuerda que 1 km son 1000 metros. Multiplica 2.5 por 1000.')">25 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Casi. MÃ­delo bien, 1 km = 1000 m.')">250 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, 'Â¡Correcto! 2.5 km Ã— (1000 m / 1 km) = 2500 m.')">2500 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Demasiado grande. Ese serÃ­a el resultado si multiplicas por 10,000.')">25000 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Casi. Mídelo bien, 1 km = 1000 m.')">250 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! 2.5 km × (1000 m / 1 km) = 2500 m.')">2500 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Demasiado grande. Ese sería el resultado si multiplicas por 10,000.')">25000 m</button>
             </div>
             <div class="feedback" id="feed1"></div>
             <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -109,18 +109,18 @@
 
         <!-- EJERCICIO 2 -->
         <div class="ejercicio-card" id="ej2">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (Masa)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Masa)</span>
             <h3>Reto 2: Pesaje de la cosecha</h3>
             <div class="enunciado">
-                Un camiÃ³n transporta <strong>3.2 toneladas</strong> de plÃ¡tano al mercado. <br><br>
-                Si sabemos que 1 tonelada equivale a 1000 kg, Â¿cuÃ¡ntos kilogramos transporta el camiÃ³n?
+                Un camión transporta <strong>3.2 toneladas</strong> de plátano al mercado. <br><br>
+                Si sabemos que 1 tonelada equivale a 1000 kg, ¿cuántos kilogramos transporta el camión?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, 'Â¡Excelente! 3.2 ton Ã— (1000 kg / 1 ton) = 3200 kg.')">3200 kg</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Excelente! 3.2 ton × (1000 kg / 1 ton) = 3200 kg.')">3200 kg</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Recuerda multiplicar por 1000.')">320 kg</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'No, eso serÃ­a si fuera 1 tonelada = 10,000 kg.')">32000 kg</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Este valor es incorrecto. Intenta usar el factor de conversiÃ³n.')">0.32 kg</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'No, eso sería si fuera 1 tonelada = 10,000 kg.')">32000 kg</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Este valor es incorrecto. Intenta usar el factor de conversión.')">0.32 kg</button>
             </div>
             <div class="feedback" id="feed2"></div>
             <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -129,17 +129,17 @@
         <!-- EJERCICIO 3 -->
         <div class="ejercicio-card" id="ej3">
             <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Tiempo)</span>
-            <h3>Reto 3: DuraciÃ³n de un viaje</h3>
+            <h3>Reto 3: Duración de un viaje</h3>
             <div class="enunciado">
                 El recorrido del bus escolar desde la vereda hasta el colegio dura <strong>45 minutos</strong>. <br><br>
-                Â¿A cuÃ¡ntos segundos equivale este tiempo? (Nota: 1 minuto = 60 segundos)
+                ¿A cuántos segundos equivale este tiempo? (Nota: 1 minuto = 60 segundos)
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Multiplicaste por 100, pero un minuto tiene 60 segundos.')">4500 s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, 'Â¡Muy bien! 45 min Ã— (60 s / 1 min) = 2700 s.')">2700 s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Te equivocaste en la multiplicaciÃ³n. 45 Ã— 60 no es 2400.')">2400 s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Dividiste en lugar de multiplicar. Los segundos son mÃ¡s pequeÃ±os que los minutos, asÃ­ que el nÃºmero debe ser mayor.')">0.75 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Muy bien! 45 min × (60 s / 1 min) = 2700 s.')">2700 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Te equivocaste en la multiplicación. 45 × 60 no es 2400.')">2400 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Dividiste en lugar de multiplicar. Los segundos son más pequeños que los minutos, así que el número debe ser mayor.')">0.75 s</button>
             </div>
             <div class="feedback" id="feed3"></div>
             <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -148,17 +148,17 @@
         <!-- EJERCICIO 4 -->
         <div class="ejercicio-card" id="ej4">
             <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Velocidad)</span>
-            <h3>Reto 4: VelocÃ­metro del auto</h3>
+            <h3>Reto 4: Velocímetro del auto</h3>
             <div class="enunciado">
-                Un carro de policÃ­a persigue a un vehÃ­culo a una velocidad de <strong>90 km/h</strong>. <br><br>
-                Para resolver ecuaciones en fÃ­sica, necesitamos la velocidad en <strong>metros por segundo (m/s)</strong>. Realiza la conversiÃ³n doble.
+                Un carro de policía persigue a un vehículo a una velocidad de <strong>90 km/h</strong>. <br><br>
+                Para resolver ecuaciones en física, necesitamos la velocidad en <strong>metros por segundo (m/s)</strong>. Realiza la conversión doble.
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Casi, revisa bien tu operaciÃ³n. (90 * 1000) / 3600.')">20 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Casi, revisa bien tu operación. (90 * 1000) / 3600.')">20 m/s</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Error. Un truco: para pasar de km/h a m/s, puedes dividir entre 3.6 directamente.')">9000 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Incorrecto. EstÃ¡s usando un factor incorrecto.')">15 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, 'Â¡Excelente! 90 km/h Ã— (1000m / 1km) Ã— (1h / 3600s) = 25 m/s. (O simplemente 90 Ã· 3.6 = 25).')">25 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Incorrecto. Estás usando un factor incorrecto.')">15 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Excelente! 90 km/h × (1000m / 1km) × (1h / 3600s) = 25 m/s. (O simplemente 90 ÷ 3.6 = 25).')">25 m/s</button>
             </div>
             <div class="feedback" id="feed4"></div>
             <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -167,28 +167,28 @@
         <!-- EJERCICIO 5 -->
         <div class="ejercicio-card" id="ej5">
             <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto</span>
-            <h3>Reto 5: Â¡Velocidad Inversa!</h3>
+            <h3>Reto 5: ¡Velocidad Inversa!</h3>
             <div class="enunciado">
-                Un guepardo, el animal mÃ¡s rÃ¡pido de la tierra, puede alcanzar una velocidad de <strong>30 m/s</strong>. <br><br>
-                Â¿A quÃ© velocidad equivale esto en <strong>kilÃ³metros por hora (km/h)</strong>? (Pista: el proceso es inverso al anterior).
+                Un guepardo, el animal más rápido de la tierra, puede alcanzar una velocidad de <strong>30 m/s</strong>. <br><br>
+                ¿A qué velocidad equivale esto en <strong>kilómetros por hora (km/h)</strong>? (Pista: el proceso es inverso al anterior).
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Para pasar de m/s a km/h debes MULTIPLICAR por 3.6 o usar factores inversos: (30 / 1000) * 3600.')">8.33 km/h</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, 'Â¡Magistral! 30 m/s Ã— (1km / 1000m) Ã— (3600s / 1h) = 108 km/h. (O 30 Ã— 3.6 = 108).')">108 km/h</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Ese valor no es correcto. IntÃ©ntalo de nuevo aplicando factores de conversiÃ³n.')">150 km/h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Magistral! 30 m/s × (1km / 1000m) × (3600s / 1h) = 108 km/h. (O 30 × 3.6 = 108).')">108 km/h</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Ese valor no es correcto. Inténtalo de nuevo aplicando factores de conversión.')">150 km/h</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Incorrecto. No solo se multiplica por 1000 y 60.')">300 km/h</button>
             </div>
             <div class="feedback" id="feed5"></div>
-            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar PrÃ¡ctica <i class="fa-solid fa-check-double"></i></button>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
         <!-- PANTALLA FINAL -->
         <div class="pantalla-final" id="pantalla-final">
-            <div class="trofeo">ðŸ†</div>
-            <h1 style="color: #f39c12; margin-bottom: 20px;">Â¡MisiÃ³n Cumplida!</h1>
-            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Has dominado los factores de conversiÃ³n de unidades. Ahora estÃ¡s listo para realizar la evaluaciÃ³n final del tema.</p>
-            <a href="fisica10_conversiones_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la EvaluaciÃ³n</a>
+            <div class="trofeo">🏆</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Has dominado los factores de conversión de unidades. Ahora estás listo para realizar la evaluación final del tema.</p>
+            <a href="fisica10_conversiones_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
         </div>
 
     </div>
@@ -206,7 +206,7 @@
                 if(b === btn) {
                     b.classList.add(esCorrecta ? 'correcta' : 'incorrecta');
                 } else if (!esCorrecta && b.getAttribute('onclick').includes('true')) {
-                    // Mostrar cuÃ¡l era la correcta si fallÃ³
+                    // Mostrar cuál era la correcta si falló
                     b.classList.add('correcta');
                 }
             });
@@ -218,7 +218,7 @@
                 `<i class="fa-solid fa-xmark-circle"></i> ${mensaje}`;
             feed.className = 'feedback ' + (esCorrecta ? 'correcto' : 'incorrecto');
             
-            // Si es correcta, lanzar confetti y mostrar botÃ³n siguiente
+            // Si es correcta, lanzar confetti y mostrar botón siguiente
             if(esCorrecta) {
                 confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#f39c12', '#e67e22', '#f1c40f'] });
                 document.getElementById('btnSig' + num).style.display = 'block';

@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica % v/v - LabVirtual W</title>
+    <title>Práctica % v/v - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -68,21 +68,21 @@
         <a href="index.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
         <ul class="menu">
             <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-            <li><a href="quimica_9.html"><i class="fa-solid fa-arrow-left"></i> QuÃ­mica 9</a></li>
+            <li><a href="quimica_9.html"><i class="fa-solid fa-arrow-left"></i> Química 9</a></li>
         </ul>
     </nav>
 
     <div class="contenedor">
-        <a href="quimica9_volumen_volumen.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
+        <a href="quimica9_volumen_volumen.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
         
         <div class="encabezado-leccion">
-            <h1>ðŸŽ® PrÃ¡ctica Interactiva: % v/v</h1>
+            <h1>🎮 Práctica Interactiva: % v/v</h1>
             <p>10 Ejercicios paso a paso para dominar el Porcentaje Volumen a Volumen</p>
         </div>
 
         <div class="barra-progreso-contenedor">
             <div class="barra-progreso-titulo">
-                <span>ðŸ“Š Progreso General</span>
+                <span>📊 Progreso General</span>
                 <span id="texto-progreso">0 / 10 ejercicios completados</span>
             </div>
             <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
@@ -95,91 +95,91 @@
         const ejercicios = [
             {
                 titulo: "Ejercicio 1: Calculando porcentaje",
-                enunciado: "Se mezclan 25 mL de alcohol con 75 mL de agua destilada. Calcula el % v/v de la soluciÃ³n resultante.",
+                enunciado: "Se mezclan 25 mL de alcohol con 75 mL de agua destilada. Calcula el % v/v de la solución resultante.",
                 pasos: [
                     { tipo: 'datos', inputs: ['v_soluto', 'v_solvente'], valores: [25, 75], labels: ['v. Soluto', 'v. Solvente'], unidades: ['mL', 'mL'] },
-                    { tipo: 'calculo', label: 'v. SoluciÃ³n', valor: 100, formula: "Suma soluto + solvente para hallar el volumen de la soluciÃ³n", unidad: 'mL' },
+                    { tipo: 'calculo', label: 'v. Solución', valor: 100, formula: "Suma soluto + solvente para hallar el volumen de la solución", unidad: 'mL' },
                     { tipo: 'formula', seleccion: '%v/v' },
-                    { tipo: 'calculo', label: '% v/v', valor: 25, formula: "Aplica la fÃ³rmula: (v. Soluto / v. SoluciÃ³n) Ã— 100", unidad: '%' }
+                    { tipo: 'calculo', label: '% v/v', valor: 25, formula: "Aplica la fórmula: (v. Soluto / v. Solución) × 100", unidad: '%' }
                 ]
             },
             {
-                titulo: "Ejercicio 2: SoluciÃ³n total dada",
-                enunciado: "En un recipiente hay 300 mL de una soluciÃ³n que contiene 15 mL de esencia. Â¿CuÃ¡l es su concentraciÃ³n en volumen?",
+                titulo: "Ejercicio 2: Solución total dada",
+                enunciado: "En un recipiente hay 300 mL de una solución que contiene 15 mL de esencia. ¿Cuál es su concentración en volumen?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_soluto', 'v_solucion'], valores: [15, 300], labels: ['v. Soluto', 'v. SoluciÃ³n'], unidades: ['mL', 'mL'], extra: "Ojo: ya tienes el total de la soluciÃ³n." },
+                    { tipo: 'datos', inputs: ['v_soluto', 'v_solucion'], valores: [15, 300], labels: ['v. Soluto', 'v. Solución'], unidades: ['mL', 'mL'], extra: "Ojo: ya tienes el total de la solución." },
                     { tipo: 'formula', seleccion: '%v/v' },
-                    { tipo: 'calculo', label: '% v/v', valor: 5, formula: "Aplica: (15 / 300) Ã— 100", unidad: '%' }
+                    { tipo: 'calculo', label: '% v/v', valor: 5, formula: "Aplica: (15 / 300) × 100", unidad: '%' }
                 ]
             },
             {
-                titulo: "Ejercicio 3: Mezcla de lÃ­quidos",
-                enunciado: "Se preparan 450 mL de soluciÃ³n al mezclar 90 mL de acetona con agua. Calcula el % v/v.",
+                titulo: "Ejercicio 3: Mezcla de líquidos",
+                enunciado: "Se preparan 450 mL de solución al mezclar 90 mL de acetona con agua. Calcula el % v/v.",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_soluto', 'v_solucion'], valores: [90, 450], labels: ['v. Soluto', 'v. SoluciÃ³n'], unidades: ['mL', 'mL'] },
+                    { tipo: 'datos', inputs: ['v_soluto', 'v_solucion'], valores: [90, 450], labels: ['v. Soluto', 'v. Solución'], unidades: ['mL', 'mL'] },
                     { tipo: 'formula', seleccion: '%v/v' },
                     { tipo: 'calculo', label: '% v/v', valor: 20, formula: "Calcula el porcentaje de la acetona en la mezcla", unidad: '%' }
                 ]
             },
             {
                 titulo: "Ejercicio 4: Hallando el soluto",
-                enunciado: "Â¿CuÃ¡ntos mililitros de Ã¡cido acÃ©tico puro hay en una botella de 600 mL de vinagre al 4% v/v?",
+                enunciado: "¿Cuántos mililitros de ácido acético puro hay en una botella de 600 mL de vinagre al 4% v/v?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [600, 4], labels: ['v. SoluciÃ³n', '% v/v'], unidades: ['mL', '%'] },
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [600, 4], labels: ['v. Solución', '% v/v'], unidades: ['mL', '%'] },
                     { tipo: 'formula', seleccion: 'soluto' },
-                    { tipo: 'calculo', label: 'v. Soluto', valor: 24, formula: "Aplica el despeje: (4 Ã— 600) / 100", unidad: 'mL' }
+                    { tipo: 'calculo', label: 'v. Soluto', valor: 24, formula: "Aplica el despeje: (4 × 600) / 100", unidad: 'mL' }
                 ]
             },
             {
                 titulo: "Ejercicio 5: Otro de soluto",
-                enunciado: "Una botella de vino de 750 mL tiene una concentraciÃ³n de 14% v/v de alcohol. Â¿QuÃ© volumen de alcohol ingerimos al beberla completa?",
+                enunciado: "Una botella de vino de 750 mL tiene una concentración de 14% v/v de alcohol. ¿Qué volumen de alcohol ingerimos al beberla completa?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [750, 14], labels: ['v. SoluciÃ³n', '% v/v'], unidades: ['mL', '%'] },
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [750, 14], labels: ['v. Solución', '% v/v'], unidades: ['mL', '%'] },
                     { tipo: 'calculo', label: 'v. Soluto', valor: 105, formula: "Usa el despeje para soluto", unidad: 'mL' }
                 ]
             },
             {
-                titulo: "Ejercicio 6: Hallando la soluciÃ³n total",
-                enunciado: "Si tenemos 40 mL de glicerina y queremos preparar una soluciÃ³n al 10% v/v, Â¿cuÃ¡l debe ser el volumen total de la soluciÃ³n?",
+                titulo: "Ejercicio 6: Hallando la solución total",
+                enunciado: "Si tenemos 40 mL de glicerina y queremos preparar una solución al 10% v/v, ¿cuál debe ser el volumen total de la solución?",
                 pasos: [
                     { tipo: 'datos', inputs: ['v_soluto', 'porcentaje'], valores: [40, 10], labels: ['v. Soluto', '% v/v'], unidades: ['mL', '%'] },
                     { tipo: 'formula', seleccion: 'solucion' },
-                    { tipo: 'calculo', label: 'v. SoluciÃ³n', valor: 400, formula: "Aplica el despeje: (40 Ã— 100) / 10", unidad: 'mL' }
+                    { tipo: 'calculo', label: 'v. Solución', valor: 400, formula: "Aplica el despeje: (40 × 100) / 10", unidad: 'mL' }
                 ]
             },
             {
-                titulo: "Ejercicio 7: Hallando soluciÃ³n",
-                enunciado: "Un desinfectante requiere 25 mL de amonio cuaternario para una concentraciÃ³n del 5% v/v. Â¿CuÃ¡nto desinfectante (soluciÃ³n total) se obtendrÃ¡?",
+                titulo: "Ejercicio 7: Hallando solución",
+                enunciado: "Un desinfectante requiere 25 mL de amonio cuaternario para una concentración del 5% v/v. ¿Cuánto desinfectante (solución total) se obtendrá?",
                 pasos: [
                     { tipo: 'datos', inputs: ['v_soluto', 'porcentaje'], valores: [25, 5], labels: ['v. Soluto', '% v/v'], unidades: ['mL', '%'] },
-                    { tipo: 'calculo', label: 'v. SoluciÃ³n', valor: 500, formula: "Usa el despeje de volumen de soluciÃ³n", unidad: 'mL' }
+                    { tipo: 'calculo', label: 'v. Solución', valor: 500, formula: "Usa el despeje de volumen de solución", unidad: 'mL' }
                 ]
             },
             {
                 titulo: "Ejercicio 8: Hallando el solvente (Reto)",
-                enunciado: "Se necesita preparar 250 mL de alcohol al 70% v/v a partir de alcohol puro y agua. Â¿CuÃ¡ntos mL de agua (solvente) se usarÃ¡n?",
+                enunciado: "Se necesita preparar 250 mL de alcohol al 70% v/v a partir de alcohol puro y agua. ¿Cuántos mL de agua (solvente) se usarán?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [250, 70], labels: ['v. SoluciÃ³n', '% v/v'], unidades: ['mL', '%'] },
-                    { tipo: 'calculo', label: 'v. Soluto', valor: 175, formula: "Primero, halla cuÃ¡nto alcohol puro se necesita", unidad: 'mL' },
-                    { tipo: 'calculo', label: 'v. Solvente', valor: 75, formula: "Si la soluciÃ³n es 250 y el soluto es 175, resta para el agua", unidad: 'mL' }
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [250, 70], labels: ['v. Solución', '% v/v'], unidades: ['mL', '%'] },
+                    { tipo: 'calculo', label: 'v. Soluto', valor: 175, formula: "Primero, halla cuánto alcohol puro se necesita", unidad: 'mL' },
+                    { tipo: 'calculo', label: 'v. Solvente', valor: 75, formula: "Si la solución es 250 y el soluto es 175, resta para el agua", unidad: 'mL' }
                 ]
             },
             {
-                titulo: "Ejercicio 9: Otro cÃ¡lculo de solvente",
-                enunciado: "Â¿QuÃ© volumen de solvente hay en 800 mL de una mezcla de anticongelante al 35% v/v?",
+                titulo: "Ejercicio 9: Otro cálculo de solvente",
+                enunciado: "¿Qué volumen de solvente hay en 800 mL de una mezcla de anticongelante al 35% v/v?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [800, 35], labels: ['v. SoluciÃ³n', '% v/v'], unidades: ['mL', '%'] },
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [800, 35], labels: ['v. Solución', '% v/v'], unidades: ['mL', '%'] },
                     { tipo: 'calculo', label: 'v. Soluto', valor: 280, formula: "Halla los mL de soluto (anticongelante puro)", unidad: 'mL' },
                     { tipo: 'calculo', label: 'v. Solvente', valor: 520, formula: "Halla los mL de agua (solvente)", unidad: 'mL' }
                 ]
             },
             {
-                titulo: "Ejercicio 10: ConcentraciÃ³n del solvente",
-                enunciado: "Si mezclas 60 mL de jugo concentrado con 240 mL de agua, Â¿quÃ© porcentaje de volumen representa el agua en esta mezcla?",
+                titulo: "Ejercicio 10: Concentración del solvente",
+                enunciado: "Si mezclas 60 mL de jugo concentrado con 240 mL de agua, ¿qué porcentaje de volumen representa el agua en esta mezcla?",
                 pasos: [
                     { tipo: 'datos', inputs: ['v_soluto', 'v_solvente'], valores: [60, 240], labels: ['v. Soluto (jugo)', 'v. Solvente (agua)'], unidades: ['mL', 'mL'] },
-                    { tipo: 'calculo', label: 'v. SoluciÃ³n', valor: 300, formula: "Suma los volÃºmenes", unidad: 'mL' },
-                    { tipo: 'calculo', label: '% v/v (soluto)', valor: 20, formula: "Calcula la concentraciÃ³n del jugo", unidad: '%' },
+                    { tipo: 'calculo', label: 'v. Solución', valor: 300, formula: "Suma los volúmenes", unidad: 'mL' },
+                    { tipo: 'calculo', label: '% v/v (soluto)', valor: 20, formula: "Calcula la concentración del jugo", unidad: '%' },
                     { tipo: 'calculo', label: '% v/v (solvente)', valor: 80, formula: "Sabiendo que el total es 100%, halla la del agua", unidad: '%' }
                 ]
             }
@@ -187,10 +187,10 @@
 
         const formulasHTML = `
             <select class="select-formula">
-                <option value="">-- Selecciona la fÃ³rmula correcta --</option>
-                <option value="%v/v">% v/v = (v. Soluto / v. SoluciÃ³n) Ã— 100</option>
-                <option value="soluto">v. Soluto = (% v/v Ã— v. SoluciÃ³n) / 100</option>
-                <option value="solucion">v. SoluciÃ³n = (v. Soluto Ã— 100) / % v/v</option>
+                <option value="">-- Selecciona la fórmula correcta --</option>
+                <option value="%v/v">% v/v = (v. Soluto / v. Solución) × 100</option>
+                <option value="soluto">v. Soluto = (% v/v × v. Solución) / 100</option>
+                <option value="solucion">v. Solución = (v. Soluto × 100) / % v/v</option>
             </select>
         `;
 
@@ -208,7 +208,7 @@
                     html += `<div class="paso-contenedor ${activo}" id="ej${index}-p${pIndex}">`;
                     
                     if (paso.tipo === 'datos') {
-                        html += `<div class="paso-titulo">ðŸ“‹ Identificar Datos <span class="icono-check">âœ”</span></div>`;
+                        html += `<div class="paso-titulo">📋 Identificar Datos <span class="icono-check">✔</span></div>`;
                         if(paso.extra) html += `<p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">${paso.extra}</p>`;
                         html += `<div class="grid-datos">`;
                         paso.inputs.forEach((input, i) => {
@@ -220,10 +220,10 @@
                         });
                         html += `</div>`;
                     } else if (paso.tipo === 'formula') {
-                        html += `<div class="paso-titulo">ðŸ“ Seleccionar FÃ³rmula <span class="icono-check">âœ”</span></div>`;
+                        html += `<div class="paso-titulo">📐 Seleccionar Fórmula <span class="icono-check">✔</span></div>`;
                         html += formulasHTML.replace('class="select-formula"', `id="input-${index}-${pIndex}-0"`);
                     } else if (paso.tipo === 'calculo') {
-                        html += `<div class="paso-titulo">ðŸ”¢ Calcular <span class="icono-check">âœ”</span></div>`;
+                        html += `<div class="paso-titulo">🔢 Calcular <span class="icono-check">✔</span></div>`;
                         html += `<p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">${paso.formula}</p>`;
                         html += `<div class="input-grupo" style="max-width:250px;">
                             <label>${paso.label}</label>
@@ -263,7 +263,7 @@
 
             if (valido) {
                 fb.className = 'feedback correcto';
-                fb.textContent = 'Â¡Correcto! âœ”ï¸';
+                fb.textContent = '¡Correcto! ✔️';
                 pasoEl.classList.remove('activo');
                 pasoEl.classList.add('completado');
 
@@ -278,7 +278,7 @@
                 }
             } else {
                 fb.className = 'feedback incorrecto';
-                fb.textContent = 'Incorrecto. Revisa tus cÃ¡lculos. âŒ';
+                fb.textContent = 'Incorrecto. Revisa tus cálculos. ❌';
             }
         };
 

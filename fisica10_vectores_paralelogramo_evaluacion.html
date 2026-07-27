@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvaluaciÃ³n: Paralelogramo - LabVirtual W</title>
+    <title>Evaluación: Paralelogramo - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -57,11 +57,11 @@
         </a>
 
         <div class="evaluacion-container">
-            <h1>EvaluaciÃ³n: Paralelogramo</h1>
+            <h1>Evaluación: Paralelogramo</h1>
             
             <form id="quizForm">
                 <div class="pregunta">
-                    <h3>1. El mÃ©todo del paralelogramo utiliza principalmente:</h3>
+                    <h3>1. El método del paralelogramo utiliza principalmente:</h3>
                     <div class="opciones">
                         <label><input type="radio" name="q1" value="a"> La ley de Boyle.</label>
                         <label><input type="radio" name="q1" value="b"> La ley del coseno generalizada.</label>
@@ -70,10 +70,10 @@
                 </div>
 
                 <div class="pregunta">
-                    <h3>2. Si \(\theta = 90^\circ\) en la fÃ³rmula de la ley de cosenos para suma de vectores:</h3>
+                    <h3>2. Si \(\theta = 90^\circ\) en la fórmula de la ley de cosenos para suma de vectores:</h3>
                     <div class="opciones">
                         <label><input type="radio" name="q2" value="a"> La magnitud es cero.</label>
-                        <label><input type="radio" name="q2" value="b"> El tÃ©rmino \(2AB\cos(\theta)\) se vuelve cero, transformÃ¡ndose en el Teorema de PitÃ¡goras.</label>
+                        <label><input type="radio" name="q2" value="b"> El término \(2AB\cos(\theta)\) se vuelve cero, transformándose en el Teorema de Pitágoras.</label>
                         <label><input type="radio" name="q2" value="c"> La magnitud se duplica.</label>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
             </form>
 
             <div id="resultados">
-                <h2>Â¡EvaluaciÃ³n Completada!</h2>
+                <h2>¡Evaluación Completada!</h2>
                 <p id="puntajeTexto" style="font-size:1.2rem;"></p>
             </div>
         </div>
@@ -104,10 +104,10 @@
             form.style.display = 'none';
             const resultados = document.getElementById('resultados');
             resultados.style.display = 'block';
-            document.getElementById('puntajeTexto').innerText = `Tu calificaciÃ³n es: ${puntaje} / 100`;
+            document.getElementById('puntajeTexto').innerText = `Tu calificación es: ${puntaje} / 100`;
             
             if(puntaje < 100) {
-                resultados.innerHTML += `<p style="margin-top:15px; font-size:0.9rem;">Te sugerimos repasar la teorÃ­a del MÃ©todo del Paralelogramo y volver a intentarlo.</p>`;
+                resultados.innerHTML += `<p style="margin-top:15px; font-size:0.9rem;">Te sugerimos repasar la teoría del Método del Paralelogramo y volver a intentarlo.</p>`;
             }
         }
     </script>

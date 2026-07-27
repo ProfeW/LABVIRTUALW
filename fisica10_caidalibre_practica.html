@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica: CaÃ­da Libre - LabVirtual W</title>
+    <title>Práctica: Caída Libre - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,12 +60,12 @@
 <body>
 
     <div class="contenedor">
-        <a href="fisica10_caidalibre.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÃ­a</a>
+        <a href="fisica10_caidalibre.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
 
         <div class="header-practica">
-            <h1><i class="fa-solid fa-gamepad"></i> PrÃ¡ctica Interactiva</h1>
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica Interactiva</h1>
             <p>Calcula tiempos y alturas usando la gravedad terrestre.</p>
-            <p style="font-size: 0.9rem; color: #aaa;">(Para esta prÃ¡ctica, usa <strong style="color: #4facfe;">g = 9.8 m/sÂ²</strong>)</p>
+            <p style="font-size: 0.9rem; color: #aaa;">(Para esta práctica, usa <strong style="color: #4facfe;">g = 9.8 m/s²</strong>)</p>
         </div>
 
         <div class="progreso-container">
@@ -74,19 +74,19 @@
 
         <!-- EJERCICIO 1 -->
         <div class="ejercicio-card activo" id="ej1">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (Velocidad de CaÃ­da)</span>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Velocidad de Caída)</span>
             <h3>Reto 1: La moneda en el pozo</h3>
             <div class="enunciado">
                 Si dejas caer una moneda en un pozo ciego y escuchas el impacto en exactamente <strong>2 segundos</strong>. <br><br>
-                Â¿A quÃ© velocidad iba la moneda justo antes de tocar el agua?<br>
+                ¿A qué velocidad iba la moneda justo antes de tocar el agua?<br>
                 <em>(Recuerda: $v_i = 0$, $v_f = v_i + g \cdot t$)</em>
             </div>
             
             <div class="opciones-grid">
                 <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Esa es la velocidad al cabo de 1 segundo (1 * 9.8).')">9.8 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, 'Â¡Correcto! vf = 0 + (9.8 * 2) = 19.6 m/s.')">19.6 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! vf = 0 + (9.8 * 2) = 19.6 m/s.')">19.6 m/s</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Recuerda multiplicar la gravedad (9.8) por el tiempo (2).')">4.9 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Â¡Uy! Ese cÃ¡lculo es muy alto. Es solo 9.8 * 2.')">39.2 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, '¡Uy! Ese cálculo es muy alto. Es solo 9.8 * 2.')">39.2 m/s</button>
             </div>
             <div class="feedback" id="feed1"></div>
             <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -94,19 +94,19 @@
 
         <!-- EJERCICIO 2 -->
         <div class="ejercicio-card" id="ej2">
-            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel BÃ¡sico (Altura)</span>
-            <h3>Reto 2: Â¿QuÃ© tan profundo es el pozo?</h3>
+            <span class="nivel-badge"><i class="fa-solid fa-star"></i> Nivel Básico (Altura)</span>
+            <h3>Reto 2: ¿Qué tan profundo es el pozo?</h3>
             <div class="enunciado">
-                En el mismo ejercicio anterior, la moneda tardÃ³ <strong>2 segundos</strong> en caer. <br><br>
-                Â¿CuÃ¡l es la profundidad del pozo? (es decir, la altura $h$).<br>
-                <em>FÃ³rmula: $h = v_i \cdot t + \frac{g \cdot t^2}{2}$</em>
+                En el mismo ejercicio anterior, la moneda tardó <strong>2 segundos</strong> en caer. <br><br>
+                ¿Cuál es la profundidad del pozo? (es decir, la altura $h$).<br>
+                <em>Fórmula: $h = v_i \cdot t + \frac{g \cdot t^2}{2}$</em>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Te faltÃ³ dividir entre 2 al final.')">39.2 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Te faltó dividir entre 2 al final.')">39.2 m</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esa es la distancia recorrida en solo 1 segundo.')">4.9 m</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esa era la velocidad, pero estamos calculando altura (metros).')">19.6 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, 'Â¡Perfecto! h = 0 + (9.8 * 2Â²) / 2 = (9.8 * 4) / 2 = 39.2 / 2 = 19.6 metros.')">19.6 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Perfecto! h = 0 + (9.8 * 2²) / 2 = (9.8 * 4) / 2 = 39.2 / 2 = 19.6 metros.')">19.6 m</button>
             </div>
             <div class="feedback" id="feed2"></div>
             <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -115,17 +115,17 @@
         <!-- EJERCICIO 3 -->
         <div class="ejercicio-card" id="ej3">
             <span class="nivel-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Medio (Uso de Gravedad 10)</span>
-            <h3>Reto 3: Salto en ParacaÃ­das</h3>
+            <h3>Reto 3: Salto en Paracaídas</h3>
             <div class="enunciado">
-                (Para este ejercicio, por facilidad, usaremos la gravedad como <strong style="color: #4facfe;">g = 10 m/sÂ²</strong>).<br><br>
-                Un paracaidista se lanza desde un helicÃ³ptero. Antes de abrir el paracaÃ­das, cae libremente durante <strong>5 segundos</strong>. Â¿QuÃ© distancia cayÃ³ en esos 5 segundos?
+                (Para este ejercicio, por facilidad, usaremos la gravedad como <strong style="color: #4facfe;">g = 10 m/s²</strong>).<br><br>
+                Un paracaidista se lanza desde un helicóptero. Antes de abrir el paracaídas, cae libremente durante <strong>5 segundos</strong>. ¿Qué distancia cayó en esos 5 segundos?
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, 'Â¡Correcto! h = (10 * 5Â²) / 2 = (10 * 25) / 2 = 250 / 2 = 125 metros.')">125 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Cuidado, sumaste el tiempo en lugar de elevarlo al cuadrado (5Â² = 25).')">25 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! h = (10 * 5²) / 2 = (10 * 25) / 2 = 250 / 2 = 125 metros.')">125 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Cuidado, sumaste el tiempo en lugar de elevarlo al cuadrado (5² = 25).')">25 m</button>
                 <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Multiplicaste mal o no dividiste entre 2 al final.')">250 m</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Esa serÃ­a su velocidad final (10 * 5 = 50), pero preguntamos por la altura.')">50 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Esa sería su velocidad final (10 * 5 = 50), pero preguntamos por la altura.')">50 m</button>
             </div>
             <div class="feedback" id="feed3"></div>
             <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -134,17 +134,17 @@
         <!-- EJERCICIO 4 -->
         <div class="ejercicio-card" id="ej4">
             <span class="nivel-badge" style="color: #f39c12; border-color: #f39c12;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> Nivel Avanzado (Sin tiempo)</span>
-            <h3>Reto 4: CaÃ­da desde la ventana</h3>
+            <h3>Reto 4: Caída desde la ventana</h3>
             <div class="enunciado">
-                Se te cae el celular por la ventana desde una altura de <strong>5 metros</strong>. Â¿Con quÃ© velocidad chocarÃ¡ contra el piso? (Usa $g = 9.8 \text{ m/s}^2$).<br><br>
-                <em>FÃ³rmula: $v_f^2 = v_i^2 + 2 \cdot g \cdot h$</em>
+                Se te cae el celular por la ventana desde una altura de <strong>5 metros</strong>. ¿Con qué velocidad chocará contra el piso? (Usa $g = 9.8 \text{ m/s}^2$).<br><br>
+                <em>Fórmula: $v_f^2 = v_i^2 + 2 \cdot g \cdot h$</em>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Ese es el valor de la velocidad AL CUADRADO (98). Â¡Debes sacarle la raÃ­z cuadrada!')">98 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Te faltÃ³ multiplicarlo por el nÃºmero 2 en la fÃ³rmula.')">49 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, 'Â¡Exacto! vfÂ² = 0 + 2(9.8)(5) = 98. La raÃ­z cuadrada de 98 es aproximadamente 9.9 m/s.')">9.9 m/s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste la altura por sÃ­ misma y no le sacaste raÃ­z.')">25 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Ese es el valor de la velocidad AL CUADRADO (98). ¡Debes sacarle la raíz cuadrada!')">98 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Te faltó multiplicarlo por el número 2 en la fórmula.')">49 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Exacto! vf² = 0 + 2(9.8)(5) = 98. La raíz cuadrada de 98 es aproximadamente 9.9 m/s.')">9.9 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Multiplicaste la altura por sí misma y no le sacaste raíz.')">25 m/s</button>
             </div>
             <div class="feedback" id="feed4"></div>
             <button class="btn-siguiente" id="btnSig4" onclick="siguiente(4)">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>
@@ -153,27 +153,27 @@
         <!-- EJERCICIO 5 -->
         <div class="ejercicio-card" id="ej5">
             <span class="nivel-badge" style="color: #e74c3c; border-color: #e74c3c;"><i class="fa-solid fa-bolt"></i> Reto Experto (Despejar el tiempo)</span>
-            <h3>Reto 5: Salto desde el trampolÃ­n</h3>
+            <h3>Reto 5: Salto desde el trampolín</h3>
             <div class="enunciado">
-                Un clavadista se deja caer desde una plataforma a <strong>20 metros</strong> sobre la piscina. Â¿CuÃ¡nto tiempo tarda en tocar el agua? (Usa $g = 10 \text{ m/s}^2$ por facilidad).<br><br>
-                <em>Pista: Despeja $t$ de la fÃ³rmula $h = \frac{g \cdot t^2}{2}$. QuedarÃ¡ $t = \sqrt{\frac{2 \cdot h}{g}}$</em>
+                Un clavadista se deja caer desde una plataforma a <strong>20 metros</strong> sobre la piscina. ¿Cuánto tiempo tarda en tocar el agua? (Usa $g = 10 \text{ m/s}^2$ por facilidad).<br><br>
+                <em>Pista: Despeja $t$ de la fórmula $h = \frac{g \cdot t^2}{2}$. Quedará $t = \sqrt{\frac{2 \cdot h}{g}}$</em>
             </div>
             
             <div class="opciones-grid">
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Olvidaste sacarle la raÃ­z cuadrada al resultado.')">4 s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, 'Â¡IncreÃ­ble! t = âˆš( (2 * 20) / 10 ) = âˆš( 40 / 10 ) = âˆš4 = 2 segundos.')">2 s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'CÃ¡lculo incorrecto. Multiplica 2 por 20, divide entre 10, y saca raÃ­z cuadrada.')">1 s</button>
-                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Demasiado tiempo. CaerÃ­a de mucho mÃ¡s alto.')">10 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Olvidaste sacarle la raíz cuadrada al resultado.')">4 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, true, '¡Increíble! t = √( (2 * 20) / 10 ) = √( 40 / 10 ) = √4 = 2 segundos.')">2 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Cálculo incorrecto. Multiplica 2 por 20, divide entre 10, y saca raíz cuadrada.')">1 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(5, this, false, 'Demasiado tiempo. Caería de mucho más alto.')">10 s</button>
             </div>
             <div class="feedback" id="feed5"></div>
-            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar PrÃ¡ctica <i class="fa-solid fa-check-double"></i></button>
+            <button class="btn-siguiente" id="btnSig5" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
         </div>
 
         <div class="pantalla-final" id="pantalla-final">
-            <div class="trofeo">ðŸ</div>
-            <h1 style="color: #f39c12; margin-bottom: 20px;">Â¡MisiÃ³n Cumplida!</h1>
-            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Â¡Excelente! Ahora entiendes cÃ³mo funciona la gravedad de la Tierra sobre los objetos en caÃ­da libre.</p>
-            <a href="fisica10_caidalibre_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la EvaluaciÃ³n</a>
+            <div class="trofeo">🏁</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Misión Cumplida!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">¡Excelente! Ahora entiendes cómo funciona la gravedad de la Tierra sobre los objetos en caída libre.</p>
+            <a href="fisica10_caidalibre_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
         </div>
 
     </div>

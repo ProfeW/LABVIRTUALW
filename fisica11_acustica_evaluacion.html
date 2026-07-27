@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvaluaciÃ³n: AcÃºstica - FÃ­sica 11 - LabVirtual W</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸ“</text></svg>">
+    <title>Evaluación: Acústica - Física 11 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -69,16 +69,16 @@
 <body>
 <div class="contenedor">
     <div id="pantalla-inicio" class="pantalla-inicio">
-        <h1><i class="fa-solid fa-file-signature"></i> EvaluaciÃ³n</h1>
-        <p>AcÃºstica â€” El Sonido Â· FÃ­sica 11Â° Â· Tipo ICFES</p>
+        <h1><i class="fa-solid fa-file-signature"></i> Evaluación</h1>
+        <p>Acústica — El Sonido · Física 11° · Tipo ICFES</p>
         <ul class="reglas">
             <li><i class="fa-solid fa-check"></i> <strong>10 preguntas aleatorias</strong> de un banco de 25 preguntas.</li>
-            <li><i class="fa-solid fa-check"></i> Cada evaluaciÃ³n es <strong>diferente</strong>.</li>
+            <li><i class="fa-solid fa-check"></i> Cada evaluación es <strong>diferente</strong>.</li>
             <li><i class="fa-solid fa-check"></i> Puedes navegar entre preguntas antes de finalizar.</li>
         </ul>
-        <input type="text" id="input-nombre" class="input-nombre" placeholder="âœï¸ Escribe tu nombre completo" maxlength="60">
+        <input type="text" id="input-nombre" class="input-nombre" placeholder="✏️ Escribe tu nombre completo" maxlength="60">
         <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre.</div><br>
-        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar EvaluaciÃ³n</button>
+        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar Evaluación</button>
     </div>
     <div id="seccion-evaluacion" class="seccion-evaluacion">
         <div class="header-eval"><div class="bienvenida-nombre" id="bienvenida-nombre"></div><div class="timer-badge">Pregunta <span id="num-actual">1</span> de 10</div></div>
@@ -93,49 +93,49 @@
     <div id="pantalla-resultado" class="pantalla-resultado">
         <div class="resultado-header">
             <div style="font-size:1rem;color:#aaa;margin-bottom:15px;" id="resultado-nombre"></div>
-            <span class="resultado-emoji" id="resultado-emoji">ðŸ“Š</span>
+            <span class="resultado-emoji" id="resultado-emoji">📊</span>
             <div class="resultado-titulo" id="resultado-titulo"></div>
         </div>
         <div class="score-grid">
-            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">âœ… Correctas</div></div>
-            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">âŒ Incorrectas</div></div>
-            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">ðŸ“Š Porcentaje</div></div>
+            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">✅ Correctas</div></div>
+            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">❌ Incorrectas</div></div>
+            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">📊 Porcentaje</div></div>
         </div>
-        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> RevisiÃ³n de Respuestas</div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión de Respuestas</div>
         <div id="revision-container"></div>
         <div style="text-align:center;margin-top:30px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
-            <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#1e8449);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva EvaluaciÃ³n</button>
-            <a href="fisica11_acustica.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar TeorÃ­a</a>
+            <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#1e8449);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva Evaluación</button>
+            <a href="fisica11_acustica.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
         </div>
     </div>
 </div>
 <script>
 const bancoPreguntas = [
-    {texto:"Â¿En cuÃ¡l de los siguientes medios NO puede propagarse el sonido?",opciones:["A. Agua","B. Aire","C. Acero","D. VacÃ­o"],respuesta:3},
+    {texto:"¿En cuál de los siguientes medios NO puede propagarse el sonido?",opciones:["A. Agua","B. Aire","C. Acero","D. Vacío"],respuesta:3},
     {texto:"El tono de un sonido (agudo o grave) depende de:",opciones:["A. Su amplitud","B. Su frecuencia","C. Su velocidad","D. Su timbre"],respuesta:1},
-    {texto:"Â¿CuÃ¡l caracterÃ­stica del sonido permite distinguir un violÃ­n de una flauta cuando tocan la misma nota?",opciones:["A. La frecuencia","B. La intensidad","C. El timbre","D. La amplitud"],respuesta:2},
-    {texto:"La velocidad del sonido en el aire a 20Â°C es aproximadamente:",opciones:["A. 300 m/s","B. 1500 m/s","C. 343 m/s","D. 5960 m/s"],respuesta:2},
-    {contexto:"Un estudiante mide que el sonido de un trueno llega 4 segundos despuÃ©s del relÃ¡mpago. La velocidad del sonido es 343 m/s.",texto:"Â¿A quÃ© distancia estÃ¡ la tormenta?",opciones:["A. 85.75 m","B. 1372 m","C. 343 m","D. 686 m"],respuesta:1},
+    {texto:"¿Cuál característica del sonido permite distinguir un violín de una flauta cuando tocan la misma nota?",opciones:["A. La frecuencia","B. La intensidad","C. El timbre","D. La amplitud"],respuesta:2},
+    {texto:"La velocidad del sonido en el aire a 20°C es aproximadamente:",opciones:["A. 300 m/s","B. 1500 m/s","C. 343 m/s","D. 5960 m/s"],respuesta:2},
+    {contexto:"Un estudiante mide que el sonido de un trueno llega 4 segundos después del relámpago. La velocidad del sonido es 343 m/s.",texto:"¿A qué distancia está la tormenta?",opciones:["A. 85.75 m","B. 1372 m","C. 343 m","D. 686 m"],respuesta:1},
     {texto:"Al aumentar la temperatura del aire, la velocidad del sonido:",opciones:["A. Disminuye","B. No cambia","C. Depende de la frecuencia","D. Aumenta"],respuesta:3},
     {texto:"El nivel de intensidad sonora que representa el umbral del dolor auditivo es aproximadamente:",opciones:["A. 60 dB","B. 85 dB","C. 120 dB","D. 20 dB"],respuesta:2},
-    {contexto:"Una ambulancia se aproxima a ti con su sirena activa. Mientras se acerca, percibes un tono mÃ¡s agudo; cuando se aleja, el tono es mÃ¡s grave.",texto:"Â¿QuÃ© fenÃ³meno explica este cambio de tono?",opciones:["A. Interferencia del sonido","B. Resonancia acÃºstica","C. Efecto Doppler","D. DifracciÃ³n sonora"],respuesta:2},
-    {texto:"Â¿En quÃ© medio viaja mÃ¡s rÃ¡pido el sonido?",opciones:["A. En el aire a 0Â°C","B. En el agua a temperatura ambiente","C. En el vacÃ­o","D. En el acero"],respuesta:3},
-    {texto:"La intensidad del sonido estÃ¡ relacionada directamente con:",opciones:["A. La frecuencia de la onda","B. La amplitud de la onda","C. La velocidad de propagaciÃ³n","D. La longitud de onda"],respuesta:1},
-    {contexto:"Una guitarra produce la nota La (440 Hz). El sonido viaja a 343 m/s.",texto:"Â¿CuÃ¡l es la longitud de onda de esa nota?",opciones:["A. 0.78 m","B. 150920 m","C. 7.8 m","D. 1.28 m"],respuesta:0},
-    {texto:"Â¿QuÃ© significa que el sonido es una onda longitudinal?",opciones:["A. Que puede propagarse en el vacÃ­o","B. Que tiene mayor velocidad que la luz","C. Que las partÃ­culas del medio vibran perpendicularmente a la direcciÃ³n de propagaciÃ³n","D. Que las partÃ­culas del medio vibran en la misma direcciÃ³n que se propaga la onda"],respuesta:3},
-    {texto:"El rango de frecuencias audibles para el oÃ­do humano normal es:",opciones:["A. 1 Hz a 1000 Hz","B. 20 Hz a 20000 Hz","C. 100 Hz a 50000 Hz","D. 200 Hz a 5000 Hz"],respuesta:1},
+    {contexto:"Una ambulancia se aproxima a ti con su sirena activa. Mientras se acerca, percibes un tono más agudo; cuando se aleja, el tono es más grave.",texto:"¿Qué fenómeno explica este cambio de tono?",opciones:["A. Interferencia del sonido","B. Resonancia acústica","C. Efecto Doppler","D. Difracción sonora"],respuesta:2},
+    {texto:"¿En qué medio viaja más rápido el sonido?",opciones:["A. En el aire a 0°C","B. En el agua a temperatura ambiente","C. En el vacío","D. En el acero"],respuesta:3},
+    {texto:"La intensidad del sonido está relacionada directamente con:",opciones:["A. La frecuencia de la onda","B. La amplitud de la onda","C. La velocidad de propagación","D. La longitud de onda"],respuesta:1},
+    {contexto:"Una guitarra produce la nota La (440 Hz). El sonido viaja a 343 m/s.",texto:"¿Cuál es la longitud de onda de esa nota?",opciones:["A. 0.78 m","B. 150920 m","C. 7.8 m","D. 1.28 m"],respuesta:0},
+    {texto:"¿Qué significa que el sonido es una onda longitudinal?",opciones:["A. Que puede propagarse en el vacío","B. Que tiene mayor velocidad que la luz","C. Que las partículas del medio vibran perpendicularmente a la dirección de propagación","D. Que las partículas del medio vibran en la misma dirección que se propaga la onda"],respuesta:3},
+    {texto:"El rango de frecuencias audibles para el oído humano normal es:",opciones:["A. 1 Hz a 1000 Hz","B. 20 Hz a 20000 Hz","C. 100 Hz a 50000 Hz","D. 200 Hz a 5000 Hz"],respuesta:1},
     {texto:"Las frecuencias por encima de 20000 Hz se denominan:",opciones:["A. Infrasonidos","B. Sonidos audibles","C. Ultrasonidos","D. Macrosonidos"],respuesta:2},
-    {contexto:"Un sonar emite un pulso de ultrasonido y recibe el eco 0.6 segundos despuÃ©s. La velocidad del sonido en el agua es 1500 m/s.",texto:"Â¿A quÃ© profundidad estÃ¡ el objeto detectado?",opciones:["A. 900 m","B. 2500 m","C. 450 m","D. 300 m"],respuesta:2},
-    {texto:"Â¿CuÃ¡l es la velocidad del sonido en el aire cuando la temperatura es 30Â°C? (v â‰ˆ 331 + 0.6Â·T)",opciones:["A. 331 m/s","B. 349 m/s","C. 361 m/s","D. 343 m/s"],respuesta:1},
-    {texto:"La resonancia acÃºstica en una flauta produce su sonido porque:",opciones:["A. El aire dentro del tubo resuena a la frecuencia natural determinada por la longitud del tubo","B. La difracciÃ³n del aire al salir amplifica el sonido","C. La interferencia de las ondas dentro del tubo incrementa la amplitud","D. La reflexiÃ³n del sonido en las paredes del instrumento duplica la frecuencia"],respuesta:0},
-    {texto:"Â¿Por quÃ© en una sinfonÃ­a los instrumentos de cuerda gruesa producen sonidos mÃ¡s graves que los de cuerda delgada?",opciones:["A. Las cuerdas gruesas producen sonidos de mayor velocidad","B. Las cuerdas gruesas vibran mÃ¡s lentamente (menor frecuencia)","C. Las cuerdas gruesas tienen mayor amplitud de vibraciÃ³n","D. Las cuerdas gruesas producen mayor volumen por su masa"],respuesta:1},
-    {contexto:"En una fÃ¡brica los trabajadores estÃ¡n expuestos constantemente a 95 dB.",texto:"Â¿QuÃ© consecuencia puede tener esta exposiciÃ³n prolongada?",opciones:["A. Ninguna, 95 dB estÃ¡ dentro del rango seguro","B. DaÃ±o auditivo, ya que supera el lÃ­mite seguro de 85 dB","C. Solo mareo, ya que el daÃ±o auditivo comienza a los 120 dB","D. PÃ©rdida temporal de la visiÃ³n por vibraciÃ³n excesiva"],respuesta:1},
-    {texto:"El eco difiere del sonido original en que:",opciones:["A. Tiene mayor frecuencia","B. Viaja mÃ¡s rÃ¡pido que el sonido original","C. Es el mismo sonido reflejado y recibido con un retardo","D. Tiene mayor amplitud que el sonido original"],respuesta:2},
-    {texto:"Â¿CuÃ¡l es la expresiÃ³n correcta para calcular la longitud de onda del sonido?",opciones:["A. Î» = f Ã— T","B. Î» = v / f","C. Î» = f / v","D. Î» = v Ã— f"],respuesta:1},
-    {contexto:"Un cantante de Ã³pera logra romper una copa de cristal con su voz sin tocarla.",texto:"Â¿QuÃ© fenÃ³meno fÃ­sico explica esto?",opciones:["A. Interferencia destructiva de las ondas sonoras","B. DifracciÃ³n del sonido al rodear la copa","C. Resonancia: la frecuencia de la voz coincide con la frecuencia natural del cristal","D. ReflexiÃ³n del sonido en la superficie de la copa"],respuesta:2},
-    {texto:"Si una fuente sonora se aleja de un observador, la frecuencia percibida por el observador:",opciones:["A. Aumenta","B. Permanece igual","C. VarÃ­a segÃºn la amplitud","D. Disminuye"],respuesta:3},
-    {texto:"Los ultrasonidos se utilizan en diagnÃ³stico mÃ©dico (ecografÃ­a) principalmente gracias a su:",opciones:["A. Baja frecuencia que penetra los tejidos sin daÃ±arlos","B. Alta frecuencia que permite obtener imÃ¡genes detalladas de Ã³rganos internos","C. Gran amplitud que estimula los Ã³rganos internos","D. Velocidad mayor a la de la luz en los tejidos blandos"],respuesta:1},
-    {texto:"Â¿CuÃ¡l fenÃ³meno ondulatorio permite que los murciÃ©lagos naveguen en la oscuridad?",opciones:["A. DifracciÃ³n de ondas de luz infrarroja","B. Resonancia en las paredes de las cuevas","C. ReflexiÃ³n de ultrasonidos (ecolocalizaciÃ³n)","D. Interferencia de ondas sonoras"],respuesta:2}
+    {contexto:"Un sonar emite un pulso de ultrasonido y recibe el eco 0.6 segundos después. La velocidad del sonido en el agua es 1500 m/s.",texto:"¿A qué profundidad está el objeto detectado?",opciones:["A. 900 m","B. 2500 m","C. 450 m","D. 300 m"],respuesta:2},
+    {texto:"¿Cuál es la velocidad del sonido en el aire cuando la temperatura es 30°C? (v ≈ 331 + 0.6·T)",opciones:["A. 331 m/s","B. 349 m/s","C. 361 m/s","D. 343 m/s"],respuesta:1},
+    {texto:"La resonancia acústica en una flauta produce su sonido porque:",opciones:["A. El aire dentro del tubo resuena a la frecuencia natural determinada por la longitud del tubo","B. La difracción del aire al salir amplifica el sonido","C. La interferencia de las ondas dentro del tubo incrementa la amplitud","D. La reflexión del sonido en las paredes del instrumento duplica la frecuencia"],respuesta:0},
+    {texto:"¿Por qué en una sinfonía los instrumentos de cuerda gruesa producen sonidos más graves que los de cuerda delgada?",opciones:["A. Las cuerdas gruesas producen sonidos de mayor velocidad","B. Las cuerdas gruesas vibran más lentamente (menor frecuencia)","C. Las cuerdas gruesas tienen mayor amplitud de vibración","D. Las cuerdas gruesas producen mayor volumen por su masa"],respuesta:1},
+    {contexto:"En una fábrica los trabajadores están expuestos constantemente a 95 dB.",texto:"¿Qué consecuencia puede tener esta exposición prolongada?",opciones:["A. Ninguna, 95 dB está dentro del rango seguro","B. Daño auditivo, ya que supera el límite seguro de 85 dB","C. Solo mareo, ya que el daño auditivo comienza a los 120 dB","D. Pérdida temporal de la visión por vibración excesiva"],respuesta:1},
+    {texto:"El eco difiere del sonido original en que:",opciones:["A. Tiene mayor frecuencia","B. Viaja más rápido que el sonido original","C. Es el mismo sonido reflejado y recibido con un retardo","D. Tiene mayor amplitud que el sonido original"],respuesta:2},
+    {texto:"¿Cuál es la expresión correcta para calcular la longitud de onda del sonido?",opciones:["A. λ = f × T","B. λ = v / f","C. λ = f / v","D. λ = v × f"],respuesta:1},
+    {contexto:"Un cantante de ópera logra romper una copa de cristal con su voz sin tocarla.",texto:"¿Qué fenómeno físico explica esto?",opciones:["A. Interferencia destructiva de las ondas sonoras","B. Difracción del sonido al rodear la copa","C. Resonancia: la frecuencia de la voz coincide con la frecuencia natural del cristal","D. Reflexión del sonido en la superficie de la copa"],respuesta:2},
+    {texto:"Si una fuente sonora se aleja de un observador, la frecuencia percibida por el observador:",opciones:["A. Aumenta","B. Permanece igual","C. Varía según la amplitud","D. Disminuye"],respuesta:3},
+    {texto:"Los ultrasonidos se utilizan en diagnóstico médico (ecografía) principalmente gracias a su:",opciones:["A. Baja frecuencia que penetra los tejidos sin dañarlos","B. Alta frecuencia que permite obtener imágenes detalladas de órganos internos","C. Gran amplitud que estimula los órganos internos","D. Velocidad mayor a la de la luz en los tejidos blandos"],respuesta:1},
+    {texto:"¿Cuál fenómeno ondulatorio permite que los murciélagos naveguen en la oscuridad?",opciones:["A. Difracción de ondas de luz infrarroja","B. Resonancia en las paredes de las cuevas","C. Reflexión de ultrasonidos (ecolocalización)","D. Interferencia de ondas sonoras"],respuesta:2}
 ];
 
 let preguntasSeleccionadas=[],respuestasUsuario=[],preguntaActual=0,nombreEstudiante='';
@@ -149,7 +149,7 @@ function iniciarEvaluacion(){
     respuestasUsuario=new Array(10).fill(null);
     document.getElementById('pantalla-inicio').style.display='none';
     document.getElementById('seccion-evaluacion').style.display='block';
-    document.getElementById('bienvenida-nombre').textContent='ðŸ‘¤ '+nombreEstudiante;
+    document.getElementById('bienvenida-nombre').textContent='👤 '+nombreEstudiante;
     mostrarPregunta(0);
 }
 function mostrarPregunta(idx){
@@ -185,23 +185,23 @@ function irSiguiente(){if(preguntaActual<9)mostrarPregunta(preguntaActual+1);}
 function irAnterior(){if(preguntaActual>0)mostrarPregunta(preguntaActual-1);}
 function finalizarEvaluacion(){
     const sinResp=respuestasUsuario.filter(r=>r===null).length;
-    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. Â¿Finalizar?`))return;
+    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¿Finalizar?`))return;
     let correctas=0,revHTML='';
     preguntasSeleccionadas.forEach((p,i)=>{
         const resp=respuestasUsuario[i];const ok=resp===p.respuesta;if(ok)correctas++;
-        revHTML+=`<div class="revision-item ${ok?'correcta':'incorrecta'}"><div class="pregunta-r">${ok?'âœ…':'âŒ'} <strong>P${i+1}:</strong> ${p.texto}</div><div>`;
+        revHTML+=`<div class="revision-item ${ok?'correcta':'incorrecta'}"><div class="pregunta-r">${ok?'✅':'❌'} <strong>P${i+1}:</strong> ${p.texto}</div><div>`;
         if(!ok)revHTML+=`<div class="tu-resp">Tu respuesta: ${resp!==null?p.opciones[resp]:'Sin responder'}</div>`;
         revHTML+=`<div class="resp-correcta">Correcta: ${p.opciones[p.respuesta]}</div></div></div>`;
     });
     const pct=Math.round(correctas/10*100);
     let emoji,titulo;
-    if(pct>=90){emoji='ðŸ†';titulo='Â¡Excelente! Dominas la acÃºstica.';}
-    else if(pct>=70){emoji='ðŸŒŸ';titulo='Â¡Muy bien! Sigue practicando.';}
-    else if(pct>=50){emoji='ðŸ“š';titulo='Aprobado. Repasa los temas con errores.';}
-    else{emoji='ðŸ’ª';titulo='Necesitas repasar la teorÃ­a de acÃºstica.';}
+    if(pct>=90){emoji='🏆';titulo='¡Excelente! Dominas la acústica.';}
+    else if(pct>=70){emoji='🌟';titulo='¡Muy bien! Sigue practicando.';}
+    else if(pct>=50){emoji='📚';titulo='Aprobado. Repasa los temas con errores.';}
+    else{emoji='💪';titulo='Necesitas repasar la teoría de acústica.';}
     document.getElementById('seccion-evaluacion').style.display='none';
     const pr=document.getElementById('pantalla-resultado');pr.classList.add('activo');
-    document.getElementById('resultado-nombre').textContent='ðŸ‘¤ '+nombreEstudiante;
+    document.getElementById('resultado-nombre').textContent='👤 '+nombreEstudiante;
     document.getElementById('resultado-emoji').textContent=emoji;
     document.getElementById('resultado-titulo').textContent=titulo;
     document.getElementById('score-correctas').textContent=correctas;

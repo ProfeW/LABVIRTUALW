@@ -85,6 +85,7 @@ window.LabAuth = {
     registrar: async function(datos) {
         datos.action = 'register';
         const req = await fetch(URL_REGISTRO, {
+            redirect: 'follow',
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(datos)
@@ -94,6 +95,7 @@ window.LabAuth = {
     
     login: async function(usuario, contrasena) {
         const req = await fetch(URL_REGISTRO, {
+            redirect: 'follow',
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({ action: 'login', usuario, contrasena })
@@ -114,6 +116,7 @@ window.LabAuth = {
             
             // Enviamos al script de ingresos, pero no bloqueamos el flujo
             fetch(URL_INGRESOS, {
+                redirect: 'follow',
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({
@@ -130,6 +133,7 @@ window.LabAuth = {
     
     recuperar: async function(usuario_o_correo) {
         const req = await fetch(URL_REGISTRO, {
+            redirect: 'follow',
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({ action: 'recover', usuario: usuario_o_correo })
