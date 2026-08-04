@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Movimiento Parabólico - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .header-practica { text-align: center; margin-bottom: 30px; }
+        .header-practica h1 { color: #f39c12; font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .progreso-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 20px 0 40px; overflow: hidden; }
+        .progreso-barra { height: 100%; background: linear-gradient(90deg, #f39c12, #e67e22); width: 0%; transition: width 0.5s ease; }
+
+        .ejercicio-card { background: rgba(20, 20, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 20px; display: none; animation: slideIn 0.5s ease forwards; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ejercicio-card.activo { display: block; }
+        
+        .nivel-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; background: rgba(52, 152, 219, 0.2); color: #4facfe; border: 1px solid #3498db; }
+        .ejercicio-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+        .enunciado { font-size: 1.2rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; padding: 15px; background: rgba(0,0,0,0.3); border-left: 4px solid #f39c12; border-radius: 5px; }
+
+        .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .opcion-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; color: #fff; font-size: 1.1rem; cursor: pointer; transition: 0.2s; text-align: center; }
+        .opcion-btn:hover:not(:disabled) { background: rgba(243, 156, 18, 0.2); border-color: #f39c12; transform: translateY(-2px); }
+        .opcion-btn.correcta { background: rgba(46, 204, 113, 0.2); border-color: var(--color-correcto); color: #fff; }
+        .opcion-btn.incorrecta { background: rgba(231, 76, 60, 0.2); border-color: var(--color-incorrecto); opacity: 0.7; }
+        .opcion-btn:disabled { cursor: not-allowed; }
+
+        .feedback { display: none; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: 500; font-size: 1.1rem; }
+        .feedback.correcto { display: block; background: rgba(46, 204, 113, 0.1); border: 1px solid var(--color-correcto); color: #2ecc71; }
+        .feedback.incorrecto { display: block; background: rgba(231, 76, 60, 0.1); border: 1px solid var(--color-incorrecto); color: #e74c3c; }
+
+        .btn-siguiente { display: none; width: 100%; padding: 15px; background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .btn-siguiente:hover { filter: brightness(1.1); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .pantalla-final { display: none; text-align: center; padding: 50px 20px; background: rgba(20, 20, 35, 0.9); border-radius: 15px; border: 1px solid rgba(243, 156, 18, 0.5); }
+        .pantalla-final.activo { display: block; animation: fadeIn 1s; }
+        .trofeo { font-size: 5rem; margin-bottom: 20px; animation: bounce 2s infinite; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @media (max-width: 600px) { .opciones-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <a href="fisica10_parabolico.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+
+        <div class="header-practica">
+            <h1><i class="fa-solid fa-gamepad"></i> Práctica en Cadena</h1>
+            <p>Resuelve el siguiente problema paso a paso. Tus respuestas se usarán en el siguiente paso.</p>
+            <p style="font-size: 0.9rem; color: #aaa;">(Para esta práctica, usa <strong style="color: #4facfe;">g = 10 m/s²</strong> por facilidad)</p>
+        </div>
+
+        <div class="progreso-container">
+            <div class="progreso-barra" id="barra"></div>
+        </div>
+
+        <!-- ENUNCIADO GENERAL (Visible en todos los pasos si se desea, aquí lo pondré en cada uno adaptado) -->
+
+        <!-- EJERCICIO 1 -->
+        <div class="ejercicio-card activo" id="ej1">
+            <span class="nivel-badge"><i class="fa-solid fa-list-ol"></i> Paso 1: Componentes de la Velocidad</span>
+            <h3>El Tiro Libre</h3>
+            <div class="enunciado">
+                Un estudiante patea un balón de fútbol en la cancha de la escuela con una velocidad inicial de <strong>20 m/s</strong> y un ángulo de <strong>30°</strong> con respecto al suelo.<br><br>
+                <em>(Datos: $\text{sen}(30°) = 0.5$ y $\text{cos}(30°) = 0.86$)</em><br><br>
+                ¿Cuáles son las componentes horizontal ($V_{ox}$) y vertical ($V_{oy}$) de la velocidad inicial?
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Al revés. Recuerda: X usa Coseno y Y usa Seno.')">Vox = 10 m/s y Voy = 17.2 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, true, '¡Correcto! Vox = 20 * 0.86 = 17.2 m/s. Voy = 20 * 0.5 = 10 m/s.')">Vox = 17.2 m/s y Voy = 10 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'Sumaste los valores en lugar de multiplicar.')">Vox = 20.86 m/s y Voy = 20.5 m/s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, this, false, 'La velocidad no puede ser igual para ambos si el ángulo no es 45°.')">Vox = 10 m/s y Voy = 10 m/s</button>
+            </div>
+            <div class="feedback" id="feed1"></div>
+            <button class="btn-siguiente" id="btnSig1" onclick="siguiente(1)">Siguiente Paso <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 2 -->
+        <div class="ejercicio-card" id="ej2">
+            <span class="nivel-badge"><i class="fa-solid fa-list-ol"></i> Paso 2: Tiempo de Vuelo</span>
+            <h3>Calculando el Tiempo</h3>
+            <div class="enunciado">
+                Muy bien, ya sabemos que la velocidad que hace subir al balón es <strong>$V_{oy} = 10 \text{ m/s}$</strong>. <br><br>
+                Teniendo en cuenta que la gravedad es <strong>10 m/s²</strong>, ¿cuánto <strong>tiempo total</strong> permanecerá el balón en el aire antes de tocar el suelo?<br><br>
+                <em>Fórmula: $t_v = \frac{2 \cdot V_{oy}}{g}$</em>
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Ese es solo el tiempo que tarda en SUBIR. Falta multiplicar por 2 para el vuelo total.')">1 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Multiplicaste mal. Revisa la fórmula paso a paso.')">20 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, false, 'Esa es la velocidad horizontal, no la uses para el tiempo en el aire.')">1.72 s</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(2, this, true, '¡Exacto! tv = (2 * 10) / 10 = 20 / 10 = 2 segundos de vuelo.')">2 s</button>
+            </div>
+            <div class="feedback" id="feed2"></div>
+            <button class="btn-siguiente" id="btnSig2" onclick="siguiente(2)">Siguiente Paso <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 3 -->
+        <div class="ejercicio-card" id="ej3">
+            <span class="nivel-badge"><i class="fa-solid fa-list-ol"></i> Paso 3: Altura Máxima</span>
+            <h3>¿Qué tan alto llegó?</h3>
+            <div class="enunciado">
+                Ya sabes que <strong>$V_{oy} = 10 \text{ m/s}$</strong>. <br><br>
+                ¿Cuál fue la altura máxima que alcanzó el balón durante su trayectoria? <br><br>
+                <em>Fórmula: $h_{max} = \frac{V_{oy}^2}{2 \cdot g}$</em>
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, true, '¡Correcto! h = (10²) / (2 * 10) = 100 / 20 = 5 metros.')">5 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Te faltó multiplicar la gravedad por 2 en el divisor (2 * 10 = 20).')">10 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'No elevaste la velocidad Voy al cuadrado. 10 * 10 = 100.')">0.5 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, this, false, 'Esa sería la altura si la velocidad inicial completa fuera vertical, pero debemos usar solo Voy.')">20 m</button>
+            </div>
+            <div class="feedback" id="feed3"></div>
+            <button class="btn-siguiente" id="btnSig3" onclick="siguiente(3)">Siguiente Paso <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- EJERCICIO 4 -->
+        <div class="ejercicio-card" id="ej4">
+            <span class="nivel-badge" style="color: #2ecc71; border-color: #2ecc71;"><i class="fa-solid fa-list-ol"></i> Paso 4: Alcance Máximo</span>
+            <h3>¿Dónde cayó?</h3>
+            <div class="enunciado">
+                Finalmente, queremos saber qué tan lejos llegó el balón. <br><br>
+                Del Paso 1 sabemos que <strong>$V_{ox} = 17.2 \text{ m/s}$</strong>. Y del Paso 2 sabemos que el tiempo en el aire fue <strong>$t_v = 2 \text{ s}$</strong>. <br><br>
+                Sabiendo que horizontalmente es un MRU ($X = V \cdot t$), ¿cuál fue la distancia total horizontal ($X_{max}$)?
+            </div>
+            
+            <div class="opciones-grid">
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Ese es el alcance si solo hubiera estado 1 segundo en el aire.')">17.2 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'No uses Voy para calcular la distancia horizontal. Usa Vox.')">20 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, true, '¡Misión Cumplida! Xmax = Vox * tv = 17.2 * 2 = 34.4 metros.')">34.4 m</button>
+                <button class="opcion-btn" onclick="verificarRespuesta(4, this, false, 'Sumaste los valores en lugar de multiplicarlos.')">19.2 m</button>
+            </div>
+            <div class="feedback" id="feed4"></div>
+            <button class="btn-siguiente" id="btnSig4" onclick="finalizar()">Terminar Práctica <i class="fa-solid fa-check-double"></i></button>
+        </div>
+
+        <div class="pantalla-final" id="pantalla-final">
+            <div class="trofeo">🔗</div>
+            <h1 style="color: #f39c12; margin-bottom: 20px;">¡Práctica en Cadena Completada!</h1>
+            <p style="font-size: 1.2rem; color: #ddd; margin-bottom: 30px;">Excelente trabajo guiado. Así es como se resuelven los problemas reales de movimiento parabólico: calculando los componentes y conectando todo paso a paso.</p>
+            <a href="fisica10_parabolico_evaluacion.html" class="btn-siguiente" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;">Ir a la Evaluación</a>
+        </div>
+
+    </div>
+
+    <script>
+        const totalEjercicios = 4;
+        function verificarRespuesta(num, btn, esCorrecta, mensaje) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            
+            botones.forEach(b => {
+                b.disabled = true;
+                if(b === btn) { b.classList.add(esCorrecta ? 'correcta' : 'incorrecta'); } 
+                else if (!esCorrecta && b.getAttribute('onclick').includes('true')) { b.classList.add('correcta'); }
+            });
+
+            const feed = document.getElementById('feed' + num);
+            feed.innerHTML = esCorrecta ? `<i class="fa-solid fa-check-circle"></i> ${mensaje}` : `<i class="fa-solid fa-xmark-circle"></i> ${mensaje}`;
+            feed.className = 'feedback ' + (esCorrecta ? 'correcto' : 'incorrecto');
+            
+            if(esCorrecta) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#f39c12', '#e67e22', '#f1c40f'] });
+                document.getElementById('btnSig' + num).style.display = 'block';
+                actualizarBarra(num);
+            } else {
+                feed.innerHTML += `<br><br><button onclick="reiniciarEjercicio(${num})" style="padding: 8px 15px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">Intentar de nuevo</button>`;
+            }
+        }
+
+        function reiniciarEjercicio(num) {
+            const card = document.getElementById('ej' + num);
+            const botones = card.querySelectorAll('.opcion-btn');
+            botones.forEach(b => { b.disabled = false; b.classList.remove('correcta', 'incorrecta'); });
+            const feed = document.getElementById('feed' + num);
+            feed.className = 'feedback';
+            feed.innerHTML = '';
+        }
+
+        function actualizarBarra(num) { document.getElementById('barra').style.width = ((num / totalEjercicios) * 100) + '%'; }
+        function siguiente(actual) {
+            document.getElementById('ej' + actual).classList.remove('activo');
+            document.getElementById('ej' + (actual + 1)).classList.add('activo');
+            window.scrollTo(0, 0);
+        }
+        function finalizar() {
+            document.getElementById('ej' + totalEjercicios).classList.remove('activo');
+            document.getElementById('pantalla-final').classList.add('activo');
+            confetti({ particleCount: 300, spread: 150, origin: { y: 0.4 }, zIndex: 1000 });
+            window.scrollTo(0, 0);
+        }
+    </script>
+<script src="auth.js"></script>
+</body>
+</html>
