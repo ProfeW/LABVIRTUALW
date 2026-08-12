@@ -3,290 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movimiento Parabólico y Semiparabólico - LabVirtual W</title>
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+    <title>Movimiento Semiparabólico y Parabólico - Física 10 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        :root {
-            --color-fisica: #3498db;   
-            --color-quimica: #9b59b6;  
-            --color-biologia: #2ecc71; 
-            --color-oscuro: #1a1a2e;
-            --color-texto: #ffffff;
-        }
-
+        :root { --color-tema: #3498db; --color-oscuro: #1a1a2e; }
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
         body {
-            background-color: var(--color-oscuro);
-            color: var(--color-texto);
-            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
-
-        /* --- NAVEGACIÓN --- */
-        nav {
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
-        }
+        nav { background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(52, 152, 219, 0.2); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo i { color: var(--color-fisica); }
+        .logo i { color: var(--color-tema); }
         .menu { list-style: none; display: flex; gap: 20px; }
-        .menu > li { position: relative; }
-        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
-        .menu > li > a:hover { background: rgba(255, 255, 255, 0.1); color: #4facfe; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(52, 152, 219, 0.1); color: var(--color-tema); }
 
-        .submenu { z-index: 1000;
-            display: none; position: absolute; top: 100%; left: 0;
-            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
-            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
-        }
-        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
-        .submenu li { list-style: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
-        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
-
-        /* --- CONTENIDO DE LA LECCIÓN --- */
-        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
-        
-        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .contenedor { max-width: 1100px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: var(--color-tema); text-decoration: none; font-weight: 600; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
-
-        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.3); padding-bottom: 20px; margin-bottom: 30px; }
-        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-fisica); margin-bottom: 10px; }
+        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.4); padding-bottom: 20px; margin-bottom: 30px; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 10px; }
         .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
-
-        .seccion-contenido {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px; padding: 30px; margin-bottom: 30px;
-        }
         
-        .seccion-contenido h2 { color: #4facfe; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; border-left: 4px solid var(--color-fisica); padding-left: 15px;}
+        .seccion-contenido { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .seccion-contenido.semi { border-top: 4px solid #e74c3c; }
+        .seccion-contenido.para { border-top: 4px solid #2ecc71; }
+        .seccion-contenido h2 { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; }
+        .seccion-contenido.semi h2 { color: #e74c3c; }
+        .seccion-contenido.para h2 { color: #2ecc71; }
+        
         .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
-        
-        /* --- ESTILOS DE FÓRMULAS --- */
-        .caja-formula {
-            background: rgba(52, 152, 219, 0.05); border: 2px dashed var(--color-fisica);
-            border-radius: 10px; padding: 25px; text-align: center; margin: 20px 0;
-        }
-        .formula-principal { font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
-        .formula-leyenda { font-size: 1rem; color: #aaa; margin-top: 10px; }
-        
-        .grid-despejes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .despeje-caja { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; border-top: 3px solid #f39c12; }
-        .despeje-caja.distancia { border-top-color: #2ecc71; }
-        .despeje-caja.gravedad { border-top-color: #e74c3c; }
-        .formula-despejada { font-size: 1.5rem; font-weight: 800; text-align: center; margin: 15px 0; color: #fff; }
+        .definicion-box { background: rgba(255,255,255,0.05); padding: 15px 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid; }
+        .definicion-box.semi { border-color: #e74c3c; }
+        .definicion-box.para { border-color: #2ecc71; }
 
-        /* --- ESTILOS DE PASO A PASO --- */
-        .ejercicio-tarjeta {
-            background: rgba(20, 20, 35, 0.6); border-left: 4px solid #4facfe;
-            padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0;
-        }
-        .ejercicio-tarjeta h3 { color: #4facfe; margin-bottom: 10px; font-size: 1.3rem; }
+        .grid-formulas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin: 20px 0; }
+        .formula-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 20px; text-align: center; }
+        .formula-card h4 { color: #bbb; font-size: 0.95rem; margin-bottom: 10px; }
+        .formula-principal { font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; }
+        .formula-principal.semi { color: #e74c3c; }
+        .formula-principal.para { color: #2ecc71; }
+
+        .ejercicio-tarjeta { background: rgba(20,20,35,0.6); padding: 25px; margin-bottom: 20px; border-radius: 8px; border-left: 4px solid; }
+        .ejercicio-tarjeta.semi { border-color: #e74c3c; }
+        .ejercicio-tarjeta.para { border-color: #2ecc71; }
+        .ejercicio-tarjeta h3 { margin-bottom: 10px; font-size: 1.2rem; }
+        .ejercicio-tarjeta.semi h3 { color: #e74c3c; }
+        .ejercicio-tarjeta.para h3 { color: #2ecc71; }
         .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
-        .paso { margin-top: 15px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
-        .paso-titulo { font-weight: 600; color: #f39c12; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;}
-        
-        /* --- NUEVOS BOTONES DE ACCIÓN FINAL --- */
-        .botones-accion-final {
-            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
-            margin-top: 40px; margin-bottom: 20px;
-        }
-        
-        .btn-accion {
-            padding: 15px 25px; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
-            text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px;
-            transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        
-        .btn-practica { background: #2ecc71; }
-        .btn-practica:hover { background: #27ae60; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
-        
-        .btn-evaluacion { background: #e74c3c; }
-        .btn-evaluacion:hover { background: #c0392b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4); }
+        .paso { margin-top: 12px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .respuesta-final { color: var(--color-tema); margin-top: 5px; font-weight: 600; font-size: 1.1rem; }
 
-        @media (max-width: 768px) {
-            .grid-despejes { grid-template-columns: 1fr; }
-            .botones-accion-final { flex-direction: column; }
-            .btn-accion { justify-content: center; }
-        }
-
+        .botones-accion-final { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; margin-bottom: 20px; }
+        .btn-accion { padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .btn-practica { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .btn-practica:hover { transform: translateY(-3px); filter:brightness(1.1); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .btn-evaluacion:hover { transform: translateY(-3px); filter:brightness(1.1); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-
     <header>
         <nav>
-            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <a href="index.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
-                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="fisica_9.html">Grado Noveno</a></li>
-                        <li><a href="fisica_10.html">Grado Décimo</a></li>
-                        <li><a href="fisica_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="quimica_9.html">Grado Noveno</a></li>
-                        <li><a href="quimica_10.html">Grado Décimo</a></li>
-                        <li><a href="quimica_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="biologia_9.html">Grado Noveno</a></li>
-                        <li><a href="biologia_10.html">Grado Décimo</a></li>
-                        <li><a href="biologia_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="fisica_10.html"><i class="fa-solid fa-atom"></i> Física 10</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        
-        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Temas de Décimo</a>
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10°</a>
 
         <div class="encabezado-leccion">
-            <h1>Movimiento Parabólico y Semiparabólico</h1>
-            <p><i class="fa-solid fa-truck-fast"></i> Unidad 2: Cinemática (El Movimiento en Dos Dimensiones)</p>
+            <h1><i class="fa-solid fa-rocket"></i> Movimiento Semiparabólico y Parabólico</h1>
+            <p><i class="fa-solid fa-layer-group"></i> Unidad: Cinemática en 2 Dimensiones (Proyectiles)</p>
         </div>
 
-        <section class="seccion-contenido">
-            <h2>1. Introducción y Conceptos Básicos</h2>
-            <p>Hasta ahora hemos visto el movimiento en una sola línea recta (eje X en MRU o MRUV, y eje Y en Caída Libre). Pero, ¿qué pasa cuando lanzamos un objeto al aire, como un balón de fútbol, o cuando sale agua de una manguera de riego?</p>
-            
-            <p>El objeto se mueve <strong>hacia adelante</strong> (eje X) y <strong>hacia arriba/abajo</strong> (eje Y) al mismo tiempo. A este movimiento en dos dimensiones se le llama <strong>Movimiento Parabólico</strong> o <strong>Semiparabólico</strong>, porque la trayectoria que dibuja en el aire es una curva llamada parábola.</p>
-
-            <div style="background: rgba(46, 204, 113, 0.1); border-left: 4px solid #2ecc71; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 15px;">
-                <p><strong>El Secreto:</strong> Este movimiento se puede separar en dos movimientos independientes:</p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li><strong>En el Eje X (Horizontal):</strong> Se mueve con <strong>M.R.U.</strong> (Velocidad constante).</li>
-                    <li><strong>En el Eje Y (Vertical):</strong> Se mueve con <strong>Caída Libre / M.R.U.V.</strong> (Acelerado por la gravedad).</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="seccion-contenido">
-            <h2>2. Antes de empezar: Componentes de la Velocidad</h2>
-            <p>En el movimiento parabólico completo, el objeto es lanzado con una <strong>velocidad inicial ($V_i$)</strong> formando un <strong>ángulo ($\theta$)</strong> con el suelo. Como la velocidad es un vector, debemos descomponerla en sus dos partes: horizontal y vertical.</p>
-
-            <div class="grid-despejes">
-                <div class="despeje-caja distancia">
-                    <h3 style="color: #2ecc71; margin-bottom: 10px;"><i class="fa-solid fa-arrows-left-right"></i> Componente Horizontal ($V_{ox}$)</h3>
-                    <p style="font-size: 0.9rem; color: #ccc;">Es la parte de la velocidad que empuja hacia adelante. Usamos la función <strong>coseno</strong>.</p>
-                    <div class="formula-despejada">V<sub>ox</sub> = V<sub>i</sub> · cos(θ)</div>
-                    <p style="font-size: 0.8rem; color: #aaa; text-align: center;">Esta velocidad <strong>nunca cambia</strong> durante el vuelo (MRU).</p>
-                </div>
-
-                <div class="despeje-caja gravedad">
-                    <h3 style="color: #e74c3c; margin-bottom: 10px;"><i class="fa-solid fa-arrows-up-down"></i> Componente Vertical ($V_{oy}$)</h3>
-                    <p style="font-size: 0.9rem; color: #ccc;">Es la parte de la velocidad que empuja hacia arriba. Usamos la función <strong>seno</strong>.</p>
-                    <div class="formula-despejada">V<sub>oy</sub> = V<sub>i</sub> · sen(θ)</div>
-                    <p style="font-size: 0.8rem; color: #aaa; text-align: center;">Esta velocidad <strong>sí cambia</strong> por culpa de la gravedad (MRUV).</p>
-                </div>
+        <!-- ==============================================
+             PARTE 1: MOVIMIENTO SEMIPARABÓLICO
+        =============================================== -->
+        <section class="seccion-contenido semi">
+            <h2><i class="fa-solid fa-plane-departure"></i> 1. Movimiento Semiparabólico</h2>
+            <p>El <strong>Movimiento Semiparabólico</strong> (o lanzamiento horizontal) ocurre cuando un objeto es lanzado horizontalmente desde cierta altura. Es la combinación de dos movimientos simultáneos:</p>
+            <ul style="margin-left: 20px; color:#ddd; margin-bottom:15px; line-height:1.6;">
+                <li><strong>En el eje X (Horizontal):</strong> Movimiento Rectilíneo Uniforme (M.R.U.). La velocidad horizontal siempre es constante, porque no hay fuerzas empujando al objeto horizontalmente (ignorando la resistencia del aire).</li>
+                <li><strong>En el eje Y (Vertical):</strong> Caída Libre. La velocidad inicial en el eje Y es cero, pero va aumentando hacia abajo por acción de la gravedad (g = 9.8 m/s²).</li>
+            </ul>
+            <div class="definicion-box semi">
+                <p><strong>¿Dónde se aplica?</strong> Cuando una avioneta suelta un paquete de suministros agrícolas, cuando un balón rueda por el borde de una mesa y cae al suelo, o al lanzar una piedra rectamente desde un puente.</p>
             </div>
 
-            <div style="background: rgba(243, 156, 18, 0.1); border-left: 4px solid #f39c12; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px;">
-                <p><strong>Nota importante sobre el Movimiento Semiparabólico:</strong> En el movimiento semiparabólico (ej. cuando algo rueda por una mesa y cae), el objeto solo tiene velocidad horizontal al principio. Por lo tanto, el ángulo es 0°, <strong>$V_{ox} = V_i$</strong> y <strong>$V_{oy} = 0$</strong>.</p>
-            </div>
-        </section>
-
-        <section class="seccion-contenido">
-            <h2>3. De MRUV a Movimiento Parabólico: Conversión de Fórmulas</h2>
-            <p>Ya conoces las fórmulas originales del Movimiento Rectilíneo Uniformemente Variado (MRUV) aplicadas a la <strong>Caída Libre</strong>. Veamos cómo esas mismas fórmulas, paso a paso, se convierten en las que usamos para calcular el Tiempo de Vuelo, Altura Máxima y Alcance Máximo en el movimiento parabólico.</p>
-
-            <div class="ejercicio-tarjeta">
-                <h3>A. Tiempo de Vuelo ($t_v$)</h3>
-                <div class="enunciado">
-                    ¿Cuánto tiempo permanece el objeto en el aire antes de tocar el suelo?
+            <h3 style="color:#e74c3c; margin: 20px 0 10px;">Fórmulas Semiparabólico</h3>
+            <div class="grid-formulas">
+                <div class="formula-card">
+                    <h4>Velocidad Inicial en X e Y</h4>
+                    <div class="formula-principal semi">Vox = Vo</div>
+                    <div class="formula-principal semi">Voy = 0</div>
                 </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 1: Fórmula original de Caída Libre (MRUV)</div>
-                    <p>Sabemos que para encontrar el tiempo de subida de un objeto lanzado hacia arriba usamos: <strong>t<sub>subida</sub> = V<sub>i</sub> / g</strong></p>
+                <div class="formula-card">
+                    <h4>Tiempo de Caída (Tiempo de vuelo)</h4>
+                    <div class="formula-principal semi">t = √(2y / g)</div>
                 </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 2: Adaptar a 2 Dimensiones</div>
-                    <p>En el movimiento parabólico, lo que hace subir al objeto es su componente vertical. Reemplazamos V<sub>i</sub> por V<sub>oy</sub>:<br> <strong>t<sub>subida</sub> = V<sub>oy</sub> / g</strong></p>
+                <div class="formula-card">
+                    <h4>Alcance Horizontal Máximo (x)</h4>
+                    <div class="formula-principal semi">x = Vox · t</div>
                 </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 3: Tiempo total de vuelo</div>
-                    <p>El objeto tarda lo mismo en subir que en bajar. Así que el tiempo total de vuelo (t<sub>v</sub>) es el doble del tiempo de subida:<br><strong>t<sub>v</sub> = 2 · (V<sub>oy</sub> / g)</strong></p>
-                    <p style="color: #2ecc71; margin-top: 5px;">Sustituyendo V<sub>oy</sub>, obtenemos la fórmula final: <strong style="font-size: 1.2rem;">t<sub>v</sub> = [2 · V<sub>i</sub> · sen(θ)] / g</strong></p>
+                <div class="formula-card">
+                    <h4>Velocidad Vertical final (Vy)</h4>
+                    <div class="formula-principal semi">Vy = g · t</div>
                 </div>
             </div>
+            <p style="color:#aaa; font-size:0.9rem;"><em>* g = 9.8 m/s² (En algunos ejercicios por facilidad se usa 10 m/s²)</em></p>
 
-            <div class="ejercicio-tarjeta">
-                <h3>B. Altura Máxima (h<sub>max</sub>)</h3>
-                <div class="enunciado">
-                    ¿Cuál es el punto más alto que alcanza el objeto en el aire?
-                </div>
+            <h3 style="color:#e74c3c; margin: 30px 0 15px;">Ejercicios Resueltos - Semiparabólico</h3>
+            <div class="ejercicio-tarjeta semi">
+                <h3>Ejercicio 1 (Alcance horizontal)</h3>
+                <div class="enunciado">Un balón rueda sobre el piso de una terraza que está a 20 m de altura y cae con una velocidad horizontal (Vo) de 5 m/s. ¿A qué distancia de la base del edificio caerá el balón? (Usa g = 10 m/s²).</div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Fórmula original de Caída Libre (MRUV)</div>
-                    <p>Para la altura de un objeto lanzado hacia arriba hasta detenerse: <strong>h = (V<sub>i</sub>²) / (2 · g)</strong></p>
-                </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 2: Adaptar a 2 Dimensiones</div>
-                    <p>De nuevo, usamos la componente que se encarga de subir, V<sub>oy</sub>:<br> <strong>h<sub>max</sub> = (V<sub>oy</sub>²) / (2 · g)</strong></p>
-                </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 3: Fórmula final</div>
-                    <p>Reemplazamos V<sub>oy</sub> por su valor trigonométrico completo.</p>
-                    <p style="color: #2ecc71; margin-top: 5px;">Fórmula final: <strong style="font-size: 1.2rem;">h<sub>max</sub> = [V<sub>i</sub>² · sen²(θ)] / (2 · g)</strong></p>
+                    <p><strong>Paso 1 (Tiempo de caída):</strong> t = √(2y / g) = √(2·20 / 10) = √(40 / 10) = √4 = 2 s.</p>
+                    <p><strong>Paso 2 (Alcance horizontal):</strong> x = Vox · t = 5 m/s × 2 s = 10 m.</p>
+                    <p class="respuesta-final">✅ Caerá a 10 metros de la base.</p>
                 </div>
             </div>
-
-            <div class="ejercicio-tarjeta">
-                <h3>C. Alcance Máximo (X<sub>max</sub>)</h3>
-                <div class="enunciado">
-                    ¿Qué tan lejos llega el objeto horizontalmente antes de caer?
-                </div>
+            <div class="ejercicio-tarjeta semi">
+                <h3>Ejercicio 2 (Altura)</h3>
+                <div class="enunciado">Un helicóptero vuela horizontalmente a 40 m/s y deja caer un bulto. Si el bulto tarda 4 segundos en tocar el suelo, ¿a qué altura iba el helicóptero? (Usa g = 10 m/s²).</div>
                 <div class="paso">
-                    <div class="paso-titulo">Paso 1: Fórmula original de MRU</div>
-                    <p>El eje horizontal no tiene aceleración, se rige por el MRU: <strong>x = v · t</strong></p>
-                </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 2: Adaptar a 2 Dimensiones</div>
-                    <p>Para la distancia máxima horizontal (X<sub>max</sub>), usamos la velocidad horizontal (V<sub>ox</sub>) y el tiempo total que dura en el aire (t<sub>v</sub>):<br> <strong>X<sub>max</sub> = V<sub>ox</sub> · t<sub>v</sub></strong></p>
-                </div>
-                <div class="paso">
-                    <div class="paso-titulo">Paso 3: Fórmula final</div>
-                    <p>Sustituyendo V<sub>ox</sub> = V<sub>i</sub> · cos(θ) y la fórmula del tiempo de vuelo, y usando la identidad trigonométrica 2·sen(θ)·cos(θ) = sen(2θ):</p>
-                    <p style="color: #2ecc71; margin-top: 5px;">Fórmula final: <strong style="font-size: 1.2rem;">X<sub>max</sub> = [V<sub>i</sub>² · sen(2θ)] / g</strong></p>
+                    <p><strong>Despeje (y = altura):</strong> y = (g · t²) / 2</p>
+                    <p>y = (10 × 4²) / 2 = (10 × 16) / 2 = 160 / 2 = 80 m.</p>
+                    <p class="respuesta-final">✅ El helicóptero volaba a 80 metros de altura.</p>
                 </div>
             </div>
         </section>
 
 
+        <!-- ==============================================
+             PARTE 2: MOVIMIENTO PARABÓLICO COMPLETO
+        =============================================== -->
+        <section class="seccion-contenido para">
+            <h2><i class="fa-solid fa-volleyball"></i> 2. Movimiento Parabólico Completo</h2>
+            <p>El <strong>Movimiento Parabólico</strong> ocurre cuando lanzamos un objeto formando un <strong>ángulo de elevación (θ)</strong> con la horizontal. El objeto sube hasta una altura máxima, y luego baja formando una curva perfecta llamada parábola.</p>
+            <ul style="margin-left: 20px; color:#ddd; margin-bottom:15px; line-height:1.6;">
+                <li><strong>Descomposición Inicial:</strong> Al ser lanzado con un ángulo, la velocidad inicial (Vo) se divide en dos: una parte horizontal (Vox) que nunca cambia, y una vertical (Voy) que lo hace subir y bajar.</li>
+                <li><strong>En el punto más alto (Altura Máxima):</strong> La velocidad vertical (Vy) es cero. La velocidad horizontal sigue siendo la misma del principio.</li>
+            </ul>
+            <div class="definicion-box para">
+                <p><strong>¿Dónde se aplica?</strong> El tiro de un cañón, patear un balón de fútbol hacia el arco, el chorro de agua de una manguera apuntada hacia arriba, o un salto en bicicleta.</p>
+            </div>
+
+            <h3 style="color:#2ecc71; margin: 20px 0 10px;">Fórmulas Parabólico (Proyectiles)</h3>
+            <div class="grid-formulas">
+                <div class="formula-card">
+                    <h4>Componentes Iniciales</h4>
+                    <div class="formula-principal para">Vox = Vo · cos(θ)</div>
+                    <div class="formula-principal para">Voy = Vo · sen(θ)</div>
+                </div>
+                <div class="formula-card">
+                    <h4>Tiempo de Vuelo Total (tv)</h4>
+                    <div class="formula-principal para">tv = (2 · Voy) / g</div>
+                </div>
+                <div class="formula-card">
+                    <h4>Altura Máxima (H o Ymax)</h4>
+                    <div class="formula-principal para">H = (Voy)² / (2g)</div>
+                </div>
+                <div class="formula-card">
+                    <h4>Alcance Máximo (Xmax)</h4>
+                    <div class="formula-principal para">Xmax = Vox · tv</div>
+                </div>
+            </div>
+            <p style="color:#aaa; font-size:0.9rem;"><em>* g = 9.8 m/s² (En algunos ejercicios por facilidad se usa 10 m/s²)</em></p>
+
+            <h3 style="color:#2ecc71; margin: 30px 0 15px;">Ejercicios Resueltos - Parabólico</h3>
+            <div class="ejercicio-tarjeta para">
+                <h3>Ejercicio 3 (Altura Máxima)</h3>
+                <div class="enunciado">Se patea un balón con una velocidad inicial de 20 m/s y un ángulo de 30°. ¿Qué altura máxima alcanza? (Usa g = 10 m/s² y sen(30) = 0.5).</div>
+                <div class="paso">
+                    <p><strong>Paso 1 (Componente Y):</strong> Voy = Vo · sen(30°) = 20 × 0.5 = 10 m/s.</p>
+                    <p><strong>Paso 2 (Altura Máx):</strong> H = (Voy)² / 2g = (10)² / (2×10) = 100 / 20 = 5 m.</p>
+                    <p class="respuesta-final">✅ Alcanza una altura máxima de 5 metros.</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta para">
+                <h3>Ejercicio 4 (Alcance Horizontal)</h3>
+                <div class="enunciado">Un cañón dispara un proyectil con Vo = 50 m/s a un ángulo de 53°. Calcula su alcance máximo. (g = 10, sen(53)=0.8, cos(53)=0.6).</div>
+                <div class="paso">
+                    <p><strong>Paso 1 (Componentes):</strong><br>Vox = 50 · cos(53) = 50 × 0.6 = 30 m/s.<br>Voy = 50 · sen(53) = 50 × 0.8 = 40 m/s.</p>
+                    <p><strong>Paso 2 (Tiempo vuelo):</strong> tv = (2 · Voy) / g = (2 × 40) / 10 = 80 / 10 = 8 s.</p>
+                    <p><strong>Paso 3 (Alcance):</strong> Xmax = Vox · tv = 30 m/s × 8 s = 240 m.</p>
+                    <p class="respuesta-final">✅ El alcance máximo es 240 metros.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botones -->
         <section class="botones-accion-final">
-            
             <a href="fisica10_parabolico_practica.html" class="btn-accion btn-practica">
-                <i class="fa-solid fa-gamepad"></i> Práctica Interactiva en Cadena
+                <i class="fa-solid fa-gamepad"></i> Práctica en Cascada (10 Ejercicios)
             </a>
-
             <a href="fisica10_parabolico_evaluacion.html" class="btn-accion btn-evaluacion">
-                <i class="fa-solid fa-file-signature"></i> Evaluación de la Unidad
+                <i class="fa-solid fa-file-signature"></i> Evaluación de Proyectiles
             </a>
-            
         </section>
 
     </main>
 
-<script src="auth.js"></script>
+    <script src="auth.js"></script>
 </body>
 </html>

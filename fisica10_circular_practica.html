@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica: Movimiento Parabólico - LabVirtual W</title>
+    <title>Práctica: Movimiento Circular Uniforme - LabVirtual W</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -31,12 +31,7 @@
         .barra-fill { background: linear-gradient(90deg, var(--color-tema), #9b59b6); height: 100%; border-radius: 20px; transition: width 0.5s ease; width: 0%; }
 
         .ejercicio-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 40px; border-top: 4px solid var(--color-tema); }
-        .ejercicio-box.semi { border-top-color: #e74c3c; }
-        .ejercicio-box.para { border-top-color: #2ecc71; }
-        .ejercicio-box h3 { margin-bottom: 10px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
-        .ejercicio-box.semi h3 { color: #e74c3c; }
-        .ejercicio-box.para h3 { color: #2ecc71; }
-
+        .ejercicio-box h3 { color: var(--color-tema); margin-bottom: 10px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
         .enunciado { font-style: italic; color: #ddd; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.05rem; border-left: 4px solid #3498db; line-height: 1.6; }
         .paso-contenedor { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid #444; transition: 0.3s; }
         .paso-contenedor.activo { border-left-color: var(--color-tema); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1); }
@@ -69,113 +64,155 @@
     <ul class="menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
         <li><a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10</a></li>
-        <li><a href="fisica10_parabolico.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+        <li><a href="fisica10_circular.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
     </ul>
 </nav>
 
 <div class="contenedor">
-    <a href="fisica10_parabolico.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a la Lección</a>
+    <a href="fisica10_circular.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a la Lección</a>
 
     <div class="encabezado-leccion">
-        <h1>🎮 Práctica: Movimiento Parabólico</h1>
-        <p>10 Ejercicios en cascada (5 Semiparabólicos y 5 Parabólicos completos). (Usa g = 10 m/s²)</p>
+        <h1>🎮 Práctica en Cascada (M.C.U.)</h1>
+        <p>16 Ejercicios · Calcula paso a paso cada magnitud (usa π ≈ 3.1416)</p>
     </div>
 
     <div class="barra-progreso-contenedor">
         <div class="barra-progreso-titulo">
             <span>📊 Progreso General</span>
-            <span id="texto-progreso">0 / 10 ejercicios completados</span>
+            <span id="texto-progreso">0 / 16 ejercicios completados</span>
         </div>
         <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
     </div>
 
+    <!-- Generación del contenedor de los 16 ejercicios (Se inyecta por JS para simplificar HTML repetitivo) -->
     <div id="ejercicios-container"></div>
     
     <div style="text-align:center; margin-top:30px;">
-        <a href="fisica10_parabolico_evaluacion.html" class="btn-validar" style="background:#e74c3c; font-size:1.2rem; padding:15px 30px;"><i class="fa-solid fa-file-signature"></i> Ir a Evaluación</a>
+        <a href="fisica10_circular_evaluacion.html" class="btn-validar" style="background:#e74c3c; font-size:1.2rem; padding:15px 30px;"><i class="fa-solid fa-file-signature"></i> Ir a Evaluación</a>
     </div>
 
 </div>
 
 <script>
+    // DATOS DE LOS 16 EJERCICIOS
     const ejerciciosData = [
-        // SEMIPARABÓLICO (1 al 5)
         {
-            tipo: 'semi', titulo: "Ejercicio 1 (Semiparabólico: Tiempo de Vuelo)",
-            enunciado: "Una piedra es lanzada horizontalmente desde un acantilado de 20 m de altura. ¿Cuánto tiempo tarda en caer? (Usa g = 10 m/s²).",
-            datos: [{id:'y', label:'y', val:20, u:'m'}, {id:'g', label:'g', val:10, u:'m/s²'}],
-            formulaOptions: [{v:'correcta', t:'t = √(2y / g)', c:true}, {v:'incorrecta', t:'t = (2y) / g', c:false}],
-            calculo: {id:'t', label:'t', val:2, u:'s'} // sqrt(40/10) = 2
+            titulo: "Ejercicio 1 (Fórmula 1: Hallar T)",
+            enunciado: "Una rueda da 60 vueltas en 30 segundos. ¿Cuál es su período (T)?",
+            datos: [{id:'n', label:'n', val:60, u:'vueltas'}, {id:'t', label:'t', val:30, u:'s'}],
+            formulaOptions: [{v:'T=t/n', t:'T = t / n (Correcta)', c:true}, {v:'T=n/t', t:'T = n / t', c:false}],
+            calculo: {id:'T', label:'T', val:0.5, u:'s'}
         },
         {
-            tipo: 'semi', titulo: "Ejercicio 2 (Semiparabólico: Alcance horizontal)",
-            enunciado: "Si el objeto del ejercicio anterior fue lanzado con una velocidad horizontal de 5 m/s y el tiempo de caída es 2 s. ¿Cuál es su alcance máximo (x)?",
-            datos: [{id:'Vox', label:'Vox', val:5, u:'m/s'}, {id:'t', label:'t', val:2, u:'s'}],
-            formulaOptions: [{v:'incorrecta', t:'x = Vox / t', c:false}, {v:'correcta', t:'x = Vox × t', c:true}],
-            calculo: {id:'x', label:'x', val:10, u:'m'}
+            titulo: "Ejercicio 2 (Fórmula 1: Despejar t)",
+            enunciado: "Si el período es de 0.2 s, ¿cuánto tiempo tarda en dar 100 vueltas?",
+            datos: [{id:'T', label:'T', val:0.2, u:'s'}, {id:'n', label:'n', val:100, u:'vueltas'}],
+            formulaOptions: [{v:'t=T/n', t:'t = T / n', c:false}, {v:'t=T*n', t:'t = T × n (Correcta)', c:true}],
+            calculo: {id:'t', label:'t', val:20, u:'s'}
         },
         {
-            tipo: 'semi', titulo: "Ejercicio 3 (Semiparabólico: Altura de caída)",
-            enunciado: "Un helicóptero deja caer un bulto. Si tarda 4 segundos en tocar el suelo, ¿a qué altura volaba el helicóptero? (g=10)",
-            datos: [{id:'t', label:'t', val:4, u:'s'}, {id:'g', label:'g', val:10, u:'m/s²'}],
-            formulaOptions: [{v:'correcta', t:'y = (g × t²) / 2', c:true}, {v:'incorrecta', t:'y = g × t', c:false}],
-            calculo: {id:'y', label:'y', val:80, u:'m'}
+            titulo: "Ejercicio 3 (Fórmula 2: Hallar f)",
+            enunciado: "Un motor completa 120 revoluciones (vueltas) en 60 s. ¿Cuál es su frecuencia?",
+            datos: [{id:'n', label:'n', val:120, u:'vueltas'}, {id:'t', label:'t', val:60, u:'s'}],
+            formulaOptions: [{v:'f=n/t', t:'f = n / t (Correcta)', c:true}, {v:'f=t/n', t:'f = t / n', c:false}],
+            calculo: {id:'f', label:'f', val:2, u:'Hz'}
         },
         {
-            tipo: 'semi', titulo: "Ejercicio 4 (Semiparabólico: Velocidad Vertical Final)",
-            enunciado: "Un proyectil se lanza horizontalmente y tarda 3 segundos en caer al piso. ¿Cuál es su velocidad vertical (Vy) justo antes de tocar el suelo? (g=10)",
-            datos: [{id:'g', label:'g', val:10, u:'m/s²'}, {id:'t', label:'t', val:3, u:'s'}],
-            formulaOptions: [{v:'incorrecta', t:'Vy = (g × t) / 2', c:false}, {v:'correcta', t:'Vy = g × t', c:true}],
-            calculo: {id:'Vy', label:'Vy', val:30, u:'m/s'}
+            titulo: "Ejercicio 4 (Fórmula 2: Despejar n)",
+            enunciado: "Si un objeto gira a una frecuencia de 5 Hz. ¿Cuántas vueltas da en 10 s?",
+            datos: [{id:'f', label:'f', val:5, u:'Hz'}, {id:'t', label:'t', val:10, u:'s'}],
+            formulaOptions: [{v:'n=f*t', t:'n = f × t (Correcta)', c:true}, {v:'n=f/t', t:'n = f / t', c:false}],
+            calculo: {id:'n', label:'n', val:50, u:'vueltas'}
         },
         {
-            tipo: 'semi', titulo: "Ejercicio 5 (Semiparabólico: Alcance X)",
-            enunciado: "Un carro cae horizontalmente por un barranco con Vox = 10 m/s. Si tarda 3 s en caer (t=3). ¿A qué distancia de la base cae?",
-            datos: [{id:'Vox', label:'Vox', val:10, u:'m/s'}, {id:'t', label:'t', val:3, u:'s'}],
-            formulaOptions: [{v:'correcta', t:'x = Vox × t', c:true}, {v:'incorrecta', t:'x = Vox + t', c:false}],
-            calculo: {id:'x', label:'x', val:30, u:'m'}
-        },
-        // PARABÓLICO COMPLETO (6 al 10)
-        {
-            tipo: 'para', titulo: "Ejercicio 6 (Parabólico: Componente Vertical Inicial)",
-            enunciado: "Un balón es pateado con una velocidad inicial de 20 m/s y un ángulo cuyo seno es 0.5. ¿Cuál es la componente vertical (Voy)?",
-            datos: [{id:'Vo', label:'Vo', val:20, u:'m/s'}, {id:'sen', label:'sen(θ)', val:0.5, u:''}],
-            formulaOptions: [{v:'incorrecta', t:'Voy = Vo × cos(θ)', c:false}, {v:'correcta', t:'Voy = Vo × sen(θ)', c:true}],
-            calculo: {id:'Voy', label:'Voy', val:10, u:'m/s'}
+            titulo: "Ejercicio 5 (Fórmula 3: Hallar ω con T)",
+            enunciado: "Un disco gira con un período de 3.1416 s. Halla su velocidad angular (ω).",
+            datos: [{id:'T', label:'T', val:3.1416, u:'s'}],
+            formulaOptions: [{v:'w=2pi/T', t:'ω = 2π / T (Correcta)', c:true}, {v:'w=2pi*T', t:'ω = 2π × T', c:false}],
+            calculo: {id:'w', label:'ω', val:2, u:'rad/s'}
         },
         {
-            tipo: 'para', titulo: "Ejercicio 7 (Parabólico: Tiempo de vuelo)",
-            enunciado: "Si la componente vertical Voy de un proyectil es 30 m/s. ¿Cuánto es su tiempo total de vuelo (tv)? (Usa g = 10 m/s²).",
-            datos: [{id:'Voy', label:'Voy', val:30, u:'m/s'}, {id:'g', label:'g', val:10, u:'m/s²'}],
-            formulaOptions: [{v:'correcta', t:'tv = (2 × Voy) / g', c:true}, {v:'incorrecta', t:'tv = Voy / (2 × g)', c:false}],
-            calculo: {id:'tv', label:'tv', val:6, u:'s'} // 2*30/10 = 6
+            titulo: "Ejercicio 6 (Fórmula 3: Despejar T desde ω)",
+            enunciado: "Si la velocidad angular es 6.2832 rad/s, ¿cuál es el período?",
+            datos: [{id:'w', label:'ω', val:6.2832, u:'rad/s'}],
+            formulaOptions: [{v:'T=2pi/w', t:'T = 2π / ω (Correcta)', c:true}, {v:'T=w/2pi', t:'T = ω / 2π', c:false}],
+            calculo: {id:'T', label:'T', val:1, u:'s'}
         },
         {
-            tipo: 'para', titulo: "Ejercicio 8 (Parabólico: Altura Máxima)",
-            enunciado: "Un proyectil tiene una componente vertical Voy de 20 m/s. Calcula su altura máxima alcanzada (H). (g = 10)",
-            datos: [{id:'Voy', label:'Voy', val:20, u:'m/s'}, {id:'g', label:'g', val:10, u:'m/s²'}],
-            formulaOptions: [{v:'incorrecta', t:'H = Voy² / g', c:false}, {v:'correcta', t:'H = Voy² / (2 × g)', c:true}],
-            calculo: {id:'H', label:'H', val:20, u:'m'} // 400/20 = 20
+            titulo: "Ejercicio 7 (Fórmula 4: Hallar ω con f)",
+            enunciado: "Una hélice gira a 10 Hz de frecuencia. ¿Cuál es su velocidad angular ω?",
+            datos: [{id:'f', label:'f', val:10, u:'Hz'}],
+            formulaOptions: [{v:'w=2pif', t:'ω = 2π × f (Correcta)', c:true}, {v:'w=f/2pi', t:'ω = f / 2π', c:false}],
+            calculo: {id:'w', label:'ω', val:62.83, u:'rad/s'} // aproximado
         },
         {
-            tipo: 'para', titulo: "Ejercicio 9 (Parabólico: Componente Horizontal)",
-            enunciado: "Un cañón dispara con Vo = 50 m/s. El coseno del ángulo de disparo es 0.6. ¿Cuál es su componente horizontal (Vox)?",
-            datos: [{id:'Vo', label:'Vo', val:50, u:'m/s'}, {id:'cos', label:'cos(θ)', val:0.6, u:''}],
-            formulaOptions: [{v:'correcta', t:'Vox = Vo × cos(θ)', c:true}, {v:'incorrecta', t:'Vox = Vo × sen(θ)', c:false}],
-            calculo: {id:'Vox', label:'Vox', val:30, u:'m/s'}
+            titulo: "Ejercicio 8 (Fórmula 4: Despejar f desde ω)",
+            enunciado: "Si ω es 31.416 rad/s, ¿cuál es su frecuencia en Hz?",
+            datos: [{id:'w', label:'ω', val:31.416, u:'rad/s'}],
+            formulaOptions: [{v:'f=2pi*w', t:'f = 2π × ω', c:false}, {v:'f=w/2pi', t:'f = ω / 2π (Correcta)', c:true}],
+            calculo: {id:'f', label:'f', val:5, u:'Hz'}
         },
         {
-            tipo: 'para', titulo: "Ejercicio 10 (Parabólico: Alcance Máximo)",
-            enunciado: "Si Vox de un proyectil es 30 m/s y dura volando un total de 8 segundos (tv). ¿Cuál es su alcance horizontal máximo (Xmax)?",
-            datos: [{id:'Vox', label:'Vox', val:30, u:'m/s'}, {id:'tv', label:'tv', val:8, u:'s'}],
-            formulaOptions: [{v:'correcta', t:'Xmax = Vox × tv', c:true}, {v:'incorrecta', t:'Xmax = Vox² / g', c:false}],
-            calculo: {id:'Xmax', label:'Xmax', val:240, u:'m'}
+            titulo: "Ejercicio 9 (Fórmula 5: Hallar v tangencial con T)",
+            enunciado: "Una piedra atada gira a 2 m de radio con un período de 3.1416 s. Halla su velocidad tangencial.",
+            datos: [{id:'R', label:'R', val:2, u:'m'}, {id:'T', label:'T', val:3.1416, u:'s'}],
+            formulaOptions: [{v:'v=2piR/T', t:'v = 2πR / T (Correcta)', c:true}, {v:'v=T/2piR', t:'v = T / 2πR', c:false}],
+            calculo: {id:'v', label:'v', val:4, u:'m/s'}
+        },
+        {
+            titulo: "Ejercicio 10 (Fórmula 5: Despejar R desde v)",
+            enunciado: "Si la velocidad tangencial es 10 m/s y su período es 6.2832 s, ¿cuál es el radio?",
+            datos: [{id:'v', label:'v', val:10, u:'m/s'}, {id:'T', label:'T', val:6.2832, u:'s'}],
+            formulaOptions: [{v:'R=vT/2pi', t:'R = (v × T) / 2π (Correcta)', c:true}, {v:'R=v/2piT', t:'R = v / (2πT)', c:false}],
+            calculo: {id:'R', label:'R', val:10, u:'m'}
+        },
+        {
+            titulo: "Ejercicio 11 (Fórmula 6: Hallar v con ω)",
+            enunciado: "Las aspas giran con ω = 5 rad/s y un radio de 3 m. Halla la velocidad tangencial v.",
+            datos: [{id:'w', label:'ω', val:5, u:'rad/s'}, {id:'R', label:'R', val:3, u:'m'}],
+            formulaOptions: [{v:'v=w*R', t:'v = ω × R (Correcta)', c:true}, {v:'v=w/R', t:'v = ω / R', c:false}],
+            calculo: {id:'v', label:'v', val:15, u:'m/s'}
+        },
+        {
+            titulo: "Ejercicio 12 (Fórmula 6: Despejar ω desde v)",
+            enunciado: "Un auto de juguete tiene velocidad constante de 20 m/s en un riel circular de 4 m de radio. Halla ω.",
+            datos: [{id:'v', label:'v', val:20, u:'m/s'}, {id:'R', label:'R', val:4, u:'m'}],
+            formulaOptions: [{v:'w=v/R', t:'ω = v / R (Correcta)', c:true}, {v:'w=v*R', t:'ω = v × R', c:false}],
+            calculo: {id:'w', label:'ω', val:5, u:'rad/s'}
+        },
+        {
+            titulo: "Ejercicio 13 (Fórmula 7: A. Centrípeta con v)",
+            enunciado: "Un corredor va a 6 m/s en una pista circular de 3 m de radio. ¿Cuál es su aceleración centrípeta?",
+            datos: [{id:'v', label:'v', val:6, u:'m/s'}, {id:'R', label:'R', val:3, u:'m'}],
+            formulaOptions: [{v:'ac=v2/R', t:'ac = v² / R (Correcta)', c:true}, {v:'ac=v/R2', t:'ac = v / R²', c:false}],
+            calculo: {id:'ac', label:'ac', val:12, u:'m/s²'}
+        },
+        {
+            titulo: "Ejercicio 14 (Fórmula 7: Despejar v desde ac)",
+            enunciado: "La aceleración centrípeta es 16 m/s² y el radio es 4 m. Calcula la velocidad tangencial (saca la raíz cuadrada al final).",
+            datos: [{id:'ac', label:'ac', val:16, u:'m/s²'}, {id:'R', label:'R', val:4, u:'m'}],
+            formulaOptions: [{v:'v=raíz(acR)', t:'v = √(ac × R) (Correcta)', c:true}, {v:'v=acR2', t:'v = ac × R²', c:false}],
+            calculo: {id:'v', label:'v', val:8, u:'m/s'}
+        },
+        {
+            titulo: "Ejercicio 15 (Fórmula 8: A. Centrípeta con ω)",
+            enunciado: "Una polea de 2 m de radio gira a ω = 4 rad/s. ¿Cuál es su aceleración centrípeta?",
+            datos: [{id:'w', label:'ω', val:4, u:'rad/s'}, {id:'R', label:'R', val:2, u:'m'}],
+            formulaOptions: [{v:'ac=w2*R', t:'ac = ω² × R (Correcta)', c:true}, {v:'ac=w*R2', t:'ac = ω × R²', c:false}],
+            calculo: {id:'ac', label:'ac', val:32, u:'m/s²'}
+        },
+        {
+            titulo: "Ejercicio 16 (Fórmula 8: Despejar R desde ac y ω)",
+            enunciado: "Si ac = 50 m/s² y ω = 5 rad/s, ¿cuál es el radio?",
+            datos: [{id:'ac', label:'ac', val:50, u:'m/s²'}, {id:'w', label:'ω', val:5, u:'rad/s'}],
+            formulaOptions: [{v:'R=ac/w2', t:'R = ac / ω² (Correcta)', c:true}, {v:'R=ac*w2', t:'R = ac × ω²', c:false}],
+            calculo: {id:'R', label:'R', val:2, u:'m'}
         }
     ];
 
     let ejerciciosFinalizados = 0;
-    const totalEjercicios = 10;
-    let completados = Array(10).fill(false);
+    const totalEjercicios = 16;
+    let completados = Array(16).fill(false);
 
     function generarHTML() {
         const contenedor = document.getElementById('ejercicios-container');
@@ -195,8 +232,8 @@
             });
 
             html += `
-            <div class="ejercicio-box ${ej.tipo}" id="ej${num}">
-                <h3><i class="fas fa-rocket"></i> ${ej.titulo}</h3>
+            <div class="ejercicio-box" id="ej${num}">
+                <h3><i class="fas fa-rotate"></i> ${ej.titulo}</h3>
                 <div class="enunciado">${ej.enunciado}</div>
                 
                 <div class="paso-contenedor activo" id="ej${num}-p1">

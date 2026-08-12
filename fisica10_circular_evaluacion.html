@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación: Movimiento Parabólico y Semiparabólico</title>
+    <title>Evaluación: Movimiento Circular Uniforme - Física 10</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -84,17 +84,17 @@
     <ul class="menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
         <li><a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10</a></li>
-        <li><a href="fisica10_parabolico.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+        <li><a href="fisica10_circular.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
     </ul>
 </nav>
 
 <div class="contenedor">
     <div id="pantalla-inicio" class="pantalla-inicio">
-        <h1><i class="fa-solid fa-rocket"></i> Evaluación: Proyectiles</h1>
-        <p>Movimiento Semiparabólico y Parabólico · Física 10°</p>
+        <h1><i class="fa-solid fa-rotate-right"></i> Evaluación: M.C.U.</h1>
+        <p>Movimiento Circular Uniforme · Física 10°</p>
         <ul class="reglas">
             <li><i class="fa-solid fa-check"></i> Consta de <strong>10 preguntas</strong>.</li>
-            <li><i class="fa-solid fa-check"></i> 5 teóricas tipo ICFES y 5 cálculos matemáticos.</li>
+            <li><i class="fa-solid fa-check"></i> 5 teóricas tipo ICFES y 5 cálculos de fórmulas en cascada.</li>
             <li><i class="fa-solid fa-check"></i> Las preguntas aparecen en orden aleatorio.</li>
         </ul>
         <input type="text" id="input-nombre" class="input-nombre" placeholder="✏️ Escribe tu nombre completo" maxlength="60">
@@ -126,22 +126,22 @@
         <div id="revision-container"></div>
         <div style="text-align:center;margin-top:30px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
             <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#2980b9);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Reintentar</button>
-            <a href="fisica10_parabolico.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
+            <a href="fisica10_circular.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
         </div>
     </div>
 </div>
 <script>
 const bancoPreguntas = [
-    {texto:"En el movimiento semiparabólico (lanzamiento horizontal), la velocidad inicial en el eje Y (vertical) es:",opciones:["A. Igual a la gravedad.","B. Igual a la velocidad horizontal de lanzamiento.","C. Cero (0 m/s).","D. Constante en todo el trayecto hacia abajo."],respuesta:2},
-    {texto:"En un movimiento semiparabólico y parabólico, el movimiento en el eje horizontal (eje X) siempre se comporta como un:",opciones:["A. Movimiento Rectilíneo Uniformemente Variado (acelerado).","B. Movimiento de Caída Libre (afectado por la gravedad).","C. Movimiento Circular Uniforme.","D. Movimiento Rectilíneo Uniforme (velocidad constante)."],respuesta:3},
-    {texto:"Cuando un proyectil alcanza su altura máxima en el movimiento parabólico completo, su velocidad vertical (Vy) es:",opciones:["A. Igual a su velocidad inicial total.","B. Cero (0 m/s), porque se detiene momentáneamente para empezar a caer.","C. Máxima, por efecto de la gravedad.","D. Igual a la velocidad horizontal."],respuesta:1},
-    {texto:"Para calcular el tiempo de vuelo de un proyectil en movimiento parabólico completo, se depende directamente de:",opciones:["A. Su masa y volumen.","B. Solamente su componente horizontal de velocidad (Vox).","C. Su componente vertical de velocidad inicial (Voy) y la gravedad.","D. La fuerza del viento exclusivamente."],respuesta:2},
-    {texto:"¿Cuál de las siguientes afirmaciones es correcta para AMBOS movimientos (parabólico y semiparabólico) ignorando la resistencia del aire?",opciones:["A. Ambos empiezan y terminan al nivel del suelo.","B. La gravedad solo afecta a los objetos muy pesados.","C. La velocidad horizontal (Vox) se mantiene constante durante todo el vuelo.","D. En ambos casos el ángulo inicial de lanzamiento es de 45°."],respuesta:2},
-    {texto:"(Cálculo) Una avioneta que vuela horizontalmente a 40 m/s deja caer una caja. Si la caja tarda 5 s en caer al suelo (g=10 m/s²), ¿A qué altura estaba la avioneta? (y = (g*t²)/2)",opciones:["A. 125 m","B. 50 m","C. 200 m","D. 250 m"],respuesta:0},
-    {texto:"(Cálculo) Del ejercicio anterior (Vox=40 m/s y tiempo de caída 5 s), ¿Cuál fue el alcance horizontal de la caja desde el punto en que se soltó? (x = Vox * t)",opciones:["A. 8 m","B. 100 m","C. 400 m","D. 200 m"],respuesta:3},
-    {texto:"(Cálculo) Se lanza un balón con un ángulo de 30° y una velocidad inicial (Vo) de 40 m/s. Sabiendo que sen(30°)=0.5, halla la componente vertical inicial (Voy). (Voy = Vo * sen(30°))",opciones:["A. 40 m/s","B. 34 m/s","C. 10 m/s","D. 20 m/s"],respuesta:3},
-    {texto:"(Cálculo) Con el mismo balón anterior (Voy = 20 m/s), ¿Cuál es el tiempo de vuelo total que duró en el aire? (tv = 2*Voy/g, asume g=10 m/s²)",opciones:["A. 4 s","B. 2 s","C. 10 s","D. 8 s"],respuesta:0},
-    {texto:"(Cálculo) Con la misma componente vertical (Voy = 20 m/s), halla la altura máxima que alcanzó el balón. (Hmax = Voy² / 2g, asume g=10 m/s²)",opciones:["A. 10 m","B. 20 m","C. 40 m","D. 100 m"],respuesta:1}
+    {texto:"¿Qué es el Movimiento Circular Uniforme (MCU)?",opciones:["A. Movimiento en línea recta constante.","B. Movimiento circular donde cambia continuamente la rapidez.","C. Movimiento circular en el que se recorren ángulos iguales en tiempos iguales.","D. Movimiento donde la aceleración total es siempre cero."],respuesta:2},
+    {texto:"La velocidad angular (ω) en el MCU mide:",opciones:["A. La distancia lineal o longitud de arco recorrida.","B. El ángulo barrido por unidad de tiempo.","C. La fuerza hacia el centro que mantiene el giro.","D. La cantidad de vueltas totales sin importar el tiempo transcurrido."],respuesta:1},
+    {texto:"La aceleración centrípeta se caracteriza porque es responsable de:",opciones:["A. Cambiar la rapidez o magnitud de la velocidad del objeto.","B. Cambiar la masa del objeto mientras gira.","C. Cambiar continuamente la dirección de la velocidad para mantener la trayectoria circular.","D. Empujar el objeto rectilíneamente hacia afuera de la curva."],respuesta:2},
+    {texto:"Si decimos que el período (T) de un objeto giratorio es de 5 segundos, significa que:",opciones:["A. El objeto da 5 vueltas en un solo segundo.","B. El objeto tarda 5 segundos en completar una sola vuelta.","C. Su velocidad tangencial es obligatoriamente de 5 m/s.","D. Acelera hacia el centro a razón de 5 m/s²."],respuesta:1},
+    {texto:"¿Cuál es la relación principal que vincula la velocidad tangencial (v) con la velocidad angular (ω)?",opciones:["A. v = ω + R","B. v = ω / R","C. v = ω · R","D. v = ω² · R"],respuesta:2},
+    {texto:"(Cálculo) Un objeto que gira en el MCU logra dar 30 vueltas exactas en 10 segundos. ¿Cuál es su frecuencia (f)? (f = n / t)",opciones:["A. 3 Hz","B. 0.33 Hz","C. 300 Hz","D. 30 Hz"],respuesta:0},
+    {texto:"(Cálculo) Si el período de una rueda es 2 s, calcula su velocidad angular ω (usa π = 3.14). (ω = 2π / T)",opciones:["A. 6.28 rad/s","B. 3.14 rad/s","C. 1.57 rad/s","D. 2 rad/s"],respuesta:1},
+    {texto:"(Cálculo) Un disco compacto tiene un radio de 0.5 m y gira a 4 rad/s de velocidad angular. ¿Cuál es su velocidad tangencial (v) en el borde? (v = ω · R)",opciones:["A. 8 m/s","B. 2 m/s","C. 4 m/s","D. 12 m/s"],respuesta:1},
+    {texto:"(Cálculo) Una bicicleta toma una curva de 5 m de radio con una velocidad constante de 10 m/s. ¿Cuál es su aceleración centrípeta? (ac = v² / R)",opciones:["A. 2 m/s²","B. 20 m/s²","C. 50 m/s²","D. 10 m/s²"],respuesta:1},
+    {texto:"(Cálculo) Un objeto gira y experimenta una aceleración centrípeta de 18 m/s² a un radio de giro de 2 m. Calcula su velocidad angular ω. (ac = ω² · R)",opciones:["A. 9 rad/s","B. 3 rad/s","C. 36 rad/s","D. 6 rad/s"],respuesta:1}
 ];
 
 let preguntasSeleccionadas=[],respuestasUsuario=[],preguntaActual=0,nombreEstudiante='';
@@ -200,7 +200,7 @@ function finalizarEvaluacion(){
     });
     const pct=Math.round(correctas/10*100);
     let emoji,titulo;
-    if(pct>=90){emoji='🏆';titulo='¡Excelente! Dominas los Proyectiles.';}
+    if(pct>=90){emoji='🏆';titulo='¡Excelente! Dominas el M.C.U.';}
     else if(pct>=70){emoji='🌟';titulo='¡Muy bien! Sigue practicando.';}
     else if(pct>=50){emoji='📚';titulo='Aprobado. Repasa las fórmulas.';}
     else{emoji='💪';titulo='Necesitas repasar la teoría y los cálculos.';}

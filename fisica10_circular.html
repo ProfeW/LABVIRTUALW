@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimiento Circular Uniforme (M.C.U.) - Física 10 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔄</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-tema: #3498db; --color-oscuro: #1a1a2e; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)),
+                url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+        nav { background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(52, 152, 219, 0.2); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(52, 152, 219, 0.1); color: var(--color-tema); }
+
+        .contenedor { max-width: 1100px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: var(--color-tema); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+        .encabezado-leccion { border-bottom: 2px solid rgba(52, 152, 219, 0.4); padding-bottom: 20px; margin-bottom: 30px; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 10px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+        
+        .seccion-contenido { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .seccion-contenido h2 { color: var(--color-tema); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; border-left: 4px solid var(--color-tema); padding-left: 15px; }
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
+        .seccion-contenido ul { margin-left: 20px; margin-bottom: 15px; color: #ddd; }
+        .seccion-contenido li { margin-bottom: 8px; }
+
+        .definicion-box { background: rgba(52, 152, 219, 0.08); border-left: 4px solid var(--color-tema); padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+        
+        .grid-comparacion { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .columna-comp { background: rgba(0,0,0,0.3); padding: 25px; border-radius: 10px; border-top: 3px solid var(--color-tema); }
+        .columna-comp.centrifuga { border-top-color: #e74c3c; }
+        .columna-comp h3 { margin-bottom: 15px; font-size: 1.3rem; }
+        .columna-comp.centrifuga h3 { color: #e74c3c; }
+
+        .grid-formulas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin: 20px 0; }
+        .formula-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 20px; text-align: center; transition: 0.3s; }
+        .formula-card:hover { border-color: var(--color-tema); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2); }
+        .formula-card h4 { color: #bbb; font-size: 1rem; margin-bottom: 10px; }
+        .formula-principal { font-size: 1.4rem; font-weight: 800; color: var(--color-tema); letter-spacing: 1px; }
+
+        .ejercicio-tarjeta { background: rgba(20,20,35,0.6); border-left: 4px solid var(--color-tema); padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+        .ejercicio-tarjeta h3 { color: var(--color-tema); margin-bottom: 10px; font-size: 1.2rem; }
+        .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
+        .paso { margin-top: 12px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 600; color: #4facfe; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .respuesta-final { color: #2ecc71; margin-top: 5px; font-weight: 600; }
+
+        .botones-accion-final { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; margin-bottom: 20px; }
+        .btn-accion { padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn-practica { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .btn-practica:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46,204,113,0.4); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .btn-evaluacion:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(231,76,60,0.4); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .grid-comparacion { grid-template-columns: 1fr; } .botones-accion-final { flex-direction: column; } .btn-accion { justify-content: center; } nav { padding: 15px 20px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="fisica_10.html"><i class="fa-solid fa-atom"></i> Física 10</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 10°</a>
+
+        <div class="encabezado-leccion">
+            <h1><i class="fa-solid fa-rotate-right"></i> Movimiento Circular Uniforme (M.C.U.)</h1>
+            <p><i class="fa-solid fa-truck-fast"></i> Unidad: Cinemática · Física Grado 10°</p>
+        </div>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-book-open"></i> 1. ¿Qué es el Movimiento Circular Uniforme?</h2>
+            <p>El <strong>Movimiento Circular Uniforme (M.C.U.)</strong> es aquel en el que un objeto describe una trayectoria circular recorriendo ángulos iguales en tiempos iguales. Aunque su rapidez (magnitud de la velocidad) es constante, su dirección cambia continuamente, lo que significa que siempre hay aceleración presente.</p>
+            
+            <div class="definicion-box">
+                <p><strong>Aplicaciones prácticas:</strong> Lo vemos en el giro de las aspas de una despulpadora de café, las llantas de un tractor avanzando a velocidad constante, un CD girando, las aspas de un ventilador, o los planetas orbitando alrededor del sol.</p>
+            </div>
+            
+            <h3 style="color: var(--color-tema); margin-top: 25px; margin-bottom: 15px;"><i class="fa-solid fa-gauge-high"></i> Velocidad Angular vs Velocidad Tangencial</h3>
+            <p>Es fundamental no confundir estas dos velocidades en el M.C.U.:</p>
+            <div class="grid-comparacion">
+                <div class="columna-comp">
+                    <h3 style="color: #4facfe;"><i class="fa-solid fa-compass"></i> Velocidad Angular (ω)</h3>
+                    <p>Mide la rapidez con la que se <strong>barre un ángulo</strong> a medida que el objeto gira. Se enfoca en los grados o radianes girados por unidad de tiempo. Es igual para todos los puntos del objeto que gira, sin importar qué tan lejos estén del centro.</p>
+                    <p><strong>Unidades:</strong> Radianes por segundo (rad/s).</p>
+                </div>
+                <div class="columna-comp" style="border-top-color: #2ecc71;">
+                    <h3 style="color: #2ecc71;"><i class="fa-solid fa-ruler"></i> Velocidad Tangencial (v)</h3>
+                    <p>Mide la rapidez con la que se recorre el <strong>borde del círculo</strong> (distancia lineal). Es tangente a la trayectoria en cada instante. A mayor distancia del centro (radio), mayor es la velocidad tangencial.</p>
+                    <p><strong>Unidades:</strong> Metros por segundo (m/s).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-down-left-and-up-right-to-center"></i> 2. Aceleración Centrípeta vs Centrífuga</h2>
+            <p>Todo movimiento circular implica un cambio de dirección en la velocidad tangencial, lo que origina una aceleración, incluso si la rapidez es constante.</p>
+            
+            <div class="grid-comparacion">
+                <div class="columna-comp">
+                    <h3 style="color: #3498db;"><i class="fa-solid fa-arrow-down"></i> Aceleración Centrípeta (ac)</h3>
+                    <p>Es una aceleración <strong>real</strong> que siempre apunta hacia el <strong>centro de la trayectoria circular</strong>. Es la responsable de hacer que el objeto cambie de dirección continuamente y no salga volando en línea recta. Es causada por una fuerza centrípeta (ej. la tensión de una cuerda, la gravedad, o el rozamiento de las llantas).</p>
+                    <p><strong>Fórmula base:</strong> ac = v² / R</p>
+                </div>
+                <div class="columna-comp centrifuga">
+                    <h3 style="color: #e74c3c;"><i class="fa-solid fa-arrow-up"></i> Aceleración Centrífuga (Ficticia)</h3>
+                    <p>Es una aceleración <strong>ficticia o inercial</strong> que parece empujar a los objetos <strong>hacia afuera</strong> del círculo. En realidad, no es una aceleración generada por una fuerza externa real, sino el resultado de la inercia del cuerpo que intenta mantener su movimiento rectilíneo mientras el sistema gira (ej. cuando un carro da una curva y sientes que te vas hacia el exterior).</p>
+                    <p><strong>Fórmula:</strong> En magnitud es igual a la centrípeta, pero con sentido opuesto.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-calculator"></i> 3. Las 8 Fórmulas del M.C.U.</h2>
+            <p>Estas son las 8 fórmulas principales que utilizaremos para resolver problemas de movimiento circular:</p>
+
+            <div class="grid-formulas">
+                <!-- Fórmulas de Período y Frecuencia -->
+                <div class="formula-card">
+                    <h4>Fórmula 1 (Período con tiempo)</h4>
+                    <div class="formula-principal">T = t / n</div>
+                </div>
+                <div class="formula-card">
+                    <h4>Fórmula 2 (Frecuencia con tiempo)</h4>
+                    <div class="formula-principal">f = n / t</div>
+                </div>
+                <!-- Fórmulas de Velocidad Angular -->
+                <div class="formula-card">
+                    <h4>Fórmula 3 (Angular con T)</h4>
+                    <div class="formula-principal">ω = 2π / T</div>
+                </div>
+                <div class="formula-card">
+                    <h4>Fórmula 4 (Angular con f)</h4>
+                    <div class="formula-principal">ω = 2π · f</div>
+                </div>
+                <!-- Fórmulas de Velocidad Tangencial -->
+                <div class="formula-card">
+                    <h4>Fórmula 5 (Tangencial con T)</h4>
+                    <div class="formula-principal">v = 2π·R / T</div>
+                </div>
+                <div class="formula-card">
+                    <h4>Fórmula 6 (Tangencial con ω)</h4>
+                    <div class="formula-principal">v = ω · R</div>
+                </div>
+                <!-- Fórmulas de Aceleración Centrípeta -->
+                <div class="formula-card">
+                    <h4>Fórmula 7 (A. Centrípeta con v)</h4>
+                    <div class="formula-principal">ac = v² / R</div>
+                </div>
+                <div class="formula-card">
+                    <h4>Fórmula 8 (A. Centrípeta con ω)</h4>
+                    <div class="formula-principal">ac = ω² · R</div>
+                </div>
+            </div>
+            <p style="color:#aaa; font-size:0.9rem; margin-top:10px;"><em>Donde: <strong>T</strong> es período, <strong>f</strong> es frecuencia, <strong>t</strong> es tiempo total, <strong>n</strong> es número de vueltas/ciclos, <strong>R</strong> es radio, <strong>ω</strong> es velocidad angular y <strong>v</strong> es velocidad tangencial. (Recuerda que T = 1/f y f = 1/T).</em></p>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-pencil"></i> 4. Ejercicios Resueltos (16 Ejercicios)</h2>
+
+            <!-- FÓRMULA 1 -->
+            <h3 style="color: #4facfe; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Fórmula 1: Período (T = t / n)</h3>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 1 (Hallar T)</h3>
+                <div class="enunciado">Un motor de una despulpadora da 120 vueltas en 60 segundos. ¿Cuál es su período?</div>
+                <div class="paso">
+                    <p>Datos: n = 120 vueltas, t = 60 s</p>
+                    <p>T = t / n  =>  T = 60 / 120 = 0.5 s</p>
+                    <p class="respuesta-final">✅ T = 0.5 segundos.</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 2 (Despejar t)</h3>
+                <div class="enunciado">Si el período de una rueda es de 2 segundos, ¿cuánto tiempo tarda en dar 50 vueltas?</div>
+                <div class="paso">
+                    <p>Despeje: t = T · n</p>
+                    <p>t = 2 s × 50 = 100 s</p>
+                    <p class="respuesta-final">✅ Tarda 100 segundos.</p>
+                </div>
+            </div>
+
+            <!-- FÓRMULA 2 -->
+            <h3 style="color: #4facfe; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Fórmula 2: Frecuencia (f = n / t)</h3>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 3 (Hallar f)</h3>
+                <div class="enunciado">Un ventilador industrial completa 300 revoluciones en 60 segundos. ¿Cuál es su frecuencia?</div>
+                <div class="paso">
+                    <p>Datos: n = 300, t = 60 s</p>
+                    <p>f = 300 / 60 = 5 Hz</p>
+                    <p class="respuesta-final">✅ La frecuencia es 5 Hz (vueltas por segundo).</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 4 (Despejar n)</h3>
+                <div class="enunciado">Un trompo gira con una frecuencia de 10 Hz. ¿Cuántas vueltas dará en 15 segundos?</div>
+                <div class="paso">
+                    <p>Despeje: n = f · t</p>
+                    <p>n = 10 Hz × 15 s = 150 vueltas</p>
+                    <p class="respuesta-final">✅ Dará 150 vueltas.</p>
+                </div>
+            </div>
+
+            <!-- FÓRMULA 3 -->
+            <h3 style="color: #4facfe; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Fórmula 3: Velocidad Angular con Período (ω = 2π / T)</h3>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 5 (Hallar ω)</h3>
+                <div class="enunciado">El segundero de un reloj tiene un período de 60 segundos. Calcula su velocidad angular. (Usa π ≈ 3.1416)</div>
+                <div class="paso">
+                    <p>Datos: T = 60 s</p>
+                    <p>ω = (2 × 3.1416) / 60 = 6.2832 / 60 = 0.1047 rad/s</p>
+                    <p class="respuesta-final">✅ ω = 0.1047 rad/s.</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 6 (Despejar T)</h3>
+                <div class="enunciado">Un objeto gira con una velocidad angular de 3.1416 rad/s (es decir, π rad/s). ¿Cuál es su período?</div>
+                <div class="paso">
+                    <p>Despeje: T = 2π / ω</p>
+                    <p>T = (2 × 3.1416) / 3.1416 = 2 s</p>
+                    <p class="respuesta-final">✅ El período es de 2 segundos.</p>
+                </div>
+            </div>
+
+            <!-- FÓRMULA 4 -->
+            <h3 style="color: #4facfe; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Fórmula 4: Velocidad Angular con Frecuencia (ω = 2π · f)</h3>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 7 (Hallar ω)</h3>
+                <div class="enunciado">Un disco gira a una frecuencia de 3 Hz. ¿Cuál es su velocidad angular?</div>
+                <div class="paso">
+                    <p>Datos: f = 3 Hz</p>
+                    <p>ω = 2 × 3.1416 × 3 = 18.8496 rad/s</p>
+                    <p class="respuesta-final">✅ ω = 18.85 rad/s.</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 8 (Despejar f)</h3>
+                <div class="enunciado">Un motor tiene una velocidad angular de 62.83 rad/s (aprox 20π). ¿Cuál es su frecuencia?</div>
+                <div class="paso">
+                    <p>Despeje: f = ω / (2π)</p>
+                    <p>f = 62.83 / 6.2832 ≈ 10 Hz</p>
+                    <p class="respuesta-final">✅ La frecuencia es 10 Hz.</p>
+                </div>
+            </div>
+
+            <!-- FÓRMULA 5 -->
+            <h3 style="color: #4facfe; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Fórmula 5: Velocidad Tangencial con Período (v = 2π·R / T)</h3>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 9 (Hallar v)</h3>
+                <div class="enunciado">Un niño hace girar una piedra atada a una cuerda de 0.5 metros de radio. Si tarda 2 segundos en dar una vuelta completa (Período), ¿cuál es la velocidad tangencial de la piedra?</div>
+                <div class="paso">
+                    <p>Datos: R = 0.5 m, T = 2 s</p>
+                    <p>v = (2 × 3.1416 × 0.5) / 2 = 3.1416 / 2 = 1.57 m/s</p>
+                    <p class="respuesta-final">✅ v = 1.57 m/s.</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 10 (Despejar R)</h3>
+                <div class="enunciado">Una rueda gira con período de 4 segundos y su borde tiene una velocidad tangencial de 3.14 m/s. ¿Cuál es su radio?</div>
+                <div class="paso">
+                    <p>Despeje: R = (v · T) / 2π</p>
+                    <p>R = (3.1416 × 4) / 6.2832 = 12.5664 / 6.2832 = 2 m</p>
+                    <p class="respuesta-final">✅ El radio es de 2 metros.</p>
+                </div>
+            </div>
+
+            <!-- FÓRMULA 6 -->
+            <h3 style="color: #4facfe; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Fórmula 6: Velocidad Tangencial con Angular (v = ω · R)</h3>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 11 (Hallar v)</h3>
+                <div class="enunciado">Las aspas de un ventilador de 0.4 m de radio giran con una velocidad angular de 10 rad/s. Calcula la velocidad tangencial en el borde.</div>
+                <div class="paso">
+                    <p>Datos: ω = 10 rad/s, R = 0.4 m</p>
+                    <p>v = 10 × 0.4 = 4 m/s</p>
+                    <p class="respuesta-final">✅ v = 4 m/s.</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 12 (Despejar ω)</h3>
+                <div class="enunciado">Un carro en una pista circular de 50 metros de radio se mueve a una velocidad constante de 25 m/s. ¿Cuál es su velocidad angular?</div>
+                <div class="paso">
+                    <p>Despeje: ω = v / R</p>
+                    <p>ω = 25 / 50 = 0.5 rad/s</p>
+                    <p class="respuesta-final">✅ ω = 0.5 rad/s.</p>
+                </div>
+            </div>
+
+            <!-- FÓRMULA 7 -->
+            <h3 style="color: #4facfe; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Fórmula 7: Aceleración Centrípeta con v (ac = v² / R)</h3>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 13 (Hallar ac)</h3>
+                <div class="enunciado">Un ciclista toma una curva de 10 metros de radio a una velocidad tangencial de 5 m/s. ¿Cuál es su aceleración centrípeta?</div>
+                <div class="paso">
+                    <p>Datos: v = 5 m/s, R = 10 m</p>
+                    <p>ac = (5)² / 10 = 25 / 10 = 2.5 m/s²</p>
+                    <p class="respuesta-final">✅ ac = 2.5 m/s².</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 14 (Despejar v)</h3>
+                <div class="enunciado">Una centrifugadora somete una muestra a una aceleración de 100 m/s². Si el radio de giro es de 0.25 m, ¿qué velocidad tangencial tiene la muestra?</div>
+                <div class="paso">
+                    <p>Despeje: v = √(ac · R)</p>
+                    <p>v = √(100 × 0.25) = √25 = 5 m/s</p>
+                    <p class="respuesta-final">✅ La velocidad tangencial es 5 m/s.</p>
+                </div>
+            </div>
+
+            <!-- FÓRMULA 8 -->
+            <h3 style="color: #4facfe; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Fórmula 8: Aceleración Centrípeta con ω (ac = ω² · R)</h3>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 15 (Hallar ac)</h3>
+                <div class="enunciado">Una rueda de 2 metros de radio gira con una velocidad angular de 3 rad/s. ¿Cuál es su aceleración centrípeta?</div>
+                <div class="paso">
+                    <p>Datos: ω = 3 rad/s, R = 2 m</p>
+                    <p>ac = (3)² × 2 = 9 × 2 = 18 m/s²</p>
+                    <p class="respuesta-final">✅ ac = 18 m/s².</p>
+                </div>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 16 (Despejar R)</h3>
+                <div class="enunciado">Si un objeto que gira a 4 rad/s experimenta una aceleración centrípeta de 32 m/s², ¿a qué distancia del eje (radio) se encuentra?</div>
+                <div class="paso">
+                    <p>Despeje: R = ac / ω²</p>
+                    <p>R = 32 / (4)² = 32 / 16 = 2 m</p>
+                    <p class="respuesta-final">✅ Se encuentra a un radio de 2 metros.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="botones-accion-final">
+            <a href="fisica10_circular_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Práctica en Cascada (16 Ejercicios)
+            </a>
+            <a href="fisica10_circular_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-file-signature"></i> Evaluación
+            </a>
+        </section>
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+</html>
