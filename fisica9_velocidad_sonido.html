@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Velocidad del Sonido según el Medio - Física 9 - LabVirtual W.">
+    <title>Velocidad del Sonido según el Medio - Física 9 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-tema: #4cd137; --color-oscuro: #1a1a2e; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26,26,46,0.88), rgba(26,26,46,0.96)),
+                url('https://images.unsplash.com/photo-1511735111819-9a3efd16269e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu > li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu > li > a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
+        .submenu { z-index: 1000; display: none; position: absolute; top: 100%; left: 0; background: rgba(20,20,35,0.95); backdrop-filter: blur(15px); min-width: 180px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255,255,255,0.1); padding-left: 25px; }
+
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: var(--color-tema); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+        .encabezado-leccion { border-bottom: 2px solid rgba(76, 209, 55, 0.4); padding-bottom: 20px; margin-bottom: 30px; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 10px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+        
+        .seccion-contenido { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .seccion-contenido h2 { color: var(--color-tema); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; border-left: 4px solid var(--color-tema); padding-left: 15px; }
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
+
+        .tabla-velocidades { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95rem; }
+        .tabla-velocidades th { background: rgba(76, 209, 55, 0.2); color: var(--color-tema); padding: 12px 15px; text-align: left; border-bottom: 2px solid rgba(76, 209, 55, 0.4); }
+        .tabla-velocidades td { padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ddd; }
+        .tabla-velocidades tr:hover td { background: rgba(76, 209, 55, 0.05); }
+
+        .caja-formula { background: rgba(76, 209, 55, 0.06); border: 2px dashed var(--color-tema); border-radius: 10px; padding: 25px; text-align: center; margin: 20px 0; }
+        .formula-principal { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 1px; margin-bottom: 10px; }
+        .formula-leyenda { font-size: 1rem; color: #aaa; }
+
+        .ejercicio-tarjeta { background: rgba(20,20,35,0.6); border-left: 4px solid var(--color-tema); padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+        .ejercicio-tarjeta h3 { color: var(--color-tema); margin-bottom: 10px; font-size: 1.2rem; }
+        .enunciado { font-style: italic; color: #eee; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; }
+        .paso { margin-top: 12px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .paso-titulo { font-weight: 600; color: #27ae60; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .respuesta-final { color: #2ecc71; margin-top: 5px; font-weight: 600; }
+
+        .botones-accion-final { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; margin-bottom: 20px; }
+        .btn-accion { padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn-practica { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .btn-practica:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46,204,113,0.4); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .btn-evaluacion:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(231,76,60,0.4); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .botones-accion-final { flex-direction: column; } .btn-accion { justify-content: center; } nav { padding: 15px 20px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i class="fa-solid fa-volume-high"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html">Grado Undécimo</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 9°</a>
+
+        <div class="encabezado-leccion">
+            <h1><i class="fa-solid fa-gauge-high"></i> Velocidad del Sonido según el Medio</h1>
+            <p><i class="fa-solid fa-layer-group"></i> Unidad: El Sonido y la Acústica · Física Grado 9°</p>
+        </div>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-tachometer-alt"></i> 1. El Sonido en Diferentes Materiales</h2>
+            <p>La velocidad con la que viaja el sonido depende de las propiedades físicas del medio por el que se propaga, principalmente de su <strong>elasticidad</strong> y de su <strong>densidad</strong>. Como regla general, el sonido viaja más rápido en los sólidos que en los líquidos, y más rápido en los líquidos que en los gases.</p>
+            <p>A continuación, presentamos una tabla con las velocidades aproximadas del sonido en los 12 materiales más comunes:</p>
+
+            <table class="tabla-velocidades">
+                <thead>
+                    <tr><th>Material (Medio de propagación)</th><th>Estado</th><th>Velocidad (m/s)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Aire (0 °C)</td><td>Gas</td><td>331 m/s</td></tr>
+                    <tr><td>Aire (20 °C)</td><td>Gas</td><td>343 m/s</td></tr>
+                    <tr><td>Oxígeno (0 °C)</td><td>Gas</td><td>317 m/s</td></tr>
+                    <tr><td>Helio (0 °C)</td><td>Gas</td><td>965 m/s</td></tr>
+                    <tr><td>Etanol (20 °C)</td><td>Líquido</td><td>1162 m/s</td></tr>
+                    <tr><td>Agua dulce (20 °C)</td><td>Líquido</td><td>1482 m/s</td></tr>
+                    <tr><td>Agua de mar (20 °C)</td><td>Líquido</td><td>1522 m/s</td></tr>
+                    <tr><td>Caucho</td><td>Sólido</td><td>1600 m/s</td></tr>
+                    <tr><td>Madera (Pino)</td><td>Sólido</td><td>3320 m/s</td></tr>
+                    <tr><td>Hormigón / Concreto</td><td>Sólido</td><td>4000 m/s</td></tr>
+                    <tr><td>Vidrio</td><td>Sólido</td><td>5640 m/s</td></tr>
+                    <tr><td>Acero</td><td>Sólido</td><td>5960 m/s</td></tr>
+                    <tr><td>Aluminio</td><td>Sólido</td><td>6420 m/s</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-calculator"></i> 2. Fórmulas Principales</h2>
+            <p>Para resolver problemas de acústica a nivel básico, utilizamos principalmente dos fórmulas. La primera nos permite relacionar la velocidad con la distancia y el tiempo. La segunda nos permite calcular cómo varía la velocidad del sonido en el aire de acuerdo a su temperatura.</p>
+
+            <div class="caja-formula">
+                <div class="formula-principal">v = d / t</div>
+                <div class="formula-leyenda">Velocidad (v) = Distancia (d) / Tiempo (t). Fórmula del Movimiento Rectilíneo Uniforme.</div>
+            </div>
+
+            <div class="caja-formula">
+                <div class="formula-principal">v = 331.4 m/s + (0.6 m/s·°C⁻¹) · T</div>
+                <div class="formula-leyenda">Donde <strong>331.4 m/s</strong> es la velocidad del sonido en el aire a 0°C, y <strong>T</strong> es la temperatura en grados centígrados (°C). Nota cómo las unidades de temperatura (°C) se cancelan con el °C⁻¹.</div>
+            </div>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-pencil"></i> 3. Ejercicios Resueltos (Fórmula: v = d / t)</h2>
+            
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 1: Calculando la Distancia</h3>
+                <div class="enunciado">"Durante una tormenta, observas el relámpago y 4 segundos después escuchas el trueno. Si consideramos que la velocidad del sonido en el aire en ese momento es de 340 m/s, ¿a qué distancia cayó el rayo?"</div>
+                <div class="paso">
+                    <div class="paso-titulo">Datos</div>
+                    <p>v = 340 m/s<br>t = 4 s<br>d = ?</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Solución</div>
+                    <p>Despejamos la distancia de la fórmula original (v = d / t) ➔ <strong>d = v · t</strong></p>
+                    <p>d = 340 m/s · 4 s = 1360 m</p>
+                    <p class="respuesta-final">✅ El rayo cayó a 1360 metros de distancia.</p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 2: Calculando el Tiempo en el Agua</h3>
+                <div class="enunciado">"Un submarino emite un sonido bajo el agua dulce (velocidad = 1482 m/s). Si el sonido debe recorrer 7410 metros para llegar a otro submarino, ¿cuánto tiempo tardará en escucharse?"</div>
+                <div class="paso">
+                    <div class="paso-titulo">Datos</div>
+                    <p>v = 1482 m/s<br>d = 7410 m<br>t = ?</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Solución</div>
+                    <p>Despejamos el tiempo (v = d / t) ➔ <strong>t = d / v</strong></p>
+                    <p>t = 7410 m / 1482 m/s = 5 s</p>
+                    <p class="respuesta-final">✅ El sonido tardará 5 segundos en llegar.</p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 3: Calculando la Velocidad en un Sólido</h3>
+                <div class="enunciado">"Golpeas un riel de tren muy largo. Un amigo situado a 2980 metros escucha el sonido propagarse a través del riel en tan solo 0.5 segundos. ¿Cuál es la velocidad del sonido en ese material?"</div>
+                <div class="paso">
+                    <div class="paso-titulo">Datos</div>
+                    <p>d = 2980 m<br>t = 0.5 s<br>v = ?</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Solución</div>
+                    <p>Aplicamos la fórmula directa: <strong>v = d / t</strong></p>
+                    <p>v = 2980 m / 0.5 s = 5960 m/s</p>
+                    <p class="respuesta-final">✅ La velocidad del sonido en ese material es 5960 m/s (corresponde al acero).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-temperature-half"></i> 4. Ejercicios Resueltos (Fórmula de Temperatura)</h2>
+            
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 4: Velocidad en un día caluroso</h3>
+                <div class="enunciado">"¿Cuál es la velocidad del sonido en el aire en un día muy caluroso de verano donde la temperatura ambiente es de 35 °C?"</div>
+                <div class="paso">
+                    <div class="paso-titulo">Datos</div>
+                    <p>T = 35 °C<br>v = ?</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Solución</div>
+                    <p>Usamos la fórmula: <strong>v = 331.4 + 0.6 · T</strong></p>
+                    <p>v = 331.4 + 0.6 · 35</p>
+                    <p>v = 331.4 + 21 = 352.4 m/s</p>
+                    <p class="respuesta-final">✅ La velocidad del sonido a 35 °C es de 352.4 m/s.</p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 5: Velocidad bajo cero</h3>
+                <div class="enunciado">"Un explorador en la Antártida emite un grito. Si la temperatura del aire es de -15 °C, ¿a qué velocidad viajará el sonido de su voz?"</div>
+                <div class="paso">
+                    <div class="paso-titulo">Datos</div>
+                    <p>T = -15 °C<br>v = ?</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Solución</div>
+                    <p>Aplicamos la fórmula teniendo en cuenta el signo negativo de la temperatura:</p>
+                    <p>v = 331.4 + (0.6 · -15)</p>
+                    <p>v = 331.4 - 9 = 322.4 m/s</p>
+                    <p class="respuesta-final">✅ A -15 °C, el sonido viaja a 322.4 m/s.</p>
+                </div>
+            </div>
+
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 6: Encontrando la Temperatura</h3>
+                <div class="enunciado">"Mediante un experimento escolar, determinamos que la velocidad del sonido en el aire del laboratorio es de 346.4 m/s. ¿A qué temperatura se encuentra el laboratorio?"</div>
+                <div class="paso">
+                    <div class="paso-titulo">Datos</div>
+                    <p>v = 346.4 m/s<br>T = ?</p>
+                </div>
+                <div class="paso">
+                    <div class="paso-titulo">Solución</div>
+                    <p>Despejamos la temperatura T de la fórmula (v = 331.4 + 0.6 · T):</p>
+                    <p>T = (v - 331.4) / 0.6</p>
+                    <p>T = (346.4 - 331.4) / 0.6</p>
+                    <p>T = 15 / 0.6 = 25 °C</p>
+                    <p class="respuesta-final">✅ El laboratorio se encuentra a una temperatura de 25 °C.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="botones-accion-final">
+            <a href="fisica9_velocidad_sonido_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Práctica Interactiva
+            </a>
+            <a href="fisica9_velocidad_sonido_evaluacion.html" class="btn-accion btn-evaluacion">
+                <i class="fa-solid fa-file-signature"></i> Evaluación
+            </a>
+        </section>
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+</html>

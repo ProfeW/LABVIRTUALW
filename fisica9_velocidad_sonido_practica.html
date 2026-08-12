@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Interactiva — Velocidad del Sonido · LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-tema: #4cd137;
+            --color-oscuro: #1a1a2e;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)),
+                url('https://images.unsplash.com/photo-1511735111819-9a3efd16269e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
+
+        .contenedor { max-width: 960px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--color-tema); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-leccion { border-bottom: 2px solid rgba(76, 209, 55, 0.4); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 8px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+
+        .leyenda-global { background: rgba(76, 209, 55, 0.1); border-left: 5px solid var(--color-tema); padding: 20px; border-radius: 8px; margin-bottom: 30px; line-height: 1.6; }
+        .leyenda-global h3 { color: var(--color-tema); margin-bottom: 10px; font-size: 1.2rem; }
+        .leyenda-global ul { margin-left: 20px; color: #ddd; }
+        .leyenda-global li { margin-bottom: 5px; }
+
+        .ejercicio-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 50px; border-top: 4px solid var(--color-tema); }
+        .ejercicio-box h3 { color: var(--color-tema); margin-bottom: 10px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .enunciado { font-style: italic; color: #ddd; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.05rem; border-left: 4px solid #3498db; line-height: 1.6; }
+
+        .paso-contenedor { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid #444; transition: 0.3s; }
+        .paso-contenedor.activo { border-left-color: var(--color-tema); box-shadow: 0 5px 15px rgba(76, 209, 55, 0.1); }
+        .paso-contenedor.completado { border-left-color: var(--color-exito); opacity: 0.7; pointer-events: none; }
+        .paso-titulo { font-weight: 800; color: #fff; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .icono-check { color: var(--color-exito); display: none; font-size: 1.4rem; }
+        .completado .icono-check { display: block; }
+        .oculto { display: none; }
+
+        .grid-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 15px; }
+        .input-grupo { display: flex; align-items: stretch; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; overflow: hidden; }
+        .input-grupo label { background: rgba(0,0,0,0.5); padding: 10px; color: #fff; font-weight: bold; min-width: 45px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+        .input-grupo input { flex: 1; padding: 10px; border: none; background: transparent; color: #fff; font-size: 1.05rem; text-align: center; font-family: 'Poppins'; outline: none; width: 100%; }
+        .input-grupo input:focus { background: rgba(255,255,255,0.08); }
+        .input-grupo .unidad { background: rgba(76, 209, 55, 0.15); padding: 10px; font-size: 0.85rem; color: var(--color-tema); border-left: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; }
+
+        select { width: 100%; padding: 13px 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(20,20,35,0.8); color: #fff; font-size: 1rem; outline: none; cursor: pointer; margin-bottom: 5px; }
+        select:focus { border-color: var(--color-tema); }
+
+        .btn-validar { background: var(--color-tema); color: #fff; border: none; padding: 12px 28px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-validar:hover { opacity: 0.85; transform: translateY(-2px); }
+
+        .feedback { display: none; margin-top: 12px; padding: 12px 18px; border-radius: 6px; font-weight: 600; font-size: 1rem; }
+        .feedback.correcto { display: block; background: rgba(46,204,113,0.15); border: 1px solid var(--color-exito); color: var(--color-exito); }
+        .feedback.incorrecto { display: block; background: rgba(231,76,60,0.15); border: 1px solid var(--color-error); color: var(--color-error); }
+
+        .barra-progreso-contenedor { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.08); }
+        .barra-progreso-titulo { font-weight: 700; color: #fff; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .barra { background: rgba(255,255,255,0.1); border-radius: 20px; height: 10px; overflow: hidden; }
+        .barra-fill { background: linear-gradient(90deg, var(--color-tema), #f39c12); height: 100%; border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo"><i class="fas fa-volume-high"></i> LabVirtual W</a>
+    <ul class="menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="fisica_9.html"><i class="fas fa-atom"></i> Física 9</a></li>
+        <li><a href="fisica9_velocidad_sonido.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+    </ul>
+</nav>
+
+<div class="contenedor">
+    <a href="fisica9_velocidad_sonido.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a la Lección</a>
+
+    <div class="encabezado-leccion">
+        <h1>🎮 Práctica en Cadena</h1>
+        <p>Velocidad del Sonido · Resuelve paso a paso</p>
+    </div>
+
+    <div class="barra-progreso-contenedor">
+        <div class="barra-progreso-titulo">
+            <span>📊 Progreso General</span>
+            <span id="texto-progreso">0 / 8 ejercicios completados</span>
+        </div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+    </div>
+
+    <div class="leyenda-global">
+        <h3><i class="fas fa-info-circle"></i> Instrucciones</h3>
+        <ul>
+            <li>Completa cada paso correctamente para desbloquear el siguiente.</li>
+            <li>En la primera parte, usa la fórmula <strong>v = d / t</strong>.</li>
+            <li>En la segunda parte, usa <strong>v = 331.4 + 0.6·T</strong>.</li>
+            <li>Puedes usar hasta un decimal en tus respuestas numéricas.</li>
+        </ul>
+    </div>
+
+    <!-- EJERCICIO 1: Hallar distancia -->
+    <div class="ejercicio-box" id="ej1">
+        <h3><i class="fas fa-bolt"></i> Ejercicio 1 (Fórmula Básica)</h3>
+        <div class="enunciado">
+            Escuchas un trueno 3 segundos después de ver el relámpago. Si la velocidad del sonido es de 340 m/s, ¿a qué distancia estás de la tormenta?
+        </div>
+        <div class="paso-contenedor activo" id="ej1-p1">
+            <div class="paso-titulo">📋 Paso 1: Datos conocidos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>v</label><input type="number" id="ej1-v" placeholder="340"><div class="unidad">m/s</div></div>
+                <div class="input-grupo"><label>t</label><input type="number" id="ej1-t" placeholder="3"><div class="unidad">s</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej1','p1')">Validar Datos</button>
+            <div class="feedback" id="ej1-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej1-p2">
+            <div class="paso-titulo">📐 Paso 2: Fórmula para Distancia <span class="icono-check">✔</span></div>
+            <select id="ej1-formula">
+                <option value="">— Selecciona —</option>
+                <option value="v=d/t">v = d / t (Fórmula principal)</option>
+                <option value="d=v*t">d = v · t (Fórmula despejada) ✓</option>
+                <option value="t=d/v">t = d / v</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej1','p2')">Validar Fórmula</button>
+            <div class="feedback" id="ej1-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej1-p3">
+            <div class="paso-titulo">🔢 Paso 3: Calcular Distancia <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>d</label><input type="number" id="ej1-d" placeholder="?"><div class="unidad">m</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej1','p3')">Validar</button>
+            <div class="feedback" id="ej1-p3-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 2: Hallar tiempo -->
+    <div class="ejercicio-box" id="ej2">
+        <h3><i class="fas fa-water"></i> Ejercicio 2 (Fórmula Básica)</h3>
+        <div class="enunciado">
+            Un sónar emite un pulso bajo el agua (velocidad 1500 m/s). Si el eco de un submarino situado a 4500 metros regresa, ¿cuánto tiempo tardó en llegar hasta el submarino (solo la ida)?
+        </div>
+        <div class="paso-contenedor activo" id="ej2-p1">
+            <div class="paso-titulo">📋 Paso 1: Datos conocidos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>v</label><input type="number" id="ej2-v" placeholder="1500"><div class="unidad">m/s</div></div>
+                <div class="input-grupo"><label>d</label><input type="number" id="ej2-d" placeholder="4500"><div class="unidad">m</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej2','p1')">Validar Datos</button>
+            <div class="feedback" id="ej2-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej2-p2">
+            <div class="paso-titulo">📐 Paso 2: Despejar Tiempo <span class="icono-check">✔</span></div>
+            <select id="ej2-formula">
+                <option value="">— Selecciona la fórmula correcta para t —</option>
+                <option value="t=v/d">t = v / d</option>
+                <option value="t=d/v">t = d / v ✓</option>
+                <option value="t=d*v">t = d · v</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej2','p2')">Validar Fórmula</button>
+            <div class="feedback" id="ej2-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej2-p3">
+            <div class="paso-titulo">⏱️ Paso 3: Calcular Tiempo <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>t</label><input type="number" id="ej2-t" placeholder="?"><div class="unidad">s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej2','p3')">Validar</button>
+            <div class="feedback" id="ej2-p3-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 3: Hallar velocidad -->
+    <div class="ejercicio-box" id="ej3">
+        <h3><i class="fas fa-question-circle"></i> Ejercicio 3 (Fórmula Básica)</h3>
+        <div class="enunciado">
+            Una explosión ocurre a 2000 metros de distancia y el sonido tarda 4 segundos en ser percibido por un observador. ¿A qué velocidad viajó el sonido en ese momento?
+        </div>
+        <div class="paso-contenedor activo" id="ej3-p1">
+            <div class="paso-titulo">📋 Paso 1: Datos conocidos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>d</label><input type="number" id="ej3-d" placeholder="2000"><div class="unidad">m</div></div>
+                <div class="input-grupo"><label>t</label><input type="number" id="ej3-t" placeholder="4"><div class="unidad">s</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej3','p1')">Validar Datos</button>
+            <div class="feedback" id="ej3-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej3-p2">
+            <div class="paso-titulo">🚀 Paso 2: Calcular Velocidad <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>v</label><input type="number" id="ej3-v" placeholder="?"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej3','p2')">Validar</button>
+            <div class="feedback" id="ej3-p2-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 4: Temperatura 1 -->
+    <div class="ejercicio-box" id="ej4">
+        <h3><i class="fas fa-temperature-high"></i> Ejercicio 4 (Fórmula con Temperatura)</h3>
+        <div class="enunciado">
+            ¿Cuál es la velocidad del sonido en un día agradable a 20 °C?
+        </div>
+        <div class="paso-contenedor activo" id="ej4-p1">
+            <div class="paso-titulo">🌡️ Paso 1: Temperatura <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>T</label><input type="number" id="ej4-T" placeholder="20"><div class="unidad">°C</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej4','p1')">Validar Dato</button>
+            <div class="feedback" id="ej4-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej4-p2">
+            <div class="paso-titulo">🔢 Paso 2: Calcular v = 331.4 + 0.6·T <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>v</label><input type="number" id="ej4-v" step="0.1" placeholder="?"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej4','p2')">Validar</button>
+            <div class="feedback" id="ej4-p2-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 5: Temperatura negativa -->
+    <div class="ejercicio-box" id="ej5">
+        <h3><i class="fas fa-snowflake"></i> Ejercicio 5 (Fórmula con Temperatura)</h3>
+        <div class="enunciado">
+            ¿A qué velocidad viaja el sonido en una montaña nevada donde la temperatura es de -5 °C?
+        </div>
+        <div class="paso-contenedor activo" id="ej5-p1">
+            <div class="paso-titulo">🌡️ Paso 1: Temperatura <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>T</label><input type="number" id="ej5-T" placeholder="-5"><div class="unidad">°C</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej5','p1')">Validar Dato</button>
+            <div class="feedback" id="ej5-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej5-p2">
+            <div class="paso-titulo">🔢 Paso 2: Calcular v <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>v</label><input type="number" id="ej5-v" step="0.1" placeholder="?"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej5','p2')">Validar</button>
+            <div class="feedback" id="ej5-p2-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 6: Temperatura alta -->
+    <div class="ejercicio-box" id="ej6">
+        <h3><i class="fas fa-fire"></i> Ejercicio 6 (Fórmula con Temperatura)</h3>
+        <div class="enunciado">
+            Calcula la velocidad del sonido en un desierto donde el termómetro marca 30 °C.
+        </div>
+        <div class="paso-contenedor activo" id="ej6-p1">
+            <div class="paso-titulo">🌡️ Paso 1: Temperatura <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>T</label><input type="number" id="ej6-T" placeholder="30"><div class="unidad">°C</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej6','p1')">Validar Dato</button>
+            <div class="feedback" id="ej6-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej6-p2">
+            <div class="paso-titulo">🔢 Paso 2: Calcular v <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>v</label><input type="number" id="ej6-v" step="0.1" placeholder="?"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej6','p2')">Validar</button>
+            <div class="feedback" id="ej6-p2-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 7: Hallar temperatura (positiva) -->
+    <div class="ejercicio-box" id="ej7">
+        <h3><i class="fas fa-search"></i> Ejercicio 7 (Despejar T)</h3>
+        <div class="enunciado">
+            En un laboratorio escolar, los estudiantes miden que el sonido viaja a 340.4 m/s. ¿A qué temperatura se encuentra el laboratorio?
+        </div>
+        <div class="paso-contenedor activo" id="ej7-p1">
+            <div class="paso-titulo">📋 Paso 1: Dato de velocidad <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>v</label><input type="number" id="ej7-v" step="0.1" placeholder="340.4"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej7','p1')">Validar Dato</button>
+            <div class="feedback" id="ej7-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej7-p2">
+            <div class="paso-titulo">📐 Paso 2: Despejar la Temperatura <span class="icono-check">✔</span></div>
+            <select id="ej7-formula">
+                <option value="">— ¿Cómo despejas T de v = 331.4 + 0.6·T? —</option>
+                <option value="T=(v+331.4)/0.6">T = (v + 331.4) / 0.6</option>
+                <option value="T=(v-331.4)/0.6">T = (v - 331.4) / 0.6 ✓</option>
+                <option value="T=v-331.4*0.6">T = v - (331.4 · 0.6)</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej7','p2')">Validar Fórmula</button>
+            <div class="feedback" id="ej7-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej7-p3">
+            <div class="paso-titulo">🌡️ Paso 3: Calcular T <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>T</label><input type="number" id="ej7-T" step="0.1" placeholder="?"><div class="unidad">°C</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej7','p3')">Validar</button>
+            <div class="feedback" id="ej7-p3-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 8: Hallar temperatura (negativa) -->
+    <div class="ejercicio-box" id="ej8">
+        <h3><i class="fas fa-wind"></i> Ejercicio 8 (Despejar T)</h3>
+        <div class="enunciado">
+            Durante un invierno extremo, la velocidad del sonido cae a 319.4 m/s. ¿Cuál era la temperatura del aire ese día?
+        </div>
+        <div class="paso-contenedor activo" id="ej8-p1">
+            <div class="paso-titulo">📋 Paso 1: Dato de velocidad <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>v</label><input type="number" id="ej8-v" step="0.1" placeholder="319.4"><div class="unidad">m/s</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej8','p1')">Validar Dato</button>
+            <div class="feedback" id="ej8-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej8-p2">
+            <div class="paso-titulo">🌡️ Paso 2: Calcular T <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">Utiliza la misma fórmula despejada del ejercicio anterior: T = (v - 331.4) / 0.6</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>T</label><input type="number" id="ej8-T" step="0.1" placeholder="?"><div class="unidad">°C</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej8','p2')">Validar</button>
+            <div class="feedback" id="ej8-p2-fb"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// TOLERANCIA Y VALIDACIONES
+function cerca(val, esperado, tol = 0.05) {
+    return Math.abs(val - esperado) <= Math.abs(esperado * tol) + 0.05;
+}
+
+const RESPUESTAS = {
+    ej1: {
+        p1: (v, t) => cerca(v, 340) && cerca(t, 3),
+        p2: (f) => f === 'd=v*t',
+        p3: (d) => cerca(d, 1020)
+    },
+    ej2: {
+        p1: (v, d) => cerca(v, 1500) && cerca(d, 4500),
+        p2: (f) => f === 't=d/v',
+        p3: (t) => cerca(t, 3)
+    },
+    ej3: {
+        p1: (d, t) => cerca(d, 2000) && cerca(t, 4),
+        p2: (v) => cerca(v, 500)
+    },
+    ej4: {
+        p1: (t) => cerca(t, 20),
+        p2: (v) => cerca(v, 343.4)
+    },
+    ej5: {
+        p1: (t) => cerca(t, -5),
+        p2: (v) => cerca(v, 328.4)
+    },
+    ej6: {
+        p1: (t) => cerca(t, 30),
+        p2: (v) => cerca(v, 349.4)
+    },
+    ej7: {
+        p1: (v) => cerca(v, 340.4),
+        p2: (f) => f === 'T=(v-331.4)/0.6',
+        p3: (t) => cerca(t, 15)
+    },
+    ej8: {
+        p1: (v) => cerca(v, 319.4),
+        p2: (t) => cerca(t, -20)
+    }
+};
+
+const SIGUIENTE_PASO = {
+    ej1: { p1: 'p2', p2: 'p3', p3: null },
+    ej2: { p1: 'p2', p2: 'p3', p3: null },
+    ej3: { p1: 'p2', p2: null },
+    ej4: { p1: 'p2', p2: null },
+    ej5: { p1: 'p2', p2: null },
+    ej6: { p1: 'p2', p2: null },
+    ej7: { p1: 'p2', p2: 'p3', p3: null },
+    ej8: { p1: 'p2', p2: null }
+};
+
+let ejerciciosFinalizados = 0;
+const totalEjercicios = 8;
+const completados = { ej1: 0, ej2: 0, ej3: 0, ej4: 0, ej5: 0, ej6: 0, ej7: 0, ej8: 0 };
+
+function getValores(ej, paso) {
+    const g = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
+    const gn = (id) => { const el = document.getElementById(id); return el ? parseFloat(el.value) : NaN; };
+
+    if (ej === 'ej1') return paso === 'p1' ? [gn('ej1-v'), gn('ej1-t')] : paso === 'p2' ? [g('ej1-formula')] : [gn('ej1-d')];
+    if (ej === 'ej2') return paso === 'p1' ? [gn('ej2-v'), gn('ej2-d')] : paso === 'p2' ? [g('ej2-formula')] : [gn('ej2-t')];
+    if (ej === 'ej3') return paso === 'p1' ? [gn('ej3-d'), gn('ej3-t')] : [gn('ej3-v')];
+    if (ej === 'ej4') return paso === 'p1' ? [gn('ej4-T')] : [gn('ej4-v')];
+    if (ej === 'ej5') return paso === 'p1' ? [gn('ej5-T')] : [gn('ej5-v')];
+    if (ej === 'ej6') return paso === 'p1' ? [gn('ej6-T')] : [gn('ej6-v')];
+    if (ej === 'ej7') return paso === 'p1' ? [gn('ej7-v')] : paso === 'p2' ? [g('ej7-formula')] : [gn('ej7-T')];
+    if (ej === 'ej8') return paso === 'p1' ? [gn('ej8-v')] : [gn('ej8-T')];
+    return [];
+}
+
+const MENSAJES_OK = ['🎉 ¡Excelente!', '✅ ¡Correcto!', '🌟 ¡Perfecto!', '💪 ¡Muy bien!'];
+const MENSAJES_MAL = ['❌ Incorrecto. Intenta de nuevo.', '❌ Revisa tus cálculos.'];
+
+function validarPaso(ej, paso) {
+    const valores = getValores(ej, paso);
+    const fnRespuesta = RESPUESTAS[ej][paso];
+    const esValido = fnRespuesta(...valores);
+
+    const fb = document.getElementById(`${ej}-${paso}-fb`);
+    const pasoEl = document.getElementById(`${ej}-${paso}`);
+
+    if (esValido) {
+        fb.className = 'feedback correcto';
+        fb.textContent = MENSAJES_OK[Math.floor(Math.random() * MENSAJES_OK.length)];
+        pasoEl.classList.add('completado');
+        pasoEl.classList.remove('activo');
+
+        const siguiente = SIGUIENTE_PASO[ej][paso];
+        if (siguiente) {
+            const sigEl = document.getElementById(`${ej}-${siguiente}`);
+            sigEl.classList.remove('oculto');
+            sigEl.classList.add('activo');
+        } else {
+            if (completados[ej] < 1) {
+                completados[ej] = 1;
+                ejerciciosFinalizados++;
+                document.getElementById('barra-fill').style.width = Math.round((ejerciciosFinalizados / totalEjercicios) * 100) + '%';
+                document.getElementById('texto-progreso').textContent = `${ejerciciosFinalizados} / ${totalEjercicios} ejercicios completados`;
+            }
+        }
+    } else {
+        fb.className = 'feedback incorrecto';
+        fb.textContent = MENSAJES_MAL[Math.floor(Math.random() * MENSAJES_MAL.length)];
+    }
+}
+</script>
+<script src="auth.js"></script>
+</body>
+</html>

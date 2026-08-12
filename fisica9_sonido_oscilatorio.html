@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El Sonido como Movimiento Oscilatorio - Física 9 - LabVirtual W.">
+    <title>El Sonido como Movimiento Oscilatorio - Física 9 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-tema: #4cd137; --color-oscuro: #1a1a2e; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26,26,46,0.88), rgba(26,26,46,0.96)),
+                url('https://images.unsplash.com/photo-1511735111819-9a3efd16269e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu > li { position: relative; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu > li > a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
+        .submenu { z-index: 1000; display: none; position: absolute; top: 100%; left: 0; background: rgba(20,20,35,0.95); backdrop-filter: blur(15px); min-width: 180px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; }
+        .menu li:hover .submenu { display: block; animation: fadeIn 0.3s ease; }
+        .submenu li { list-style: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; }
+        .submenu a:hover { background: rgba(255,255,255,0.1); padding-left: 25px; }
+
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: var(--color-tema); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+        .encabezado-leccion { border-bottom: 2px solid rgba(76, 209, 55, 0.4); padding-bottom: 20px; margin-bottom: 30px; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 10px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+        
+        .seccion-contenido { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .seccion-contenido h2 { color: var(--color-tema); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.8rem; border-left: 4px solid var(--color-tema); padding-left: 15px; }
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
+
+        .definicion-box { background: rgba(76, 209, 55, 0.08); border-left: 4px solid var(--color-tema); padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+        .definicion-box strong { color: var(--color-tema); }
+
+        .grid-caracteristicas { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .caract-card { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 20px; border-top: 3px solid var(--color-tema); }
+        .caract-card h4 { color: var(--color-tema); font-size: 1.1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .caract-card p { color: #ccc; font-size: 0.95rem; line-height: 1.5; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .grid-caracteristicas { grid-template-columns: 1fr; } nav { padding: 15px 20px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i class="fa-solid fa-volume-high"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html">Grado Undécimo</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <a href="fisica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Física 9°</a>
+
+        <div class="encabezado-leccion">
+            <h1><i class="fa-solid fa-compact-disc"></i> El Sonido como Movimiento Oscilatorio</h1>
+            <p><i class="fa-solid fa-layer-group"></i> Unidad: El Sonido y la Acústica · Física Grado 9°</p>
+        </div>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-wave-square"></i> 1. Naturaleza Oscilatoria del Sonido</h2>
+            <p>El sonido es un fenómeno físico que resulta de la perturbación de un medio material, ya sea sólido, líquido o gaseoso. Esta perturbación se transmite a través del medio en forma de ondas mecánicas longitudinales, lo que significa que las partículas del medio oscilan en la misma dirección en la que se propaga la onda.</p>
+            <div class="definicion-box">
+                <p><strong>Movimiento Oscilatorio:</strong> Es un movimiento repetitivo en torno a una posición de equilibrio. En el caso del sonido, las moléculas del aire (o de otro medio) vibran hacia adelante y hacia atrás transmitiendo energía sin desplazar materia a grandes distancias.</p>
+            </div>
+            <p>Por tanto, el sonido que escuchamos es simplemente la interpretación que hace nuestro cerebro de estas oscilaciones continuas cuando llegan a nuestros oídos y hacen vibrar el tímpano.</p>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-chart-line"></i> 2. Parámetros del Movimiento Oscilatorio</h2>
+
+            <div class="grid-caracteristicas">
+                <div class="caract-card">
+                    <h4><i class="fa-solid fa-arrows-up-down"></i> Amplitud (A)</h4>
+                    <p>Es la máxima distancia que se separa una partícula de su punto de equilibrio al vibrar. En acústica, una mayor amplitud se percibe como un sonido más <strong>fuerte</strong> o con mayor volumen.</p>
+                </div>
+                <div class="caract-card">
+                    <h4><i class="fa-solid fa-stopwatch"></i> Periodo (T)</h4>
+                    <p>Es el tiempo que tarda una partícula del medio en realizar una oscilación o ciclo completo. Se mide en segundos (s).</p>
+                </div>
+                <div class="caract-card">
+                    <h4><i class="fa-solid fa-wave-square"></i> Frecuencia (f)</h4>
+                    <p>Representa el número de oscilaciones que ocurren en un segundo. Su unidad de medida es el Hercio (Hz). La frecuencia determina el tono del sonido: frecuencias altas corresponden a sonidos <strong>agudos</strong> y bajas a sonidos <strong>graves</strong>.</p>
+                </div>
+                <div class="caract-card">
+                    <h4><i class="fa-solid fa-ruler-horizontal"></i> Longitud de onda (λ)</h4>
+                    <p>Es la distancia que hay entre dos compresiones (o rarefacciones) consecutivas de la onda sonora. Nos indica qué tanto avanza la onda durante un ciclo completo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion-contenido">
+            <h2><i class="fa-solid fa-wind"></i> 3. ¿Cómo se propaga el Sonido?</h2>
+            <p>Para que exista el sonido se requiere siempre de tres elementos fundamentales:</p>
+            <ul>
+                <li style="margin-bottom: 10px; margin-left: 20px;"><strong>Fuente vibratoria:</strong> Un objeto que entra en oscilación (por ejemplo, las cuerdas vocales, la membrana de un parlante o las cuerdas de una guitarra).</li>
+                <li style="margin-bottom: 10px; margin-left: 20px;"><strong>Medio elástico:</strong> El medio material a través del cual viaja la energía. Como es una onda mecánica, el sonido <strong>no puede propagarse en el vacío</strong>.</li>
+                <li style="margin-left: 20px;"><strong>Receptor:</strong> Un dispositivo anatómico o tecnológico capaz de captar las variaciones de presión, como el oído humano o un micrófono.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+</html>

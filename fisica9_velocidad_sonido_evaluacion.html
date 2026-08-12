@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación: Velocidad del Sonido - Física 9 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --color-tema: #4cd137; --color-oscuro: #1a1a2e; --color-correcto: #2ecc71; --color-incorrecto: #e74c3c; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+        body { background-color:var(--color-oscuro); color:#fff; background-image:linear-gradient(rgba(26,26,46,0.93),rgba(26,26,46,0.98)),url('https://images.unsplash.com/photo-1511735111819-9a3efd16269e?auto=format&fit=crop&w=1920&q=80'); background-size:cover; background-attachment:fixed; min-height:100vh; }
+        
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
+
+        .contenedor { max-width:900px; margin:40px auto; padding:20px; }
+        .pantalla-inicio { background:rgba(20,20,35,0.95); border:1px solid rgba(76, 209, 55, 0.4); border-radius:20px; padding:50px 40px; text-align:center; }
+        .pantalla-inicio h1 { color:var(--color-tema); font-size:2.4rem; margin-bottom:10px; }
+        .pantalla-inicio p { color:#aaa; margin-bottom:30px; }
+        .reglas { text-align:left; background:rgba(0,0,0,0.3); padding:20px 25px; border-radius:10px; margin-bottom:30px; }
+        .reglas li { color:#ddd; margin-bottom:8px; list-style:none; }
+        .reglas li i { color:var(--color-tema); margin-right:10px; }
+        .input-nombre { width:100%; max-width:400px; padding:14px 20px; border-radius:10px; border:2px solid rgba(76, 209, 55, 0.5); background:rgba(0,0,0,0.4); color:#fff; font-size:1.1rem; font-family:'Poppins',sans-serif; outline:none; transition:0.3s; display:block; margin:0 auto 20px; }
+        .input-nombre:focus { border-color:var(--color-tema); }
+        .input-nombre::placeholder { color:#666; }
+        .btn-inicio { padding:15px 40px; background:linear-gradient(135deg,var(--color-tema),#27ae60); color:#fff; border:none; border-radius:10px; font-size:1.2rem; font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif; }
+        .btn-inicio:hover { filter:brightness(1.15); transform:translateY(-2px); }
+        .alerta-nombre { display:none; color:#e74c3c; font-size:0.9rem; margin-top:10px; }
+        .seccion-evaluacion { display:none; }
+        .header-eval { display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; flex-wrap:wrap; gap:10px; }
+        .bienvenida-nombre { font-size:1rem; color:#58d68d; }
+        .timer-badge { background:rgba(76, 209, 55, 0.15); border:1px solid var(--color-tema); padding:8px 16px; border-radius:20px; color:#58d68d; font-weight:700; }
+        .progreso-container { width:100%; height:8px; background:rgba(255,255,255,0.1); border-radius:10px; margin-bottom:25px; overflow:hidden; }
+        .progreso-barra { height:100%; background:linear-gradient(90deg,var(--color-tema),#2ecc71); width:0%; transition:width 0.4s ease; border-radius:10px; }
+        .pregunta-card { background:rgba(20,20,35,0.9); border:1px solid rgba(255,255,255,0.1); border-radius:15px; padding:30px; animation:slideIn 0.4s ease; }
+        .pregunta-numero { font-size:0.85rem; color:#58d68d; font-weight:600; margin-bottom:10px; }
+        .pregunta-texto { font-size:1.1rem; color:#eee; line-height:1.65; margin-bottom:20px; }
+        .contexto-icfes { background:rgba(0,0,0,0.3); border-left:3px solid var(--color-tema); padding:12px 16px; border-radius:0 8px 8px 0; margin-bottom:20px; font-size:0.95rem; color:#ccc; font-style:italic; }
+        .opciones-lista { list-style:none; display:flex; flex-direction:column; gap:12px; }
+        .opcion-item { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.15); border-radius:10px; padding:14px 18px; cursor:pointer; transition:0.2s; display:flex; align-items:center; gap:12px; color:#eee; }
+        .opcion-item:hover { background:rgba(76, 209, 55, 0.15); border-color:var(--color-tema); }
+        .opcion-item.seleccionada { background:rgba(76, 209, 55, 0.2); border-color:var(--color-tema); }
+        .opcion-letra { width:32px; height:32px; border-radius:50%; border:2px solid rgba(76, 209, 55, 0.5); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; flex-shrink:0; color:#58d68d; }
+        .opcion-item.seleccionada .opcion-letra { background:var(--color-tema); border-color:var(--color-tema); color:white; }
+        .navegacion-preguntas { display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); justify-content:space-between; align-items:center; }
+        .btn-nav { padding:12px 24px; border-radius:8px; border:none; cursor:pointer; font-size:1rem; font-weight:600; transition:0.3s; font-family:'Poppins',sans-serif; }
+        .btn-anterior { background:rgba(255,255,255,0.1); color:#fff; }
+        .btn-siguiente-p { background:linear-gradient(135deg,var(--color-tema),#27ae60); color:#fff; }
+        .btn-finalizar { background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; }
+        .pantalla-resultado { display:none; background:rgba(20,20,35,0.95); border-radius:20px; padding:40px; border:1px solid rgba(76, 209, 55, 0.4); }
+        .pantalla-resultado.activo { display:block; animation:fadeIn 0.8s; }
+        .resultado-header { text-align:center; margin-bottom:35px; }
+        .resultado-emoji { font-size:5rem; display:block; margin-bottom:15px; }
+        .resultado-titulo { font-size:2rem; font-weight:800; margin-bottom:10px; }
+        .score-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-bottom:30px; }
+        .score-card { background:rgba(0,0,0,0.3); border-radius:12px; padding:20px; text-align:center; border-top:3px solid var(--color-tema); }
+        .score-num { font-size:2.2rem; font-weight:800; color:var(--color-tema); }
+        .score-label { font-size:0.85rem; color:#aaa; margin-top:5px; }
+        .revision-titulo { font-size:1.3rem; font-weight:700; color:#58d68d; margin-bottom:20px; }
+        .revision-item { background:rgba(0,0,0,0.2); border-radius:10px; padding:15px 20px; margin-bottom:12px; border-left:4px solid; }
+        .revision-item.correcta { border-left-color:var(--color-correcto); }
+        .revision-item.incorrecta { border-left-color:var(--color-incorrecto); }
+        .revision-item .pregunta-r { color:#eee; font-size:0.95rem; margin-bottom:8px; }
+        .revision-item .tu-resp { color:#e74c3c; font-size:0.9rem; }
+        .revision-item .resp-correcta { color:#2ecc71; font-size:0.9rem; }
+        @keyframes slideIn { from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);} }
+        @keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo"><i class="fas fa-volume-high"></i> LabVirtual W</a>
+    <ul class="menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="fisica_9.html"><i class="fas fa-atom"></i> Física 9</a></li>
+        <li><a href="fisica9_velocidad_sonido.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+    </ul>
+</nav>
+
+<div class="contenedor">
+    <div id="pantalla-inicio" class="pantalla-inicio">
+        <h1><i class="fa-solid fa-file-signature"></i> Evaluación</h1>
+        <p>Velocidad del Sonido · Física 9° · Teoría y Ejercicios</p>
+        <ul class="reglas">
+            <li><i class="fa-solid fa-check"></i> Consta de <strong>10 preguntas</strong> en total.</li>
+            <li><i class="fa-solid fa-check"></i> Encontrarás 5 preguntas de teoría y 5 ejercicios prácticos, presentados en orden aleatorio.</li>
+            <li><i class="fa-solid fa-check"></i> Puedes navegar entre preguntas antes de finalizar.</li>
+        </ul>
+        <input type="text" id="input-nombre" class="input-nombre" placeholder="✏️ Escribe tu nombre completo" maxlength="60">
+        <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre.</div><br>
+        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar Evaluación</button>
+    </div>
+    <div id="seccion-evaluacion" class="seccion-evaluacion">
+        <div class="header-eval"><div class="bienvenida-nombre" id="bienvenida-nombre"></div><div class="timer-badge">Pregunta <span id="num-actual">1</span> de 10</div></div>
+        <div class="progreso-container"><div class="progreso-barra" id="barra-eval"></div></div>
+        <div id="contenedor-pregunta"></div>
+        <div class="navegacion-preguntas">
+            <button class="btn-nav btn-anterior" id="btn-anterior" onclick="irAnterior()"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+            <button class="btn-nav btn-siguiente-p" id="btn-sig-p" onclick="irSiguiente()">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="btn-nav btn-finalizar" id="btn-finalizar" onclick="finalizarEvaluacion()" style="display:none;"><i class="fa-solid fa-check-double"></i> Finalizar y Ver Resultados</button>
+        </div>
+    </div>
+    <div id="pantalla-resultado" class="pantalla-resultado">
+        <div class="resultado-header">
+            <div style="font-size:1rem;color:#aaa;margin-bottom:15px;" id="resultado-nombre"></div>
+            <span class="resultado-emoji" id="resultado-emoji">📊</span>
+            <div class="resultado-titulo" id="resultado-titulo"></div>
+        </div>
+        <div class="score-grid">
+            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">✅ Correctas</div></div>
+            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">❌ Incorrectas</div></div>
+            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">📊 Porcentaje</div></div>
+        </div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión de Respuestas</div>
+        <div id="revision-container"></div>
+        <div style="text-align:center;margin-top:30px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
+            <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#27ae60);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva Evaluación</button>
+            <a href="fisica9_velocidad_sonido.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
+        </div>
+    </div>
+</div>
+<script>
+const bancoPreguntas = [
+    {texto:"El sonido es un fenómeno físico que se define como una onda:",opciones:["A. Transversal y electromagnética","B. Longitudinal y mecánica","C. Transversal y mecánica","D. Longitudinal y electromagnética"],respuesta:1},
+    {texto:"¿En cuál de los siguientes medios el sonido viaja a mayor velocidad?",opciones:["A. El aire","B. El agua","C. El acero","D. El vacío"],respuesta:2},
+    {texto:"A medida que aumenta la temperatura del aire, ¿qué sucede con la velocidad del sonido?",opciones:["A. Aumenta","B. Disminuye","C. Permanece constante","D. Se vuelve cero"],respuesta:0},
+    {texto:"Para que exista el sonido, es indispensable contar con los siguientes elementos:",opciones:["A. Un medio elástico, una fuente y un receptor","B. Luz, un medio de propagación y un receptor","C. El vacío, el aire y una fuente sonora","D. Gravedad, una onda y una fuente"],respuesta:0},
+    {texto:"La velocidad estándar del sonido en el aire a una temperatura de 0 °C es aproximadamente:",opciones:["A. 343 m/s","B. 1500 m/s","C. 300.000 km/s","D. 331.4 m/s"],respuesta:3},
+    {contexto:"Un tren emite un silbido que tarda 5 segundos en llegar a una persona situada a 1700 metros de distancia.",texto:"¿Cuál fue la velocidad del sonido en ese momento? (Usa v = d/t)",opciones:["A. 320 m/s","B. 340 m/s","C. 350 m/s","D. 330 m/s"],respuesta:1},
+    {contexto:"Durante una fuerte tormenta observas un relámpago, y el trueno se escucha exactamente 4 segundos después. La velocidad del sonido en ese instante es de 340 m/s.",texto:"¿A qué distancia se encuentra la tormenta?",opciones:["A. 1360 m","B. 680 m","C. 136 m","D. 2720 m"],respuesta:0},
+    {contexto:"Te encuentras en una región desértica durante un día muy caluroso en el que la temperatura alcanza los 30 °C.",texto:"Calcula la velocidad del sonido. (Usa v = 331.4 + 0.6·T)",opciones:["A. 331.4 m/s","B. 349.4 m/s","C. 313.4 m/s","D. 361.4 m/s"],respuesta:1},
+    {contexto:"En un laboratorio de física experimental, los equipos logran medir que la velocidad del sonido en el aire encerrado es de 337.4 m/s.",texto:"¿Cuál es la temperatura de ese laboratorio?",opciones:["A. 20 °C","B. 10 °C","C. 15 °C","D. 5 °C"],respuesta:1},
+    {contexto:"Un submarino de exploración emite una onda sonora bajo el agua (donde la velocidad del sonido es de 1500 m/s) hacia un buque hundido que se encuentra a 4500 metros de distancia.",texto:"¿Cuánto tiempo tarda en llegar la onda sonora al buque hundido?",opciones:["A. 1 s","B. 2 s","C. 3 s","D. 4 s"],respuesta:2}
+];
+
+let preguntasSeleccionadas=[],respuestasUsuario=[],preguntaActual=0,nombreEstudiante='';
+
+function iniciarEvaluacion(){
+    const input=document.getElementById('input-nombre');
+    nombreEstudiante=input.value.trim();
+    if(!nombreEstudiante){document.getElementById('alerta-nombre').style.display='block';input.focus();return;}
+    document.getElementById('alerta-nombre').style.display='none';
+    preguntasSeleccionadas=[...bancoPreguntas].sort(()=>Math.random()-0.5);
+    respuestasUsuario=new Array(10).fill(null);
+    document.getElementById('pantalla-inicio').style.display='none';
+    document.getElementById('seccion-evaluacion').style.display='block';
+    document.getElementById('bienvenida-nombre').textContent='👤 '+nombreEstudiante;
+    mostrarPregunta(0);
+}
+function mostrarPregunta(idx){
+    preguntaActual=idx;
+    const p=preguntasSeleccionadas[idx];
+    const letras=['A','B','C','D'];
+    let html=`<div class="pregunta-card"><div class="pregunta-numero">Pregunta ${idx+1} de 10</div>`;
+    if(p.contexto)html+=`<div class="contexto-icfes"><i class="fa-solid fa-quote-left"></i> ${p.contexto}</div>`;
+    html+=`<div class="pregunta-texto">${p.texto}</div><ul class="opciones-lista">`;
+    p.opciones.forEach((op,i)=>{
+        const sel=respuestasUsuario[idx]===i?'seleccionada':'';
+        html+=`<li class="opcion-item ${sel}" onclick="seleccionarOpcion(${i})"><div class="opcion-letra">${letras[i]}</div><span>${op.replace(/^[A-D]\.\s/,'')}</span></li>`;
+    });
+    html+=`</ul></div>`;
+    document.getElementById('contenedor-pregunta').innerHTML=html;
+    document.getElementById('num-actual').textContent=idx+1;
+    document.getElementById('barra-eval').style.width=((idx+1)/10*100)+'%';
+    document.getElementById('btn-anterior').style.display=idx===0?'none':'inline-block';
+    document.getElementById('btn-sig-p').style.display=idx===9?'none':'inline-block';
+    document.getElementById('btn-finalizar').style.display=idx===9?'inline-block':'none';
+}
+function seleccionarOpcion(idx){
+    respuestasUsuario[preguntaActual]=idx;
+    document.querySelectorAll('.opcion-item').forEach((el,i)=>{
+        el.classList.toggle('seleccionada',i===idx);
+        const letra=el.querySelector('.opcion-letra');
+        letra.style.background=i===idx?'var(--color-tema)':'';
+        letra.style.borderColor=i===idx?'var(--color-tema)':'';
+        letra.style.color=i===idx?'white':'';
+    });
+}
+function irSiguiente(){if(preguntaActual<9)mostrarPregunta(preguntaActual+1);}
+function irAnterior(){if(preguntaActual>0)mostrarPregunta(preguntaActual-1);}
+function finalizarEvaluacion(){
+    const sinResp=respuestasUsuario.filter(r=>r===null).length;
+    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¿Finalizar de todos modos?`))return;
+    let correctas=0,revHTML='';
+    preguntasSeleccionadas.forEach((p,i)=>{
+        const resp=respuestasUsuario[i];const ok=resp===p.respuesta;if(ok)correctas++;
+        revHTML+=`<div class="revision-item ${ok?'correcta':'incorrecta'}"><div class="pregunta-r">${ok?'✅':'❌'} <strong>P${i+1}:</strong> ${p.texto}</div><div>`;
+        if(!ok)revHTML+=`<div class="tu-resp">Tu respuesta: ${resp!==null?p.opciones[resp]:'Sin responder'}</div>`;
+        revHTML+=`<div class="resp-correcta">Correcta: ${p.opciones[p.respuesta]}</div></div></div>`;
+    });
+    const pct=Math.round(correctas/10*100);
+    let emoji,titulo;
+    if(pct>=90){emoji='🏆';titulo='¡Excelente! Dominas el tema.';}
+    else if(pct>=70){emoji='🌟';titulo='¡Muy bien! Sigue practicando.';}
+    else if(pct>=50){emoji='📚';titulo='Aprobado. Repasa las fórmulas.';}
+    else{emoji='💪';titulo='Necesitas repasar la teoría y ejercicios.';}
+    document.getElementById('seccion-evaluacion').style.display='none';
+    const pr=document.getElementById('pantalla-resultado');pr.classList.add('activo');
+    document.getElementById('resultado-nombre').textContent='👤 '+nombreEstudiante;
+    document.getElementById('resultado-emoji').textContent=emoji;
+    document.getElementById('resultado-titulo').textContent=titulo;
+    document.getElementById('score-correctas').textContent=correctas;
+    document.getElementById('score-incorrectas').textContent=10-correctas;
+    document.getElementById('score-pct').textContent=pct+'%';
+    document.getElementById('revision-container').innerHTML=revHTML;
+    if(pct>=70)confetti({particleCount:200,spread:120,origin:{y:0.4}});
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+<script src="auth.js"></script>
+</body>
+</html>
