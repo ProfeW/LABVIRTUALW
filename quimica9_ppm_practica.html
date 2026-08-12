@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Interactiva — Partes por Millón (ppm) · LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-tema: #e74c3c;
+            --color-oscuro: #14111f;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(20, 17, 31, 0.92), rgba(20, 17, 31, 0.98)),
+                url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        nav { background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(231,76,60,0.2); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(231,76,60,0.1); color: var(--color-tema); }
+
+        .contenedor { max-width: 960px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--color-tema); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .encabezado-leccion { border-bottom: 2px solid rgba(231,76,60,0.4); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 8px; }
+        .encabezado-leccion p { color: #aaa; font-size: 1.1rem; }
+
+        .leyenda-global { background: rgba(231,76,60,0.1); border-left: 5px solid var(--color-tema); padding: 20px; border-radius: 8px; margin-bottom: 30px; line-height: 1.6; }
+        .leyenda-global h3 { color: var(--color-tema); margin-bottom: 10px; font-size: 1.2rem; }
+        .leyenda-global ul { margin-left: 20px; color: #ddd; }
+        .leyenda-global li { margin-bottom: 5px; }
+
+        .ejercicio-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 50px; border-top: 4px solid var(--color-tema); }
+        .ejercicio-box h3 { color: var(--color-tema); margin-bottom: 10px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .enunciado { font-style: italic; color: #ddd; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.05rem; border-left: 4px solid #3498db; line-height: 1.6; }
+
+        .paso-contenedor { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid #444; transition: 0.3s; }
+        .paso-contenedor.activo { border-left-color: var(--color-tema); box-shadow: 0 5px 15px rgba(231,76,60,0.1); }
+        .paso-contenedor.completado { border-left-color: var(--color-exito); opacity: 0.7; pointer-events: none; }
+        .paso-titulo { font-weight: 800; color: #fff; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .icono-check { color: var(--color-exito); display: none; font-size: 1.4rem; }
+        .completado .icono-check { display: block; }
+        .oculto { display: none; }
+
+        .grid-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 15px; }
+        .input-grupo { display: flex; align-items: stretch; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; overflow: hidden; }
+        .input-grupo label { background: rgba(0,0,0,0.5); padding: 10px; color: #fff; font-weight: bold; min-width: 45px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+        .input-grupo input { flex: 1; padding: 10px; border: none; background: transparent; color: #fff; font-size: 1.05rem; text-align: center; font-family: 'Poppins'; outline: none; width: 100%; }
+        .input-grupo input:focus { background: rgba(255,255,255,0.08); }
+        .input-grupo .unidad { background: rgba(231,76,60,0.15); padding: 10px; font-size: 0.85rem; color: var(--color-tema); border-left: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; }
+
+        select { width: 100%; padding: 13px 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(20,20,35,0.8); color: #fff; font-size: 1rem; outline: none; cursor: pointer; margin-bottom: 5px; }
+        select:focus { border-color: var(--color-tema); }
+
+        .btn-validar { background: var(--color-tema); color: #fff; border: none; padding: 12px 28px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-validar:hover { opacity: 0.85; transform: translateY(-2px); }
+
+        .feedback { display: none; margin-top: 12px; padding: 12px 18px; border-radius: 6px; font-weight: 600; font-size: 1rem; }
+        .feedback.correcto { display: block; background: rgba(46,204,113,0.15); border: 1px solid var(--color-exito); color: var(--color-exito); }
+        .feedback.incorrecto { display: block; background: rgba(231,76,60,0.15); border: 1px solid var(--color-error); color: var(--color-error); }
+
+        .barra-progreso-contenedor { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.08); }
+        .barra-progreso-titulo { font-weight: 700; color: #fff; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .barra { background: rgba(255,255,255,0.1); border-radius: 20px; height: 10px; overflow: hidden; }
+        .barra-fill { background: linear-gradient(90deg, var(--color-tema), #f39c12); height: 100%; border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo"><i class="fas fa-microscope"></i> LabVirtual W</a>
+    <ul class="menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="quimica_9.html"><i class="fas fa-flask"></i> Química 9</a></li>
+        <li><a href="quimica9_ppm.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+    </ul>
+</nav>
+
+<div class="contenedor">
+    <a href="quimica9_ppm.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a la Lección</a>
+
+    <div class="encabezado-leccion">
+        <h1>🎮 Práctica en Cadena</h1>
+        <p>Partes por Millón (ppm) · Identifica, elige y calcula paso a paso</p>
+    </div>
+
+    <div class="barra-progreso-contenedor">
+        <div class="barra-progreso-titulo">
+            <span>📊 Progreso General</span>
+            <span id="texto-progreso">0 / 8 ejercicios completados</span>
+        </div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+    </div>
+
+    <div class="leyenda-global">
+        <h3><i class="fas fa-info-circle"></i> Instrucciones</h3>
+        <ul>
+            <li>Lee el enunciado y sigue cada paso en orden.</li>
+            <li>Primero identifica cuál sustancia es el <strong>Soluto</strong> (la que está en menor cantidad o de interés) y cuál es la <strong>Solución o Solvente</strong> (el medio o total).</li>
+            <li>Extrae los datos, selecciona la fórmula correcta (directa o despejada) y calcula.</li>
+        </ul>
+    </div>
+
+    <!-- EJERCICIO 1 -->
+    <div class="ejercicio-box" id="ej1">
+        <h3><i class="fas fa-droplet"></i> Ejercicio 1 (Fórmula 1: mg / L)</h3>
+        <div class="enunciado">
+            Un lago contiene 20 Litros de agua de muestra en los que se detectan 60 mg de un contaminante químico. Hallar la concentración en ppm.
+        </div>
+        <div class="paso-contenedor activo" id="ej1-p1">
+            <div class="paso-titulo">🔍 Paso 1: Identificar Soluto y Solución <span class="icono-check">✔</span></div>
+            <select id="ej1-soluto">
+                <option value="">— ¿Quién es el Soluto? —</option>
+                <option value="contaminante">Contaminante químico ✓</option>
+                <option value="agua">Agua del lago</option>
+            </select>
+            <select id="ej1-solucion">
+                <option value="">— ¿Quién es la Solución (o medio principal)? —</option>
+                <option value="contaminante">Contaminante químico</option>
+                <option value="agua">Agua del lago ✓</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej1','p1')">Validar Identificación</button>
+            <div class="feedback" id="ej1-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej1-p2">
+            <div class="paso-titulo">📋 Paso 2: Extraer Datos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>Soluto</label><input type="number" id="ej1-mg" placeholder="60"><div class="unidad">mg</div></div>
+                <div class="input-grupo"><label>Solución</label><input type="number" id="ej1-l" placeholder="20"><div class="unidad">L</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej1','p2')">Validar Datos</button>
+            <div class="feedback" id="ej1-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej1-p3">
+            <div class="paso-titulo">📐 Paso 3: Elegir Fórmula <span class="icono-check">✔</span></div>
+            <select id="ej1-formula">
+                <option value="">— Selecciona —</option>
+                <option value="mg/L">ppm = mg soluto / L solución ✓</option>
+                <option value="mg/kg">ppm = mg soluto / kg solución</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej1','p3')">Validar Fórmula</button>
+            <div class="feedback" id="ej1-p3-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej1-p4">
+            <div class="paso-titulo">🔢 Paso 4: Calcular <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>ppm</label><input type="number" id="ej1-res" placeholder="?"><div class="unidad">ppm</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej1','p4')">Validar</button>
+            <div class="feedback" id="ej1-p4-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 2 -->
+    <div class="ejercicio-box" id="ej2">
+        <h3><i class="fas fa-droplet"></i> Ejercicio 2 (Despejando L)</h3>
+        <div class="enunciado">
+            Se requiere preparar una mezcla líquida con una concentración de 5 ppm de fluoruro. Si tienes 25 mg de fluoruro disponibles, ¿cuántos Litros de solución puedes preparar?
+        </div>
+        <div class="paso-contenedor activo" id="ej2-p1">
+            <div class="paso-titulo">🔍 Paso 1: Identificar Soluto y Solución <span class="icono-check">✔</span></div>
+            <select id="ej2-soluto">
+                <option value="">— ¿Quién es el Soluto? —</option>
+                <option value="fluoruro">Fluoruro ✓</option>
+                <option value="mezcla">Mezcla líquida</option>
+            </select>
+            <select id="ej2-solucion">
+                <option value="">— ¿Quién es la Solución? —</option>
+                <option value="fluoruro">Fluoruro</option>
+                <option value="mezcla">Mezcla líquida ✓</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej2','p1')">Validar Identificación</button>
+            <div class="feedback" id="ej2-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej2-p2">
+            <div class="paso-titulo">📋 Paso 2: Extraer Datos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>Soluto</label><input type="number" id="ej2-mg" placeholder="25"><div class="unidad">mg</div></div>
+                <div class="input-grupo"><label>ppm</label><input type="number" id="ej2-ppm" placeholder="5"><div class="unidad">ppm</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej2','p2')">Validar Datos</button>
+            <div class="feedback" id="ej2-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej2-p3">
+            <div class="paso-titulo">📐 Paso 3: Despejar Fórmula <span class="icono-check">✔</span></div>
+            <select id="ej2-formula">
+                <option value="">— Selecciona la fórmula despejada para L —</option>
+                <option value="L=ppm*mg">L solución = ppm × mg soluto</option>
+                <option value="L=mg/ppm">L solución = mg soluto / ppm ✓</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej2','p3')">Validar Fórmula</button>
+            <div class="feedback" id="ej2-p3-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej2-p4">
+            <div class="paso-titulo">🔢 Paso 4: Calcular Litros <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>L</label><input type="number" id="ej2-res" placeholder="?"><div class="unidad">L</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej2','p4')">Validar</button>
+            <div class="feedback" id="ej2-p4-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 3 -->
+    <div class="ejercicio-box" id="ej3">
+        <h3><i class="fas fa-mountain"></i> Ejercicio 3 (Fórmula 2: mg / kg)</h3>
+        <div class="enunciado">
+            En un análisis de suelos, una muestra de tierra de 15 kg contiene 45 mg de un mineral traza. ¿Cuál es su concentración en ppm?
+        </div>
+        <div class="paso-contenedor activo" id="ej3-p1">
+            <div class="paso-titulo">🔍 Paso 1: Identificar Soluto y Solución <span class="icono-check">✔</span></div>
+            <select id="ej3-soluto">
+                <option value="">— ¿Quién es el Soluto? —</option>
+                <option value="tierra">Tierra</option>
+                <option value="mineral">Mineral traza ✓</option>
+            </select>
+            <select id="ej3-solucion">
+                <option value="">— ¿Quién es la Solución/Muestra total? —</option>
+                <option value="tierra">Muestra de Tierra ✓</option>
+                <option value="mineral">Mineral traza</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej3','p1')">Validar Identificación</button>
+            <div class="feedback" id="ej3-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej3-p2">
+            <div class="paso-titulo">📋 Paso 2: Extraer Datos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>Soluto</label><input type="number" id="ej3-mg" placeholder="45"><div class="unidad">mg</div></div>
+                <div class="input-grupo"><label>Muestra</label><input type="number" id="ej3-kg" placeholder="15"><div class="unidad">kg</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej3','p2')">Validar Datos</button>
+            <div class="feedback" id="ej3-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej3-p3">
+            <div class="paso-titulo">📐 Paso 3: Elegir Fórmula <span class="icono-check">✔</span></div>
+            <select id="ej3-formula">
+                <option value="">— Selecciona —</option>
+                <option value="mg/L">ppm = mg soluto / L solución</option>
+                <option value="mg/kg">ppm = mg soluto / kg solución ✓</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej3','p3')">Validar Fórmula</button>
+            <div class="feedback" id="ej3-p3-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej3-p4">
+            <div class="paso-titulo">🔢 Paso 4: Calcular ppm <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>ppm</label><input type="number" id="ej3-res" placeholder="?"><div class="unidad">ppm</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej3','p4')">Validar</button>
+            <div class="feedback" id="ej3-p4-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 4 -->
+    <div class="ejercicio-box" id="ej4">
+        <h3><i class="fas fa-mountain"></i> Ejercicio 4 (Despejando mg)</h3>
+        <div class="enunciado">
+            Un bulto de abono pesa 8 kg y tiene una concentración certificada de 12 ppm de nitrato. ¿Cuántos miligramos de nitrato hay en el bulto?
+        </div>
+        <div class="paso-contenedor activo" id="ej4-p1">
+            <div class="paso-titulo">🔍 Paso 1: Identificar Soluto y Solución <span class="icono-check">✔</span></div>
+            <select id="ej4-soluto">
+                <option value="">— ¿Quién es el Soluto? —</option>
+                <option value="abono">Abono</option>
+                <option value="nitrato">Nitrato ✓</option>
+            </select>
+            <select id="ej4-solucion">
+                <option value="">— ¿Quién es la Solución/Muestra total? —</option>
+                <option value="abono">Abono ✓</option>
+                <option value="nitrato">Nitrato</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej4','p1')">Validar Identificación</button>
+            <div class="feedback" id="ej4-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej4-p2">
+            <div class="paso-titulo">📋 Paso 2: Extraer Datos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>Muestra</label><input type="number" id="ej4-kg" placeholder="8"><div class="unidad">kg</div></div>
+                <div class="input-grupo"><label>ppm</label><input type="number" id="ej4-ppm" placeholder="12"><div class="unidad">ppm</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej4','p2')">Validar Datos</button>
+            <div class="feedback" id="ej4-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej4-p3">
+            <div class="paso-titulo">📐 Paso 3: Despejar Fórmula <span class="icono-check">✔</span></div>
+            <select id="ej4-formula">
+                <option value="">— Selecciona la fórmula despejada para mg soluto —</option>
+                <option value="mg=ppm/kg">mg soluto = ppm / kg</option>
+                <option value="mg=ppm*kg">mg soluto = ppm × kg ✓</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej4','p3')">Validar Fórmula</button>
+            <div class="feedback" id="ej4-p3-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej4-p4">
+            <div class="paso-titulo">🔢 Paso 4: Calcular mg de nitrato <span class="icono-check">✔</span></div>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>mg</label><input type="number" id="ej4-res" placeholder="?"><div class="unidad">mg</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej4','p4')">Validar</button>
+            <div class="feedback" id="ej4-p4-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 5 -->
+    <div class="ejercicio-box" id="ej5">
+        <h3><i class="fas fa-balance-scale"></i> Ejercicio 5 (Fórmula 3: Masa a Masa con 10⁶)</h3>
+        <div class="enunciado">
+            Una mezcla industrial de 400,000 g de solución contiene 2 g de sal pura. Hallar su concentración en ppm.
+        </div>
+        <div class="paso-contenedor activo" id="ej5-p1">
+            <div class="paso-titulo">🔍 Paso 1: Identificar Soluto y Solución <span class="icono-check">✔</span></div>
+            <select id="ej5-soluto">
+                <option value="">— Soluto —</option>
+                <option value="mezcla">Mezcla</option>
+                <option value="sal">Sal pura ✓</option>
+            </select>
+            <select id="ej5-solucion">
+                <option value="">— Solución —</option>
+                <option value="mezcla">Mezcla industrial ✓</option>
+                <option value="sal">Sal pura</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej5','p1')">Validar</button>
+            <div class="feedback" id="ej5-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej5-p2">
+            <div class="paso-titulo">📋 Paso 2: Datos en gramos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>g soluto</label><input type="number" id="ej5-gs" placeholder="2"><div class="unidad">g</div></div>
+                <div class="input-grupo"><label>g solución</label><input type="number" id="ej5-gsol" placeholder="400000"><div class="unidad">g</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej5','p2')">Validar</button>
+            <div class="feedback" id="ej5-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej5-p3">
+            <div class="paso-titulo">📐 Paso 3: Elegir Fórmula <span class="icono-check">✔</span></div>
+            <select id="ej5-formula">
+                <option value="">— Selecciona —</option>
+                <option value="f3">ppm = (g soluto / g solución) × 10⁶ ✓</option>
+                <option value="f4">ppm = (g soluto / mL solución) × 10⁶</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej5','p3')">Validar</button>
+            <div class="feedback" id="ej5-p3-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej5-p4">
+            <div class="paso-titulo">🔢 Paso 4: Calcular ppm <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">(2 / 400000) × 1000000 = ?</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>ppm</label><input type="number" id="ej5-res" placeholder="?"><div class="unidad">ppm</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej5','p4')">Validar</button>
+            <div class="feedback" id="ej5-p4-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 6 -->
+    <div class="ejercicio-box" id="ej6">
+        <h3><i class="fas fa-balance-scale"></i> Ejercicio 6 (Despejando masa de la solución)</h3>
+        <div class="enunciado">
+            Una solución especial tiene una concentración de 4 ppm. Si sabemos que contiene 8 g de soluto disuelto, ¿cuál es la masa total de la solución en gramos?
+        </div>
+        <div class="paso-contenedor activo" id="ej6-p1">
+            <div class="paso-titulo">📋 Paso 1: Datos conocidos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>ppm</label><input type="number" id="ej6-ppm" placeholder="4"><div class="unidad">ppm</div></div>
+                <div class="input-grupo"><label>g soluto</label><input type="number" id="ej6-gs" placeholder="8"><div class="unidad">g</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej6','p1')">Validar Datos</button>
+            <div class="feedback" id="ej6-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej6-p2">
+            <div class="paso-titulo">📐 Paso 2: Despejar Fórmula <span class="icono-check">✔</span></div>
+            <select id="ej6-formula">
+                <option value="">— Despejar g solución de: ppm = (g sol / g solución) × 10⁶ —</option>
+                <option value="mal">g solución = (ppm × 10⁶) / g soluto</option>
+                <option value="bien">g solución = (g soluto × 10⁶) / ppm ✓</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej6','p2')">Validar</button>
+            <div class="feedback" id="ej6-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej6-p3">
+            <div class="paso-titulo">🔢 Paso 3: Calcular g solución <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">g solución = (8 × 1.000.000) / 4 = ?</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>g sol</label><input type="number" id="ej6-res" placeholder="?"><div class="unidad">g</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej6','p3')">Validar</button>
+            <div class="feedback" id="ej6-p3-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 7 -->
+    <div class="ejercicio-box" id="ej7">
+        <h3><i class="fas fa-vial"></i> Ejercicio 7 (Fórmula 4: Masa a Volumen con 10⁶)</h3>
+        <div class="enunciado">
+            En un tanque de 500,000 mL de solución, hay disueltos 5 g de cloro activo. ¿Cuáles son las partes por millón (ppm) de cloro en el tanque?
+        </div>
+        <div class="paso-contenedor activo" id="ej7-p1">
+            <div class="paso-titulo">📋 Paso 1: Datos conocidos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>g soluto</label><input type="number" id="ej7-gs" placeholder="5"><div class="unidad">g</div></div>
+                <div class="input-grupo"><label>mL solución</label><input type="number" id="ej7-ml" placeholder="500000"><div class="unidad">mL</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej7','p1')">Validar</button>
+            <div class="feedback" id="ej7-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej7-p2">
+            <div class="paso-titulo">📐 Paso 2: Elegir Fórmula <span class="icono-check">✔</span></div>
+            <select id="ej7-formula">
+                <option value="">— Selecciona —</option>
+                <option value="f4">ppm = (g soluto / mL solución) × 10⁶ ✓</option>
+                <option value="f3">ppm = (g soluto / g solución) × 10⁶</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej7','p2')">Validar</button>
+            <div class="feedback" id="ej7-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej7-p3">
+            <div class="paso-titulo">🔢 Paso 3: Calcular ppm <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">(5 / 500000) × 1000000 = ?</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>ppm</label><input type="number" id="ej7-res" placeholder="?"><div class="unidad">ppm</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej7','p3')">Validar</button>
+            <div class="feedback" id="ej7-p3-fb"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 8 -->
+    <div class="ejercicio-box" id="ej8">
+        <h3><i class="fas fa-vial"></i> Ejercicio 8 (Despejando masa del soluto en g)</h3>
+        <div class="enunciado">
+            Tienes un volumen de 300,000 mL de una solución preparada a 6 ppm. ¿Cuántos gramos de soluto hay en esa solución?
+        </div>
+        <div class="paso-contenedor activo" id="ej8-p1">
+            <div class="paso-titulo">📋 Paso 1: Datos conocidos <span class="icono-check">✔</span></div>
+            <div class="grid-datos">
+                <div class="input-grupo"><label>ppm</label><input type="number" id="ej8-ppm" placeholder="6"><div class="unidad">ppm</div></div>
+                <div class="input-grupo"><label>mL solución</label><input type="number" id="ej8-ml" placeholder="300000"><div class="unidad">mL</div></div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej8','p1')">Validar</button>
+            <div class="feedback" id="ej8-p1-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej8-p2">
+            <div class="paso-titulo">📐 Paso 2: Despejar g soluto <span class="icono-check">✔</span></div>
+            <select id="ej8-formula">
+                <option value="">— Despejar g soluto de: ppm = (g soluto / mL solución) × 10⁶ —</option>
+                <option value="bien">g soluto = (ppm × mL solución) / 10⁶ ✓</option>
+                <option value="mal">g soluto = (mL solución × 10⁶) / ppm</option>
+            </select>
+            <button class="btn-validar" onclick="validarPaso('ej8','p2')">Validar</button>
+            <div class="feedback" id="ej8-p2-fb"></div>
+        </div>
+        <div class="paso-contenedor oculto" id="ej8-p3">
+            <div class="paso-titulo">🔢 Paso 3: Calcular g soluto <span class="icono-check">✔</span></div>
+            <p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">(6 × 300000) / 1.000.000 = ?</p>
+            <div class="input-grupo" style="max-width:200px;">
+                <label>g sol</label><input type="number" id="ej8-res" step="0.1" placeholder="?"><div class="unidad">g</div>
+            </div>
+            <button class="btn-validar" onclick="validarPaso('ej8','p3')">Validar</button>
+            <div class="feedback" id="ej8-p3-fb"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// LÓGICA DE VALIDACIÓN
+function cerca(val, esperado, tol = 0.05) {
+    return Math.abs(val - esperado) <= Math.abs(esperado * tol) + 0.05;
+}
+
+const RESPUESTAS = {
+    ej1: {
+        p1: (soluto, sol) => soluto === 'contaminante' && sol === 'agua',
+        p2: (mg, l) => cerca(mg, 60) && cerca(l, 20),
+        p3: (f) => f === 'mg/L',
+        p4: (r) => cerca(r, 3)
+    },
+    ej2: {
+        p1: (soluto, sol) => soluto === 'fluoruro' && sol === 'mezcla',
+        p2: (mg, ppm) => cerca(mg, 25) && cerca(ppm, 5),
+        p3: (f) => f === 'L=mg/ppm',
+        p4: (r) => cerca(r, 5)
+    },
+    ej3: {
+        p1: (soluto, sol) => soluto === 'mineral' && sol === 'tierra',
+        p2: (mg, kg) => cerca(mg, 45) && cerca(kg, 15),
+        p3: (f) => f === 'mg/kg',
+        p4: (r) => cerca(r, 3)
+    },
+    ej4: {
+        p1: (soluto, sol) => soluto === 'nitrato' && sol === 'abono',
+        p2: (kg, ppm) => cerca(kg, 8) && cerca(ppm, 12),
+        p3: (f) => f === 'mg=ppm*kg',
+        p4: (r) => cerca(r, 96)
+    },
+    ej5: {
+        p1: (soluto, sol) => soluto === 'sal' && sol === 'mezcla',
+        p2: (gs, gsol) => cerca(gs, 2) && cerca(gsol, 400000),
+        p3: (f) => f === 'f3',
+        p4: (r) => cerca(r, 5)
+    },
+    ej6: {
+        p1: (ppm, gs) => cerca(ppm, 4) && cerca(gs, 8),
+        p2: (f) => f === 'bien',
+        p3: (r) => cerca(r, 2000000)
+    },
+    ej7: {
+        p1: (gs, ml) => cerca(gs, 5) && cerca(ml, 500000),
+        p2: (f) => f === 'f4',
+        p3: (r) => cerca(r, 10)
+    },
+    ej8: {
+        p1: (ppm, ml) => cerca(ppm, 6) && cerca(ml, 300000),
+        p2: (f) => f === 'bien',
+        p3: (r) => cerca(r, 1.8)
+    }
+};
+
+const SIGUIENTE_PASO = {
+    ej1: { p1: 'p2', p2: 'p3', p3: 'p4', p4: null },
+    ej2: { p1: 'p2', p2: 'p3', p3: 'p4', p4: null },
+    ej3: { p1: 'p2', p2: 'p3', p3: 'p4', p4: null },
+    ej4: { p1: 'p2', p2: 'p3', p3: 'p4', p4: null },
+    ej5: { p1: 'p2', p2: 'p3', p3: 'p4', p4: null },
+    ej6: { p1: 'p2', p2: 'p3', p3: null },
+    ej7: { p1: 'p2', p2: 'p3', p3: null },
+    ej8: { p1: 'p2', p2: 'p3', p3: null }
+};
+
+let ejerciciosFinalizados = 0;
+const totalEjercicios = 8;
+const completados = { ej1: 0, ej2: 0, ej3: 0, ej4: 0, ej5: 0, ej6: 0, ej7: 0, ej8: 0 };
+
+function getValores(ej, paso) {
+    const g = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
+    const gn = (id) => { const el = document.getElementById(id); return el ? parseFloat(el.value) : NaN; };
+
+    if (ej === 'ej1') return paso === 'p1' ? [g('ej1-soluto'), g('ej1-solucion')] : paso === 'p2' ? [gn('ej1-mg'), gn('ej1-l')] : paso === 'p3' ? [g('ej1-formula')] : [gn('ej1-res')];
+    if (ej === 'ej2') return paso === 'p1' ? [g('ej2-soluto'), g('ej2-solucion')] : paso === 'p2' ? [gn('ej2-mg'), gn('ej2-ppm')] : paso === 'p3' ? [g('ej2-formula')] : [gn('ej2-res')];
+    if (ej === 'ej3') return paso === 'p1' ? [g('ej3-soluto'), g('ej3-solucion')] : paso === 'p2' ? [gn('ej3-mg'), gn('ej3-kg')] : paso === 'p3' ? [g('ej3-formula')] : [gn('ej3-res')];
+    if (ej === 'ej4') return paso === 'p1' ? [g('ej4-soluto'), g('ej4-solucion')] : paso === 'p2' ? [gn('ej4-kg'), gn('ej4-ppm')] : paso === 'p3' ? [g('ej4-formula')] : [gn('ej4-res')];
+    if (ej === 'ej5') return paso === 'p1' ? [g('ej5-soluto'), g('ej5-solucion')] : paso === 'p2' ? [gn('ej5-gs'), gn('ej5-gsol')] : paso === 'p3' ? [g('ej5-formula')] : [gn('ej5-res')];
+    if (ej === 'ej6') return paso === 'p1' ? [gn('ej6-ppm'), gn('ej6-gs')] : paso === 'p2' ? [g('ej6-formula')] : [gn('ej6-res')];
+    if (ej === 'ej7') return paso === 'p1' ? [gn('ej7-gs'), gn('ej7-ml')] : paso === 'p2' ? [g('ej7-formula')] : [gn('ej7-res')];
+    if (ej === 'ej8') return paso === 'p1' ? [gn('ej8-ppm'), gn('ej8-ml')] : paso === 'p2' ? [g('ej8-formula')] : [gn('ej8-res')];
+    
+    return [];
+}
+
+const MENSAJES_OK = ['🎉 ¡Excelente!', '✅ ¡Correcto!', '🌟 ¡Perfecto!', '💪 ¡Muy bien!'];
+const MENSAJES_MAL = ['❌ Incorrecto. Intenta de nuevo.', '❌ Revisa tus selecciones o cálculos.'];
+
+function validarPaso(ej, paso) {
+    const valores = getValores(ej, paso);
+    const fnRespuesta = RESPUESTAS[ej][paso];
+    const esValido = fnRespuesta(...valores);
+
+    const fb = document.getElementById(`${ej}-${paso}-fb`);
+    const pasoEl = document.getElementById(`${ej}-${paso}`);
+
+    if (esValido) {
+        fb.className = 'feedback correcto';
+        fb.textContent = MENSAJES_OK[Math.floor(Math.random() * MENSAJES_OK.length)];
+        pasoEl.classList.add('completado');
+        pasoEl.classList.remove('activo');
+
+        const siguiente = SIGUIENTE_PASO[ej][paso];
+        if (siguiente) {
+            const sigEl = document.getElementById(`${ej}-${siguiente}`);
+            sigEl.classList.remove('oculto');
+            sigEl.classList.add('activo');
+        } else {
+            if (completados[ej] < 1) {
+                completados[ej] = 1;
+                ejerciciosFinalizados++;
+                document.getElementById('barra-fill').style.width = Math.round((ejerciciosFinalizados / totalEjercicios) * 100) + '%';
+                document.getElementById('texto-progreso').textContent = `${ejerciciosFinalizados} / ${totalEjercicios} ejercicios completados`;
+            }
+        }
+    } else {
+        fb.className = 'feedback incorrecto';
+        fb.textContent = MENSAJES_MAL[Math.floor(Math.random() * MENSAJES_MAL.length)];
+    }
+}
+</script>
+<script src="auth.js"></script>
+</body>
+</html>
