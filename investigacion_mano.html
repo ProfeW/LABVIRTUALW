@@ -16,6 +16,7 @@
             --color-investigacion: #f39c12;
             --color-oscuro: #1a1a2e;
             --color-texto: #ffffff;
+            --color-fondo-oscuro: rgba(26, 26, 46, 0.95);
         }
 
         html { scroll-behavior: smooth; }
@@ -42,88 +43,43 @@
         .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .menu a:hover { background: rgba(255, 255, 255, 0.1); color: var(--color-investigacion); }
 
-        .submenu { z-index: 1000;
-            display: none; position: absolute; top: 100%; left: 0;
-            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
-            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: visible;
-        }
+        /* Submenús Dropdown */
+        .submenu { z-index: 1000; display: none; position: absolute; top: 100%; left: 0; background: var(--color-fondo-oscuro); backdrop-filter: blur(15px); min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: visible; }
         .menu li:hover > .submenu { display: block; }
         .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; display: block; }
         .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
-
         .submenu .has-submenu { position: relative; }
-        .submenu .submenu-nivel2 {
-            display: none; position: absolute; top: 0; left: 100%;
-            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
-            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .submenu .submenu-nivel2 { display: none; position: absolute; top: 0; left: 100%; background: var(--color-fondo-oscuro); backdrop-filter: blur(15px); min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .submenu .has-submenu:hover > .submenu-nivel2 { display: block; }
 
         /* --- CONTENIDO PRINCIPAL --- */
         .contenedor { max-width: 1000px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.5s ease; }
         
-        .header-tema {
-            background: rgba(243, 156, 18, 0.1);
-            border-left: 5px solid var(--color-investigacion);
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-        }
-        .header-tema h1 {
-            color: var(--color-investigacion);
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
+        .header-tema { background: rgba(243, 156, 18, 0.1); border-left: 5px solid var(--color-investigacion); padding: 30px; border-radius: 10px; margin-bottom: 40px; }
+        .header-tema h1 { color: var(--color-investigacion); font-size: 2.2rem; margin-bottom: 10px; }
         
-        .seccion-guia {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(5px);
-        }
-        .seccion-guia h2 {
-            color: #4facfe;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 10px;
-        }
-        .seccion-guia h3 {
-            color: #e74c3c;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        .seccion-guia p, .seccion-guia ul, .seccion-guia ol {
-            color: #ddd;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-        .seccion-guia ul, .seccion-guia ol {
-            padding-left: 20px;
-        }
-        .seccion-guia li {
-            margin-bottom: 8px;
-        }
+        .seccion-guia { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 15px; margin-bottom: 30px; backdrop-filter: blur(5px); }
+        .seccion-guia h2 { color: #4facfe; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .seccion-guia h3 { color: #e74c3c; margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem; }
+        .seccion-guia p, .seccion-guia ul, .seccion-guia ol { color: #ddd; line-height: 1.6; margin-bottom: 15px; }
+        .seccion-guia ul, .seccion-guia ol { padding-left: 20px; }
+        .seccion-guia li { margin-bottom: 8px; }
+        
+        .destacado { background: rgba(46, 204, 113, 0.1); border-left: 4px solid var(--color-biologia); padding: 15px; margin: 15px 0; border-radius: 0 5px 5px 0; }
+        .tip-word { background: rgba(52, 152, 219, 0.1); border-left: 4px solid var(--color-fisica); padding: 15px; margin: 15px 0; border-radius: 0 5px 5px 0; }
 
-        .destacado {
-            background: rgba(46, 204, 113, 0.1);
-            border-left: 4px solid var(--color-biologia);
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 5px 5px 0;
-        }
+        /* Herramienta Citas */
+        .herramienta-apa { background: rgba(155, 89, 182, 0.1); border: 1px solid var(--color-quimica); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        .herramienta-apa h3 { color: var(--color-quimica); margin-top: 0; }
+        .formulario-apa { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .formulario-apa input { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px; border-radius: 5px; width: 100%; outline: none; }
+        .formulario-apa input:focus { border-color: var(--color-quimica); }
+        .btn-generar { grid-column: span 2; background: var(--color-quimica); color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-generar:hover { background: #8e44ad; }
+        .resultado-apa { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 5px; margin-top: 15px; border-left: 4px solid var(--color-quimica); display: none; }
+        .resultado-apa p { margin-bottom: 5px !important; }
 
-        .tip-word {
-            background: rgba(52, 152, 219, 0.1);
-            border-left: 4px solid var(--color-fisica);
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 5px 5px 0;
-        }
+        .img-ejemplo { width: 100%; max-width: 400px; display: block; margin: 20px auto; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -132,38 +88,14 @@
 
     <header>
         <nav>
-            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <a href="index.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
-                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="fisica_9.html">Grado Noveno</a></li>
-                        <li><a href="fisica_10.html">Grado Décimo</a></li>
-                        <li><a href="fisica_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="biologia_9.html">Grado Noveno</a></li>
-                        <li><a href="biologia_10.html">Grado Décimo</a></li>
-                        <li><a href="biologia_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li><a href="quimica_9.html">Grado Noveno</a></li>
-                        <li><a href="quimica_10.html">Grado Décimo</a></li>
-                        <li><a href="quimica_11.html">Grado 11</a></li>
-                    </ul>
-                </li>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
                 <li>
                     <a href="#"><i class="fa-solid fa-book-open"></i> Recursos <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
                     <ul class="submenu">
                         <li class="has-submenu">
-                            <a href="#">Investigación <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i></a>
+                            <a href="#">Investigación <i class="fa-solid fa-chevron-right" style="font-size: 10px; float: right; margin-top: 4px;"></i></a>
                             <ul class="submenu-nivel2">
                                 <li><a href="investigacion_computador.html">A computador</a></li>
                                 <li><a href="investigacion_mano.html">A mano</a></li>
@@ -178,96 +110,160 @@
     <main class="contenedor">
         <div class="header-tema">
             <h1>Continuidad del Proyecto Investigativo (A Mano)</h1>
-            <p>Sigue estas instrucciones al pie de la letra para mantener un estándar de calidad, organización y pulcritud en tu trabajo escrito a mano.</p>
+            <p>Sigue estas instrucciones paso a paso para organizar, escribir y estructurar tu proyecto investigativo escrito a mano con calidad y orden.</p>
         </div>
 
         <section class="seccion-guia">
-            <h2>1. Normas Básicas y Creación de la "Hoja Guía"</h2>
+            <h2>1. Normas Básicas y Hoja Guía</h2>
             <p>Para asegurar que todo quede derecho y bien presentado, vamos a crear y usar una <strong>Hoja Guía</strong>. Toma una hoja en blanco y sigue estos pasos:</p>
             
             <div class="tip-word">
-                <strong><i class="fa-solid fa-ruler-combined"></i> Paso 1: Los Márgenes (2.5 cm)</strong><br>
-                Con una regla, mide <strong>2.5 centímetros</strong> en cada uno de los cuatro lados de la hoja (arriba, abajo, izquierda y derecha). Traza un recuadro o margen oscuro con marcador para que se note desde el otro lado.
+                <strong><i class="fa-solid fa-ruler-combined"></i> Los Márgenes (2.5 cm)</strong><br>
+                Mide <strong>2.5 centímetros</strong> en cada uno de los 4 lados de la hoja. Traza un recuadro oscuro con marcador para que se note desde el otro lado.
             </div>
 
             <div class="tip-word">
-                <strong><i class="fa-solid fa-lines-leaning"></i> Paso 2: Los Renglones (1 cm)</strong><br>
-                Dentro de ese margen que acabas de dibujar, vas a trazar líneas horizontales (renglones). Cada línea debe tener una distancia exacta de <strong>1 centímetro</strong> respecto a la otra. Traza líneas de extremo a extremo dentro del margen.
+                <strong><i class="fa-solid fa-lines-leaning"></i> Los Renglones (1 cm)</strong><br>
+                Traza líneas horizontales con una distancia exacta de <strong>1 centímetro</strong> respecto a la otra dentro del margen. Pon esta hoja por debajo de tus páginas en blanco para guiarte.
             </div>
             
-            <p><strong>¿Cómo se usa?</strong> Esta hoja guía la vas a poner <strong>por debajo</strong> de cada hoja blanca en la que vayas a escribir. De esta forma verás las líneas a contraluz y te asegurarás de escribir recto y con el tamaño de letra correcto.</p>
-
-            <h3>Otras Recomendaciones Generales:</h3>
             <ul>
-                <li><strong>El Color de Tinta:</strong> Todo el trabajo debe escribirse con un solo color de lapicero, debe ser color <strong>Negro</strong>. No uses colores ni marcadores para el texto.</li>
-                <li><strong>La Letra:</strong> Mantén un tamaño de letra adecuado que ocupe correctamente el renglón de 1 cm. Debes tener una escritura legible, clara y sin tachones o enmendaduras (no usar corrector).</li>
-                <li><strong>Los Títulos:</strong> Todos los títulos principales de tu trabajo deben ir <strong>Centrados</strong> y en mayúscula.</li>
-                <li><strong>Los Párrafos (Sangría):</strong> Cada vez que inicies un párrafo nuevo, debes dejar un espacio en blanco de <strong>1.5 centímetros</strong> aproximadamente desde el margen izquierdo antes de empezar a escribir la primera palabra.</li>
+                <li><strong>El Color de Tinta:</strong> Todo el trabajo debe escribirse con lapicero <strong>Negro</strong>. Sin tachones.</li>
+                <li><strong>La Letra:</strong> Letra legible que ocupe correctamente el renglón.</li>
+                <li><strong>Los Títulos:</strong> Todos los títulos principales deben ir <strong>Centrados</strong> y en mayúscula.</li>
+                <li><strong>Sangría:</strong> Cada vez que inicies un párrafo nuevo, deja un espacio en blanco de <strong>1.5 centímetros</strong> (aprox).</li>
             </ul>
         </section>
 
         <section class="seccion-guia">
-            <h2>2. Estructura Inicial del Documento</h2>
-            <p>Todo trabajo escrito, aunque sea a mano, debe llevar un orden formal:</p>
+            <h2>2. La Portada del Proyecto</h2>
+            <p>La portada es la cara de tu trabajo. Todo el texto debe ir <strong>Centrado</strong>, respetando estrictamente el siguiente orden y los espacios mencionados:</p>
             
-            <h3>La Portada</h3>
-            <p>Es la primera página de tu trabajo. Los textos en esta página deben ir <strong>Centrados</strong>. Distribuye la información a lo largo de la hoja:</p>
-            <ul>
-                <li>Título de tu proyecto (en el centro-superior, todo en mayúsculas).</li>
-                <li>Nombres completos de los integrantes (en el medio de la hoja).</li>
-                <li>Nombre del área (Ej. Física - Grado 11°).</li>
-                <li>Nombre del profesor (Wilmer Gonzalez Ossa).</li>
+            <ol>
+                <li>Palabra <strong>Proyecto</strong>.</li>
+                <li>Título completo de tu proyecto.</li>
+                <li><em>[Deja un espacio dando Enter/Renglones libres]</em></li>
+                <li><strong>Integrantes:</strong> Nombres completos, <strong>empezando por los apellidos</strong>.</li>
+                <li><em>[Deja un espacio pequeño]</em></li>
+                <li><strong>Profesor:</strong> Nombre completo del docente, <strong>empezando por los apellidos</strong>.</li>
+                <li><em>[Deja un espacio grande]</em></li>
                 <li>Institución Educativa Gallego.</li>
+                <li>Ciencias Naturales.</li>
+                <li>Grado Décimo.</li>
                 <li>La Plata - Huila.</li>
-                <li>Año.</li>
-            </ul>
+                <li>Mes y Año (Ejemplo: Noviembre 2026).</li>
+            </ol>
+            
+            <img src="https://images.unsplash.com/photo-1455390582262-044cdead27d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ejemplo de Portada" class="img-ejemplo">
         </section>
 
         <section class="seccion-guia">
-            <h2>3. Contenido del Proyecto (Guía de Redacción)</h2>
-            <p>Apoyado en tu Hoja Guía, redacta las siguientes partes en orden:</p>
-            
-            <h3>4. EL PLANTEAMIENTO DEL PROBLEMA</h3>
-            <p>Aquí van a explicar la situación que quieren solucionar, como un embudo, de lo general a lo específico.</p>
+            <h2>3. Contenido del Proyecto (Paso a Paso)</h2>
+            <p>A continuación, te detallamos qué debe contener cada sección específica del trabajo.</p>
+
+            <h3>Introducción</h3>
+            <p>Se compone de tres párrafos:</p>
             <ul>
-                <li><strong>Párrafo 1 (Lo general):</strong> Habla de una situación o problema a nivel mundial o en la región que esté relacionado con su proyecto. Describan su importancia.</li>
-                <li><strong>Párrafo 2 (Lo específico):</strong> Aterricen el problema a su institución o comunidad. Describan una situación que hayan observado en su colegio.</li>
-                <li><strong>Párrafo 3 (Las consecuencias):</strong> Describan qué pasa si no se hace nada y a quiénes afecta.</li>
-                <li><strong>La Pregunta del Problema:</strong> Debe ser el último párrafo del planteamiento. Es una frase que incluye: <strong>qué</strong> (el proyecto), <strong>cómo</strong> (la forma), <strong>dónde</strong> (lugar) y <strong>cuándo</strong> (momento).</li>
+                <li><strong>Párrafo 1:</strong> Una generalidad global de la idea de nuestro proyecto.</li>
+                <li><strong>Párrafo 2:</strong> Contar un poco acerca de qué es lo que vamos a hacer de manera breve.</li>
+                <li><strong>Párrafo 3:</strong> Acerca de los aprendizajes que vamos a vivir a través del proyecto o complementar con lo que contiene el proyecto en sí.</li>
+            </ul>
+
+            <h3>Justificación</h3>
+            <p>Se trabaja principalmente en dos párrafos:</p>
+            <ul>
+                <li><strong>Párrafo 1:</strong> El "porqué" del proyecto. Un enfoque un poco grande sobre la problemática asociado a cómo vamos a solucionarlo.</li>
+                <li><strong>Párrafo 2:</strong> Cómo vamos a atender esa problemática y por qué es importante aprender sobre esa temática.</li>
+            </ul>
+
+            <h3>Planteamiento del Problema</h3>
+            <p>Se desarrolla en tres párrafos y finaliza con la pregunta problema:</p>
+            <ul>
+                <li><strong>Párrafo 1:</strong> Problemática global asociada a la temática.</li>
+                <li><strong>Párrafo 2:</strong> Problemática cercana que nos indique qué vamos a hacer o cómo lo vamos a resolver.</li>
+                <li><strong>Párrafo 3:</strong> Qué pasaría si no atendemos esta problemática.</li>
+                <li><strong>La Pregunta Problema:</strong> Debe ser el último punto y debe indicar qué vamos a hacer, para qué lo vamos a hacer, dónde y el año.</li>
             </ul>
             <div class="destacado">
-                <strong>Ejemplo de pregunta:</strong> ¿Cómo la elaboración e instalación de un sistema de canecas para reciclar, apoyado por una campaña de socialización, puede promover el hábito de separación de residuos en los estudiantes de nuestra institución en el mes de septiembre de 2025?
+                <strong>Ejemplo de pregunta:</strong> ¿Cómo el diseño de un prototipo de robot que recoge basura promueve el aprendizaje acerca de cómo mejorar la conciencia ambiental en la Institución Educativa Gallego en el año 2026?
             </div>
 
-            <h3>5. LOS OBJETIVOS</h3>
-            <p>Aquí van a decir qué van a lograr usando verbos terminados en <strong>-ar, -er, -ir</strong>.</p>
+            <h3>Objetivos</h3>
             <ul>
-                <li><strong>Objetivo General:</strong> Es la meta principal.
-                    <br><em>Ejemplo:</em> Construir y socializar un programa de reciclaje...</li>
-                <li><strong>Objetivos Específicos:</strong>
-                    <ul>
-                        <li><strong>Primer objetivo (Investigación):</strong> Investigar, Consultar, Seleccionar.</li>
-                        <li><strong>Segundo objetivo (Construcción):</strong> Construir, Elaborar, Desarrollar.</li>
-                        <li><strong>Tercer objetivo (Verificación):</strong> Evaluar, Verificar, Analizar.</li>
-                    </ul>
+                <li><strong>Objetivo General:</strong> Es uno solo y va asociado a la pregunta problema. Inicia con un verbo en infinitivo (-ar, -er, -ir) muy grande.</li>
+                <li><strong>Objetivos Específicos:</strong> Se manejan exactamente 4:
+                    <ol>
+                        <li><strong>Diagnosticar o Investigar:</strong> Todo el contexto teórico. Consultar información acerca de lo que estamos haciendo y aprender al respecto (solo información, sin salir a recolectar datos externos).</li>
+                        <li><strong>Diseñar:</strong> Cómo lo vamos a hacer. Diseñar el plano físico o maqueta y diseñar una estrategia de enseñanza (cómo van a aprender).</li>
+                        <li><strong>Implementar o Crear:</strong> La creación física paso a paso de lo diseñado en el objetivo 2.</li>
+                        <li><strong>Evaluar:</strong> Cuál va a ser la metodología de evaluación del proyecto.</li>
+                    </ol>
                 </li>
             </ul>
 
-            <h3>6. EL MARCO TEÓRICO</h3>
-            <p>La base teórica de su investigación.</p>
+            <h3>Marco Teórico</h3>
+            <p>Es la investigación pura. Deben definir en sus propias palabras:</p>
             <ul>
-                <li><strong>Conceptos Clave:</strong> Definan con sus palabras los conceptos generales y técnicos del proyecto.</li>
-                <li><strong>Antecedentes:</strong> Describan proyectos parecidos (de internet o libros) que sirvan de ejemplo.</li>
-                <li><strong>Proyección:</strong> Describan los resultados, beneficios y el impacto positivo que esperan lograr.</li>
+                <li><strong>10 conceptos generales</strong> (Ej. Sostenibilidad).</li>
+                <li><strong>10 conceptos técnicos</strong> (Ej. Circuito, voltaje).</li>
             </ul>
+            <div class="tip-word">
+                <strong>Citas y Referencias (APA 7):</strong> Usa <strong>Google Académico</strong> para buscar información real. Recuerda que siempre que tomes información, debes <strong>citar dentro del texto</strong> (ej. Pérez, 2026) y al final de tu trabajo colocar la <strong>referencia completa</strong> en la hoja de Referencias.
+            </div>
 
-            <h3>7. LA METODOLOGÍA</h3>
-            <p>El paso a paso que deben describir en detalle para lograr sus objetivos:</p>
+            <h3>Metodología</h3>
+            <p>Se divide en 4 fases asociadas a los 4 objetivos específicos:</p>
             <ul>
-                <li><strong>Metodología del Objetivo 1 (Investigar/planear):</strong> Fuentes a consultar, plan a crear y lista de materiales.</li>
-                <li><strong>Metodología del Objetivo 2 (Crear/socializar):</strong> Cómo van a construir el prototipo paso a paso y cómo lo van a mostrar.</li>
-                <li><strong>Metodología del Objetivo 3 (Evaluar):</strong> Cómo van a verificar si el proyecto funcionó, mediciones y observaciones.</li>
+                <li><strong>Fase 1 (Obj. 1):</strong> Describir paso a paso qué fue lo que hicimos con toda la investigación.</li>
+                <li><strong>Fase 2 (Obj. 2):</strong> Crear el plano o bosquejo a mano alzada. Incluye los 3 componentes de aprendizaje: 1) Lista de chequeo para ver si el prototipo funcionó. 2) Lista de chequeo para la socialización en otro salón. 3) Una tercera encuesta complementaria sobre los aprendizajes.</li>
+                <li><strong>Fase 3 (Obj. 3):</strong> Creación paso a paso de todo el proyecto y cómo se implementarán las encuestas mencionadas en la Fase 2.</li>
+                <li><strong>Fase 4 (Obj. 4):</strong> Evaluación. Explicar cómo va a ser el análisis de datos (por medio de gráficas, pruebas estadísticas) y describir todo este proceso.</li>
             </ul>
+        </section>
+
+        <!-- HERRAMIENTA APA 7 -->
+        <section class="seccion-guia" id="herramienta-apa">
+            <h2>Herramienta: Citas y Referencias APA 7</h2>
+            <p>Incluso en un trabajo a mano, las normas APA rigen cómo mencionas tus fuentes. Usa este generador para crear la referencia perfecta y luego transcríbela a tu hoja:</p>
+            
+            <div class="herramienta-apa">
+                <h3><i class="fa-solid fa-quote-right"></i> Generador Rápido</h3>
+                <div class="formulario-apa">
+                    <input type="text" id="apa-autor" placeholder="Autor (Ej. Pérez, J.)">
+                    <input type="text" id="apa-year" placeholder="Año (Ej. 2026 o s.f.)">
+                    <input type="text" id="apa-titulo" placeholder="Título del artículo o página" style="grid-column: span 2;">
+                    <input type="text" id="apa-sitio" placeholder="Nombre del Sitio Web (Ej. Wikipedia)">
+                    <input type="text" id="apa-url" placeholder="Pega el enlace (URL) aquí">
+                    <button class="btn-generar" onclick="generarAPA()">Generar Cita y Referencia</button>
+                </div>
+                
+                <div class="resultado-apa" id="resultado-apa">
+                    <p style="color:#2ecc71; font-weight:bold; font-size:12px;">¿Dónde va la cita? Va dentro de tus párrafos escritos.</p>
+                    <p id="out-cita" style="margin-bottom:15px;"></p>
+                    <p style="color:#2ecc71; font-weight:bold; font-size:12px;">¿Dónde va la referencia? Va en tu última hoja titulada 'Referencias'.</p>
+                    <p id="out-ref"></p>
+                </div>
+            </div>
+            
+            <script>
+                function generarAPA() {
+                    const autor = document.getElementById('apa-autor').value || 'Autor Desconocido';
+                    const year = document.getElementById('apa-year').value || 's.f.';
+                    const titulo = document.getElementById('apa-titulo').value || 'Título Desconocido';
+                    const sitio = document.getElementById('apa-sitio').value || 'Sitio Web';
+                    const url = document.getElementById('apa-url').value || 'https://...';
+                    
+                    const apellido = autor.split(',')[0];
+                    
+                    const citaText = `<strong>Cita (Al final de un texto):</strong> (${apellido}, ${year}) <br> <strong>Cita Narrativa (Dentro del texto):</strong> Según ${apellido} (${year})...`;
+                    
+                    const refText = `<strong>Referencia:</strong> ${autor}. (${year}). <em>${titulo}</em>. ${sitio}. ${url}`;
+                    
+                    document.getElementById('out-cita').innerHTML = citaText;
+                    document.getElementById('out-ref').innerHTML = refText;
+                    document.getElementById('resultado-apa').style.display = 'block';
+                }
+            </script>
         </section>
 
     </main>
