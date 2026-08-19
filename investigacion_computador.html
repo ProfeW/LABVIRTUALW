@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Proyecto - A Computador</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
+            --color-investigacion: #f39c12;
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-investigacion); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu li { position: relative; } 
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(255, 255, 255, 0.1); color: var(--color-investigacion); }
+
+        .submenu { z-index: 1000;
+            display: none; position: absolute; top: 100%; left: 0;
+            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
+            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: visible;
+        }
+        .menu li:hover > .submenu { display: block; }
+        .submenu a { padding: 12px 20px; font-size: 14px; font-weight: 400; display: block; }
+        .submenu a:hover { background: rgba(255, 255, 255, 0.1); padding-left: 25px; }
+
+        .submenu .has-submenu { position: relative; }
+        .submenu .submenu-nivel2 {
+            display: none; position: absolute; top: 0; left: 100%;
+            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
+            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .submenu .has-submenu:hover > .submenu-nivel2 { display: block; }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.5s ease; }
+        
+        .header-tema {
+            background: rgba(243, 156, 18, 0.1);
+            border-left: 5px solid var(--color-investigacion);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        .header-tema h1 {
+            color: var(--color-investigacion);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .seccion-guia {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+        .seccion-guia h2 {
+            color: #4facfe;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        .seccion-guia h3 {
+            color: #e74c3c;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .seccion-guia p, .seccion-guia ul, .seccion-guia ol {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .seccion-guia ul, .seccion-guia ol {
+            padding-left: 20px;
+        }
+        .seccion-guia li {
+            margin-bottom: 8px;
+        }
+        
+        .destacado {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--color-biologia);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .tip-word {
+            background: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--color-fisica);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-atom"></i> Física <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="fisica_9.html">Grado Noveno</a></li>
+                        <li><a href="fisica_10.html">Grado Décimo</a></li>
+                        <li><a href="fisica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> Biología <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="biologia_9.html">Grado Noveno</a></li>
+                        <li><a href="biologia_10.html">Grado Décimo</a></li>
+                        <li><a href="biologia_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-flask"></i> Química <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li><a href="quimica_9.html">Grado Noveno</a></li>
+                        <li><a href="quimica_10.html">Grado Décimo</a></li>
+                        <li><a href="quimica_11.html">Grado 11</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-book-open"></i> Recursos <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="submenu">
+                        <li class="has-submenu">
+                            <a href="#">Investigación <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i></a>
+                            <ul class="submenu-nivel2">
+                                <li><a href="investigacion_computador.html">A computador</a></li>
+                                <li><a href="investigacion_mano.html">A mano</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <div class="header-tema">
+            <h1>Continuidad del Proyecto Investigativo (A Computador)</h1>
+            <p>Sigue estas instrucciones paso a paso para configurar tu documento de Microsoft Word y redactar correctamente las secciones de tu proyecto de investigación.</p>
+        </div>
+
+        <section class="seccion-guia">
+            <h2>1. Configuración Básica en Microsoft Word</h2>
+            <p>Antes de empezar a escribir, debes preparar tu documento en Word con las normas básicas. Si no sabes cómo hacerlo, sigue estos pasos al pie de la letra:</p>
+            
+            <div class="tip-word">
+                <strong><i class="fa-solid fa-desktop"></i> Paso 1: Configurar Márgenes y Tamaño de Papel</strong><br>
+                Ve a la pestaña <strong>Disposición</strong> o <strong>Formato</strong> en la parte superior. Haz clic en <strong>Márgenes</strong> y selecciona <strong>Márgenes personalizados</strong>. Establece 2.54 cm para los márgenes superior, inferior, izquierdo y derecho. En la pestaña <strong>Papel</strong> (dentro de esa misma ventana), asegúrate de que el tamaño sea <strong>Carta</strong>.
+            </div>
+
+            <div class="tip-word">
+                <strong><i class="fa-solid fa-font"></i> Paso 2: Configurar Tipo de Letra y Párrafo</strong><br>
+                Ve a la pestaña <strong>Inicio</strong>. Selecciona el tipo de letra <strong>Arial</strong> o <strong>Times New Roman</strong>, y tamaño <strong>12</strong>. Luego, haz clic en el botón de <strong>Espaciado entre líneas y párrafos</strong> (un ícono con flechas arriba y abajo) y selecciona <strong>1.5</strong>. Todo el texto debe estar <strong>Alineado a la izquierda</strong>.
+            </div>
+
+            <div class="tip-word">
+                <strong><i class="fa-solid fa-list-ol"></i> Paso 3: Sangría</strong><br>
+                Al inicio de cada párrafo, debes dejar un espacio. Presiona la tecla <strong>Tab</strong> (la que tiene dos flechas opuestas, arriba de Bloq Mayús) una sola vez cada vez que empieces un párrafo nuevo.
+            </div>
+        </section>
+
+        <section class="seccion-guia">
+            <h2>2. Estructura Inicial del Documento</h2>
+            <p>Todo trabajo escrito en computador debe llevar un orden claro y profesional:</p>
+            
+            <h3>Portada</h3>
+            <p>La primera página de tu documento será la portada. Todo el texto de la portada debe ir <strong>Centrado</strong>. Incluye la siguiente información de arriba hacia abajo (presiona Enter para dejar espacios entre ellos):</p>
+            <ul>
+                <li>Título de tu proyecto (en mayúsculas y negrita).</li>
+                <li>Nombres completos de los integrantes.</li>
+                <li>El nombre del área (Ej. Física - Grado 11°).</li>
+                <li>El nombre del profesor (Wilmer Gonzalez Ossa).</li>
+                <li>Institución Educativa Gallego.</li>
+                <li>La Plata - Huila.</li>
+                <li>El año.</li>
+            </ul>
+
+            <h3>Tabla de Contenido</h3>
+            <p>Para hacer la tabla de contenido automáticamente, primero debes usar los <strong>Estilos de Título</strong> en Word.</p>
+            <div class="tip-word">
+                <strong>¿Cómo usar Estilos?</strong> Selecciona los títulos de tu trabajo (Ej. "4. PLANTEAMIENTO DEL PROBLEMA") y ve a la pestaña <strong>Inicio</strong>, en la sección "Estilos", haz clic en <strong>Título 1</strong>.<br>
+                <strong>¿Cómo insertar la Tabla?</strong> Crea una página en blanco después de la portada. Ve a la pestaña <strong>Referencias</strong>, haz clic en <strong>Tabla de contenido</strong> y elige la primera opción ("Tabla automática 1"). ¡Se creará sola!
+            </div>
+        </section>
+
+        <section class="seccion-guia">
+            <h2>3. Contenido del Proyecto (Guía de Redacción)</h2>
+            <p>Ahora que tu Word está listo, redacta las siguientes partes guiándote de las explicaciones:</p>
+            
+            <h3>4. EL PLANTEAMIENTO DEL PROBLEMA</h3>
+            <p>Aquí van a explicar la situación que quieren solucionar. Piensen en un embudo: van de lo más grande a lo más pequeño.</p>
+            <ul>
+                <li><strong>Párrafo 1 (Lo general):</strong> Habla de una situación o problema a nivel mundial o en la región que esté relacionado con su proyecto. Describan su importancia o por qué es un tema del que se habla.</li>
+                <li><strong>Párrafo 2 (Lo específico):</strong> Aterricen el problema a su institución o comunidad. Describan una situación que hayan observado en su colegio que tenga que ver con el tema.</li>
+                <li><strong>Párrafo 3 (Las consecuencias):</strong> Describan qué pasa si no se hace nada. Expliquen por qué es importante resolver ese problema y a quiénes afecta.</li>
+                <li><strong>La Pregunta del Problema:</strong> Esta es una sola frase que resume todo lo que plantearon. Debe ser el último párrafo del planteamiento del problema. Debe incluir estas cuatro cosas: <strong>qué</strong> (el proyecto que van a hacer), <strong>cómo</strong> (la forma en que lo harán), <strong>dónde</strong> (el lugar) y <strong>cuándo</strong> (el momento).</li>
+            </ul>
+            <div class="destacado">
+                <strong>Ejemplo de pregunta:</strong> ¿Cómo la elaboración e instalación de un sistema de canecas para reciclar, apoyado por una campaña de socialización, puede promover el hábito de separación de residuos en los estudiantes de nuestra institución en el mes de septiembre de 2025?
+            </div>
+
+            <h3>5. LOS OBJETIVOS</h3>
+            <p>Aquí van a decir qué van a lograr. Recuerden usar verbos terminados en <strong>-ar, -er, -ir</strong>.</p>
+            <ul>
+                <li><strong>Objetivo General:</strong> Es la meta principal, una sola frase que resume todo el proyecto. Usen verbos como Diseñar, Construir, Evaluar, Proponer.
+                    <br><em>Ejemplo:</em> Construir y socializar un programa de reciclaje...</li>
+                <li><strong>Objetivos Específicos:</strong> Son los pasos concretos.
+                    <ul>
+                        <li><strong>Primer objetivo:</strong> Investigación (Investigar, Consultar).</li>
+                        <li><strong>Segundo objetivo:</strong> Construcción (Construir, Elaborar).</li>
+                        <li><strong>Tercer objetivo:</strong> Verificación (Evaluar, Verificar).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>6. EL MARCO TEÓRICO</h3>
+            <p>Es la base de su proyecto, donde demuestran que investigaron.</p>
+            <ul>
+                <li><strong>Conceptos Clave:</strong> Definan brevemente los conceptos importantes generales (ej. sostenibilidad) y técnicos (ej. circuitos, programación).</li>
+                <li><strong>Antecedentes:</strong> Trabajos previos de otras personas. Describan qué proyectos encontraron en internet/libros y qué resultados tuvieron.</li>
+                <li><strong>Proyección:</strong> Describan los resultados que esperan obtener y el impacto positivo que generará el proyecto.</li>
+            </ul>
+
+            <h3>7. LA METODOLOGÍA</h3>
+            <p>Es el paso a paso detallado. Deben explicar cómo lograrán cada objetivo:</p>
+            <ul>
+                <li><strong>Metodología del Objetivo 1:</strong> Fuentes a consultar, plan a crear y lista detallada de materiales.</li>
+                <li><strong>Metodología del Objetivo 2:</strong> Cómo construirán el prototipo, armado paso a paso y cómo lo mostrarán el día de la ciencia.</li>
+                <li><strong>Metodología del Objetivo 3:</strong> Cómo van a verificar si funcionó, qué observarán o medirán.</li>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+</html>
