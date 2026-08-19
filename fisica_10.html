@@ -109,7 +109,7 @@
             border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            overflow: visible;
+            overflow: hidden;
         }
 
         .menu li:hover .submenu {
@@ -126,22 +126,12 @@
             padding: 12px 20px;
             font-size: 14px;
             font-weight: 400;
-            display: block;
         }
 
         .submenu a:hover {
             background: rgba(255, 255, 255, 0.1);
             padding-left: 25px; 
         }
-
-        .submenu .has-submenu { position: relative; }
-        .submenu .submenu-nivel2 {
-            display: none; position: absolute; top: 0; left: 100%;
-            background: rgba(20, 20, 35, 0.95); backdrop-filter: blur(15px);
-            min-width: 180px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .submenu .has-submenu:hover > .submenu-nivel2 { display: block; }
 
         .fisica:hover { border-left: 4px solid var(--color-fisica); }
         .quimica:hover { border-left: 4px solid var(--color-quimica); }
@@ -228,18 +218,7 @@
                         <li><a href="biologia_11.html" class="biologia">Grado 11</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#"><i class="fa-solid fa-book-open"></i> Recursos <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
-                    <ul class="submenu">
-                        <li class="has-submenu">
-                            <a href="#">Investigación <i class="fa-solid fa-chevron-right" style="font-size: 10px; float: right; margin-top: 4px;"></i></a>
-                            <ul class="submenu-nivel2">
-                                <li><a href="investigacion_computador.html">A computador</a></li>
-                                <li><a href="investigacion_mano.html">A mano</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                <li><a href="recursos.html"><i class="fa-solid fa-book-open"></i> Recursos</a></li>
             </ul>
         </nav>
     </header>
