@@ -343,7 +343,7 @@
             btnFinal.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando Reporte...';
             btnFinal.disabled = true;
 
-            const formData = new FormData();
+            const formData = new URLSearchParams();
             formData.append('accion', 'practica'); // Para que Google Sheets sepa a qué hoja enviarlo
             formData.append('nombre', estudiante_nombre);
             formData.append('grado', estudiante_grado);
