@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gregor Mendel - El Padre de la Genética | LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bio-primario: #2ecc71;   
+            --color-bio-secundario: #1abc9c;
+            --color-oscuro: #121e14;
+            --color-texto: #ffffff;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(18, 30, 20, 0.95), rgba(18, 30, 20, 0.98)), url('https://images.unsplash.com/photo-1530508953158-6927d30f40fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(46, 204, 113, 0.2); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-bio-primario); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(46, 204, 113, 0.1); color: var(--color-bio-primario); }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.8s ease; }
+        
+        .encabezado-area { text-align: center; margin-bottom: 50px; border-bottom: 2px solid var(--color-bio-primario); padding-bottom: 30px;}
+        .badge-grado { display: inline-block; background: rgba(46, 204, 113, 0.2); color: var(--color-bio-primario); padding: 5px 15px; border-radius: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(46, 204, 113, 0.4);}
+        .encabezado-area h1 { font-size: 3rem; color: #fff; margin-bottom: 15px; text-transform: uppercase; }
+        .encabezado-area h1 span { color: var(--color-bio-secundario); }
+        
+        /* --- TARJETAS DE CONTENIDO --- */
+        .tarjeta-info {
+            background: var(--bg-tarjeta);
+            border-radius: 15px;
+            border-left: 5px solid var(--color-bio-primario);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .tarjeta-info:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+            border-left-color: var(--color-bio-secundario);
+        }
+
+        .tarjeta-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .tarjeta-header i { font-size: 2rem; color: var(--color-bio-primario); }
+        .tarjeta-header h2 { font-size: 1.8rem; color: #fff; }
+
+        .texto-info { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: justify; }
+        .texto-info p { margin-bottom: 15px; }
+        
+        .resaltado { color: var(--color-bio-primario); font-weight: 600; }
+
+        /* --- LÍNEA DE TIEMPO (CORTA) --- */
+        .timeline { margin-top: 20px; border-left: 3px solid rgba(46, 204, 113, 0.3); padding-left: 20px; }
+        .timeline-item { margin-bottom: 25px; position: relative; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -28px; top: 5px; width: 12px; height: 12px;
+            background: var(--color-bio-primario); border-radius: 50%; box-shadow: 0 0 10px var(--color-bio-primario);
+        }
+        .timeline-fecha { font-weight: 800; color: var(--color-bio-secundario); margin-bottom: 5px; font-size: 1.1rem;}
+        .timeline-texto { color: #ccc; line-height: 1.5; }
+
+        .btn-siguiente {
+            display: inline-block; background: var(--color-bio-primario); color: #121e14;
+            padding: 15px 30px; border-radius: 8px; font-weight: 800; font-size: 1.2rem;
+            text-decoration: none; transition: 0.3s; margin-top: 20px; width: 100%; text-align: center;
+        }
+        .btn-siguiente:hover { background: var(--color-bio-secundario); transform: scale(1.02); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="biologia_10.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Volver a Biología 10°</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-area">
+            <div class="badge-grado">INTRODUCCIÓN A LA GENÉTICA</div>
+            <h1>Gregor Mendel:<br><span>El Padre de la Genética</span></h1>
+        </div>
+
+        <article class="tarjeta-info">
+            <div class="tarjeta-header">
+                <i class="fa-solid fa-book-open-reader"></i>
+                <h2>¿Quién fue Gregor Mendel?</h2>
+            </div>
+            <div class="texto-info">
+                <p>Johann Gregor Mendel (1822-1884) fue un monje agustino católico y naturalista nacido en Heinzendorf, en el antiguo Imperio Austríaco (actual República Checa). Mendel es universalmente reconocido como el fundador de la ciencia de la <span class="resaltado">genética moderna</span>.</p>
+                <p>A pesar de vivir en una época donde aún no se conocía la existencia del ADN, los cromosomas o los genes, Mendel logró deducir los principios fundamentales de la herencia que rigen la transmisión de características de una generación a otra.</p>
+            </div>
+        </article>
+
+        <article class="tarjeta-info">
+            <div class="tarjeta-header">
+                <i class="fa-solid fa-seedling"></i>
+                <h2>El Experimento con Guisantes (Pisum sativum)</h2>
+            </div>
+            <div class="texto-info">
+                <p>Entre 1856 y 1863, Mendel llevó a cabo sus famosos experimentos cruzando miles de plantas de guisantes en el jardín de su monasterio. Eligió esta planta por varias razones estratégicas:</p>
+                <ul style="margin-left: 20px; margin-bottom: 15px; color: #ccc; line-height: 1.8;">
+                    <li>Eran fáciles de cultivar y crecían rápidamente.</li>
+                    <li>Presentaban características fácilmente distinguibles (color de la flor, forma de la semilla, altura de la planta, etc.).</li>
+                    <li>Podía controlar exactamente qué planta polinizaba a cuál.</li>
+                </ul>
+                <p>Mendel no se limitó a observar; <span class="resaltado">aplicó las matemáticas y la estadística</span> a sus hallazgos, contando cuidadosamente el número de descendientes con cada rasgo. Este enfoque cuantitativo fue revolucionario para la biología de su época.</p>
+            </div>
+        </article>
+
+        <article class="tarjeta-info">
+            <div class="tarjeta-header">
+                <i class="fa-solid fa-timeline"></i>
+                <h2>Fechas Importantes</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-fecha">1822</div>
+                    <div class="timeline-texto">Nacimiento de Gregor Mendel en la actual República Checa.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-fecha">1856 - 1863</div>
+                    <div class="timeline-texto">Período en el que realizó sus cruces genéticos con más de 28,000 plantas de guisantes.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-fecha">1865</div>
+                    <div class="timeline-texto">Presenta sus descubrimientos en las reuniones de la Sociedad de Historia Natural de Brno, formulando lo que hoy conocemos como las "Leyes de Mendel".</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-fecha">1866</div>
+                    <div class="timeline-texto">Publica su obra científica: <em>"Experimentos sobre hibridación de plantas"</em>. Trágicamente, la comunidad científica ignoró su trabajo por completo.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-fecha">1900</div>
+                    <div class="timeline-texto">Dieciséis años después de su muerte, tres científicos europeos (De Vries, Correns y Von Tschermak) redescubrieron independientemente sus leyes, dando a Mendel el crédito póstumo que merecía.</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="tarjeta-info">
+            <div class="tarjeta-header">
+                <i class="fa-solid fa-star"></i>
+                <h2>Importancia de su Descubrimiento</h2>
+            </div>
+            <div class="texto-info">
+                <p>La importancia del trabajo de Mendel radica en que demostró que la herencia no es una mezcla aleatoria de los rasgos de los padres (como se creía entonces, donde si cruzabas algo rojo con blanco daba rosa), sino que los rasgos se heredan a través de <span class="resaltado">unidades discretas e indivisibles</span> que hoy llamamos genes.</p>
+                <p>Estableció los conceptos de <strong>dominancia</strong> y <strong>recesividad</strong>, fundamentales para entender por qué ciertas características saltan generaciones o por qué podemos portar enfermedades genéticas sin padecerlas.</p>
+            </div>
+        </article>
+
+        <a href="biologia10_mendel_ley1.html" class="btn-siguiente">Continuar a la 1ra Ley de Mendel <i class="fa-solid fa-arrow-right"></i></a>
+
+    </main>
+
+<script src="auth.js"></script>
+</body>
+</html>

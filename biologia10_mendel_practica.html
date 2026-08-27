@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Interactiva: Leyes de Mendel | LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            --color-bio-primario: #3498db;   
+            --color-bio-secundario: #2980b9;
+            --color-oscuro: #0f171e;
+            --color-texto: #ffffff;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(15, 23, 30, 0.95), rgba(15, 23, 30, 0.98)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(52, 152, 219, 0.2); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-bio-primario); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(52, 152, 219, 0.1); color: var(--color-bio-primario); }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.8s ease; }
+        
+        .encabezado-area { text-align: center; margin-bottom: 40px; border-bottom: 2px solid var(--color-bio-primario); padding-bottom: 20px;}
+        .badge-grado { display: inline-block; background: rgba(52, 152, 219, 0.2); color: var(--color-bio-primario); padding: 5px 15px; border-radius: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(52, 152, 219, 0.4);}
+        .encabezado-area h1 { font-size: 2.5rem; color: #fff; text-transform: uppercase; }
+
+        /* --- PANTALLA DE LOGIN --- */
+        #login-section {
+            background: rgba(0,0,0,0.6); border: 2px solid var(--color-bio-primario);
+            border-radius: 15px; padding: 40px; text-align: center; max-width: 500px; margin: 0 auto;
+        }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 10px; color: #ccc; }
+        .form-control { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #444; background: rgba(255,255,255,0.05); color: #fff; font-size: 1.1rem; outline: none; transition: 0.3s; }
+        .form-control:focus { border-color: var(--color-bio-primario); box-shadow: 0 0 15px rgba(52, 152, 219, 0.3); }
+
+        .btn-principal {
+            background: var(--color-bio-primario); color: #fff; border: none; padding: 15px 30px; 
+            border-radius: 8px; font-weight: 800; font-size: 1.2rem; cursor: pointer; width: 100%; transition: 0.3s;
+        }
+        .btn-principal:hover { background: var(--color-bio-secundario); transform: scale(1.02); }
+        .btn-principal:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* --- ÁREA DE PRÁCTICA --- */
+        #practice-section { display: none; }
+        .info-estudiante { background: rgba(52, 152, 219, 0.1); border-left: 5px solid var(--color-bio-primario); padding: 15px; margin-bottom: 30px; border-radius: 5px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center;}
+        
+        .ejercicio-card {
+            background: var(--bg-tarjeta); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .ej-numero { position: absolute; top: 0; right: 0; background: var(--color-bio-primario); color: #fff; padding: 5px 15px; border-bottom-left-radius: 12px; font-weight: 800; }
+        .ej-texto { font-size: 1.2rem; margin-bottom: 25px; line-height: 1.6; }
+        
+        .opciones-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .opcion-label { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.4); padding: 15px 20px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: 0.2s; font-size: 1.1rem; }
+        .opcion-label:hover { background: rgba(52, 152, 219, 0.1); border-color: rgba(52, 152, 219, 0.5); }
+        
+        input[type="radio"] { appearance: none; width: 22px; height: 22px; border: 2px solid #ccc; border-radius: 50%; outline: none; transition: 0.2s; position: relative; cursor: pointer; flex-shrink: 0; }
+        input[type="radio"]:checked { border-color: var(--color-bio-primario); }
+        input[type="radio"]:checked::before { content: ''; position: absolute; width: 12px; height: 12px; background: var(--color-bio-primario); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 10px var(--color-bio-primario); }
+        
+        .opcion-correcta { border-color: var(--color-exito) !important; background: rgba(46, 204, 113, 0.1) !important; }
+        .opcion-incorrecta { border-color: var(--color-error) !important; background: rgba(231, 76, 60, 0.1) !important; }
+        
+        .feedback { margin-top: 20px; font-weight: 600; font-size: 1.1rem; display: none; padding: 15px; border-radius: 8px; }
+        .feedback-correcto { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71;}
+        .feedback-incorrecto { background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid #e74c3c;}
+
+        .btn-check { margin-top: 25px; background: transparent; border: 2px solid var(--color-bio-primario); color: var(--color-bio-primario); padding: 10px 20px; border-radius: 5px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-check:hover { background: var(--color-bio-primario); color: #fff; }
+        .btn-check:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="biologia_10.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Volver al Menú</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-area">
+            <div class="badge-grado">ENTRENAMIENTO INTERACTIVO</div>
+            <h1>Práctica: Leyes de Mendel</h1>
+        </div>
+
+        <!-- SECCIÓN DE LOGIN -->
+        <section id="login-section">
+            <h2 style="margin-bottom: 20px;"><i class="fa-solid fa-address-card" style="color: var(--color-bio-primario);"></i> Identificación</h2>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 0.9rem;">Para realizar la práctica y registrar tu progreso, por favor ingresa tus datos.</p>
+            
+            <form id="form-login">
+                <div class="form-group">
+                    <label for="nombre_estudiante">Nombre y Apellido Completos:</label>
+                    <input type="text" id="nombre_estudiante" class="form-control" placeholder="Ej: Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label for="grado_estudiante">Grado / Curso:</label>
+                    <input type="text" id="grado_estudiante" class="form-control" placeholder="Ej: 10-A" required>
+                </div>
+                <button type="submit" class="btn-principal"><i class="fa-solid fa-rocket"></i> Iniciar Práctica</button>
+            </form>
+        </section>
+
+        <!-- SECCIÓN DE PRÁCTICA -->
+        <section id="practice-section">
+            <div class="info-estudiante">
+                <div><i class="fa-solid fa-user-graduate"></i> Estudiante: <strong id="display-nombre"></strong> | Curso: <strong id="display-grado"></strong></div>
+                <div style="font-size: 0.9rem; color: #ccc;">Práctica Formativa</div>
+            </div>
+
+            <!-- Ejercicio 1 -->
+            <div class="ejercicio-card" data-ej="1" data-correct="C">
+                <div class="ej-numero">Ej. 1 - Primera Ley</div>
+                <div class="ej-texto">Se cruza una planta de flores moradas puras dominantes (MM) con una de flores blancas puras recesivas (mm). ¿Qué porcentaje de la primera generación (F1) tendrá flores moradas?</div>
+                <div class="opciones-grid">
+                    <label class="opcion-label"><input type="radio" name="q1" value="A"> A) 25%</label>
+                    <label class="opcion-label"><input type="radio" name="q1" value="B"> B) 50%</label>
+                    <label class="opcion-label"><input type="radio" name="q1" value="C"> C) 100%</label>
+                </div>
+                <button class="btn-check" onclick="verificarRespuesta(1)"><i class="fa-solid fa-check"></i> Comprobar</button>
+                <div class="feedback" id="feedback-1"></div>
+            </div>
+
+            <!-- Ejercicio 2 -->
+            <div class="ejercicio-card" data-ej="2" data-correct="B">
+                <div class="ej-numero">Ej. 2 - Segunda Ley</div>
+                <div class="ej-texto">Si cruzas dos individuos de la F1 del ejercicio anterior (es decir, cruzamos Mm x Mm), ¿cuál es la proporción fenotípica (lo que se ve físicamente) en la descendencia F2?</div>
+                <div class="opciones-grid">
+                    <label class="opcion-label"><input type="radio" name="q2" value="A"> A) Proporción 1:2:1 (1 morado fuerte, 2 morados claros, 1 blanco)</label>
+                    <label class="opcion-label"><input type="radio" name="q2" value="B"> B) Proporción 3:1 (3 morados por cada 1 blanco)</label>
+                    <label class="opcion-label"><input type="radio" name="q2" value="C"> C) Proporción 9:3:3:1</label>
+                </div>
+                <button class="btn-check" onclick="verificarRespuesta(2)"><i class="fa-solid fa-check"></i> Comprobar</button>
+                <div class="feedback" id="feedback-2"></div>
+            </div>
+
+            <!-- Ejercicio 3 -->
+            <div class="ejercicio-card" data-ej="3" data-correct="A">
+                <div class="ej-numero">Ej. 3 - Conceptos (Fenotipo vs Genotipo)</div>
+                <div class="ej-texto">Al analizar un perro, determinas que su pelaje es "Negro y brillante". Esta descripción hace referencia directa a su:</div>
+                <div class="opciones-grid">
+                    <label class="opcion-label"><input type="radio" name="q3" value="A"> A) Fenotipo</label>
+                    <label class="opcion-label"><input type="radio" name="q3" value="B"> B) Genotipo</label>
+                    <label class="opcion-label"><input type="radio" name="q3" value="C"> C) Cariotipo</label>
+                </div>
+                <button class="btn-check" onclick="verificarRespuesta(3)"><i class="fa-solid fa-check"></i> Comprobar</button>
+                <div class="feedback" id="feedback-3"></div>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="ejercicio-card" data-ej="4" data-correct="B">
+                <div class="ej-numero">Ej. 4 - Segunda Ley (Alelos)</div>
+                <div class="ej-texto">En humanos, el cabello rizado (R) domina sobre el lacio (r). Una pareja de cabello rizado tiene un hijo de cabello lacio. ¿Cuál debe ser el genotipo de los padres?</div>
+                <div class="opciones-grid">
+                    <label class="opcion-label"><input type="radio" name="q4" value="A"> A) RR x Rr</label>
+                    <label class="opcion-label"><input type="radio" name="q4" value="B"> B) Rr x Rr</label>
+                    <label class="opcion-label"><input type="radio" name="q4" value="C"> C) rr x rr</label>
+                </div>
+                <button class="btn-check" onclick="verificarRespuesta(4)"><i class="fa-solid fa-check"></i> Comprobar</button>
+                <div class="feedback" id="feedback-4"></div>
+            </div>
+
+            <!-- Ejercicio 5 -->
+            <div class="ejercicio-card" data-ej="5" data-correct="C">
+                <div class="ej-numero">Ej. 5 - Tercera Ley</div>
+                <div class="ej-texto">De acuerdo con la Tercera Ley de Mendel (cruce dihíbrido de dos heterocigotos, Ej: AaBb x AaBb), ¿qué probabilidad hay de obtener un individuo doblemente recesivo (aabb) de un total de 16 combinaciones?</div>
+                <div class="opciones-grid">
+                    <label class="opcion-label"><input type="radio" name="q5" value="A"> A) 9/16</label>
+                    <label class="opcion-label"><input type="radio" name="q5" value="B"> B) 3/16</label>
+                    <label class="opcion-label"><input type="radio" name="q5" value="C"> C) 1/16</label>
+                </div>
+                <button class="btn-check" onclick="verificarRespuesta(5)"><i class="fa-solid fa-check"></i> Comprobar</button>
+                <div class="feedback" id="feedback-5"></div>
+            </div>
+
+            <button class="btn-principal" id="btn-finalizar" style="margin-top: 20px; font-size: 1.4rem; padding: 20px;" onclick="finalizarPractica()"><i class="fa-solid fa-paper-plane"></i> Finalizar y Enviar Reporte al Docente</button>
+        </section>
+
+    </main>
+
+    <script>
+        let estudiante_nombre = "";
+        let estudiante_grado = "";
+        let ejerciciosCompletados = 0;
+        
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDv4X5QLZXRvLdaAKLnz3z6ajdKnKM6q_vMBHhRO8803PXFZoVHnamm9vsH0q81Mqu/exec';
+
+        // Manejo del Login
+        document.getElementById('form-login').addEventListener('submit', function(e) {
+            e.preventDefault();
+            estudiante_nombre = document.getElementById('nombre_estudiante').value.trim();
+            estudiante_grado = document.getElementById('grado_estudiante').value.trim();
+            
+            if(estudiante_nombre !== "" && estudiante_grado !== "") {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('display-nombre').innerText = estudiante_nombre;
+                document.getElementById('display-grado').innerText = estudiante_grado;
+                document.getElementById('practice-section').style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+        });
+
+        // Lógica de validación por pregunta
+        function verificarRespuesta(numEj) {
+            const card = document.querySelector(`.ejercicio-card[data-ej="${numEj}"]`);
+            const seleccion = card.querySelector(`input[name="q${numEj}"]:checked`);
+            const correcta = card.getAttribute('data-correct');
+            const feedbackBox = document.getElementById(`feedback-${numEj}`);
+            
+            if(!seleccion) {
+                Swal.fire({ icon: 'warning', title: 'Oye!', text: 'Selecciona una opción primero.', background: '#0f171e', color: '#fff'});
+                return;
+            }
+
+            // Deshabilitar opciones
+            card.querySelectorAll(`input[name="q${numEj}"]`).forEach(input => {
+                input.disabled = true;
+                if(input.value === correcta) {
+                    input.parentElement.classList.add('opcion-correcta');
+                } else if(input.checked && input.value !== correcta) {
+                    input.parentElement.classList.add('opcion-incorrecta');
+                }
+            });
+
+            card.querySelector('.btn-check').style.display = 'none';
+            feedbackBox.style.display = 'block';
+
+            if(seleccion.value === correcta) {
+                feedbackBox.className = 'feedback feedback-correcto';
+                feedbackBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> ¡Correcto! Excelente análisis.';
+            } else {
+                feedbackBox.className = 'feedback feedback-incorrecto';
+                feedbackBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Incorrecto. Revisa de nuevo los conceptos teóricos.';
+            }
+
+            ejerciciosCompletados++;
+        }
+
+        // Envío final
+        function finalizarPractica() {
+            if(ejerciciosCompletados < 5) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Práctica Incompleta',
+                    text: 'Debes comprobar (resolver) los 5 ejercicios antes de enviar tu reporte.',
+                    background: '#0f171e', color: '#fff', confirmButtonColor: '#3498db'
+                });
+                return;
+            }
+
+            const btnFinal = document.getElementById('btn-finalizar');
+            btnFinal.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando Reporte...';
+            btnFinal.disabled = true;
+
+            const formData = new FormData();
+            formData.append('accion', 'practica'); // Para que Google Sheets sepa a qué hoja enviarlo
+            formData.append('nombre', estudiante_nombre);
+            formData.append('grado', estudiante_grado);
+
+            // Simulación o Envío real
+            if(SCRIPT_URL.includes('TU_SCRIPT_ID')) {
+                setTimeout(() => {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Modo Prueba Local',
+                        html: `Falta configurar tu URL de Google Apps Script.<br><br>Datos generados:<br>Hoja: PRÁCTICA<br>Nombre: ${estudiante_nombre}<br>Grado: ${estudiante_grado}`,
+                        background: '#0f171e', color: '#fff', confirmButtonColor: '#3498db'
+                    });
+                    btnFinal.innerHTML = '<i class="fa-solid fa-check-double"></i> Reporte Simulado';
+                }, 1000);
+            } else {
+                fetch(SCRIPT_URL, { method: 'POST', body: formData })
+                    .then(res => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Reporte Enviado!',
+                            text: 'El docente ha recibido el comprobante de que realizaste la práctica.',
+                            background: '#0f171e', color: '#fff', confirmButtonColor: '#3498db'
+                        }).then(() => {
+                            window.location.href = 'biologia_10.html';
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error de Red',
+                            text: 'Hubo un fallo al enviar. Revisa tu conexión.',
+                            background: '#0f171e', color: '#fff', confirmButtonColor: '#e74c3c'
+                        });
+                        btnFinal.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Reintentar Envío';
+                        btnFinal.disabled = false;
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

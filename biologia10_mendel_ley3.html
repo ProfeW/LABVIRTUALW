@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tercera Ley de Mendel | LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bio-primario: #2ecc71;   
+            --color-bio-secundario: #1abc9c;
+            --color-oscuro: #121e14;
+            --color-texto: #ffffff;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+            --color-dom: #e74c3c;
+            --color-rec: #3498db;
+            --color-dom2: #f1c40f;
+            --color-rec2: #9b59b6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(18, 30, 20, 0.95), rgba(18, 30, 20, 0.98)), url('https://images.unsplash.com/photo-1530508953158-6927d30f40fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(46, 204, 113, 0.2); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-bio-primario); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(46, 204, 113, 0.1); color: var(--color-bio-primario); }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .contenedor { max-width: 1100px; margin: 40px auto; padding: 20px; animation: fadeIn 0.8s ease; }
+        
+        .encabezado-area { text-align: center; margin-bottom: 50px; border-bottom: 2px solid var(--color-bio-primario); padding-bottom: 30px;}
+        .badge-grado { display: inline-block; background: rgba(46, 204, 113, 0.2); color: var(--color-bio-primario); padding: 5px 15px; border-radius: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(46, 204, 113, 0.4);}
+        .encabezado-area h1 { font-size: 3rem; color: #fff; margin-bottom: 15px; text-transform: uppercase; }
+        .encabezado-area h1 span { color: var(--color-bio-secundario); }
+        
+        /* --- TARJETAS --- */
+        .tarjeta-info {
+            background: var(--bg-tarjeta);
+            border-radius: 15px;
+            border-left: 5px solid var(--color-bio-primario);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .tarjeta-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .tarjeta-header i { font-size: 2rem; color: var(--color-bio-primario); }
+        .tarjeta-header h2 { font-size: 1.8rem; color: #fff; }
+
+        .texto-info { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: justify; }
+        .texto-info p { margin-bottom: 15px; }
+        .resaltado { color: var(--color-bio-primario); font-weight: 600; }
+
+        /* --- CUADRO DE PUNNETT (16 celdas) --- */
+        .punnett-container { display: flex; justify-content: center; margin: 30px 0; overflow-x: auto; }
+        .punnett-table { border-collapse: collapse; text-align: center; font-size: 1.2rem; font-weight: 800; min-width: 600px;}
+        .punnett-table td, .punnett-table th { padding: 15px; border: 2px solid #555; width: 20%; height: 80px;}
+        .punnett-header { background: rgba(0,0,0,0.5); color: #aaa; font-size: 1.1rem;}
+        .punnett-cell { background: rgba(255,255,255,0.05); transition: 0.3s; }
+        .punnett-cell:hover { background: rgba(46, 204, 113, 0.2); }
+        
+        .alelo-dom { color: var(--color-dom); } /* A */
+        .alelo-rec { color: var(--color-rec); } /* a */
+        .alelo-dom2 { color: var(--color-dom2); } /* B */
+        .alelo-rec2 { color: var(--color-rec2); } /* b */
+
+        /* --- ANALISIS RESULTADOS --- */
+        .analisis-caja { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 10px; border: 1px solid rgba(46, 204, 113, 0.3); margin-top: 20px;}
+        .analisis-caja h3 { color: var(--color-bio-secundario); margin-bottom: 15px; font-size: 1.3rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .analisis-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 1px dashed #333; padding-bottom: 5px;}
+        
+        /* --- EJERCICIOS RESUELTOS --- */
+        .ejercicio-resuelto { background: rgba(0,0,0,0.6); border: 1px solid var(--color-bio-primario); border-radius: 12px; padding: 25px; margin-bottom: 30px; }
+        .ej-titulo { font-size: 1.4rem; color: var(--color-bio-primario); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .ej-enunciado { font-size: 1.15rem; font-style: italic; background: rgba(255,255,255,0.05); padding: 15px; border-left: 4px solid #f1c40f; margin-bottom: 20px; }
+        
+        .paso-paso { margin-left: 20px; border-left: 2px solid #555; padding-left: 20px;}
+        .paso { margin-bottom: 20px; position: relative; }
+        .paso::before { content: attr(data-step); position: absolute; left: -38px; top: -2px; width: 30px; height: 30px; background: var(--color-bio-secundario); color: #000; font-weight: 900; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem;}
+        .paso-titulo { font-weight: 800; color: #fff; margin-bottom: 5px; font-size: 1.1rem; }
+        
+        .btn-nav { display: flex; justify-content: space-between; margin-top: 40px; }
+        .btn-accion { background: var(--color-bio-primario); color: #121e14; padding: 15px 25px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; transition: 0.3s; }
+        .btn-accion:hover { background: var(--color-bio-secundario); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3); }
+        .btn-secundario { background: transparent; border: 2px solid var(--color-bio-primario); color: var(--color-bio-primario); }
+        .btn-secundario:hover { background: rgba(46, 204, 113, 0.1); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="biologia_10.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Volver al Menú</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-area">
+            <div class="badge-grado">LEYES DE MENDEL</div>
+            <h1>Tercera Ley de Mendel:<br><span>Transmisión Independiente</span></h1>
+        </div>
+
+        <article class="tarjeta-info">
+            <div class="tarjeta-header">
+                <i class="fa-solid fa-network-wired"></i>
+                <h2>Concepto e Importancia</h2>
+            </div>
+            <div class="texto-info">
+                <p>La <strong>Tercera Ley de Mendel</strong> (o Principio de la Transmisión Independiente) establece que los diferentes rasgos son heredados independientemente unos de otros. El patrón de herencia de un rasgo no afectará al patrón de herencia de otro.</p>
+                <p>Mendel concluyó esto al estudiar dos características al mismo tiempo (por ejemplo: color de la semilla y textura de la semilla). Observó que ser "Amarilla" no te obliga a ser "Lisa", y ser "Verde" no te obliga a ser "Rugosa". Los genes se mezclan en todas las combinaciones posibles.</p>
+                <p><strong>Importancia:</strong> Es la razón fundamental de la inmensa diversidad y variabilidad genética en el mundo. ¡Por eso tú puedes tener el color de cabello de tu padre pero la forma de los ojos de tu madre!</p>
+            </div>
+        </article>
+
+        <article class="tarjeta-info">
+            <div class="tarjeta-header">
+                <i class="fa-solid fa-table-cells-large"></i>
+                <h2>Análisis Estructural: Cruce Dihíbrido (AaBb x AaBb)</h2>
+            </div>
+            <div class="texto-info">
+                <p>Para ver esto matemáticamente, usamos un <strong>Cruce Dihíbrido</strong> (dos genes). Cruzamos plantas heterocigotas para ambos rasgos: <br>
+                <span class="alelo-dom">A</span> (Amarilla), <span class="alelo-rec">a</span> (Verde) y <span class="alelo-dom2">B</span> (Lisa), <span class="alelo-rec2">b</span> (Rugosa).
+                </p>
+                <p>Los gametos que cada padre puede producir son: <strong>AB, Ab, aB, ab</strong>. Al cruzarlos, se genera una cuadrícula de 4x4 (16 casillas).</p>
+            </div>
+            
+            <div class="punnett-container">
+                <table class="punnett-table">
+                    <tr>
+                        <th style="border:none;"></th>
+                        <th class="punnett-header"><span class="alelo-dom">A</span><span class="alelo-dom2">B</span></th>
+                        <th class="punnett-header"><span class="alelo-dom">A</span><span class="alelo-rec2">b</span></th>
+                        <th class="punnett-header"><span class="alelo-rec">a</span><span class="alelo-dom2">B</span></th>
+                        <th class="punnett-header"><span class="alelo-rec">a</span><span class="alelo-rec2">b</span></th>
+                    </tr>
+                    <tr>
+                        <th class="punnett-header"><span class="alelo-dom">A</span><span class="alelo-dom2">B</span></th>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">AA</span><span class="alelo-dom2">BB</span></td>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">AA</span><span class="alelo-dom2">B</span><span class="alelo-rec2">b</span></td>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">A</span><span class="alelo-rec">a</span><span class="alelo-dom2">BB</span></td>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">A</span><span class="alelo-rec">a</span><span class="alelo-dom2">B</span><span class="alelo-rec2">b</span></td>
+                    </tr>
+                    <tr>
+                        <th class="punnett-header"><span class="alelo-dom">A</span><span class="alelo-rec2">b</span></th>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">AA</span><span class="alelo-dom2">B</span><span class="alelo-rec2">b</span></td>
+                        <td class="punnett-cell"><span class="alelo-dom">AA</span><span class="alelo-rec2">bb</span></td>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">A</span><span class="alelo-rec">a</span><span class="alelo-dom2">B</span><span class="alelo-rec2">b</span></td>
+                        <td class="punnett-cell"><span class="alelo-dom">A</span><span class="alelo-rec">a</span><span class="alelo-rec2">bb</span></td>
+                    </tr>
+                    <tr>
+                        <th class="punnett-header"><span class="alelo-rec">a</span><span class="alelo-dom2">B</span></th>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">A</span><span class="alelo-rec">a</span><span class="alelo-dom2">BB</span></td>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">A</span><span class="alelo-rec">a</span><span class="alelo-dom2">B</span><span class="alelo-rec2">b</span></td>
+                        <td class="punnett-cell" style="background: rgba(52, 152, 219, 0.1);"><span class="alelo-rec">aa</span><span class="alelo-dom2">BB</span></td>
+                        <td class="punnett-cell" style="background: rgba(52, 152, 219, 0.1);"><span class="alelo-rec">aa</span><span class="alelo-dom2">B</span><span class="alelo-rec2">b</span></td>
+                    </tr>
+                    <tr>
+                        <th class="punnett-header"><span class="alelo-rec">a</span><span class="alelo-rec2">b</span></th>
+                        <td class="punnett-cell" style="background: rgba(231, 76, 60, 0.2);"><span class="alelo-dom">A</span><span class="alelo-rec">a</span><span class="alelo-dom2">B</span><span class="alelo-rec2">b</span></td>
+                        <td class="punnett-cell"><span class="alelo-dom">A</span><span class="alelo-rec">a</span><span class="alelo-rec2">bb</span></td>
+                        <td class="punnett-cell" style="background: rgba(52, 152, 219, 0.1);"><span class="alelo-rec">aa</span><span class="alelo-dom2">B</span><span class="alelo-rec2">b</span></td>
+                        <td class="punnett-cell" style="border: 2px solid var(--color-bio-secundario);"><span class="alelo-rec">aa</span><span class="alelo-rec2">bb</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="analisis-caja">
+                <h3><i class="fa-solid fa-eye"></i> Proporción Fenotípica (La Regla del 9:3:3:1)</h3>
+                <div class="analisis-item"><span style="color:var(--color-dom);">Amarillas</span> y <span style="color:var(--color-dom2);">Lisas</span> (Ambos Dominantes): <strong>9/16</strong></div>
+                <div class="analisis-item"><span style="color:var(--color-dom);">Amarillas</span> y <span style="color:var(--color-rec2);">Rugosas</span> (Dom 1, Rec 2): <strong>3/16</strong></div>
+                <div class="analisis-item"><span style="color:var(--color-rec);">Verdes</span> y <span style="color:var(--color-dom2);">Lisas</span> (Rec 1, Dom 2): <strong>3/16</strong></div>
+                <div class="analisis-item"><span style="color:var(--color-rec);">Verdes</span> y <span style="color:var(--color-rec2);">Rugosas</span> (Ambos Recesivos): <strong>1/16</strong></div>
+            </div>
+        </article>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN DE EJERCICIOS RESUELTOS            -->
+        <!-- ========================================== -->
+        <h2 style="text-align: center; font-size: 2.2rem; margin: 50px 0 30px; border-bottom: 2px solid #555; padding-bottom: 20px;">
+            <i class="fa-solid fa-chalkboard-user" style="color: var(--color-bio-secundario);"></i> Ejercicios Resueltos Paso a Paso
+        </h2>
+
+        <!-- Ejercicio 1 -->
+        <div class="ejercicio-resuelto">
+            <h3 class="ej-titulo">Ejercicio 1: Cobayas (conejillos de indias)</h3>
+            <div class="ej-enunciado">
+                "En cobayas, el pelo negro (N) domina sobre el blanco (n) y el pelo áspero (A) domina sobre el suave (a). Se cruzan dos cobayas heterocigotas para ambos rasgos (NnAa x NnAa). ¿Cuál es la probabilidad de que nazca un cobaya blanco y suave?"
+            </div>
+            
+            <div class="paso-paso">
+                <div class="paso" data-step="1">
+                    <div class="paso-titulo">Entender los genes implicados</div>
+                    <div class="texto-info">Tenemos dos rasgos al mismo tiempo. Es un clásico cruce dihíbrido de heterocigotos, por lo que aplicaremos la proporción 9:3:3:1 de la Tercera Ley.</div>
+                </div>
+                <div class="paso" data-step="2">
+                    <div class="paso-titulo">Identificar el fenotipo buscado</div>
+                    <div class="texto-info">El ejercicio pregunta por un cobaya "blanco y suave". <br>
+                    Blanco = recesivo (n). Suave = recesivo (a). <br>
+                    Nos están pidiendo la probabilidad del individuo doble recesivo (nnaa).</div>
+                </div>
+                <div class="paso" data-step="3" style="margin-bottom: 0;">
+                    <div class="paso-titulo">Aplicar la Proporción</div>
+                    <div class="texto-info">
+                        Según la regla 9:3:3:1, el último número "1" corresponde al doble recesivo.<br>
+                        <strong>Respuesta:</strong> La probabilidad es de <strong>1/16</strong> (aprox. 6.25%).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="ejercicio-resuelto">
+            <h3 class="ej-titulo">Ejercicio 2: Variedad de perritos</h3>
+            <div class="ej-enunciado">
+                "Un perro labrador negro y de cola larga (homocigoto dominante NNLL) se cruza con una hembra dorada y de cola corta (homocigota recesiva nnll). ¿Cómo serán los cachorros de la generación F1 genotípica y fenotípicamente?"
+            </div>
+            
+            <div class="paso-paso">
+                <div class="paso" data-step="1">
+                    <div class="paso-titulo">Extraer los genotipos de los padres</div>
+                    <div class="texto-info">Padre = <strong>NNLL</strong>. Madre = <strong>nnll</strong>.</div>
+                </div>
+                <div class="paso" data-step="2">
+                    <div class="paso-titulo">Generar gametos</div>
+                    <div class="texto-info">
+                        El padre solo puede aportar los alelos 'N' y 'L'. (Gametos NL).<br>
+                        La madre solo puede aportar los alelos 'n' y 'l'. (Gametos nl).
+                    </div>
+                </div>
+                <div class="paso" data-step="3" style="margin-bottom: 0;">
+                    <div class="paso-titulo">Unir los gametos (F1)</div>
+                    <div class="texto-info">
+                        Al unir (NL) con (nl) obtenemos descendencia que es 100% <strong>NnLl</strong>.<br>
+                        <strong>Genotipo F1:</strong> 100% Doble Heterocigotos (NnLl).<br>
+                        <strong>Fenotipo F1:</strong> 100% Perros negros y de cola larga (ya que la N y la L dominan).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="ejercicio-resuelto">
+            <h3 class="ej-titulo">Ejercicio 3: Sandías Rayadas</h3>
+            <div class="ej-enunciado">
+                "El patrón rayado en sandías (R) es dominante sobre el liso (r), y la forma ovalada (O) domina sobre la redonda (o). Cruzamos una sandía Heterocigota Rayada/Ovalada (RrOo) con una sandía lisa y redonda (rroo). ¿Aparecerán sandías Rayadas y redondas?"
+            </div>
+            
+            <div class="paso-paso">
+                <div class="paso" data-step="1">
+                    <div class="paso-titulo">Establecer el tipo de cruce</div>
+                    <div class="texto-info">Cruce: <strong>RrOo x rroo</strong>. (Este es un "cruce de prueba" dihíbrido, no es entre dos heterocigotos, por lo que NO aplica la proporción 9:3:3:1 de memoria, hay que hacer el cuadro).</div>
+                </div>
+                <div class="paso" data-step="2">
+                    <div class="paso-titulo">Gametos y Cuadro Mínimo</div>
+                    <div class="texto-info">
+                        Gametos de RrOo: RO, Ro, rO, ro (4 opciones).<br>
+                        Gametos de rroo: ro (solo 1 opción, ya que es puro).<br>
+                        El cruce genera 4 combinaciones: RrOo (Ray/Ova), Rroo (Ray/Red), rrOo (Lis/Ova), rroo (Lis/Red). Todas con 25% de probabilidad.
+                    </div>
+                </div>
+                <div class="paso" data-step="3" style="margin-bottom: 0;">
+                    <div class="paso-titulo">Responder la Pregunta</div>
+                    <div class="texto-info">
+                        ¿Aparecerán sandías Rayadas (R_) y redondas (oo)?<br>
+                        Sí, el genotipo <strong>Rroo</strong> cumple con estas condiciones. <strong>Respuesta: Sí, en un 25% de los casos.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-nav">
+            <a href="biologia10_mendel_ley2.html" class="btn-accion btn-secundario"><i class="fa-solid fa-arrow-left"></i> Anterior (2da Ley)</a>
+            <a href="biologia10_mendel_practica.html" class="btn-accion" style="background:#3498db; color:#fff;"><i class="fa-solid fa-flask"></i> Ir al Simulador/Práctica <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+    </main>
+
+<script src="auth.js"></script>
+</body>
+</html>

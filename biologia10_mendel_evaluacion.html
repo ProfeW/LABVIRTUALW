@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Final: Leyes de Mendel | LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            --color-bio-primario: #e74c3c;   
+            --color-bio-secundario: #c0392b;
+            --color-oscuro: #170d0d;
+            --color-texto: #ffffff;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+            --color-exito: #2ecc71;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(23, 13, 13, 0.95), rgba(23, 13, 13, 0.98)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(231, 76, 60, 0.3); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-bio-primario); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(231, 76, 60, 0.1); color: var(--color-bio-primario); }
+
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.8s ease; }
+        
+        .encabezado-area { text-align: center; margin-bottom: 40px; border-bottom: 2px solid var(--color-bio-primario); padding-bottom: 20px;}
+        .badge-grado { display: inline-block; background: rgba(231, 76, 60, 0.2); color: var(--color-bio-primario); padding: 5px 15px; border-radius: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(231, 76, 60, 0.4);}
+        .encabezado-area h1 { font-size: 2.5rem; color: #fff; text-transform: uppercase; }
+
+        /* --- PANTALLA DE LOGIN --- */
+        #login-section {
+            background: rgba(0,0,0,0.6); border: 2px solid var(--color-bio-primario);
+            border-radius: 15px; padding: 40px; text-align: center; max-width: 500px; margin: 0 auto;
+        }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 10px; color: #ccc; }
+        .form-control { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #444; background: rgba(255,255,255,0.05); color: #fff; font-size: 1.1rem; outline: none; transition: 0.3s; }
+        .form-control:focus { border-color: var(--color-bio-primario); box-shadow: 0 0 15px rgba(231, 76, 60, 0.3); }
+
+        .btn-principal {
+            background: var(--color-bio-primario); color: #fff; border: none; padding: 15px 30px; 
+            border-radius: 8px; font-weight: 800; font-size: 1.2rem; cursor: pointer; width: 100%; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-principal:hover { background: var(--color-bio-secundario); transform: scale(1.02); }
+        .btn-principal:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* --- ÁREA DE EVALUACIÓN --- */
+        #eval-section { display: none; }
+        .info-estudiante { background: rgba(231, 76, 60, 0.1); border-left: 5px solid var(--color-bio-primario); padding: 15px; margin-bottom: 30px; border-radius: 5px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center;}
+        
+        .seccion-titulo { font-size: 1.5rem; color: var(--color-bio-primario); margin: 30px 0 20px; border-bottom: 1px solid #333; padding-bottom: 10px;}
+
+        .pregunta-card {
+            background: var(--bg-tarjeta); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 25px; margin-bottom: 25px; transition: 0.3s;
+        }
+        .pregunta-card:hover { border-color: rgba(231, 76, 60, 0.4); }
+        
+        .p-numero { color: var(--color-bio-primario); font-weight: 800; font-size: 1.1rem; margin-bottom: 10px; }
+        .p-texto { font-size: 1.15rem; margin-bottom: 15px; }
+        
+        .opciones-lista { display: flex; flex-direction: column; gap: 10px; }
+        .opcion-label { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.4); padding: 12px 15px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: 0.2s; }
+        .opcion-label:hover { background: rgba(231, 76, 60, 0.1); border-color: var(--color-bio-primario); }
+        
+        input[type="radio"] { appearance: none; width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 50%; outline: none; transition: 0.2s; position: relative; cursor: pointer; flex-shrink: 0;}
+        input[type="radio"]:checked { border-color: var(--color-bio-primario); background: rgba(231, 76, 60, 0.2); }
+        input[type="radio"]:checked::before { content: ''; position: absolute; width: 10px; height: 10px; background: var(--color-bio-primario); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+        /* Ejercicio Practico en Eval */
+        .ejercicio-box { background: rgba(255,255,255,0.03); border: 2px dashed #555; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .select-personalizado { width: 100%; padding: 12px; background: #111; color: #fff; border: 1px solid #444; border-radius: 5px; margin-top: 5px; font-size: 1rem; outline: none; }
+        .select-personalizado:focus { border-color: var(--color-bio-primario); }
+
+        /* Pantalla Resultados */
+        #resultado-container { display: none; text-align: center; background: rgba(0,0,0,0.8); border: 2px solid var(--color-bio-primario); padding: 40px; border-radius: 15px; margin-top: 40px; }
+        .nota-final { font-size: 5rem; font-weight: 900; margin: 20px 0; text-shadow: 0 0 20px rgba(231, 76, 60, 0.5); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="biologia_10.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-area">
+            <div class="badge-grado">EVALUACIÓN SUMATIVA</div>
+            <h1>Evaluación Final: Leyes de Mendel</h1>
+        </div>
+
+        <!-- SECCIÓN DE LOGIN -->
+        <section id="login-section">
+            <h2 style="margin-bottom: 20px;"><i class="fa-solid fa-id-badge" style="color: var(--color-bio-primario);"></i> Registro de Evaluación</h2>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 0.9rem;">Ingresa tus datos para iniciar la prueba. Al finalizar, tu nota se enviará automáticamente al sistema.</p>
+            
+            <form id="form-login">
+                <div class="form-group">
+                    <label for="nombre_estudiante">Nombre y Apellido Completos:</label>
+                    <input type="text" id="nombre_estudiante" class="form-control" placeholder="Ej: Maria Gonzalez" required>
+                </div>
+                <div class="form-group">
+                    <label for="grado_estudiante">Grado / Curso:</label>
+                    <input type="text" id="grado_estudiante" class="form-control" placeholder="Ej: 10-B" required>
+                </div>
+                <button type="submit" class="btn-principal"><i class="fa-solid fa-play"></i> Comenzar Evaluación</button>
+            </form>
+        </section>
+
+        <!-- SECCIÓN DE EVALUACIÓN -->
+        <section id="eval-section">
+            <div class="info-estudiante">
+                <div><i class="fa-solid fa-user"></i> <strong id="display-nombre"></strong> (<span id="display-grado"></span>)</div>
+                <div style="font-size: 0.9rem; color: #ccc;"><i class="fa-solid fa-clock"></i> Cuestionario Aleatorio</div>
+            </div>
+
+            <form id="eval-form">
+                
+                <div class="seccion-titulo"><i class="fa-solid fa-list-check"></i> I. Preguntas de Selección Múltiple (2.5 puntos)</div>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">Selecciona la respuesta correcta para cada una de las siguientes 5 preguntas teóricas (0.5 cada una).</p>
+                
+                <div id="contenedor-preguntas"></div> <!-- Aquí se inyectan las 5 preguntas -->
+
+                <div class="seccion-titulo"><i class="fa-solid fa-pen-to-square"></i> II. Ejercicio Práctico (2.5 puntos)</div>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">Analiza el siguiente caso y selecciona el fenotipo, genotipo y proporción correcta.</p>
+                
+                <div id="contenedor-ejercicio"></div> <!-- Aquí se inyecta el ejercicio -->
+
+                <button type="button" class="btn-principal" id="btn-enviar-eval" style="margin-top: 40px;" onclick="calificarYEnviar()"><i class="fa-solid fa-paper-plane"></i> Finalizar y Enviar Evaluación</button>
+            </form>
+
+        </section>
+
+        <!-- RESULTADOS -->
+        <div id="resultado-container">
+            <h2>Resultados Enviados</h2>
+            <div class="nota-final" id="nota-texto">0.0</div>
+            <p id="mensaje-feedback" style="font-size: 1.2rem; margin-bottom: 20px; color: #ccc;"></p>
+            <a href="biologia_10.html" class="btn-principal" style="background: #2ecc71; text-decoration: none; display: inline-block; width: auto;"><i class="fa-solid fa-house"></i> Volver al Menú</a>
+        </div>
+
+    </main>
+
+    <script>
+        // DATOS DE ESTUDIANTE Y CONEXIÓN
+        let estudiante = { nombre: "", grado: "" };
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDv4X5QLZXRvLdaAKLnz3z6ajdKnKM6q_vMBHhRO8803PXFZoVHnamm9vsH0q81Mqu/exec'; // <- REEMPLAZAR
+        
+        // ==========================================
+        // BANCO DE 20 PREGUNTAS
+        // ==========================================
+        const bancoPreguntas = [
+            { q: "¿Quién es considerado el padre de la genética moderna?", opciones: ["Charles Darwin", "Gregor Mendel", "James Watson", "Louis Pasteur"], correcta: 1 },
+            { q: "La unidad de herencia que se transmite de padres a hijos se llama:", opciones: ["Cromosoma", "Gen", "Fenotipo", "Célula"], correcta: 1 },
+            { q: "La Primera Ley de Mendel también es conocida como el Principio de:", opciones: ["Segregación", "Transmisión Independiente", "Uniformidad", "Mutación"], correcta: 2 },
+            { q: "Si un alelo enmascara completamente al otro, se le denomina alelo:", opciones: ["Dominante", "Recesivo", "Homocigoto", "Codominante"], correcta: 0 },
+            { q: "Un organismo que posee dos alelos idénticos para un rasgo específico es:", opciones: ["Heterocigoto", "Híbrido", "Homocigoto", "Mutante"], correcta: 2 },
+            { q: "El conjunto de características físicas observables de un individuo se llama:", opciones: ["Genotipo", "Fenotipo", "Cariotipo", "Alelo"], correcta: 1 },
+            { q: "La Segunda Ley de Mendel establece la segregación de los alelos durante la formación de:", opciones: ["Proteínas", "Gametos", "Tejidos", "Órganos"], correcta: 1 },
+            { q: "¿Cuál es la proporción fenotípica esperada al cruzar dos heterocigotos (Aa x Aa) según la Segunda Ley?", opciones: ["1:1", "1:2:1", "3:1", "9:3:3:1"], correcta: 2 },
+            { q: "¿Qué porcentaje de descendientes homocigotos recesivos (aa) se obtiene del cruce Aa x Aa?", opciones: ["0%", "25%", "50%", "100%"], correcta: 1 },
+            { q: "La composición genética interna de un organismo se conoce como:", opciones: ["Fenotipo", "Alelo dominante", "Genotipo", "Rasgo"], correcta: 2 },
+            { q: "La Tercera Ley de Mendel aplica cuando se estudian:", opciones: ["Solo caracteres recesivos", "Un solo carácter a la vez", "Dos o más caracteres simultáneamente", "Caracteres ligados al sexo"], correcta: 2 },
+            { q: "¿Cuál es la proporción fenotípica clásica de un cruce dihíbrido (AaBb x AaBb)?", opciones: ["3:1", "1:2:1", "9:3:3:1", "9:7"], correcta: 2 },
+            { q: "En un Cuadro de Punnett, las letras mayúsculas (ej: 'A') representan usualmente:", opciones: ["Alelos dominantes", "Alelos recesivos", "Genes letales", "Mutaciones"], correcta: 0 },
+            { q: "El cruce de una planta Alta pura (AA) con una enana pura (aa) dará como resultado una F1:", opciones: ["100% Alta", "50% Alta y 50% Enana", "100% Enana", "75% Alta"], correcta: 0 },
+            { q: "¿Qué organismo utilizó Mendel para sus principales experimentos?", opciones: ["Moscas de la fruta", "Guisantes (Pisum sativum)", "Ratones", "Bacterias"], correcta: 1 },
+            { q: "Un alelo recesivo solo se expresa físicamente si el individuo es:", opciones: ["Heterocigoto", "Homocigoto dominante", "Homocigoto recesivo", "Híbrido"], correcta: 2 },
+            { q: "Si la proporción genotípica de un cruce es 100% heterocigota (Aa), este cruce fue probablemente:", opciones: ["Aa x Aa", "AA x aa", "aa x aa", "AA x AA"], correcta: 1 },
+            { q: "¿Cuántos cuadros o casillas tiene un Cuadro de Punnett estándar para un cruce dihíbrido?", opciones: ["4", "8", "16", "24"], correcta: 2 },
+            { q: "En la herencia Mendeliana, si mezclas flor roja dominante con flor blanca recesiva pura, la F1 será:", opciones: ["Rosa", "Roja", "Blanca", "Roja y Blanca a manchas"], correcta: 1 },
+            { q: "¿Por qué Mendel tuvo éxito donde otros fracasaron al estudiar la herencia?", opciones: ["Usó microscopios avanzados", "Descubrió el ADN", "Aplicó las matemáticas y estadística a sus datos", "Viajó a las islas Galápagos"], correcta: 2 }
+        ];
+
+        // ==========================================
+        // BANCO DE 3 EJERCICIOS PRÁCTICOS
+        // ==========================================
+        const bancoEjercicios = [
+            {
+                id: "EJ-01",
+                enunciado: "En humanos, la presencia de pecas (P) domina sobre la ausencia de pecas (p). Una pareja donde el padre es Heterocigoto con pecas (Pp) y la madre no tiene pecas (pp) tiene un hijo. Analiza este cruce (Pp x pp) y responde:",
+                opcionesFeno: ["100% Con pecas", "50% Con pecas / 50% Sin pecas", "75% Con pecas / 25% Sin pecas", "100% Sin pecas"],
+                opcionesGeno: ["100% Pp", "50% Pp / 50% pp", "25% PP / 50% Pp / 25% pp", "100% pp"],
+                opcionesProp: ["Proporción 1:1", "Proporción 3:1", "Proporción 9:3:3:1", "No hay proporción exacta"],
+                correctas: { feno: 1, geno: 1, prop: 0 }
+            },
+            {
+                id: "EJ-02",
+                enunciado: "En una raza bovina, los cuernos largos (L) dominan sobre los cortos (l). Si se cruzan dos toros heterocigotos (Ll x Ll) y nacen 4 terneros, selecciona el análisis genético correcto para la descendencia según las Leyes de Mendel.",
+                opcionesFeno: ["100% Cuernos Largos", "3 Cuernos Largos / 1 Cuerno Corto (75% - 25%)", "Mitad y Mitad (50% - 50%)", "100% Cuernos Cortos"],
+                opcionesGeno: ["25% LL / 50% Ll / 25% ll", "50% LL / 50% ll", "100% Ll", "50% Ll / 50% ll"],
+                opcionesProp: ["Proporción 1:1", "Proporción 1:2:1 Genotípica", "Proporción 100% dominante", "Proporción dihíbrida"],
+                correctas: { feno: 1, geno: 0, prop: 1 }
+            },
+            {
+                id: "EJ-03",
+                enunciado: "Cruce de Primera Ley: Una planta de semillas amarillas Puras (AA) se cruza con otra de semillas verdes Puras (aa). Determina las características de toda su descendencia F1.",
+                opcionesFeno: ["Semillas Verdes en su totalidad", "75% Amarillas y 25% Verdes", "100% Semillas Amarillas", "Mitad amarillas, mitad verdes"],
+                opcionesGeno: ["Todos Homocigotos Dominantes", "Todos Heterocigotos (Aa)", "Todos Homocigotos Recesivos", "Mezcla de Homocigotos y Heterocigotos"],
+                opcionesProp: ["3:1", "1:2:1", "100% Uniformidad", "9:3:3:1"],
+                correctas: { feno: 2, geno: 1, prop: 2 }
+            }
+        ];
+
+        let preguntasSeleccionadas = [];
+        let ejercicioSeleccionado = null;
+
+        // Mezclar array (Fisher-Yates)
+        function mezclar(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // Iniciar Evaluación
+        document.getElementById('form-login').addEventListener('submit', function(e) {
+            e.preventDefault();
+            estudiante.nombre = document.getElementById('nombre_estudiante').value.trim();
+            estudiante.grado = document.getElementById('grado_estudiante').value.trim();
+            
+            if(estudiante.nombre && estudiante.grado) {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('display-nombre').innerText = estudiante.nombre;
+                document.getElementById('display-grado').innerText = estudiante.grado;
+                document.getElementById('eval-section').style.display = 'block';
+                cargarPrueba();
+            }
+        });
+
+        function cargarPrueba() {
+            // 1. Cargar 5 preguntas al azar
+            let copiaBanco = JSON.parse(JSON.stringify(bancoPreguntas));
+            copiaBanco.forEach((p, i) => p.idOriginal = i); // Guardar ID para rastreo
+            mezclar(copiaBanco);
+            preguntasSeleccionadas = copiaBanco.slice(0, 5);
+
+            const contPreguntas = document.getElementById('contenedor-preguntas');
+            preguntasSeleccionadas.forEach((p, index) => {
+                let htmlOpciones = "";
+                p.opciones.forEach((op, i) => {
+                    htmlOpciones += `<label class="opcion-label"><input type="radio" name="p${index}" value="${i}"> ${op}</label>`;
+                });
+                
+                contPreguntas.innerHTML += `
+                    <div class="pregunta-card">
+                        <div class="p-numero">Pregunta ${index + 1}</div>
+                        <div class="p-texto">${p.q}</div>
+                        <div class="opciones-lista">${htmlOpciones}</div>
+                    </div>
+                `;
+            });
+
+            // 2. Cargar 1 Ejercicio al azar
+            ejercicioSeleccionado = bancoEjercicios[Math.floor(Math.random() * bancoEjercicios.length)];
+            const contEj = document.getElementById('contenedor-ejercicio');
+            
+            let htmlFeno = `<option value="">-- Selecciona el Fenotipo --</option>`;
+            ejercicioSeleccionado.opcionesFeno.forEach((op, i) => htmlFeno += `<option value="${i}">${op}</option>`);
+            
+            let htmlGeno = `<option value="">-- Selecciona el Genotipo --</option>`;
+            ejercicioSeleccionado.opcionesGeno.forEach((op, i) => htmlGeno += `<option value="${i}">${op}</option>`);
+            
+            let htmlProp = `<option value="">-- Selecciona la Proporción / Regla --</option>`;
+            ejercicioSeleccionado.opcionesProp.forEach((op, i) => htmlProp += `<option value="${i}">${op}</option>`);
+
+            contEj.innerHTML = `
+                <div class="pregunta-card" style="border-color: var(--color-bio-primario);">
+                    <div class="p-numero">${ejercicioSeleccionado.id}</div>
+                    <div class="p-texto" style="font-style: italic;">"${ejercicioSeleccionado.enunciado}"</div>
+                    
+                    <div class="ejercicio-box">
+                        <label style="color:#ccc; font-size:0.9rem;">1. Resultado Fenotípico (0.83 pts)</label>
+                        <select id="ej-feno" class="select-personalizado">${htmlFeno}</select>
+                    </div>
+                    <div class="ejercicio-box">
+                        <label style="color:#ccc; font-size:0.9rem;">2. Resultado Genotípico (0.83 pts)</label>
+                        <select id="ej-geno" class="select-personalizado">${htmlGeno}</select>
+                    </div>
+                    <div class="ejercicio-box" style="margin-bottom:0;">
+                        <label style="color:#ccc; font-size:0.9rem;">3. Proporción Identificada (0.84 pts)</label>
+                        <select id="ej-prop" class="select-personalizado">${htmlProp}</select>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Calificación y Envío
+        function calificarYEnviar() {
+            let puntajePreguntas = 0;
+            let respuestasMultiplesLog = [];
+            
+            // Validar y calificar las 5 preguntas
+            for(let i=0; i<5; i++) {
+                const seleccion = document.querySelector(`input[name="p${i}"]:checked`);
+                if(!seleccion) {
+                    Swal.fire('Atención', `Falta responder la pregunta ${i+1}.`, 'warning');
+                    return;
+                }
+                const acierto = (parseInt(seleccion.value) === preguntasSeleccionadas[i].correcta);
+                if(acierto) puntajePreguntas += 0.5;
+                respuestasMultiplesLog.push(`P${i+1}: ${acierto ? 'Correcto' : 'Fallo'}`);
+            }
+
+            // Validar y calificar el ejercicio
+            const vFeno = document.getElementById('ej-feno').value;
+            const vGeno = document.getElementById('ej-geno').value;
+            const vProp = document.getElementById('ej-prop').value;
+
+            if(vFeno === "" || vGeno === "" || vProp === "") {
+                Swal.fire('Atención', `Falta completar los campos del Ejercicio Práctico.`, 'warning');
+                return;
+            }
+
+            let puntajeEjercicio = 0;
+            if(parseInt(vFeno) === ejercicioSeleccionado.correctas.feno) puntajeEjercicio += 0.83;
+            if(parseInt(vGeno) === ejercicioSeleccionado.correctas.geno) puntajeEjercicio += 0.83;
+            if(parseInt(vProp) === ejercicioSeleccionado.correctas.prop) puntajeEjercicio += 0.84;
+
+            const notaFinal = (puntajePreguntas + puntajeEjercicio).toFixed(1);
+
+            // Bloquear interfaz
+            document.getElementById('btn-enviar-eval').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando Resultados...';
+            document.getElementById('btn-enviar-eval').disabled = true;
+
+            // Preparar envío a Google Sheets
+            const formData = new FormData();
+            formData.append('accion', 'evaluacion');
+            formData.append('nombre', estudiante.nombre);
+            formData.append('grado', estudiante.grado);
+            formData.append('nota', notaFinal);
+            formData.append('ejercicio', ejercicioSeleccionado.id);
+            formData.append('detalle_preguntas', respuestasMultiplesLog.join(" | "));
+
+            if(SCRIPT_URL.includes('TU_SCRIPT_ID')) {
+                setTimeout(() => {
+                    Swal.fire({
+                        icon: 'info', title: 'Simulación de Envío de Evaluación',
+                        html: `Falta configurar el Script.<br>Nota calculada: <b>${notaFinal} / 5.0</b><br>Datos que se guardarán en la hoja EVALUACIONES:<br>- Nombre: ${estudiante.nombre}<br>- Grado: ${estudiante.grado}<br>- Ejercicio Tocado: ${ejercicioSeleccionado.id}<br>- Detalle: ${respuestasMultiplesLog.join(", ")}`,
+                        background: '#170d0d', color: '#fff'
+                    }).then(() => mostrarResultadosLocales(notaFinal));
+                }, 1000);
+            } else {
+                fetch(SCRIPT_URL, { method: 'POST', body: formData })
+                    .then(res => mostrarResultadosLocales(notaFinal))
+                    .catch(err => {
+                        Swal.fire('Error', 'Fallo al enviar los datos de la evaluación. Verifica el internet.', 'error');
+                        document.getElementById('btn-enviar-eval').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Finalizar y Enviar Evaluación';
+                        document.getElementById('btn-enviar-eval').disabled = false;
+                    });
+            }
+        }
+
+        function mostrarResultadosLocales(nota) {
+            document.getElementById('eval-section').style.display = 'none';
+            const contenedorRes = document.getElementById('resultado-container');
+            contenedorRes.style.display = 'block';
+            
+            const notaElement = document.getElementById('nota-texto');
+            notaElement.innerText = nota;
+
+            if(parseFloat(nota) >= 4.0) { notaElement.style.color = '#2ecc71'; document.getElementById('mensaje-feedback').innerText = "¡Excelente dominio de la genética!"; }
+            else if(parseFloat(nota) >= 3.0) { notaElement.style.color = '#f1c40f'; document.getElementById('mensaje-feedback').innerText = "Aprobado. Buen trabajo, aunque puedes repasar algunos conceptos."; }
+            else { notaElement.style.color = '#e74c3c'; document.getElementById('mensaje-feedback').innerText = "Debes repasar las Leyes de Mendel y volver a intentarlo."; }
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

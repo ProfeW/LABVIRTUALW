@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primera Ley de Mendel | LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bio-primario: #2ecc71;   
+            --color-bio-secundario: #1abc9c;
+            --color-oscuro: #121e14;
+            --color-texto: #ffffff;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+            --color-dom: #e74c3c;
+            --color-rec: #3498db;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(18, 30, 20, 0.95), rgba(18, 30, 20, 0.98)), url('https://images.unsplash.com/photo-1530508953158-6927d30f40fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(46, 204, 113, 0.2); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-bio-primario); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(46, 204, 113, 0.1); color: var(--color-bio-primario); }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .contenedor { max-width: 1100px; margin: 40px auto; padding: 20px; animation: fadeIn 0.8s ease; }
+        
+        .encabezado-area { text-align: center; margin-bottom: 50px; border-bottom: 2px solid var(--color-bio-primario); padding-bottom: 30px;}
+        .badge-grado { display: inline-block; background: rgba(46, 204, 113, 0.2); color: var(--color-bio-primario); padding: 5px 15px; border-radius: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(46, 204, 113, 0.4);}
+        .encabezado-area h1 { font-size: 3rem; color: #fff; margin-bottom: 15px; text-transform: uppercase; }
+        .encabezado-area h1 span { color: var(--color-bio-secundario); }
+        
+        /* --- TARJETAS --- */
+        .tarjeta-info {
+            background: var(--bg-tarjeta);
+            border-radius: 15px;
+            border-left: 5px solid var(--color-bio-primario);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .tarjeta-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .tarjeta-header i { font-size: 2rem; color: var(--color-bio-primario); }
+        .tarjeta-header h2 { font-size: 1.8rem; color: #fff; }
+
+        .texto-info { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: justify; }
+        .texto-info p { margin-bottom: 15px; }
+        .resaltado { color: var(--color-bio-primario); font-weight: 600; }
+
+        /* --- CUADRO DE PUNNETT --- */
+        .punnett-container { display: flex; justify-content: center; margin: 30px 0; }
+        .punnett-table { border-collapse: collapse; text-align: center; font-size: 1.5rem; font-weight: 800; }
+        .punnett-table td, .punnett-table th { padding: 25px; border: 2px solid #555; width: 100px; height: 100px;}
+        .punnett-header { background: rgba(0,0,0,0.5); color: #aaa; font-size: 1.2rem;}
+        .punnett-cell { background: rgba(255,255,255,0.05); transition: 0.3s; }
+        .punnett-cell:hover { background: rgba(46, 204, 113, 0.2); }
+        .alelo-dom { color: var(--color-dom); }
+        .alelo-rec { color: var(--color-rec); }
+
+        /* --- ANALISIS RESULTADOS --- */
+        .analisis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .analisis-caja { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 10px; border: 1px solid rgba(46, 204, 113, 0.3); }
+        .analisis-caja h3 { color: var(--color-bio-secundario); margin-bottom: 15px; font-size: 1.3rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .analisis-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 1px dashed #333; padding-bottom: 5px;}
+        
+        /* --- EJERCICIOS RESUELTOS --- */
+        .ejercicio-resuelto { background: rgba(0,0,0,0.6); border: 1px solid var(--color-bio-primario); border-radius: 12px; padding: 25px; margin-bottom: 30px; }
+        .ej-titulo { font-size: 1.4rem; color: var(--color-bio-primario); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .ej-enunciado { font-size: 1.15rem; font-style: italic; background: rgba(255,255,255,0.05); padding: 15px; border-left: 4px solid #f1c40f; margin-bottom: 20px; }
+        
+        .paso-paso { margin-left: 20px; border-left: 2px solid #555; padding-left: 20px;}
+        .paso { margin-bottom: 20px; position: relative; }
+        .paso::before { content: attr(data-step); position: absolute; left: -38px; top: -2px; width: 30px; height: 30px; background: var(--color-bio-secundario); color: #000; font-weight: 900; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem;}
+        .paso-titulo { font-weight: 800; color: #fff; margin-bottom: 5px; font-size: 1.1rem; }
+        
+        .btn-nav { display: flex; justify-content: space-between; margin-top: 40px; }
+        .btn-accion { background: var(--color-bio-primario); color: #121e14; padding: 15px 25px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; transition: 0.3s; }
+        .btn-accion:hover { background: var(--color-bio-secundario); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3); }
+        .btn-secundario { background: transparent; border: 2px solid var(--color-bio-primario); color: var(--color-bio-primario); }
+        .btn-secundario:hover { background: rgba(46, 204, 113, 0.1); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .analisis-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="biologia_10.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Volver al Menú</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-area">
+            <div class="badge-grado">LEYES DE MENDEL</div>
+            <h1>Primera Ley de Mendel:<br><span>Principio de la Uniformidad</span></h1>
+        </div>
+
+        <article class="tarjeta-info">
+            <div class="tarjeta-header">
+                <i class="fa-solid fa-book-open"></i>
+                <h2>Concepto e Importancia</h2>
+            </div>
+            <div class="texto-info">
+                <p>La <strong>Primera Ley de Mendel</strong> establece que si se cruzan dos individuos de raza pura (homocigotos) para un carácter determinado, todos los descendientes de la primera generación (F1) serán <strong>fenotípica y genotípicamente iguales entre sí</strong>, e iguales fenotípicamente a uno de los progenitores (el dominante).</p>
+                <p><strong>Importancia:</strong> Esta ley rompió con la idea de que los rasgos se "mezclaban" como si fueran líquidos. Demostró que existen <span class="resaltado">alelos dominantes y recesivos</span>, y que un rasgo recesivo puede ocultarse sin desaparecer.</p>
+                <p><strong>Usos y Aplicaciones:</strong> Se utiliza en agricultura y ganadería para obtener "líneas puras" y garantizar que la primera cosecha o camada de un cruce específico tenga características estandarizadas y predecibles al 100%.</p>
+            </div>
+        </article>
+
+        <article class="tarjeta-info">
+            <div class="tarjeta-header">
+                <i class="fa-solid fa-table-cells"></i>
+                <h2>Análisis Estructural (Cuadro de Punnett)</h2>
+            </div>
+            <div class="texto-info">
+                <p>Para ilustrar esta ley, tomemos el experimento de Mendel: cruzó plantas de guisantes de semillas amarillas puras (<span class="alelo-dom">AA</span>) con semillas verdes puras (<span class="alelo-rec">aa</span>).</p>
+            </div>
+            
+            <div class="punnett-container">
+                <table class="punnett-table">
+                    <tr>
+                        <th style="border:none;"></th>
+                        <th class="punnett-header"><span class="alelo-dom">A</span></th>
+                        <th class="punnett-header"><span class="alelo-dom">A</span></th>
+                    </tr>
+                    <tr>
+                        <th class="punnett-header"><span class="alelo-rec">a</span></th>
+                        <td class="punnett-cell"><span class="alelo-dom">A</span><span class="alelo-rec">a</span></td>
+                        <td class="punnett-cell"><span class="alelo-dom">A</span><span class="alelo-rec">a</span></td>
+                    </tr>
+                    <tr>
+                        <th class="punnett-header"><span class="alelo-rec">a</span></th>
+                        <td class="punnett-cell"><span class="alelo-dom">A</span><span class="alelo-rec">a</span></td>
+                        <td class="punnett-cell"><span class="alelo-dom">A</span><span class="alelo-rec">a</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="analisis-grid">
+                <div class="analisis-caja">
+                    <h3><i class="fa-solid fa-eye"></i> Análisis del Fenotipo</h3>
+                    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">(Lo que se ve físicamente)</p>
+                    <div class="analisis-item"><span>Semillas Amarillas:</span> <strong>4/4</strong></div>
+                    <div class="analisis-item"><span>Semillas Verdes:</span> <strong>0/4</strong></div>
+                    <div class="analisis-item" style="border:none; color: var(--color-bio-primario); margin-top: 10px;"><span>Proporción Porcentual:</span> <strong>100% Amarillas</strong></div>
+                </div>
+                <div class="analisis-caja">
+                    <h3><i class="fa-solid fa-dna"></i> Análisis del Genotipo</h3>
+                    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">(La composición de los genes)</p>
+                    <div class="analisis-item"><span>Homocigotos (Puros):</span> <strong>0/4 (0%)</strong></div>
+                    <div class="analisis-item"><span>Heterocigotos (Híbridos):</span> <strong>4/4 (100%)</strong></div>
+                    <div class="analisis-item" style="border:none; color: var(--color-bio-primario); margin-top: 10px;"><span>Resultado:</span> <strong>100% Aa</strong></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN DE EJERCICIOS RESUELTOS            -->
+        <!-- ========================================== -->
+        <h2 style="text-align: center; font-size: 2.2rem; margin: 50px 0 30px; border-bottom: 2px solid #555; padding-bottom: 20px;">
+            <i class="fa-solid fa-chalkboard-user" style="color: var(--color-bio-secundario);"></i> Ejercicios Resueltos Paso a Paso
+        </h2>
+
+        <!-- Ejercicio 1 -->
+        <div class="ejercicio-resuelto">
+            <h3 class="ej-titulo">Ejercicio 1: El color del pelaje en ratones</h3>
+            <div class="ej-enunciado">
+                "En una especie de ratones, el pelaje negro (N) es dominante sobre el pelaje blanco (n). Se cruza un ratón macho de línea pura para pelaje negro con una hembra de línea pura para pelaje blanco. Determina el genotipo y fenotipo de la primera generación (F1)."
+            </div>
+            
+            <div class="paso-paso">
+                <div class="paso" data-step="1">
+                    <div class="paso-titulo">Identificar Alelos y Progenitores</div>
+                    <div class="texto-info">
+                        Alelo dominante (Negro) = <strong>N</strong><br>
+                        Alelo recesivo (Blanco) = <strong>n</strong><br>
+                        Macho puro negro = <strong>NN</strong><br>
+                        Hembra pura blanca = <strong>nn</strong>
+                    </div>
+                </div>
+                <div class="paso" data-step="2">
+                    <div class="paso-titulo">Crear el Cuadro de Punnett</div>
+                    <div class="texto-info">
+                        Separamos los alelos del macho (N y N) en las columnas, y los de la hembra (n y n) en las filas. Al cruzarlos, cada una de las 4 casillas recibe una 'N' del padre y una 'n' de la madre, dando como resultado <strong>Nn</strong> en todas las casillas.
+                    </div>
+                </div>
+                <div class="paso" data-step="3" style="margin-bottom: 0;">
+                    <div class="paso-titulo">Establecer Resultados Finales</div>
+                    <div class="texto-info">
+                        <strong>Genotipo:</strong> 100% Nn (Heterocigoto).<br>
+                        <strong>Fenotipo:</strong> 100% Ratones de pelaje negro (ya que la N domina).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="ejercicio-resuelto">
+            <h3 class="ej-titulo">Ejercicio 2: Tallo de las plantas de tomate</h3>
+            <div class="ej-enunciado">
+                "En las plantas de tomate, el tallo alto (A) es dominante frente al tallo enano (a). Un agricultor cruza una planta alta homocigota con una planta enana homocigota. ¿Qué porcentaje de las plantas resultantes serán enanas?"
+            </div>
+            
+            <div class="paso-paso">
+                <div class="paso" data-step="1">
+                    <div class="paso-titulo">Identificar Alelos y Progenitores</div>
+                    <div class="texto-info">
+                        Planta Alta homocigota = <strong>AA</strong><br>
+                        Planta Enana homocigota = <strong>aa</strong> (Recuerda que para que se exprese el recesivo siempre debe ser puro).
+                    </div>
+                </div>
+                <div class="paso" data-step="2">
+                    <div class="paso-titulo">Cruzar e Interpretar</div>
+                    <div class="texto-info">
+                        Al aplicar la Primera Ley de Mendel (cruce de dos puros), sabemos por regla general que la descendencia F1 será 100% heterocigota (<strong>Aa</strong>).
+                    </div>
+                </div>
+                <div class="paso" data-step="3" style="margin-bottom: 0;">
+                    <div class="paso-titulo">Responder a la pregunta específica</div>
+                    <div class="texto-info">
+                        Todas las plantas hijas tienen el genotipo <strong>Aa</strong>, por lo tanto, su fenotipo es de tallo alto. La pregunta pide el porcentaje de plantas enanas. Al no haber ninguna planta 'aa', el resultado es <strong>0%</strong>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="ejercicio-resuelto">
+            <h3 class="ej-titulo">Ejercicio 3: Las alas de las moscas de la fruta (Drosophila)</h3>
+            <div class="ej-enunciado">
+                "Una mosca de la fruta con alas largas puras (L) se aparea con una mosca de alas cortas puras (l). Determina la proporción genotípica y fenotípica de la F1."
+            </div>
+            
+            <div class="paso-paso">
+                <div class="paso" data-step="1">
+                    <div class="paso-titulo">Extraer Datos</div>
+                    <div class="texto-info">Alas largas pura = <strong>LL</strong> | Alas cortas pura = <strong>ll</strong></div>
+                </div>
+                <div class="paso" data-step="2">
+                    <div class="paso-titulo">Cálculo de Proporciones</div>
+                    <div class="texto-info">El cruce <strong>LL x ll</strong> generará 4 combinaciones genéticas. Las 4 casillas del cuadro de Punnett contendrán el genotipo <strong>Ll</strong>.</div>
+                </div>
+                <div class="paso" data-step="3" style="margin-bottom: 0;">
+                    <div class="paso-titulo">Reporte de Proporciones</div>
+                    <div class="texto-info">
+                        <strong>Proporción Genotípica:</strong> 4/4 Heterocigotos (Ll).<br>
+                        <strong>Proporción Fenotípica:</strong> 4/4 Moscas con alas largas.<br>
+                        <em>¡Ambas proporciones equivalen a la unidad total o al 100%!</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-nav">
+            <a href="biologia10_gregor_mendel.html" class="btn-accion btn-secundario"><i class="fa-solid fa-arrow-left"></i> Anterior (Gregor Mendel)</a>
+            <a href="biologia10_mendel_ley2.html" class="btn-accion">Continuar a la 2da Ley <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+    </main>
+
+<script src="auth.js"></script>
+</body>
+</html>
