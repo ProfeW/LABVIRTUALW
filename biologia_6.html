@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biología 6° - Menú Principal | LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bio-primario: #2ecc71;   
+            --color-bio-secundario: #1abc9c;
+            --color-oscuro: #121e14; /* Un tono oscuro con un toque de verde bosque */
+            --color-texto: #ffffff;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            /* Fondo con imagen de naturaleza/biología con un overlay oscuro para que el texto resalte */
+            background-image: linear-gradient(rgba(18, 30, 20, 0.92), rgba(18, 30, 20, 0.98)), url('https://images.unsplash.com/photo-1530508953158-6927d30f40fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { 
+            background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(46, 204, 113, 0.2); 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 50px; position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-bio-primario); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(46, 204, 113, 0.1); color: var(--color-bio-primario); }
+
+        /* --- ENCABEZADO --- */
+        .contenedor { max-width: 1200px; margin: 40px auto; padding: 20px; animation: fadeIn 0.8s ease; }
+        
+        .encabezado-area { text-align: center; margin-bottom: 50px; }
+        .badge-grado { display: inline-block; background: rgba(46, 204, 113, 0.2); color: var(--color-bio-primario); padding: 5px 15px; border-radius: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(46, 204, 113, 0.4);}
+        .encabezado-area h1 { font-size: 3.5rem; color: #fff; margin-bottom: 15px; text-transform: uppercase; }
+        .encabezado-area h1 span { color: var(--color-bio-primario); }
+        .encabezado-area p { color: #ccc; font-size: 1.15rem; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+        /* --- GRID DE UNIDADES TEMÁTICAS --- */
+        .grid-unidades { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
+
+        /* --- TARJETA DE UNIDAD --- */
+        .tarjeta-unidad {
+            background: var(--bg-tarjeta);
+            border-radius: 15px;
+            border-top: 5px solid var(--color-bio-primario);
+            border-left: 1px solid rgba(255,255,255,0.05);
+            border-right: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .tarjeta-unidad:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-top-color: var(--color-bio-secundario);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .unidad-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;}
+        .icono-unidad { font-size: 2.5rem; color: var(--color-bio-primario); background: rgba(46, 204, 113, 0.1); width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
+        .unidad-header h2 { font-size: 1.6rem; color: #fff; line-height: 1.2; }
+
+        /* --- LISTA DE TEMAS (MENÚ INTERNO) --- */
+        .lista-temas { display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+        
+        .tema-enlace {
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 18px;
+            border-radius: 8px;
+            color: #ddd;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .tema-enlace i.fa-angle-right { margin-left: auto; color: #555; transition: 0.3s;}
+        .tema-enlace i.icono-tema { color: var(--color-bio-secundario); width: 20px; text-align: center; }
+        
+        .tema-enlace:hover {
+            background: rgba(46, 204, 113, 0.15);
+            border-color: rgba(46, 204, 113, 0.3);
+            color: #fff;
+            transform: translateX(5px);
+        }
+        .tema-enlace:hover i.fa-angle-right { color: var(--color-bio-primario); transform: translateX(3px); }
+
+        /* Categorías o Sub-bloques visuales dentro de una tarjeta */
+        .sub-categoria {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin: 15px 0 5px 5px;
+            font-weight: 800;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 768px) { 
+            .grid-unidades { grid-template-columns: 1fr; } 
+            .encabezado-area h1 { font-size: 2.5rem; }
+            nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        
+        <div class="encabezado-area">
+            <div class="badge-grado">GRADO SEXTO</div>
+            <h1>Explora la <span>Biología</span></h1>
+            <p>Selecciona una unidad temática para comenzar. Descubre los secretos del ADN, cómo evolucionan las especies y los ecosistemas que conforman nuestro planeta.</p>
+        </div>
+
+        <div class="grid-unidades">
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 1: PRIMER PERIODO                       -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad"><i class="fa-solid fa-leaf"></i></div>
+                    <h2>Primer Periodo</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Introducción</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-open icono-tema"></i> Conceptos Básicos<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 2: SEGUNDO PERIODO                      -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #3498db; background: rgba(52, 152, 219, 0.1); border-color: #3498db;"><i class="fa-solid fa-microscope"></i></div>
+                    <h2>Segundo Periodo</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Biología Celular</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-circle-nodes icono-tema" style="color: #3498db;"></i> La Célula<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 3: TERCER PERIODO                       -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #f39c12; background: rgba(243, 156, 18, 0.1);"><i class="fa-solid fa-network-wired"></i></div>
+                    <h2>Tercer Periodo</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Taxonomía y Nutrición</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-journal-whills icono-tema" style="color: #f39c12;"></i> Clasificación de Seres Vivos<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-apple-whole icono-tema" style="color: #f39c12;"></i> Nutrición y Pirámide<i class="fa-solid fa-angle-right"></i></a>
+                    
+                    <div class="sub-categoria">Evaluaciones</div>
+                    <a href="biologia6_evaluacion_practica.html" class="tema-enlace" style="background: rgba(243,156,18,0.2); border-color: rgba(243,156,18,0.5);"><i class="fa-solid fa-clipboard-check icono-tema" style="color: #f39c12;"></i> Evaluación de Práctica<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- BLOQUE 4: CUARTO PERIODO                       -->
+            <!-- ============================================== -->
+            <article class="tarjeta-unidad">
+                <div class="unidad-header">
+                    <div class="icono-unidad" style="color: #e67e22; background: rgba(230, 126, 34, 0.1);"><i class="fa-solid fa-earth-americas"></i></div>
+                    <h2>Cuarto Periodo</h2>
+                </div>
+                <div class="lista-temas">
+                    <div class="sub-categoria">Ecología</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-tree icono-tema" style="color: #e67e22;"></i> Ecosistemas<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+<script src="auth.js"></script>
+</body>
+</html>

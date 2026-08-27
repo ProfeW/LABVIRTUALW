@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Práctica - Biología 6°</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-primario: #2ecc71;
+            --color-secundario: #27ae60;
+            --color-fondo: #121e14;
+            --color-tarjeta: rgba(255,255,255,0.05);
+            --color-texto: #ffffff;
+            --color-error: #e74c3c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(18,30,20,0.9), rgba(18,30,20,0.95)), url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+        }
+
+        .contenedor {
+            width: 100%; max-width: 800px;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(15px);
+            border-radius: 20px; border: 1px solid rgba(46,204,113,0.3);
+            padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .header-eval { text-align: center; margin-bottom: 30px; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 20px;}
+        .header-eval h1 { color: var(--color-primario); font-size: 2.2rem; }
+        .header-eval p { color: #bbb; font-size: 1rem; margin-top: 10px;}
+
+        /* FORMULARIO INICIO */
+        #pantalla-inicio { text-align: center; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #ddd; }
+        .input-group input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(46,204,113,0.5); background: rgba(0,0,0,0.3); color: #fff; font-size: 1rem; outline: none; }
+        .input-group input:focus { border-color: var(--color-primario); box-shadow: 0 0 10px rgba(46,204,113,0.3); }
+        .input-group input[readonly] { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.1); cursor: not-allowed; }
+
+        .btn {
+            background: var(--color-primario); color: #fff;
+            border: none; padding: 12px 30px; border-radius: 30px;
+            font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 10px; margin-top: 20px;
+        }
+        .btn:hover { background: var(--color-secundario); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(46,204,113,0.3); }
+        .btn:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* PREGUNTAS */
+        #pantalla-preguntas { display: none; }
+        .pregunta-card {
+            background: var(--color-tarjeta);
+            padding: 25px; border-radius: 12px; margin-bottom: 25px;
+            border-left: 4px solid var(--color-primario);
+        }
+        .pregunta-titulo { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; color: #eee; }
+        
+        /* Opciones de respuesta */
+        .opciones-radio label {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 15px; background: rgba(0,0,0,0.3);
+            border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .opciones-radio label:hover { background: rgba(46,204,113,0.1); border-color: rgba(46,204,113,0.3); }
+        .opciones-radio input[type="radio"] { accent-color: var(--color-primario); transform: scale(1.2); }
+
+        .select-fv { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(46,204,113,0.5); background: rgba(0,0,0,0.5); color: #fff; font-size: 1rem; outline: none; cursor: pointer;}
+        .select-fv option { background: #121e14; }
+
+        .input-abierta { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(46,204,113,0.5); background: rgba(0,0,0,0.3); color: #fff; font-size: 1rem; outline: none; }
+        
+        /* OVERLAY LOADING */
+        #overlay-loading {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; flex-direction: column;
+        }
+        .spinner { border: 5px solid rgba(255,255,255,0.1); border-top: 5px solid var(--color-primario); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin-bottom: 15px;}
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* PANTALLA RESULTADOS */
+        #pantalla-resultados { display: none; text-align: center; }
+        .nota-final { font-size: 4rem; font-weight: 800; color: var(--color-primario); margin: 20px 0; }
+        .resumen-respuestas { text-align: left; margin-top: 30px; }
+        .item-resultado { padding: 15px; margin-bottom: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); border-left: 4px solid; }
+        .item-resultado.correcto { border-left-color: var(--color-primario); }
+        .item-resultado.incorrecto { border-left-color: var(--color-error); }
+        .item-resultado .texto-p { font-weight: 600; margin-bottom: 5px; }
+        .item-resultado .respuesta-usuario { font-size: 0.9rem; color: #aaa; }
+        .item-resultado .respuesta-correcta { font-size: 0.9rem; color: var(--color-primario); margin-top: 5px;}
+
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <div class="header-eval">
+            <h1><i class="fa-solid fa-microscope"></i> Evaluación de Práctica</h1>
+            <p>Biología - Clasificación y Nutrición de Seres Vivos</p>
+        </div>
+
+        <!-- PANTALLA 1: INICIO -->
+        <div id="pantalla-inicio">
+            <i class="fa-solid fa-user-graduate" style="font-size: 4rem; color: var(--color-primario); margin-bottom: 20px;"></i>
+            <p style="margin-bottom: 25px; color: #ccc;">Ingresa tu nombre para comenzar. El sistema elegirá 10 preguntas al azar.</p>
+            
+            <form id="form-inicio" onsubmit="iniciarPrueba(event)">
+                <div class="input-group">
+                    <label>Nombre Completo:</label>
+                    <input type="text" id="nombre-estudiante" required placeholder="Ej: Juan Pérez" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>Grado:</label>
+                    <input type="text" id="grado-estudiante" value="Sexto" readonly>
+                </div>
+                <button type="submit" class="btn"><i class="fa-solid fa-play"></i> Comenzar Prueba</button>
+            </form>
+        </div>
+
+        <!-- PANTALLA 2: PREGUNTAS -->
+        <div id="pantalla-preguntas">
+            <form id="form-preguntas" onsubmit="enviarPrueba(event)">
+                <div id="contenedor-preguntas"></div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Enviar Respuestas</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PANTALLA 3: RESULTADOS -->
+        <div id="pantalla-resultados">
+            <h2><i class="fa-solid fa-square-check" style="color: var(--color-primario);"></i> ¡Evaluación Finalizada!</h2>
+            <div class="nota-final" id="nota-mostrar">0.0</div>
+            <p id="mensaje-feedback" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+            
+            <button class="btn" onclick="document.getElementById('resumen-detallado').style.display='block'; this.style.display='none';"><i class="fa-solid fa-list-check"></i> Ver Correcciones</button>
+            
+            <div id="resumen-detallado" class="resumen-respuestas" style="display: none;">
+                <!-- Aquí se inyectan los resultados detallados -->
+            </div>
+            
+            <br>
+            <a href="biologia_6.html" class="btn" style="background: #333; margin-top: 20px;"><i class="fa-solid fa-house"></i> Volver al Menú</a>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE CARGA -->
+    <div id="overlay-loading">
+        <div class="spinner"></div>
+        <h2 style="color: #fff;">Enviando respuestas...</h2>
+        <p style="color: #aaa; margin-top: 10px;">Por favor espera</p>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN: PEGA AQUÍ LA URL DE TU GOOGLE APPS SCRIPT
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwC0rO0PFBajoy3uy6a3lXs8Vbq8t3YLEpXx8k1XEv1cZ68MRCEwt-HFUGz1Y8O-IsrrA/exec';
+
+        // BANCO DE 30 PREGUNTAS (10 Abiertas cortas, 10 F/V, 10 Múltiple)
+        const bancoPreguntas = [
+            // ABIERTAS (Respuesta de 1-2 palabras, palabras clave)
+            { tipo: 'abierta', pregunta: "¿Qué personaje histórico clasificaba a los animales según sus apariencias engañosas, como si volaban o nadaban? 🏛️", keywords: ["aristoteles", "aristóteles"] },
+            { tipo: 'abierta', pregunta: "¿Qué científico (apellido) creó el sistema de clasificación natural basado en parentesco evolutivo? 👨‍🔬", keywords: ["linneo", "linne", "linné"] },
+            { tipo: 'abierta', pregunta: "Nombre del gas vital que liberan las plantas al finalizar la fotosíntesis. 💨", keywords: ["oxigeno", "oxígeno"] },
+            { tipo: 'abierta', pregunta: "¿Qué nombre recibe la etapa de la nutrición donde los alimentos se trituran y descomponen en el estómago? 🍔", keywords: ["digestion", "digestión"] },
+            { tipo: 'abierta', pregunta: "¿A qué dominio de la vida pertenecen las bacterias extremófilas que viven adentro de los volcanes? 🌋", keywords: ["archaea", "arquea"] },
+            { tipo: 'abierta', pregunta: "¿Cómo se llama el grupo taxonómico (dominio) al que pertenecemos los humanos, perros y plantas? 🧬", keywords: ["eukarya", "eucariota", "eucariotas"] },
+            { tipo: 'abierta', pregunta: "¿Qué nombre técnico (según su dieta) recibe un animal como el colibrí que se alimenta de néctar? 🌺", keywords: ["nectarivoro", "nectarívoro"] },
+            { tipo: 'abierta', pregunta: "Mineral muy importante para los huesos que abunda en los alimentos del Nivel Azul (leche, queso). 🥛", keywords: ["calcio"] },
+            { tipo: 'abierta', pregunta: "¿A qué nivel de la pirámide (escribe el color) pertenecen las frutas y verduras? 🍎", keywords: ["verde"] },
+            { tipo: 'abierta', pregunta: "¿Qué macronutrientes (conocidos como los constructores de músculos) nos aportan las carnes y los huevos? 🥩", keywords: ["proteina", "proteinas", "proteína", "proteínas"] },
+
+            // FALSO / VERDADERO
+            { tipo: 'fv', pregunta: "El dominio Archaea está formado por bacterias que viven en condiciones muy hostiles, como volcanes.", correcta: "V" },
+            { tipo: 'fv', pregunta: "Las bacterias comunes que usamos para fabricar yogurt (Lactobacillus) pertenecen al dominio Eukarya.", correcta: "F" },
+            { tipo: 'fv', pregunta: "En la pirámide taxonómica, el nivel de 'Dominio' agrupa a un número mayor de seres vivos que el nivel de 'Especie'.", correcta: "V" },
+            { tipo: 'fv', pregunta: "Al escribir un nombre científico, la segunda palabra debe empezar siempre con letra mayúscula.", correcta: "F" },
+            { tipo: 'fv', pregunta: "La nutrición autótrofa consiste en que los seres vivos fabrican su propio alimento usando la luz solar.", correcta: "V" },
+            { tipo: 'fv', pregunta: "Durante la etapa de digestión, los nutrientes son enviados directamente a la sangre sin procesar.", correcta: "F" },
+            { tipo: 'fv', pregunta: "Los macronutrientes, como las vitaminas, se necesitan en pequeñísimas dosis para regular el cuerpo.", correcta: "F" },
+            { tipo: 'fv', pregunta: "Las frutas y verduras deben ser la base principal de nuestra alimentación diaria (Nivel Verde).", correcta: "V" },
+            { tipo: 'fv', pregunta: "Es recomendable comer dulces y embutidos (Punta Roja) todos los días porque dan mucha energía sana.", correcta: "F" },
+            { tipo: 'fv', pregunta: "Un organismo saprótrofo (o carroñero) es aquel que se alimenta de materia orgánica en descomposición o animales muertos.", correcta: "V" },
+
+            // SELECCIÓN MÚLTIPLE
+            { tipo: 'multiple', pregunta: "Un estudiante observa un caballo y una hormiga. Sabe que el caballo tiene columna vertebral. ¿A qué Filo pertenece el caballo?", opciones: ["Arthropoda", "Chordata", "Carnivora", "Primates"], correcta: "Chordata" },
+            { tipo: 'multiple', pregunta: "¿Cuál es el orden correcto de las cuatro etapas de la nutrición heterótrofa?", opciones: ["Absorción, Ingestión, Digestión, Excreción", "Ingestión, Digestión, Absorción, Excreción", "Digestión, Excreción, Ingestión, Absorción", "Excreción, Ingestión, Absorción, Digestión"], correcta: "Ingestión, Digestión, Absorción, Excreción" },
+            { tipo: 'multiple', pregunta: "Un zancudo o mosquito es un animal que se alimenta de sangre. Según su dieta, se clasifica como:", opciones: ["Saprófito", "Herbívoro", "Carnívoro", "Hematófago"], correcta: "Hematófago" },
+            { tipo: 'multiple', pregunta: "En la nomenclatura binomial, el nombre científico correcto para el perro de la casa es:", opciones: ["Canis lupus familiaris", "canis lupus familiaris", "CANIS LUPUS FAMILIARIS", "Canis Lupus Familiaris"], correcta: "Canis lupus familiaris" },
+            { tipo: 'multiple', pregunta: "En la nutrición heterótrofa, ¿qué órganos se encargan principalmente de la etapa de 'Ingestión'?", opciones: ["Intestino delgado y grueso", "Estómago e hígado", "Boca y glándulas salivales", "Ano y esfínter"], correcta: "Boca y glándulas salivales" },
+            { tipo: 'multiple', pregunta: "Las ______________ son un ejemplo de Micronutrientes, ya que el cuerpo las necesita en pequeñas cantidades.", opciones: ["Proteínas", "Vitaminas", "Grasas", "Aguas"], correcta: "Vitaminas" },
+            { tipo: 'multiple', pregunta: "Si un alimento dice: 'Soy rico pero tengo mucha azúcar y grasa. Visítame solo 1 vez por semana', pertenece a:", opciones: ["El Nivel Verde (Frutas y verduras)", "El Nivel Azul (Lácteos)", "El Nivel Naranja (Músculos)", "La Punta Roja (Los antojos)"], correcta: "La Punta Roja (Los antojos)" },
+            { tipo: 'multiple', pregunta: "¿Cuál es el animal cuyo nombre científico es Bos taurus?", opciones: ["El cultivo de café", "El perro", "La vaca", "El caballo"], correcta: "La vaca" },
+            { tipo: 'multiple', pregunta: "Al observar un naranjo, sabemos que es una planta que da flores y frutos. Por lo tanto, pertenece a la clase de las:", opciones: ["Gimnospermas", "Briofitas", "Angiospermas", "Esporas"], correcta: "Angiospermas" },
+            { tipo: 'multiple', pregunta: "¿Qué grupo de alimentos son nuestra principal fuente de Carbohidratos (energía para correr) ubicados en el Nivel Marrón?", opciones: ["Frutas y hortalizas", "Lácteos y queso", "Carnes y pollo", "Cereales integrales, pan y pasta"], correcta: "Cereales integrales, pan y pasta" }
+        ];
+
+        let preguntasSeleccionadas = [];
+        let datosEstudiante = { nombre: '', grado: 'Sexto', nota: 0 };
+
+        // Función para mezclar un array (Fisher-Yates)
+        function mezclarArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function iniciarPrueba(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre-estudiante').value.trim();
+            if(!nombre) return;
+            
+            datosEstudiante.nombre = nombre;
+            
+            // Seleccionar 10 preguntas aleatorias del banco de 30
+            let bancoMezclado = mezclarArray([...bancoPreguntas]);
+            preguntasSeleccionadas = bancoMezclado.slice(0, 10);
+            
+            renderizarPreguntas();
+            
+            document.getElementById('pantalla-inicio').style.display = 'none';
+            document.getElementById('pantalla-preguntas').style.display = 'block';
+        }
+
+        function renderizarPreguntas() {
+            const contenedor = document.getElementById('contenedor-preguntas');
+            contenedor.innerHTML = '';
+
+            preguntasSeleccionadas.forEach((p, index) => {
+                let htmlStr = `<div class="pregunta-card">
+                                <div class="pregunta-titulo">${index + 1}. ${p.pregunta}</div>`;
+                
+                if(p.tipo === 'multiple') {
+                    let opcionesMezcladas = mezclarArray([...p.opciones]);
+                    htmlStr += `<div class="opciones-radio">`;
+                    opcionesMezcladas.forEach(op => {
+                        htmlStr += `<label><input type="radio" name="preg_${index}" value="${op}" required> ${op}</label>`;
+                    });
+                    htmlStr += `</div>`;
+                } 
+                else if (p.tipo === 'fv') {
+                    htmlStr += `<select name="preg_${index}" class="select-fv" required>
+                                    <option value="" disabled selected>Selecciona tu respuesta...</option>
+                                    <option value="V">Verdadero</option>
+                                    <option value="F">Falso</option>
+                                </select>`;
+                }
+                else if (p.tipo === 'abierta') {
+                    htmlStr += `<input type="text" name="preg_${index}" class="input-abierta" required placeholder="Escribe tu respuesta aquí (1 o 2 palabras)..." autocomplete="off">`;
+                }
+
+                htmlStr += `</div>`;
+                contenedor.innerHTML += htmlStr;
+            });
+        }
+
+        // Función estricta pero tolerante para normalizar texto
+        function normalizarTexto(texto) {
+            return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+        }
+
+        function enviarPrueba(e) {
+            e.preventDefault();
+            
+            let correctas = 0;
+            let resumenHTML = '';
+
+            preguntasSeleccionadas.forEach((p, index) => {
+                let respuestaUsuario = "";
+                let esCorrecta = false;
+                let elem = document.getElementsByName(`preg_${index}`);
+                
+                if(p.tipo === 'multiple') {
+                    for(let r of elem) { if(r.checked) respuestaUsuario = r.value; }
+                    esCorrecta = (respuestaUsuario === p.correcta);
+                } 
+                else if (p.tipo === 'fv') {
+                    respuestaUsuario = elem[0].value;
+                    esCorrecta = (respuestaUsuario === p.correcta);
+                } 
+                else if (p.tipo === 'abierta') {
+                    respuestaUsuario = elem[0].value;
+                    let respNormalizada = normalizarTexto(respuestaUsuario);
+                    // Comprobar si alguna de las palabras clave está en la respuesta del usuario
+                    esCorrecta = p.keywords.some(kw => respNormalizada.includes(normalizarTexto(kw)));
+                }
+
+                if(esCorrecta) correctas++;
+
+                // Generar HTML del resumen para esta pregunta
+                let respTexto = (p.tipo === 'fv') ? (respuestaUsuario === 'V' ? 'Verdadero' : 'Falso') : respuestaUsuario;
+                let correctaTexto = (p.tipo === 'fv') ? (p.correcta === 'V' ? 'Verdadero' : 'Falso') : 
+                                    (p.tipo === 'abierta') ? p.keywords[0].toUpperCase() : p.correcta;
+
+                resumenHTML += `
+                    <div class="item-resultado ${esCorrecta ? 'correcto' : 'incorrecto'}">
+                        <div class="texto-p">${index + 1}. ${p.pregunta}</div>
+                        <div class="respuesta-usuario">Tú respondiste: <strong>${respTexto}</strong> ${esCorrecta ? '✅' : '❌'}</div>
+                        ${!esCorrecta ? `<div class="respuesta-correcta">Respuesta esperada: <strong>${correctaTexto}</strong></div>` : ''}
+                    </div>
+                `;
+            });
+
+            // Calcular nota sobre 5.0
+            datosEstudiante.nota = (correctas * 0.5).toFixed(1);
+            
+            // Inyectar resumen
+            document.getElementById('resumen-detallado').innerHTML = resumenHTML;
+            document.getElementById('nota-mostrar').innerText = datosEstudiante.nota;
+            
+            let mensaje = "";
+            if(datosEstudiante.nota >= 4.0) mensaje = "¡Excelente trabajo! Dominas muy bien los temas.";
+            else if(datosEstudiante.nota >= 3.0) mensaje = "¡Aprobaste! Pero puedes repasar un poco más.";
+            else mensaje = "No te rindas, repasa las guías e inténtalo de nuevo.";
+            
+            document.getElementById('mensaje-feedback').innerText = mensaje;
+
+            // Enviar datos al script
+            enviarDatosGoogle();
+        }
+
+        function enviarDatosGoogle() {
+            document.getElementById('overlay-loading').style.display = 'flex';
+
+            const formData = new URLSearchParams();
+            formData.append('accion', 'evaluacion'); // Identificador para Apps Script si se usa uno unificado
+            formData.append('nombre', datosEstudiante.nombre);
+            formData.append('grado', datosEstudiante.grado);
+            formData.append('nota', datosEstudiante.nota);
+            formData.append('timestamp', new Date().toLocaleString());
+
+            // Fire and forget
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            })
+            .then(() => {
+                document.getElementById('overlay-loading').style.display = 'none';
+                document.getElementById('pantalla-preguntas').style.display = 'none';
+                document.getElementById('pantalla-resultados').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error enviando:', error);
+                document.getElementById('overlay-loading').style.display = 'none';
+                alert('Hubo un error de conexión, pero te mostraremos tus resultados locales.');
+                document.getElementById('pantalla-preguntas').style.display = 'none';
+                document.getElementById('pantalla-resultados').style.display = 'block';
+            });
+        }
+
+    </script>
+</body>
+</html>
