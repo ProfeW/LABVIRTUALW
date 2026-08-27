@@ -170,9 +170,9 @@
                 </div>
                 <div class="analisis-caja">
                     <h3><i class="fa-solid fa-dna"></i> Análisis Genotípico (Proporción 1:2:1)</h3>
-                    <div class="analisis-item"><span>Homocigoto Dominante (AA):</span> <strong>1/4 (25%)</strong></div>
-                    <div class="analisis-item"><span>Heterocigoto (Aa):</span> <strong>2/4 (50%)</strong></div>
-                    <div class="analisis-item"><span>Homocigoto Recesivo (aa):</span> <strong>1/4 (25%)</strong></div>
+                    <div class="analisis-item"><span>Homocigotos Dominantes (AA):</span> <strong>1/4 (25%)</strong></div>
+                    <div class="analisis-item"><span>Heterocigotos (Aa):</span> <strong>2/4 (50%)</strong></div>
+                    <div class="analisis-item"><span>Homocigotos Recesivos (aa):</span> <strong>1/4 (25%)</strong></div>
                 </div>
             </div>
         </article>
@@ -199,8 +199,12 @@
                 <div class="paso" data-step="2">
                     <div class="paso-titulo">Llenar el Cuadro de Punnett</div>
                     <div class="texto-info">
-                        Padre (arriba): M, m. Madre (lado): M, m.<br>
-                        Resultados de las 4 casillas: <strong>MM</strong>, <strong>Mm</strong>, <strong>Mm</strong>, <strong>mm</strong>.
+                        <p>Padre (arriba): M, m. Madre (lado): M, m. Resultados de las 4 casillas: <strong>MM</strong>, <strong>Mm</strong>, <strong>Mm</strong>, <strong>mm</strong>.</p>
+                        <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
+                            <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">M</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec);">m</th></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom); background: rgba(0,0,0,0.5);">M</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">MM</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Mm</td></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">m</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Mm</td><td style="padding: 10px; border: 1px solid #555; background: rgba(52, 152, 219, 0.1);">mm</td></tr>
+                        </table>
                     </div>
                 </div>
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
@@ -226,8 +230,15 @@
                     <div class="texto-info">Cruce: <strong>Rr x Rr</strong>. Los resultados son: 1 RR, 2 Rr, 1 rr.</div>
                 </div>
                 <div class="paso" data-step="2">
-                    <div class="paso-titulo">Identificar el Fenotipo Dominante</div>
-                    <div class="texto-info">El pelo rizado se expresa tanto en 'RR' como en 'Rr'. Eso suma 3 casillas de 4 (es decir, el 75% o la famosa proporción 3:1).</div>
+                    <div class="paso-titulo">Identificar el Fenotipo Dominante mediante Punnett</div>
+                    <div class="texto-info">
+                        <p>El pelo rizado se expresa tanto en 'RR' como en 'Rr'. Al realizar el cuadro, vemos que suman 3 casillas de 4 (es decir, el 75% o la famosa proporción 3:1).</p>
+                        <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
+                            <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">R</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec);">r</th></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom); background: rgba(0,0,0,0.5);">R</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">RR</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Rr</td></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">r</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Rr</td><td style="padding: 10px; border: 1px solid #555; background: rgba(52, 152, 219, 0.1);">rr</td></tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
                     <div class="paso-titulo">Cálculo Numérico</div>
@@ -252,10 +263,14 @@
                     <div class="texto-info">Resultados del Punnett: RR, Rr, Rr, rr.</div>
                 </div>
                 <div class="paso" data-step="2">
-                    <div class="paso-titulo">Responder la Pregunta 1 (Homocigotos Dominantes)</div>
+                    <div class="paso-titulo">Analizar el Cuadro y Responder Pregunta 1 (Homocigotos Dominantes)</div>
                     <div class="texto-info">
-                        El homocigoto dominante es 'RR'. Aparece 1 vez de 4.<br>
-                        Porcentaje = <strong>25%</strong>.
+                        <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
+                            <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">R</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec);">r</th></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom); background: rgba(0,0,0,0.5);">R</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">RR</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Rr</td></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">r</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Rr</td><td style="padding: 10px; border: 1px solid #555; background: rgba(52, 152, 219, 0.1);">rr</td></tr>
+                        </table>
+                        <p>El homocigoto dominante es 'RR'. Aparece 1 vez de 4. Porcentaje = <strong>25%</strong>.</p>
                     </div>
                 </div>
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
@@ -267,6 +282,51 @@
                 </div>
             </div>
         </div>
+
+        <h2 style="text-align: center; font-size: 2.2rem; margin: 50px 0 30px; border-bottom: 2px solid #555; padding-bottom: 20px;">
+            <i class="fa-solid fa-gamepad" style="color: var(--color-bio-secundario);"></i> Prueba tu Aprendizaje
+        </h2>
+        <div style="background: rgba(0,0,0,0.6); border: 2px dashed var(--color-bio-secundario); border-radius: 12px; padding: 25px; margin-bottom: 30px;" id="cadena-ley2">
+            <h3 style="color: #fff; margin-bottom: 15px;" id="cadena-q-text-2">Reto 1: En un cruce de dos heterocigotos (Aa x Aa), ¿cuál es la probabilidad de que nazca un individuo con el rasgo recesivo?</h3>
+            <div id="cadena-opciones-2" style="display: flex; gap: 10px; flex-direction: column;">
+                <button onclick="checkCadenaLey2_1(0)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">A) 50%</button>
+                <button onclick="checkCadenaLey2_1(1)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">B) 25%</button>
+                <button onclick="checkCadenaLey2_1(2)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">C) 75%</button>
+            </div>
+            <p id="cadena-feedback-2" style="margin-top: 15px; font-weight: bold; font-size: 1.1rem;"></p>
+        </div>
+
+        <script>
+            function checkCadenaLey2_1(ans) {
+                const fb = document.getElementById('cadena-feedback-2');
+                if(ans === 1) {
+                    fb.style.color = '#2ecc71';
+                    fb.innerHTML = '¡Correcto! Solo 1 de cada 4 (25%) será homocigoto recesivo (aa). <br><br> <button onclick="nextCadenaLey2_1()" class="btn-accion">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>';
+                } else {
+                    fb.style.color = '#e74c3c';
+                    fb.innerHTML = 'Incorrecto. Revisa la proporción 3:1.';
+                }
+            }
+            function nextCadenaLey2_1() {
+                document.getElementById('cadena-q-text-2').innerText = 'Reto 2: En el mismo cruce, ¿qué porcentaje será HETEROCIGOTO (Aa)?';
+                document.getElementById('cadena-opciones-2').innerHTML = `
+                    <button onclick="checkCadenaLey2_2(0)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">A) 50%</button>
+                    <button onclick="checkCadenaLey2_2(1)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">B) 25%</button>
+                    <button onclick="checkCadenaLey2_2(2)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">C) 100%</button>
+                `;
+                document.getElementById('cadena-feedback-2').innerHTML = '';
+            }
+            function checkCadenaLey2_2(ans) {
+                const fb = document.getElementById('cadena-feedback-2');
+                if(ans === 0) {
+                    fb.style.color = '#2ecc71';
+                    fb.innerHTML = '¡Excelente! Has dominado la Segunda Ley de Mendel. Puedes continuar.';
+                } else {
+                    fb.style.color = '#e74c3c';
+                    fb.innerHTML = 'Incorrecto. Mira el genotipo Aa en el cuadro de Punnett, aparece en 2 casillas (2 de 4).';
+                }
+            }
+        </script>
 
         <div class="btn-nav">
             <a href="biologia10_mendel_ley1.html" class="btn-accion btn-secundario"><i class="fa-solid fa-arrow-left"></i> Anterior (1ra Ley)</a>

@@ -172,8 +172,9 @@
                 <div class="analisis-caja">
                     <h3><i class="fa-solid fa-dna"></i> Análisis del Genotipo</h3>
                     <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">(La composición de los genes)</p>
-                    <div class="analisis-item"><span>Homocigotos (Puros):</span> <strong>0/4 (0%)</strong></div>
-                    <div class="analisis-item"><span>Heterocigotos (Híbridos):</span> <strong>4/4 (100%)</strong></div>
+                    <div class="analisis-item"><span>Homocigotos Dominantes (AA):</span> <strong>0/4 (0%)</strong></div>
+                    <div class="analisis-item"><span>Heterocigotos (Aa):</span> <strong>4/4 (100%)</strong></div>
+                    <div class="analisis-item"><span>Homocigotos Recesivos (aa):</span> <strong>0/4 (0%)</strong></div>
                     <div class="analisis-item" style="border:none; color: var(--color-bio-primario); margin-top: 10px;"><span>Resultado:</span> <strong>100% Aa</strong></div>
                 </div>
             </div>
@@ -206,7 +207,12 @@
                 <div class="paso" data-step="2">
                     <div class="paso-titulo">Crear el Cuadro de Punnett</div>
                     <div class="texto-info">
-                        Separamos los alelos del macho (N y N) en las columnas, y los de la hembra (n y n) en las filas. Al cruzarlos, cada una de las 4 casillas recibe una 'N' del padre y una 'n' de la madre, dando como resultado <strong>Nn</strong> en todas las casillas.
+                        <p>Separamos los alelos del macho (N y N) en las columnas, y los de la hembra (n y n) en las filas. Al cruzarlos, cada una de las 4 casillas recibe una 'N' del padre y una 'n' de la madre, dando como resultado <strong>Nn</strong> en todas las casillas.</p>
+                        <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
+                            <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">N</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">N</th></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">n</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Nn</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Nn</td></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">n</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Nn</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Nn</td></tr>
+                        </table>
                     </div>
                 </div>
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
@@ -237,7 +243,12 @@
                 <div class="paso" data-step="2">
                     <div class="paso-titulo">Cruzar e Interpretar</div>
                     <div class="texto-info">
-                        Al aplicar la Primera Ley de Mendel (cruce de dos puros), sabemos por regla general que la descendencia F1 será 100% heterocigota (<strong>Aa</strong>).
+                        <p>Al aplicar la Primera Ley de Mendel (cruce de dos puros), sabemos por regla general que la descendencia F1 será 100% heterocigota (<strong>Aa</strong>).</p>
+                        <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
+                            <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">A</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">A</th></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">a</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Aa</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Aa</td></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">a</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Aa</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Aa</td></tr>
+                        </table>
                     </div>
                 </div>
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
@@ -263,7 +274,14 @@
                 </div>
                 <div class="paso" data-step="2">
                     <div class="paso-titulo">Cálculo de Proporciones</div>
-                    <div class="texto-info">El cruce <strong>LL x ll</strong> generará 4 combinaciones genéticas. Las 4 casillas del cuadro de Punnett contendrán el genotipo <strong>Ll</strong>.</div>
+                    <div class="texto-info">
+                        <p>El cruce <strong>LL x ll</strong> generará 4 combinaciones genéticas. Las 4 casillas del cuadro de Punnett contendrán el genotipo <strong>Ll</strong>.</p>
+                        <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
+                            <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">L</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">L</th></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">l</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Ll</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Ll</td></tr>
+                            <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">l</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Ll</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Ll</td></tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
                     <div class="paso-titulo">Reporte de Proporciones</div>
@@ -275,6 +293,51 @@
                 </div>
             </div>
         </div>
+
+        <h2 style="text-align: center; font-size: 2.2rem; margin: 50px 0 30px; border-bottom: 2px solid #555; padding-bottom: 20px;">
+            <i class="fa-solid fa-gamepad" style="color: var(--color-bio-secundario);"></i> Prueba tu Aprendizaje
+        </h2>
+        <div style="background: rgba(0,0,0,0.6); border: 2px dashed var(--color-bio-secundario); border-radius: 12px; padding: 25px; margin-bottom: 30px;" id="cadena-ley1">
+            <h3 style="color: #fff; margin-bottom: 15px;" id="cadena-q-text">Reto 1: Si cruzas una mosca de ojos rojos pura (RR) con una de ojos blancos pura (rr), ¿Qué fenotipo tendrán todos sus hijos?</h3>
+            <div id="cadena-opciones" style="display: flex; gap: 10px; flex-direction: column;">
+                <button onclick="checkCadena1(0)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">A) 50% Ojos rojos, 50% Ojos blancos</button>
+                <button onclick="checkCadena1(1)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">B) 100% Ojos rojos</button>
+                <button onclick="checkCadena1(2)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">C) 100% Ojos blancos</button>
+            </div>
+            <p id="cadena-feedback" style="margin-top: 15px; font-weight: bold; font-size: 1.1rem;"></p>
+        </div>
+
+        <script>
+            function checkCadena1(ans) {
+                const fb = document.getElementById('cadena-feedback');
+                if(ans === 1) {
+                    fb.style.color = '#2ecc71';
+                    fb.innerHTML = '¡Correcto! Todos serán heterocigotos (Rr) y el rojo domina. <br><br> <button onclick="nextCadena1()" class="btn-accion">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>';
+                } else {
+                    fb.style.color = '#e74c3c';
+                    fb.innerHTML = 'Incorrecto. Recuerda que al cruzar dos puros, la F1 toma el rasgo del dominante.';
+                }
+            }
+            function nextCadena1() {
+                document.getElementById('cadena-q-text').innerText = 'Reto 2: ¿Cuál es el genotipo exacto de los hijos de ese cruce (RR x rr)?';
+                document.getElementById('cadena-opciones').innerHTML = `
+                    <button onclick="checkCadena2(0)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">A) Homocigoto Dominante (RR)</button>
+                    <button onclick="checkCadena2(1)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">B) Homocigoto Recesivo (rr)</button>
+                    <button onclick="checkCadena2(2)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">C) Heterocigoto (Rr)</button>
+                `;
+                document.getElementById('cadena-feedback').innerHTML = '';
+            }
+            function checkCadena2(ans) {
+                const fb = document.getElementById('cadena-feedback');
+                if(ans === 2) {
+                    fb.style.color = '#2ecc71';
+                    fb.innerHTML = '¡Excelente! Has dominado la Primera Ley de Mendel. Ya puedes continuar a la segunda ley.';
+                } else {
+                    fb.style.color = '#e74c3c';
+                    fb.innerHTML = 'Incorrecto. Reciben una R del padre y una r de la madre.';
+                }
+            }
+        </script>
 
         <div class="btn-nav">
             <a href="biologia10_gregor_mendel.html" class="btn-accion btn-secundario"><i class="fa-solid fa-arrow-left"></i> Anterior (Gregor Mendel)</a>
