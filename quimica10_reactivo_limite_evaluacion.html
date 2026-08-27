@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Estequiometría Avanzada (Décimo) - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --color-quimica: #9b59b6;
+            --color-oscuro: #1a1a2e;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-evaluacion: #4facfe; /* Azul brillante para evaluación 10 */
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: #fff; background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; min-height: 100vh; }
+        nav { background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(79, 172, 254, 0.3); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-evaluacion); }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        
+        .encabezado-eval { text-align: center; margin-bottom: 40px; border-bottom: 2px solid var(--color-evaluacion); padding-bottom: 20px; }
+        .encabezado-eval h1 { font-size: 2.5rem; color: var(--color-evaluacion); }
+        .encabezado-eval p { color: #ccc; font-size: 1.1rem; }
+
+        .seccion-titulo { background: rgba(79, 172, 254, 0.15); border-left: 5px solid var(--color-evaluacion); padding: 15px 20px; font-size: 1.5rem; font-weight: 700; border-radius: 5px; margin-bottom: 25px; margin-top: 40px;}
+        
+        .pregunta-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 25px; margin-bottom: 25px; transition: 0.3s; }
+        .pregunta-card:hover { border-color: rgba(79, 172, 254, 0.4); box-shadow: 0 5px 15px rgba(79, 172, 254, 0.1); }
+        
+        .pregunta-num { color: var(--color-evaluacion); font-weight: 800; font-size: 1.2rem; margin-bottom: 10px; }
+        .pregunta-texto { font-size: 1.1rem; margin-bottom: 15px; }
+        .ecuacion { font-family: monospace; font-size: 1.3rem; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 15px; color: #f1c40f;}
+        
+        /* Opciones Múltiples */
+        .opciones { display: flex; flex-direction: column; gap: 10px; }
+        .opcion-label { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: 0.2s; }
+        .opcion-label:hover { background: rgba(79, 172, 254, 0.1); border-color: var(--color-evaluacion); }
+        input[type="radio"] { appearance: none; width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 50%; outline: none; transition: 0.2s; position: relative; cursor: pointer; }
+        input[type="radio"]:checked { border-color: var(--color-evaluacion); background: rgba(79, 172, 254, 0.2); }
+        input[type="radio"]:checked::before { content: ''; position: absolute; width: 10px; height: 10px; background: var(--color-evaluacion); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+        .btn-enviar { background: var(--color-evaluacion); color: #1a1a2e; border: none; padding: 18px 40px; border-radius: 8px; font-weight: 800; font-size: 1.2rem; cursor: pointer; width: 100%; margin-top: 40px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
+        .btn-enviar:hover { opacity: 0.9; transform: scale(1.02); box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3); }
+
+        #resultado-container { display: none; text-align: center; background: rgba(0,0,0,0.6); border: 2px solid var(--color-evaluacion); padding: 40px; border-radius: 15px; margin-top: 40px; }
+        .nota-final { font-size: 5rem; font-weight: 900; margin: 20px 0; text-shadow: 0 0 20px rgba(79, 172, 254, 0.5); }
+        
+        .correcta-visual { border-color: var(--color-exito) !important; background: rgba(46, 204, 113, 0.1) !important; }
+        .incorrecta-visual { border-color: var(--color-error) !important; background: rgba(231, 76, 60, 0.1) !important; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+        <a href="quimica_10.html" style="color:#fff; text-decoration:none;"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+    </nav>
+
+    <div class="contenedor" id="test-container">
+        <div class="encabezado-eval">
+            <h1>Evaluación: Estequiometría Avanzada</h1>
+            <p>Calcula los gramos producidos y responde a las preguntas teóricas. Tienes 10 preguntas. Cada una vale 0.5 puntos.</p>
+        </div>
+
+        <form id="eval-form">
+            
+            <div class="seccion-titulo"><i class="fa-solid fa-calculator"></i> Sección I: Ejercicios Prácticos (Gramos Producidos)</div>
+            <p style="margin-bottom: 20px; color:#ccc;">Identifica el Reactivo Límite en tu hoja de papel y luego usa sus moles para calcular los gramos del producto esperado.</p>
+
+            <!-- P1 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 1</div>
+                <div class="pregunta-texto">Se hacen reaccionar 10 g de H₂ con 64 g de O₂. ¿Cuántos gramos de H₂O se producen?</div>
+                <div class="ecuacion">2H₂ + O₂ → 2H₂O</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q1" value="18"> 18 g de H₂O</label>
+                    <label class="opcion-label"><input type="radio" name="q1" value="36"> 36 g de H₂O</label>
+                    <label class="opcion-label"><input type="radio" name="q1" value="72"> 72 g de H₂O</label>
+                    <label class="opcion-label"><input type="radio" name="q1" value="90"> 90 g de H₂O</label>
+                </div>
+            </div>
+
+            <!-- P2 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 2</div>
+                <div class="pregunta-texto">Se mezclan 28 g de Nitrógeno (N₂) con 12 g de Hidrógeno (H₂). ¿Cuántos gramos de Amoníaco (NH₃) se forman?</div>
+                <div class="ecuacion">N₂ + 3H₂ → 2NH₃</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q2" value="17"> 17 g de NH₃</label>
+                    <label class="opcion-label"><input type="radio" name="q2" value="34"> 34 g de NH₃</label>
+                    <label class="opcion-label"><input type="radio" name="q2" value="51"> 51 g de NH₃</label>
+                    <label class="opcion-label"><input type="radio" name="q2" value="68"> 68 g de NH₃</label>
+                </div>
+            </div>
+
+            <!-- P3 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 3</div>
+                <div class="pregunta-texto">Combustión de 32 g de Metano (CH₄) con 96 g de Oxígeno (O₂). ¿Cuántos gramos de CO₂ se producen?</div>
+                <div class="ecuacion">CH₄ + 2O₂ → CO₂ + 2H₂O</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q3" value="44"> 44 g de CO₂</label>
+                    <label class="opcion-label"><input type="radio" name="q3" value="66"> 66 g de CO₂</label>
+                    <label class="opcion-label"><input type="radio" name="q3" value="88"> 88 g de CO₂</label>
+                    <label class="opcion-label"><input type="radio" name="q3" value="132"> 132 g de CO₂</label>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 4</div>
+                <div class="pregunta-texto">Reaccionan 54 g de Aluminio (Al) con 142 g de Cloro (Cl₂). ¿Cuántos gramos de Cloruro de Aluminio (AlCl₃) se obtienen?</div>
+                <div class="ecuacion">2Al + 3Cl₂ → 2AlCl₃</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q4" value="133.5"> 133.5 g de AlCl₃</label>
+                    <label class="opcion-label"><input type="radio" name="q4" value="178"> 178 g de AlCl₃</label>
+                    <label class="opcion-label"><input type="radio" name="q4" value="267"> 267 g de AlCl₃</label>
+                    <label class="opcion-label"><input type="radio" name="q4" value="355"> 355 g de AlCl₃</label>
+                </div>
+            </div>
+
+            <!-- P5 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 5</div>
+                <div class="pregunta-texto">Se combinan 112 g de Hierro (Fe) con 64 g de Oxígeno (O₂). ¿Cuántos gramos de Óxido Férrico (Fe₂O₃) se producen?</div>
+                <div class="ecuacion">4Fe + 3O₂ → 2Fe₂O₃</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q5" value="160"> 160 g de Fe₂O₃</label>
+                    <label class="opcion-label"><input type="radio" name="q5" value="240"> 240 g de Fe₂O₃</label>
+                    <label class="opcion-label"><input type="radio" name="q5" value="320"> 320 g de Fe₂O₃</label>
+                    <label class="opcion-label"><input type="radio" name="q5" value="80"> 80 g de Fe₂O₃</label>
+                </div>
+            </div>
+
+            <div class="seccion-titulo"><i class="fa-solid fa-brain"></i> Sección II: Conceptos Estequiométricos Avanzados</div>
+
+            <!-- P6 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 6</div>
+                <div class="pregunta-texto">¿Qué representa el Reactivo en Exceso?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q6" value="a"> A) El reactivo que se consume primero en su totalidad.</label>
+                    <label class="opcion-label"><input type="radio" name="q6" value="b"> B) El reactivo que determina la cantidad máxima de producto.</label>
+                    <label class="opcion-label"><input type="radio" name="q6" value="c"> C) El reactivo del cual queda una cantidad sin reaccionar al finalizar la reacción.</label>
+                    <label class="opcion-label"><input type="radio" name="q6" value="d"> D) Una sustancia química que funciona como catalizador.</label>
+                </div>
+            </div>
+
+            <!-- P7 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 7</div>
+                <div class="pregunta-texto">Para calcular los gramos producidos en una reacción, ¿qué valor debes usar en la relación estequiométrica (regla de tres)?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q7" value="a"> A) Los moles iniciales del reactivo en exceso.</label>
+                    <label class="opcion-label"><input type="radio" name="q7" value="b"> B) Los moles iniciales del reactivo límite.</label>
+                    <label class="opcion-label"><input type="radio" name="q7" value="c"> C) La suma de los moles de todos los reactivos.</label>
+                    <label class="opcion-label"><input type="radio" name="q7" value="d"> D) La masa molar del producto.</label>
+                </div>
+            </div>
+
+            <!-- P8 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 8</div>
+                <div class="pregunta-texto">Si el rendimiento real (en el laboratorio) de una reacción es 60 g, pero el rendimiento teórico calculado con el reactivo límite era de 75 g, ¿cuál es el porcentaje de rendimiento (%R) de la reacción?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q8" value="a"> A) 80%</label>
+                    <label class="opcion-label"><input type="radio" name="q8" value="b"> B) 60%</label>
+                    <label class="opcion-label"><input type="radio" name="q8" value="c"> C) 125%</label>
+                    <label class="opcion-label"><input type="radio" name="q8" value="d"> D) 75%</label>
+                </div>
+            </div>
+
+            <!-- P9 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 9</div>
+                <div class="pregunta-texto">¿Cuál es el paso final indispensable (el famoso Paso 6) para calcular la masa final del producto deseado?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q9" value="a"> A) Dividir los moles obtenidos entre el coeficiente estequiométrico.</label>
+                    <label class="opcion-label"><input type="radio" name="q9" value="b"> B) Restar las masas de los reactivos.</label>
+                    <label class="opcion-label"><input type="radio" name="q9" value="c"> C) Multiplicar los moles de producto obtenidos (por relación estequiométrica) por su Masa Molar.</label>
+                    <label class="opcion-label"><input type="radio" name="q9" value="d"> D) Sumar las masas molares de los reactivos y productos juntos.</label>
+                </div>
+            </div>
+
+            <!-- P10 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 10</div>
+                <div class="pregunta-texto">Si en una industria duplicas la cantidad de tu Reactivo Límite inicial, ¿qué sucederá con la cantidad teórica de producto formado? (Asumiendo que hay suficiente reactivo en exceso).</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q10" value="a"> A) Se reduce a la mitad.</label>
+                    <label class="opcion-label"><input type="radio" name="q10" value="b"> B) Se mantiene exactamente igual.</label>
+                    <label class="opcion-label"><input type="radio" name="q10" value="c"> C) Se duplica.</label>
+                    <label class="opcion-label"><input type="radio" name="q10" value="d"> D) Se vuelve impredecible.</label>
+                </div>
+            </div>
+
+            <button type="button" class="btn-enviar" onclick="calificar()"><i class="fa-solid fa-paper-plane"></i> Finalizar y Ver Nota</button>
+        </form>
+
+        <div id="resultado-container">
+            <h2>Resultados de la Evaluación</h2>
+            <div class="nota-final" id="nota-texto">0.0</div>
+            <p id="mensaje-feedback" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+            <button class="btn-enviar" style="background: var(--color-quimica); width: auto; color:#fff;" onclick="window.scrollTo(0,0); location.reload();"><i class="fa-solid fa-rotate-right"></i> Reintentar Evaluación</button>
+            <a href="quimica_10.html" class="btn-enviar" style="background: #2ecc71; width: auto; color:#fff; text-decoration:none; display:inline-block; margin-left:10px;"><i class="fa-solid fa-house"></i> Volver al Menú</a>
+        </div>
+
+    </div>
+
+    <script>
+        const respuestasCorrectas = {
+            q1: "72",   // Ej 1: 72g
+            q2: "34",   // Ej 2: 34g
+            q3: "66",   // Ej 3: 66g
+            q4: "178",  // Ej 4: 177.5 ~ 178g. En HTML es 178.
+            q5: "160",  // Ej 5: 160g
+            q6: "c",
+            q7: "b",
+            q8: "a",    // (60/75)*100 = 80%
+            q9: "c",
+            q10: "c"
+        };
+
+        function calificar() {
+            let puntaje = 0;
+            let respondidas = 0;
+
+            for(let i=1; i<=10; i++) {
+                const nombreRadio = 'q' + i;
+                const seleccion = document.querySelector(`input[name="${nombreRadio}"]:checked`);
+                
+                if(!seleccion) {
+                    Swal.fire('Atención', `Por favor responde la pregunta ${i} antes de enviar.`, 'warning');
+                    return;
+                }
+
+                respondidas++;
+                
+                // Mostrar colores
+                const todasLasOpciones = document.querySelectorAll(`input[name="${nombreRadio}"]`);
+                todasLasOpciones.forEach(op => {
+                    op.parentElement.style.pointerEvents = 'none'; // deshabilitar
+                    if(op.value === respuestasCorrectas[nombreRadio]) {
+                        op.parentElement.classList.add('correcta-visual');
+                    } else if (op.checked && op.value !== respuestasCorrectas[nombreRadio]) {
+                        op.parentElement.classList.add('incorrecta-visual');
+                    }
+                });
+
+                if(seleccion.value === respuestasCorrectas[nombreRadio]) {
+                    puntaje += 0.5;
+                }
+            }
+
+            document.getElementById('eval-form').style.display = 'none';
+            const contenedorRes = document.getElementById('resultado-container');
+            contenedorRes.style.display = 'block';
+            
+            const notaElement = document.getElementById('nota-texto');
+            notaElement.innerText = puntaje.toFixed(1);
+
+            let color = '';
+            let msj = '';
+            if(puntaje >= 4.0) { color = '#2ecc71'; msj = '¡Felicidades! Eres un maestro de la estequiometría avanzada.'; }
+            else if (puntaje >= 3.0) { color = '#f1c40f'; msj = 'Buen trabajo. Repasa los cálculos para mejorar tus tiempos.'; }
+            else { color = '#e74c3c'; msj = 'Te recomendamos realizar la práctica de nuevo para entender el paso a paso.'; }
+
+            notaElement.style.color = color;
+            document.getElementById('mensaje-feedback').innerText = msj;
+            
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    </script>
+</body>
+</html>

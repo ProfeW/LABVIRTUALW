@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanceo por Tanteo - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-quim-primario: #9b59b6;   
+            --color-quim-secundario: #00d2d3; 
+            --color-oscuro: #14111f; 
+            --color-texto: #ffffff;
+            --color-alerta: #e74c3c;
+            --bg-tarjeta: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: var(--color-texto);
+            background-image: linear-gradient(rgba(20, 17, 31, 0.92), rgba(20, 17, 31, 0.98)), url('https://images.unsplash.com/photo-1603126858732-41a4a49c95d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; line-height: 1.6;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav { background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(155, 89, 182, 0.2); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-quim-primario); }
+        .btn-volver { color: var(--color-quim-secundario); text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; margin-top: 20px;}
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor { max-width: 1000px; margin: 0 auto; padding: 20px; animation: fadeIn 0.8s ease; }
+
+        /* --- ENCABEZADO --- */
+        .encabezado-leccion { text-align: center; margin-bottom: 40px; border-bottom: 2px solid rgba(155, 89, 182, 0.3); padding-bottom: 20px; margin-top: 10px;}
+        .encabezado-leccion h1 { font-size: 3rem; color: var(--color-quim-secundario); margin-bottom: 10px; }
+        .encabezado-leccion p { font-size: 1.1rem; color: #ccc; }
+
+        /* --- SECCIONES --- */
+        .seccion { background: var(--bg-tarjeta); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .seccion h2 { color: var(--color-quim-primario); margin-bottom: 20px; font-size: 1.8rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; display: flex; align-items: center; gap: 10px;}
+        
+        .caja-info { background: rgba(0, 210, 211, 0.1); border-left: 4px solid var(--color-quim-secundario); padding: 15px 20px; border-radius: 5px; margin-bottom: 20px; }
+        
+        .lista-pasos { list-style: none; counter-reset: paso-counter; margin-bottom: 20px; }
+        .lista-pasos li { position: relative; padding-left: 50px; margin-bottom: 15px; font-size: 1.05rem; }
+        .lista-pasos li::before {
+            content: counter(paso-counter); counter-increment: paso-counter;
+            position: absolute; left: 0; top: 0; width: 35px; height: 35px;
+            background: var(--color-quim-primario); color: #fff; font-weight: bold;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+        }
+
+        /* --- EJERCICIOS --- */
+        .ejercicio { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; margin-bottom: 25px; }
+        .ejercicio h3 { color: #f1c40f; margin-bottom: 15px; font-size: 1.4rem; }
+        
+        .ecuacion { font-size: 1.8rem; text-align: center; font-weight: 800; letter-spacing: 2px; margin: 20px 0; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.2); font-family: monospace; }
+        .ecuacion span { color: var(--color-alerta); font-size: 2rem; font-weight: 900;} /* Coeficientes resaltados */
+        
+        .paso-ejercicio { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #555; }
+        .paso-ejercicio strong { color: var(--color-quim-secundario); }
+
+        table.tabla-conteo { width: 100%; max-width: 400px; margin: 15px auto; border-collapse: collapse; text-align: center; }
+        table.tabla-conteo th, table.tabla-conteo td { border: 1px solid rgba(255,255,255,0.2); padding: 8px; }
+        table.tabla-conteo th { background: rgba(155, 89, 182, 0.2); color: var(--color-quim-primario); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+    </nav>
+
+    <main class="contenedor">
+        <a href="quimica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Química 9°</a>
+
+        <div class="encabezado-leccion">
+            <h1>Balanceo por Tanteo</h1>
+            <p>Aprende paso a paso cómo igualar las ecuaciones químicas para cumplir con la Ley de Conservación de la Masa.</p>
+        </div>
+
+        <section class="seccion">
+            <h2><i class="fa-solid fa-book-open"></i> 1. Concepto y Regla de Oro</h2>
+            <div class="caja-info">
+                <strong>Ley de Lavoisier:</strong> "La materia no se crea ni se destruye, solo se transforma". En una reacción química, la cantidad de átomos de cada elemento en los Reactivos debe ser exactamente igual a la cantidad en los Productos.
+            </div>
+            <p>Para balancear por "tanteo" (ensayo y error), modificamos los <strong>coeficientes</strong> (los números grandes a la izquierda de cada molécula). <strong>¡NUNCA!</strong> debes modificar los subíndices (los números pequeños abajo), ya que alterarías la naturaleza de la sustancia.</p>
+        </section>
+
+        <section class="seccion">
+            <h2><i class="fa-solid fa-list-ol"></i> 2. Orden Recomendado (M.N.H.O.)</h2>
+            <p>Para no dar vueltas infinitas, te recomendamos seguir siempre este orden para balancear los elementos:</p>
+            <ul class="lista-pasos" style="margin-top: 15px;">
+                <li><strong>Metales:</strong> (Ej: Na, Fe, Al, Cu)</li>
+                <li><strong>No Metales:</strong> Diferentes al oxígeno e hidrógeno (Ej: Cl, S, N, C)</li>
+                <li><strong>Hidrógeno:</strong> (H)</li>
+                <li><strong>Oxígeno:</strong> (O). Generalmente, si balanceaste bien los anteriores, el oxígeno se balancea casi solo al final.</li>
+            </ul>
+        </section>
+
+        <section class="seccion">
+            <h2><i class="fa-solid fa-dumbbell"></i> 3. Ejemplos Paso a Paso</h2>
+
+            <!-- EJEMPLO 1 -->
+            <div class="ejercicio">
+                <h3>Ejemplo 1: Formación del Amoníaco</h3>
+                <div class="ecuacion">N₂ + H₂ → NH₃</div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 1:</strong> Conteo inicial.
+                    <table class="tabla-conteo">
+                        <tr><th>Reactivos</th><th>Elemento</th><th>Productos</th></tr>
+                        <tr><td>2</td><td>N</td><td>1</td></tr>
+                        <tr><td>2</td><td>H</td><td>3</td></tr>
+                    </table>
+                    <em>Desbalanceado en Nitrógeno e Hidrógeno.</em>
+                </div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 2:</strong> Siguiendo el orden (no hay metales, seguimos con el No metal: N). Ponemos un coeficiente 2 en el NH₃.
+                    <div class="ecuacion">N₂ + H₂ → <span>2</span>NH₃</div>
+                    <em>Ahora tenemos 2 Nitrógenos a cada lado. Pero el Hidrógeno en los productos ahora es 2 × 3 = 6.</em>
+                </div>
+
+                <div class="paso-ejercicio">
+                    <strong>Paso 3:</strong> Balanceamos el Hidrógeno. Necesitamos 6 en los reactivos. Ponemos un 3 en el H₂ (3 × 2 = 6).
+                    <div class="ecuacion">N₂ + <span>3</span>H₂ → <span>2</span>NH₃</div>
+                </div>
+
+                <div class="paso-ejercicio" style="border-left-color: #2ecc71; background: rgba(46, 204, 113, 0.1);">
+                    <strong>Paso 4: ¡Balanceado!</strong> N = 2 | H = 6.
+                </div>
+            </div>
+
+            <!-- EJEMPLO 2 -->
+            <div class="ejercicio">
+                <h3>Ejemplo 2: Formación del Agua</h3>
+                <div class="ecuacion">H₂ + O₂ → H₂O</div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 1:</strong> Hay 2 Oxígenos en reactivos y 1 en productos. Ponemos un 2 en el agua.
+                    <div class="ecuacion">H₂ + O₂ → <span>2</span>H₂O</div>
+                </div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 2:</strong> Ahora hay 4 Hidrógenos (2×2) en productos y 2 en reactivos. Ponemos un 2 al H₂.
+                    <div class="ecuacion"><span>2</span>H₂ + O₂ → <span>2</span>H₂O</div>
+                </div>
+
+                <div class="paso-ejercicio" style="border-left-color: #2ecc71; background: rgba(46, 204, 113, 0.1);">
+                    <strong>Paso 3: ¡Balanceado!</strong> H = 4 | O = 2.
+                </div>
+            </div>
+
+            <!-- EJEMPLO 3 -->
+            <div class="ejercicio">
+                <h3>Ejemplo 3: Combustión del Metano</h3>
+                <div class="ecuacion">CH₄ + O₂ → CO₂ + H₂O</div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 1:</strong> Orden: Carbono (C) primero. Está balanceado (1 y 1). Luego Hidrógeno (H): 4 en reactivos, 2 en productos. Ponemos un 2 en el agua.
+                    <div class="ecuacion">CH₄ + O₂ → CO₂ + <span>2</span>H₂O</div>
+                </div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 2:</strong> Finalmente Oxígeno (O). En productos hay 2 (del CO₂) + 2 (del 2H₂O) = 4. En reactivos hay 2. Ponemos un 2 al O₂.
+                    <div class="ecuacion">CH₄ + <span>2</span>O₂ → CO₂ + <span>2</span>H₂O</div>
+                </div>
+
+                <div class="paso-ejercicio" style="border-left-color: #2ecc71; background: rgba(46, 204, 113, 0.1);">
+                    <strong>Paso 3: ¡Balanceado!</strong> C = 1 | H = 4 | O = 4.
+                </div>
+            </div>
+
+            <!-- EJEMPLO 4 -->
+            <div class="ejercicio">
+                <h3>Ejemplo 4: Oxidación del Aluminio</h3>
+                <div class="ecuacion">Al + O₂ → Al₂O₃</div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 1:</strong> Metal primero (Al). 1 en reactivos, 2 en productos. Ponemos 2 al Al.
+                    <div class="ecuacion"><span>2</span>Al + O₂ → Al₂O₃</div>
+                </div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 2:</strong> Oxígeno. Tenemos 2 en reactivos y 3 en productos. Un truco: cruzar los números. Multiplicamos el O₂ por 3 y la molécula entera de Al₂O₃ por 2.
+                    <div class="ecuacion">2Al + <span>3</span>O₂ → <span>2</span>Al₂O₃</div>
+                    <em>O = 6 en ambos lados.</em>
+                </div>
+
+                <div class="paso-ejercicio">
+                    <strong>Paso 3:</strong> El Aluminio se desbalanceó (ahora hay 4 en productos). Cambiamos el 2 inicial por un 4.
+                    <div class="ecuacion"><span>4</span>Al + <span>3</span>O₂ → <span>2</span>Al₂O₃</div>
+                </div>
+
+                <div class="paso-ejercicio" style="border-left-color: #2ecc71; background: rgba(46, 204, 113, 0.1);">
+                    <strong>Paso 4: ¡Balanceado!</strong> Al = 4 | O = 6.
+                </div>
+            </div>
+
+            <!-- EJEMPLO 5 -->
+            <div class="ejercicio">
+                <h3>Ejemplo 5: Hierro con Ácido Clorhídrico</h3>
+                <div class="ecuacion">Fe + HCl → FeCl₃ + H₂</div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 1:</strong> Metales: Fe (1 y 1). No Metales: Cl (1 y 3). Ponemos 3 al HCl.
+                    <div class="ecuacion">Fe + <span>3</span>HCl → FeCl₃ + H₂</div>
+                </div>
+                
+                <div class="paso-ejercicio">
+                    <strong>Paso 2:</strong> Hidrógeno: 3 en reactivos, 2 en productos. Como no podemos poner 1.5, multiplicamos todo por 2 para eliminar impares.
+                    <div class="ecuacion"><span>2</span>Fe + <span>6</span>HCl → <span>2</span>FeCl₃ + <span>3</span>H₂</div>
+                </div>
+
+                <div class="paso-ejercicio" style="border-left-color: #2ecc71; background: rgba(46, 204, 113, 0.1);">
+                    <strong>Paso 3: ¡Balanceado!</strong> Fe = 2 | Cl = 6 | H = 6.
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+</body>
+</html>

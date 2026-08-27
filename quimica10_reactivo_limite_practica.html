@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Reactivo Límite y Gramos (Décimo) - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --color-quimica: #9b59b6;
+            --color-secundario: #8e44ad;
+            --color-oscuro: #1a1a2e;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-alerta: #e67e22;
+            --color-producto: #2ecc71;
+        }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: #fff; background-image: linear-gradient(rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.98)), url('https://images.unsplash.com/photo-1532187863486-abf9d39d99c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; min-height: 100vh; }
+        nav { background: rgba(0,0,0,0.3); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(155, 89, 182, 0.2); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-quimica); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .menu a:hover { background: rgba(155,89,182,0.1); color: #4facfe; }
+        
+        .contenedor { max-width: 960px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        .btn-volver { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+        
+        .encabezado-leccion { border-bottom: 2px solid rgba(155, 89, 182, 0.3); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: #4facfe; margin-bottom: 8px; }
+        .encabezado-leccion p { color: #ccc; font-size: 1.1rem; }
+
+        .barra-progreso-contenedor { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.08); }
+        .barra-progreso-titulo { font-weight: 700; color: #fff; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .barra { background: rgba(255,255,255,0.1); border-radius: 20px; height: 10px; overflow: hidden; }
+        .barra-fill { background: linear-gradient(90deg, #4facfe, var(--color-quimica)); height: 100%; border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+
+        .ejercicio-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 50px; border-top: 4px solid #4facfe; }
+        .ejercicio-box h3 { color: #4facfe; margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        
+        .enunciado { font-style: italic; color: #ddd; background: rgba(79, 172, 254, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 1.1rem; border-left: 4px solid #4facfe; }
+        .ecuacion-box { text-align: center; font-family: monospace; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; color: #fff; letter-spacing: 1px;}
+        .datos-box { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; font-size: 0.95rem; color: #ccc;}
+
+        .pasos-container { display: flex; flex-direction: column; gap: 15px; }
+        
+        .paso-contenedor { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 8px; border-left: 4px solid #555; transition: 0.3s; }
+        .paso-contenedor.activo { border-left-color: #4facfe; box-shadow: 0 5px 15px rgba(79, 172, 254, 0.1); }
+        .paso-contenedor.completado { border-left-color: var(--color-exito); opacity: 0.8; pointer-events: none; }
+        .paso-contenedor.oculto { display: none; }
+        
+        .paso-titulo { font-weight: 800; color: #fff; font-size: 1.1rem; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .icono-check { color: var(--color-exito); display: none; font-size: 1.4rem; }
+        .completado .icono-check { display: block; }
+
+        .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .input-grupo { display: flex; align-items: stretch; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; overflow: hidden; }
+        .input-grupo label { background: rgba(255,255,255,0.05); padding: 12px; color: #fff; font-weight: bold; width: 45%; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem;}
+        .input-grupo input, .input-grupo select { flex: 1; padding: 12px; border: none; background: transparent; color: #fff; font-size: 1.1rem; text-align: center; outline: none; }
+        .input-grupo select { cursor: pointer; }
+        .input-grupo select option { background: var(--color-oscuro); }
+        .input-grupo input:focus, .input-grupo select:focus { background: rgba(79, 172, 254, 0.1); }
+
+        .btn-validar { background: #4facfe; color: var(--color-oscuro); border: none; padding: 12px 28px; border-radius: 6px; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 1rem; text-transform: uppercase;}
+        .btn-validar:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3); }
+
+        .feedback { display: none; margin-top: 15px; padding: 12px 15px; border-radius: 6px; font-weight: 600; text-align: center;}
+        .feedback.correcto { display: block; background: rgba(46,204,113,0.15); border: 1px solid var(--color-exito); color: var(--color-exito); }
+        .feedback.incorrecto { display: block; background: rgba(231,76,60,0.15); border: 1px solid var(--color-error); color: var(--color-error); }
+
+        .btn-siguiente-ejercicio { display: none; background: #4facfe; color: #fff; border: none; padding: 15px 30px; border-radius: 8px; font-weight: 800; font-size: 1.2rem; cursor: pointer; margin-top: 30px; width: 100%; transition: 0.3s; text-transform: uppercase; }
+        .btn-siguiente-ejercicio:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .grid-inputs { grid-template-columns: 1fr; } .input-grupo label { width: 50%; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+        <ul class="menu">
+            <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+        </ul>
+    </nav>
+
+    <div class="contenedor">
+        <a href="quimica10_reactivo_limite.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        
+        <div class="encabezado-leccion">
+            <h1>🎮 Práctica: Estequiometría Avanzada</h1>
+            <p>8 Ejercicios paso a paso. Recuerda usar el reactivo límite para calcular los gramos del producto esperado.</p>
+        </div>
+
+        <div class="barra-progreso-contenedor">
+            <div class="barra-progreso-titulo">
+                <span><i class="fa-solid fa-chart-line"></i> Progreso General</span>
+                <span id="texto-progreso">0 / 8 completados</span>
+            </div>
+            <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+        </div>
+
+        <div id="contenedor-ejercicios"></div>
+    </div>
+
+    <script>
+        const ejerciciosData = [
+            { // Ejercicio 1
+                titulo: "Formación del Agua",
+                enunciado: "Se hacen reaccionar 10 g de Hidrógeno (H₂) con 64 g de Oxígeno (O₂). Calcula los gramos de H₂O.",
+                ecuacion: "2H₂ + 1O₂ → 2H₂O",
+                reactivos: ["H₂", "O₂"],
+                pm: [2, 32],
+                masa: [10, 64],
+                moles_correctos: ["5", "5.0"], 
+                moles2_correctos: ["2", "2.0"],
+                div_correctas: ["2.5", "2.50"],
+                div2_correctas: ["2", "2.0"],
+                rl_correcto: "O2",
+                producto: "H₂O",
+                producto_pm: 18,
+                gramos_correctos: ["72", "72.0"]
+            },
+            { // Ejercicio 2
+                titulo: "Formación de Amoníaco",
+                enunciado: "Se mezclan 28 g de Nitrógeno (N₂) con 12 g de Hidrógeno (H₂). Calcula los gramos de NH₃.",
+                ecuacion: "1N₂ + 3H₂ → 2NH₃",
+                reactivos: ["N₂", "H₂"],
+                pm: [28, 2],
+                masa: [28, 12],
+                moles_correctos: ["1", "1.0"],
+                moles2_correctos: ["6", "6.0"],
+                div_correctas: ["1", "1.0"],
+                div2_correctas: ["2", "2.0"],
+                rl_correcto: "N2",
+                producto: "NH₃",
+                producto_pm: 17,
+                gramos_correctos: ["34", "34.0"]
+            },
+            { // Ejercicio 3
+                titulo: "Combustión del Metano",
+                enunciado: "Se queman 32 g de Metano (CH₄) en presencia de 96 g de Oxígeno (O₂). Calcula los gramos de Dióxido de Carbono (CO₂).",
+                ecuacion: "1CH₄ + 2O₂ → 1CO₂ + 2H₂O",
+                reactivos: ["CH₄", "O₂"],
+                pm: [16, 32],
+                masa: [32, 96],
+                moles_correctos: ["2", "2.0"],
+                moles2_correctos: ["3", "3.0"],
+                div_correctas: ["2", "2.0"],
+                div2_correctas: ["1.5", "1.50"],
+                rl_correcto: "O2",
+                producto: "CO₂",
+                producto_pm: 44,
+                gramos_correctos: ["66", "66.0"]
+            },
+            { // Ejercicio 4
+                titulo: "Cloruro de Aluminio",
+                enunciado: "Reaccionan 54 g de Aluminio (Al) con 142 g de Cloro (Cl₂). Calcula los gramos de AlCl₃.",
+                ecuacion: "2Al + 3Cl₂ → 2AlCl₃",
+                reactivos: ["Al", "Cl₂"],
+                pm: [27, 71],
+                masa: [54, 142],
+                moles_correctos: ["2", "2.0"],
+                moles2_correctos: ["2", "2.0"],
+                div_correctas: ["1", "1.0"],
+                div2_correctas: ["0.66", "0.67", "0.6"],
+                rl_correcto: "Cl2",
+                producto: "AlCl₃",
+                producto_pm: 133.5,
+                gramos_correctos: ["177.5", "177.6", "178", "178.0"] // Margen de error por decimales
+            },
+            { // Ejercicio 5
+                titulo: "Óxido de Hierro (III)",
+                enunciado: "Se combinan 112 g de Hierro (Fe) con 64 g de Oxígeno (O₂). Calcula los gramos de Fe₂O₃.",
+                ecuacion: "4Fe + 3O₂ → 2Fe₂O₃",
+                reactivos: ["Fe", "O₂"],
+                pm: [56, 32],
+                masa: [112, 64],
+                moles_correctos: ["2", "2.0"],
+                moles2_correctos: ["2", "2.0"],
+                div_correctas: ["0.5", "0.50"],
+                div2_correctas: ["0.66", "0.67", "0.6"],
+                rl_correcto: "Fe",
+                producto: "Fe₂O₃",
+                producto_pm: 160,
+                gramos_correctos: ["160", "160.0"]
+            },
+            { // Ejercicio 6
+                titulo: "Dióxido de Azufre",
+                enunciado: "Reaccionan 64 g de Azufre (S) con 32 g de Oxígeno (O₂). Calcula los gramos de SO₂.",
+                ecuacion: "1S + 1O₂ → 1SO₂",
+                reactivos: ["S", "O₂"],
+                pm: [32, 32],
+                masa: [64, 32],
+                moles_correctos: ["2", "2.0"],
+                moles2_correctos: ["1", "1.0"],
+                div_correctas: ["2", "2.0"],
+                div2_correctas: ["1", "1.0"],
+                rl_correcto: "O2",
+                producto: "SO₂",
+                producto_pm: 64,
+                gramos_correctos: ["64", "64.0"]
+            },
+            { // Ejercicio 7
+                titulo: "Óxido de Magnesio",
+                enunciado: "Se calientan 48 g de Magnesio (Mg) con 64 g de Oxígeno (O₂). Calcula los gramos de MgO.",
+                ecuacion: "2Mg + 1O₂ → 2MgO",
+                reactivos: ["Mg", "O₂"],
+                pm: [24, 32],
+                masa: [48, 64],
+                moles_correctos: ["2", "2.0"],
+                moles2_correctos: ["2", "2.0"],
+                div_correctas: ["1", "1.0"],
+                div2_correctas: ["2", "2.0"],
+                rl_correcto: "Mg",
+                producto: "MgO",
+                producto_pm: 40,
+                gramos_correctos: ["80", "80.0"]
+            },
+            { // Ejercicio 8
+                titulo: "Dióxido de Carbono (Carbono elemental)",
+                enunciado: "Combustión de 36 g de Carbono (C) con 64 g de Oxígeno (O₂). Calcula los gramos de CO₂.",
+                ecuacion: "1C + 1O₂ → 1CO₂",
+                reactivos: ["C", "O₂"],
+                pm: [12, 32],
+                masa: [36, 64],
+                moles_correctos: ["3", "3.0"],
+                moles2_correctos: ["2", "2.0"],
+                div_correctas: ["3", "3.0"],
+                div2_correctas: ["2", "2.0"],
+                rl_correcto: "O2",
+                producto: "CO₂",
+                producto_pm: 44,
+                gramos_correctos: ["88", "88.0"]
+            }
+        ];
+
+        let ejercicioActual = 0;
+
+        function renderizarEjercicio(index) {
+            const data = ejerciciosData[index];
+            const div = document.createElement('div');
+            div.className = 'ejercicio-box';
+            div.innerHTML = `
+                <h3>Ejercicio ${index + 1}: ${data.titulo}</h3>
+                <p class="enunciado">${data.enunciado}</p>
+                <div class="ecuacion-box">${data.ecuacion}</div>
+                <div class="datos-box">
+                    <span><strong>PM ${data.reactivos[0]}:</strong> ${data.pm[0]} g/mol</span> | 
+                    <span><strong>PM ${data.reactivos[1]}:</strong> ${data.pm[1]} g/mol</span> |
+                    <span style="color:var(--color-producto);"><strong>PM ${data.producto}:</strong> ${data.producto_pm} g/mol</span>
+                </div>
+                
+                <div class="pasos-container">
+                    <!-- PASO 1: MOLES -->
+                    <div class="paso-contenedor activo" id="paso1_${index}">
+                        <div class="paso-titulo">Paso 1: Convertir a Moles <i class="fa-solid fa-circle-check icono-check"></i></div>
+                        <div class="grid-inputs">
+                            <div class="input-grupo">
+                                <label>Moles ${data.reactivos[0]}</label>
+                                <input type="number" step="0.01" id="in_mol1_${index}" placeholder="Ej: 2.5">
+                            </div>
+                            <div class="input-grupo">
+                                <label>Moles ${data.reactivos[1]}</label>
+                                <input type="number" step="0.01" id="in_mol2_${index}" placeholder="Ej: 1.2">
+                            </div>
+                        </div>
+                        <button class="btn-validar" onclick="validarPaso1(${index})">Validar Moles</button>
+                        <div class="feedback" id="feed1_${index}"></div>
+                    </div>
+
+                    <!-- PASO 2: DIVISIÓN -->
+                    <div class="paso-contenedor oculto" id="paso2_${index}">
+                        <div class="paso-titulo">Paso 2: Dividir entre Coeficiente <i class="fa-solid fa-circle-check icono-check"></i></div>
+                        <div class="grid-inputs">
+                            <div class="input-grupo">
+                                <label>División ${data.reactivos[0]}</label>
+                                <input type="number" step="0.01" id="in_div1_${index}" placeholder="Ej: 1.25">
+                            </div>
+                            <div class="input-grupo">
+                                <label>División ${data.reactivos[1]}</label>
+                                <input type="number" step="0.01" id="in_div2_${index}" placeholder="Ej: 0.6">
+                            </div>
+                        </div>
+                        <button class="btn-validar" onclick="validarPaso2(${index})">Validar División</button>
+                        <div class="feedback" id="feed2_${index}"></div>
+                    </div>
+
+                    <!-- PASO 3: LIMITE -->
+                    <div class="paso-contenedor oculto" id="paso3_${index}">
+                        <div class="paso-titulo">Paso 3: Reactivo Límite <i class="fa-solid fa-circle-check icono-check"></i></div>
+                        <div class="grid-inputs" style="grid-template-columns: 1fr;">
+                            <div class="input-grupo">
+                                <label>Reactivo Límite es:</label>
+                                <select id="in_rl_${index}">
+                                    <option value="" disabled selected>Seleccione...</option>
+                                    <option value="reactivo1">${data.reactivos[0]}</option>
+                                    <option value="reactivo2">${data.reactivos[1]}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn-validar" onclick="validarPaso3(${index})">Confirmar Límite</button>
+                        <div class="feedback" id="feed3_${index}"></div>
+                    </div>
+
+                    <!-- PASO 4: GRAMOS (NUEVO) -->
+                    <div class="paso-contenedor oculto" id="paso4_${index}" style="border-left-color: var(--color-producto);">
+                        <div class="paso-titulo" style="color: var(--color-producto);">Paso 4: Gramos Producidos <i class="fa-solid fa-circle-check icono-check"></i></div>
+                        <p style="margin-bottom: 10px; font-size:0.9rem; color:#aaa;">Usa los moles (del Paso 1) del Reactivo Límite, aplica regla de tres con coeficientes, y multiplica por el PM del producto.</p>
+                        <div class="grid-inputs" style="grid-template-columns: 1fr;">
+                            <div class="input-grupo" style="border-color: var(--color-producto);">
+                                <label style="background: rgba(46, 204, 113, 0.1); color: var(--color-producto);">Gramos ${data.producto}</label>
+                                <input type="number" step="0.01" id="in_g_${index}" placeholder="Ej: 120.5">
+                            </div>
+                        </div>
+                        <button class="btn-validar" style="background: var(--color-producto);" onclick="validarPaso4(${index})">Finalizar Ejercicio</button>
+                        <div class="feedback" id="feed4_${index}"></div>
+                    </div>
+                </div>
+                
+                <button class="btn-siguiente-ejercicio" id="btn-next-${index}" onclick="siguienteEjercicio()">Siguiente Ejercicio <i class="fa-solid fa-arrow-right"></i></button>
+            `;
+            
+            const contenedor = document.getElementById('contenedor-ejercicios');
+            contenedor.innerHTML = '';
+            contenedor.appendChild(div);
+            actualizarProgreso();
+        }
+
+        // Funciones de Validación
+        function validarPaso1(idx) {
+            const v1 = document.getElementById(`in_mol1_${idx}`).value.trim();
+            const v2 = document.getElementById(`in_mol2_${idx}`).value.trim();
+            const feed = document.getElementById(`feed1_${idx}`);
+            if(ejerciciosData[idx].moles_correctos.includes(v1) && ejerciciosData[idx].moles2_correctos.includes(v2)) {
+                exito(feed, '¡Moles correctos!', `paso1_${idx}`, `paso2_${idx}`);
+            } else { error(feed, 'Revisa la conversión a moles.'); }
+        }
+
+        function validarPaso2(idx) {
+            const v1 = document.getElementById(`in_div1_${idx}`).value.trim();
+            const v2 = document.getElementById(`in_div2_${idx}`).value.trim();
+            const feed = document.getElementById(`feed2_${idx}`);
+            if(ejerciciosData[idx].div_correctas.includes(v1) && ejerciciosData[idx].div2_correctas.includes(v2)) {
+                exito(feed, '¡Divisiones correctas!', `paso2_${idx}`, `paso3_${idx}`);
+            } else { error(feed, 'Revisa las divisiones.'); }
+        }
+
+        function validarPaso3(idx) {
+            const val = document.getElementById(`in_rl_${idx}`).value;
+            const feed = document.getElementById(`feed3_${idx}`);
+            const data = ejerciciosData[idx];
+            let esCorrecto = false;
+            
+            if(data.rl_correcto.includes("O2") && val === 'reactivo2') esCorrecto = true;
+            if(data.rl_correcto === "N2" && val === 'reactivo1') esCorrecto = true;
+            if(data.rl_correcto === "Cl2" && val === 'reactivo2') esCorrecto = true;
+            if(data.rl_correcto === "Fe" && val === 'reactivo1') esCorrecto = true;
+            if(data.rl_correcto === "Mg" && val === 'reactivo1') esCorrecto = true;
+
+            if(esCorrecto) {
+                exito(feed, '¡Reactivo Límite correcto! Ahora calcula los gramos.', `paso3_${idx}`, `paso4_${idx}`);
+                document.getElementById(`paso4_${idx}`).classList.add('activo');
+            } else { error(feed, 'El reactivo límite es el menor resultado de la división.'); }
+        }
+
+        function validarPaso4(idx) {
+            const val = document.getElementById(`in_g_${idx}`).value.trim();
+            const feed = document.getElementById(`feed4_${idx}`);
+            if(ejerciciosData[idx].gramos_correctos.includes(val)) {
+                feed.className = 'feedback correcto';
+                feed.innerHTML = '<i class="fa-solid fa-star"></i> ¡Perfecto! Gramos calculados exitosamente.';
+                document.getElementById(`paso4_${idx}`).classList.remove('activo');
+                document.getElementById(`paso4_${idx}`).classList.add('completado');
+                
+                if(ejercicioActual < 7) {
+                    document.getElementById(`btn-next-${idx}`).style.display = 'block';
+                } else {
+                    ejercicioActual++;
+                    actualizarProgreso();
+                    Swal.fire({
+                        title: '¡Práctica Completada!',
+                        text: 'Has superado el nivel avanzado de Estequiometría.',
+                        icon: 'success',
+                        confirmButtonText: 'Ir a Evaluación',
+                        confirmButtonColor: '#4facfe'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'quimica10_reactivo_limite_evaluacion.html';
+                        }
+                    });
+                }
+            } else { error(feed, 'Revisa la regla de tres usando los moles del reactivo límite.'); }
+        }
+
+        function exito(feed, msj, pasoActual, pasoSiguiente) {
+            feed.className = 'feedback correcto';
+            feed.innerHTML = `<i class="fa-solid fa-check"></i> ${msj}`;
+            document.getElementById(pasoActual).classList.remove('activo');
+            document.getElementById(pasoActual).classList.add('completado');
+            document.getElementById(pasoSiguiente).classList.remove('oculto');
+            document.getElementById(pasoSiguiente).classList.add('activo');
+        }
+
+        function error(feed, msj) {
+            feed.className = 'feedback incorrecto';
+            feed.innerHTML = `<i class="fa-solid fa-xmark"></i> ${msj}`;
+        }
+
+        function siguienteEjercicio() {
+            ejercicioActual++;
+            renderizarEjercicio(ejercicioActual);
+        }
+
+        function actualizarProgreso() {
+            document.getElementById('texto-progreso').innerText = `${ejercicioActual} / 8 completados`;
+            document.getElementById('barra-fill').style.width = `${(ejercicioActual / 8) * 100}%`;
+        }
+
+        // Iniciar
+        renderizarEjercicio(0);
+    </script>
+</body>
+</html>

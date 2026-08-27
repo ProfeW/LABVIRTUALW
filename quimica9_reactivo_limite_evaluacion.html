@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Reactivo Límite (Noveno) - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --color-quimica: #9b59b6;
+            --color-oscuro: #14111f;
+            --color-exito: #2ecc71;
+            --color-error: #e74c3c;
+            --color-evaluacion: #e74c3c; /* Rojo/Naranja para evaluación */
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--color-oscuro); color: #fff; background-image: linear-gradient(rgba(20, 17, 31, 0.95), rgba(20, 17, 31, 0.98)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; min-height: 100vh; }
+        nav { background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(231, 76, 60, 0.3); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-evaluacion); }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; animation: fadeIn 0.5s ease; }
+        
+        .encabezado-eval { text-align: center; margin-bottom: 40px; border-bottom: 2px solid var(--color-evaluacion); padding-bottom: 20px; }
+        .encabezado-eval h1 { font-size: 2.5rem; color: var(--color-evaluacion); }
+        .encabezado-eval p { color: #ccc; font-size: 1.1rem; }
+
+        .seccion-titulo { background: rgba(231, 76, 60, 0.15); border-left: 5px solid var(--color-evaluacion); padding: 15px 20px; font-size: 1.5rem; font-weight: 700; border-radius: 5px; margin-bottom: 25px; margin-top: 40px;}
+        
+        .pregunta-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 25px; margin-bottom: 25px; transition: 0.3s; }
+        .pregunta-card:hover { border-color: rgba(231, 76, 60, 0.4); box-shadow: 0 5px 15px rgba(231, 76, 60, 0.1); }
+        
+        .pregunta-num { color: var(--color-evaluacion); font-weight: 800; font-size: 1.2rem; margin-bottom: 10px; }
+        .pregunta-texto { font-size: 1.1rem; margin-bottom: 15px; }
+        .ecuacion { font-family: monospace; font-size: 1.3rem; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 15px; color: #f1c40f;}
+        
+        /* Opciones Múltiples */
+        .opciones { display: flex; flex-direction: column; gap: 10px; }
+        .opcion-label { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: 0.2s; }
+        .opcion-label:hover { background: rgba(231, 76, 60, 0.1); border-color: var(--color-evaluacion); }
+        input[type="radio"] { appearance: none; width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 50%; outline: none; transition: 0.2s; position: relative; cursor: pointer; }
+        input[type="radio"]:checked { border-color: var(--color-evaluacion); background: rgba(231, 76, 60, 0.2); }
+        input[type="radio"]:checked::before { content: ''; position: absolute; width: 10px; height: 10px; background: var(--color-evaluacion); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+        .btn-enviar { background: var(--color-evaluacion); color: #fff; border: none; padding: 18px 40px; border-radius: 8px; font-weight: 800; font-size: 1.2rem; cursor: pointer; width: 100%; margin-top: 40px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
+        .btn-enviar:hover { opacity: 0.9; transform: scale(1.02); box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3); }
+
+        #resultado-container { display: none; text-align: center; background: rgba(0,0,0,0.6); border: 2px solid var(--color-evaluacion); padding: 40px; border-radius: 15px; margin-top: 40px; }
+        .nota-final { font-size: 5rem; font-weight: 900; margin: 20px 0; text-shadow: 0 0 20px rgba(231, 76, 60, 0.5); }
+        
+        .correcta-visual { border-color: var(--color-exito) !important; background: rgba(46, 204, 113, 0.1) !important; }
+        .incorrecta-visual { border-color: var(--color-error) !important; background: rgba(231, 76, 60, 0.1) !important; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="inicio.html" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
+        <a href="quimica_9.html" style="color:#fff; text-decoration:none;"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+    </nav>
+
+    <div class="contenedor" id="test-container">
+        <div class="encabezado-eval">
+            <h1>Evaluación: Reactivo Límite</h1>
+            <p>Lee cuidadosamente. Tienes 10 preguntas (5 Prácticas y 5 Teóricas). Cada pregunta vale 0.5 puntos.</p>
+        </div>
+
+        <form id="eval-form">
+            
+            <div class="seccion-titulo"><i class="fa-solid fa-calculator"></i> Sección I: Ejercicios Prácticos</div>
+            <p style="margin-bottom: 20px; color:#ccc;">Resuelve en una hoja y selecciona cuál es el Reactivo Límite en cada caso.</p>
+
+            <!-- P1 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 1</div>
+                <div class="pregunta-texto">Se hacen reaccionar 10 g de H₂ con 32 g de O₂. ¿Cuál es el reactivo límite?</div>
+                <div class="ecuacion">2H₂ + O₂ → 2H₂O</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q1" value="H2"> Hidrógeno (H₂)</label>
+                    <label class="opcion-label"><input type="radio" name="q1" value="O2"> Oxígeno (O₂)</label>
+                    <label class="opcion-label"><input type="radio" name="q1" value="H2O"> Agua (H₂O)</label>
+                    <label class="opcion-label"><input type="radio" name="q1" value="Ninguno"> Ninguno, están en proporciones estequiométricas</label>
+                </div>
+            </div>
+
+            <!-- P2 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 2</div>
+                <div class="pregunta-texto">Se mezclan 28 g de Nitrógeno (N₂) con 12 g de Hidrógeno (H₂). ¿Cuál es el reactivo límite?</div>
+                <div class="ecuacion">N₂ + 3H₂ → 2NH₃</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q2" value="H2"> Hidrógeno (H₂)</label>
+                    <label class="opcion-label"><input type="radio" name="q2" value="N2"> Nitrógeno (N₂)</label>
+                    <label class="opcion-label"><input type="radio" name="q2" value="NH3"> Amoníaco (NH₃)</label>
+                </div>
+            </div>
+
+            <!-- P3 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 3</div>
+                <div class="pregunta-texto">Reaccionan 27 g de Aluminio (Al) con 213 g de Cloro (Cl₂). ¿Cuál es el reactivo límite?</div>
+                <div class="ecuacion">2Al + 3Cl₂ → 2AlCl₃</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q3" value="Al"> Aluminio (Al)</label>
+                    <label class="opcion-label"><input type="radio" name="q3" value="Cl2"> Cloro (Cl₂)</label>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 4</div>
+                <div class="pregunta-texto">Se calientan 32 g de Azufre (S) con 64 g de Oxígeno (O₂). ¿Qué sustancia se acaba primero?</div>
+                <div class="ecuacion">S + O₂ → SO₂</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q4" value="O2"> Oxígeno (O₂)</label>
+                    <label class="opcion-label"><input type="radio" name="q4" value="S"> Azufre (S)</label>
+                </div>
+            </div>
+
+            <!-- P5 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 5</div>
+                <div class="pregunta-texto">Combustión de 24 g de Carbono (C) con 32 g de Oxígeno (O₂). El reactivo límite es:</div>
+                <div class="ecuacion">C + O₂ → CO₂</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q5" value="C"> Carbono (C)</label>
+                    <label class="opcion-label"><input type="radio" name="q5" value="O2"> Oxígeno (O₂)</label>
+                </div>
+            </div>
+
+            <div class="seccion-titulo"><i class="fa-solid fa-brain"></i> Sección II: Conceptos Teóricos</div>
+
+            <!-- P6 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 6</div>
+                <div class="pregunta-texto">¿Qué es el reactivo límite en una reacción química?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q6" value="a"> A) La sustancia que se consume por completo primero.</label>
+                    <label class="opcion-label"><input type="radio" name="q6" value="b"> B) La sustancia que sobra al final de la reacción.</label>
+                    <label class="opcion-label"><input type="radio" name="q6" value="c"> C) El producto que más masa tiene.</label>
+                    <label class="opcion-label"><input type="radio" name="q6" value="d"> D) El reactivo que tiene mayor coeficiente.</label>
+                </div>
+            </div>
+
+            <!-- P7 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 7</div>
+                <div class="pregunta-texto">¿Por qué es obligatorio balancear la ecuación antes de buscar el reactivo límite?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q7" value="a"> A) Para que la ecuación se vea estéticamente correcta.</label>
+                    <label class="opcion-label"><input type="radio" name="q7" value="b"> B) Para cumplir con la Ley de Conservación de la Masa de Lavoisier.</label>
+                    <label class="opcion-label"><input type="radio" name="q7" value="c"> C) Para poder simplificar los subíndices de las moléculas.</label>
+                    <label class="opcion-label"><input type="radio" name="q7" value="d"> D) No es obligatorio balancearla.</label>
+                </div>
+            </div>
+
+            <!-- P8 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 8</div>
+                <div class="pregunta-texto">¿Cuál es la fórmula correcta para calcular los moles de una sustancia si conoces su masa en gramos?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q8" value="a"> A) Moles = Masa (g) × Masa Molar (PM)</label>
+                    <label class="opcion-label"><input type="radio" name="q8" value="b"> B) Moles = Masa Molar (PM) / Masa (g)</label>
+                    <label class="opcion-label"><input type="radio" name="q8" value="c"> C) Moles = Masa (g) / Masa Molar (PM)</label>
+                    <label class="opcion-label"><input type="radio" name="q8" value="d"> D) Moles = Masa (g) + Masa Molar (PM)</label>
+                </div>
+            </div>
+
+            <!-- P9 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 9</div>
+                <div class="pregunta-texto">En una fábrica de bicicletas, se tienen 100 marcos y 150 llantas. Sabiendo que cada bicicleta requiere 1 marco y 2 llantas, ¿qué elemento representa el reactivo límite?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q9" value="a"> A) Las bicicletas completadas.</label>
+                    <label class="opcion-label"><input type="radio" name="q9" value="b"> B) Los marcos (sobrarán marcos).</label>
+                    <label class="opcion-label"><input type="radio" name="q9" value="c"> C) Las llantas (se acabarán primero).</label>
+                    <label class="opcion-label"><input type="radio" name="q9" value="d"> D) Ninguno, ambos se acaban al tiempo.</label>
+                </div>
+            </div>
+
+            <!-- P10 -->
+            <div class="pregunta-card">
+                <div class="pregunta-num">Pregunta 10</div>
+                <div class="pregunta-texto">En la metodología de 5 pasos, ¿qué debes hacer justo después de calcular los moles de cada reactivo?</div>
+                <div class="opciones">
+                    <label class="opcion-label"><input type="radio" name="q10" value="a"> A) Dividir esos moles entre el coeficiente balanceado de la ecuación.</label>
+                    <label class="opcion-label"><input type="radio" name="q10" value="b"> B) Multiplicar ambos moles para hallar el producto.</label>
+                    <label class="opcion-label"><input type="radio" name="q10" value="c"> C) Restar los moles mayores menos los menores.</label>
+                    <label class="opcion-label"><input type="radio" name="q10" value="d"> D) El ejercicio finaliza ahí, el número menor de moles es el límite.</label>
+                </div>
+            </div>
+
+            <button type="button" class="btn-enviar" onclick="calificar()"><i class="fa-solid fa-paper-plane"></i> Finalizar y Ver Nota</button>
+        </form>
+
+        <div id="resultado-container">
+            <h2>Resultados de la Evaluación</h2>
+            <div class="nota-final" id="nota-texto">0.0</div>
+            <p id="mensaje-feedback" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+            <button class="btn-enviar" style="background: #3498db; width: auto;" onclick="window.scrollTo(0,0); location.reload();"><i class="fa-solid fa-rotate-right"></i> Reintentar Evaluación</button>
+            <a href="quimica_9.html" class="btn-enviar" style="background: #2ecc71; width: auto; text-decoration:none; display:inline-block; margin-left:10px;"><i class="fa-solid fa-house"></i> Volver al Menú</a>
+        </div>
+
+    </div>
+
+    <script>
+        const respuestasCorrectas = {
+            q1: "O2",   // 10/2=5, 32/32=1 (1/1=1). O2=1, H2=2.5. RL=O2
+            q2: "N2",   // 56/28=2. 12/2=6. N2: 2/1=2. H2: 6/3=2. Wait, 2 y 2. No, 56/28=2, 2/1=2. 12/2=6, 6/3=2. Son iguales.
+            q3: "Al",   // 27/27=1, 1/2=0.5. 213/71=3, 3/3=1. RL=Al.
+            q4: "S",    // 32/32=1. 64/32=2. RL=S.
+            q5: "O2",   // 24/12=2. 32/32=1. RL=O2.
+            q6: "a",
+            q7: "b",
+            q8: "c",
+            q9: "c",    // 100 marcos (necesito 200 llantas). Tengo 150 llantas, hago 75 bicis. Llantas se acaban.
+            q10: "a"
+        };
+
+        // Corrección Pregunta 2: 28g N2 (1 mol/1 =1), 12g H2 (6 mol/3=2). N2 limitante. Cambiaré P2 en el HTML. (Ya lo hice: 56g N2 = 2 moles. 2/1=2. H2 = 6 moles. 6/3=2. Hmmm, wait, I put 56g N2. 56/28 = 2. 2/1=2. 12g H2 -> 6 moles. 6/3=2. It's a tie! Let's change P2 answers directly here in the logic to reflect a correct RL.)
+        // Voy a ajustar las respuestas de P2 en la lógica: 28g de N2 = 1 mol. 1/1 = 1. 12g de H2 = 6 moles. 6/3=2. N2 es límite. Modificaré el HTML de forma virtual asumiendo 28g. No, I wrote 56g N2. I will change it via replace_file_content after if needed. Let's just fix it.
+
+        function calificar() {
+            let puntaje = 0;
+            let respondidas = 0;
+
+            for(let i=1; i<=10; i++) {
+                const nombreRadio = 'q' + i;
+                const seleccion = document.querySelector(`input[name="${nombreRadio}"]:checked`);
+                
+                if(!seleccion) {
+                    Swal.fire('Atención', `Por favor responde la pregunta ${i} antes de enviar.`, 'warning');
+                    return;
+                }
+
+                respondidas++;
+                
+                // Mostrar colores
+                const todasLasOpciones = document.querySelectorAll(`input[name="${nombreRadio}"]`);
+                todasLasOpciones.forEach(op => {
+                    op.parentElement.style.pointerEvents = 'none'; // deshabilitar
+                    if(op.value === respuestasCorrectas[nombreRadio]) {
+                        op.parentElement.classList.add('correcta-visual');
+                    } else if (op.checked && op.value !== respuestasCorrectas[nombreRadio]) {
+                        op.parentElement.classList.add('incorrecta-visual');
+                    }
+                });
+
+                if(seleccion.value === respuestasCorrectas[nombreRadio]) {
+                    puntaje += 0.5;
+                }
+            }
+
+            document.getElementById('eval-form').style.display = 'none';
+            const contenedorRes = document.getElementById('resultado-container');
+            contenedorRes.style.display = 'block';
+            
+            const notaElement = document.getElementById('nota-texto');
+            notaElement.innerText = puntaje.toFixed(1);
+
+            let color = '';
+            let msj = '';
+            if(puntaje >= 4.0) { color = '#2ecc71'; msj = '¡Excelente trabajo! Has dominado el tema.'; }
+            else if (puntaje >= 3.0) { color = '#f1c40f'; msj = 'Buen trabajo, pero te sugerimos repasar un poco más.'; }
+            else { color = '#e74c3c'; msj = 'Debes repasar la teoría y los ejercicios prácticos e intentarlo de nuevo.'; }
+
+            notaElement.style.color = color;
+            document.getElementById('mensaje-feedback').innerText = msj;
+            
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    </script>
+</body>
+</html>
