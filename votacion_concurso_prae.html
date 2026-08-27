@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votación Concurso PRAE - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --color-neon: #00f3ff;
+            --color-neon-alt: #ff00ea;
+            --color-oscuro: #12121a;
+            --color-card: rgba(255, 255, 255, 0.05);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { 
+            background-color: var(--color-oscuro); 
+            color: #fff; 
+            background-image: radial-gradient(circle at top right, rgba(0, 243, 255, 0.1), transparent 40%), radial-gradient(circle at bottom left, rgba(255, 0, 234, 0.1), transparent 40%);
+            background-size: cover; 
+            background-attachment: fixed; 
+            min-height: 100vh; 
+        }
+        
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; animation: fadeIn 0.6s ease; }
+        
+        .encabezado { text-align: center; margin-bottom: 40px; border-bottom: 2px solid var(--color-neon); padding-bottom: 20px; }
+        .encabezado h1 { font-size: 3rem; color: #fff; text-shadow: 0 0 10px var(--color-neon), 0 0 20px var(--color-neon); margin-bottom: 15px;}
+        
+        .alerta-jurado { background: rgba(255, 0, 234, 0.1); border-left: 5px solid var(--color-neon-alt); padding: 15px 20px; font-size: 1.1rem; border-radius: 5px; margin-bottom: 30px; line-height: 1.6;}
+        
+        .form-group { margin-bottom: 30px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .form-group label { display: block; font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; color: var(--color-neon); }
+        .input-nombre { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 243, 255, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-size: 1.1rem; outline: none; transition: 0.3s; }
+        .input-nombre:focus { border-color: var(--color-neon); box-shadow: 0 0 15px rgba(0, 243, 255, 0.3); }
+
+        .categorias-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        @media (max-width: 768px) { .categorias-grid { grid-template-columns: 1fr; } }
+        
+        .categoria-titulo { font-size: 1.8rem; text-align: center; margin-bottom: 20px; color: var(--color-neon-alt); text-shadow: 0 0 10px rgba(255,0,234,0.5); }
+        .cat-mascota { color: var(--color-neon); text-shadow: 0 0 10px rgba(0,243,255,0.5); }
+        
+        .opciones-lista { display: flex; flex-direction: column; gap: 15px; }
+        .opcion-item { background: var(--color-card); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 20px; }
+        .opcion-item:hover { transform: translateY(-5px); border-color: var(--color-neon); box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2); }
+        
+        .opcion-img-container { width: 120px; height: 120px; border-radius: 8px; overflow: hidden; background: #000; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .opcion-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        .opcion-item:hover .opcion-img-container img { transform: scale(1.1); }
+        
+        .opcion-info { flex-grow: 1; }
+        .opcion-info h3 { font-size: 1.5rem; margin-bottom: 5px; color: #eee; }
+        
+        /* Custom Radio */
+        input[type="radio"] { appearance: none; width: 25px; height: 25px; border: 2px solid #ccc; border-radius: 50%; outline: none; transition: 0.2s; position: relative; cursor: pointer; flex-shrink: 0; }
+        input[type="radio"]:checked { border-color: var(--color-neon); }
+        input[type="radio"]:checked::before { content: ''; position: absolute; width: 13px; height: 13px; background: var(--color-neon); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 10px var(--color-neon); }
+        
+        /* Opcion activa visual */
+        .opcion-item.selected { border-color: var(--color-neon); background: rgba(0, 243, 255, 0.05); box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); }
+
+        .btn-enviar { background: transparent; border: 2px solid var(--color-neon); color: var(--color-neon); padding: 18px 40px; border-radius: 8px; font-weight: 800; font-size: 1.2rem; cursor: pointer; width: 100%; margin-top: 40px; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-enviar:hover { background: var(--color-neon); color: #000; box-shadow: 0 0 20px var(--color-neon); }
+        .btn-enviar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .nota-final { margin-top: 40px; text-align: center; font-size: 1.1rem; color: #ccc; background: rgba(0,0,0,0.4); padding: 25px; border-radius: 10px; border-top: 1px solid rgba(255,255,255,0.1); line-height: 1.6;}
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="encabezado">
+            <h1>Vota por tu Favorito</h1>
+            <p style="font-size: 1.2rem; color: #ddd;">Concurso Proyecto PRAE a Nivel Departamental</p>
+        </div>
+
+        <div class="alerta-jurado">
+            <i class="fa-solid fa-triangle-exclamation" style="color: var(--color-neon-alt); font-size: 1.3rem; margin-right: 10px;"></i> 
+            <strong>Exclusivo para profesores:</strong> Ustedes son los jurados. Estas imágenes fueron diseñadas por los estudiantes de los diferentes grados de la institución para concursar en el proyecto PRAE a nivel departamental. Por favor, voten, solo podemos enviar una propuesta por categoría.
+        </div>
+
+        <form id="votacion-form">
+            <div class="form-group">
+                <label for="nombre"><i class="fa-solid fa-user-tie"></i> Nombre Completo del Docente (Jurado):</label>
+                <input type="text" id="nombre" name="nombre" class="input-nombre" placeholder="Ingrese su nombre y apellido" required>
+            </div>
+
+            <div class="categorias-grid">
+                <!-- Categoría Logo -->
+                <div class="categoria-col">
+                    <h2 class="categoria-titulo"><i class="fa-solid fa-leaf"></i> Categoría: Logo</h2>
+                    <div class="opciones-lista">
+                        <!-- Option 1 to 6 -->
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="1.jpg" alt="Logo 1" onerror="this.src='https://via.placeholder.com/150/1a1a2e/ff00ea?text=Imagen+1'"></div>
+                            <div class="opcion-info"><h3>Propuesta 1</h3></div>
+                            <input type="radio" name="categoria_1" value="1" required>
+                        </label>
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="2.jpg" alt="Logo 2" onerror="this.src='https://via.placeholder.com/150/1a1a2e/ff00ea?text=Imagen+2'"></div>
+                            <div class="opcion-info"><h3>Propuesta 2</h3></div>
+                            <input type="radio" name="categoria_1" value="2" required>
+                        </label>
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="3.jpg" alt="Logo 3" onerror="this.src='https://via.placeholder.com/150/1a1a2e/ff00ea?text=Imagen+3'"></div>
+                            <div class="opcion-info"><h3>Propuesta 3</h3></div>
+                            <input type="radio" name="categoria_1" value="3" required>
+                        </label>
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="4.jpg" alt="Logo 4" onerror="this.src='https://via.placeholder.com/150/1a1a2e/ff00ea?text=Imagen+4'"></div>
+                            <div class="opcion-info"><h3>Propuesta 4</h3></div>
+                            <input type="radio" name="categoria_1" value="4" required>
+                        </label>
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="5.jpg" alt="Logo 5" onerror="this.src='https://via.placeholder.com/150/1a1a2e/ff00ea?text=Imagen+5'"></div>
+                            <div class="opcion-info"><h3>Propuesta 5</h3></div>
+                            <input type="radio" name="categoria_1" value="5" required>
+                        </label>
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="6.jpg" alt="Logo 6" onerror="this.src='https://via.placeholder.com/150/1a1a2e/ff00ea?text=Imagen+6'"></div>
+                            <div class="opcion-info"><h3>Propuesta 6</h3></div>
+                            <input type="radio" name="categoria_1" value="6" required>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Categoría Mascota -->
+                <div class="categoria-col">
+                    <h2 class="categoria-titulo cat-mascota"><i class="fa-solid fa-paw"></i> Categoría: Mascota</h2>
+                    <div class="opciones-lista">
+                        <!-- Option 7 to 10 -->
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="7.jpg" alt="Mascota 7" onerror="this.src='https://via.placeholder.com/150/1a1a2e/00f3ff?text=Imagen+7'"></div>
+                            <div class="opcion-info"><h3>Propuesta 7</h3></div>
+                            <input type="radio" name="categoria_2" value="7" required>
+                        </label>
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="8.jpg" alt="Mascota 8" onerror="this.src='https://via.placeholder.com/150/1a1a2e/00f3ff?text=Imagen+8'"></div>
+                            <div class="opcion-info"><h3>Propuesta 8</h3></div>
+                            <input type="radio" name="categoria_2" value="8" required>
+                        </label>
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="9.jpg" alt="Mascota 9" onerror="this.src='https://via.placeholder.com/150/1a1a2e/00f3ff?text=Imagen+9'"></div>
+                            <div class="opcion-info"><h3>Propuesta 9</h3></div>
+                            <input type="radio" name="categoria_2" value="9" required>
+                        </label>
+                        <label class="opcion-item">
+                            <div class="opcion-img-container"><img src="10.jpg" alt="Mascota 10" onerror="this.src='https://via.placeholder.com/150/1a1a2e/00f3ff?text=Imagen+10'"></div>
+                            <div class="opcion-info"><h3>Propuesta 10</h3></div>
+                            <input type="radio" name="categoria_2" value="10" required>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-enviar" id="btn-submit"><i class="fa-solid fa-paper-plane"></i> Enviar Votación</button>
+        </form>
+
+        <div class="nota-final">
+            <i class="fa-solid fa-bullhorn" style="color: var(--color-neon); font-size: 1.5rem; margin-bottom: 10px; display: block;"></i> 
+            Las mascotas y logos escogidos serán enviados a la Gobernación. En los próximos días habrá una jornada de votación con <strong>"likes" a través de Facebook</strong>, por favor estén muy atentos para que nos colaboren.
+        </div>
+    </div>
+
+    <script>
+        // Script para manejar el estilo visual al seleccionar
+        const opciones = document.querySelectorAll('input[type="radio"]');
+        opciones.forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Remover la clase selected de todos los items de esta misma categoría
+                const name = this.name;
+                const siblings = document.querySelectorAll(`input[name="${name}"]`);
+                siblings.forEach(s => s.closest('.opcion-item').classList.remove('selected'));
+                
+                // Agregar la clase selected al item seleccionado
+                if(this.checked) {
+                    this.closest('.opcion-item').classList.add('selected');
+                }
+            });
+        });
+
+        // Envío del formulario a Google Sheets
+        // ===> REEMPLAZAR ESTA URL CON LA URL DE TU SCRIPT DE GOOGLE <===
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxXyBSa9aEzTsCCLeEUBQosvESw2VrKAWholER7qp81ODrkQuqxdhXaE1OHAefi8PCJCA/exec'; 
+        const form = document.getElementById('votacion-form');
+        const btnSubmit = document.getElementById('btn-submit');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // Verificamos que se seleccionó una de cada categoría
+            const logo = document.querySelector('input[name="categoria_1"]:checked');
+            const mascota = document.querySelector('input[name="categoria_2"]:checked');
+            
+            if(!logo || !mascota) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Faltan opciones',
+                    text: 'Debes seleccionar una propuesta en la categoría Logo y una en Mascota.',
+                    background: '#12121a',
+                    color: '#fff',
+                    confirmButtonColor: '#00f3ff'
+                });
+                return;
+            }
+
+            // Cambiar estado del botón
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+            btnSubmit.disabled = true;
+
+            // Preparar datos
+            const formData = new FormData(form);
+
+            // Simulación de envío si no se ha configurado la URL (Para que puedas probarlo ahora)
+            if(scriptURL.includes('TU_SCRIPT_ID')) {
+                setTimeout(() => {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Modo de Prueba Local',
+                        html: `Falta configurar el enlace de Google Apps Script.<br><br><b>Datos que se enviarían a tu hoja:</b><br>Nombre: ${formData.get('nombre')}<br>Logo: Imagen ${formData.get('categoria_1')}<br>Mascota: Imagen ${formData.get('categoria_2')}`,
+                        background: '#12121a',
+                        color: '#fff',
+                        confirmButtonColor: '#00f3ff'
+                    });
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Votación';
+                    btnSubmit.disabled = false;
+                }, 1000);
+                return;
+            }
+
+            // Petición POST a Google Apps Script
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Votación Registrada!',
+                        text: 'Gracias por participar en la elección del proyecto PRAE.',
+                        background: '#12121a',
+                        color: '#fff',
+                        confirmButtonColor: '#00f3ff'
+                    }).then(() => {
+                        form.reset();
+                        document.querySelectorAll('.opcion-item').forEach(item => item.classList.remove('selected'));
+                        btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Votación';
+                        btnSubmit.disabled = false;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de conexión',
+                        text: 'Hubo un problema al enviar tu voto. Por favor, intenta de nuevo.',
+                        background: '#12121a',
+                        color: '#fff',
+                        confirmButtonColor: '#ff00ea'
+                    });
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Votación';
+                    btnSubmit.disabled = false;
+                });
+        });
+    </script>
+</body>
+</html>
