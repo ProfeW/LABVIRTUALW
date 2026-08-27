@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Biotecnología - Biología 11°</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-primario: #f39c12;
+            --color-secundario: #e67e22;
+            --color-fondo: #121212;
+            --color-tarjeta: rgba(255,255,255,0.05);
+            --color-texto: #ffffff;
+            --color-error: #e74c3c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(18,18,18,0.9), rgba(18,18,18,0.95)), url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+        }
+
+        .contenedor {
+            width: 100%; max-width: 900px;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(15px);
+            border-radius: 20px; border: 1px solid rgba(243, 156, 18, 0.3);
+            padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .header-eval { text-align: center; margin-bottom: 30px; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 20px;}
+        .header-eval h1 { color: var(--color-primario); font-size: 2.2rem; }
+        .header-eval p { color: #bbb; font-size: 1rem; margin-top: 10px;}
+
+        /* VIDEO RESPONSIVE */
+        .video-container {
+            position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0; overflow: hidden;
+            border-radius: 12px; margin-bottom: 30px; border: 2px solid rgba(255,255,255,0.1);
+        }
+        .video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .input-group { margin-bottom: 25px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 10px; font-weight: 600; color: #f39c12; font-size: 1.05rem;}
+        .input-group input, .input-group textarea { 
+            width: 100%; padding: 15px; border-radius: 8px; border: 1px solid rgba(243, 156, 18, 0.5); 
+            background: rgba(0,0,0,0.4); color: #fff; font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        .input-group textarea { resize: vertical; min-height: 100px; }
+        .input-group input:focus, .input-group textarea:focus { border-color: var(--color-primario); box-shadow: 0 0 10px rgba(243, 156, 18, 0.3); }
+
+        .btn {
+            background: var(--color-primario); color: #fff;
+            border: none; padding: 12px 30px; border-radius: 30px;
+            font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 10px; margin-top: 20px;
+        }
+        .btn:hover { background: var(--color-secundario); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3); }
+        .btn:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; color: #999;}
+
+        /* OVERLAY LOADING */
+        #overlay-loading {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; flex-direction: column;
+        }
+        .spinner { border: 5px solid rgba(255,255,255,0.1); border-top: 5px solid var(--color-primario); border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 20px;}
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #loading-text { color: #fff; font-size: 1.2rem; text-align: center; max-width: 80%; line-height: 1.5; }
+        #loading-subtext { color: var(--color-primario); font-size: 0.9rem; margin-top: 10px; font-weight: 600; }
+
+        /* PANTALLA RESULTADOS */
+        #pantalla-resultados { display: none; text-align: center; margin-top: 20px; }
+        .nota-final { font-size: 5rem; font-weight: 800; color: var(--color-primario); margin: 10px 0; line-height: 1; }
+        .feedback-box { 
+            background: rgba(243, 156, 18, 0.1); border-left: 4px solid var(--color-primario); 
+            padding: 20px; text-align: left; border-radius: 8px; margin: 20px 0; font-size: 1.05rem; line-height: 1.6;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <div class="header-eval">
+            <h1><i class="fa-solid fa-microchip"></i> Taller de Biotecnología</h1>
+            <p>Observa el documental y responde las 3 preguntas de reflexión. Tu trabajo será evaluado automáticamente por Inteligencia Artificial.</p>
+        </div>
+
+        <div id="pantalla-cuestionario">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/CtvGfaL2Dtg" title="Bioeconomía como alternativa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <form id="form-taller" onsubmit="enviarEvaluacion(event)">
+                <div class="input-group">
+                    <label style="color: #fff;"><i class="fa-solid fa-user"></i> Tu Nombre Completo:</label>
+                    <input type="text" id="nombre-estudiante" required placeholder="Ej: Juan Pérez" autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label>1. ¿Por qué la producción a gran escala de biomasa puede ser peligrosa para el medio ambiente en otras partes del mundo?</label>
+                    <textarea id="resp1" required placeholder="Escribe tu reflexión basándote en el video..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>2. Elige una de estas dos tecnologías (cría de mosca soldado negra o el "ordeño de plantas") y explica brevemente cómo ayuda a reducir el impacto ambiental.</label>
+                    <textarea id="resp2" required placeholder="Escribe tu reflexión basándote en el video..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>3. Según el documental, ¿es posible sustituir absolutamente todos los productos derivados del petróleo solo con biomasa? ¿Cuál es la otra acción fundamental que debemos tomar?</label>
+                    <textarea id="resp3" required placeholder="Escribe tu reflexión basándote en el video..."></textarea>
+                </div>
+
+                <div style="text-align: center;">
+                    <button type="submit" class="btn" id="btn-enviar"><i class="fa-solid fa-robot"></i> Enviar a Calificar (IA)</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="pantalla-resultados">
+            <h2><i class="fa-solid fa-ranking-star" style="color: var(--color-primario);"></i> Resultados de la Evaluación</h2>
+            <div class="nota-final" id="nota-mostrar">0.0</div>
+            
+            <div class="feedback-box">
+                <strong style="color: var(--color-primario); display: block; margin-bottom: 10px;"><i class="fa-solid fa-comment-dots"></i> Retroalimentación de la Inteligencia Artificial:</strong>
+                <span id="mensaje-feedback"></span>
+            </div>
+            
+            <a href="biologia_11.html" class="btn" style="background: #333; margin-top: 20px;"><i class="fa-solid fa-house"></i> Volver al Menú</a>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE CARGA -->
+    <div id="overlay-loading">
+        <div class="spinner"></div>
+        <div id="loading-text">La Inteligencia Artificial está leyendo y analizando tus respuestas...</div>
+        <div id="loading-subtext">Por favor, espera unos segundos.</div>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN DE APPS SCRIPT: Reemplazar con la URL generada
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqsc0VfsDOTRNYDhGIBtO-00efpn5hxOjGpCFVAUZ1REzJ2YWyjJJnGk8jDgUwawqJeg/exec';
+
+        // API KEY Ofuscada de Gemini
+        const API_KEY_OBFUSCATED = "UXdfSVl3RkEyRmZFYUN3bGo0RHJ3VzE0YjVrc2ZSc1d4MkM4SkkwSHludEo2TlI4YkEuUUE=";
+
+        function getApiKey() {
+            try {
+                return atob(API_KEY_OBFUSCATED).split("").reverse().join("");
+            } catch (e) {
+                console.error("Error decodificando API Key");
+                return "";
+            }
+        }
+
+        async function enviarEvaluacion(e) {
+            e.preventDefault();
+            
+            const btnEnviar = document.getElementById('btn-enviar');
+            btnEnviar.disabled = true;
+            document.getElementById('overlay-loading').style.display = 'flex';
+
+            const nombre = document.getElementById('nombre-estudiante').value.trim();
+            const resp1 = document.getElementById('resp1').value.trim();
+            const resp2 = document.getElementById('resp2').value.trim();
+            const resp3 = document.getElementById('resp3').value.trim();
+
+            const promptText = `
+Eres un profesor de biología estricto pero justo, evaluando un taller sobre el documental 'Bioeconomía como alternativa'. 
+Estás calificando a un estudiante de Grado 11. Analiza sus respuestas a estas 3 preguntas.
+
+Pregunta 1: ¿Por qué la producción a gran escala de biomasa puede ser peligrosa para el medio ambiente en otras partes del mundo?
+Pregunta 2: Elige una de estas dos tecnologías (cría de mosca soldado negra o el "ordeño de plantas") y explica brevemente cómo ayuda a reducir el impacto ambiental.
+Pregunta 3: Según el documental, ¿es posible sustituir absolutamente todos los productos derivados del petróleo solo con biomasa? ¿Cuál es la otra acción fundamental que debemos tomar?
+
+Respuestas del estudiante:
+1. ${resp1}
+2. ${resp2}
+3. ${resp3}
+
+Instrucciones de evaluación:
+- Compara sus respuestas con los conceptos reales del documental.
+- Califica de 1.0 a 5.0 usando un decimal. (5.0 = Excelente, 4.0 = Bueno, 3.0 = Aceptable, < 3.0 = Deficiente).
+- Devuelve EXACTAMENTE Y ÚNICAMENTE un objeto JSON válido (sin etiquetas \`\`\`json, solo las llaves). 
+- El objeto debe tener este formato exacto:
+{
+  "calificacion": 4.5,
+  "retroalimentacion": "Escribe aquí un texto corto (máximo 4 oraciones) en español hablándole directamente al estudiante, indicándole qué respondió bien y qué detalles le faltaron."
+}
+`;
+
+            const apiKey = getApiKey();
+            const aiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+            try {
+                // 1. Enviar prompt a la IA
+                document.getElementById('loading-subtext').innerText = "Paso 1/2: Solicitando calificación a la IA...";
+                const responseAI = await fetch(aiEndpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: promptText }] }],
+                        generationConfig: { temperature: 0.2 } // Baja temperatura para que sea predecible
+                    })
+                });
+
+                if (!responseAI.ok) throw new Error("Fallo en la API de la IA");
+
+                const dataAI = await responseAI.json();
+                let respuestaRaw = dataAI.candidates[0].content.parts[0].text;
+                
+                // Limpiar posibles etiquetas markdown que la IA a veces incluye
+                respuestaRaw = respuestaRaw.replace(/```json/g, '').replace(/```/g, '').trim();
+                
+                const resultadoJson = JSON.parse(respuestaRaw);
+                
+                const notaFinal = parseFloat(resultadoJson.calificacion).toFixed(1);
+                const feedbackTexto = resultadoJson.retroalimentacion;
+
+                // 2. Enviar los datos calificados a Google Apps Script
+                document.getElementById('loading-subtext').innerText = "Paso 2/2: Guardando resultados en la base de datos...";
+                
+                const formData = new URLSearchParams();
+                formData.append('accion', 'taller_bio11');
+                formData.append('nombre', nombre);
+                formData.append('grado', 'Once');
+                formData.append('nota', notaFinal);
+                formData.append('feedback', feedbackTexto);
+                formData.append('respuestas', `1: ${resp1}\n2: ${resp2}\n3: ${resp3}`);
+                formData.append('timestamp', new Date().toLocaleString());
+
+                // Se hace en modo no-cors porque a la hoja de Google no necesitamos leer la respuesta
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData.toString()
+                }).then(() => {
+                    mostrarResultados(notaFinal, feedbackTexto);
+                }).catch((e) => {
+                    console.error("Error al guardar en BD:", e);
+                    // Aún si falla la base de datos, mostramos la nota al estudiante
+                    mostrarResultados(notaFinal, feedbackTexto + "\n\n(Nota: Hubo un problema al guardar tu nota en la base de datos del profesor).");
+                });
+
+            } catch (error) {
+                console.error("Error en el proceso:", error);
+                alert("Hubo un error de conexión con la Inteligencia Artificial. Por favor, revisa tu internet o intenta de nuevo más tarde.");
+                document.getElementById('overlay-loading').style.display = 'none';
+                btnEnviar.disabled = false;
+            }
+        }
+
+        function mostrarResultados(nota, feedback) {
+            document.getElementById('overlay-loading').style.display = 'none';
+            document.getElementById('pantalla-cuestionario').style.display = 'none';
+            
+            document.getElementById('nota-mostrar').innerText = nota;
+            document.getElementById('mensaje-feedback').innerText = feedback;
+            
+            document.getElementById('pantalla-resultados').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
