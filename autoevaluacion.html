@@ -162,6 +162,7 @@
                         <label for="grado">Grado</label>
                         <select id="grado" name="grado" required>
                             <option value="" disabled selected>Seleccione su grado...</option>
+                            <option value="6">Grado Sexto</option>
                             <option value="8">Grado Octavo</option>
                             <option value="9">Grado Noveno</option>
                             <option value="10">Grado Décimo</option>
@@ -345,7 +346,9 @@
             const grado = this.value;
             const asignaturaInput = document.getElementById('asignatura');
             
-            if (grado === '8') {
+            if (grado === '6') {
+                asignaturaInput.value = 'Biología y Cátedra de la Paz';
+            } else if (grado === '8') {
                 asignaturaInput.value = 'Lectura Crítica';
             } else if (grado === '9' || grado === '10' || grado === '11') {
                 asignaturaInput.value = 'Ciencias Naturales y Cátedra de la Paz';
