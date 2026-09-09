@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Práctica: Intensidad Sonora - Física 9 - LabVirtual W</title>
+    <title>Práctica en Cascada: Intensidad Sonora - Física 9 - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -22,13 +22,59 @@
         .menu { list-style: none; display: flex; gap: 20px; }
         .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; }
         .menu a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
-        .contenedor { max-width: 800px; margin: 40px auto; padding: 20px; }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
         .form-practica { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--color-tema); }
-        .form-group input[type="text"], .form-group input[type="number"] { width: 100%; padding: 12px; border-radius: 6px; border: none; background: rgba(255,255,255,0.1); color: #fff; outline: none; }
-        .form-group input:focus { border: 1px solid var(--color-tema); }
-        button { background: var(--color-tema); color: #fff; padding: 15px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem; font-weight: 600; width: 100%; transition: 0.3s; }
+        
+        .ejercicio-cascada {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 5px solid var(--color-tema);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 10px 10px 0;
+        }
+        .ejercicio-cascada h3 {
+            color: var(--color-tema);
+            margin-bottom: 10px;
+        }
+        .enunciado {
+            font-style: italic;
+            color: #ddd;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        .paso-grupo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 15px;
+            border-radius: 6px;
+        }
+        .paso-grupo label {
+            font-weight: 600;
+            color: #fff;
+            width: 70%;
+        }
+        .paso-grupo input[type="number"] {
+            width: 25%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            outline: none;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .paso-grupo input:focus { border: 1px solid var(--color-tema); }
+        
+        .form-group-nombre { margin-bottom: 30px; }
+        .form-group-nombre label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--color-tema); font-size: 1.2rem;}
+        .form-group-nombre input[type="text"] { width: 100%; padding: 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem; outline: none;}
+        
+        button { background: var(--color-tema); color: #fff; padding: 15px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1.2rem; font-weight: 600; width: 100%; transition: 0.3s; margin-top: 20px;}
         button:hover { background: #3ab028; transform: translateY(-2px); }
     </style>
 </head>
@@ -43,36 +89,112 @@
         </nav>
     </header>
     <main class="contenedor">
-        <a href="fisica_9.html" class="btn-volver" style="color: var(--color-tema); display: inline-block; margin-bottom: 20px; text-decoration: none; font-weight:600;"><i class="fa-solid fa-arrow-left"></i> Volver</a>
-        <h1 style="color: var(--color-tema); margin-bottom: 20px;">Práctica: Intensidad Sonora</h1>
-        <p style="margin-bottom: 30px;">Resuelve los siguientes ejercicios de intensidad de sonido. Tus respuestas serán enviadas a la base de datos del docente.</p>
+        <a href="fisica_9.html" class="btn-volver" style="color: var(--color-tema); display: inline-block; margin-bottom: 20px; text-decoration: none; font-weight:600;"><i class="fa-solid fa-arrow-left"></i> Volver al Menú</a>
+        <h1 style="color: var(--color-tema); margin-bottom: 20px;">Práctica: Intensidad Sonora (Paso a Paso)</h1>
+        <p style="margin-bottom: 30px; font-size: 1.1rem;">Resuelve los siguientes ejercicios analizando los datos paso a paso en forma de cascada. Tus respuestas serán enviadas a la base de datos del docente.</p>
         
         <form class="form-practica" id="formPractica">
-            <div class="form-group">
+            <div class="form-group-nombre">
                 <label>Nombre del Estudiante:</label>
-                <input type="text" name="nombre" required>
+                <input type="text" name="nombre" required placeholder="Ingresa tu nombre completo">
             </div>
-            <div class="form-group">
-                <label>1. En el coliseo del colegio, un gran altavoz emite música con una potencia de 400 W. Si esa onda choca directamente contra una lona publicitaria que tiene un área de 20 m², ¿cuál es la intensidad del sonido que recibe la lona? (W/m²)</label>
-                <input type="number" name="p1" required>
+            
+            <!-- EJERCICIO 1 -->
+            <div class="ejercicio-cascada">
+                <h3>Ejercicio 1 (Cálculo directo)</h3>
+                <p class="enunciado">"En el coliseo del colegio, un gran altavoz emite música con una potencia de 400 W. Si esa onda choca directamente contra una lona publicitaria que tiene un área de 20 m², ¿cuál es la intensidad del sonido que recibe la lona?"</p>
+                
+                <div class="paso-grupo">
+                    <label>Paso 1: ¿Cuál es la Potencia (P) en vatios?</label>
+                    <input type="number" name="e1_paso1" required placeholder="W">
+                </div>
+                <div class="paso-grupo">
+                    <label>Paso 2: ¿Cuál es el Área (A) en m²?</label>
+                    <input type="number" name="e1_paso2" required placeholder="m²">
+                </div>
+                <div class="paso-grupo">
+                    <label style="color: var(--color-tema);">Paso 3: Sabiendo que I = P / A, ¿cuál es la Intensidad (I) final?</label>
+                    <input type="number" name="e1_paso3" required placeholder="W/m²">
+                </div>
             </div>
-            <div class="form-group">
-                <label>2. Un ingeniero mide el sonido del motor de un tractor agrícola. Descubre que el sonido golpea una barrera protectora de 5 m² generando una intensidad física de 30 W/m². ¿Cuánta potencia (P) en vatios está generando ese motor?</label>
-                <input type="number" name="p2" required>
+
+            <!-- EJERCICIO 2 -->
+            <div class="ejercicio-cascada">
+                <h3>Ejercicio 2 (Despeje de Potencia)</h3>
+                <p class="enunciado">"Un ingeniero mide el sonido del motor de un tractor agrícola. Descubre que el sonido golpea una barrera protectora de 5 m² generando una intensidad física de 30 W/m². ¿Cuánta potencia (P) está generando ese motor?"</p>
+                
+                <div class="paso-grupo">
+                    <label>Paso 1: ¿Cuál es la Intensidad (I) medida?</label>
+                    <input type="number" name="e2_paso1" required placeholder="W/m²">
+                </div>
+                <div class="paso-grupo">
+                    <label>Paso 2: ¿Cuál es el Área (A) de la barrera?</label>
+                    <input type="number" name="e2_paso2" required placeholder="m²">
+                </div>
+                <div class="paso-grupo">
+                    <label style="color: var(--color-tema);">Paso 3: Sabiendo que la fórmula despejada es P = I × A, ¿cuál es la Potencia (P) final?</label>
+                    <input type="number" name="e2_paso3" required placeholder="W">
+                </div>
             </div>
-            <div class="form-group">
-                <label>3. En una discoteca, la intensidad física del sonido es tan fuerte que registra 50 W/m² sobre una de las paredes acústicas. Si sabemos que los parlantes están disparando una potencia de 1000 W hacia esa dirección, ¿cuál es el Área (A) de esa pared en m²?</label>
-                <input type="number" name="p3" required>
+
+            <!-- EJERCICIO 3 -->
+            <div class="ejercicio-cascada">
+                <h3>Ejercicio 3 (Despeje de Área)</h3>
+                <p class="enunciado">"En una discoteca, la intensidad física del sonido es tan fuerte que registra 50 W/m² sobre una pared. Si sabemos que los parlantes están disparando una potencia de 1000 W hacia esa dirección, ¿cuál es el Área (A) de esa pared?"</p>
+                
+                <div class="paso-grupo">
+                    <label>Paso 1: ¿Cuál es la Potencia (P) disparada?</label>
+                    <input type="number" name="e3_paso1" required placeholder="W">
+                </div>
+                <div class="paso-grupo">
+                    <label>Paso 2: ¿Cuál es la Intensidad (I) registrada?</label>
+                    <input type="number" name="e3_paso2" required placeholder="W/m²">
+                </div>
+                <div class="paso-grupo">
+                    <label style="color: var(--color-tema);">Paso 3: Sabiendo que la fórmula despejada es A = P / I, ¿cuál es el Área (A) final?</label>
+                    <input type="number" name="e3_paso3" required placeholder="m²">
+                </div>
             </div>
-            <div class="form-group">
-                <label>4. Durante las fiestas, un músico toca la trompeta emitiendo una potencia sonora de 30 W. Si este sonido choca contra una ventana de 2 m², ¿cuál es la intensidad del sonido sobre el vidrio? (W/m²)</label>
-                <input type="number" name="p4" required>
+
+            <!-- EJERCICIO 4 -->
+            <div class="ejercicio-cascada">
+                <h3>Ejercicio 4 (Cálculo directo)</h3>
+                <p class="enunciado">"Durante las fiestas, un músico toca la trompeta emitiendo una potencia sonora de 30 W. Si este sonido choca contra una ventana de 2 m², ¿cuál es la intensidad del sonido sobre el vidrio?"</p>
+                
+                <div class="paso-grupo">
+                    <label>Paso 1: Identifica la Potencia (P).</label>
+                    <input type="number" name="e4_paso1" required placeholder="W">
+                </div>
+                <div class="paso-grupo">
+                    <label>Paso 2: Identifica el Área (A).</label>
+                    <input type="number" name="e4_paso2" required placeholder="m²">
+                </div>
+                <div class="paso-grupo">
+                    <label style="color: var(--color-tema);">Paso 3: Calcula la Intensidad (I) dividiendo P entre A.</label>
+                    <input type="number" name="e4_paso3" required placeholder="W/m²">
+                </div>
             </div>
-            <div class="form-group">
-                <label>5. Los estudiantes están armando una cabina de radio para el colegio. Saben que los paneles de espuma que compraron tienen un área de 4 m² y pueden soportar una intensidad máxima de 15 W/m² antes de que el sonido se filtre. ¿Cuál es la potencia máxima (P) que pueden emitir los parlantes dentro de la cabina? (W)</label>
-                <input type="number" name="p5" required>
+
+            <!-- EJERCICIO 5 -->
+            <div class="ejercicio-cascada">
+                <h3>Ejercicio 5 (Despeje de Potencia máxima)</h3>
+                <p class="enunciado">"Los estudiantes están armando una cabina de radio. Saben que los paneles de espuma tienen un área de 4 m² y pueden soportar una intensidad máxima de 15 W/m² antes de que el sonido se filtre. ¿Cuál es la potencia máxima (P) que pueden emitir los parlantes dentro de la cabina?"</p>
+                
+                <div class="paso-grupo">
+                    <label>Paso 1: Identifica la Intensidad máxima (I).</label>
+                    <input type="number" name="e5_paso1" required placeholder="W/m²">
+                </div>
+                <div class="paso-grupo">
+                    <label>Paso 2: Identifica el Área de la cabina (A).</label>
+                    <input type="number" name="e5_paso2" required placeholder="m²">
+                </div>
+                <div class="paso-grupo">
+                    <label style="color: var(--color-tema);">Paso 3: Calcula la Potencia máxima (P = I × A).</label>
+                    <input type="number" name="e5_paso3" required placeholder="W">
+                </div>
             </div>
-            <button type="submit">Enviar Respuestas</button>
+
+            <button type="submit">Enviar Práctica en Cascada</button>
         </form>
     </main>
 
@@ -85,16 +207,7 @@
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
             
-            alert('¡Simulación de envío!\\nEn una implementación real, esto enviaría los datos a Google Sheets usando Apps Script a la URL:\\n' + scriptURL + '\\n\\nTus datos:\\n' + JSON.stringify(data, null, 2));
-            
-            /* CÓDIGO REAL PARA ENVIAR (descomentar y configurar URL):
-            fetch(scriptURL, { method: 'POST', body: formData})
-                .then(response => {
-                    alert('Respuestas enviadas correctamente.');
-                    document.getElementById('formPractica').reset();
-                })
-                .catch(error => alert('Error al enviar.'));
-            */
+            alert('¡Simulación de envío!\\nEn una implementación real, esto enviaría los datos a Google Sheets usando Apps Script a la URL:\\n' + scriptURL + '\\n\\nTus datos de los ejercicios en cascada:\\n' + JSON.stringify(data, null, 2));
         });
     </script>
 </body>
