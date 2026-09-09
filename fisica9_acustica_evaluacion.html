@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Evaluación Final: Acústica y Sonido - Física 9</title>
+    <title>Evaluaci&oacute;n Final: Ac&uacute;stica y Sonido - F&iacute;sica 9</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -32,7 +32,6 @@
         
         .opcion { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
         
-        /* Estilos para los ejercicios en cascada */
         .ejercicio-cascada {
             background: rgba(0, 0, 0, 0.4);
             border-left: 5px solid var(--color-tema);
@@ -41,45 +40,36 @@
             border-radius: 0 10px 10px 0;
             margin-top: 20px;
         }
-        .ejercicio-cascada h3 {
-            color: var(--color-tema);
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        .enunciado {
-            font-style: italic;
-            color: #ddd;
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-        }
+        .ejercicio-cascada h3 { color: var(--color-tema); margin-bottom: 10px; font-size: 1.2rem; }
+        .enunciado { font-style: italic; color: #ddd; margin-bottom: 20px; font-size: 1.05rem; }
         .paso-grupo {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            background: rgba(255,255,255,0.05);
-            padding: 10px 15px;
-            border-radius: 6px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px 15px; border-radius: 6px;
         }
-        .paso-grupo label {
-            font-weight: 600;
-            color: #fff;
-            width: 70%;
-        }
+        .paso-grupo label { font-weight: 600; color: #fff; width: 70%; }
         .paso-grupo input[type="number"], .paso-grupo input[type="text"] {
-            width: 25%;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            outline: none;
-            text-align: center;
+            width: 25%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1); color: #fff; outline: none; text-align: center;
         }
         .paso-grupo input:focus { border: 1px solid var(--color-tema); }
         
         button { background: var(--color-tema); color: #fff; padding: 15px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem; font-weight: 600; width: 100%; transition: 0.3s; margin-top: 10px;}
         button:hover { background: #c0392b; transform: translateY(-2px); }
+
+        /* Modal Resultados IA */
+        .modal-ia {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px);
+        }
+        .modal-contenido {
+            background: var(--color-oscuro); border: 2px solid var(--color-tema); border-radius: 15px;
+            padding: 30px; max-width: 600px; width: 90%; text-align: center; box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+        }
+        .modal-contenido h2 { color: var(--color-tema); margin-bottom: 15px; }
+        .modal-contenido .nota { font-size: 3rem; font-weight: 800; color: #fff; margin: 20px 0; }
+        .modal-contenido p { color: #ddd; margin-bottom: 20px; line-height: 1.6; }
+        .resumen-errores { text-align: left; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; max-height: 200px; overflow-y: auto; }
+        .resumen-errores p { margin-bottom: 5px; font-size: 0.95rem; }
     </style>
 </head>
 <body>
@@ -88,125 +78,213 @@
             <a href="index.html" class="logo"><i class="fa-solid fa-volume-high"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="fisica_9.html">Física 9</a></li>
+                <li><a href="fisica_9.html">F&iacute;sica 9</a></li>
             </ul>
         </nav>
     </header>
     <main class="contenedor">
         <a href="fisica_9.html" class="btn-volver" style="color: var(--color-tema); display: inline-block; margin-bottom: 20px; text-decoration:none; font-weight:600;"><i class="fa-solid fa-arrow-left"></i> Volver</a>
-        <h1 style="color: var(--color-tema); margin-bottom: 20px;">Evaluación Final: Acústica y Sonido</h1>
+        <h1 style="color: var(--color-tema); margin-bottom: 20px;">Evaluaci&oacute;n Final: Ac&uacute;stica y Sonido</h1>
         
-        <form class="form-evaluacion">
+        <form class="form-evaluacion" id="evaluacionForm">
             <div class="form-group">
                 <label>Nombre Completo:</label>
-                <input type="text" required>
+                <input type="text" id="nombreEstudiante" required>
             </div>
             
-            <h2 style="color: #fff; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">Parte I: Conceptos Teóricos</h2>
+            <h2 style="color: #fff; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">Parte I: Conceptos Te&oacute;ricos</h2>
 
             <div class="form-group">
-                <label>1. El sonido viaja más rápido en un medio sólido que en uno gaseoso debido a:</label>
-                <div class="opcion"><input type="radio" name="q1" value="a"> a) Que los gases son más densos</div>
-                <div class="opcion"><input type="radio" name="q1" value="b"> b) Que las partículas en los sólidos están más juntas y transmiten la energía más rápido</div>
-                <div class="opcion"><input type="radio" name="q1" value="c"> c) El vacío espacial</div>
+                <label>1. El sonido viaja m&aacute;s r&aacute;pido en un medio s&oacute;lido que en uno gaseoso debido a:</label>
+                <div class="opcion"><input type="radio" name="q1" value="a"> a) Que los gases son m&aacute;s densos</div>
+                <div class="opcion"><input type="radio" name="q1" value="b"> b) Que las part&iacute;culas en los s&oacute;lidos est&aacute;n m&aacute;s juntas y transmiten la energ&iacute;a m&aacute;s r&aacute;pido</div>
+                <div class="opcion"><input type="radio" name="q1" value="c"> c) El vac&iacute;o espacial</div>
             </div>
 
             <div class="form-group">
-                <label>2. Falso o Verdadero: El sonido viaja mucho más rápido en el aire frío de la madrugada que en el aire caliente del mediodía.</label>
+                <label>2. Falso o Verdadero: El sonido viaja mucho m&aacute;s r&aacute;pido en el aire fr&iacute;o de la madrugada que en el aire caliente del mediod&iacute;a.</label>
                 <div class="opcion"><input type="radio" name="q2" value="v"> Verdadero</div>
                 <div class="opcion"><input type="radio" name="q2" value="f"> Falso</div>
             </div>
 
             <div class="form-group">
-                <label>3. ¿Qué característica del sonido nos permite distinguir la voz de un amigo de la de un desconocido, incluso si hablan al mismo volumen?</label>
+                <label>3. &iquest;Qu&eacute; caracter&iacute;stica del sonido nos permite distinguir la voz de un amigo de la de un desconocido, incluso si hablan al mismo volumen?</label>
                 <div class="opcion"><input type="radio" name="q3" value="a"> a) Amplitud</div>
                 <div class="opcion"><input type="radio" name="q3" value="b"> b) Tono (Frecuencia)</div>
                 <div class="opcion"><input type="radio" name="q3" value="c"> c) Timbre</div>
             </div>
 
             <div class="form-group">
-                <label>4. El sonido es una onda ______________, lo que significa que necesita obligatoriamente un medio material para propagarse (no viaja en el vacío).</label>
-                <input type="text" placeholder="Escribe la palabra correcta">
+                <label>4. El sonido es una onda ______________, lo que significa que necesita obligatoriamente un medio material para propagarse (no viaja en el vac&iacute;o).</label>
+                <input type="text" id="q4" placeholder="Escribe la palabra (ej: electromagn&eacute;tica, mec&aacute;nica, etc.)">
             </div>
 
             <div class="form-group">
-                <label>5. ¿Qué es el Infrasonido y qué fenómeno natural puede producirlo?</label>
-                <input type="text" placeholder="Define y da un ejemplo geológico o animal">
+                <label>5. Menciona un animal o evento natural que produce Infrasonido.</label>
+                <input type="text" id="q5" placeholder="M&aacute;ximo 2 palabras (ej: terremoto, elefante)">
             </div>
 
             <div class="form-group">
-                <label>6. ¿Qué es el Ultrasonido y qué tecnología médica o animal lo utiliza?</label>
-                <input type="text" placeholder="Define y da un ejemplo de uso">
+                <label>6. Menciona un animal o tecnolog&iacute;a m&eacute;dica que utiliza el Ultrasonido.</label>
+                <input type="text" id="q6" placeholder="M&aacute;ximo 2 palabras (ej: ecograf&iacute;a, murci&eacute;lago)">
             </div>
 
             <div class="form-group">
-                <label>7. En el oído humano, la estructura en forma de caracol llena de líquido y células ciliadas que convierte la vibración en impulso eléctrico se llama:</label>
-                <div class="opcion"><input type="radio" name="q7" value="a"> a) Tímpano</div>
-                <div class="opcion"><input type="radio" name="q7" value="b"> b) Cóclea</div>
+                <label>7. En el o&iacute;do humano, la estructura en forma de caracol llena de l&iacute;quido y c&eacute;lulas ciliadas que convierte la vibraci&oacute;n en impulso el&eacute;ctrico se llama:</label>
+                <div class="opcion"><input type="radio" name="q7" value="a"> a) T&iacute;mpano</div>
+                <div class="opcion"><input type="radio" name="q7" value="b"> b) C&oacute;clea</div>
                 <div class="opcion"><input type="radio" name="q7" value="c"> c) Estribo</div>
             </div>
 
-            <h2 style="color: #fff; margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">Parte II: Misiones Matemáticas en Cascada</h2>
+            <h2 style="color: #fff; margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">Parte II: Misiones Matem&aacute;ticas en Cascada</h2>
 
-            <!-- PREGUNTA 8 (EJERCICIO VELOCIDAD NORMAL) -->
             <div class="ejercicio-cascada">
-                <h3>8. Misión 1: Velocidad del Sonido (Fórmula Normal)</h3>
-                <p class="enunciado">Un trabajador golpea un tubo de acero muy largo, en el cual el sonido viaja a una velocidad (v) de 5120 m/s. Si el sonido tarda un tiempo (t) de 1.5 segundos en llegar al otro extremo, ¿cuál es la longitud (distancia) del tubo?</p>
+                <h3>8. Misi&oacute;n 1: Velocidad del Sonido (F&oacute;rmula Normal)</h3>
+                <p class="enunciado">Un trabajador golpea un tubo de acero, en el cual el sonido viaja a v = 5120 m/s. Si tarda t = 1.5 s, &iquest;cu&aacute;l es la distancia?</p>
                 
                 <div class="paso-grupo">
-                    <label>Paso 1: Identifica la Velocidad (v) en m/s</label>
-                    <input type="number" name="q8_p1" placeholder="m/s">
+                    <label>Paso 1: Identifica la Velocidad (v)</label>
+                    <input type="number" id="q8_p1">
                 </div>
                 <div class="paso-grupo">
-                    <label>Paso 2: Identifica el Tiempo (t) en s</label>
-                    <input type="number" step="0.1" name="q8_p2" placeholder="s">
+                    <label>Paso 2: Identifica el Tiempo (t)</label>
+                    <input type="number" step="0.1" id="q8_p2">
                 </div>
                 <div class="paso-grupo">
-                    <label style="color: var(--color-tema);">Paso 3: Sabiendo que d = v × t, ¿Cuál es la Distancia (d) del tubo?</label>
-                    <input type="number" name="q8_p3" placeholder="Metros">
+                    <label style="color: var(--color-tema);">Paso 3: Distancia final (d = v &times; t)</label>
+                    <input type="number" id="q8_p3">
                 </div>
             </div>
 
-            <!-- PREGUNTA 9 (EJERCICIO VELOCIDAD CON TEMPERATURA) -->
             <div class="ejercicio-cascada">
-                <h3>9. Misión 2: Velocidad del Sonido con Temperatura</h3>
-                <p class="enunciado">Calcula cuál será la velocidad del sonido en el aire al mediodía en una ciudad calurosa, donde la temperatura ambiente es de 31°C.</p>
+                <h3>9. Misi&oacute;n 2: Velocidad con Temperatura</h3>
+                <p class="enunciado">Calcula la velocidad del sonido en el aire cuando la temperatura ambiente es de 31&deg;C.</p>
                 
                 <div class="paso-grupo">
-                    <label>Paso 1: Identifica la Temperatura (T) en °C</label>
-                    <input type="number" name="q9_p1" placeholder="°C">
+                    <label>Paso 1: Temperatura (T)</label>
+                    <input type="number" id="q9_p1">
                 </div>
                 <div class="paso-grupo">
-                    <label>Paso 2: La fórmula general es v = 331 + (0.6 × T). Primero, multiplica 0.6 por la temperatura que identificaste.</label>
-                    <input type="number" step="0.1" name="q9_p2" placeholder="Resultado">
+                    <label>Paso 2: (0.6 &times; T)</label>
+                    <input type="number" step="0.1" id="q9_p2">
                 </div>
                 <div class="paso-grupo">
-                    <label style="color: var(--color-tema);">Paso 3: Suma 331 al resultado anterior. ¿Cuál es la Velocidad final (v)?</label>
-                    <input type="number" step="0.1" name="q9_p3" placeholder="m/s">
+                    <label style="color: var(--color-tema);">Paso 3: v = 331 + resultado anterior</label>
+                    <input type="number" step="0.1" id="q9_p3">
                 </div>
             </div>
 
-            <!-- PREGUNTA 10 (EJERCICIO INTENSIDAD / POTENCIA) -->
             <div class="ejercicio-cascada">
-                <h3>10. Misión 3: Intensidad Sonora (Potencia y Área)</h3>
-                <p class="enunciado">Un parlante emite música con una fuerza (Potencia) de 200 W. Ese sonido choca contra una pared que tiene 5 metros de base y 2 metros de altura.</p>
+                <h3>10. Misi&oacute;n 3: Intensidad Sonora (Potencia y &Aacute;rea)</h3>
+                <p class="enunciado">Un parlante emite Potencia de 200 W. El sonido choca contra una pared de 5 m de base y 2 m de altura.</p>
                 
                 <div class="paso-grupo">
-                    <label>Paso 1: Calcula el Área de la pared (base × altura).</label>
-                    <input type="number" name="q10_p1" placeholder="m²">
+                    <label>Paso 1: &Aacute;rea (base &times; altura)</label>
+                    <input type="number" id="q10_p1">
                 </div>
                 <div class="paso-grupo">
-                    <label>Paso 2: Identifica la Potencia (P) emitida por el parlante.</label>
-                    <input type="number" name="q10_p2" placeholder="W">
+                    <label>Paso 2: Potencia (P)</label>
+                    <input type="number" id="q10_p2">
                 </div>
                 <div class="paso-grupo">
-                    <label style="color: var(--color-tema);">Paso 3: Sabiendo que I = P / Área, ¿Cuál es la Intensidad final?</label>
-                    <input type="number" name="q10_p3" placeholder="W/m²">
+                    <label style="color: var(--color-tema);">Paso 3: Intensidad (I = P / A)</label>
+                    <input type="number" id="q10_p3">
                 </div>
             </div>
 
-            <button type="button" onclick="alert('Evaluación enviada con éxito (Simulación)')">Enviar Evaluación Final</button>
+            <button type="button" onclick="calificarIA()">Asistente IA: Calificar y Entregar</button>
         </form>
     </main>
+
+    <!-- Modal IA -->
+    <div class="modal-ia" id="modalIA">
+        <div class="modal-contenido">
+            <h2><i class="fa-solid fa-robot"></i> Asistente IA LabVirtual W</h2>
+            <p>He analizado las respuestas del estudiante <strong id="nombreMostrar"></strong>.</p>
+            <div class="nota" id="notaFinal">0.0 / 5.0</div>
+            
+            <div class="resumen-errores" id="cajaErrores">
+                <!-- Se inyectarán los comentarios aquí -->
+            </div>
+            
+            <button onclick="document.getElementById('modalIA').style.display='none'">Cerrar Calificaci&oacute;n</button>
+        </div>
+    </div>
+
+    <script>
+        function limpiarTexto(txt) {
+            return txt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+        }
+
+        function calificarIA() {
+            let nombre = document.getElementById('nombreEstudiante').value;
+            if(!nombre) { alert("Por favor ingresa tu nombre."); return; }
+            
+            let puntajeTotal = 0;
+            let totalPuntos = 16; // 7 de teóricas + 9 (3 pasos x 3 misiones)
+            let errores = [];
+
+            // Q1: b
+            let q1 = document.querySelector('input[name="q1"]:checked');
+            if(q1 && q1.value === 'b') puntajeTotal++; else errores.push("- Q1: Propagaci&oacute;n s&oacute;lidos (Incorrecto).");
+
+            // Q2: f
+            let q2 = document.querySelector('input[name="q2"]:checked');
+            if(q2 && q2.value === 'f') puntajeTotal++; else errores.push("- Q2: Temp vs Velocidad (Incorrecto).");
+
+            // Q3: c
+            let q3 = document.querySelector('input[name="q3"]:checked');
+            if(q3 && q3.value === 'c') puntajeTotal++; else errores.push("- Q3: Caracter&iacute;stica de la voz (Deber&iacute;a ser el timbre).");
+
+            // Q4: mecanica
+            let q4 = limpiarTexto(document.getElementById('q4').value);
+            if(q4.includes("mecanic") || q4 === "mecanica") puntajeTotal++; else errores.push("- Q4: Tipo de onda (Incompleto/Incorrecto).");
+
+            // Q5: Infrasonido (elefante, ballena, terremoto...)
+            let q5 = limpiarTexto(document.getElementById('q5').value);
+            let validInfrasonido = ["elefante", "ballena", "rinoceronte", "terremoto", "sismo", "volcan", "tornado", "erupcion"];
+            if(validInfrasonido.some(w => q5.includes(w))) puntajeTotal++; else errores.push("- Q5: Ejemplo de infrasonido no v&aacute;lido.");
+
+            // Q6: Ultrasonido (murcielago, delfin, ecografia...)
+            let q6 = limpiarTexto(document.getElementById('q6').value);
+            let validUltrasonido = ["murcielago", "delfin", "perro", "gato", "ecografia", "sonar", "medicina", "limpieza"];
+            if(validUltrasonido.some(w => q6.includes(w))) puntajeTotal++; else errores.push("- Q6: Ejemplo de ultrasonido no v&aacute;lido.");
+
+            // Q7: b (Cóclea)
+            let q7 = document.querySelector('input[name="q7"]:checked');
+            if(q7 && q7.value === 'b') puntajeTotal++; else errores.push("- Q7: &Oacute;rgano del o&iacute;do (Es la C&oacute;clea).");
+
+            // Misión 1
+            if(document.getElementById('q8_p1').value == "5120") puntajeTotal++; else errores.push("- M1 (Paso 1): Velocidad mal identificada.");
+            if(document.getElementById('q8_p2').value == "1.5") puntajeTotal++; else errores.push("- M1 (Paso 2): Tiempo mal identificado.");
+            if(document.getElementById('q8_p3').value == "7680") puntajeTotal++; else errores.push("- M1 (Paso 3): C&aacute;lculo de distancia incorrecto.");
+
+            // Misión 2
+            if(document.getElementById('q9_p1').value == "31") puntajeTotal++; else errores.push("- M2 (Paso 1): Temperatura mal identificada.");
+            if(document.getElementById('q9_p2').value == "18.6") puntajeTotal++; else errores.push("- M2 (Paso 2): Multiplicaci&oacute;n incorrecta.");
+            if(document.getElementById('q9_p3').value == "349.6") puntajeTotal++; else errores.push("- M2 (Paso 3): Suma de velocidad final incorrecta.");
+
+            // Misión 3
+            if(document.getElementById('q10_p1').value == "10") puntajeTotal++; else errores.push("- M3 (Paso 1): &Aacute;rea mal calculada.");
+            if(document.getElementById('q10_p2').value == "200") puntajeTotal++; else errores.push("- M3 (Paso 2): Potencia mal identificada.");
+            if(document.getElementById('q10_p3').value == "20") puntajeTotal++; else errores.push("- M3 (Paso 3): C&aacute;lculo de Intensidad incorrecto.");
+
+            // Calcular nota escala 0.0 a 5.0
+            let nota = (puntajeTotal / totalPuntos) * 5.0;
+            
+            document.getElementById('nombreMostrar').innerText = nombre;
+            document.getElementById('notaFinal').innerText = nota.toFixed(1) + " / 5.0";
+            document.getElementById('notaFinal').style.color = (nota >= 3.0) ? "#2ecc71" : "#e74c3c";
+            
+            let cajaErr = document.getElementById('cajaErrores');
+            if(errores.length === 0) {
+                cajaErr.innerHTML = "<p style='color:#2ecc71;'><i class='fa-solid fa-check'></i> &iexcl;Evaluaci&oacute;n perfecta! No hay ning&uacute;n error.</p>";
+            } else {
+                cajaErr.innerHTML = "<strong style='color:#e74c3c;'>Comentarios de mejora:</strong><br>" + errores.join("<br>");
+            }
+
+            document.getElementById('modalIA').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
