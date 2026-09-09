@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Infrasonido y Ultrasonido - Física 9 - LabVirtual W</title>
+    <title>El Oído, Infrasonido y Ultrasonido - Física 9 - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -29,9 +29,14 @@
         .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 10px; }
         .seccion-contenido { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
         .seccion-contenido h2 { color: var(--color-tema); margin-bottom: 20px; }
-        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
-        .img-container { text-align: center; margin: 20px 0; background: #fff; padding: 10px; border-radius: 10px; }
+        .seccion-contenido h3 { color: #fbc531; margin-top: 25px; margin-bottom: 10px; font-size: 1.3rem; }
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; text-align: justify; }
+        .seccion-contenido ul { margin-left: 20px; margin-bottom: 15px; color: #ddd; }
+        .seccion-contenido li { margin-bottom: 10px; line-height: 1.6; }
+        .img-container { text-align: center; margin: 30px 0; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px dashed rgba(255,255,255,0.2); }
         .img-container img { max-width: 100%; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .paso-oido { background: rgba(0,0,0,0.4); border-left: 4px solid var(--color-tema); padding: 15px; margin-bottom: 15px; border-radius: 0 8px 8px 0; }
+        .paso-oido strong { color: var(--color-tema); }
     </style>
 </head>
 <body>
@@ -45,37 +50,83 @@
         </nav>
     </header>
     <main class="contenedor">
-        <a href="fisica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+        <a href="fisica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Menú</a>
         <div class="encabezado-leccion">
-            <h1><i class="fa-solid fa-wave-square"></i> Infrasonido y Ultrasonido</h1>
-            <p>El espectro auditivo y la escala humana</p>
+            <h1><i class="fa-solid fa-wave-square"></i> El Oído, Infrasonido y Ultrasonido</h1>
+            <p>Descubriendo los límites de nuestra percepción acústica y la maravilla de la audición humana.</p>
         </div>
+
         <section class="seccion-contenido">
-            <h2>1. La Escala Humana (Sonido Audible)</h2>
-            <p>La "sintonía" de nuestro oído se mide en Hertz (Hz). El rango que podemos escuchar va desde los <strong>20 Hz</strong> (sonidos muy graves) hasta los <strong>20,000 Hz</strong> (sonidos muy agudos). Cualquier onda mecánica que vibre fuera de este rango es inaudible para nosotros.</p>
+            <h2>1. El Oído Humano y la Audición</h2>
+            <p>El oído es un órgano extraordinariamente complejo y sensible. Su función principal no es solo "escuchar", sino transformar la energía mecánica (ondas de presión en el aire) en impulsos eléctricos (energía bioeléctrica) que nuestro cerebro puede interpretar como voces, música o ruido.</p>
+            
             <div class="img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Animal_hearing_frequency_range.svg/1024px-Animal_hearing_frequency_range.svg.png" alt="Espectro Auditivo" />
+                <img src="oido.jpg" alt="Anatomía del Oído Humano" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <p style="display:none; color:#fbc531;"><i class="fa-solid fa-image"></i> [Espacio reservado para la imagen: oido.jpg]</p>
+            </div>
+
+            <h3>Paso a Paso: ¿Cómo escuchamos?</h3>
+            <p>La conversión de una onda mecánica a un impulso nervioso ocurre a través de un viaje fascinante por tres secciones de nuestro oído:</p>
+            
+            <div class="paso-oido">
+                <strong>1. Oído Externo (La Antena):</strong> La oreja (o pabellón auricular) actúa como un embudo que capta las ondas sonoras que viajan por el aire y las dirige hacia el canal auditivo. Al final del canal, estas ondas chocan contra una membrana muy tensa llamada <strong>tímpano</strong>, haciéndolo vibrar de la misma manera que la piel de un tambor.
+            </div>
+            
+            <div class="paso-oido">
+                <strong>2. Oído Medio (El Amplificador):</strong> Las vibraciones del tímpano se transmiten a una cadena de tres huesos diminutos, los más pequeños del cuerpo humano: el <strong>martillo</strong>, el <strong>yunque</strong> y el <strong>estribo</strong>. Estos huesecillos actúan como un sistema de palancas que amplifican la fuerza de la vibración unas 20 veces antes de enviarla a la ventana oval (la puerta de entrada al oído interno).
+            </div>
+            
+            <div class="paso-oido">
+                <strong>3. Oído Interno (El Convertidor Eléctrico):</strong> La vibración entra en la <strong>cóclea</strong>, una estructura en forma de caracol llena de líquido. El movimiento del líquido estimula miles de células microscópicas parecidas a cabellos, llamadas células ciliadas. Estas células son las verdaderas responsables de la audición: cuando se doblan por el movimiento del líquido, generan una señal eléctrica.
+            </div>
+            
+            <div class="paso-oido">
+                <strong>4. El Cerebro (El Procesador):</strong> Finalmente, la señal eléctrica viaja a través del <strong>nervio auditivo</strong> directamente al cerebro (específicamente a la corteza auditiva). Allí, estas señales se decodifican en fracciones de segundo y reconocemos de qué sonido se trata, su volumen, su tono y de dónde proviene.
             </div>
         </section>
+
         <section class="seccion-contenido">
-            <h2>2. El Infrasonido (Vibraciones Lentas y Gigantes)</h2>
-            <p>Son ondas sonoras con una frecuencia menor a 20 Hz. Son largas, lentas y pesadas, y pueden viajar largas distancias sin perder energía.</p>
+            <h2>2. La Escala Humana y la Frecuencia (Sintonía)</h2>
+            <p>Para entender el infrasonido y ultrasonido, primero debemos conocer nuestros propios límites. Nuestro oído es como un radio que solo puede captar ciertas "emisoras". Esta sintonía se mide en Hertz (Hz), que es el número de vibraciones por segundo (Frecuencia).</p>
             <ul>
-                <li><strong>Naturaleza:</strong> Los elefantes y ballenas las usan para comunicarse a kilómetros.</li>
-                <li><strong>Eventos geológicos:</strong> Terremotos, erupciones volcánicas y tornados.</li>
+                <li><strong>El Rango Audible:</strong> Va desde los <strong>20 Hz</strong> (sonidos supremamente graves, lentos) hasta los <strong>20,000 Hz</strong> (sonidos supremamente agudos, rápidos).</li>
+                <li>Si una onda mecánica vibra menos de 20 veces por segundo, o más de 20,000 veces, los humanos somos biológicamente sordos a ella. Sin embargo, que no la escuchemos no significa que no exista ni que no tenga energía.</li>
             </ul>
         </section>
+
         <section class="seccion-contenido">
-            <h2>3. El Ultrasonido (Vibraciones Rápidas y Diminutas)</h2>
-            <p>Frecuencias mayores a 20,000 Hz. Son ondas cortas y rápidas, perfectas para "ver" a través del sonido debido a que rebotan en objetos diminutos.</p>
+            <h2>3. El Infrasonido (Vibraciones Lentas y Gigantes)</h2>
+            <p><strong>¿Qué es?:</strong> Son ondas sonoras con una frecuencia <strong>menor a 20 Hz</strong>. Se caracterizan por ser ondas de gran longitud, lentas y pesadas. Al ser tan grandes, tienen la asombrosa capacidad de viajar decenas o cientos de kilómetros sin perder energía, atravesando obstáculos gigantescos como montañas, bosques densos e incluso paredes sólidas gruesas.</p>
+            
+            <h3>Ejemplos en la Naturaleza y Animales:</h3>
             <ul>
-                <li><strong>Naturaleza:</strong> Ecolocalización en murciélagos y delfines.</li>
-                <li><strong>Uso médico e industrial:</strong> Ecografías y limpieza microscópica.</li>
+                <li><strong>Elefantes:</strong> Pueden generar fuertes infrasonidos con sus cuerdas vocales que viajan por el suelo. Lo usan para comunicarse con sus manadas a varios kilómetros de distancia en la sabana africana.</li>
+                <li><strong>Ballenas y Rinocerontes:</strong> Utilizan cantos en baja frecuencia que viajan enormes distancias a través del océano o la tierra.</li>
+                <li><strong>Eventos Geológicos:</strong> La naturaleza genera infrasonido masivo durante terremotos, erupciones volcánicas, avalanchas, meteoritos entrando a la atmósfera y tornados.</li>
+            </ul>
+
+            <h3>Aplicaciones y Usos Humanos:</h3>
+            <ul>
+                <li><strong>Sismología:</strong> Monitoreo de actividad sísmica y volcánica. Las estaciones de detección escuchan el "rugido" de la Tierra antes de que ocurra una erupción.</li>
+                <li><strong>Seguridad Global:</strong> Redes internacionales de sensores infrasónicos vigilan secretamente las explosiones nucleares subterráneas.</li>
             </ul>
         </section>
+
         <section class="seccion-contenido">
-            <h2>4. El Oído y la Audición</h2>
-            <p>Para que nuestro cerebro comprenda el sonido, la onda sonora ingresa por el pabellón auricular (oreja), viaja por el conducto auditivo y hace vibrar el <strong>tímpano</strong>. Esta vibración se transmite por tres pequeños huesos (martillo, yunque y estribo) hasta llegar a la <strong>cóclea</strong> en el oído interno, donde las células ciliadas convierten la energía mecánica en impulsos eléctricos que el cerebro procesa.</p>
+            <h2>4. El Ultrasonido (Vibraciones Rápidas y Diminutas)</h2>
+            <p><strong>¿Qué es?:</strong> Son ondas sonoras con una frecuencia <strong>mayor a 20,000 Hz</strong>. Al vibrar tan rápido, las ondas son extremadamente cortas y "finas". Esta cualidad es su mayor ventaja: debido a su pequeñez, no rodean los obstáculos, sino que rebotan en ellos (reflexión acústica). Esto las hace perfectas para "ver" a través del sonido, ofreciendo una alta resolución para detectar objetos diminutos o texturas.</p>
+            
+            <h3>Ejemplos en la Naturaleza y Animales:</h3>
+            <ul>
+                <li><strong>Murciélagos y Delfines:</strong> Utilizan la <strong>ecolocalización</strong>. Emiten chillidos ultrasónicos rápidos y escuchan el eco cuando rebota en insectos en el aire o peces en el agua. Esto les permite cazar en la oscuridad total.</li>
+                <li><strong>Perros y Gatos:</strong> Pueden escuchar frecuencias de hasta 45,000 Hz (perros) o 64,000 Hz (gatos). Por eso los perros responden a "silbatos silenciosos" que los humanos no pueden oír.</li>
+            </ul>
+
+            <h3>Aplicaciones y Usos Humanos:</h3>
+            <ul>
+                <li><strong>Medicina (Ecografías):</strong> Un transductor emite vibraciones ultrasónicas en el cuerpo. Las ondas rebotan en los órganos o en el bebé dentro del vientre materno y regresan al sensor, que las convierte en una imagen médica. No utiliza radiación peligrosa.</li>
+                <li><strong>Industria (Limpieza y Detección):</strong> Máquinas que envían ultrasonido a través de líquidos para limpiar joyas u ópticas a nivel microscópico, o radares industriales (sonar) para encontrar grietas ocultas en tuberías metálicas o estructuras aeronáuticas.</li>
+            </ul>
         </section>
     </main>
 </body>
