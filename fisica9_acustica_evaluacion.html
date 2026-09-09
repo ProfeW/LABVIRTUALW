@@ -22,17 +22,64 @@
         .menu { list-style: none; display: flex; gap: 20px; }
         .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; }
         .menu a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
-        .contenedor { max-width: 800px; margin: 40px auto; padding: 20px; }
+        .contenedor { max-width: 900px; margin: 40px auto; padding: 20px; }
         .form-evaluacion { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        
         .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 600; color: #fff; }
-        .form-group input[type="text"], .form-group input[type="number"] { width: 100%; padding: 12px; border-radius: 6px; border: none; background: rgba(255,255,255,0.1); color: #fff; margin-bottom: 10px; outline: none;}
+        .form-group > label { display: block; margin-bottom: 10px; font-weight: 600; color: #fff; }
+        .form-group input[type="text"] { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #fff; margin-bottom: 10px; outline: none;}
         .form-group input:focus { border: 1px solid var(--color-tema); }
-        button { background: var(--color-tema); color: #fff; padding: 15px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem; font-weight: 600; width: 100%; transition: 0.3s; }
-        button:hover { background: #c0392b; transform: translateY(-2px); }
+        
         .opcion { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .mision-cadena { background: rgba(231, 76, 60, 0.1); border-left: 4px solid var(--color-tema); padding: 20px; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
-        .mision-cadena h3 { color: var(--color-tema); margin-bottom: 15px; font-size: 1.2rem; }
+        
+        /* Estilos para los ejercicios en cascada */
+        .ejercicio-cascada {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 5px solid var(--color-tema);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 10px 10px 0;
+            margin-top: 20px;
+        }
+        .ejercicio-cascada h3 {
+            color: var(--color-tema);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .enunciado {
+            font-style: italic;
+            color: #ddd;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .paso-grupo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 15px;
+            border-radius: 6px;
+        }
+        .paso-grupo label {
+            font-weight: 600;
+            color: #fff;
+            width: 70%;
+        }
+        .paso-grupo input[type="number"], .paso-grupo input[type="text"] {
+            width: 25%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            outline: none;
+            text-align: center;
+        }
+        .paso-grupo input:focus { border: 1px solid var(--color-tema); }
+        
+        button { background: var(--color-tema); color: #fff; padding: 15px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem; font-weight: 600; width: 100%; transition: 0.3s; margin-top: 10px;}
+        button:hover { background: #c0392b; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -55,6 +102,8 @@
                 <input type="text" required>
             </div>
             
+            <h2 style="color: #fff; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">Parte I: Conceptos Teóricos</h2>
+
             <div class="form-group">
                 <label>1. El sonido viaja más rápido en un medio sólido que en uno gaseoso debido a:</label>
                 <div class="opcion"><input type="radio" name="q1" value="a"> a) Que los gases son más densos</div>
@@ -63,57 +112,96 @@
             </div>
 
             <div class="form-group">
-                <label>2. Ejercicio (Velocidad del sonido): Un trabajador golpea un tubo de acero muy largo (v = 5120 m/s). Si el sonido tarda 1.5 segundos en llegar al otro extremo, ¿cuál es la longitud del tubo?</label>
-                <input type="number" placeholder="Respuesta en metros">
+                <label>2. Falso o Verdadero: El sonido viaja mucho más rápido en el aire frío de la madrugada que en el aire caliente del mediodía.</label>
+                <div class="opcion"><input type="radio" name="q2" value="v"> Verdadero</div>
+                <div class="opcion"><input type="radio" name="q2" value="f"> Falso</div>
             </div>
 
             <div class="form-group">
-                <label>3. Ejercicio (Variación por temperatura): Calcula la velocidad del sonido al mediodía cuando la temperatura ambiente es de 31°C (Fórmula: v = 331 + 0.6 * T).</label>
-                <input type="number" step="0.1" placeholder="Respuesta en m/s">
+                <label>3. ¿Qué característica del sonido nos permite distinguir la voz de un amigo de la de un desconocido, incluso si hablan al mismo volumen?</label>
+                <div class="opcion"><input type="radio" name="q3" value="a"> a) Amplitud</div>
+                <div class="opcion"><input type="radio" name="q3" value="b"> b) Tono (Frecuencia)</div>
+                <div class="opcion"><input type="radio" name="q3" value="c"> c) Timbre</div>
             </div>
 
             <div class="form-group">
-                <label>4. Falso o Verdadero: El sonido viaja mucho más rápido en el aire frío de la madrugada que en el aire caliente del mediodía.</label>
-                <div class="opcion"><input type="radio" name="q4" value="v"> Verdadero</div>
-                <div class="opcion"><input type="radio" name="q4" value="f"> Falso</div>
+                <label>4. El sonido es una onda ______________, lo que significa que necesita obligatoriamente un medio material para propagarse (no viaja en el vacío).</label>
+                <input type="text" placeholder="Escribe la palabra correcta">
             </div>
 
             <div class="form-group">
-                <label>5. ¿Qué característica del sonido (Amplitud, Tono o Timbre) nos permite distinguir la voz de un amigo de la de un desconocido, incluso si hablan al mismo volumen?</label>
-                <input type="text" placeholder="Escribe la cualidad del sonido">
+                <label>5. ¿Qué es el Infrasonido y qué fenómeno natural puede producirlo?</label>
+                <input type="text" placeholder="Define y da un ejemplo geológico o animal">
             </div>
 
             <div class="form-group">
-                <label>6. ¿Qué es el Ultrasonido y qué animal u objeto tecnológico lo usa?</label>
-                <input type="text" placeholder="Define y da un ejemplo">
+                <label>6. ¿Qué es el Ultrasonido y qué tecnología médica o animal lo utiliza?</label>
+                <input type="text" placeholder="Define y da un ejemplo de uso">
             </div>
 
             <div class="form-group">
-                <label>7. En el proceso de la audición humana, el nervio auditivo recibe la señal de una estructura en forma de caracol llena de líquido y células ciliadas. Esta estructura se llama:</label>
+                <label>7. En el oído humano, la estructura en forma de caracol llena de líquido y células ciliadas que convierte la vibración en impulso eléctrico se llama:</label>
                 <div class="opcion"><input type="radio" name="q7" value="a"> a) Tímpano</div>
                 <div class="opcion"><input type="radio" name="q7" value="b"> b) Cóclea</div>
-                <div class="opcion"><input type="radio" name="q7" value="c"> c) Yunque</div>
+                <div class="opcion"><input type="radio" name="q7" value="c"> c) Estribo</div>
             </div>
 
-            <div class="mision-cadena">
-                <h3><i class="fa-solid fa-link"></i> Misión Matemática en Cadena (Intensidad del Sonido)</h3>
-                <p style="margin-bottom: 15px; color:#ddd;"><strong>Problema:</strong> Un parlante emite música con una fuerza (Potencia) de <strong>200 W</strong>. Ese sonido choca contra una pared que tiene <strong>5 metros de base y 2 metros de altura</strong>. Vamos a descubrir la Intensidad acústica paso a paso.</p>
+            <h2 style="color: #fff; margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">Parte II: Misiones Matemáticas en Cascada</h2>
+
+            <!-- PREGUNTA 8 (EJERCICIO VELOCIDAD NORMAL) -->
+            <div class="ejercicio-cascada">
+                <h3>8. Misión 1: Velocidad del Sonido (Fórmula Normal)</h3>
+                <p class="enunciado">Un trabajador golpea un tubo de acero muy largo, en el cual el sonido viaja a una velocidad (v) de 5120 m/s. Si el sonido tarda un tiempo (t) de 1.5 segundos en llegar al otro extremo, ¿cuál es la longitud (distancia) del tubo?</p>
                 
-                <div class="form-group">
-                    <label>8. PASO 1: Calcula el área de la pared. Para saber el tamaño de la pared, multiplica su base por su altura (5 x 2).</label>
-                    <input type="number" name="q8" placeholder="Escribe el resultado del área aquí (m²)">
+                <div class="paso-grupo">
+                    <label>Paso 1: Identifica la Velocidad (v) en m/s</label>
+                    <input type="number" name="q8_p1" placeholder="m/s">
                 </div>
-                
-                <div class="form-group">
-                    <label>9. PASO 2: Escribe la fórmula correcta para calcular la Intensidad (I) a partir de la Potencia (P) y el Área (A).</label>
-                    <div class="opcion"><input type="radio" name="q9" value="a"> a) I = P × A</div>
-                    <div class="opcion"><input type="radio" name="q9" value="b"> b) I = P / A</div>
-                    <div class="opcion"><input type="radio" name="q9" value="c"> c) I = A / P</div>
+                <div class="paso-grupo">
+                    <label>Paso 2: Identifica el Tiempo (t) en s</label>
+                    <input type="number" step="0.1" name="q8_p2" placeholder="s">
                 </div>
+                <div class="paso-grupo">
+                    <label style="color: var(--color-tema);">Paso 3: Sabiendo que d = v × t, ¿Cuál es la Distancia (d) del tubo?</label>
+                    <input type="number" name="q8_p3" placeholder="Metros">
+                </div>
+            </div>
+
+            <!-- PREGUNTA 9 (EJERCICIO VELOCIDAD CON TEMPERATURA) -->
+            <div class="ejercicio-cascada">
+                <h3>9. Misión 2: Velocidad del Sonido con Temperatura</h3>
+                <p class="enunciado">Calcula cuál será la velocidad del sonido en el aire al mediodía en una ciudad calurosa, donde la temperatura ambiente es de 31°C.</p>
                 
-                <div class="form-group">
-                    <label>10. PASO 3: ¡Misión cumplida! Ahora, toma los 200 W de potencia del parlante y divídelos entre el número del área que encontraste en el Paso 1. ¿Cuál es el resultado final?</label>
-                    <input type="number" name="q10" placeholder="Escribe la Intensidad final en W/m²">
+                <div class="paso-grupo">
+                    <label>Paso 1: Identifica la Temperatura (T) en °C</label>
+                    <input type="number" name="q9_p1" placeholder="°C">
+                </div>
+                <div class="paso-grupo">
+                    <label>Paso 2: La fórmula general es v = 331 + (0.6 × T). Primero, multiplica 0.6 por la temperatura que identificaste.</label>
+                    <input type="number" step="0.1" name="q9_p2" placeholder="Resultado">
+                </div>
+                <div class="paso-grupo">
+                    <label style="color: var(--color-tema);">Paso 3: Suma 331 al resultado anterior. ¿Cuál es la Velocidad final (v)?</label>
+                    <input type="number" step="0.1" name="q9_p3" placeholder="m/s">
+                </div>
+            </div>
+
+            <!-- PREGUNTA 10 (EJERCICIO INTENSIDAD / POTENCIA) -->
+            <div class="ejercicio-cascada">
+                <h3>10. Misión 3: Intensidad Sonora (Potencia y Área)</h3>
+                <p class="enunciado">Un parlante emite música con una fuerza (Potencia) de 200 W. Ese sonido choca contra una pared que tiene 5 metros de base y 2 metros de altura.</p>
+                
+                <div class="paso-grupo">
+                    <label>Paso 1: Calcula el Área de la pared (base × altura).</label>
+                    <input type="number" name="q10_p1" placeholder="m²">
+                </div>
+                <div class="paso-grupo">
+                    <label>Paso 2: Identifica la Potencia (P) emitida por el parlante.</label>
+                    <input type="number" name="q10_p2" placeholder="W">
+                </div>
+                <div class="paso-grupo">
+                    <label style="color: var(--color-tema);">Paso 3: Sabiendo que I = P / Área, ¿Cuál es la Intensidad final?</label>
+                    <input type="number" name="q10_p3" placeholder="W/m²">
                 </div>
             </div>
 
