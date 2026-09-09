@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Infrasonido y Ultrasonido - Física 9 - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-tema: #4cd137; --color-oscuro: #1a1a2e; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26,26,46,0.88), rgba(26,26,46,0.96)),
+                url('https://images.unsplash.com/photo-1511735111819-9a3efd16269e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; }
+        .menu a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: var(--color-tema); text-decoration: none; font-weight: 600; }
+        .btn-volver:hover { color: #fff; }
+        .encabezado-leccion { border-bottom: 2px solid rgba(76, 209, 55, 0.4); padding-bottom: 20px; margin-bottom: 30px; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 10px; }
+        .seccion-contenido { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .seccion-contenido h2 { color: var(--color-tema); margin-bottom: 20px; }
+        .seccion-contenido p { line-height: 1.7; color: #ddd; margin-bottom: 15px; font-size: 1.05rem; }
+        .img-container { text-align: center; margin: 20px 0; background: #fff; padding: 10px; border-radius: 10px; }
+        .img-container img { max-width: 100%; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i class="fa-solid fa-volume-high"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="fisica_9.html">Física 9</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="contenedor">
+        <a href="fisica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+        <div class="encabezado-leccion">
+            <h1><i class="fa-solid fa-wave-square"></i> Infrasonido y Ultrasonido</h1>
+            <p>El espectro auditivo y la escala humana</p>
+        </div>
+        <section class="seccion-contenido">
+            <h2>1. La Escala Humana (Sonido Audible)</h2>
+            <p>La "sintonía" de nuestro oído se mide en Hertz (Hz). El rango que podemos escuchar va desde los <strong>20 Hz</strong> (sonidos muy graves) hasta los <strong>20,000 Hz</strong> (sonidos muy agudos). Cualquier onda mecánica que vibre fuera de este rango es inaudible para nosotros.</p>
+            <div class="img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Animal_hearing_frequency_range.svg/1024px-Animal_hearing_frequency_range.svg.png" alt="Espectro Auditivo" />
+            </div>
+        </section>
+        <section class="seccion-contenido">
+            <h2>2. El Infrasonido (Vibraciones Lentas y Gigantes)</h2>
+            <p>Son ondas sonoras con una frecuencia menor a 20 Hz. Son largas, lentas y pesadas, y pueden viajar largas distancias sin perder energía.</p>
+            <ul>
+                <li><strong>Naturaleza:</strong> Los elefantes y ballenas las usan para comunicarse a kilómetros.</li>
+                <li><strong>Eventos geológicos:</strong> Terremotos, erupciones volcánicas y tornados.</li>
+            </ul>
+        </section>
+        <section class="seccion-contenido">
+            <h2>3. El Ultrasonido (Vibraciones Rápidas y Diminutas)</h2>
+            <p>Frecuencias mayores a 20,000 Hz. Son ondas cortas y rápidas, perfectas para "ver" a través del sonido debido a que rebotan en objetos diminutos.</p>
+            <ul>
+                <li><strong>Naturaleza:</strong> Ecolocalización en murciélagos y delfines.</li>
+                <li><strong>Uso médico e industrial:</strong> Ecografías y limpieza microscópica.</li>
+            </ul>
+        </section>
+        <section class="seccion-contenido">
+            <h2>4. El Oído y la Audición</h2>
+            <p>Para que nuestro cerebro comprenda el sonido, la onda sonora ingresa por el pabellón auricular (oreja), viaja por el conducto auditivo y hace vibrar el <strong>tímpano</strong>. Esta vibración se transmite por tres pequeños huesos (martillo, yunque y estribo) hasta llegar a la <strong>cóclea</strong> en el oído interno, donde las células ciliadas convierten la energía mecánica en impulsos eléctricos que el cerebro procesa.</p>
+        </section>
+    </main>
+</body>
+</html>

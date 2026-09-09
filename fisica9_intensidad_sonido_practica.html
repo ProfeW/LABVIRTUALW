@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Práctica: Intensidad Sonora - Física 9 - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-tema: #4cd137; --color-oscuro: #1a1a2e; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26,26,46,0.88), rgba(26,26,46,0.96)),
+                url('https://images.unsplash.com/photo-1511735111819-9a3efd16269e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; }
+        .menu a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
+        .contenedor { max-width: 800px; margin: 40px auto; padding: 20px; }
+        .form-practica { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--color-tema); }
+        .form-group input[type="text"], .form-group input[type="number"] { width: 100%; padding: 12px; border-radius: 6px; border: none; background: rgba(255,255,255,0.1); color: #fff; outline: none; }
+        .form-group input:focus { border: 1px solid var(--color-tema); }
+        button { background: var(--color-tema); color: #fff; padding: 15px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem; font-weight: 600; width: 100%; transition: 0.3s; }
+        button:hover { background: #3ab028; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i class="fa-solid fa-volume-high"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="fisica_9.html">Física 9</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="contenedor">
+        <a href="fisica_9.html" class="btn-volver" style="color: var(--color-tema); display: inline-block; margin-bottom: 20px; text-decoration: none; font-weight:600;"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+        <h1 style="color: var(--color-tema); margin-bottom: 20px;">Práctica: Intensidad Sonora</h1>
+        <p style="margin-bottom: 30px;">Resuelve los siguientes ejercicios de intensidad de sonido. Tus respuestas serán enviadas a la base de datos del docente.</p>
+        
+        <form class="form-practica" id="formPractica">
+            <div class="form-group">
+                <label>Nombre del Estudiante:</label>
+                <input type="text" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label>1. En el coliseo del colegio, un gran altavoz emite música con una potencia de 400 W. Si esa onda choca directamente contra una lona publicitaria que tiene un área de 20 m², ¿cuál es la intensidad del sonido que recibe la lona? (W/m²)</label>
+                <input type="number" name="p1" required>
+            </div>
+            <div class="form-group">
+                <label>2. Un ingeniero mide el sonido del motor de un tractor agrícola. Descubre que el sonido golpea una barrera protectora de 5 m² generando una intensidad física de 30 W/m². ¿Cuánta potencia (P) en vatios está generando ese motor?</label>
+                <input type="number" name="p2" required>
+            </div>
+            <div class="form-group">
+                <label>3. En una discoteca, la intensidad física del sonido es tan fuerte que registra 50 W/m² sobre una de las paredes acústicas. Si sabemos que los parlantes están disparando una potencia de 1000 W hacia esa dirección, ¿cuál es el Área (A) de esa pared en m²?</label>
+                <input type="number" name="p3" required>
+            </div>
+            <div class="form-group">
+                <label>4. Durante las fiestas, un músico toca la trompeta emitiendo una potencia sonora de 30 W. Si este sonido choca contra una ventana de 2 m², ¿cuál es la intensidad del sonido sobre el vidrio? (W/m²)</label>
+                <input type="number" name="p4" required>
+            </div>
+            <div class="form-group">
+                <label>5. Los estudiantes están armando una cabina de radio para el colegio. Saben que los paneles de espuma que compraron tienen un área de 4 m² y pueden soportar una intensidad máxima de 15 W/m² antes de que el sonido se filtre. ¿Cuál es la potencia máxima (P) que pueden emitir los parlantes dentro de la cabina? (W)</label>
+                <input type="number" name="p5" required>
+            </div>
+            <button type="submit">Enviar Respuestas</button>
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('formPractica').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // REEMPLAZA ESTA URL CON TU GOOGLE APPS SCRIPT WEB APP URL
+            const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI'; 
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            alert('¡Simulación de envío!\\nEn una implementación real, esto enviaría los datos a Google Sheets usando Apps Script a la URL:\\n' + scriptURL + '\\n\\nTus datos:\\n' + JSON.stringify(data, null, 2));
+            
+            /* CÓDIGO REAL PARA ENVIAR (descomentar y configurar URL):
+            fetch(scriptURL, { method: 'POST', body: formData})
+                .then(response => {
+                    alert('Respuestas enviadas correctamente.');
+                    document.getElementById('formPractica').reset();
+                })
+                .catch(error => alert('Error al enviar.'));
+            */
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Intensidad y Potencia del Sonido - Física 9 - LabVirtual W</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-tema: #4cd137; --color-oscuro: #1a1a2e; }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--color-oscuro); color: #fff;
+            background-image: linear-gradient(rgba(26,26,46,0.88), rgba(26,26,46,0.96)),
+                url('https://images.unsplash.com/photo-1511735111819-9a3efd16269e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+        }
+        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo i { color: var(--color-tema); }
+        .menu { list-style: none; display: flex; gap: 20px; }
+        .menu a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 5px; transition: all 0.3s; }
+        .menu a:hover { background: rgba(255,255,255,0.1); color: var(--color-tema); }
+        .contenedor { max-width: 1000px; margin: 40px auto; padding: 20px; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: var(--color-tema); text-decoration: none; font-weight: 600; }
+        .btn-volver:hover { color: #fff; }
+        .encabezado-leccion { border-bottom: 2px solid rgba(76, 209, 55, 0.4); padding-bottom: 20px; margin-bottom: 30px; }
+        .encabezado-leccion h1 { font-size: 2.8rem; color: var(--color-tema); margin-bottom: 10px; }
+        .seccion-contenido { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .seccion-contenido h2 { color: var(--color-tema); margin-bottom: 20px; }
+        .caja-formula { background: rgba(76, 209, 55, 0.06); border: 2px dashed var(--color-tema); border-radius: 10px; padding: 25px; text-align: center; margin: 20px 0; }
+        .formula-principal { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 1px; margin-bottom: 10px; }
+        .ejercicio-tarjeta { background: rgba(20,20,35,0.6); border-left: 4px solid var(--color-tema); padding: 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+        .ejercicio-tarjeta h3 { color: var(--color-tema); margin-bottom: 10px; }
+        
+        .botones-accion-final { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; margin-bottom: 20px; }
+        .btn-accion { padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn-practica { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .btn-practica:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46,204,113,0.4); }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i class="fa-solid fa-volume-high"></i> LabVirtual W</a>
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="fisica_9.html">Física 9</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="contenedor">
+        <a href="fisica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+        <div class="encabezado-leccion">
+            <h1><i class="fa-solid fa-bolt"></i> Intensidad y Potencia del Sonido</h1>
+            <p>Entendiendo la fuerza del sonido</p>
+        </div>
+        <section class="seccion-contenido">
+            <h2>¿Qué es la Intensidad Física?</h2>
+            <p>Imagina que el sonido es un viento invisible de energía. La intensidad física es la cantidad exacta de esa energía sonora (llamada Potencia) que choca o atraviesa una superficie (Área) en un momento determinado. Se mide en Vatios por metro cuadrado (W/m²).</p>
+            <div class="caja-formula">
+                <div class="formula-principal">I = P / A</div>
+                <div class="formula-leyenda">
+                    <strong>I</strong> = Intensidad (W/m²) <br>
+                    <strong>P</strong> = Potencia de la fuente (Vatios, W) <br>
+                    <strong>A</strong> = Área (m²) (Para rectángulos: A = base × altura)
+                </div>
+            </div>
+            <p>Nota: La intensidad en decibeles requiere de logaritmos base 10 (β = 10 log(I/I0)) y para la amplitud se requieren funciones trigonométricas (y = A sin(kx - wt)). Para el grado noveno, analizaremos la amplitud gráficamente y la intensidad con la fórmula mostrada (Potencia y Área).</p>
+        </section>
+        
+        <section class="seccion-contenido">
+            <h2>Ejercicios Resueltos</h2>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 1: Cálculo de Intensidad</h3>
+                <p><strong>Problema:</strong> Un parlante de la Institución emite música con una potencia de 150 W. Este sonido choca contra una pared que tiene un área de 15 m². ¿Cuál es la intensidad?</p>
+                <p><strong>Solución:</strong> I = P / A  ➜ I = 150 / 15 = 10 W/m²</p>
+            </div>
+            <div class="ejercicio-tarjeta">
+                <h3>Ejercicio 2: Despejando Potencia</h3>
+                <p><strong>Problema:</strong> Un trabajador agrícola está expuesto al ruido de una guadañadora. Si la intensidad es de 5 W/m² y el área de sus protectores es de 0.2 m², ¿cuánta Potencia sonora están frenando?</p>
+                <p><strong>Solución:</strong> P = I · A ➜ P = 5 · 0.2 = 1 W</p>
+            </div>
+        </section>
+        
+        <section class="botones-accion-final">
+            <a href="fisica9_intensidad_sonido_practica.html" class="btn-accion btn-practica">
+                <i class="fa-solid fa-gamepad"></i> Práctica Interactiva
+            </a>
+        </section>
+    </main>
+</body>
+</html>
