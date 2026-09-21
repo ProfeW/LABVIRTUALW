@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Simulador de Moléculas - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Simulador de Moléculas Pro - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,60 +46,73 @@
         h2 { font-size: 1.8rem; border-bottom: 2px solid rgba(0, 210, 255, 0.2); padding-bottom: 10px; color: var(--color-primario); margin-bottom: 20px; margin-top: 30px;}
         p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; color: #cbd5e1; }
 
-        /* SIMULADOR UI */
-        .pizarra-simulador {
-            background: rgba(0, 0, 0, 0.5); border: 2px dashed rgba(0, 210, 255, 0.3);
-            border-radius: 15px; min-height: 500px; position: relative; margin-bottom: 20px;
-            overflow: hidden; touch-action: none;
-            /* Cuadrícula invisible pero activa matemáticamente en JS */
-            background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
+        /* SIMULADOR V2 UI */
         .toolbar {
             display: flex; flex-wrap: wrap; gap: 10px; background: rgba(15, 23, 42, 0.9);
             padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1);
             align-items: center;
+            justify-content: center;
         }
+        
+        .toolbar-group {
+            display: flex; gap: 5px; border-right: 2px solid rgba(255,255,255,0.1); padding-right: 15px; margin-right: 5px;
+            flex-wrap: wrap; justify-content: center;
+        }
+        .toolbar-group:last-child { border-right: none; }
+
         .tool-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;
-            width: 45px; height: 45px; border-radius: 8px; cursor: grab; display: flex; justify-content: center; align-items: center;
-            font-size: 1.2rem; font-weight: bold; transition: 0.2s; user-select: none;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
+            min-width: 40px; height: 40px; border-radius: 8px; cursor: grab; display: flex; justify-content: center; align-items: center;
+            font-size: 1.1rem; font-weight: bold; transition: 0.2s; user-select: none; padding: 0 10px;
         }
         .tool-btn:hover { background: rgba(0, 210, 255, 0.2); border-color: var(--color-primario); }
-        .tool-btn.active { background: rgba(0, 210, 255, 0.4); border-color: var(--color-primario); }
+        .tool-btn:active { cursor: grabbing; }
 
-        .elemento-lienzo {
-            position: absolute; cursor: grab; font-weight: bold; font-size: 1.2rem; color: #fff;
-            display: flex; justify-content: center; align-items: center; width: 50px; height: 50px;
-            text-shadow: 0 0 5px rgba(0,0,0,0.8); user-select: none; z-index: 10;
-        }
-        .elemento-subindice {
-            position: absolute; cursor: grab; font-weight: bold; font-size: 0.9rem; color: #fff;
-            display: flex; justify-content: center; align-items: flex-end; width: 20px; height: 50px;
-            padding-bottom: 5px; user-select: none; z-index: 11;
-        }
-        .enlace-lienzo {
-            position: absolute; background: #fff; cursor: grab; z-index: 5;
-        }
-        .enlace-lienzo.simple { height: 4px; border-radius: 2px; }
-        .enlace-lienzo.doble { height: 12px; border-top: 3px solid #fff; border-bottom: 3px solid #fff; background: transparent; }
-        .enlace-lienzo.triple { height: 18px; border-top: 3px solid #fff; border-bottom: 3px solid #fff; background: #fff; background-clip: content-box; padding: 4px 0;}
-
-        /* EVALUADOR UI */
-        .form-grupo { margin-bottom: 20px; }
-        .form-grupo label { display: block; margin-bottom: 8px; color: var(--color-primario); font-weight: 600;}
-        .form-grupo input { 
-            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(0,0,0,0.3); color: #fff; font-size: 1rem;
+        /* Cuadrícula basada en celdas (Cell-based grid) */
+        .pizarra-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2px;
+            background: rgba(255,255,255,0.1); /* Color de la línea del grid */
+            padding: 2px;
+            border-radius: 10px;
+            border: 2px solid var(--color-primario);
+            margin-bottom: 20px;
+            overflow-x: auto;
         }
 
+        .celda-grid {
+            background: rgba(15, 23, 42, 0.8);
+            aspect-ratio: 1; /* Cuadrados perfectos */
+            min-width: 45px;
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+        }
+        .celda-grid:hover { background: rgba(0, 210, 255, 0.1); }
+        .celda-grid.drag-over { background: rgba(0, 210, 255, 0.3); border: 2px dashed var(--color-primario); }
+
+        .celda-input {
+            width: 100%; height: 100%;
+            background: transparent; border: none;
+            color: #fff; font-size: 1.2rem; font-weight: bold; font-family: monospace;
+            text-align: center; outline: none;
+            padding: 0; margin: 0;
+        }
+        
+        /* Efectos visuales para los enlaces si los escriben directamente */
+        .celda-input[value="-"], .celda-input[value="—"] { color: #f59e0b; }
+        .celda-input[value="|"] { color: #f59e0b; }
+        .celda-input[value="="] { color: #a855f7; }
+        .celda-input[value="||"] { color: #a855f7; }
+        
         .btn {
             background: linear-gradient(135deg, var(--color-primario), var(--color-secundario)); color: #fff;
             border: none; padding: 12px 25px; border-radius: 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3); }
-        .btn:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; color: #999;}
+        .btn.danger { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+        .btn.danger:hover { box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); }
 
         /* OVERLAY LOADING */
         #overlay-loading {
@@ -121,37 +134,48 @@
     </div>
 
     <main class="contenedor">
-        <h1>Simulador y Evaluación IA</h1>
-        <p>Esta es la prueba definitiva. Te daremos un nombre y deberás dibujar su estructura molecular en la pizarra arrastrando los elementos. Al terminar, la <strong>Inteligencia Artificial</strong> leerá tu dibujo y te calificará.</p>
+        <h1>Simulador de Moléculas Pro</h1>
+        <p>Arrastra los elementos desde la barra hacia los cuadritos, o dale clic a cualquier cuadrito y <strong>escribe directamente</strong> usando tu teclado (ej. CH3, -, =).<br>
+        <em style="color:var(--color-primario); font-size: 0.9rem;">Truco: Si arrastras una C y luego una H al mismo cuadro, ¡se fusionan automáticamente!</em></p>
 
-        <div class="form-grupo" style="background: rgba(0, 210, 255, 0.1); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 210, 255, 0.3);">
+        <div style="background: rgba(0, 210, 255, 0.1); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 210, 255, 0.3); margin-bottom: 20px;">
             <h3 style="color: var(--color-primario); margin-bottom: 10px;">Tu Reto Actual:</h3>
             <div style="font-size: 2rem; font-family: monospace; font-weight: bold; color: #fff; text-align: center;" id="reto-nombre">2-metil-1-buteno</div>
             <button class="btn" style="padding: 5px 15px; font-size: 0.9rem; margin-top: 15px; display: block; margin-left: auto; margin-right: auto;" onclick="generarRetoAleatorio()">Cambiar Reto</button>
         </div>
         
+        <!-- BARRA DE HERRAMIENTAS -->
         <div class="toolbar" id="toolbar">
-            <span style="color:#aaa; font-size:0.9rem; margin-right: 10px;">Arrastra a la pizarra:</span>
-            <!-- Elementos -->
-            <div class="tool-btn" draggable="true" data-type="atom" data-symbol="C" title="Carbono">C</div>
-            <div class="tool-btn" draggable="true" data-type="atom" data-symbol="H" title="Hidrógeno">H</div>
-            <div class="tool-btn" draggable="true" data-type="atom" data-symbol="O" title="Oxígeno">O</div>
-            <div class="tool-btn" style="width: 2px; background: rgba(255,255,255,0.2); margin: 0 5px; cursor:default;"></div>
-            <!-- Enlaces -->
-            <div class="tool-btn" draggable="true" data-type="bond" data-bond="simple" title="Enlace Simple">—</div>
-            <div class="tool-btn" draggable="true" data-type="bond" data-bond="doble" title="Enlace Doble">=</div>
-            <div class="tool-btn" draggable="true" data-type="bond" data-bond="triple" title="Enlace Triple">≡</div>
-            <div class="tool-btn" style="width: 2px; background: rgba(255,255,255,0.2); margin: 0 5px; cursor:default;"></div>
-            <!-- Subíndices -->
-            <div class="tool-btn" draggable="true" data-type="sub" data-num="2" style="font-size:0.9rem" title="Subíndice 2">₂</div>
-            <div class="tool-btn" draggable="true" data-type="sub" data-num="3" style="font-size:0.9rem" title="Subíndice 3">₃</div>
+            <div class="toolbar-group">
+                <div class="tool-btn" draggable="true" data-value="CH3" title="Grupo Metilo">CH₃</div>
+                <div class="tool-btn" draggable="true" data-value="CH2" title="Metileno">CH₂</div>
+                <div class="tool-btn" draggable="true" data-value="CH" title="Metino">CH</div>
+            </div>
             
-            <button class="btn" style="margin-left: auto; padding: 5px 15px; font-size: 0.9rem; background: #e74c3c;" onclick="limpiarPizarra()"><i class="fa-solid fa-trash"></i> Limpiar</button>
-        </div>
-        <p style="font-size: 0.85rem; color: #888; text-align: center; margin-top: -10px; margin-bottom: 10px;"><em>* Haz doble clic sobre un enlace ya puesto en la pizarra para rotarlo (horizontal/vertical). Arrastra fuera de la pizarra para eliminar un elemento.</em></p>
+            <div class="toolbar-group">
+                <div class="tool-btn" draggable="true" data-value="C" title="Carbono">C</div>
+                <div class="tool-btn" draggable="true" data-value="H" title="Hidrógeno">H</div>
+                <div class="tool-btn" draggable="true" data-value="O" title="Oxígeno">O</div>
+                <div class="tool-btn" draggable="true" data-value="3" title="Subíndice 3">₃</div>
+                <div class="tool-btn" draggable="true" data-value="2" title="Subíndice 2">₂</div>
+            </div>
 
-        <div class="pizarra-simulador" id="lienzo">
-            <!-- Elementos se dibujarán aquí -->
+            <div class="toolbar-group">
+                <div class="tool-btn" draggable="true" data-value="-" title="Enlace Simple Horizontal">—</div>
+                <div class="tool-btn" draggable="true" data-value="|" title="Enlace Simple Vertical">|</div>
+                <div class="tool-btn" draggable="true" data-value="=" title="Enlace Doble Horizontal">=</div>
+                <div class="tool-btn" draggable="true" data-value="||" title="Enlace Doble Vertical">||</div>
+                <div class="tool-btn" draggable="true" data-value="≡" title="Enlace Triple">≡</div>
+            </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;">
+            <button class="btn danger" style="padding: 5px 15px; font-size: 0.9rem;" onclick="limpiarPizarra()"><i class="fa-solid fa-trash"></i> Limpiar Cuadrícula</button>
+        </div>
+
+        <!-- CUADRÍCULA -->
+        <div class="pizarra-grid" id="lienzo">
+            <!-- Se generará vía JS (12x12) -->
         </div>
 
         <button class="btn" style="width: 100%; font-size: 1.2rem; padding: 15px;" id="btn-evaluar" onclick="evaluarConIA()"><i class="fa-solid fa-robot"></i> Evaluar mi Molécula con IA</button>
@@ -160,7 +184,7 @@
         <div id="pantalla-resultados">
             <h2><i class="fa-solid fa-ranking-star" style="color: var(--color-primario);"></i> Resultados de la Evaluación</h2>
             <div class="feedback-box">
-                <strong style="color: var(--color-primario); display: block; margin-bottom: 10px;"><i class="fa-solid fa-comment-dots"></i> Retroalimentación de la Inteligencia Artificial:</strong>
+                <strong style="color: var(--color-primario); display: block; margin-bottom: 10px;"><i class="fa-solid fa-comment-dots"></i> Análisis de la IA:</strong>
                 <span id="mensaje-feedback"></span>
             </div>
             <button class="btn" onclick="document.getElementById('pantalla-resultados').style.display='none'; generarRetoAleatorio(); limpiarPizarra();"><i class="fa-solid fa-rotate-right"></i> Intentar Nuevo Reto</button>
@@ -170,149 +194,114 @@
     <!-- PANTALLA DE CARGA -->
     <div id="overlay-loading">
         <div class="spinner"></div>
-        <div style="color: #fff; font-size: 1.2rem; text-align: center; max-width: 80%;">La Inteligencia Artificial está escaneando tu pizarra y evaluando las conexiones...</div>
+        <div style="color: #fff; font-size: 1.2rem; text-align: center; max-width: 80%;">La IA está leyendo tu cuadrícula y comprobando los enlaces de los carbonos...</div>
     </div>
 
     <script>
-        const retos = ["propano", "butano", "2-metilpropano", "eteno", "propeno", "2-buteno", "etino", "2-butino", "etanol", "1-buteno"];
+        const retos = ["propano", "butano", "2-metilpropano", "eteno", "propeno", "2-buteno", "etino", "2-butino", "2,2-dimetilpropano", "ciclopentano"];
+        
         function generarRetoAleatorio() {
             const reto = retos[Math.floor(Math.random() * retos.length)];
             document.getElementById('reto-nombre').innerText = reto;
         }
 
-        // LÓGICA DRAG & DROP (Touch & Mouse Support)
+        // GENERAR GRID (12x12)
         const lienzo = document.getElementById('lienzo');
-        const gridCell = 50; // Tamaño de celda del grid invisible
-        let elementIdCounter = 0;
+        const numFilas = 12;
+        const numCols = 12;
 
-        // Soporte nativo Drag and Drop HTML5 para crear desde toolbar
-        document.querySelectorAll('.tool-btn[draggable="true"]').forEach(item => {
-            item.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('type', item.getAttribute('data-type'));
-                e.dataTransfer.setData('symbol', item.getAttribute('data-symbol'));
-                e.dataTransfer.setData('bond', item.getAttribute('data-bond'));
-                e.dataTransfer.setData('num', item.getAttribute('data-num'));
-            });
-        });
-
-        lienzo.addEventListener('dragover', (e) => { e.preventDefault(); });
-        lienzo.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const type = e.dataTransfer.getData('type');
-            if(!type) return;
-
-            const rect = lienzo.getBoundingClientRect();
-            let x = e.clientX - rect.left;
-            let y = e.clientY - rect.top;
-            
-            // Snap to grid
-            x = Math.round(x / gridCell) * gridCell;
-            y = Math.round(y / gridCell) * gridCell;
-
-            createElementOnGrid(type, e.dataTransfer, x, y);
-        });
-
-        function createElementOnGrid(type, data, x, y) {
-            const el = document.createElement('div');
-            el.id = 'sim-el-' + elementIdCounter++;
-            el.style.left = `${x}px`;
-            el.style.top = `${y}px`;
-            el.setAttribute('data-type', type);
-
-            if (type === 'atom') {
-                el.className = 'elemento-lienzo draggable-item';
-                el.innerText = data.getData('symbol');
-                el.setAttribute('data-value', data.getData('symbol'));
-            } else if (type === 'bond') {
-                const bondType = data.getData('bond');
-                el.className = `enlace-lienzo ${bondType} draggable-item`;
-                el.style.width = `${gridCell}px`;
-                el.setAttribute('data-value', bondType);
-                el.dataset.horizontal = "true";
-                
-                // Rotar con doble clic
-                el.addEventListener('dblclick', function() {
-                    if(this.dataset.horizontal === "true") {
-                        this.style.width = '10px'; this.style.height = `${gridCell}px`;
-                        this.dataset.horizontal = "false";
-                    } else {
-                        this.style.width = `${gridCell}px`; this.style.height = '10px';
-                        this.dataset.horizontal = "true";
-                    }
-                });
-            } else if (type === 'sub') {
-                el.className = 'elemento-subindice draggable-item';
-                el.innerText = `_${data.getData('num')}`;
-                el.setAttribute('data-value', data.getData('num'));
-            }
-
-            makeDraggable(el);
-            lienzo.appendChild(el);
-        }
-
-        // Hacer que los elementos ya en el lienzo se puedan mover
-        function makeDraggable(el) {
-            let isDragging = false;
-            
-            el.addEventListener('mousedown', startDrag);
-            el.addEventListener('touchstart', startDrag, {passive: false});
-
-            function startDrag(e) {
-                if(e.type === 'mousedown' && e.button !== 0) return; // Solo clic izquierdo
-                isDragging = true;
-                el.style.zIndex = 100;
-                
-                const moveHandler = (ev) => {
-                    if(!isDragging) return;
-                    ev.preventDefault(); // Prevenir scroll en móviles
-                    const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
-                    const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+        function inicializarPizarra() {
+            lienzo.innerHTML = '';
+            for (let r = 0; r < numFilas; r++) {
+                for (let c = 0; c < numCols; c++) {
+                    const celda = document.createElement('div');
+                    celda.className = 'celda-grid';
                     
-                    const rect = lienzo.getBoundingClientRect();
-                    let x = clientX - rect.left - (gridCell/2);
-                    let y = clientY - rect.top - (gridCell/2);
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'celda-input';
+                    input.maxLength = 5; // Limita longitud en la celda
+                    input.dataset.row = r;
+                    input.dataset.col = c;
                     
-                    el.style.left = `${x}px`;
-                    el.style.top = `${y}px`;
-                };
+                    // Asegurar que al salir del input formatee algunos caracteres especiales
+                    input.addEventListener('change', (e) => {
+                        let val = e.target.value.toUpperCase();
+                        // Reemplazar números por subíndices si el usuario escribió normal
+                        val = val.replace(/2/g, "₂").replace(/3/g, "₃").replace(/4/g, "₄");
+                        e.target.value = val;
+                    });
 
-                const stopDrag = (ev) => {
-                    isDragging = false;
-                    el.style.zIndex = '';
-                    document.removeEventListener('mousemove', moveHandler);
-                    document.removeEventListener('mouseup', stopDrag);
-                    document.removeEventListener('touchmove', moveHandler);
-                    document.removeEventListener('touchend', stopDrag);
+                    celda.appendChild(input);
+                    lienzo.appendChild(celda);
+
+                    // Configurar Eventos de Drag & Drop por celda
+                    celda.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        celda.classList.add('drag-over');
+                    });
                     
-                    // Snap to grid on drop
-                    const rect = lienzo.getBoundingClientRect();
-                    const clientX = ev.changedTouches ? ev.changedTouches[0].clientX : ev.clientX;
-                    const clientY = ev.changedTouches ? ev.changedTouches[0].clientY : ev.clientY;
-                    
-                    // Si se soltó fuera del lienzo, se elimina
-                    if(clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) {
-                        el.remove();
-                        return;
-                    }
+                    celda.addEventListener('dragleave', () => {
+                        celda.classList.remove('drag-over');
+                    });
 
-                    let finalX = clientX - rect.left;
-                    let finalY = clientY - rect.top;
-                    el.style.left = `${Math.round(finalX / gridCell) * gridCell}px`;
-                    el.style.top = `${Math.round(finalY / gridCell) * gridCell}px`;
-                };
+                    celda.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        celda.classList.remove('drag-over');
+                        const dataVal = e.dataTransfer.getData('value');
+                        if (!dataVal) return;
 
-                document.addEventListener('mousemove', moveHandler);
-                document.addEventListener('mouseup', stopDrag);
-                document.addEventListener('touchmove', moveHandler, {passive: false});
-                document.addEventListener('touchend', stopDrag);
+                        // Lógica de Fusión Inteligente
+                        let currentVal = input.value;
+                        
+                        // Si arrastran un grupo armado (CH3) o un enlace (-), reemplaza si está vacío, o sobrescribe
+                        if(dataVal.length > 1 || ['-','|','=','||','≡'].includes(dataVal)){
+                             // Mapear subíndices visuales si vienen de los botones 
+                            let valAInsertar = dataVal.replace("3", "₃").replace("2", "₂");
+                            input.value = valAInsertar;
+                        } 
+                        // Lógica incremental (C + H + 3)
+                        else {
+                            let appendChar = dataVal;
+                            if (dataVal === '3') appendChar = '₃';
+                            if (dataVal === '2') appendChar = '₂';
+                            input.value = currentVal + appendChar;
+                        }
+                    });
+                }
             }
         }
 
         function limpiarPizarra() {
-            lienzo.innerHTML = '';
+            document.querySelectorAll('.celda-input').forEach(inp => inp.value = '');
         }
 
-        // IA EVALUATION LOGIC
+        // Configurar botones arrastrables
+        document.querySelectorAll('.tool-btn').forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('value', item.getAttribute('data-value'));
+            });
+            // Soporte para clics rápidos (si selecciona una celda y hace clic en el botón, lo inserta)
+            item.addEventListener('click', () => {
+                const activeEl = document.activeElement;
+                if(activeEl && activeEl.classList.contains('celda-input')) {
+                    const dataVal = item.getAttribute('data-value');
+                    let valAInsertar = dataVal.replace("3", "₃").replace("2", "₂");
+                    
+                    if(['-','|','=','||','≡'].includes(valAInsertar) || valAInsertar.includes("C")) {
+                        activeEl.value = valAInsertar;
+                    } else {
+                        activeEl.value += valAInsertar;
+                    }
+                }
+            });
+        });
+
+        // INIT
+        generarRetoAleatorio();
+        inicializarPizarra();
+
+        // EVALUACIÓN IA
         const API_KEY_OBFUSCATED = "UXdfSVl3RkEyRmZFYUN3bGo0RHJ3VzE0YjVrc2ZSc1d4MkM4SkkwSHludEo2TlI4YkEuUUE=";
         function getApiKey() {
             try { return atob(API_KEY_OBFUSCATED).split("").reverse().join(""); } 
@@ -321,38 +310,39 @@
 
         async function evaluarConIA() {
             const reto = document.getElementById('reto-nombre').innerText;
-            const items = document.querySelectorAll('.draggable-item');
+            const celdas = document.querySelectorAll('.celda-input');
+            let estructuraMatriz = [];
             
-            if(items.length === 0) {
-                alert("La pizarra está vacía. Dibuja primero la molécula."); return;
+            // Recopilar solo celdas con contenido
+            celdas.forEach(inp => {
+                if (inp.value.trim() !== '') {
+                    estructuraMatriz.push({
+                        fila: parseInt(inp.dataset.row),
+                        columna: parseInt(inp.dataset.col),
+                        valor: inp.value.trim()
+                    });
+                }
+            });
+
+            if(estructuraMatriz.length === 0) {
+                alert("La cuadrícula está vacía. Escribe o arrastra los elementos a las casillas para formar la molécula."); return;
             }
 
             document.getElementById('overlay-loading').style.display = 'flex';
             document.getElementById('btn-evaluar').disabled = true;
 
-            // Compilar matriz de pizarra
-            let estructuraPlana = [];
-            items.forEach(el => {
-                estructuraPlana.push({
-                    tipo: el.getAttribute('data-type'),
-                    valor: el.getAttribute('data-value'),
-                    x: parseInt(el.style.left),
-                    y: parseInt(el.style.top),
-                    horizontal: el.dataset.horizontal || "N/A"
-                });
-            });
-
             const promptText = `
-Eres un evaluador de química orgánica estricto. Un estudiante ha armado una molécula en una cuadrícula intentando formar el compuesto: "${reto}".
-Aquí están los elementos que colocó en la pizarra y sus coordenadas (x,y):
-${JSON.stringify(estructuraPlana, null, 2)}
+Eres un profesor de química orgánica riguroso. Un estudiante ha dibujado una molécula en una cuadrícula intentando formar el compuesto: "${reto}".
+Aquí tienes la matriz de posiciones (Fila, Columna) y el contenido de cada celda:
+${JSON.stringify(estructuraMatriz, null, 2)}
 
-Analiza las coordenadas. Las celdas son de 50x50px. 
-Verifica si los carbonos están conectados lógicamente por enlaces, y si la cantidad de hidrógenos (subíndices) en cada carbono es correcta para satisfacer la tetravalencia (4 enlaces).
-Si la molécula corresponde ESTRUCTURALMENTE al nombre "${reto}", felicita al estudiante.
-Si hay errores (ej: un carbono con 5 enlaces, faltan hidrógenos, o el esqueleto no corresponde al nombre), explícalo.
+Analiza las conexiones asumiendo que celdas adyacentes están enlazadas a través de los símbolos de enlace (-, |, =, ||, ≡). 
+- Verifica si la cadena principal corresponde al nombre "${reto}".
+- Verifica si los radicales están en la posición correcta.
+- Verifica si se cumple la tetravalencia (un carbono 'C' debe tener 4 enlaces en total sumando hidrógenos y enlaces a otros carbonos). 
 
-Devuelve un mensaje directo para el estudiante (máx 5 oraciones).
+Si es correcta (estructuralmente, no importa si rotó la molécula entera mientras sea la misma IUPAC), felicítalo con entusiasmo.
+Si es incorrecta, indícale amablemente su error (por ejemplo, "El carbono en la fila 3 columna 4 tiene 5 enlaces", o "Te faltó el doble enlace"). Sé breve y conciso (máximo 4 oraciones). No uses formato Markdown complejo en tu respuesta.
 `;
 
             const apiKey = getApiKey();
@@ -377,7 +367,7 @@ Devuelve un mensaje directo para el estudiante (máx 5 oraciones).
 
             } catch (error) {
                 console.error("Error IA:", error);
-                alert("Hubo un error de conexión con la IA evaluadora.");
+                alert("Hubo un error de conexión con la IA evaluadora. Revisa tu conexión a internet.");
             } finally {
                 document.getElementById('overlay-loading').style.display = 'none';
                 document.getElementById('btn-evaluar').disabled = false;
