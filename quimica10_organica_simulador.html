@@ -27,31 +27,30 @@
                 radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.08), transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(58, 123, 213, 0.08), transparent 25%);
             background-attachment: fixed;
-            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+            display: flex; flex-direction: column; align-items: center; padding: 20px;
         }
 
-        .nav-superior { width: 100%; max-width: 1000px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-superior { width: 100%; max-width: 1400px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .btn-volver { color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
 
+        /* Contenedor expandido para aprovechar la pantalla */
         .contenedor {
-            width: 100%; max-width: 1000px;
+            width: 100%; max-width: 1400px; 
             background: var(--color-tarjeta); backdrop-filter: blur(15px);
             border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            padding: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             margin-bottom: 40px;
         }
 
-        h1 { font-size: 2.5rem; text-align: center; margin-bottom: 30px; background: -webkit-linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        h2 { font-size: 1.8rem; border-bottom: 2px solid rgba(0, 210, 255, 0.2); padding-bottom: 10px; color: var(--color-primario); margin-bottom: 20px; margin-top: 30px;}
-        p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; color: #cbd5e1; }
+        h1 { font-size: 2.5rem; text-align: center; margin-bottom: 20px; background: -webkit-linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p { font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px; color: #cbd5e1; text-align: center;}
 
         /* SIMULADOR V2 UI */
         .toolbar {
-            display: flex; flex-wrap: wrap; gap: 10px; background: rgba(15, 23, 42, 0.9);
+            display: flex; flex-wrap: wrap; gap: 8px; background: rgba(15, 23, 42, 0.9);
             padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1);
-            align-items: center;
-            justify-content: center;
+            align-items: center; justify-content: center;
         }
         
         .toolbar-group {
@@ -65,45 +64,50 @@
             min-width: 40px; height: 40px; border-radius: 8px; cursor: grab; display: flex; justify-content: center; align-items: center;
             font-size: 1.1rem; font-weight: bold; transition: 0.2s; user-select: none; padding: 0 10px;
         }
-        .tool-btn:hover { background: rgba(0, 210, 255, 0.2); border-color: var(--color-primario); }
-        .tool-btn:active { cursor: grabbing; }
+        .tool-btn:hover { background: rgba(0, 210, 255, 0.2); border-color: var(--color-primario); transform: scale(1.05); }
+        .tool-btn:active { cursor: grabbing; transform: scale(0.95); }
 
-        /* Cuadrícula basada en celdas (Cell-based grid) */
+        /* Cuadrícula basada en celdas (Cell-based grid) - Más pequeña y ancha */
         .pizarra-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 2px;
-            background: rgba(255,255,255,0.1); /* Color de la línea del grid */
-            padding: 2px;
+            grid-template-columns: repeat(20, 1fr); /* 20 columnas */
+            gap: 1px;
+            background: rgba(255,255,255,0.1);
+            padding: 1px;
             border-radius: 10px;
             border: 2px solid var(--color-primario);
             margin-bottom: 20px;
             overflow-x: auto;
+            max-height: 60vh;
+            overflow-y: auto;
         }
 
         .celda-grid {
             background: rgba(15, 23, 42, 0.8);
             aspect-ratio: 1; /* Cuadrados perfectos */
-            min-width: 45px;
+            min-width: 32px; /* Celdas más pequeñas */
             display: flex; justify-content: center; align-items: center;
             position: relative;
         }
         .celda-grid:hover { background: rgba(0, 210, 255, 0.1); }
-        .celda-grid.drag-over { background: rgba(0, 210, 255, 0.3); border: 2px dashed var(--color-primario); }
+        .celda-grid.drag-over { background: rgba(0, 210, 255, 0.3); border: 1px dashed var(--color-primario); }
 
         .celda-input {
             width: 100%; height: 100%;
             background: transparent; border: none;
-            color: #fff; font-size: 1.2rem; font-weight: bold; font-family: monospace;
+            color: #fff; font-size: 1rem; font-weight: bold; font-family: monospace;
             text-align: center; outline: none;
             padding: 0; margin: 0;
+            transition: 0.1s;
         }
+        .celda-input:focus { background: rgba(0, 210, 255, 0.15); box-shadow: inset 0 0 5px var(--color-primario); }
         
-        /* Efectos visuales para los enlaces si los escriben directamente */
+        /* Efectos visuales para los enlaces */
         .celda-input[value="-"], .celda-input[value="—"] { color: #f59e0b; }
         .celda-input[value="|"] { color: #f59e0b; }
         .celda-input[value="="] { color: #a855f7; }
         .celda-input[value="||"] { color: #a855f7; }
+        .celda-input[value="≡"] { color: #10b981; }
         
         .btn {
             background: linear-gradient(135deg, var(--color-primario), var(--color-secundario)); color: #fff;
@@ -135,11 +139,10 @@
 
     <main class="contenedor">
         <h1>Simulador de Moléculas Pro</h1>
-        <p>Arrastra los elementos desde la barra hacia los cuadritos, o dale clic a cualquier cuadrito y <strong>escribe directamente</strong> usando tu teclado (ej. CH3, -, =).<br>
-        <em style="color:var(--color-primario); font-size: 0.9rem;">Truco: Si arrastras una C y luego una H al mismo cuadro, ¡se fusionan automáticamente!</em></p>
+        <p>Selecciona una casilla y escribe con tu teclado, o dale <strong>clic a un botón de la barra</strong> para que el elemento aparezca en la casilla seleccionada. También puedes arrastrarlos y fusionar átomos (ej. C + H + 3 = CH₃).</p>
 
-        <div style="background: rgba(0, 210, 255, 0.1); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 210, 255, 0.3); margin-bottom: 20px;">
-            <h3 style="color: var(--color-primario); margin-bottom: 10px;">Tu Reto Actual:</h3>
+        <div style="background: rgba(0, 210, 255, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 210, 255, 0.3); margin-bottom: 20px;">
+            <h3 style="color: var(--color-primario); margin-bottom: 10px; text-align: center; font-size: 1.2rem;">Tu Reto Actual:</h3>
             <div style="font-size: 2rem; font-family: monospace; font-weight: bold; color: #fff; text-align: center;" id="reto-nombre">2-metil-1-buteno</div>
             <button class="btn" style="padding: 5px 15px; font-size: 0.9rem; margin-top: 15px; display: block; margin-left: auto; margin-right: auto;" onclick="generarRetoAleatorio()">Cambiar Reto</button>
         </div>
@@ -175,7 +178,7 @@
 
         <!-- CUADRÍCULA -->
         <div class="pizarra-grid" id="lienzo">
-            <!-- Se generará vía JS (12x12) -->
+            <!-- Se generará vía JS (15 filas x 20 columnas para más espacio) -->
         </div>
 
         <button class="btn" style="width: 100%; font-size: 1.2rem; padding: 15px;" id="btn-evaluar" onclick="evaluarConIA()"><i class="fa-solid fa-robot"></i> Evaluar mi Molécula con IA</button>
@@ -194,21 +197,46 @@
     <!-- PANTALLA DE CARGA -->
     <div id="overlay-loading">
         <div class="spinner"></div>
-        <div style="color: #fff; font-size: 1.2rem; text-align: center; max-width: 80%;">La IA está leyendo tu cuadrícula y comprobando los enlaces de los carbonos...</div>
+        <div style="color: #fff; font-size: 1.2rem; text-align: center; max-width: 80%;">La IA está leyendo tu cuadrícula y comprobando los enlaces...</div>
     </div>
 
     <script>
-        const retos = ["propano", "butano", "2-metilpropano", "eteno", "propeno", "2-buteno", "etino", "2-butino", "2,2-dimetilpropano", "ciclopentano"];
+        // BANCO DE 100 MOLÉCULAS (Alcanos, Alquenos, Alquinos)
+        const retos = [
+            // Alcanos Lineales y Ramificados
+            "metano", "etano", "propano", "butano", "pentano", "hexano", "heptano", "octano", "nonano", "decano",
+            "2-metilpropano", "2-metilbutano", "3-metilpentano", "2,2-dimetilpropano", "2,3-dimetilbutano",
+            "2,4-dimetilpentano", "3-etilpentano", "2,2,4-trimetilpentano", "3-etil-2-metilhexano", "4-propilheptano",
+            "3,3-dimetilpentano", "3,4-dimetilhexano", "2,2,3,3-tetrametilbutano", "3-etil-3-metilpentano", "2-metilhexano",
+            "3-metilheptano", "2,5-dimetilhexano", "2,2-dimetilpentano", "2,3,4-trimetilpentano", "3-etil-2,4-dimetilpentano",
+            "4-etil-2-metilheptano", "5-propilnonano", "4-isopropilheptano", "4-etil-3,4-dimetiloctano", "2-metiloctano",
+            "3-etil-4-metilhexano", "2,3-dimetilpentano", "2,4-dimetilhexano", "3,5-dimetilheptano", "2,2,3-trimetilbutano",
+            // Alquenos
+            "eteno", "propeno", "1-buteno", "2-buteno", "1-penteno", "2-penteno", "1-hexeno", "2-hexeno", "3-hexeno", "1-hepteno",
+            "2-metilpropeno", "2-metil-1-buteno", "2-metil-2-buteno", "3-metil-1-buteno", "2,3-dimetil-2-buteno",
+            "1,3-butadieno", "1,4-pentadieno", "2-metil-1,3-butadieno", "3-metil-1-penteno", "4-metil-2-penteno",
+            "2-etil-1-buteno", "3,3-dimetil-1-buteno", "2,4-dimetil-2-penteno", "3-etil-2-penteno", "1,3,5-hexatrieno",
+            "1-octeno", "2-noneno", "3-deceno", "4-metil-1-hexeno", "2,3-dimetil-1-penteno",
+            "4,4-dimetil-2-penteno", "3-etil-3-hexeno", "2,5-dimetil-3-hexeno", "2-metil-1,4-pentadieno", "1,5-hexadieno",
+            // Alquinos
+            "etino", "propino", "1-butino", "2-butino", "1-pentino", "2-pentino", "1-hexino", "2-hexino", "3-hexino", "1-heptino",
+            "3-metil-1-butino", "4-metil-1-pentino", "4,4-dimetil-1-pentino", "3,3-dimetil-1-butino", "4-metil-2-pentino",
+            "3-etil-1-pentino", "5-metil-2-hexino", "1,3-butadiino", "1,4-pentadiino", "2,5-dimetil-3-hexino",
+            "1-octino", "2-nonino", "3-decino", "5-etil-3-heptino", "4,5-dimetil-2-hexino",
+            "3-propil-1-hexino", "3-etil-4-metil-1-pentino", "3,3-dietil-1-pentino", "6-metil-3-heptino", "1,5-hexadiino"
+        ];
         
         function generarRetoAleatorio() {
             const reto = retos[Math.floor(Math.random() * retos.length)];
             document.getElementById('reto-nombre').innerText = reto;
         }
 
-        // GENERAR GRID (12x12)
+        // GENERAR GRID (15 filas x 20 columnas)
         const lienzo = document.getElementById('lienzo');
-        const numFilas = 12;
-        const numCols = 12;
+        const numFilas = 15;
+        const numCols = 20;
+
+        let lastFocusedCell = null; // Para guardar la última celda seleccionada
 
         function inicializarPizarra() {
             lienzo.innerHTML = '';
@@ -220,14 +248,16 @@
                     const input = document.createElement('input');
                     input.type = 'text';
                     input.className = 'celda-input';
-                    input.maxLength = 5; // Limita longitud en la celda
+                    input.maxLength = 5;
                     input.dataset.row = r;
                     input.dataset.col = c;
+                    
+                    // Rastrear la última celda enfocada
+                    input.addEventListener('focus', () => { lastFocusedCell = input; });
                     
                     // Asegurar que al salir del input formatee algunos caracteres especiales
                     input.addEventListener('change', (e) => {
                         let val = e.target.value.toUpperCase();
-                        // Reemplazar números por subíndices si el usuario escribió normal
                         val = val.replace(/2/g, "₂").replace(/3/g, "₃").replace(/4/g, "₄");
                         e.target.value = val;
                     });
@@ -250,49 +280,56 @@
                         celda.classList.remove('drag-over');
                         const dataVal = e.dataTransfer.getData('value');
                         if (!dataVal) return;
-
-                        // Lógica de Fusión Inteligente
-                        let currentVal = input.value;
-                        
-                        // Si arrastran un grupo armado (CH3) o un enlace (-), reemplaza si está vacío, o sobrescribe
-                        if(dataVal.length > 1 || ['-','|','=','||','≡'].includes(dataVal)){
-                             // Mapear subíndices visuales si vienen de los botones 
-                            let valAInsertar = dataVal.replace("3", "₃").replace("2", "₂");
-                            input.value = valAInsertar;
-                        } 
-                        // Lógica incremental (C + H + 3)
-                        else {
-                            let appendChar = dataVal;
-                            if (dataVal === '3') appendChar = '₃';
-                            if (dataVal === '2') appendChar = '₂';
-                            input.value = currentVal + appendChar;
-                        }
+                        insertarValorEnInput(input, dataVal);
+                        input.focus(); // Selecciona la celda tras soltar
                     });
                 }
             }
         }
 
-        function limpiarPizarra() {
-            document.querySelectorAll('.celda-input').forEach(inp => inp.value = '');
+        function insertarValorEnInput(input, dataVal) {
+            let currentVal = input.value;
+            // Si arrastran un grupo armado o un enlace, reemplaza si está vacío, o sobrescribe
+            if(dataVal.length > 1 || ['-','|','=','||','≡'].includes(dataVal)){
+                let valAInsertar = dataVal.replace("3", "₃").replace("2", "₂");
+                input.value = valAInsertar;
+            } 
+            // Lógica incremental (C + H + 3)
+            else {
+                let appendChar = dataVal;
+                if (dataVal === '3') appendChar = '₃';
+                if (dataVal === '2') appendChar = '₂';
+                input.value = currentVal + appendChar;
+            }
         }
 
-        // Configurar botones arrastrables
+        function limpiarPizarra() {
+            document.querySelectorAll('.celda-input').forEach(inp => inp.value = '');
+            lastFocusedCell = null;
+        }
+
+        // Configurar botones de la barra de herramientas
         document.querySelectorAll('.tool-btn').forEach(item => {
+            // Drag and Drop support
             item.addEventListener('dragstart', (e) => {
                 e.dataTransfer.setData('value', item.getAttribute('data-value'));
             });
-            // Soporte para clics rápidos (si selecciona una celda y hace clic en el botón, lo inserta)
+            
+            // Clic support: Inserta en la última celda enfocada
             item.addEventListener('click', () => {
-                const activeEl = document.activeElement;
-                if(activeEl && activeEl.classList.contains('celda-input')) {
+                if(lastFocusedCell) {
                     const dataVal = item.getAttribute('data-value');
-                    let valAInsertar = dataVal.replace("3", "₃").replace("2", "₂");
-                    
-                    if(['-','|','=','||','≡'].includes(valAInsertar) || valAInsertar.includes("C")) {
-                        activeEl.value = valAInsertar;
-                    } else {
-                        activeEl.value += valAInsertar;
-                    }
+                    insertarValorEnInput(lastFocusedCell, dataVal);
+                    // Opcional: mover el foco a la celda de la derecha automáticamente
+                    // let col = parseInt(lastFocusedCell.dataset.col);
+                    // let row = parseInt(lastFocusedCell.dataset.row);
+                    // if(col < numCols - 1) {
+                    //     let nextCell = document.querySelector(`.celda-input[data-row="${row}"][data-col="${col+1}"]`);
+                    //     if(nextCell) { nextCell.focus(); }
+                    // }
+                } else {
+                    // Si no hay celda seleccionada, le damos un aviso visual
+                    alert("Primero dale clic a un cuadrito de la pizarra donde quieras insertar el elemento.");
                 }
             });
         });
@@ -325,7 +362,7 @@
             });
 
             if(estructuraMatriz.length === 0) {
-                alert("La cuadrícula está vacía. Escribe o arrastra los elementos a las casillas para formar la molécula."); return;
+                alert("La cuadrícula está vacía. Escribe o selecciona los elementos en las casillas para formar la molécula."); return;
             }
 
             document.getElementById('overlay-loading').style.display = 'flex';
