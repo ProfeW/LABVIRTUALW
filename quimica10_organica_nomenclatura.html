@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nomenclatura Básica - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-primario: #00d2ff;
+            --color-secundario: #3a7bd5;
+            --color-fondo: #0f172a;
+            --color-tarjeta: rgba(30, 41, 59, 0.7);
+            --color-texto: #e2e8f0;
+            --color-acento: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-fondo); color: var(--color-texto);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(58, 123, 213, 0.08), transparent 25%);
+            background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+        }
+
+        .nav-superior { width: 100%; max-width: 1000px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-volver { color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor {
+            width: 100%; max-width: 1000px;
+            background: var(--color-tarjeta); backdrop-filter: blur(15px);
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+        }
+
+        h1 { font-size: 2.5rem; text-align: center; margin-bottom: 30px; background: -webkit-linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid rgba(0, 210, 255, 0.2); padding-bottom: 10px; color: var(--color-primario); margin-bottom: 20px; margin-top: 30px;}
+        p, li { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; color: #cbd5e1; }
+        
+        ul { margin-left: 20px; margin-bottom: 20px; }
+
+        /* Tablas */
+        .tabla-responsive { overflow-x: auto; margin-bottom: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        table { width: 100%; border-collapse: collapse; text-align: center; background: rgba(0,0,0,0.2); }
+        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { background: rgba(0, 210, 255, 0.1); color: var(--color-primario); font-weight: 600; }
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* Evaluación Embebida */
+        .evaluacion-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 15px; padding: 30px; margin-top: 40px; }
+        .evaluacion-box h3 { color: #fff; margin-bottom: 20px; text-align: center; font-size: 1.8rem;}
+        
+        .pregunta { margin-bottom: 25px; }
+        .pregunta p { font-weight: 600; color: var(--color-primario); margin-bottom: 10px; }
+        
+        .opciones label { display: block; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;}
+        .opciones label:hover { background: rgba(255,255,255,0.1); }
+        .opciones input[type="radio"] { margin-right: 10px; }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--color-primario), var(--color-secundario)); color: #fff;
+            border: none; padding: 12px 25px; border-radius: 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; gap: 10px; margin: 0 auto;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3); }
+
+        #resultado-eval { display: none; text-align: center; margin-top: 20px; font-size: 1.2rem; font-weight: 600; padding: 20px; border-radius: 10px; }
+        .correcto { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
+        .incorrecto { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-superior">
+        <a href="quimica10_organica_carbono.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a El Carbono</a>
+        <a href="quimica10_organica_alcanos.html" class="btn-volver">Siguiente: Alcanos <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <main class="contenedor">
+        <h1>Nomenclatura Básica Orgánica</h1>
+
+        <h2>Tipos de Fórmulas</h2>
+        <p>A diferencia de la química inorgánica, en química orgánica es vital conocer la estructura de la molécula, no solo cuántos átomos tiene. Se usan varias formas de representación:</p>
+        <ul>
+            <li><strong>Fórmula Empírica:</strong> Proporción más simple (Ej: benceno C6H6 es CH).</li>
+            <li><strong>Fórmula Molecular:</strong> Número real de átomos (Ej: C2H6).</li>
+            <li><strong>Fórmula Condensada o Semidesarrollada:</strong> Muestra conexiones sin dibujar enlaces (Ej: CH3-CH3).</li>
+            <li><strong>Fórmula Estructural o Desarrollada:</strong> Muestra todos los átomos y todos los enlaces.</li>
+            <li><strong>Líneas o Esqueleto:</strong> Los vértices y extremos representan carbonos, se omiten hidrógenos.</li>
+        </ul>
+
+        <h2>Clasificación por tipo de enlace</h2>
+        <p>Los compuestos orgánicos base (hidrocarburos) se nombran según el tipo de enlaces que presentan:</p>
+        <ul>
+            <li><strong>Alcanos:</strong> Solo enlaces simples (Sufijo: <em>-ano</em>). Ej: Metano.</li>
+            <li><strong>Alquenos:</strong> Al menos un enlace doble (Sufijo: <em>-eno</em>). Ej: Eteno.</li>
+            <li><strong>Alquinos:</strong> Al menos un enlace triple (Sufijo: <em>-ino</em>). Ej: Etino.</li>
+        </ul>
+
+        <h2>Tabla de Prefijos (IUPAC)</h2>
+        <p>Para nombrar la cantidad de carbonos en la cadena principal, la IUPAC establece los siguientes prefijos:</p>
+        
+        <div class="tabla-responsive">
+            <table>
+                <tr><th># Carbonos</th><th>Prefijo</th><th># Carbonos</th><th>Prefijo</th></tr>
+                <tr><td>1</td><td>Met-</td><td>11</td><td>Undec-</td></tr>
+                <tr><td>2</td><td>Et-</td><td>12</td><td>Dodec-</td></tr>
+                <tr><td>3</td><td>Prop-</td><td>13</td><td>Tridec-</td></tr>
+                <tr><td>4</td><td>But-</td><td>14</td><td>Tetradec-</td></tr>
+                <tr><td>5</td><td>Pent-</td><td>15</td><td>Pentadec-</td></tr>
+                <tr><td>6</td><td>Hex-</td><td>16</td><td>Hexadec-</td></tr>
+                <tr><td>7</td><td>Hept-</td><td>17</td><td>Heptadec-</td></tr>
+                <tr><td>8</td><td>Oct-</td><td>18</td><td>Octadec-</td></tr>
+                <tr><td>9</td><td>Non-</td><td>19</td><td>Nonadec-</td></tr>
+                <tr><td>10</td><td>Dec-</td><td>20</td><td>Eicos-</td></tr>
+            </table>
+        </div>
+
+        <p><strong>Reglas Generales de Escritura:</strong> 
+        Los números se separan de otros números mediante comas (<strong>,</strong>).
+        Los números se separan de las letras mediante guiones (<strong>-</strong>).</p>
+
+        <!-- EVALUACIÓN EMBEBIDA -->
+        <div class="evaluacion-box" id="evaluacion">
+            <h3><i class="fa-solid fa-clipboard-check" style="color: var(--color-primario);"></i> Evaluación: Nomenclatura Básica</h3>
+            
+            <form id="form-evaluacion">
+                <div class="pregunta" id="q1">
+                    <p>1. ¿Qué tipo de fórmula muestra la conectividad sin dibujar las líneas de los enlaces (ej. CH3CH2CH3)?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p1" value="a"> a) Fórmula Molecular</label>
+                        <label><input type="radio" name="p1" value="b"> b) Fórmula Condensada</label>
+                        <label><input type="radio" name="p1" value="c"> c) Fórmula de Líneas</label>
+                        <label><input type="radio" name="p1" value="d"> d) Fórmula Empírica</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="q2">
+                    <p>2. Si un compuesto orgánico tiene 7 átomos de carbono en su cadena principal, ¿qué prefijo usaremos?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p2" value="a"> a) Non-</label>
+                        <label><input type="radio" name="p2" value="b"> b) Hex-</label>
+                        <label><input type="radio" name="p2" value="c"> c) Hept-</label>
+                        <label><input type="radio" name="p2" value="d"> d) Oct-</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="q3">
+                    <p>3. ¿Qué terminación (sufijo) se usa para compuestos que tienen al menos un enlace triple?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p3" value="a"> a) -ano</label>
+                        <label><input type="radio" name="p3" value="b"> b) -eno</label>
+                        <label><input type="radio" name="p3" value="c"> c) -ino</label>
+                        <label><input type="radio" name="p3" value="d"> d) -ilo</label>
+                    </div>
+                </div>
+
+                <button type="button" class="btn" onclick="calificar()"><i class="fa-solid fa-paper-plane"></i> Enviar Respuestas</button>
+            </form>
+
+            <div id="resultado-eval"></div>
+        </div>
+    </main>
+
+    <script>
+        function calificar() {
+            let puntaje = 0;
+            const respuestas = { p1: 'b', p2: 'c', p3: 'c' };
+            const total = 3;
+
+            for (let p in respuestas) {
+                const seleccion = document.querySelector(`input[name="${p}"]:checked`);
+                if (seleccion) {
+                    if (seleccion.value === respuestas[p]) {
+                        puntaje++;
+                        seleccion.parentElement.style.color = '#10b981';
+                    } else {
+                        seleccion.parentElement.style.color = '#ef4444';
+                    }
+                }
+            }
+
+            const resDiv = document.getElementById('resultado-eval');
+            resDiv.style.display = 'block';
+            
+            if (puntaje === total) {
+                resDiv.className = 'correcto';
+                resDiv.innerHTML = `<i class="fa-solid fa-check-circle"></i> ¡Excelente! Has respondido correctamente (${puntaje}/${total}). Estás listo para avanzar.`;
+            } else {
+                resDiv.className = 'incorrecto';
+                resDiv.innerHTML = `<i class="fa-solid fa-times-circle"></i> Obtuviste ${puntaje}/${total}. Revisa la teoría e inténtalo de nuevo.`;
+            }
+        }
+    </script>
+</body>
+</html>

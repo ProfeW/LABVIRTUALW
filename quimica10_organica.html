@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Química Orgánica - 10°</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-primario: #00d2ff;
+            --color-secundario: #3a7bd5;
+            --color-fondo: #0f172a;
+            --color-tarjeta: rgba(30, 41, 59, 0.7);
+            --color-texto: #e2e8f0;
+            --color-acento: #f59e0b;
+            --color-exito: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(58, 123, 213, 0.08), transparent 25%);
+            background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+            scroll-behavior: smooth;
+        }
+
+        /* Nav */
+        .nav-tabs {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px;
+            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px);
+            padding: 15px 25px; border-radius: 50px; border: 1px solid rgba(0, 210, 255, 0.2);
+            position: sticky; top: 20px; z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .nav-tab {
+            background: transparent; border: none; color: #94a3b8; font-size: 1rem;
+            font-weight: 600; cursor: pointer; transition: 0.3s; padding: 8px 16px; border-radius: 20px;
+        }
+        .nav-tab.active, .nav-tab:hover {
+            color: #fff; background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+        }
+
+        /* Contenedores */
+        .seccion {
+            width: 100%; max-width: 1000px;
+            background: var(--color-tarjeta); backdrop-filter: blur(15px);
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px; margin-bottom: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            display: none; animation: fadeIn 0.5s ease-out forwards;
+        }
+        .seccion.activa { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Tipografía */
+        h1, h2, h3 { color: #fff; margin-bottom: 20px; }
+        h1 { font-size: 2.5rem; text-align: center; background: -webkit-linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid rgba(0, 210, 255, 0.2); padding-bottom: 10px; color: var(--color-primario);}
+        p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; color: #cbd5e1; }
+        ul { margin-left: 20px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; line-height: 1.6; }
+
+        /* Tablas */
+        .tabla-responsive { overflow-x: auto; margin-bottom: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: rgba(0,0,0,0.2); }
+        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { background: rgba(0, 210, 255, 0.1); color: var(--color-primario); font-weight: 600; }
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* Alertas/Info */
+        .info-box { background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--color-acento); padding: 20px; border-radius: 8px; margin-bottom: 20px;}
+        .info-box h4 { color: var(--color-acento); margin-bottom: 10px;}
+
+        /* Botones Generales */
+        .btn {
+            background: linear-gradient(135deg, var(--color-primario), var(--color-secundario)); color: #fff;
+            border: none; padding: 12px 25px; border-radius: 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3); }
+
+        /* SIMULADOR UI */
+        .pizarra-simulador {
+            background: rgba(0, 0, 0, 0.5); border: 2px dashed rgba(0, 210, 255, 0.3);
+            border-radius: 15px; min-height: 400px; position: relative; margin-bottom: 20px;
+            overflow: hidden;
+            /* Cuadrícula invisible pero activa matemáticamente en JS */
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .toolbar {
+            display: flex; flex-wrap: wrap; gap: 10px; background: rgba(15, 23, 42, 0.9);
+            padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .tool-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;
+            width: 45px; height: 45px; border-radius: 8px; cursor: grab; display: flex; justify-content: center; align-items: center;
+            font-size: 1.2rem; font-weight: bold; transition: 0.2s;
+        }
+        .tool-btn:hover { background: rgba(0, 210, 255, 0.2); border-color: var(--color-primario); }
+        .elemento-lienzo {
+            position: absolute; cursor: grab; font-weight: bold; font-size: 1.2rem; color: #fff;
+            display: flex; justify-content: center; align-items: center; width: 40px; height: 40px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.8);
+        }
+        .enlace-lienzo {
+            position: absolute; background: #fff; box-shadow: 0 0 3px #000;
+        }
+        .enlace-lienzo.simple { height: 4px; border-radius: 2px; }
+        .enlace-lienzo.doble { height: 10px; border-top: 3px solid #fff; border-bottom: 3px solid #fff; background: transparent; }
+        .enlace-lienzo.triple { height: 16px; border-top: 3px solid #fff; border-bottom: 3px solid #fff; background: #fff; background-clip: content-box; padding: 4px 0;}
+
+        /* EVALUADOR UI */
+        .form-grupo { margin-bottom: 20px; }
+        .form-grupo label { display: block; margin-bottom: 8px; color: var(--color-primario); font-weight: 600;}
+        .form-grupo input { 
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3); color: #fff; font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-tabs">
+        <button class="nav-tab activa" onclick="mostrarSeccion('teoria')"><i class="fa-solid fa-book"></i> Teoría</button>
+        <button class="nav-tab" onclick="mostrarSeccion('paso-a-paso')"><i class="fa-solid fa-list-ol"></i> Paso a Paso</button>
+        <button class="nav-tab" onclick="mostrarSeccion('simulador')"><i class="fa-solid fa-flask"></i> Simulador</button>
+        <button class="nav-tab" onclick="mostrarSeccion('evaluacion')"><i class="fa-solid fa-file-signature"></i> Evaluación</button>
+    </div>
+
+    <!-- SECCIÓN: TEORÍA -->
+    <div id="teoria" class="seccion activa">
+        <h1>Introducción a la Química Orgánica</h1>
+        
+        <p>La <strong>química orgánica</strong> es la rama de la química que se dedica al estudio de los compuestos que contienen <strong>carbono</strong>, especialmente aquellos que forman enlaces con el hidrógeno. Históricamente, se pensaba que estos compuestos solo podían ser producidos por organismos vivos. En contraste, la química inorgánica estudia el resto de los compuestos.</p>
+        
+        <div class="info-box">
+            <h4><i class="fa-solid fa-clock-rotate-left"></i> Breve Reseña</h4>
+            <p style="margin-bottom:0">En 1828, <strong>Friedrich Wöhler</strong> logró sintetizar urea (un compuesto orgánico) a partir de cianato de amonio (un compuesto inorgánico), demostrando que no se necesitaba una "fuerza vital" para crear compuestos orgánicos.</p>
+        </div>
+
+        <h2>Bioelementos</h2>
+        <p>Los principales elementos que forman los compuestos orgánicos son el Carbono (C), el Hidrógeno (H), el Oxígeno (O) y el Nitrógeno (N), a los que a veces se suma el Azufre (S) y Fósforo (P) - CHONPS. Son esenciales para la vida.</p>
+
+        <h2>El Carbono y sus Formas Alotrópicas</h2>
+        <p>El carbono tiene la capacidad de formar <strong>cuatro enlaces</strong> (catenación), creando cadenas largas y anillos. En la naturaleza se presenta en varias formas alotrópicas:</p>
+        
+        <div class="tabla-responsive">
+            <table>
+                <tr>
+                    <th>Forma</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><strong>Diamante</strong></td>
+                    <td>Estructura tridimensional rígida y transparente, conocida por su gran dureza.</td>
+                </tr>
+                <tr>
+                    <td><strong>Grafito</strong></td>
+                    <td>Estructura laminar en capas, oscura y blanda, conductora de electricidad.</td>
+                </tr>
+                <tr>
+                    <td><strong>Carbono Amorfo</strong></td>
+                    <td>Se encuentra en carbón vegetal y hollín, sin estructura cristalina definida.</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>Hibridación del Carbono</h2>
+        <ul>
+            <li><strong>sp³ (Tetraédrica):</strong> Cuatro enlaces simples.</li>
+            <li><strong>sp² (Trigonal):</strong> Un enlace doble y dos simples.</li>
+            <li><strong>sp (Diagonal):</strong> Un enlace triple y un simple (o dos dobles).</li>
+        </ul>
+        
+        <br>
+        <button class="btn" onclick="mostrarSeccion('paso-a-paso')" style="width: 100%; justify-content: center;">Ir a Nomenclatura Paso a Paso <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- SECCIÓN: PASO A PASO -->
+    <div id="paso-a-paso" class="seccion">
+        <h1>Nomenclatura Interactiva</h1>
+        <p>Aprende a nombrar alcanos, alquenos y alquinos paso a paso.</p>
+        <!-- Aquí irá la UI interactiva -->
+        <div style="text-align: center; padding: 40px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.2);">
+            <i class="fa-solid fa-hammer" style="font-size: 3rem; color: var(--color-primario); margin-bottom: 20px;"></i>
+            <h3>Módulo en Construcción</h3>
+            <p>Pronto podrás ver el simulador de pasos aquí.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN: SIMULADOR -->
+    <div id="simulador" class="seccion">
+        <h1>Simulador de Moléculas</h1>
+        <p>Dibuja la estructura de los compuestos usando la barra de herramientas. Arrastra los elementos a la cuadrícula.</p>
+        
+        <div class="toolbar" id="toolbar">
+            <div class="tool-btn" draggable="true" data-type="atom" data-symbol="C">C</div>
+            <div class="tool-btn" draggable="true" data-type="atom" data-symbol="H">H</div>
+            <div class="tool-btn" draggable="true" data-type="atom" data-symbol="O">O</div>
+            <div class="tool-btn" style="width: 2px; background: rgba(255,255,255,0.2); margin: 0 10px;"></div>
+            <div class="tool-btn" draggable="true" data-type="bond" data-bond="simple">—</div>
+            <div class="tool-btn" draggable="true" data-type="bond" data-bond="doble">=</div>
+            <div class="tool-btn" draggable="true" data-type="bond" data-bond="triple">≡</div>
+            <div class="tool-btn" style="width: 2px; background: rgba(255,255,255,0.2); margin: 0 10px;"></div>
+            <div class="tool-btn" draggable="true" data-type="sub" data-num="2" style="font-size:0.9rem">₂</div>
+            <div class="tool-btn" draggable="true" data-type="sub" data-num="3" style="font-size:0.9rem">₃</div>
+            
+            <button class="btn" style="margin-left: auto; padding: 5px 15px; font-size: 0.9rem; background: #e74c3c;" onclick="limpiarPizarra()"><i class="fa-solid fa-trash"></i> Limpiar</button>
+        </div>
+
+        <div class="pizarra-simulador" id="lienzo" ondrop="soltarEnLienzo(event)" ondragover="permitirSoltar(event)">
+            <!-- Elementos se dibujarán aquí -->
+        </div>
+
+        <div class="form-grupo">
+            <label>¿Qué molécula dibujaste?</label>
+            <input type="text" id="nombre-molecula-eval" placeholder="Ej: 2-metilbutano">
+        </div>
+        <button class="btn" style="width: 100%; justify-content: center;" onclick="evaluarMolecula()"><i class="fa-solid fa-robot"></i> Evaluar con IA</button>
+    </div>
+
+    <!-- SECCIÓN: EVALUACIÓN -->
+    <div id="evaluacion" class="seccion">
+        <h1>Banco de Preguntas</h1>
+        <p>Pondremos a prueba tus conocimientos con 10 preguntas aleatorias.</p>
+        <!-- Cuestionario UI -->
+        <div style="text-align: center; padding: 40px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.2);">
+            <i class="fa-solid fa-hammer" style="font-size: 3rem; color: var(--color-primario); margin-bottom: 20px;"></i>
+            <h3>Módulo en Construcción</h3>
+            <p>Pronto podrás realizar tu evaluación aquí.</p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarSeccion(id) {
+            document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('activa'));
+            document.getElementById(id).classList.add('activa');
+            event.currentTarget.classList.add('activa');
+        }
+
+        // Lógica DRAG & DROP Simulador
+        let draggedElementData = null;
+
+        document.querySelectorAll('.tool-btn[draggable="true"]').forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                draggedElementData = {
+                    type: item.getAttribute('data-type'),
+                    symbol: item.getAttribute('data-symbol'),
+                    bond: item.getAttribute('data-bond'),
+                    num: item.getAttribute('data-num')
+                };
+                e.dataTransfer.setData('text/plain', 'simulador-item');
+            });
+        });
+
+        function permitirSoltar(e) { e.preventDefault(); }
+
+        function soltarEnLienzo(e) {
+            e.preventDefault();
+            if (!draggedElementData) return;
+
+            const rect = e.target.getBoundingClientRect();
+            // Calcular grid de 40x40 para snap
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+            
+            x = Math.round(x / 40) * 40;
+            y = Math.round(y / 40) * 40;
+
+            const el = document.createElement('div');
+            el.style.left = `${x}px`;
+            el.style.top = `${y}px`;
+
+            if (draggedElementData.type === 'atom') {
+                el.className = 'elemento-lienzo';
+                el.innerText = draggedElementData.symbol;
+            } else if (draggedElementData.type === 'bond') {
+                el.className = `enlace-lienzo ${draggedElementData.bond}`;
+                el.style.width = '40px';
+                // Click para rotar
+                el.dataset.horizontal = "true";
+                el.onclick = function() {
+                    if(this.dataset.horizontal === "true") {
+                        this.style.width = '10px'; this.style.height = '40px';
+                        this.dataset.horizontal = "false";
+                    } else {
+                        this.style.width = '40px'; this.style.height = '10px';
+                        this.dataset.horizontal = "true";
+                    }
+                };
+            } else if (draggedElementData.type === 'sub') {
+                el.className = 'elemento-lienzo';
+                el.style.fontSize = '0.9rem';
+                el.innerText = `_${draggedElementData.num}`;
+            }
+
+            document.getElementById('lienzo').appendChild(el);
+            draggedElementData = null;
+        }
+
+        function limpiarPizarra() {
+            document.getElementById('lienzo').innerHTML = '';
+        }
+
+        function evaluarMolecula() {
+            alert('En desarrollo: Aquí la IA compilará el HTML del grid y evaluará la molécula dibujada respecto al nombre indicado.');
+        }
+    </script>
+</body>
+</html>

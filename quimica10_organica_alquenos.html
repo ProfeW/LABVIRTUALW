@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Alquenos - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-primario: #00d2ff;
+            --color-secundario: #3a7bd5;
+            --color-fondo: #0f172a;
+            --color-tarjeta: rgba(30, 41, 59, 0.7);
+            --color-texto: #e2e8f0;
+            --color-acento: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-fondo); color: var(--color-texto);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(58, 123, 213, 0.08), transparent 25%);
+            background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+        }
+
+        .nav-superior { width: 100%; max-width: 1000px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-volver { color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor {
+            width: 100%; max-width: 1000px;
+            background: var(--color-tarjeta); backdrop-filter: blur(15px);
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+        }
+
+        h1 { font-size: 2.5rem; text-align: center; margin-bottom: 30px; background: -webkit-linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid rgba(0, 210, 255, 0.2); padding-bottom: 10px; color: var(--color-primario); margin-bottom: 20px; margin-top: 30px;}
+        p, li { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; color: #cbd5e1; }
+        ul { margin-left: 20px; margin-bottom: 20px; }
+
+        .simulador-pasos { background: rgba(0,0,0,0.3); padding: 30px; border-radius: 15px; border: 1px dashed rgba(0, 210, 255, 0.4); text-align: center;}
+        
+        .estructura-display {
+            font-family: 'Courier New', monospace; font-size: 1.8rem; letter-spacing: 2px;
+            margin: 30px 0; min-height: 80px; display: flex; justify-content: center; align-items: center;
+        }
+        
+        .btn-controles { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;}
+        
+        .btn {
+            background: linear-gradient(135deg, var(--color-primario), var(--color-secundario)); color: #fff;
+            border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
+        .btn:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; color: #999;}
+        
+        .paso-descripcion { font-size: 1.1rem; color: var(--color-acento); font-weight: 600; min-height: 30px; }
+        .resultado-nombre { font-size: 1.5rem; font-weight: bold; color: #10b981; margin-top: 15px; min-height: 40px;}
+
+        .hl-cadena { color: #f59e0b; text-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
+        .hl-numero { font-size: 0.8rem; color: #00d2ff; vertical-align: super; }
+        .hl-radical { color: #ef4444; font-weight: bold; }
+        .hl-doble { color: #a855f7; font-weight: 900; }
+
+        .evaluacion-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 15px; padding: 30px; margin-top: 40px; }
+        .evaluacion-box h3 { color: #fff; margin-bottom: 20px; text-align: center; font-size: 1.8rem;}
+        .pregunta { margin-bottom: 25px; text-align: left; }
+        .pregunta p { font-weight: 600; color: var(--color-primario); margin-bottom: 10px; }
+        .opciones label { display: block; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;}
+        .opciones label:hover { background: rgba(255,255,255,0.1); }
+        .opciones input[type="radio"] { margin-right: 10px; }
+        #resultado-eval { display: none; text-align: center; margin-top: 20px; font-size: 1.2rem; font-weight: 600; padding: 20px; border-radius: 10px; }
+        .correcto { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
+        .incorrecto { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-superior">
+        <a href="quimica10_organica_alcanos.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Alcanos</a>
+        <a href="quimica10_organica_alquinos.html" class="btn-volver">Siguiente: Alquinos <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <main class="contenedor">
+        <h1>Nomenclatura de Alquenos</h1>
+
+        <h2>¿Qué son los Alquenos?</h2>
+        <p>Los alquenos son hidrocarburos insaturados que contienen al menos un <strong>enlace doble</strong> carbono-carbono. Su terminación o sufijo siempre es <strong>-eno</strong>.</p>
+        <p><strong>Regla de Oro:</strong> El enlace doble manda. La cadena principal DEBE contener el enlace doble, y se empieza a enumerar por el extremo que le dé la posición más baja a dicho enlace (sin importar dónde estén los radicales).</p>
+
+        <div class="simulador-pasos">
+            <h3 style="color: #fff; margin-bottom: 15px;">Práctica Interactiva</h3>
+            <div style="margin-bottom: 15px;">
+                <label style="color:#ccc;">Selecciona un ejemplo: </label>
+                <select id="selector-ejemplo" onchange="cargarEjemplo()" style="padding: 5px; border-radius: 5px; background: #1e293b; color: #fff; border: 1px solid #00d2ff;">
+                    <option value="0">Ejemplo 1 (Lineal corto)</option>
+                    <option value="1">Ejemplo 2 (Doble enlace central)</option>
+                    <option value="2">Ejemplo 3 (Dos dobles enlaces)</option>
+                    <option value="3">Ejemplo 4 (1 Ramificación)</option>
+                    <option value="4">Ejemplo 5 (Múltiples ramificaciones)</option>
+                </select>
+            </div>
+
+            <div class="estructura-display" id="display-estructura"></div>
+            <div class="paso-descripcion" id="desc-paso">Presiona 'Siguiente Paso' para comenzar.</div>
+            <div class="resultado-nombre" id="resultado-nombre"></div>
+
+            <div class="btn-controles" style="margin-top: 20px;">
+                <button class="btn" id="btn-reinicio" onclick="reiniciarPaso()" style="background: #e74c3c;">Reiniciar</button>
+                <button class="btn" id="btn-siguiente" onclick="avanzarPaso()">Siguiente Paso <i class="fa-solid fa-play"></i></button>
+            </div>
+        </div>
+
+        <div class="evaluacion-box" id="evaluacion">
+            <h3><i class="fa-solid fa-clipboard-check" style="color: var(--color-primario);"></i> Evaluación: Alquenos</h3>
+            <form id="form-evaluacion">
+                <div class="pregunta" id="q1">
+                    <p>1. ¿Qué característica principal define a un alqueno?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p1" value="a"> a) Tienen solo enlaces simples.</label>
+                        <label><input type="radio" name="p1" value="b"> b) Tienen al menos un enlace triple.</label>
+                        <label><input type="radio" name="p1" value="c"> c) Tienen al menos un enlace doble.</label>
+                        <label><input type="radio" name="p1" value="d"> d) Son hidrocarburos saturados.</label>
+                    </div>
+                </div>
+                <div class="pregunta" id="q2">
+                    <p>2. Al enumerar la cadena principal en un alqueno ramificado, ¿quién tiene la prioridad?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p2" value="a"> a) El radical más cercano al extremo.</label>
+                        <label><input type="radio" name="p2" value="b"> b) El enlace doble debe tener el número más bajo posible.</label>
+                        <label><input type="radio" name="p2" value="c"> c) Siempre se empieza por la derecha.</label>
+                        <label><input type="radio" name="p2" value="d"> d) El orden alfabético.</label>
+                    </div>
+                </div>
+                <div class="pregunta" id="q3">
+                    <p>3. ¿Cómo se nombra un compuesto lineal de 4 carbonos con un enlace doble en el carbono 1?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p3" value="a"> a) Butano</label>
+                        <label><input type="radio" name="p3" value="b"> b) 2-buteno</label>
+                        <label><input type="radio" name="p3" value="c"> c) 1-butino</label>
+                        <label><input type="radio" name="p3" value="d"> d) 1-buteno</label>
+                    </div>
+                </div>
+                <button type="button" class="btn" onclick="calificar()"><i class="fa-solid fa-paper-plane"></i> Enviar Respuestas</button>
+            </form>
+            <div id="resultado-eval"></div>
+        </div>
+    </main>
+
+    <script>
+        const ejemplos = [
+            {
+                base: "CH2=CH-CH3",
+                paso1: "<span class='hl-cadena'>CH2<span class='hl-doble'>=</span>CH-CH3</span>",
+                paso2: "<span class='hl-cadena'>C<span class='hl-numero'>1</span>H2<span class='hl-doble'>=</span>C<span class='hl-numero'>2</span>H-C<span class='hl-numero'>3</span>H3</span>",
+                paso3: "No hay radicales.",
+                nombre: "Propeno (o 1-propeno)",
+                desc: ["Paso 1: Cadena de 3 carbonos con un enlace doble.", "Paso 2: Enumeramos desde donde está el enlace doble (izquierda).", "Paso 3: Sin radicales.", "Paso 4: Posición del doble enlace (1) + propeno."]
+            },
+            {
+                base: "CH3-CH=CH-CH3",
+                paso1: "<span class='hl-cadena'>CH3-CH<span class='hl-doble'>=</span>CH-CH3</span>",
+                paso2: "<span class='hl-cadena'>C<span class='hl-numero'>1</span>H3-C<span class='hl-numero'>2</span>H<span class='hl-doble'>=</span>C<span class='hl-numero'>3</span>H-C<span class='hl-numero'>4</span>H3</span>",
+                paso3: "No hay radicales.",
+                nombre: "2-buteno",
+                desc: ["Paso 1: Cadena de 4 carbonos.", "Paso 2: Enlace doble en el medio, se puede empezar de cualquier lado.", "Paso 3: No hay radicales.", "Paso 4: Indicamos la posición del doble enlace (2)."]
+            },
+            {
+                base: "CH2=CH-CH=CH2",
+                paso1: "<span class='hl-cadena'>CH2<span class='hl-doble'>=</span>CH-CH<span class='hl-doble'>=</span>CH2</span>",
+                paso2: "<span class='hl-cadena'>C<span class='hl-numero'>1</span>H2<span class='hl-doble'>=</span>C<span class='hl-numero'>2</span>H-C<span class='hl-numero'>3</span>H<span class='hl-doble'>=</span>C<span class='hl-numero'>4</span>H2</span>",
+                paso3: "Doble enlace en C1 y C3.",
+                nombre: "1,3-butadieno",
+                desc: ["Paso 1: Cadena de 4 carbonos con dos dobles enlaces.", "Paso 2: Enumeramos.", "Paso 3: Identificamos posiciones de ambos dobles enlaces (1 y 3).", "Paso 4: Al tener 2 dobles enlaces, usamos el sufijo -dieno."]
+            },
+            {
+                base: "CH2=C(CH3)-CH2-CH3",
+                paso1: "<span class='hl-cadena'>CH2<span class='hl-doble'>=</span>C</span>(CH3)<span class='hl-cadena'>-CH2-CH3</span>",
+                paso2: "<span class='hl-cadena'>C<span class='hl-numero'>1</span>H2<span class='hl-doble'>=</span>C<span class='hl-numero'>2</span></span>(CH3)<span class='hl-cadena'>-C<span class='hl-numero'>3</span>H2-C<span class='hl-numero'>4</span>H3</span>",
+                paso3: "Radical en C2: <span class='hl-radical'>-CH3 (Metil)</span>",
+                nombre: "2-metil-1-buteno",
+                desc: ["Paso 1: La cadena que contiene el doble enlace tiene 4 carbonos.", "Paso 2: Numeramos de izq a der para que el doble enlace sea el 1.", "Paso 3: Identificamos el Metil en posición 2.", "Paso 4: Posición del radical, nombre del radical, posición del enlace, cadena (-eno)."]
+            },
+            {
+                base: "CH3-C(CH3)=C(CH2CH3)-CH3",
+                paso1: "Cadena más larga con el enlace doble es de 5 carbonos (horizontal).",
+                paso2: "C1 (izq) a C5 (der). El enlace doble queda en posición 2.",
+                paso3: "Radicales: <span class='hl-radical'>Metil en C2</span> y <span class='hl-radical'>Etil en C3</span>.",
+                nombre: "3-etil-2-metil-2-penteno",
+                desc: ["Paso 1: Cadena principal de 5 carbonos.", "Paso 2: Numeramos de izq a der para darle el #2 al doble enlace.", "Paso 3: Identificamos radicales en C2 y C3.", "Paso 4: Orden alfabético de radicales (Etil primero) y luego la cadena (-eno)."]
+            }
+        ];
+
+        let pasoActual = 0;
+        let idActual = 0;
+
+        function cargarEjemplo() {
+            idActual = parseInt(document.getElementById('selector-ejemplo').value);
+            reiniciarPaso();
+        }
+
+        function reiniciarPaso() {
+            pasoActual = 0;
+            document.getElementById('display-estructura').innerHTML = ejemplos[idActual].base;
+            document.getElementById('desc-paso').innerText = "Presiona 'Siguiente Paso' para comenzar a nombrar.";
+            document.getElementById('resultado-nombre').innerText = "";
+            document.getElementById('btn-siguiente').disabled = false;
+        }
+
+        function avanzarPaso() {
+            pasoActual++;
+            const ej = ejemplos[idActual];
+            if (pasoActual === 1) {
+                document.getElementById('display-estructura').innerHTML = ej.paso1;
+                document.getElementById('desc-paso').innerText = ej.desc[0];
+            } else if (pasoActual === 2) {
+                document.getElementById('display-estructura').innerHTML = ej.paso2;
+                document.getElementById('desc-paso').innerText = ej.desc[1];
+            } else if (pasoActual === 3) {
+                document.getElementById('display-estructura').innerHTML = ej.paso2 + "<br><br><span style='font-size:1.2rem'>" + ej.paso3 + "</span>";
+                document.getElementById('desc-paso').innerText = ej.desc[2];
+            } else if (pasoActual === 4) {
+                document.getElementById('desc-paso').innerText = ej.desc[3];
+                document.getElementById('resultado-nombre').innerText = ej.nombre;
+                document.getElementById('btn-siguiente').disabled = true;
+            }
+        }
+
+        cargarEjemplo();
+
+        function calificar() {
+            let puntaje = 0;
+            const respuestas = { p1: 'c', p2: 'b', p3: 'd' };
+            const total = 3;
+
+            for (let p in respuestas) {
+                const seleccion = document.querySelector(`input[name="${p}"]:checked`);
+                if (seleccion) {
+                    if (seleccion.value === respuestas[p]) { puntaje++; seleccion.parentElement.style.color = '#10b981'; } 
+                    else { seleccion.parentElement.style.color = '#ef4444'; }
+                }
+            }
+
+            const resDiv = document.getElementById('resultado-eval');
+            resDiv.style.display = 'block';
+            if (puntaje === total) {
+                resDiv.className = 'correcto';
+                resDiv.innerHTML = `<i class="fa-solid fa-check-circle"></i> ¡Excelente! (${puntaje}/${total}).`;
+            } else {
+                resDiv.className = 'incorrecto';
+                resDiv.innerHTML = `<i class="fa-solid fa-times-circle"></i> Obtuviste ${puntaje}/${total}. Inténtalo de nuevo.`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Alcanos - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-primario: #00d2ff;
+            --color-secundario: #3a7bd5;
+            --color-fondo: #0f172a;
+            --color-tarjeta: rgba(30, 41, 59, 0.7);
+            --color-texto: #e2e8f0;
+            --color-acento: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-fondo); color: var(--color-texto);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(58, 123, 213, 0.08), transparent 25%);
+            background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+        }
+
+        .nav-superior { width: 100%; max-width: 1000px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-volver { color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor {
+            width: 100%; max-width: 1000px;
+            background: var(--color-tarjeta); backdrop-filter: blur(15px);
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+        }
+
+        h1 { font-size: 2.5rem; text-align: center; margin-bottom: 30px; background: -webkit-linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid rgba(0, 210, 255, 0.2); padding-bottom: 10px; color: var(--color-primario); margin-bottom: 20px; margin-top: 30px;}
+        p, li { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; color: #cbd5e1; }
+        ul { margin-left: 20px; margin-bottom: 20px; }
+
+        /* Contenedor del Simulador Paso a Paso */
+        .simulador-pasos { background: rgba(0,0,0,0.3); padding: 30px; border-radius: 15px; border: 1px dashed rgba(0, 210, 255, 0.4); text-align: center;}
+        
+        .estructura-display {
+            font-family: 'Courier New', monospace; font-size: 1.8rem; letter-spacing: 2px;
+            margin: 30px 0; min-height: 80px; display: flex; justify-content: center; align-items: center;
+        }
+        
+        .btn-controles { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;}
+        
+        .btn {
+            background: linear-gradient(135deg, var(--color-primario), var(--color-secundario)); color: #fff;
+            border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
+        .btn:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; color: #999;}
+        
+        .paso-descripcion { font-size: 1.1rem; color: var(--color-acento); font-weight: 600; min-height: 30px; }
+        .resultado-nombre { font-size: 1.5rem; font-weight: bold; color: #10b981; margin-top: 15px; min-height: 40px;}
+
+        /* Colores para los pasos */
+        .hl-cadena { color: #f59e0b; text-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
+        .hl-numero { font-size: 0.8rem; color: #00d2ff; vertical-align: super; }
+        .hl-radical { color: #ef4444; font-weight: bold; }
+
+        /* Evaluación Embebida */
+        .evaluacion-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 15px; padding: 30px; margin-top: 40px; }
+        .evaluacion-box h3 { color: #fff; margin-bottom: 20px; text-align: center; font-size: 1.8rem;}
+        .pregunta { margin-bottom: 25px; text-align: left; }
+        .pregunta p { font-weight: 600; color: var(--color-primario); margin-bottom: 10px; }
+        .opciones label { display: block; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;}
+        .opciones label:hover { background: rgba(255,255,255,0.1); }
+        .opciones input[type="radio"] { margin-right: 10px; }
+
+        #resultado-eval { display: none; text-align: center; margin-top: 20px; font-size: 1.2rem; font-weight: 600; padding: 20px; border-radius: 10px; }
+        .correcto { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
+        .incorrecto { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-superior">
+        <a href="quimica10_organica_nomenclatura.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Nomenclatura</a>
+        <a href="quimica10_organica_alquenos.html" class="btn-volver">Siguiente: Alquenos <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <main class="contenedor">
+        <h1>Nomenclatura de Alcanos</h1>
+
+        <h2>¿Qué son los Alcanos?</h2>
+        <p>Los alcanos son hidrocarburos (compuestos de solo Carbono e Hidrógeno) que contienen únicamente <strong>enlaces simples</strong> entre sus carbonos. También se les conoce como parafinas. Su terminación o sufijo siempre es <strong>-ano</strong>.</p>
+
+        <h2>Simulador: Ejercicios Paso a Paso</h2>
+        <p>Aprenderemos a nombrar alcanos ramificados siguiendo 4 pasos fundamentales dictados por la IUPAC:</p>
+        <ul>
+            <li><strong>Paso 1:</strong> Identificar la cadena principal (la más larga y continua).</li>
+            <li><strong>Paso 2:</strong> Enumerar la cadena empezando por el extremo más cercano a una ramificación.</li>
+            <li><strong>Paso 3:</strong> Identificar los radicales (ramificaciones como metil, etil).</li>
+            <li><strong>Paso 4:</strong> Nombrar por orden alfabético colocando el número del carbono, usando prefijos (di, tri) si se repiten.</li>
+        </ul>
+
+        <div class="simulador-pasos">
+            <h3 style="color: #fff; margin-bottom: 15px;">Práctica Interactiva</h3>
+            <div style="margin-bottom: 15px;">
+                <label style="color:#ccc;">Selecciona un ejemplo: </label>
+                <select id="selector-ejemplo" onchange="cargarEjemplo()" style="padding: 5px; border-radius: 5px; background: #1e293b; color: #fff; border: 1px solid #00d2ff;">
+                    <option value="0">Ejemplo 1 (Lineal corto)</option>
+                    <option value="1">Ejemplo 2 (Lineal mediano)</option>
+                    <option value="2">Ejemplo 3 (Lineal largo)</option>
+                    <option value="3">Ejemplo 4 (Lineal muy largo)</option>
+                    <option value="4">Ejemplo 5 (Lineal gigante)</option>
+                    <option value="5">Ejemplo 6 (1 Ramificación)</option>
+                    <option value="6">Ejemplo 7 (2 Ramificaciones iguales)</option>
+                    <option value="7">Ejemplo 8 (2 Ramificaciones distintas)</option>
+                    <option value="8">Ejemplo 9 (3 Ramificaciones)</option>
+                    <option value="9">Ejemplo 10 (Complejo)</option>
+                </select>
+            </div>
+
+            <div class="estructura-display" id="display-estructura">
+                CH3-CH2-CH3
+            </div>
+
+            <div class="paso-descripcion" id="desc-paso">Presiona 'Siguiente Paso' para comenzar a nombrar la molécula.</div>
+            <div class="resultado-nombre" id="resultado-nombre"></div>
+
+            <div class="btn-controles" style="margin-top: 20px;">
+                <button class="btn" id="btn-reinicio" onclick="reiniciarPaso()" style="background: #e74c3c;">Reiniciar Ejercicio</button>
+                <button class="btn" id="btn-siguiente" onclick="avanzarPaso()">Siguiente Paso <i class="fa-solid fa-play"></i></button>
+            </div>
+        </div>
+
+        <!-- EVALUACIÓN EMBEBIDA -->
+        <div class="evaluacion-box" id="evaluacion">
+            <h3><i class="fa-solid fa-clipboard-check" style="color: var(--color-primario);"></i> Evaluación: Alcanos</h3>
+            
+            <form id="form-evaluacion">
+                <div class="pregunta" id="q1">
+                    <p>1. ¿Cómo se denomina al radical formado por un solo átomo de carbono (CH3-)?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p1" value="a"> a) Etil</label>
+                        <label><input type="radio" name="p1" value="b"> b) Propil</label>
+                        <label><input type="radio" name="p1" value="c"> c) Metil</label>
+                        <label><input type="radio" name="p1" value="d"> d) Butil</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="q2">
+                    <p>2. Al enumerar una cadena carbonada ramificada, ¿por dónde se debe empezar?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p2" value="a"> a) Siempre por la izquierda.</label>
+                        <label><input type="radio" name="p2" value="b"> b) Por el extremo más cercano a una ramificación (radical).</label>
+                        <label><input type="radio" name="p2" value="c"> c) Siempre por la derecha.</label>
+                        <label><input type="radio" name="p2" value="d"> d) Por el centro de la molécula.</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="q3">
+                    <p>3. ¿Cómo se nombra un alcano lineal de 5 carbonos?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p3" value="a"> a) Butano</label>
+                        <label><input type="radio" name="p3" value="b"> b) Hexano</label>
+                        <label><input type="radio" name="p3" value="c"> c) Propano</label>
+                        <label><input type="radio" name="p3" value="d"> d) Pentano</label>
+                    </div>
+                </div>
+
+                <button type="button" class="btn" onclick="calificar()"><i class="fa-solid fa-paper-plane"></i> Enviar Respuestas</button>
+            </form>
+
+            <div id="resultado-eval"></div>
+        </div>
+    </main>
+
+    <script>
+        // DATOS PARA EL SIMULADOR
+        const ejemplos = [
+            { // 0: Lineal
+                base: "CH3-CH2-CH3",
+                paso1: "<span class='hl-cadena'>CH3-CH2-CH3</span>",
+                paso2: "<span class='hl-cadena'>C<span class='hl-numero'>1</span>H3 - C<span class='hl-numero'>2</span>H2 - C<span class='hl-numero'>3</span>H3</span>",
+                paso3: "No hay radicales.",
+                nombre: "Propano",
+                desc: ["Paso 1: Identificamos la cadena continua (3 carbonos).", "Paso 2: Enumeramos (da igual el lado al no haber ramas).", "Paso 3: Identificamos radicales (no hay).", "Paso 4: Nombramos. Prefijo para 3 es prop-, sufijo -ano."]
+            },
+            { // 1: Lineal
+                base: "CH3-CH2-CH2-CH3",
+                paso1: "<span class='hl-cadena'>CH3-CH2-CH2-CH3</span>",
+                paso2: "<span class='hl-cadena'>C<span class='hl-numero'>1</span>H3 - C<span class='hl-numero'>2</span>H2 - C<span class='hl-numero'>3</span>H2 - C<span class='hl-numero'>4</span>H3</span>",
+                paso3: "No hay radicales.",
+                nombre: "Butano",
+                desc: ["Paso 1: Cadena principal de 4 carbonos.", "Paso 2: Enumeramos la cadena.", "Paso 3: Sin ramificaciones.", "Paso 4: Prefijo para 4 es but-, sufijo -ano."]
+            },
+            { // 2
+                base: "CH3-CH2-CH2-CH2-CH2-CH3",
+                paso1: "<span class='hl-cadena'>CH3-CH2-CH2-CH2-CH2-CH3</span>",
+                paso2: "<span class='hl-cadena'>C<span class='hl-numero'>1</span>H3 - C<span class='hl-numero'>2</span>H2 - C<span class='hl-numero'>3</span>H2 - C<span class='hl-numero'>4</span>H2 - C<span class='hl-numero'>5</span>H2 - C<span class='hl-numero'>6</span>H3</span>",
+                paso3: "No hay radicales.",
+                nombre: "Hexano",
+                desc: ["Paso 1: Cadena de 6 carbonos.", "Paso 2: Enumeración estándar.", "Paso 3: Nada por aquí.", "Paso 4: Prefijo hex-, sufijo -ano."]
+            },
+            { // 3
+                base: "CH3-(CH2)6-CH3",
+                paso1: "<span class='hl-cadena'>CH3-(CH2)6-CH3</span>",
+                paso2: "Total: 8 carbonos enumerados.",
+                paso3: "No hay radicales.",
+                nombre: "Octano",
+                desc: ["Paso 1: Cadena condensada de 8 carbonos.", "Paso 2: 1 + 6 + 1 = 8.", "Paso 3: No hay radicales.", "Paso 4: Prefijo oct-."]
+            },
+            { // 4
+                base: "CH3-(CH2)8-CH3",
+                paso1: "<span class='hl-cadena'>CH3-(CH2)8-CH3</span>",
+                paso2: "Total: 10 carbonos enumerados.",
+                paso3: "No hay radicales.",
+                nombre: "Decano",
+                desc: ["Paso 1: Cadena de 10 carbonos.", "Paso 2: Enumeración directa.", "Paso 3: N/A.", "Paso 4: Prefijo dec-."]
+            },
+            { // 5: 1 Rama
+                base: "CH3-CH(CH3)-CH3",
+                paso1: "CH3-<span class='hl-cadena'>CH</span>(CH3)-<span class='hl-cadena'>CH3</span> (Línea principal resaltada)",
+                paso2: "C<span class='hl-numero'>1</span>H3-C<span class='hl-numero'>2</span>H(CH3)-C<span class='hl-numero'>3</span>H3",
+                paso3: "Radical en C2: <span class='hl-radical'>-CH3 (Metil)</span>",
+                nombre: "2-metilpropano",
+                desc: ["Paso 1: Identificamos la cadena más larga (3 carbonos).", "Paso 2: Enumeramos (cerca de la rama, en este caso es simétrico).", "Paso 3: El grupo que sobra es un Metil (-CH3).", "Paso 4: Posición (2) - nombre radical (metil) - nombre cadena (propano)."]
+            },
+            { // 6: 2 Ramas iguales
+                base: "CH3-C(CH3)2-CH3",
+                paso1: "Cadena de 3 carbonos con ramificaciones centrales.",
+                paso2: "C<span class='hl-numero'>1</span>H3-C<span class='hl-numero'>2</span>(CH3)2-C<span class='hl-numero'>3</span>H3",
+                paso3: "Dos radicales en C2: <span class='hl-radical'>-CH3 y -CH3 (Metiles)</span>",
+                nombre: "2,2-dimetilpropano",
+                desc: ["Paso 1: Cadena principal de 3 carbonos.", "Paso 2: El carbono central es el número 2.", "Paso 3: Tenemos dos grupos metil en el carbono 2.", "Paso 4: Usamos comas para números (2,2) y prefijo 'di' para dos metiles."]
+            },
+            { // 7: 2 Ramas distintas
+                base: "CH3-CH(CH3)-CH(CH2CH3)-CH2-CH3",
+                paso1: "La cadena principal tiene 5 carbonos (horizontal).",
+                paso2: "Empezamos de izquierda a derecha para tener ramas en 2 y 3.",
+                paso3: "C2: <span class='hl-radical'>Metil</span> | C3: <span class='hl-radical'>Etil</span>",
+                nombre: "3-etil-2-metilpentano",
+                desc: ["Paso 1: Cadena de 5 carbonos.", "Paso 2: Se enumera de izq a der (posiciones 2,3 son menores que 3,4).", "Paso 3: Identificamos un Etil y un Metil.", "Paso 4: Orden alfabético: primero 'Etil', luego 'Metil'."]
+            },
+            { // 8: 3 Ramas
+                base: "CH3-CH(CH3)-CH(CH3)-CH(CH3)-CH3",
+                paso1: "Cadena principal de 5 carbonos.",
+                paso2: "Posiciones 2, 3 y 4.",
+                paso3: "Tres radicales <span class='hl-radical'>Metil</span>.",
+                nombre: "2,3,4-trimetilpentano",
+                desc: ["Paso 1: 5 carbonos (Pentano).", "Paso 2: Simétrico, posiciones 2, 3 y 4.", "Paso 3: Tres grupos -CH3.", "Paso 4: Posiciones separadas por comas (2,3,4) y prefijo 'tri'metil."]
+            },
+            { // 9: Complejo
+                base: "CH3-CH2-C(CH3)2-CH2-CH(CH2CH3)-CH3",
+                paso1: "Cadena más larga tiene 6 carbonos.",
+                paso2: "De der a izq: Ramas en 2, 4 y 4. (2+4+4=10).",
+                paso3: "C2: Etil | C4,C4: Dimetil",
+                nombre: "3-etil-4,4-dimetilhexano (numerando de izq a der da posiciones menores)",
+                desc: ["Paso 1: 6 carbonos (Hexano).", "Paso 2: Se enumera buscando las posiciones más bajas. Izq a der: 3,3,5 (suma 11). Der a izq: 2,4,4 (suma 10). Corrección: es de der a izq.", "Paso 3: Radicales: etil y dos metiles.", "Paso 4: Orden alfabético: Etil va antes que metil."]
+            }
+        ];
+
+        let pasoActual = 0;
+        let idActual = 0;
+
+        function cargarEjemplo() {
+            idActual = parseInt(document.getElementById('selector-ejemplo').value);
+            reiniciarPaso();
+        }
+
+        function reiniciarPaso() {
+            pasoActual = 0;
+            document.getElementById('display-estructura').innerHTML = ejemplos[idActual].base;
+            document.getElementById('desc-paso').innerText = "Presiona 'Siguiente Paso' para comenzar a nombrar la molécula.";
+            document.getElementById('resultado-nombre').innerText = "";
+            document.getElementById('btn-siguiente').disabled = false;
+        }
+
+        function avanzarPaso() {
+            pasoActual++;
+            const ej = ejemplos[idActual];
+            
+            if (pasoActual === 1) {
+                document.getElementById('display-estructura').innerHTML = ej.paso1;
+                document.getElementById('desc-paso').innerText = ej.desc[0];
+            } else if (pasoActual === 2) {
+                document.getElementById('display-estructura').innerHTML = ej.paso2;
+                document.getElementById('desc-paso').innerText = ej.desc[1];
+            } else if (pasoActual === 3) {
+                document.getElementById('display-estructura').innerHTML = ej.paso2 + "<br><br><span style='font-size:1.2rem'>" + ej.paso3 + "</span>";
+                document.getElementById('desc-paso').innerText = ej.desc[2];
+            } else if (pasoActual === 4) {
+                document.getElementById('desc-paso').innerText = ej.desc[3];
+                document.getElementById('resultado-nombre').innerText = ej.nombre;
+                document.getElementById('btn-siguiente').disabled = true;
+            }
+        }
+
+        // INIT
+        cargarEjemplo();
+
+        function calificar() {
+            let puntaje = 0;
+            const respuestas = { p1: 'c', p2: 'b', p3: 'd' };
+            const total = 3;
+
+            for (let p in respuestas) {
+                const seleccion = document.querySelector(`input[name="${p}"]:checked`);
+                if (seleccion) {
+                    if (seleccion.value === respuestas[p]) {
+                        puntaje++;
+                        seleccion.parentElement.style.color = '#10b981';
+                    } else {
+                        seleccion.parentElement.style.color = '#ef4444';
+                    }
+                }
+            }
+
+            const resDiv = document.getElementById('resultado-eval');
+            resDiv.style.display = 'block';
+            
+            if (puntaje === total) {
+                resDiv.className = 'correcto';
+                resDiv.innerHTML = `<i class="fa-solid fa-check-circle"></i> ¡Excelente! (${puntaje}/${total}). Buen trabajo en Alcanos.`;
+            } else {
+                resDiv.className = 'incorrecto';
+                resDiv.innerHTML = `<i class="fa-solid fa-times-circle"></i> Obtuviste ${puntaje}/${total}. Revisa los pasos e inténtalo de nuevo.`;
+            }
+        }
+    </script>
+</body>
+</html>

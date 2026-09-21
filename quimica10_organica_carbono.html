@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>El Carbono - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-primario: #00d2ff;
+            --color-secundario: #3a7bd5;
+            --color-fondo: #0f172a;
+            --color-tarjeta: rgba(30, 41, 59, 0.7);
+            --color-texto: #e2e8f0;
+            --color-acento: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-fondo); color: var(--color-texto);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(58, 123, 213, 0.08), transparent 25%);
+            background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+        }
+
+        .nav-superior { width: 100%; max-width: 1000px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-volver { color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+
+        .contenedor {
+            width: 100%; max-width: 1000px;
+            background: var(--color-tarjeta); backdrop-filter: blur(15px);
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+        }
+
+        h1 { font-size: 2.5rem; text-align: center; margin-bottom: 30px; background: -webkit-linear-gradient(135deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid rgba(0, 210, 255, 0.2); padding-bottom: 10px; color: var(--color-primario); margin-bottom: 20px; margin-top: 30px;}
+        p, li { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; color: #cbd5e1; }
+        
+        ul { margin-left: 20px; margin-bottom: 20px; }
+
+        /* Tablas */
+        .tabla-responsive { overflow-x: auto; margin-bottom: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: rgba(0,0,0,0.2); }
+        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { background: rgba(0, 210, 255, 0.1); color: var(--color-primario); font-weight: 600; }
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* Evaluación Embebida */
+        .evaluacion-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 15px; padding: 30px; margin-top: 40px; }
+        .evaluacion-box h3 { color: #fff; margin-bottom: 20px; text-align: center; font-size: 1.8rem;}
+        
+        .pregunta { margin-bottom: 25px; }
+        .pregunta p { font-weight: 600; color: var(--color-primario); margin-bottom: 10px; }
+        
+        .opciones label { display: block; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;}
+        .opciones label:hover { background: rgba(255,255,255,0.1); }
+        .opciones input[type="radio"] { margin-right: 10px; }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--color-primario), var(--color-secundario)); color: #fff;
+            border: none; padding: 12px 25px; border-radius: 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; gap: 10px; margin: 0 auto;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3); }
+
+        #resultado-eval { display: none; text-align: center; margin-top: 20px; font-size: 1.2rem; font-weight: 600; padding: 20px; border-radius: 10px; }
+        .correcto { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
+        .incorrecto { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-superior">
+        <a href="quimica10_organica_introduccion.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Introducción</a>
+        <a href="quimica10_organica_nomenclatura.html" class="btn-volver">Siguiente Tema <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <main class="contenedor">
+        <h1>El Carbono: El Pilar de la Vida</h1>
+
+        <h2>El Elemento Central</h2>
+        <p>El carbono es el elemento central de la química orgánica debido a su capacidad única para formar enlaces estables con otros átomos de carbono, creando así cadenas y anillos muy extensos y diversos. Esta propiedad, llamada <strong>catenación</strong>, es la base para la enorme variedad de compuestos orgánicos.</p>
+
+        <h2>Formas Alotrópicas</h2>
+        <p>El carbono se encuentra en la naturaleza en varias formas alotrópicas (diferentes estructuras físicas del mismo elemento en el mismo estado físico):</p>
+        
+        <div class="tabla-responsive">
+            <table>
+                <tr>
+                    <th>Forma Alotrópica</th>
+                    <th>Características principales</th>
+                </tr>
+                <tr>
+                    <td><strong>Diamante</strong></td>
+                    <td>Estructura tridimensional rígida y transparente. Es el mineral natural más duro conocido, no conduce electricidad.</td>
+                </tr>
+                <tr>
+                    <td><strong>Grafito</strong></td>
+                    <td>Estructura laminar en capas formadas por hexágonos, oscura y blanda. Excelente lubricante y conduce la electricidad.</td>
+                </tr>
+                <tr>
+                    <td><strong>Carbono Amorfo</strong></td>
+                    <td>Sin estructura cristalina definida (sus átomos están desordenados). Ejemplos son el hollín, el carbón vegetal y el coque.</td>
+                </tr>
+                <tr>
+                    <td><strong>Fullerenos</strong></td>
+                    <td>Estructuras en forma de esfera (como un balón de fútbol), tubos (nanotubos) o anillos. Tienen aplicaciones tecnológicas increíbles.</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>Enlaces e Hibridación del Carbono</h2>
+        <p>El átomo de carbono, con su configuración electrónica 1s² 2s² 2p², tiene la notable capacidad de formar <strong>cuatro enlaces covalentes</strong> (tetravalencia). Para entender cómo lo hace geométricamente, se utiliza el concepto de <strong>hibridación</strong> (la mezcla de orbitales atómicos para formar nuevos orbitales híbridos).</p>
+
+        <ul>
+            <li><strong>Hibridación sp³ (Tetraédrica):</strong> Se mezclan un orbital s y tres orbitales p para formar cuatro orbitales sp³ idénticos. Estos orbitales se orientan en una geometría tetraédrica con ángulos de 109.5°, permitiendo la formación de 4 <em>enlaces simples</em>.</li>
+            <li><strong>Hibridación sp² (Trigonal plana):</strong> Se mezclan un orbital s y dos orbitales p. Queda un orbital p puro sin hibridar. Esta hibridación permite la formación de un <em>enlace doble</em> y dos enlaces simples, con ángulos de 120°.</li>
+            <li><strong>Hibridación sp (Digonal o Lineal):</strong> Se mezclan un orbital s y un orbital p, dejando dos orbitales p puros. Permite la formación de un <em>enlace triple</em> y un simple, o dos dobles. Los ángulos son de 180°.</li>
+        </ul>
+
+        <!-- EVALUACIÓN EMBEBIDA -->
+        <div class="evaluacion-box" id="evaluacion">
+            <h3><i class="fa-solid fa-clipboard-check" style="color: var(--color-primario);"></i> Evaluación: El Carbono</h3>
+            
+            <form id="form-evaluacion">
+                <div class="pregunta" id="q1">
+                    <p>1. ¿Cómo se llama la propiedad del carbono que le permite unirse a otros carbonos para formar cadenas infinitas?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p1" value="a"> a) Electronegatividad</label>
+                        <label><input type="radio" name="p1" value="b"> b) Isomería</label>
+                        <label><input type="radio" name="p1" value="c"> c) Catenación</label>
+                        <label><input type="radio" name="p1" value="d"> d) Ionización</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="q2">
+                    <p>2. ¿Cuál de estas formas alotrópicas del carbono es excelente conductor de electricidad y tiene estructura en capas blandas?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p2" value="a"> a) Diamante</label>
+                        <label><input type="radio" name="p2" value="b"> b) Grafito</label>
+                        <label><input type="radio" name="p2" value="c"> c) Carbón vegetal (Amorfo)</label>
+                        <label><input type="radio" name="p2" value="d"> d) Plástico</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="q3">
+                    <p>3. ¿Qué tipo de enlaces se pueden formar si el carbono presenta hibridación sp (lineal)?</p>
+                    <div class="opciones">
+                        <label><input type="radio" name="p3" value="a"> a) Cuatro enlaces simples únicamente.</label>
+                        <label><input type="radio" name="p3" value="b"> b) Un enlace doble y dos simples.</label>
+                        <label><input type="radio" name="p3" value="c"> c) Un enlace triple y uno simple (o dos dobles).</label>
+                        <label><input type="radio" name="p3" value="d"> d) Enlaces iónicos.</label>
+                    </div>
+                </div>
+
+                <button type="button" class="btn" onclick="calificar()"><i class="fa-solid fa-paper-plane"></i> Enviar Respuestas</button>
+            </form>
+
+            <div id="resultado-eval"></div>
+        </div>
+    </main>
+
+    <script>
+        function calificar() {
+            let puntaje = 0;
+            const respuestas = { p1: 'c', p2: 'b', p3: 'c' };
+            const total = 3;
+
+            for (let p in respuestas) {
+                const seleccion = document.querySelector(`input[name="${p}"]:checked`);
+                if (seleccion) {
+                    if (seleccion.value === respuestas[p]) {
+                        puntaje++;
+                        seleccion.parentElement.style.color = '#10b981';
+                    } else {
+                        seleccion.parentElement.style.color = '#ef4444';
+                    }
+                }
+            }
+
+            const resDiv = document.getElementById('resultado-eval');
+            resDiv.style.display = 'block';
+            
+            if (puntaje === total) {
+                resDiv.className = 'correcto';
+                resDiv.innerHTML = `<i class="fa-solid fa-check-circle"></i> ¡Excelente! Has respondido correctamente (${puntaje}/${total}). Estás listo para avanzar.`;
+            } else {
+                resDiv.className = 'incorrecto';
+                resDiv.innerHTML = `<i class="fa-solid fa-times-circle"></i> Obtuviste ${puntaje}/${total}. Revisa la teoría e inténtalo de nuevo.`;
+            }
+        }
+    </script>
+</body>
+</html>
