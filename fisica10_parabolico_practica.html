@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Práctica: Movimiento Parabólico - LabVirtual W</title>
+    <title>PrÃ¡ctica: Movimiento ParabÃ³lico - LabVirtual W</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>??</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -74,17 +74,17 @@
     <a href="index.html" class="logo"><i class="fas fa-microscope"></i> LabVirtual W</a>
     <ul class="menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10</a></li>
-        <li><a href="fisica10_parabolico.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> FÃ­sica 10</a></li>
+        <li><a href="fisica10_parabolico.html"><i class="fas fa-arrow-left"></i> Volver a LecciÃ³n</a></li>
     </ul>
 </nav>
 
 <div class="contenedor">
-    <a href="fisica10_parabolico.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a la Lección</a>
+    <a href="fisica10_parabolico.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a la LecciÃ³n</a>
 
     <div class="encabezado-leccion">
-        <h1>?? Práctica: Movimiento Parabólico</h1>
-        <p>10 Ejercicios en cascada (5 Semiparabólicos y 5 Parabólicos completos). (Usa g = 10 m/s²)</p>
+        <h1>?? PrÃ¡ctica: Movimiento ParabÃ³lico</h1>
+        <p>10 Ejercicios en cascada (5 SemiparabÃ³licos y 5 ParabÃ³licos completos). (Usa g = 10 m/sÂ²)</p>
     </div>
 
     <div class="barra-progreso-contenedor">
@@ -98,83 +98,83 @@
     <div id="ejercicios-container"></div>
     
     <div style="text-align:center; margin-top:30px;">
-        <a href="fisica10_parabolico_evaluacion.html" class="btn-validar" style="background:#e74c3c; font-size:1.2rem; padding:15px 30px;"><i class="fa-solid fa-file-signature"></i> Ir a Evaluación</a>
+        <a href="fisica10_parabolico_evaluacion.html" class="btn-validar" style="background:#e74c3c; font-size:1.2rem; padding:15px 30px;"><i class="fa-solid fa-file-signature"></i> Ir a EvaluaciÃ³n</a>
     </div>
 
 </div>
 
 <script>
     const ejerciciosData = [
-        // SEMIPARABÓLICO (1 al 5)
+        // SEMIPARABÃ“LICO (1 al 5)
         {
-            tipo: 'semi', titulo: "Ejercicio 1 (Semiparabólico: Tiempo de Vuelo)",
-            enunciado: "Una piedra es lanzada horizontalmente desde un acantilado de 20 m de altura. ¿Cuánto tiempo tarda en caer? (Usa g = 10 m/s²).",
-            datos: [{id:'y', label:'y', val:20, u:'m'}, {id:'g', label:'g', val:10, u:'m/s²'}],
+            tipo: 'semi', titulo: "Ejercicio 1 (SemiparabÃ³lico: Tiempo de Vuelo)",
+            enunciado: "Una piedra es lanzada horizontalmente desde un acantilado de 20 m de altura. Â¿CuÃ¡nto tiempo tarda en caer? (Usa g = 10 m/sÂ²).",
+            datos: [{id:'y', label:'y', val:20, u:'m'}, {id:'g', label:'g', val:10, u:'m/sÂ²'}],
             formulaOptions: [{v:'correcta', t:'t = v(2y / g)', c:true}, {v:'incorrecta', t:'t = (2y) / g', c:false}],
             calculo: {id:'t', label:'t', val:2, u:'s'} // sqrt(40/10) = 2
         },
         {
-            tipo: 'semi', titulo: "Ejercicio 2 (Semiparabólico: Alcance horizontal)",
-            enunciado: "Si el objeto del ejercicio anterior fue lanzado con una velocidad horizontal de 5 m/s y el tiempo de caída es 2 s. ¿Cuál es su alcance máximo (x)?",
+            tipo: 'semi', titulo: "Ejercicio 2 (SemiparabÃ³lico: Alcance horizontal)",
+            enunciado: "Si el objeto del ejercicio anterior fue lanzado con una velocidad horizontal de 5 m/s y el tiempo de caÃ­da es 2 s. Â¿CuÃ¡l es su alcance mÃ¡ximo (x)?",
             datos: [{id:'Vox', label:'Vox', val:5, u:'m/s'}, {id:'t', label:'t', val:2, u:'s'}],
-            formulaOptions: [{v:'incorrecta', t:'x = Vox / t', c:false}, {v:'correcta', t:'x = Vox × t', c:true}],
+            formulaOptions: [{v:'incorrecta', t:'x = Vox / t', c:false}, {v:'correcta', t:'x = Vox Ã— t', c:true}],
             calculo: {id:'x', label:'x', val:10, u:'m'}
         },
         {
-            tipo: 'semi', titulo: "Ejercicio 3 (Semiparabólico: Altura de caída)",
-            enunciado: "Un helicóptero deja caer un bulto. Si tarda 4 segundos en tocar el suelo, ¿a qué altura volaba el helicóptero? (g=10)",
-            datos: [{id:'t', label:'t', val:4, u:'s'}, {id:'g', label:'g', val:10, u:'m/s²'}],
-            formulaOptions: [{v:'correcta', t:'y = (g × t²) / 2', c:true}, {v:'incorrecta', t:'y = g × t', c:false}],
+            tipo: 'semi', titulo: "Ejercicio 3 (SemiparabÃ³lico: Altura de caÃ­da)",
+            enunciado: "Un helicÃ³ptero deja caer un bulto. Si tarda 4 segundos en tocar el suelo, Â¿a quÃ© altura volaba el helicÃ³ptero? (g=10)",
+            datos: [{id:'t', label:'t', val:4, u:'s'}, {id:'g', label:'g', val:10, u:'m/sÂ²'}],
+            formulaOptions: [{v:'correcta', t:'y = (g Ã— tÂ²) / 2', c:true}, {v:'incorrecta', t:'y = g Ã— t', c:false}],
             calculo: {id:'y', label:'y', val:80, u:'m'}
         },
         {
-            tipo: 'semi', titulo: "Ejercicio 4 (Semiparabólico: Velocidad Vertical Final)",
-            enunciado: "Un proyectil se lanza horizontalmente y tarda 3 segundos en caer al piso. ¿Cuál es su velocidad vertical (Vy) justo antes de tocar el suelo? (g=10)",
-            datos: [{id:'g', label:'g', val:10, u:'m/s²'}, {id:'t', label:'t', val:3, u:'s'}],
-            formulaOptions: [{v:'incorrecta', t:'Vy = (g × t) / 2', c:false}, {v:'correcta', t:'Vy = g × t', c:true}],
+            tipo: 'semi', titulo: "Ejercicio 4 (SemiparabÃ³lico: Velocidad Vertical Final)",
+            enunciado: "Un proyectil se lanza horizontalmente y tarda 3 segundos en caer al piso. Â¿CuÃ¡l es su velocidad vertical (Vy) justo antes de tocar el suelo? (g=10)",
+            datos: [{id:'g', label:'g', val:10, u:'m/sÂ²'}, {id:'t', label:'t', val:3, u:'s'}],
+            formulaOptions: [{v:'incorrecta', t:'Vy = (g Ã— t) / 2', c:false}, {v:'correcta', t:'Vy = g Ã— t', c:true}],
             calculo: {id:'Vy', label:'Vy', val:30, u:'m/s'}
         },
         {
-            tipo: 'semi', titulo: "Ejercicio 5 (Semiparabólico: Alcance X)",
-            enunciado: "Un carro cae horizontalmente por un barranco con Vox = 10 m/s. Si tarda 3 s en caer (t=3). ¿A qué distancia de la base cae?",
+            tipo: 'semi', titulo: "Ejercicio 5 (SemiparabÃ³lico: Alcance X)",
+            enunciado: "Un carro cae horizontalmente por un barranco con Vox = 10 m/s. Si tarda 3 s en caer (t=3). Â¿A quÃ© distancia de la base cae?",
             datos: [{id:'Vox', label:'Vox', val:10, u:'m/s'}, {id:'t', label:'t', val:3, u:'s'}],
-            formulaOptions: [{v:'correcta', t:'x = Vox × t', c:true}, {v:'incorrecta', t:'x = Vox + t', c:false}],
+            formulaOptions: [{v:'correcta', t:'x = Vox Ã— t', c:true}, {v:'incorrecta', t:'x = Vox + t', c:false}],
             calculo: {id:'x', label:'x', val:30, u:'m'}
         },
-        // PARABÓLICO COMPLETO (6 al 10)
+        // PARABÃ“LICO COMPLETO (6 al 10)
         {
-            tipo: 'para', titulo: "Ejercicio 6 (Parabólico: Componente Vertical Inicial)",
-            enunciado: "Un balón es pateado con una velocidad inicial de 20 m/s y un ángulo cuyo seno es 0.5. ¿Cuál es la componente vertical (Voy)?",
+            tipo: 'para', titulo: "Ejercicio 6 (ParabÃ³lico: Componente Vertical Inicial)",
+            enunciado: "Un balÃ³n es pateado con una velocidad inicial de 20 m/s y un Ã¡ngulo cuyo seno es 0.5. Â¿CuÃ¡l es la componente vertical (Voy)?",
             datos: [{id:'Vo', label:'Vo', val:20, u:'m/s'}, {id:'sen', label:'sen(?)', val:0.5, u:''}],
-            formulaOptions: [{v:'incorrecta', t:'Voy = Vo × cos(?)', c:false}, {v:'correcta', t:'Voy = Vo × sen(?)', c:true}],
+            formulaOptions: [{v:'incorrecta', t:'Voy = Vo Ã— cos(?)', c:false}, {v:'correcta', t:'Voy = Vo Ã— sen(?)', c:true}],
             calculo: {id:'Voy', label:'Voy', val:10, u:'m/s'}
         },
         {
-            tipo: 'para', titulo: "Ejercicio 7 (Parabólico: Tiempo de vuelo)",
-            enunciado: "Si la componente vertical Voy de un proyectil es 30 m/s. ¿Cuánto es su tiempo total de vuelo (tv)? (Usa g = 10 m/s²).",
-            datos: [{id:'Voy', label:'Voy', val:30, u:'m/s'}, {id:'g', label:'g', val:10, u:'m/s²'}],
-            formulaOptions: [{v:'correcta', t:'tv = (2 × Voy) / g', c:true}, {v:'incorrecta', t:'tv = Voy / (2 × g)', c:false}],
+            tipo: 'para', titulo: "Ejercicio 7 (ParabÃ³lico: Tiempo de vuelo)",
+            enunciado: "Si la componente vertical Voy de un proyectil es 30 m/s. Â¿CuÃ¡nto es su tiempo total de vuelo (tv)? (Usa g = 10 m/sÂ²).",
+            datos: [{id:'Voy', label:'Voy', val:30, u:'m/s'}, {id:'g', label:'g', val:10, u:'m/sÂ²'}],
+            formulaOptions: [{v:'correcta', t:'tv = (2 Ã— Voy) / g', c:true}, {v:'incorrecta', t:'tv = Voy / (2 Ã— g)', c:false}],
             calculo: {id:'tv', label:'tv', val:6, u:'s'} // 2*30/10 = 6
         },
         {
-            tipo: 'para', titulo: "Ejercicio 8 (Parabólico: Altura Máxima)",
-            enunciado: "Un proyectil tiene una componente vertical Voy de 20 m/s. Calcula su altura máxima alcanzada (H). (g = 10)",
-            datos: [{id:'Voy', label:'Voy', val:20, u:'m/s'}, {id:'g', label:'g', val:10, u:'m/s²'}],
-            formulaOptions: [{v:'incorrecta', t:'H = Voy² / g', c:false}, {v:'correcta', t:'H = Voy² / (2 × g)', c:true}],
+            tipo: 'para', titulo: "Ejercicio 8 (ParabÃ³lico: Altura MÃ¡xima)",
+            enunciado: "Un proyectil tiene una componente vertical Voy de 20 m/s. Calcula su altura mÃ¡xima alcanzada (H). (g = 10)",
+            datos: [{id:'Voy', label:'Voy', val:20, u:'m/s'}, {id:'g', label:'g', val:10, u:'m/sÂ²'}],
+            formulaOptions: [{v:'incorrecta', t:'H = VoyÂ² / g', c:false}, {v:'correcta', t:'H = VoyÂ² / (2 Ã— g)', c:true}],
             calculo: {id:'H', label:'H', val:20, u:'m'} // 400/20 = 20
         },
         {
-            tipo: 'para', titulo: "Ejercicio 9 (Parabólico: Componente Horizontal)",
-            enunciado: "Un cañón dispara con Vo = 50 m/s. El coseno del ángulo de disparo es 0.6. ¿Cuál es su componente horizontal (Vox)?",
+            tipo: 'para', titulo: "Ejercicio 9 (ParabÃ³lico: Componente Horizontal)",
+            enunciado: "Un caÃ±Ã³n dispara con Vo = 50 m/s. El coseno del Ã¡ngulo de disparo es 0.6. Â¿CuÃ¡l es su componente horizontal (Vox)?",
             datos: [{id:'Vo', label:'Vo', val:50, u:'m/s'}, {id:'cos', label:'cos(?)', val:0.6, u:''}],
-            formulaOptions: [{v:'correcta', t:'Vox = Vo × cos(?)', c:true}, {v:'incorrecta', t:'Vox = Vo × sen(?)', c:false}],
+            formulaOptions: [{v:'correcta', t:'Vox = Vo Ã— cos(?)', c:true}, {v:'incorrecta', t:'Vox = Vo Ã— sen(?)', c:false}],
             calculo: {id:'Vox', label:'Vox', val:30, u:'m/s'}
         },
         {
-            tipo: 'para', titulo: "Ejercicio 10 (Parabólico: Alcance Máximo)",
-            enunciado: "Si Vox de un proyectil es 30 m/s y dura volando un total de 8 segundos (tv). ¿Cuál es su alcance horizontal máximo (Xmax)?",
+            tipo: 'para', titulo: "Ejercicio 10 (ParabÃ³lico: Alcance MÃ¡ximo)",
+            enunciado: "Si Vox de un proyectil es 30 m/s y dura volando un total de 8 segundos (tv). Â¿CuÃ¡l es su alcance horizontal mÃ¡ximo (Xmax)?",
             datos: [{id:'Vox', label:'Vox', val:30, u:'m/s'}, {id:'tv', label:'tv', val:8, u:'s'}],
-            formulaOptions: [{v:'correcta', t:'Xmax = Vox × tv', c:true}, {v:'incorrecta', t:'Xmax = Vox² / g', c:false}],
+            formulaOptions: [{v:'correcta', t:'Xmax = Vox Ã— tv', c:true}, {v:'incorrecta', t:'Xmax = VoxÂ² / g', c:false}],
             calculo: {id:'Xmax', label:'Xmax', val:240, u:'m'}
         }
     ];
@@ -195,7 +195,7 @@
                 datosHtml += `<div class="input-grupo"><label>${d.label}</label><input type="number" id="ej${num}-${d.id}" placeholder="${d.val}"><div class="unidad">${d.u}</div></div>`;
             });
 
-            let opcionesFormula = `<option value="">— Selecciona —</option>`;
+            let opcionesFormula = `<option value="">â€” Selecciona â€”</option>`;
             ej.formulaOptions.forEach(opt => {
                 opcionesFormula += `<option value="${opt.c ? 'correcta' : 'incorrecta'}">${opt.t}</option>`;
             });
@@ -213,9 +213,9 @@
                 </div>
 
                 <div class="paso-contenedor oculto" id="ej${num}-p2">
-                    <div class="paso-titulo">?? Paso 2: Elegir Fórmula <span class="icono-check">?</span></div>
+                    <div class="paso-titulo">?? Paso 2: Elegir FÃ³rmula <span class="icono-check">?</span></div>
                     <select id="ej${num}-formula">${opcionesFormula}</select>
-                    <button class="btn-validar" onclick="validarPaso(${num}, 'p2')">Validar Fórmula</button>
+                    <button class="btn-validar" onclick="validarPaso(${num}, 'p2')">Validar FÃ³rmula</button>
                     <div class="feedback" id="ej${num}-p2-fb"></div>
                 </div>
 
@@ -226,7 +226,7 @@
                         <input type="number" id="ej${num}-res" placeholder="?">
                         <div class="unidad">${ej.calculo.u}</div>
                     </div>
-                    <button class="btn-validar" onclick="validarPaso(${num}, 'p3')">Validar Cálculo</button>
+                    <button class="btn-validar" onclick="validarPaso(${num}, 'p3')">Validar CÃ¡lculo</button>
                     <div class="feedback" id="ej${num}-p3-fb"></div>
                 </div>
             </div>`;
@@ -238,8 +238,8 @@
         return Math.abs(val - esperado) <= Math.abs(esperado * tol) + 0.05;
     }
 
-    const MSJS_OK = ['¡Excelente!', '¡Correcto!', '¡Perfecto!', '¡Muy bien!'];
-    const MSJS_MAL = ['Incorrecto. Revisa tus datos.', 'Vuelve a intentarlo.', 'Revisa bien la fórmula o cálculo.'];
+    const MSJS_OK = ['Â¡Excelente!', 'Â¡Correcto!', 'Â¡Perfecto!', 'Â¡Muy bien!'];
+    const MSJS_MAL = ['Incorrecto. Revisa tus datos.', 'Vuelve a intentarlo.', 'Revisa bien la fÃ³rmula o cÃ¡lculo.'];
 
     window.validarPaso = function(num, paso) {
         const ej = ejerciciosData[num-1];

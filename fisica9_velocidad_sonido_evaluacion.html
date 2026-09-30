@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Evaluación: Velocidad del Sonido - Física 9 - LabVirtual W</title>
+    <title>EvaluaciÃ³n: Velocidad del Sonido - FÃ­sica 9 - LabVirtual W</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>??</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -86,23 +86,23 @@
     <a href="index.html" class="logo"><i class="fas fa-volume-high"></i> LabVirtual W</a>
     <ul class="menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="fisica_9.html"><i class="fas fa-atom"></i> Física 9</a></li>
-        <li><a href="fisica9_velocidad_sonido.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+        <li><a href="fisica_9.html"><i class="fas fa-atom"></i> FÃ­sica 9</a></li>
+        <li><a href="fisica9_velocidad_sonido.html"><i class="fas fa-arrow-left"></i> Volver a LecciÃ³n</a></li>
     </ul>
 </nav>
 
 <div class="contenedor">
     <div id="pantalla-inicio" class="pantalla-inicio">
-        <h1><i class="fa-solid fa-file-signature"></i> Evaluación</h1>
-        <p>Velocidad del Sonido · Física 9° · Teoría y Ejercicios</p>
+        <h1><i class="fa-solid fa-file-signature"></i> EvaluaciÃ³n</h1>
+        <p>Velocidad del Sonido Â· FÃ­sica 9Â° Â· TeorÃ­a y Ejercicios</p>
         <ul class="reglas">
             <li><i class="fa-solid fa-check"></i> Consta de <strong>10 preguntas</strong> en total.</li>
-            <li><i class="fa-solid fa-check"></i> Encontrarás 5 preguntas de teoría y 5 ejercicios prácticos, presentados en orden aleatorio.</li>
+            <li><i class="fa-solid fa-check"></i> EncontrarÃ¡s 5 preguntas de teorÃ­a y 5 ejercicios prÃ¡cticos, presentados en orden aleatorio.</li>
             <li><i class="fa-solid fa-check"></i> Puedes navegar entre preguntas antes de finalizar.</li>
         </ul>
         <input type="text" id="input-nombre" class="input-nombre" placeholder="?? Escribe tu nombre completo" maxlength="60">
         <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre.</div><br>
-        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar Evaluación</button>
+        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar EvaluaciÃ³n</button>
     </div>
     <div id="seccion-evaluacion" class="seccion-evaluacion">
         <div class="header-eval"><div class="bienvenida-nombre" id="bienvenida-nombre"></div><div class="timer-badge">Pregunta <span id="num-actual">1</span> de 10</div></div>
@@ -125,26 +125,26 @@
             <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">? Incorrectas</div></div>
             <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">?? Porcentaje</div></div>
         </div>
-        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión de Respuestas</div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> RevisiÃ³n de Respuestas</div>
         <div id="revision-container"></div>
         <div style="text-align:center;margin-top:30px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
-            <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#27ae60);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva Evaluación</button>
-            <a href="fisica9_velocidad_sonido.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
+            <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#27ae60);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Nueva EvaluaciÃ³n</button>
+            <a href="fisica9_velocidad_sonido.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar TeorÃ­a</a>
         </div>
     </div>
 </div>
 <script>
 const bancoPreguntas = [
-    {texto:"El sonido es un fenómeno físico que se define como una onda:",opciones:["A. Transversal y electromagnética","B. Longitudinal y mecánica","C. Transversal y mecánica","D. Longitudinal y electromagnética"],respuesta:1},
-    {texto:"¿En cuál de los siguientes medios el sonido viaja a mayor velocidad?",opciones:["A. El aire","B. El agua","C. El acero","D. El vacío"],respuesta:2},
-    {texto:"A medida que aumenta la temperatura del aire, ¿qué sucede con la velocidad del sonido?",opciones:["A. Aumenta","B. Disminuye","C. Permanece constante","D. Se vuelve cero"],respuesta:0},
-    {texto:"Para que exista el sonido, es indispensable contar con los siguientes elementos:",opciones:["A. Un medio elástico, una fuente y un receptor","B. Luz, un medio de propagación y un receptor","C. El vacío, el aire y una fuente sonora","D. Gravedad, una onda y una fuente"],respuesta:0},
-    {texto:"La velocidad estándar del sonido en el aire a una temperatura de 0 °C es aproximadamente:",opciones:["A. 343 m/s","B. 1500 m/s","C. 300.000 km/s","D. 331.4 m/s"],respuesta:3},
-    {contexto:"Un tren emite un silbido que tarda 5 segundos en llegar a una persona situada a 1700 metros de distancia.",texto:"¿Cuál fue la velocidad del sonido en ese momento? (Usa v = d/t)",opciones:["A. 320 m/s","B. 340 m/s","C. 350 m/s","D. 330 m/s"],respuesta:1},
-    {contexto:"Durante una fuerte tormenta observas un relámpago, y el trueno se escucha exactamente 4 segundos después. La velocidad del sonido en ese instante es de 340 m/s.",texto:"¿A qué distancia se encuentra la tormenta?",opciones:["A. 1360 m","B. 680 m","C. 136 m","D. 2720 m"],respuesta:0},
-    {contexto:"Te encuentras en una región desértica durante un día muy caluroso en el que la temperatura alcanza los 30 °C.",texto:"Calcula la velocidad del sonido. (Usa v = 331.4 + 0.6·T)",opciones:["A. 331.4 m/s","B. 349.4 m/s","C. 313.4 m/s","D. 361.4 m/s"],respuesta:1},
-    {contexto:"En un laboratorio de física experimental, los equipos logran medir que la velocidad del sonido en el aire encerrado es de 337.4 m/s.",texto:"¿Cuál es la temperatura de ese laboratorio?",opciones:["A. 20 °C","B. 10 °C","C. 15 °C","D. 5 °C"],respuesta:1},
-    {contexto:"Un submarino de exploración emite una onda sonora bajo el agua (donde la velocidad del sonido es de 1500 m/s) hacia un buque hundido que se encuentra a 4500 metros de distancia.",texto:"¿Cuánto tiempo tarda en llegar la onda sonora al buque hundido?",opciones:["A. 1 s","B. 2 s","C. 3 s","D. 4 s"],respuesta:2}
+    {texto:"El sonido es un fenÃ³meno fÃ­sico que se define como una onda:",opciones:["A. Transversal y electromagnÃ©tica","B. Longitudinal y mecÃ¡nica","C. Transversal y mecÃ¡nica","D. Longitudinal y electromagnÃ©tica"],respuesta:1},
+    {texto:"Â¿En cuÃ¡l de los siguientes medios el sonido viaja a mayor velocidad?",opciones:["A. El aire","B. El agua","C. El acero","D. El vacÃ­o"],respuesta:2},
+    {texto:"A medida que aumenta la temperatura del aire, Â¿quÃ© sucede con la velocidad del sonido?",opciones:["A. Aumenta","B. Disminuye","C. Permanece constante","D. Se vuelve cero"],respuesta:0},
+    {texto:"Para que exista el sonido, es indispensable contar con los siguientes elementos:",opciones:["A. Un medio elÃ¡stico, una fuente y un receptor","B. Luz, un medio de propagaciÃ³n y un receptor","C. El vacÃ­o, el aire y una fuente sonora","D. Gravedad, una onda y una fuente"],respuesta:0},
+    {texto:"La velocidad estÃ¡ndar del sonido en el aire a una temperatura de 0 Â°C es aproximadamente:",opciones:["A. 343 m/s","B. 1500 m/s","C. 300.000 km/s","D. 331.4 m/s"],respuesta:3},
+    {contexto:"Un tren emite un silbido que tarda 5 segundos en llegar a una persona situada a 1700 metros de distancia.",texto:"Â¿CuÃ¡l fue la velocidad del sonido en ese momento? (Usa v = d/t)",opciones:["A. 320 m/s","B. 340 m/s","C. 350 m/s","D. 330 m/s"],respuesta:1},
+    {contexto:"Durante una fuerte tormenta observas un relÃ¡mpago, y el trueno se escucha exactamente 4 segundos despuÃ©s. La velocidad del sonido en ese instante es de 340 m/s.",texto:"Â¿A quÃ© distancia se encuentra la tormenta?",opciones:["A. 1360 m","B. 680 m","C. 136 m","D. 2720 m"],respuesta:0},
+    {contexto:"Te encuentras en una regiÃ³n desÃ©rtica durante un dÃ­a muy caluroso en el que la temperatura alcanza los 30 Â°C.",texto:"Calcula la velocidad del sonido. (Usa v = 331.4 + 0.6Â·T)",opciones:["A. 331.4 m/s","B. 349.4 m/s","C. 313.4 m/s","D. 361.4 m/s"],respuesta:1},
+    {contexto:"En un laboratorio de fÃ­sica experimental, los equipos logran medir que la velocidad del sonido en el aire encerrado es de 337.4 m/s.",texto:"Â¿CuÃ¡l es la temperatura de ese laboratorio?",opciones:["A. 20 Â°C","B. 10 Â°C","C. 15 Â°C","D. 5 Â°C"],respuesta:1},
+    {contexto:"Un submarino de exploraciÃ³n emite una onda sonora bajo el agua (donde la velocidad del sonido es de 1500 m/s) hacia un buque hundido que se encuentra a 4500 metros de distancia.",texto:"Â¿CuÃ¡nto tiempo tarda en llegar la onda sonora al buque hundido?",opciones:["A. 1 s","B. 2 s","C. 3 s","D. 4 s"],respuesta:2}
 ];
 
 let preguntasSeleccionadas=[],respuestasUsuario=[],preguntaActual=0,nombreEstudiante='';
@@ -194,7 +194,7 @@ function irSiguiente(){if(preguntaActual<9)mostrarPregunta(preguntaActual+1);}
 function irAnterior(){if(preguntaActual>0)mostrarPregunta(preguntaActual-1);}
 function finalizarEvaluacion(){
     const sinResp=respuestasUsuario.filter(r=>r===null).length;
-    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¿Finalizar de todos modos?`))return;
+    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. Â¿Finalizar de todos modos?`))return;
     let correctas=0,revHTML='';
     preguntasSeleccionadas.forEach((p,i)=>{
         const resp=respuestasUsuario[i];const ok=resp===p.respuesta;if(ok)correctas++;
@@ -204,10 +204,10 @@ function finalizarEvaluacion(){
     });
     const pct=Math.round(correctas/10*100);
     let emoji,titulo;
-    if(pct>=90){emoji='??';titulo='¡Excelente! Dominas el tema.';}
-    else if(pct>=70){emoji='??';titulo='¡Muy bien! Sigue practicando.';}
-    else if(pct>=50){emoji='??';titulo='Aprobado. Repasa las fórmulas.';}
-    else{emoji='??';titulo='Necesitas repasar la teoría y ejercicios.';}
+    if(pct>=90){emoji='??';titulo='Â¡Excelente! Dominas el tema.';}
+    else if(pct>=70){emoji='??';titulo='Â¡Muy bien! Sigue practicando.';}
+    else if(pct>=50){emoji='??';titulo='Aprobado. Repasa las fÃ³rmulas.';}
+    else{emoji='??';titulo='Necesitas repasar la teorÃ­a y ejercicios.';}
     document.getElementById('seccion-evaluacion').style.display='none';
     const pr=document.getElementById('pantalla-resultado');pr.classList.add('activo');
     document.getElementById('resultado-nombre').textContent='?? '+nombreEstudiante;
