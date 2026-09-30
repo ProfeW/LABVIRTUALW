@@ -1,0 +1,527 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Catálogo de Aves - LabVirtual W</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fisica: #3498db;   
+            --color-quimica: #9b59b6;  
+            --color-biologia: #2ecc71; 
+            --color-oscuro: #1a1a2e;
+            --color-texto: #ffffff;
+            --color-primario: #7ea391;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        /* --- BARRA DE NAVEGACIÓN --- */
+        nav {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--color-biologia);
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu > li {
+            position: relative;
+        }
+
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .menu > li > a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-biologia);
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1.titulo-principal {
+            color: var(--color-biologia);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        p.subtitulo {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .btn-nuevo {
+            background: var(--color-biologia);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto 40px auto;
+            transition: 0.3s;
+        }
+
+        .btn-nuevo:hover {
+            background: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        /* --- MODAL FORMULARIO --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--color-oscuro);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .modal-header h2 {
+            color: var(--color-biologia);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .form-group input[type="text"], .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            outline: none;
+        }
+        
+        .form-group input[type="text"]:focus {
+            border-color: var(--color-biologia);
+        }
+
+        .btn-guardar {
+            width: 100%;
+            background: var(--color-biologia);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-guardar:hover {
+            background: #27ae60;
+        }
+
+        /* --- GRID CATALOGO --- */
+        .catalogo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .ave-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ave-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-biologia);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .ave-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--color-biologia);
+        }
+
+        .ave-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ave-nombre {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .ave-cientifico {
+            font-size: 14px;
+            font-style: italic;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .ave-acciones {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-accion {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-ver-hoja {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--color-biologia);
+            border: 1px solid var(--color-biologia);
+        }
+
+        .btn-ver-hoja:hover {
+            background: var(--color-biologia);
+            color: white;
+        }
+
+        .btn-crear-hoja {
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #aaa;
+        }
+
+        .btn-crear-hoja:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .no-data {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #888;
+            padding: 40px;
+            font-style: italic;
+        }
+
+        .preview-img-container {
+            width: 100%;
+            height: 150px;
+            margin-top: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            display: none;
+            border: 1px dashed rgba(255,255,255,0.3);
+        }
+        .preview-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fa-solid fa-feather"></i> LabVirtual W
+            </div>
+            <ul class="menu">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="#" style="color: var(--color-biologia);"><i class="fa-solid fa-book-open"></i> Catálogo de Aves</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <h1 class="titulo-principal">Catálogo de Aves de Gallego</h1>
+        <p class="subtitulo">Registra, visualiza y gestiona las diferentes especies de aves de la región.</p>
+
+        <button class="btn-nuevo" onclick="abrirModal()">
+            <i class="fa-solid fa-plus"></i> Nuevo Registro de Ave
+        </button>
+
+        <div class="catalogo-grid" id="catalogoGrid">
+            <!-- Las aves se renderizarán aquí -->
+        </div>
+    </main>
+
+    <!-- Modal para Nueva Ave -->
+    <div class="modal" id="modalAve">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Registrar Nueva Ave</h2>
+                <button class="close-btn" onclick="cerrarModal()">&times;</button>
+            </div>
+            <form id="formAve" onsubmit="guardarAve(event)">
+                <div class="form-group">
+                    <label>Nombre Común</label>
+                    <input type="text" id="nombreComun" required placeholder="Ej: Barranquero">
+                </div>
+                <div class="form-group">
+                    <label>Nombre Científico</label>
+                    <input type="text" id="nombreCientifico" required placeholder="Ej: Momotus momota">
+                </div>
+                <div class="form-group">
+                    <label>Fotografía del Ave</label>
+                    <input type="file" id="imagenAve" accept="image/*" required onchange="previsualizarImagen(event)">
+                    <div class="preview-img-container" id="previewContainer">
+                        <img id="previewImg" src="">
+                    </div>
+                </div>
+                <button type="submit" class="btn-guardar"><i class="fa-solid fa-save"></i> Guardar Ave</button>
+            </form>
+        </div>
+    </div>
+
+        <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNjJw7xUyNplALmQBQCapzNzr1C79vTDc",
+            authDomain: "labvirtual-profew.firebaseapp.com",
+            projectId: "labvirtual-profew",
+            storageBucket: "labvirtual-profew.firebasestorage.app",
+            messagingSenderId: "981474222295",
+            appId: "1:981474222295:web:5f413bb53231afc4bb1092"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let imagenBase64 = "";
+
+        window.previsualizarImagen = function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagenBase64 = e.target.result;
+                    document.getElementById('previewImg').src = imagenBase64;
+                    document.getElementById('previewContainer').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        window.guardarAve = async function(event) {
+            event.preventDefault();
+            
+            const btn = document.querySelector('.btn-guardar');
+            const btnOriginalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+            btn.disabled = true;
+            
+            const comun = document.getElementById('nombreComun').value;
+            const cientifico = document.getElementById('nombreCientifico').value;
+
+            if (!imagenBase64) {
+                alert("Por favor selecciona una imagen.");
+                btn.innerHTML = btnOriginalText;
+                btn.disabled = false;
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "catalogo_aves"), {
+                    nombreComun: comun,
+                    nombreCientifico: cientifico,
+                    imagen: imagenBase64,
+                    fecha: new Date().toISOString()
+                });
+                
+                document.getElementById('formAve').reset();
+                imagenBase64 = "";
+                document.getElementById('previewContainer').style.display = 'none';
+                window.cerrarModal();
+                await window.renderizarCatalogo();
+            } catch (e) {
+                console.error("Error al guardar: ", e);
+                alert("Hubo un error al guardar. Revisa tu consola y los permisos de Firestore.");
+            } finally {
+                btn.innerHTML = btnOriginalText;
+                btn.disabled = false;
+            }
+        }
+
+        window.renderizarCatalogo = async function() {
+            const grid = document.getElementById('catalogoGrid');
+            grid.innerHTML = '<div class="no-data"><i class="fa-solid fa-spinner fa-spin"></i> Cargando catálogo desde la nube...</div>';
+            
+            try {
+                const querySnapshot = await getDocs(collection(db, "catalogo_aves"));
+                grid.innerHTML = '';
+                
+                if (querySnapshot.empty) {
+                    grid.innerHTML = '<div class="no-data">Aún no hay aves registradas en el catálogo de la nube.</div>';
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const ave = doc.data();
+                    const aveId = doc.id;
+                    const card = document.createElement('div');
+                    card.className = 'ave-card';
+                    card.innerHTML = 
+                        <img src=" + ave.imagen + " class="ave-img" alt=" + ave.nombreComun + ">
+                        <div class="ave-info">
+                            <div class="ave-nombre"> + ave.nombreComun + </div>
+                            <div class="ave-cientifico"> + ave.nombreCientifico + </div>
+                            <div class="ave-acciones">
+                                <a href="practica_aves.html?id= + aveId + " class="btn-accion btn-ver-hoja">
+                                    <i class="fa-solid fa-file-pdf"></i> Ver / Editar Hoja de Vida
+                                </a>
+                            </div>
+                        </div>
+                    ;
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                console.error("Error al cargar: ", e);
+                grid.innerHTML = '<div class="no-data" style="color: #e74c3c;">Error al cargar los datos. Revisa la consola o tu base de datos en Firebase.</div>';
+            }
+        }
+
+        window.abrirModal = function() {
+            document.getElementById('modalAve').style.display = 'flex';
+        }
+
+        window.cerrarModal = function() {
+            document.getElementById('modalAve').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.renderizarCatalogo();
+            const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+            if (!user || user.usuario !== 'profew') {
+                const btnNuevo = document.querySelector('.btn-nuevo');
+                if (btnNuevo) btnNuevo.style.display = 'none';
+            }
+        });
+    </script>
+<script src="auth.js"></script>
+</body>
+</html>
+
+

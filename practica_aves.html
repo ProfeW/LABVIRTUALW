@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía de Aves de Gallego - I.E. Gallego</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GuÃ­a de Aves de Gallego - I.E. Gallego</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -357,7 +357,7 @@
         }
         .btn-imprimir:hover { background-color: #435e54; }
 
-        /* AJUSTE ESTRICTO PARA IMPRESIÓN (SOLUCIÓN AL ESPACIO EN BLANCO) */
+        /* AJUSTE ESTRICTO PARA IMPRESIÃ“N (SOLUCIÃ“N AL ESPACIO EN BLANCO) */
         @media print {
             @page { size: letter; margin: 0; }
             html, body { 
@@ -367,18 +367,24 @@
                 padding: 0; 
                 background-color: white; 
             }
-            .btn-imprimir { display: none; }
+            .btn-imprimir { display: none; } .botones-container { display: none !important; }
             .hoja {
                 box-shadow: none;
                 width: 100%;
-                height: 100vh; /* Fuerza al contenedor a ocupar el 100% de la página de impresión */
+                height: 100vh; /* Fuerza al contenedor a ocupar el 100% de la pÃ¡gina de impresiÃ³n */
                 padding: 0.3in 0.4in;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
-                justify-content: space-between; /* Distribuye equitativamente el espacio vacío restante */
+                justify-content: space-between; /* Distribuye equitativamente el espacio vacÃ­o restante */
             }
             textarea::-webkit-input-placeholder { color: transparent; }
             input::-webkit-input-placeholder { color: transparent; }
+        }
+    </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
         }
     </style>
 </head>
@@ -387,8 +393,8 @@
     <div class="hoja">
         
         <div class="header">
-            <h1>GUÍA DE AVES DE GALLEGO</h1>
-            <h2>INSTITUCIÓN EDUCATIVA GALLEGO • BIOLOGÍA</h2>
+            <h1>GUÃA DE AVES DE GALLEGO</h1>
+            <h2>INSTITUCIÃ“N EDUCATIVA GALLEGO â€¢ BIOLOGÃA</h2>
             <div class="header-bar"></div>
         </div>
 
@@ -410,8 +416,8 @@
             <div class="foto-container">
                 <div class="foto-box" onclick="document.getElementById('input-foto').click()">
                     <i class="fa-solid fa-camera"></i>
-                    <p>FOTOGRAFÍA O<br>ILUSTRACIÓN<br>DEL AVE</p>
-                    <img id="img-preview" src="" alt="Vista previa de la fotografía de ave">
+                    <p>FOTOGRAFÃA O<br>ILUSTRACIÃ“N<br>DEL AVE</p>
+                    <img id="img-preview" src="" alt="Vista previa de la fotografÃ­a de ave">
                 </div>
                 <input type="file" id="input-foto" class="foto-input" accept="image/*" onchange="cargarImagen(event)">
                 
@@ -426,16 +432,16 @@
                 <div class="name-fields">
                     <div>
                         <input type="text" style="font-size: 16px; font-weight: 700;">
-                        <label>NOMBRE COMÚN</label>
+                        <label>NOMBRE COMÃšN</label>
                     </div>
                     <div>
                         <input type="text" style="font-size: 14px; font-style: italic;">
-                        <label>NOMBRE CIENTÍFICO</label>
+                        <label>NOMBRE CIENTÃFICO</label>
                     </div>
                 </div>
 
                 <div class="identificador-row">
-                    <span style="font-size: 12px;">IDENTIFICADOR DE ESPECIE (Nº)</span>
+                    <span style="font-size: 12px;">IDENTIFICADOR DE ESPECIE (NÂº)</span>
                     <div class="id-boxes">
                         <input type="text" maxlength="1"> /
                         <input type="text" maxlength="1"> /
@@ -445,7 +451,7 @@
 
                 <div class="sub-grid">
                     <div class="box">
-                        <div class="box-title">TAXONOMÍA</div>
+                        <div class="box-title">TAXONOMÃA</div>
                         <div class="taxonomia-list">
                             <div class="tax-item"><label>Reino:</label><input type="text"></div>
                             <div class="tax-item"><label>Filo:</label><input type="text"></div>
@@ -456,7 +462,7 @@
                     </div>
 
                     <div class="box">
-                        <div class="box-title">CARACTERÍSTICAS CLAVE</div>
+                        <div class="box-title">CARACTERÃSTICAS CLAVE</div>
                         <div class="caract-grid">
                             <div class="caract-item">
                                 <div class="caract-header">
@@ -494,13 +500,13 @@
         </div>
 
         <div class="full-box">
-            <div class="box-title">DESCRIPCIÓN FÍSICA</div>
+            <div class="box-title">DESCRIPCIÃ“N FÃSICA</div>
             <textarea style="height: 3.2em;"></textarea>
         </div>
 
         <div class="bottom-grid">
             <div class="box">
-                <div class="box-title">ALIMENTACIÓN</div>
+                <div class="box-title">ALIMENTACIÃ“N</div>
                 <div class="alim-item">
                     <div class="alim-icon a-dieta"><i class="fa-solid fa-utensils"></i></div>
                     <div style="flex-grow: 1;"><label style="font-size:11px; font-weight:700;">Dieta principal</label><textarea style="height: 3.2em; font-size: 12px;"></textarea></div>
@@ -512,7 +518,7 @@
             </div>
             
             <div class="box">
-                <div class="box-title">HÁBITAT Y UBICACIÓN EN GALLEGO</div>
+                <div class="box-title">HÃBITAT Y UBICACIÃ“N EN GALLEGO</div>
                 <div style="text-align: center; font-size: 11px; margin-top:-5px; margin-bottom:5px;">Zonas donde se observa</div>
                 <textarea style="height: 6.4em;"></textarea>
             </div>
@@ -520,19 +526,19 @@
 
         <div class="bottom-grid" style="margin-bottom: 0;">
             <div class="box">
-                <div class="box-title">FUNCIÓN ECOSISTÉMICA</div>
+                <div class="box-title">FUNCIÃ“N ECOSISTÃ‰MICA</div>
                 <textarea style="height: 6.4em;"></textarea>
             </div>
             
             <div class="box iucn-fix">
-                <div class="box-title">ESTADO DE CONSERVACIÓN (IUCN)</div>
+                <div class="box-title">ESTADO DE CONSERVACIÃ“N (IUCN)</div>
                 <div class="iucn-container">
                     <div class="iucn-item">
                         <label>
                             <input type="radio" name="iucn" value="lc">
                             <div class="iucn-circle bg-lc">LC</div>
                         </label>
-                        <span>Preocupación Menor</span>
+                        <span>PreocupaciÃ³n Menor</span>
                     </div>
                     <div class="iucn-item">
                         <label>
@@ -553,7 +559,7 @@
                             <input type="radio" name="iucn" value="cr">
                             <div class="iucn-circle bg-cr">CR</div>
                         </label>
-                        <span>En Peligro Crítico</span>
+                        <span>En Peligro CrÃ­tico</span>
                     </div>
                 </div>
                 <div class="row-inline" style="margin-top: 5px;">
@@ -565,12 +571,152 @@
 
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">
-        <i class="fa-solid fa-file-pdf"></i> DESCARGAR COMO PDF (TAMAÑO CARTA)
-    </button>
+        <div style="display: flex; gap: 15px; margin-top: 15px; margin-bottom: 20px; justify-content: center;" class="botones-container">
+        <button class="btn-imprimir" style="background-color: #4facfe;" onclick="guardarHojaVida()">
+            <i class="fa-solid fa-save"></i> GUARDAR CAMBIOS
+        </button>
+        <button class="btn-imprimir" onclick="window.print()">
+            <i class="fa-solid fa-file-pdf"></i> DESCARGAR COMO PDF
+        </button>
+    </div>
+        <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    <script>
-        function cargarImagen(event) {
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNjJw7xUyNplALmQBQCapzNzr1C79vTDc",
+            authDomain: "labvirtual-profew.firebaseapp.com",
+            projectId: "labvirtual-profew",
+            storageBucket: "labvirtual-profew.firebasestorage.app",
+            messagingSenderId: "981474222295",
+            appId: "1:981474222295:web:5f413bb53231afc4bb1092"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const params = new URLSearchParams(window.location.search);
+        const birdId = params.get('id');
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (birdId) {
+                await window.cargarHojaVida();
+            } else {
+                alert("Atención: Has entrado sin seleccionar un ave específica. Vuelve al catálogo para seleccionar una.");
+            }
+
+            const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+            if (!user || user.usuario !== 'profew') {
+                const btnGuardar = document.querySelector('.btn-guardar-hoja');
+                if (btnGuardar) btnGuardar.style.display = 'none';
+                
+                const inputs = document.querySelectorAll('input:not([type="radio"]), textarea');
+                inputs.forEach(inp => inp.readOnly = true);
+                
+                const radios = document.querySelectorAll('input[type="radio"]');
+                radios.forEach(r => r.disabled = true);
+                
+                const cameraIcon = document.querySelector('.foto-box');
+                if (cameraIcon) cameraIcon.style.pointerEvents = 'none';
+            }
+        });
+
+        window.cargarHojaVida = async function() {
+            try {
+                const docRef = doc(db, "catalogo_aves", birdId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    
+                    // Nombres
+                    const nameInputs = document.querySelectorAll('.name-fields input');
+                    const inpComun = nameInputs[0];
+                    const inpCientifico = nameInputs[1];
+                    if (inpComun && data.nombreComun) inpComun.value = data.nombreComun;
+                    if (inpCientifico && data.nombreCientifico) inpCientifico.value = data.nombreCientifico;
+
+                    // Inputs extra
+                    const inputs = document.querySelectorAll('input[type="text"], input[type="date"], textarea');
+                    inputs.forEach((inp, idx) => {
+                        if (data['inp_' + idx] !== undefined) {
+                            inp.value = data['inp_' + idx];
+                        }
+                    });
+
+                    // Radio IUCN
+                    if (data.iucn) {
+                        const radio = document.querySelector('input[name="iucn"][value="' + data.iucn + '"]');
+                        if (radio) radio.checked = true;
+                    }
+
+                    // Imagen
+                    if (data.imagen) {
+                        const imgPreview = document.getElementById('img-preview');
+                        const fotoBoxIcons = document.querySelectorAll('.foto-box i, .foto-box p');
+                        imgPreview.src = data.imagen;
+                        imgPreview.style.display = 'block';
+                        fotoBoxIcons.forEach(el => el.style.display = 'none');
+                        imgPreview.setAttribute('data-loaded', 'true');
+                    }
+                } else {
+                    console.log("No existe el documento");
+                }
+            } catch (error) {
+                console.error("Error obteniendo documento:", error);
+            }
+        }
+
+        window.guardarHojaVida = async function() {
+            if (!birdId) {
+                alert('No se puede guardar: No hay un ID de ave asociado. Vuelve al catálogo.');
+                return;
+            }
+
+            const btn = document.querySelector('.btn-guardar-hoja');
+            const btnOriginalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> GUARDANDO...';
+            btn.disabled = true;
+
+            const data = {};
+            
+            // Nombres base
+            const nameInputs = document.querySelectorAll('.name-fields input');
+            if (nameInputs[0] && nameInputs[0].value) data.nombreComun = nameInputs[0].value;
+            if (nameInputs[1] && nameInputs[1].value) data.nombreCientifico = nameInputs[1].value;
+
+            // Inputs extra
+            const inputs = document.querySelectorAll('input[type="text"], input[type="date"], textarea');
+            inputs.forEach((inp, idx) => {
+                data['inp_' + idx] = inp.value;
+            });
+
+            // Radio IUCN
+            const iucnSelected = document.querySelector('input[name="iucn"]:checked');
+            if (iucnSelected) {
+                data.iucn = iucnSelected.value;
+            }
+
+            // Imagen manual
+            const imgPreview = document.getElementById('img-preview');
+            if (imgPreview.src && imgPreview.src.startsWith('data:')) {
+                data.imagen = imgPreview.src;
+            }
+
+            try {
+                const docRef = doc(db, "catalogo_aves", birdId);
+                await updateDoc(docRef, data);
+                alert('¡Hoja de vida guardada exitosamente en la nube!');
+            } catch (error) {
+                console.error("Error actualizando documento: ", error);
+                alert("Hubo un error al guardar. Asegúrate de tener permisos en Firebase.");
+            } finally {
+                btn.innerHTML = btnOriginalText;
+                btn.disabled = false;
+            }
+        }
+
+        window.cargarImagen = function(event) {
             const input = event.target;
             const preview = document.getElementById('img-preview');
             const icons = input.parentElement.querySelectorAll('i, p');
@@ -581,6 +727,7 @@
                     preview.src = e.target.result;
                     preview.style.display = 'block';
                     icons.forEach(el => el.style.display = 'none');
+                    preview.setAttribute('data-loaded', 'true');
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -589,3 +736,7 @@
 <script src="auth.js"></script>
 </body>
 </html>
+
+
+
+
