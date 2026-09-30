@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Pr·ctica Interactiva: ¡cidos CarboxÌlicos - LabVirtual W</title>
+    <title>Pr√°ctica Interactiva: √Åcidos Carbox√≠licos - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -82,37 +82,37 @@
 
     <nav>
         <a href="#" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
-        <a href="acidos_carboxilicos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÌa</a>
+        <a href="acidos_carboxilicos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a Teor√≠a</a>
     </nav>
 
     <main class="contenedor">
         <div class="encabezado">
-            <h1>DesafÌo: ¡cidos CarboxÌlicos</h1>
-            <p>El reto final de la jerarquÌa IUPAC. Demuestra tu dominio frente a radicales, alcoholes, cetonas y alquenos.</p>
+            <h1>Desaf√≠o: √Åcidos Carbox√≠licos</h1>
+            <p>El reto final de la jerarqu√≠a IUPAC. Demuestra tu dominio frente a radicales, alcoholes, cetonas y alquenos.</p>
         </div>
 
         <!-- LEYENDA -->
         <section class="leyenda">
             <h2><i class="fa-solid fa-circle-info"></i> Instrucciones de Nomenclatura</h2>
             <ul>
-                <li><i class="fa-solid fa-check"></i> Siempre debes iniciar con la palabra <span class="clave">·cido</span> y terminar en <span class="clave">-oico</span>.</li>
-                <li><i class="fa-solid fa-check"></i> Separa n˙meros de letras con guiones (-) y n˙meros de n˙meros con comas (,).</li>
+                <li><i class="fa-solid fa-check"></i> Siempre debes iniciar con la palabra <span class="clave">√°cido</span> y terminar en <span class="clave">-oico</span>.</li>
+                <li><i class="fa-solid fa-check"></i> Separa n√∫meros de letras con guiones (-) y n√∫meros de n√∫meros con comas (,).</li>
                 <li><i class="fa-solid fa-check"></i> El carbono 1 <strong>siempre</strong> es el del grupo carboxilo (-COOH).</li>
             </ul>
             <div class="nota-inteligente">
-                <strong><i class="fa-solid fa-robot"></i> Inteligencia del Simulador:</strong> Este sistema es flexible. Entiende ambas nomenclaturas v·lidas. Por ejemplo, si la molÈcula es un alqueno, puedes escribir tanto <strong>·cido 3-pentenoico</strong> como <strong>·cido pent-3-enoico</strong>, y ambas ser·n calificadas como correctas. (Tampoco importa si olvidas las tildes).
+                <strong><i class="fa-solid fa-robot"></i> Inteligencia del Simulador:</strong> Este sistema es flexible. Entiende ambas nomenclaturas v√°lidas. Por ejemplo, si la mol√©cula es un alqueno, puedes escribir tanto <strong>√°cido 3-pentenoico</strong> como <strong>√°cido pent-3-enoico</strong>, y ambas ser√°n calificadas como correctas. (Tampoco importa si olvidas las tildes).
             </div>
         </section>
 
         <!-- CONTENEDOR DE EJERCICIOS -->
         <div id="ejercicios-container">
-            <!-- Los ejercicios se cargan vÌa JS -->
+            <!-- Los ejercicios se cargan v√≠a JS -->
         </div>
 
     </main>
 
     <script>
-        // Array de ejercicios con m˙ltiples opciones de respuesta v·lidas
+        // Array de ejercicios con m√∫ltiples opciones de respuesta v√°lidas
         const ejercicios = [
             { 
                 id: 1, 
@@ -187,7 +187,7 @@
                     <pre>${ej.mol}</pre>
                 </div>
                 <div class="input-group">
-                    <input type="text" class="input-nombre" id="input-${ej.id}" placeholder="Escribe el nombre IUPAC aquÌ..." onkeypress="handleEnter(event, ${ej.id})">
+                    <input type="text" class="input-nombre" id="input-${ej.id}" placeholder="Escribe el nombre IUPAC aqu√≠..." onkeypress="handleEnter(event, ${ej.id})">
                     <button class="btn-validar" onclick="validar(${ej.id})">Validar</button>
                 </div>
                 <div class="feedback" id="feedback-${ej.id}"></div>
@@ -202,7 +202,7 @@
             }
         }
 
-        // FunciÛn normalizadora extrema: quita tildes, convierte a min˙scula, arregla espacios dobles y espacios en guiones
+        // Funci√≥n normalizadora extrema: quita tildes, convierte a min√∫scula, arregla espacios dobles y espacios en guiones
         function normalizarTexto(str) {
             let s = str.toLowerCase();
             // Quitar tildes
@@ -213,7 +213,7 @@
             s = s.replace(/\s*-\s*/g, '-');
             // Quitar espacios alrededor de comas (ej: "2 , 2" -> "2,2")
             s = s.replace(/\s*,\s*/g, ',');
-            // Asegurar que si escribieron la palabra "acido", haya exactamente un espacio despuÈs
+            // Asegurar que si escribieron la palabra "acido", haya exactamente un espacio despu√©s
             s = s.replace(/^acido\s+/, 'acido ');
             return s;
         }
@@ -231,15 +231,15 @@
 
             feedback.style.display = 'flex';
 
-            // Validar si olvidÛ la palabra "·cido"
+            // Validar si olvid√≥ la palabra "√°cido"
             if (!valorNormalizado.startsWith("acido ")) {
-                feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Recuerda: Debes empezar el nombre con la palabra "·cido".`;
+                feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Recuerda: Debes empezar el nombre con la palabra "√°cido".`;
                 feedback.className = 'feedback warning';
                 input.style.borderColor = 'var(--color-alerta)';
-                return; // Detiene la validaciÛn aquÌ
+                return; // Detiene la validaci√≥n aqu√≠
             }
 
-            // Comprobar si el valor coincide con alguna de las opciones v·lidas
+            // Comprobar si el valor coincide con alguna de las opciones v√°lidas
             let esCorrecto = false;
             for(let correcta of respuestasValidas) {
                 if (valorNormalizado === correcta) {
@@ -249,11 +249,11 @@
             }
 
             if (esCorrecto) {
-                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> °Excelente! El nombre es totalmente correcto.`;
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¬°Excelente! El nombre es totalmente correcto.`;
                 feedback.className = 'feedback correct';
                 input.style.borderColor = 'var(--color-destaque)';
             } else {
-                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. Revisa bien los radicales, el orden alfabÈtico o la numeraciÛn. °IntÈntalo de nuevo!`;
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. Revisa bien los radicales, el orden alfab√©tico o la numeraci√≥n. ¬°Int√©ntalo de nuevo!`;
                 feedback.className = 'feedback incorrect';
                 input.style.borderColor = 'var(--color-error)';
             }

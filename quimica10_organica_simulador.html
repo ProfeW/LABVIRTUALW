@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Simulador de MolÈculas Pro - LabVirtual W</title>
+    <title>Simulador de Mol√©culas Pro - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -67,7 +67,7 @@
         .tool-btn:hover { background: rgba(0, 210, 255, 0.2); border-color: var(--color-primario); transform: scale(1.05); }
         .tool-btn:active { cursor: grabbing; transform: scale(0.95); }
 
-        /* CuadrÌcula basada en celdas (Cell-based grid) - M·s pequeÒa y ancha */
+        /* Cuadr√≠cula basada en celdas (Cell-based grid) - M√°s peque√±a y ancha */
         .pizarra-grid {
             display: grid;
             grid-template-columns: repeat(20, 1fr); /* 20 columnas */
@@ -85,7 +85,7 @@
         .celda-grid {
             background: rgba(15, 23, 42, 0.8);
             aspect-ratio: 1; /* Cuadrados perfectos */
-            min-width: 32px; /* Celdas m·s pequeÒas */
+            min-width: 32px; /* Celdas m√°s peque√±as */
             display: flex; justify-content: center; align-items: center;
             position: relative;
         }
@@ -103,7 +103,7 @@
         .celda-input:focus { background: rgba(0, 210, 255, 0.15); box-shadow: inset 0 0 5px var(--color-primario); }
         
         /* Efectos visuales para los enlaces */
-        .celda-input[value="-"], .celda-input[value="ó"] { color: #f59e0b; }
+        .celda-input[value="-"], .celda-input[value="‚Äî"] { color: #f59e0b; }
         .celda-input[value="|"] { color: #f59e0b; }
         .celda-input[value="="] { color: #a855f7; }
         .celda-input[value="||"] { color: #a855f7; }
@@ -134,12 +134,12 @@
 
     <div class="nav-superior">
         <a href="quimica10_organica_alquinos.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Alquinos</a>
-        <a href="quimica_10.html" class="btn-volver">Volver al Men˙ Principal <i class="fa-solid fa-home"></i></a>
+        <a href="quimica_10.html" class="btn-volver">Volver al Men√∫ Principal <i class="fa-solid fa-home"></i></a>
     </div>
 
     <main class="contenedor">
-        <h1>Simulador de MolÈculas Pro</h1>
-        <p>Selecciona una casilla y escribe con tu teclado, o dale <strong>clic a un botÛn de la barra</strong> para que el elemento aparezca en la casilla seleccionada. TambiÈn puedes arrastrarlos y fusionar ·tomos (ej. C + H + 3 = CH3).</p>
+        <h1>Simulador de Mol√©culas Pro</h1>
+        <p>Selecciona una casilla y escribe con tu teclado, o dale <strong>clic a un bot√≥n de la barra</strong> para que el elemento aparezca en la casilla seleccionada. Tambi√©n puedes arrastrarlos y fusionar √°tomos (ej. C + H + 3 = CH3).</p>
 
         <div style="background: rgba(0, 210, 255, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 210, 255, 0.3); margin-bottom: 20px;">
             <h3 style="color: var(--color-primario); margin-bottom: 10px; text-align: center; font-size: 1.2rem;">Tu Reto Actual:</h3>
@@ -157,14 +157,14 @@
             
             <div class="toolbar-group">
                 <div class="tool-btn" draggable="true" data-value="C" title="Carbono">C</div>
-                <div class="tool-btn" draggable="true" data-value="H" title="HidrÛgeno">H</div>
-                <div class="tool-btn" draggable="true" data-value="O" title="OxÌgeno">O</div>
-                <div class="tool-btn" draggable="true" data-value="3" title="SubÌndice 3">3</div>
-                <div class="tool-btn" draggable="true" data-value="2" title="SubÌndice 2">2</div>
+                <div class="tool-btn" draggable="true" data-value="H" title="Hidr√≥geno">H</div>
+                <div class="tool-btn" draggable="true" data-value="O" title="Ox√≠geno">O</div>
+                <div class="tool-btn" draggable="true" data-value="3" title="Sub√≠ndice 3">3</div>
+                <div class="tool-btn" draggable="true" data-value="2" title="Sub√≠ndice 2">2</div>
             </div>
 
             <div class="toolbar-group">
-                <div class="tool-btn" draggable="true" data-value="-" title="Enlace Simple Horizontal">ó</div>
+                <div class="tool-btn" draggable="true" data-value="-" title="Enlace Simple Horizontal">‚Äî</div>
                 <div class="tool-btn" draggable="true" data-value="|" title="Enlace Simple Vertical">|</div>
                 <div class="tool-btn" draggable="true" data-value="=" title="Enlace Doble Horizontal">=</div>
                 <div class="tool-btn" draggable="true" data-value="||" title="Enlace Doble Vertical">||</div>
@@ -173,21 +173,21 @@
         </div>
 
         <div style="display:flex; justify-content:flex-end; margin-bottom: 10px;">
-            <button class="btn danger" style="padding: 5px 15px; font-size: 0.9rem;" onclick="limpiarPizarra()"><i class="fa-solid fa-trash"></i> Limpiar CuadrÌcula</button>
+            <button class="btn danger" style="padding: 5px 15px; font-size: 0.9rem;" onclick="limpiarPizarra()"><i class="fa-solid fa-trash"></i> Limpiar Cuadr√≠cula</button>
         </div>
 
-        <!-- CUADRÕCULA -->
+        <!-- CUADR√çCULA -->
         <div class="pizarra-grid" id="lienzo">
-            <!-- Se generar· vÌa JS (15 filas x 20 columnas para m·s espacio) -->
+            <!-- Se generar√° v√≠a JS (15 filas x 20 columnas para m√°s espacio) -->
         </div>
 
-        <button class="btn" style="width: 100%; font-size: 1.2rem; padding: 15px;" id="btn-evaluar" onclick="evaluarConIA()"><i class="fa-solid fa-robot"></i> Evaluar mi MolÈcula con IA</button>
+        <button class="btn" style="width: 100%; font-size: 1.2rem; padding: 15px;" id="btn-evaluar" onclick="evaluarConIA()"><i class="fa-solid fa-robot"></i> Evaluar mi Mol√©cula con IA</button>
 
         <!-- Resultados IA -->
         <div id="pantalla-resultados">
-            <h2><i class="fa-solid fa-ranking-star" style="color: var(--color-primario);"></i> Resultados de la EvaluaciÛn</h2>
+            <h2><i class="fa-solid fa-ranking-star" style="color: var(--color-primario);"></i> Resultados de la Evaluaci√≥n</h2>
             <div class="feedback-box">
-                <strong style="color: var(--color-primario); display: block; margin-bottom: 10px;"><i class="fa-solid fa-comment-dots"></i> An·lisis de la IA:</strong>
+                <strong style="color: var(--color-primario); display: block; margin-bottom: 10px;"><i class="fa-solid fa-comment-dots"></i> An√°lisis de la IA:</strong>
                 <span id="mensaje-feedback"></span>
             </div>
             <button class="btn" onclick="document.getElementById('pantalla-resultados').style.display='none'; generarRetoAleatorio(); limpiarPizarra();"><i class="fa-solid fa-rotate-right"></i> Intentar Nuevo Reto</button>
@@ -197,11 +197,11 @@
     <!-- PANTALLA DE CARGA -->
     <div id="overlay-loading">
         <div class="spinner"></div>
-        <div style="color: #fff; font-size: 1.2rem; text-align: center; max-width: 80%;">La IA est· leyendo tu cuadrÌcula y comprobando los enlaces...</div>
+        <div style="color: #fff; font-size: 1.2rem; text-align: center; max-width: 80%;">La IA est√° leyendo tu cuadr√≠cula y comprobando los enlaces...</div>
     </div>
 
     <script>
-        // BANCO DE 100 MOL…CULAS (Alcanos, Alquenos, Alquinos)
+        // BANCO DE 100 MOL√âCULAS (Alcanos, Alquenos, Alquinos)
         const retos = [
             // Alcanos Lineales y Ramificados
             "metano", "etano", "propano", "butano", "pentano", "hexano", "heptano", "octano", "nonano", "decano",
@@ -236,7 +236,7 @@
         const numFilas = 15;
         const numCols = 20;
 
-        let lastFocusedCell = null; // Para guardar la ˙ltima celda seleccionada
+        let lastFocusedCell = null; // Para guardar la √∫ltima celda seleccionada
 
         function inicializarPizarra() {
             lienzo.innerHTML = '';
@@ -252,7 +252,7 @@
                     input.dataset.row = r;
                     input.dataset.col = c;
                     
-                    // Rastrear la ˙ltima celda enfocada
+                    // Rastrear la √∫ltima celda enfocada
                     input.addEventListener('focus', () => { lastFocusedCell = input; });
                     
                     // Asegurar que al salir del input formatee algunos caracteres especiales
@@ -289,12 +289,12 @@
 
         function insertarValorEnInput(input, dataVal) {
             let currentVal = input.value;
-            // Si arrastran un grupo armado o un enlace, reemplaza si est· vacÌo, o sobrescribe
+            // Si arrastran un grupo armado o un enlace, reemplaza si est√° vac√≠o, o sobrescribe
             if(dataVal.length > 1 || ['-','|','=','||','='].includes(dataVal)){
                 let valAInsertar = dataVal.replace("3", "3").replace("2", "2");
                 input.value = valAInsertar;
             } 
-            // LÛgica incremental (C + H + 3)
+            // L√≥gica incremental (C + H + 3)
             else {
                 let appendChar = dataVal;
                 if (dataVal === '3') appendChar = '3';
@@ -315,12 +315,12 @@
                 e.dataTransfer.setData('value', item.getAttribute('data-value'));
             });
             
-            // Clic support: Inserta en la ˙ltima celda enfocada
+            // Clic support: Inserta en la √∫ltima celda enfocada
             item.addEventListener('click', () => {
                 if(lastFocusedCell) {
                     const dataVal = item.getAttribute('data-value');
                     insertarValorEnInput(lastFocusedCell, dataVal);
-                    // Opcional: mover el foco a la celda de la derecha autom·ticamente
+                    // Opcional: mover el foco a la celda de la derecha autom√°ticamente
                     // let col = parseInt(lastFocusedCell.dataset.col);
                     // let row = parseInt(lastFocusedCell.dataset.row);
                     // if(col < numCols - 1) {
@@ -338,7 +338,7 @@
         generarRetoAleatorio();
         inicializarPizarra();
 
-        // EVALUACI”N IA
+        // EVALUACI√ìN IA
         const API_KEY_OBFUSCATED = "UXdfSVl3RkEyRmZFYUN3bGo0RHJ3VzE0YjVrc2ZSc1d4MkM4SkkwSHludEo2TlI4YkEuUUE=";
         function getApiKey() {
             try { return atob(API_KEY_OBFUSCATED).split("").reverse().join(""); } 
@@ -362,24 +362,24 @@
             });
 
             if(estructuraMatriz.length === 0) {
-                alert("La cuadrÌcula est· vacÌa. Escribe o selecciona los elementos en las casillas para formar la molÈcula."); return;
+                alert("La cuadr√≠cula est√° vac√≠a. Escribe o selecciona los elementos en las casillas para formar la mol√©cula."); return;
             }
 
             document.getElementById('overlay-loading').style.display = 'flex';
             document.getElementById('btn-evaluar').disabled = true;
 
             const promptText = `
-Eres un profesor de quÌmica org·nica riguroso. Un estudiante ha dibujado una molÈcula en una cuadrÌcula intentando formar el compuesto: "${reto}".
-AquÌ tienes la matriz de posiciones (Fila, Columna) y el contenido de cada celda:
+Eres un profesor de qu√≠mica org√°nica riguroso. Un estudiante ha dibujado una mol√©cula en una cuadr√≠cula intentando formar el compuesto: "${reto}".
+Aqu√≠ tienes la matriz de posiciones (Fila, Columna) y el contenido de cada celda:
 ${JSON.stringify(estructuraMatriz, null, 2)}
 
-Analiza las conexiones asumiendo que celdas adyacentes est·n enlazadas a travÈs de los sÌmbolos de enlace (-, |, =, ||, =). 
+Analiza las conexiones asumiendo que celdas adyacentes est√°n enlazadas a trav√©s de los s√≠mbolos de enlace (-, |, =, ||, =). 
 - Verifica si la cadena principal corresponde al nombre "${reto}".
-- Verifica si los radicales est·n en la posiciÛn correcta.
-- Verifica si se cumple la tetravalencia (un carbono 'C' debe tener 4 enlaces en total sumando hidrÛgenos y enlaces a otros carbonos). 
+- Verifica si los radicales est√°n en la posici√≥n correcta.
+- Verifica si se cumple la tetravalencia (un carbono 'C' debe tener 4 enlaces en total sumando hidr√≥genos y enlaces a otros carbonos). 
 
-Si es correcta (estructuralmente, no importa si rotÛ la molÈcula entera mientras sea la misma IUPAC), felicÌtalo con entusiasmo.
-Si es incorrecta, indÌcale amablemente su error (por ejemplo, "El carbono en la fila 3 columna 4 tiene 5 enlaces", o "Te faltÛ el doble enlace"). SÈ breve y conciso (m·ximo 4 oraciones). No uses formato Markdown complejo en tu respuesta.
+Si es correcta (estructuralmente, no importa si rot√≥ la mol√©cula entera mientras sea la misma IUPAC), felic√≠talo con entusiasmo.
+Si es incorrecta, ind√≠cale amablemente su error (por ejemplo, "El carbono en la fila 3 columna 4 tiene 5 enlaces", o "Te falt√≥ el doble enlace"). S√© breve y conciso (m√°ximo 4 oraciones). No uses formato Markdown complejo en tu respuesta.
 `;
 
             const apiKey = getApiKey();
@@ -404,7 +404,7 @@ Si es incorrecta, indÌcale amablemente su error (por ejemplo, "El carbono en la 
 
             } catch (error) {
                 console.error("Error IA:", error);
-                alert("Hubo un error de conexiÛn con la IA evaluadora. Revisa tu conexiÛn a internet.");
+                alert("Hubo un error de conexi√≥n con la IA evaluadora. Revisa tu conexi√≥n a internet.");
             } finally {
                 document.getElementById('overlay-loading').style.display = 'none';
                 document.getElementById('btn-evaluar').disabled = false;

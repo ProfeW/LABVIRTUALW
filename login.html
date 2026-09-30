@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Iniciar Sesión - LabVirtual W</title>
+    <title>Iniciar SesiÃ³n - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="auth.js"></script>
@@ -62,8 +62,8 @@
 
     <div class="auth-container">
         <i class="fa-solid fa-flask logo-icono"></i>
-        <h1>Iniciar Sesión</h1>
-        <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 25px;">Ingresa para acceder a las prácticas y evaluaciones de LabVirtual W.</p>
+        <h1>Iniciar SesiÃ³n</h1>
+        <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 25px;">Ingresa para acceder a las prÃ¡cticas y evaluaciones de LabVirtual W.</p>
         
         <div id="error-msg" class="error-msg"></div>
 
@@ -74,14 +74,14 @@
             </div>
             <div class="input-group">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" id="contrasena" placeholder="Contraseña" required autocomplete="current-password">
+                <input type="password" id="contrasena" placeholder="ContraseÃ±a" required autocomplete="current-password">
             </div>
             <button type="submit" class="btn-submit" id="btn-login">Entrar</button>
         </form>
 
         <div class="links-bottom">
-            <p><a href="recuperar.html">¿Olvidaste tu contraseña?</a></p>
-            <p style="margin-top: 10px; color: #aaa;">¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+            <p><a href="recuperar.html">Â¿Olvidaste tu contraseÃ±a?</a></p>
+            <p style="margin-top: 10px; color: #aaa;">Â¿No tienes cuenta? <a href="registro.html">RegÃ­strate aquÃ­</a></p>
         </div>
     </div>
 
@@ -100,7 +100,7 @@
             try {
                 const res = await window.LabAuth.login(user, pass);
                 if (res.success) {
-                    btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Éxito!';
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Â¡Ã‰xito!';
                     btn.style.background = '#2ecc71';
                     setTimeout(() => { window.location.href = 'index.html'; }, 1000);
                 } else {
@@ -110,7 +110,7 @@
                     btn.innerHTML = 'Entrar';
                 }
             } catch (err) {
-                errorMsg.textContent = "Error de conexión. Intenta de nuevo.";
+                errorMsg.textContent = "Error de conexiÃ³n. Intenta de nuevo.";
                 errorMsg.style.display = 'block';
                 btn.disabled = false;
                 btn.innerHTML = 'Entrar';

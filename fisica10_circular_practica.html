@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Práctica: Movimiento Circular Uniforme - LabVirtual W</title>
+    <title>PrÃ¡ctica: Movimiento Circular Uniforme - LabVirtual W</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>??</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -69,17 +69,17 @@
     <a href="index.html" class="logo"><i class="fas fa-microscope"></i> LabVirtual W</a>
     <ul class="menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10</a></li>
-        <li><a href="fisica10_circular.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> FÃ­sica 10</a></li>
+        <li><a href="fisica10_circular.html"><i class="fas fa-arrow-left"></i> Volver a LecciÃ³n</a></li>
     </ul>
 </nav>
 
 <div class="contenedor">
-    <a href="fisica10_circular.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a la Lección</a>
+    <a href="fisica10_circular.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a la LecciÃ³n</a>
 
     <div class="encabezado-leccion">
-        <h1>?? Práctica en Cascada (M.C.U.)</h1>
-        <p>16 Ejercicios · Calcula paso a paso cada magnitud (usa p ˜ 3.1416)</p>
+        <h1>?? PrÃ¡ctica en Cascada (M.C.U.)</h1>
+        <p>16 Ejercicios Â· Calcula paso a paso cada magnitud (usa p Ëœ 3.1416)</p>
     </div>
 
     <div class="barra-progreso-contenedor">
@@ -90,11 +90,11 @@
         <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
     </div>
 
-    <!-- Generación del contenedor de los 16 ejercicios (Se inyecta por JS para simplificar HTML repetitivo) -->
+    <!-- GeneraciÃ³n del contenedor de los 16 ejercicios (Se inyecta por JS para simplificar HTML repetitivo) -->
     <div id="ejercicios-container"></div>
     
     <div style="text-align:center; margin-top:30px;">
-        <a href="fisica10_circular_evaluacion.html" class="btn-validar" style="background:#e74c3c; font-size:1.2rem; padding:15px 30px;"><i class="fa-solid fa-file-signature"></i> Ir a Evaluación</a>
+        <a href="fisica10_circular_evaluacion.html" class="btn-validar" style="background:#e74c3c; font-size:1.2rem; padding:15px 30px;"><i class="fa-solid fa-file-signature"></i> Ir a EvaluaciÃ³n</a>
     </div>
 
 </div>
@@ -103,115 +103,115 @@
     // DATOS DE LOS 16 EJERCICIOS
     const ejerciciosData = [
         {
-            titulo: "Ejercicio 1 (Fórmula 1: Hallar T)",
-            enunciado: "Una rueda da 60 vueltas en 30 segundos. ¿Cuál es su período (T)?",
+            titulo: "Ejercicio 1 (FÃ³rmula 1: Hallar T)",
+            enunciado: "Una rueda da 60 vueltas en 30 segundos. Â¿CuÃ¡l es su perÃ­odo (T)?",
             datos: [{id:'n', label:'n', val:60, u:'vueltas'}, {id:'t', label:'t', val:30, u:'s'}],
             formulaOptions: [{v:'T=t/n', t:'T = t / n (Correcta)', c:true}, {v:'T=n/t', t:'T = n / t', c:false}],
             calculo: {id:'T', label:'T', val:0.5, u:'s'}
         },
         {
-            titulo: "Ejercicio 2 (Fórmula 1: Despejar t)",
-            enunciado: "Si el período es de 0.2 s, ¿cuánto tiempo tarda en dar 100 vueltas?",
+            titulo: "Ejercicio 2 (FÃ³rmula 1: Despejar t)",
+            enunciado: "Si el perÃ­odo es de 0.2 s, Â¿cuÃ¡nto tiempo tarda en dar 100 vueltas?",
             datos: [{id:'T', label:'T', val:0.2, u:'s'}, {id:'n', label:'n', val:100, u:'vueltas'}],
-            formulaOptions: [{v:'t=T/n', t:'t = T / n', c:false}, {v:'t=T*n', t:'t = T × n (Correcta)', c:true}],
+            formulaOptions: [{v:'t=T/n', t:'t = T / n', c:false}, {v:'t=T*n', t:'t = T Ã— n (Correcta)', c:true}],
             calculo: {id:'t', label:'t', val:20, u:'s'}
         },
         {
-            titulo: "Ejercicio 3 (Fórmula 2: Hallar f)",
-            enunciado: "Un motor completa 120 revoluciones (vueltas) en 60 s. ¿Cuál es su frecuencia?",
+            titulo: "Ejercicio 3 (FÃ³rmula 2: Hallar f)",
+            enunciado: "Un motor completa 120 revoluciones (vueltas) en 60 s. Â¿CuÃ¡l es su frecuencia?",
             datos: [{id:'n', label:'n', val:120, u:'vueltas'}, {id:'t', label:'t', val:60, u:'s'}],
             formulaOptions: [{v:'f=n/t', t:'f = n / t (Correcta)', c:true}, {v:'f=t/n', t:'f = t / n', c:false}],
             calculo: {id:'f', label:'f', val:2, u:'Hz'}
         },
         {
-            titulo: "Ejercicio 4 (Fórmula 2: Despejar n)",
-            enunciado: "Si un objeto gira a una frecuencia de 5 Hz. ¿Cuántas vueltas da en 10 s?",
+            titulo: "Ejercicio 4 (FÃ³rmula 2: Despejar n)",
+            enunciado: "Si un objeto gira a una frecuencia de 5 Hz. Â¿CuÃ¡ntas vueltas da en 10 s?",
             datos: [{id:'f', label:'f', val:5, u:'Hz'}, {id:'t', label:'t', val:10, u:'s'}],
-            formulaOptions: [{v:'n=f*t', t:'n = f × t (Correcta)', c:true}, {v:'n=f/t', t:'n = f / t', c:false}],
+            formulaOptions: [{v:'n=f*t', t:'n = f Ã— t (Correcta)', c:true}, {v:'n=f/t', t:'n = f / t', c:false}],
             calculo: {id:'n', label:'n', val:50, u:'vueltas'}
         },
         {
-            titulo: "Ejercicio 5 (Fórmula 3: Hallar ? con T)",
-            enunciado: "Un disco gira con un período de 3.1416 s. Halla su velocidad angular (?).",
+            titulo: "Ejercicio 5 (FÃ³rmula 3: Hallar ? con T)",
+            enunciado: "Un disco gira con un perÃ­odo de 3.1416 s. Halla su velocidad angular (?).",
             datos: [{id:'T', label:'T', val:3.1416, u:'s'}],
-            formulaOptions: [{v:'w=2pi/T', t:'? = 2p / T (Correcta)', c:true}, {v:'w=2pi*T', t:'? = 2p × T', c:false}],
+            formulaOptions: [{v:'w=2pi/T', t:'? = 2p / T (Correcta)', c:true}, {v:'w=2pi*T', t:'? = 2p Ã— T', c:false}],
             calculo: {id:'w', label:'?', val:2, u:'rad/s'}
         },
         {
-            titulo: "Ejercicio 6 (Fórmula 3: Despejar T desde ?)",
-            enunciado: "Si la velocidad angular es 6.2832 rad/s, ¿cuál es el período?",
+            titulo: "Ejercicio 6 (FÃ³rmula 3: Despejar T desde ?)",
+            enunciado: "Si la velocidad angular es 6.2832 rad/s, Â¿cuÃ¡l es el perÃ­odo?",
             datos: [{id:'w', label:'?', val:6.2832, u:'rad/s'}],
             formulaOptions: [{v:'T=2pi/w', t:'T = 2p / ? (Correcta)', c:true}, {v:'T=w/2pi', t:'T = ? / 2p', c:false}],
             calculo: {id:'T', label:'T', val:1, u:'s'}
         },
         {
-            titulo: "Ejercicio 7 (Fórmula 4: Hallar ? con f)",
-            enunciado: "Una hélice gira a 10 Hz de frecuencia. ¿Cuál es su velocidad angular ??",
+            titulo: "Ejercicio 7 (FÃ³rmula 4: Hallar ? con f)",
+            enunciado: "Una hÃ©lice gira a 10 Hz de frecuencia. Â¿CuÃ¡l es su velocidad angular ??",
             datos: [{id:'f', label:'f', val:10, u:'Hz'}],
-            formulaOptions: [{v:'w=2pif', t:'? = 2p × f (Correcta)', c:true}, {v:'w=f/2pi', t:'? = f / 2p', c:false}],
+            formulaOptions: [{v:'w=2pif', t:'? = 2p Ã— f (Correcta)', c:true}, {v:'w=f/2pi', t:'? = f / 2p', c:false}],
             calculo: {id:'w', label:'?', val:62.83, u:'rad/s'} // aproximado
         },
         {
-            titulo: "Ejercicio 8 (Fórmula 4: Despejar f desde ?)",
-            enunciado: "Si ? es 31.416 rad/s, ¿cuál es su frecuencia en Hz?",
+            titulo: "Ejercicio 8 (FÃ³rmula 4: Despejar f desde ?)",
+            enunciado: "Si ? es 31.416 rad/s, Â¿cuÃ¡l es su frecuencia en Hz?",
             datos: [{id:'w', label:'?', val:31.416, u:'rad/s'}],
-            formulaOptions: [{v:'f=2pi*w', t:'f = 2p × ?', c:false}, {v:'f=w/2pi', t:'f = ? / 2p (Correcta)', c:true}],
+            formulaOptions: [{v:'f=2pi*w', t:'f = 2p Ã— ?', c:false}, {v:'f=w/2pi', t:'f = ? / 2p (Correcta)', c:true}],
             calculo: {id:'f', label:'f', val:5, u:'Hz'}
         },
         {
-            titulo: "Ejercicio 9 (Fórmula 5: Hallar v tangencial con T)",
-            enunciado: "Una piedra atada gira a 2 m de radio con un período de 3.1416 s. Halla su velocidad tangencial.",
+            titulo: "Ejercicio 9 (FÃ³rmula 5: Hallar v tangencial con T)",
+            enunciado: "Una piedra atada gira a 2 m de radio con un perÃ­odo de 3.1416 s. Halla su velocidad tangencial.",
             datos: [{id:'R', label:'R', val:2, u:'m'}, {id:'T', label:'T', val:3.1416, u:'s'}],
             formulaOptions: [{v:'v=2piR/T', t:'v = 2pR / T (Correcta)', c:true}, {v:'v=T/2piR', t:'v = T / 2pR', c:false}],
             calculo: {id:'v', label:'v', val:4, u:'m/s'}
         },
         {
-            titulo: "Ejercicio 10 (Fórmula 5: Despejar R desde v)",
-            enunciado: "Si la velocidad tangencial es 10 m/s y su período es 6.2832 s, ¿cuál es el radio?",
+            titulo: "Ejercicio 10 (FÃ³rmula 5: Despejar R desde v)",
+            enunciado: "Si la velocidad tangencial es 10 m/s y su perÃ­odo es 6.2832 s, Â¿cuÃ¡l es el radio?",
             datos: [{id:'v', label:'v', val:10, u:'m/s'}, {id:'T', label:'T', val:6.2832, u:'s'}],
-            formulaOptions: [{v:'R=vT/2pi', t:'R = (v × T) / 2p (Correcta)', c:true}, {v:'R=v/2piT', t:'R = v / (2pT)', c:false}],
+            formulaOptions: [{v:'R=vT/2pi', t:'R = (v Ã— T) / 2p (Correcta)', c:true}, {v:'R=v/2piT', t:'R = v / (2pT)', c:false}],
             calculo: {id:'R', label:'R', val:10, u:'m'}
         },
         {
-            titulo: "Ejercicio 11 (Fórmula 6: Hallar v con ?)",
+            titulo: "Ejercicio 11 (FÃ³rmula 6: Hallar v con ?)",
             enunciado: "Las aspas giran con ? = 5 rad/s y un radio de 3 m. Halla la velocidad tangencial v.",
             datos: [{id:'w', label:'?', val:5, u:'rad/s'}, {id:'R', label:'R', val:3, u:'m'}],
-            formulaOptions: [{v:'v=w*R', t:'v = ? × R (Correcta)', c:true}, {v:'v=w/R', t:'v = ? / R', c:false}],
+            formulaOptions: [{v:'v=w*R', t:'v = ? Ã— R (Correcta)', c:true}, {v:'v=w/R', t:'v = ? / R', c:false}],
             calculo: {id:'v', label:'v', val:15, u:'m/s'}
         },
         {
-            titulo: "Ejercicio 12 (Fórmula 6: Despejar ? desde v)",
+            titulo: "Ejercicio 12 (FÃ³rmula 6: Despejar ? desde v)",
             enunciado: "Un auto de juguete tiene velocidad constante de 20 m/s en un riel circular de 4 m de radio. Halla ?.",
             datos: [{id:'v', label:'v', val:20, u:'m/s'}, {id:'R', label:'R', val:4, u:'m'}],
-            formulaOptions: [{v:'w=v/R', t:'? = v / R (Correcta)', c:true}, {v:'w=v*R', t:'? = v × R', c:false}],
+            formulaOptions: [{v:'w=v/R', t:'? = v / R (Correcta)', c:true}, {v:'w=v*R', t:'? = v Ã— R', c:false}],
             calculo: {id:'w', label:'?', val:5, u:'rad/s'}
         },
         {
-            titulo: "Ejercicio 13 (Fórmula 7: A. Centrípeta con v)",
-            enunciado: "Un corredor va a 6 m/s en una pista circular de 3 m de radio. ¿Cuál es su aceleración centrípeta?",
+            titulo: "Ejercicio 13 (FÃ³rmula 7: A. CentrÃ­peta con v)",
+            enunciado: "Un corredor va a 6 m/s en una pista circular de 3 m de radio. Â¿CuÃ¡l es su aceleraciÃ³n centrÃ­peta?",
             datos: [{id:'v', label:'v', val:6, u:'m/s'}, {id:'R', label:'R', val:3, u:'m'}],
-            formulaOptions: [{v:'ac=v2/R', t:'ac = v² / R (Correcta)', c:true}, {v:'ac=v/R2', t:'ac = v / R²', c:false}],
-            calculo: {id:'ac', label:'ac', val:12, u:'m/s²'}
+            formulaOptions: [{v:'ac=v2/R', t:'ac = vÂ² / R (Correcta)', c:true}, {v:'ac=v/R2', t:'ac = v / RÂ²', c:false}],
+            calculo: {id:'ac', label:'ac', val:12, u:'m/sÂ²'}
         },
         {
-            titulo: "Ejercicio 14 (Fórmula 7: Despejar v desde ac)",
-            enunciado: "La aceleración centrípeta es 16 m/s² y el radio es 4 m. Calcula la velocidad tangencial (saca la raíz cuadrada al final).",
-            datos: [{id:'ac', label:'ac', val:16, u:'m/s²'}, {id:'R', label:'R', val:4, u:'m'}],
-            formulaOptions: [{v:'v=raíz(acR)', t:'v = v(ac × R) (Correcta)', c:true}, {v:'v=acR2', t:'v = ac × R²', c:false}],
+            titulo: "Ejercicio 14 (FÃ³rmula 7: Despejar v desde ac)",
+            enunciado: "La aceleraciÃ³n centrÃ­peta es 16 m/sÂ² y el radio es 4 m. Calcula la velocidad tangencial (saca la raÃ­z cuadrada al final).",
+            datos: [{id:'ac', label:'ac', val:16, u:'m/sÂ²'}, {id:'R', label:'R', val:4, u:'m'}],
+            formulaOptions: [{v:'v=raÃ­z(acR)', t:'v = v(ac Ã— R) (Correcta)', c:true}, {v:'v=acR2', t:'v = ac Ã— RÂ²', c:false}],
             calculo: {id:'v', label:'v', val:8, u:'m/s'}
         },
         {
-            titulo: "Ejercicio 15 (Fórmula 8: A. Centrípeta con ?)",
-            enunciado: "Una polea de 2 m de radio gira a ? = 4 rad/s. ¿Cuál es su aceleración centrípeta?",
+            titulo: "Ejercicio 15 (FÃ³rmula 8: A. CentrÃ­peta con ?)",
+            enunciado: "Una polea de 2 m de radio gira a ? = 4 rad/s. Â¿CuÃ¡l es su aceleraciÃ³n centrÃ­peta?",
             datos: [{id:'w', label:'?', val:4, u:'rad/s'}, {id:'R', label:'R', val:2, u:'m'}],
-            formulaOptions: [{v:'ac=w2*R', t:'ac = ?² × R (Correcta)', c:true}, {v:'ac=w*R2', t:'ac = ? × R²', c:false}],
-            calculo: {id:'ac', label:'ac', val:32, u:'m/s²'}
+            formulaOptions: [{v:'ac=w2*R', t:'ac = ?Â² Ã— R (Correcta)', c:true}, {v:'ac=w*R2', t:'ac = ? Ã— RÂ²', c:false}],
+            calculo: {id:'ac', label:'ac', val:32, u:'m/sÂ²'}
         },
         {
-            titulo: "Ejercicio 16 (Fórmula 8: Despejar R desde ac y ?)",
-            enunciado: "Si ac = 50 m/s² y ? = 5 rad/s, ¿cuál es el radio?",
-            datos: [{id:'ac', label:'ac', val:50, u:'m/s²'}, {id:'w', label:'?', val:5, u:'rad/s'}],
-            formulaOptions: [{v:'R=ac/w2', t:'R = ac / ?² (Correcta)', c:true}, {v:'R=ac*w2', t:'R = ac × ?²', c:false}],
+            titulo: "Ejercicio 16 (FÃ³rmula 8: Despejar R desde ac y ?)",
+            enunciado: "Si ac = 50 m/sÂ² y ? = 5 rad/s, Â¿cuÃ¡l es el radio?",
+            datos: [{id:'ac', label:'ac', val:50, u:'m/sÂ²'}, {id:'w', label:'?', val:5, u:'rad/s'}],
+            formulaOptions: [{v:'R=ac/w2', t:'R = ac / ?Â² (Correcta)', c:true}, {v:'R=ac*w2', t:'R = ac Ã— ?Â²', c:false}],
             calculo: {id:'R', label:'R', val:2, u:'m'}
         }
     ];
@@ -232,7 +232,7 @@
                 datosHtml += `<div class="input-grupo"><label>${d.label}</label><input type="number" id="ej${num}-${d.id}" placeholder="${d.val}"><div class="unidad">${d.u}</div></div>`;
             });
 
-            let opcionesFormula = `<option value="">— Selecciona —</option>`;
+            let opcionesFormula = `<option value="">â€” Selecciona â€”</option>`;
             ej.formulaOptions.forEach(opt => {
                 opcionesFormula += `<option value="${opt.c ? 'correcta' : 'incorrecta'}">${opt.t}</option>`;
             });
@@ -250,9 +250,9 @@
                 </div>
 
                 <div class="paso-contenedor oculto" id="ej${num}-p2">
-                    <div class="paso-titulo">?? Paso 2: Elegir Fórmula <span class="icono-check">?</span></div>
+                    <div class="paso-titulo">?? Paso 2: Elegir FÃ³rmula <span class="icono-check">?</span></div>
                     <select id="ej${num}-formula">${opcionesFormula}</select>
-                    <button class="btn-validar" onclick="validarPaso(${num}, 'p2')">Validar Fórmula</button>
+                    <button class="btn-validar" onclick="validarPaso(${num}, 'p2')">Validar FÃ³rmula</button>
                     <div class="feedback" id="ej${num}-p2-fb"></div>
                 </div>
 
@@ -263,7 +263,7 @@
                         <input type="number" id="ej${num}-res" placeholder="?">
                         <div class="unidad">${ej.calculo.u}</div>
                     </div>
-                    <button class="btn-validar" onclick="validarPaso(${num}, 'p3')">Validar Cálculo</button>
+                    <button class="btn-validar" onclick="validarPaso(${num}, 'p3')">Validar CÃ¡lculo</button>
                     <div class="feedback" id="ej${num}-p3-fb"></div>
                 </div>
             </div>`;
@@ -275,8 +275,8 @@
         return Math.abs(val - esperado) <= Math.abs(esperado * tol) + 0.05;
     }
 
-    const MSJS_OK = ['¡Excelente!', '¡Correcto!', '¡Perfecto!', '¡Muy bien!'];
-    const MSJS_MAL = ['Incorrecto. Revisa tus datos.', 'Vuelve a intentarlo.', 'Revisa bien la fórmula o cálculo.'];
+    const MSJS_OK = ['Â¡Excelente!', 'Â¡Correcto!', 'Â¡Perfecto!', 'Â¡Muy bien!'];
+    const MSJS_MAL = ['Incorrecto. Revisa tus datos.', 'Vuelve a intentarlo.', 'Revisa bien la fÃ³rmula o cÃ¡lculo.'];
 
     window.validarPaso = function(num, paso) {
         const ej = ejerciciosData[num-1];

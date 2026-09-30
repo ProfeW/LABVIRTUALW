@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>VotaciÛn Concurso PRAE - LabVirtual W</title>
+    <title>Votaci√≥n Concurso PRAE - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -85,7 +85,7 @@
 
         <div class="alerta-jurado">
             <i class="fa-solid fa-triangle-exclamation" style="color: var(--color-neon-alt); font-size: 1.3rem; margin-right: 10px;"></i> 
-            <strong>Exclusivo para profesores:</strong> Ustedes son los jurados. Estas im·genes fueron diseÒadas por los estudiantes de los diferentes grados de la instituciÛn para concursar en el proyecto PRAE a nivel departamental. Por favor, voten, solo podemos enviar una propuesta por categorÌa.
+            <strong>Exclusivo para profesores:</strong> Ustedes son los jurados. Estas im√°genes fueron dise√±adas por los estudiantes de los diferentes grados de la instituci√≥n para concursar en el proyecto PRAE a nivel departamental. Por favor, voten, solo podemos enviar una propuesta por categor√≠a.
         </div>
 
         <form id="votacion-form">
@@ -95,9 +95,9 @@
             </div>
 
             <div class="categorias-grid">
-                <!-- CategorÌa Logo -->
+                <!-- Categor√≠a Logo -->
                 <div class="categoria-col">
-                    <h2 class="categoria-titulo"><i class="fa-solid fa-leaf"></i> CategorÌa: Logo</h2>
+                    <h2 class="categoria-titulo"><i class="fa-solid fa-leaf"></i> Categor√≠a: Logo</h2>
                     <div class="opciones-lista">
                         <!-- Option 1 to 6 -->
                         <label class="opcion-item">
@@ -133,9 +133,9 @@
                     </div>
                 </div>
 
-                <!-- CategorÌa Mascota -->
+                <!-- Categor√≠a Mascota -->
                 <div class="categoria-col">
-                    <h2 class="categoria-titulo cat-mascota"><i class="fa-solid fa-paw"></i> CategorÌa: Mascota</h2>
+                    <h2 class="categoria-titulo cat-mascota"><i class="fa-solid fa-paw"></i> Categor√≠a: Mascota</h2>
                     <div class="opciones-lista">
                         <!-- Option 7 to 10 -->
                         <label class="opcion-item">
@@ -162,12 +162,12 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn-enviar" id="btn-submit"><i class="fa-solid fa-paper-plane"></i> Enviar VotaciÛn</button>
+            <button type="submit" class="btn-enviar" id="btn-submit"><i class="fa-solid fa-paper-plane"></i> Enviar Votaci√≥n</button>
         </form>
 
         <div class="nota-final">
             <i class="fa-solid fa-bullhorn" style="color: var(--color-neon); font-size: 1.5rem; margin-bottom: 10px; display: block;"></i> 
-            Las mascotas y logos escogidos ser·n enviados a la GobernaciÛn. En los prÛximos dÌas habr· una jornada de votaciÛn con <strong>"likes" a travÈs de Facebook</strong>, por favor estÈn muy atentos para que nos colaboren.
+            Las mascotas y logos escogidos ser√°n enviados a la Gobernaci√≥n. En los pr√≥ximos d√≠as habr√° una jornada de votaci√≥n con <strong>"likes" a trav√©s de Facebook</strong>, por favor est√©n muy atentos para que nos colaboren.
         </div>
     </div>
 
@@ -176,7 +176,7 @@
         const opciones = document.querySelectorAll('input[type="radio"]');
         opciones.forEach(radio => {
             radio.addEventListener('change', function() {
-                // Remover la clase selected de todos los items de esta misma categorÌa
+                // Remover la clase selected de todos los items de esta misma categor√≠a
                 const name = this.name;
                 const siblings = document.querySelectorAll(`input[name="${name}"]`);
                 siblings.forEach(s => s.closest('.opcion-item').classList.remove('selected'));
@@ -188,7 +188,7 @@
             });
         });
 
-        // EnvÌo del formulario a Google Sheets
+        // Env√≠o del formulario a Google Sheets
         // ===> REEMPLAZAR ESTA URL CON LA URL DE TU SCRIPT DE GOOGLE <===
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxXyBSa9aEzTsCCLeEUBQosvESw2VrKAWholER7qp81ODrkQuqxdhXaE1OHAefi8PCJCA/exec'; 
         const form = document.getElementById('votacion-form');
@@ -197,7 +197,7 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // Verificamos que se seleccionÛ una de cada categorÌa
+            // Verificamos que se seleccion√≥ una de cada categor√≠a
             const logo = document.querySelector('input[name="categoria_1"]:checked');
             const mascota = document.querySelector('input[name="categoria_2"]:checked');
             
@@ -205,7 +205,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Faltan opciones',
-                    text: 'Debes seleccionar una propuesta en la categorÌa Logo y una en Mascota.',
+                    text: 'Debes seleccionar una propuesta en la categor√≠a Logo y una en Mascota.',
                     background: '#12121a',
                     color: '#fff',
                     confirmButtonColor: '#00f3ff'
@@ -213,44 +213,44 @@
                 return;
             }
 
-            // Cambiar estado del botÛn
+            // Cambiar estado del bot√≥n
             btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
             btnSubmit.disabled = true;
 
             // Preparar datos
             const formData = new FormData(form);
 
-            // SimulaciÛn de envÌo si no se ha configurado la URL (Para que puedas probarlo ahora)
+            // Simulaci√≥n de env√≠o si no se ha configurado la URL (Para que puedas probarlo ahora)
             if(scriptURL.includes('TU_SCRIPT_ID')) {
                 setTimeout(() => {
                     Swal.fire({
                         icon: 'info',
                         title: 'Modo de Prueba Local',
-                        html: `Falta configurar el enlace de Google Apps Script.<br><br><b>Datos que se enviarÌan a tu hoja:</b><br>Nombre: ${formData.get('nombre')}<br>Logo: Imagen ${formData.get('categoria_1')}<br>Mascota: Imagen ${formData.get('categoria_2')}`,
+                        html: `Falta configurar el enlace de Google Apps Script.<br><br><b>Datos que se enviar√≠an a tu hoja:</b><br>Nombre: ${formData.get('nombre')}<br>Logo: Imagen ${formData.get('categoria_1')}<br>Mascota: Imagen ${formData.get('categoria_2')}`,
                         background: '#12121a',
                         color: '#fff',
                         confirmButtonColor: '#00f3ff'
                     });
-                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar VotaciÛn';
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Votaci√≥n';
                     btnSubmit.disabled = false;
                 }, 1000);
                 return;
             }
 
-            // PeticiÛn POST a Google Apps Script
+            // Petici√≥n POST a Google Apps Script
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
                     Swal.fire({
                         icon: 'success',
-                        title: '°VotaciÛn Registrada!',
-                        text: 'Gracias por participar en la elecciÛn del proyecto PRAE.',
+                        title: '¬°Votaci√≥n Registrada!',
+                        text: 'Gracias por participar en la elecci√≥n del proyecto PRAE.',
                         background: '#12121a',
                         color: '#fff',
                         confirmButtonColor: '#00f3ff'
                     }).then(() => {
                         form.reset();
                         document.querySelectorAll('.opcion-item').forEach(item => item.classList.remove('selected'));
-                        btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar VotaciÛn';
+                        btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Votaci√≥n';
                         btnSubmit.disabled = false;
                     });
                 })
@@ -258,13 +258,13 @@
                     console.error('Error!', error.message);
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error de conexiÛn',
+                        title: 'Error de conexi√≥n',
                         text: 'Hubo un problema al enviar tu voto. Por favor, intenta de nuevo.',
                         background: '#12121a',
                         color: '#fff',
                         confirmButtonColor: '#ff00ea'
                     });
-                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar VotaciÛn';
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Votaci√≥n';
                     btnSubmit.disabled = false;
                 });
         });

@@ -72,7 +72,7 @@
         .hl-numero { font-size: 0.8rem; color: #00d2ff; vertical-align: super; }
         .hl-radical { color: #ef4444; font-weight: bold; }
 
-        /* Evaluación Embebida */
+        /* EvaluaciÃ³n Embebida */
         .evaluacion-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 15px; padding: 30px; margin-top: 40px; }
         .evaluacion-box h3 { color: #fff; margin-bottom: 20px; text-align: center; font-size: 1.8rem;}
         .pregunta { margin-bottom: 25px; text-align: left; }
@@ -96,16 +96,16 @@
     <main class="contenedor">
         <h1>Nomenclatura de Alcanos</h1>
 
-        <h2>¿Qué son los Alcanos?</h2>
-        <p>Los alcanos son hidrocarburos (compuestos de solo Carbono e Hidrógeno) que contienen únicamente <strong>enlaces simples</strong> entre sus carbonos. También se les conoce como parafinas. Su terminación o sufijo siempre es <strong>-ano</strong>.</p>
+        <h2>Â¿QuÃ© son los Alcanos?</h2>
+        <p>Los alcanos son hidrocarburos (compuestos de solo Carbono e HidrÃ³geno) que contienen Ãºnicamente <strong>enlaces simples</strong> entre sus carbonos. TambiÃ©n se les conoce como parafinas. Su terminaciÃ³n o sufijo siempre es <strong>-ano</strong>.</p>
 
         <h2>Ejemplos de Alcanos</h2>
-        <p>Aquí tienes 10 ejemplos de alcanos (desde los más simples hasta algunos con ramificaciones). Nota cómo los números de los átomos de hidrógeno se escriben como <em>subíndices</em> pequeños:</p>
+        <p>AquÃ­ tienes 10 ejemplos de alcanos (desde los mÃ¡s simples hasta algunos con ramificaciones). Nota cÃ³mo los nÃºmeros de los Ã¡tomos de hidrÃ³geno se escriben como <em>subÃ­ndices</em> pequeÃ±os:</p>
         <div class="tabla-responsive">
             <table>
                 <tr>
                     <th>Nombre (IUPAC)</th>
-                    <th>Fórmula Semidesarrollada</th>
+                    <th>FÃ³rmula Semidesarrollada</th>
                     <th>Tipo</th>
                 </tr>
                 <tr><td>Metano</td><td>CH<sub>4</sub></td><td>Lineal simple</td></tr>
@@ -124,14 +124,14 @@
         <h2>Simulador: Ejercicios Paso a Paso</h2>
         <p>Aprenderemos a nombrar alcanos ramificados siguiendo 4 pasos fundamentales dictados por la IUPAC:</p>
         <ul>
-            <li><strong>Paso 1:</strong> Identificar la cadena principal (la más larga y continua).</li>
-            <li><strong>Paso 2:</strong> Enumerar la cadena empezando por el extremo más cercano a una ramificación.</li>
+            <li><strong>Paso 1:</strong> Identificar la cadena principal (la mÃ¡s larga y continua).</li>
+            <li><strong>Paso 2:</strong> Enumerar la cadena empezando por el extremo mÃ¡s cercano a una ramificaciÃ³n.</li>
             <li><strong>Paso 3:</strong> Identificar los radicales (ramificaciones como metil, etil).</li>
-            <li><strong>Paso 4:</strong> Nombrar por orden alfabético colocando el número del carbono, usando prefijos (di, tri) si se repiten.</li>
+            <li><strong>Paso 4:</strong> Nombrar por orden alfabÃ©tico colocando el nÃºmero del carbono, usando prefijos (di, tri) si se repiten.</li>
         </ul>
 
         <div class="simulador-pasos">
-            <h3 style="color: #fff; margin-bottom: 15px;">Práctica Interactiva</h3>
+            <h3 style="color: #fff; margin-bottom: 15px;">PrÃ¡ctica Interactiva</h3>
             <div style="margin-bottom: 15px;">
                 <label style="color:#ccc;">Selecciona un ejemplo: </label>
                 <select id="selector-ejemplo" onchange="cargarEjemplo()" style="padding: 5px; border-radius: 5px; background: #1e293b; color: #fff; border: 1px solid #00d2ff;">
@@ -140,7 +140,7 @@
                     <option value="2">Ejemplo 3 (Lineal largo)</option>
                     <option value="3">Ejemplo 4 (Lineal muy largo)</option>
                     <option value="4">Ejemplo 5 (Lineal gigante)</option>
-                    <option value="5">Ejemplo 6 (1 Ramificación)</option>
+                    <option value="5">Ejemplo 6 (1 RamificaciÃ³n)</option>
                     <option value="6">Ejemplo 7 (2 Ramificaciones iguales)</option>
                     <option value="7">Ejemplo 8 (2 Ramificaciones distintas)</option>
                     <option value="8">Ejemplo 9 (3 Ramificaciones)</option>
@@ -152,7 +152,7 @@
                 CH3-CH2-CH3
             </div>
 
-            <div class="paso-descripcion" id="desc-paso">Presiona 'Siguiente Paso' para comenzar a nombrar la molécula.</div>
+            <div class="paso-descripcion" id="desc-paso">Presiona 'Siguiente Paso' para comenzar a nombrar la molÃ©cula.</div>
             <div class="resultado-nombre" id="resultado-nombre"></div>
 
             <div class="btn-controles" style="margin-top: 20px;">
@@ -161,13 +161,13 @@
             </div>
         </div>
 
-        <!-- EVALUACIÓN EMBEBIDA -->
+        <!-- EVALUACIÃ“N EMBEBIDA -->
         <div class="evaluacion-box" id="evaluacion">
-            <h3><i class="fa-solid fa-clipboard-check" style="color: var(--color-primario);"></i> Evaluación: Alcanos</h3>
+            <h3><i class="fa-solid fa-clipboard-check" style="color: var(--color-primario);"></i> EvaluaciÃ³n: Alcanos</h3>
             
             <form id="form-evaluacion">
                 <div class="pregunta" id="q1">
-                    <p>1. ¿Cómo se denomina al radical formado por un solo átomo de carbono (CH3-)?</p>
+                    <p>1. Â¿CÃ³mo se denomina al radical formado por un solo Ã¡tomo de carbono (CH3-)?</p>
                     <div class="opciones">
                         <label><input type="radio" name="p1" value="a"> a) Etil</label>
                         <label><input type="radio" name="p1" value="b"> b) Propil</label>
@@ -177,17 +177,17 @@
                 </div>
 
                 <div class="pregunta" id="q2">
-                    <p>2. Al enumerar una cadena carbonada ramificada, ¿por dónde se debe empezar?</p>
+                    <p>2. Al enumerar una cadena carbonada ramificada, Â¿por dÃ³nde se debe empezar?</p>
                     <div class="opciones">
                         <label><input type="radio" name="p2" value="a"> a) Siempre por la izquierda.</label>
-                        <label><input type="radio" name="p2" value="b"> b) Por el extremo más cercano a una ramificación (radical).</label>
+                        <label><input type="radio" name="p2" value="b"> b) Por el extremo mÃ¡s cercano a una ramificaciÃ³n (radical).</label>
                         <label><input type="radio" name="p2" value="c"> c) Siempre por la derecha.</label>
-                        <label><input type="radio" name="p2" value="d"> d) Por el centro de la molécula.</label>
+                        <label><input type="radio" name="p2" value="d"> d) Por el centro de la molÃ©cula.</label>
                     </div>
                 </div>
 
                 <div class="pregunta" id="q3">
-                    <p>3. ¿Cómo se nombra un alcano lineal de 5 carbonos?</p>
+                    <p>3. Â¿CÃ³mo se nombra un alcano lineal de 5 carbonos?</p>
                     <div class="opciones">
                         <label><input type="radio" name="p3" value="a"> a) Butano</label>
                         <label><input type="radio" name="p3" value="b"> b) Hexano</label>
@@ -228,7 +228,7 @@
                 paso2: "<span class='hl-cadena'>C<span class='hl-numero'>1</span>H3 - C<span class='hl-numero'>2</span>H2 - C<span class='hl-numero'>3</span>H2 - C<span class='hl-numero'>4</span>H2 - C<span class='hl-numero'>5</span>H2 - C<span class='hl-numero'>6</span>H3</span>",
                 paso3: "No hay radicales.",
                 nombre: "Hexano",
-                desc: ["Paso 1: Cadena de 6 carbonos.", "Paso 2: Enumeración estándar.", "Paso 3: Nada por aquí.", "Paso 4: Prefijo hex-, sufijo -ano."]
+                desc: ["Paso 1: Cadena de 6 carbonos.", "Paso 2: EnumeraciÃ³n estÃ¡ndar.", "Paso 3: Nada por aquÃ­.", "Paso 4: Prefijo hex-, sufijo -ano."]
             },
             { // 3
                 base: "CH3-(CH2)6-CH3",
@@ -244,15 +244,15 @@
                 paso2: "Total: 10 carbonos enumerados.",
                 paso3: "No hay radicales.",
                 nombre: "Decano",
-                desc: ["Paso 1: Cadena de 10 carbonos.", "Paso 2: Enumeración directa.", "Paso 3: N/A.", "Paso 4: Prefijo dec-."]
+                desc: ["Paso 1: Cadena de 10 carbonos.", "Paso 2: EnumeraciÃ³n directa.", "Paso 3: N/A.", "Paso 4: Prefijo dec-."]
             },
             { // 5: 1 Rama
                 base: "CH3-CH(CH3)-CH3",
-                paso1: "CH3-<span class='hl-cadena'>CH</span>(CH3)-<span class='hl-cadena'>CH3</span> (Línea principal resaltada)",
+                paso1: "CH3-<span class='hl-cadena'>CH</span>(CH3)-<span class='hl-cadena'>CH3</span> (LÃ­nea principal resaltada)",
                 paso2: "C<span class='hl-numero'>1</span>H3-C<span class='hl-numero'>2</span>H(CH3)-C<span class='hl-numero'>3</span>H3",
                 paso3: "Radical en C2: <span class='hl-radical'>-CH3 (Metil)</span>",
                 nombre: "2-metilpropano",
-                desc: ["Paso 1: Identificamos la cadena más larga (3 carbonos).", "Paso 2: Enumeramos (cerca de la rama, en este caso es simétrico).", "Paso 3: El grupo que sobra es un Metil (-CH3).", "Paso 4: Posición (2) - nombre radical (metil) - nombre cadena (propano)."]
+                desc: ["Paso 1: Identificamos la cadena mÃ¡s larga (3 carbonos).", "Paso 2: Enumeramos (cerca de la rama, en este caso es simÃ©trico).", "Paso 3: El grupo que sobra es un Metil (-CH3).", "Paso 4: PosiciÃ³n (2) - nombre radical (metil) - nombre cadena (propano)."]
             },
             { // 6: 2 Ramas iguales
                 base: "CH3-C(CH3)2-CH3",
@@ -260,7 +260,7 @@
                 paso2: "C<span class='hl-numero'>1</span>H3-C<span class='hl-numero'>2</span>(CH3)2-C<span class='hl-numero'>3</span>H3",
                 paso3: "Dos radicales en C2: <span class='hl-radical'>-CH3 y -CH3 (Metiles)</span>",
                 nombre: "2,2-dimetilpropano",
-                desc: ["Paso 1: Cadena principal de 3 carbonos.", "Paso 2: El carbono central es el número 2.", "Paso 3: Tenemos dos grupos metil en el carbono 2.", "Paso 4: Usamos comas para números (2,2) y prefijo 'di' para dos metiles."]
+                desc: ["Paso 1: Cadena principal de 3 carbonos.", "Paso 2: El carbono central es el nÃºmero 2.", "Paso 3: Tenemos dos grupos metil en el carbono 2.", "Paso 4: Usamos comas para nÃºmeros (2,2) y prefijo 'di' para dos metiles."]
             },
             { // 7: 2 Ramas distintas
                 base: "CH3-CH(CH3)-CH(CH2CH3)-CH2-CH3",
@@ -268,7 +268,7 @@
                 paso2: "Empezamos de izquierda a derecha para tener ramas en 2 y 3.",
                 paso3: "C2: <span class='hl-radical'>Metil</span> | C3: <span class='hl-radical'>Etil</span>",
                 nombre: "3-etil-2-metilpentano",
-                desc: ["Paso 1: Cadena de 5 carbonos.", "Paso 2: Se enumera de izq a der (posiciones 2,3 son menores que 3,4).", "Paso 3: Identificamos un Etil y un Metil.", "Paso 4: Orden alfabético: primero 'Etil', luego 'Metil'."]
+                desc: ["Paso 1: Cadena de 5 carbonos.", "Paso 2: Se enumera de izq a der (posiciones 2,3 son menores que 3,4).", "Paso 3: Identificamos un Etil y un Metil.", "Paso 4: Orden alfabÃ©tico: primero 'Etil', luego 'Metil'."]
             },
             { // 8: 3 Ramas
                 base: "CH3-CH(CH3)-CH(CH3)-CH(CH3)-CH3",
@@ -276,15 +276,15 @@
                 paso2: "Posiciones 2, 3 y 4.",
                 paso3: "Tres radicales <span class='hl-radical'>Metil</span>.",
                 nombre: "2,3,4-trimetilpentano",
-                desc: ["Paso 1: 5 carbonos (Pentano).", "Paso 2: Simétrico, posiciones 2, 3 y 4.", "Paso 3: Tres grupos -CH3.", "Paso 4: Posiciones separadas por comas (2,3,4) y prefijo 'tri'metil."]
+                desc: ["Paso 1: 5 carbonos (Pentano).", "Paso 2: SimÃ©trico, posiciones 2, 3 y 4.", "Paso 3: Tres grupos -CH3.", "Paso 4: Posiciones separadas por comas (2,3,4) y prefijo 'tri'metil."]
             },
             { // 9: Complejo
                 base: "CH3-CH2-C(CH3)2-CH2-CH(CH2CH3)-CH3",
-                paso1: "Cadena más larga tiene 6 carbonos.",
+                paso1: "Cadena mÃ¡s larga tiene 6 carbonos.",
                 paso2: "De der a izq: Ramas en 2, 4 y 4. (2+4+4=10).",
                 paso3: "C2: Etil | C4,C4: Dimetil",
                 nombre: "3-etil-4,4-dimetilhexano (numerando de izq a der da posiciones menores)",
-                desc: ["Paso 1: 6 carbonos (Hexano).", "Paso 2: Se enumera buscando las posiciones más bajas. Izq a der: 3,3,5 (suma 11). Der a izq: 2,4,4 (suma 10). Corrección: es de der a izq.", "Paso 3: Radicales: etil y dos metiles.", "Paso 4: Orden alfabético: Etil va antes que metil."]
+                desc: ["Paso 1: 6 carbonos (Hexano).", "Paso 2: Se enumera buscando las posiciones mÃ¡s bajas. Izq a der: 3,3,5 (suma 11). Der a izq: 2,4,4 (suma 10). CorrecciÃ³n: es de der a izq.", "Paso 3: Radicales: etil y dos metiles.", "Paso 4: Orden alfabÃ©tico: Etil va antes que metil."]
             }
         ];
 
@@ -299,7 +299,7 @@
         function reiniciarPaso() {
             pasoActual = 0;
             document.getElementById('display-estructura').innerHTML = ejemplos[idActual].base;
-            document.getElementById('desc-paso').innerText = "Presiona 'Siguiente Paso' para comenzar a nombrar la molécula.";
+            document.getElementById('desc-paso').innerText = "Presiona 'Siguiente Paso' para comenzar a nombrar la molÃ©cula.";
             document.getElementById('resultado-nombre').innerText = "";
             document.getElementById('btn-siguiente').disabled = false;
         }
@@ -349,10 +349,10 @@
             
             if (puntaje === total) {
                 resDiv.className = 'correcto';
-                resDiv.innerHTML = `<i class="fa-solid fa-check-circle"></i> ¡Excelente! (${puntaje}/${total}). Buen trabajo en Alcanos.`;
+                resDiv.innerHTML = `<i class="fa-solid fa-check-circle"></i> Â¡Excelente! (${puntaje}/${total}). Buen trabajo en Alcanos.`;
             } else {
                 resDiv.className = 'incorrecto';
-                resDiv.innerHTML = `<i class="fa-solid fa-times-circle"></i> Obtuviste ${puntaje}/${total}. Revisa los pasos e inténtalo de nuevo.`;
+                resDiv.innerHTML = `<i class="fa-solid fa-times-circle"></i> Obtuviste ${puntaje}/${total}. Revisa los pasos e intÃ©ntalo de nuevo.`;
             }
         }
     </script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Panel de Administración - LabVirtual W</title>
+    <title>Panel de AdministraciÃ³n - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="auth.js"></script>
@@ -90,7 +90,7 @@
 
     <div class="contenedor">
         <div class="panel-header">
-            <h1><i class="fa-solid fa-users-gear"></i> Gestión del Laboratorio</h1>
+            <h1><i class="fa-solid fa-users-gear"></i> GestiÃ³n del Laboratorio</h1>
         </div>
 
         <div class="tabs">
@@ -106,10 +106,10 @@
                         <tr>
                             <th>Nombre Completo</th>
                             <th>Correo</th>
-                            <th>Teléfono</th>
+                            <th>TelÃ©fono</th>
                             <th>Grado</th>
                             <th>Usuario</th>
-                            <th>Contraseña</th>
+                            <th>ContraseÃ±a</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -154,12 +154,12 @@
                     <input type="text" id="edit-nombre" required>
                 </div>
                 <div class="input-group">
-                    <label>Correo Electrónico</label>
+                    <label>Correo ElectrÃ³nico</label>
                     <input type="email" id="edit-correo" required>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div class="input-group">
-                        <label>Teléfono</label>
+                        <label>TelÃ©fono</label>
                         <input type="text" id="edit-telefono" required>
                     </div>
                     <div class="input-group">
@@ -168,11 +168,11 @@
                     </div>
                 </div>
                 <div class="input-group">
-                    <label>Usuario (ID Único)</label>
+                    <label>Usuario (ID Ãšnico)</label>
                     <input type="text" id="edit-usuario" readonly style="background: rgba(0,0,0,0.6); cursor: not-allowed;" title="El nombre de usuario no se puede cambiar">
                 </div>
                 <div class="input-group">
-                    <label>Contraseña</label>
+                    <label>ContraseÃ±a</label>
                     <input type="text" id="edit-contrasena" required>
                 </div>
                 <button type="submit" class="btn-save" id="btn-save-edit"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
@@ -181,7 +181,7 @@
     </div>
 
     <script>
-        // Lógica de Pestañas
+        // LÃ³gica de PestaÃ±as
         function openTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -233,7 +233,7 @@
                 table.dataset.loaded = 'true';
                 if (res.success && res.data.length > 0) {
                     tbody.innerHTML = '';
-                    // Mostrar los más recientes primero
+                    // Mostrar los mÃ¡s recientes primero
                     res.data.reverse().forEach(log => {
                         tbody.innerHTML += `
                             <tr>
@@ -275,7 +275,7 @@
             btn.disabled = true;
 
             const datos = {
-                usuario_original: document.getElementById('edit-original-usuario').value, // ID único
+                usuario_original: document.getElementById('edit-original-usuario').value, // ID Ãºnico
                 nombre_completo: document.getElementById('edit-nombre').value,
                 correo_electronico: document.getElementById('edit-correo').value,
                 numero_telefono: document.getElementById('edit-telefono').value,
@@ -293,7 +293,7 @@
                     alert("Error: " + res.message);
                 }
             } catch (err) {
-                alert("Error de conexión al intentar actualizar.");
+                alert("Error de conexiÃ³n al intentar actualizar.");
             }
             btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios';
             btn.disabled = false;
@@ -301,7 +301,7 @@
 
         // Eliminar Usuario
         async function deleteUser(usuario) {
-            if (confirm(`¿Estás seguro que deseas eliminar permanentemente al usuario '${usuario}'?`)) {
+            if (confirm(`Â¿EstÃ¡s seguro que deseas eliminar permanentemente al usuario '${usuario}'?`)) {
                 try {
                     const res = await window.LabAuth.deleteUser(usuario);
                     if(res.success) {
@@ -310,16 +310,16 @@
                         alert("Error: " + res.message);
                     }
                 } catch(err) {
-                    alert("Error de conexión al intentar eliminar.");
+                    alert("Error de conexiÃ³n al intentar eliminar.");
                 }
             }
         }
 
         // Iniciar
         document.addEventListener('DOMContentLoaded', () => {
-            // Verificar si el usuario que está intentando acceder es profew
+            // Verificar si el usuario que estÃ¡ intentando acceder es profew
             const checkUser = JSON.parse(localStorage.getItem('usuario_labvirtual'));
-            // La redirección de seguridad ya la hace auth.js en la línea 23, pero por precaución:
+            // La redirecciÃ³n de seguridad ya la hace auth.js en la lÃ­nea 23, pero por precauciÃ³n:
             if (!checkUser || checkUser.usuario !== 'profew') {
                 document.body.innerHTML = '<h1 style="text-align:center; margin-top: 50px; color:#e74c3c;">Acceso Denegado</h1>';
             } else {

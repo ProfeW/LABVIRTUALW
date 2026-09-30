@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Evaluación: Movimiento Circular Uniforme - Física 10</title>
+    <title>EvaluaciÃ³n: Movimiento Circular Uniforme - FÃ­sica 10</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>??</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -89,23 +89,23 @@
     <a href="index.html" class="logo"><i class="fas fa-microscope"></i> LabVirtual W</a>
     <ul class="menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> Física 10</a></li>
-        <li><a href="fisica10_circular.html"><i class="fas fa-arrow-left"></i> Volver a Lección</a></li>
+        <li><a href="fisica_10.html"><i class="fas fa-atom"></i> FÃ­sica 10</a></li>
+        <li><a href="fisica10_circular.html"><i class="fas fa-arrow-left"></i> Volver a LecciÃ³n</a></li>
     </ul>
 </nav>
 
 <div class="contenedor">
     <div id="pantalla-inicio" class="pantalla-inicio">
-        <h1><i class="fa-solid fa-rotate-right"></i> Evaluación: M.C.U.</h1>
-        <p>Movimiento Circular Uniforme · Física 10°</p>
+        <h1><i class="fa-solid fa-rotate-right"></i> EvaluaciÃ³n: M.C.U.</h1>
+        <p>Movimiento Circular Uniforme Â· FÃ­sica 10Â°</p>
         <ul class="reglas">
             <li><i class="fa-solid fa-check"></i> Consta de <strong>10 preguntas</strong>.</li>
-            <li><i class="fa-solid fa-check"></i> 5 teóricas tipo ICFES y 5 cálculos de fórmulas en cascada.</li>
+            <li><i class="fa-solid fa-check"></i> 5 teÃ³ricas tipo ICFES y 5 cÃ¡lculos de fÃ³rmulas en cascada.</li>
             <li><i class="fa-solid fa-check"></i> Las preguntas aparecen en orden aleatorio.</li>
         </ul>
         <input type="text" id="input-nombre" class="input-nombre" placeholder="?? Escribe tu nombre completo" maxlength="60">
         <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre.</div><br>
-        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar Evaluación</button>
+        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar EvaluaciÃ³n</button>
     </div>
     <div id="seccion-evaluacion" class="seccion-evaluacion">
         <div class="header-eval"><div class="bienvenida-nombre" id="bienvenida-nombre"></div><div class="timer-badge">Pregunta <span id="num-actual">1</span> de 10</div></div>
@@ -128,26 +128,26 @@
             <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">? Incorrectas</div></div>
             <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">?? Porcentaje</div></div>
         </div>
-        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisión de Respuestas</div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> RevisiÃ³n de Respuestas</div>
         <div id="revision-container"></div>
         <div style="text-align:center;margin-top:30px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
             <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#2980b9);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Reintentar</button>
-            <a href="fisica10_circular.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teoría</a>
+            <a href="fisica10_circular.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar TeorÃ­a</a>
         </div>
     </div>
 </div>
 <script>
 const bancoPreguntas = [
-    {texto:"¿Qué es el Movimiento Circular Uniforme (MCU)?",opciones:["A. Movimiento en línea recta constante.","B. Movimiento circular donde cambia continuamente la rapidez.","C. Movimiento circular en el que se recorren ángulos iguales en tiempos iguales.","D. Movimiento donde la aceleración total es siempre cero."],respuesta:2},
-    {texto:"La velocidad angular (?) en el MCU mide:",opciones:["A. La distancia lineal o longitud de arco recorrida.","B. El ángulo barrido por unidad de tiempo.","C. La fuerza hacia el centro que mantiene el giro.","D. La cantidad de vueltas totales sin importar el tiempo transcurrido."],respuesta:1},
-    {texto:"La aceleración centrípeta se caracteriza porque es responsable de:",opciones:["A. Cambiar la rapidez o magnitud de la velocidad del objeto.","B. Cambiar la masa del objeto mientras gira.","C. Cambiar continuamente la dirección de la velocidad para mantener la trayectoria circular.","D. Empujar el objeto rectilíneamente hacia afuera de la curva."],respuesta:2},
-    {texto:"Si decimos que el período (T) de un objeto giratorio es de 5 segundos, significa que:",opciones:["A. El objeto da 5 vueltas en un solo segundo.","B. El objeto tarda 5 segundos en completar una sola vuelta.","C. Su velocidad tangencial es obligatoriamente de 5 m/s.","D. Acelera hacia el centro a razón de 5 m/s²."],respuesta:1},
-    {texto:"¿Cuál es la relación principal que vincula la velocidad tangencial (v) con la velocidad angular (?)?",opciones:["A. v = ? + R","B. v = ? / R","C. v = ? · R","D. v = ?² · R"],respuesta:2},
-    {texto:"(Cálculo) Un objeto que gira en el MCU logra dar 30 vueltas exactas en 10 segundos. ¿Cuál es su frecuencia (f)? (f = n / t)",opciones:["A. 3 Hz","B. 0.33 Hz","C. 300 Hz","D. 30 Hz"],respuesta:0},
-    {texto:"(Cálculo) Si el período de una rueda es 2 s, calcula su velocidad angular ? (usa p = 3.14). (? = 2p / T)",opciones:["A. 6.28 rad/s","B. 3.14 rad/s","C. 1.57 rad/s","D. 2 rad/s"],respuesta:1},
-    {texto:"(Cálculo) Un disco compacto tiene un radio de 0.5 m y gira a 4 rad/s de velocidad angular. ¿Cuál es su velocidad tangencial (v) en el borde? (v = ? · R)",opciones:["A. 8 m/s","B. 2 m/s","C. 4 m/s","D. 12 m/s"],respuesta:1},
-    {texto:"(Cálculo) Una bicicleta toma una curva de 5 m de radio con una velocidad constante de 10 m/s. ¿Cuál es su aceleración centrípeta? (ac = v² / R)",opciones:["A. 2 m/s²","B. 20 m/s²","C. 50 m/s²","D. 10 m/s²"],respuesta:1},
-    {texto:"(Cálculo) Un objeto gira y experimenta una aceleración centrípeta de 18 m/s² a un radio de giro de 2 m. Calcula su velocidad angular ?. (ac = ?² · R)",opciones:["A. 9 rad/s","B. 3 rad/s","C. 36 rad/s","D. 6 rad/s"],respuesta:1}
+    {texto:"Â¿QuÃ© es el Movimiento Circular Uniforme (MCU)?",opciones:["A. Movimiento en lÃ­nea recta constante.","B. Movimiento circular donde cambia continuamente la rapidez.","C. Movimiento circular en el que se recorren Ã¡ngulos iguales en tiempos iguales.","D. Movimiento donde la aceleraciÃ³n total es siempre cero."],respuesta:2},
+    {texto:"La velocidad angular (?) en el MCU mide:",opciones:["A. La distancia lineal o longitud de arco recorrida.","B. El Ã¡ngulo barrido por unidad de tiempo.","C. La fuerza hacia el centro que mantiene el giro.","D. La cantidad de vueltas totales sin importar el tiempo transcurrido."],respuesta:1},
+    {texto:"La aceleraciÃ³n centrÃ­peta se caracteriza porque es responsable de:",opciones:["A. Cambiar la rapidez o magnitud de la velocidad del objeto.","B. Cambiar la masa del objeto mientras gira.","C. Cambiar continuamente la direcciÃ³n de la velocidad para mantener la trayectoria circular.","D. Empujar el objeto rectilÃ­neamente hacia afuera de la curva."],respuesta:2},
+    {texto:"Si decimos que el perÃ­odo (T) de un objeto giratorio es de 5 segundos, significa que:",opciones:["A. El objeto da 5 vueltas en un solo segundo.","B. El objeto tarda 5 segundos en completar una sola vuelta.","C. Su velocidad tangencial es obligatoriamente de 5 m/s.","D. Acelera hacia el centro a razÃ³n de 5 m/sÂ²."],respuesta:1},
+    {texto:"Â¿CuÃ¡l es la relaciÃ³n principal que vincula la velocidad tangencial (v) con la velocidad angular (?)?",opciones:["A. v = ? + R","B. v = ? / R","C. v = ? Â· R","D. v = ?Â² Â· R"],respuesta:2},
+    {texto:"(CÃ¡lculo) Un objeto que gira en el MCU logra dar 30 vueltas exactas en 10 segundos. Â¿CuÃ¡l es su frecuencia (f)? (f = n / t)",opciones:["A. 3 Hz","B. 0.33 Hz","C. 300 Hz","D. 30 Hz"],respuesta:0},
+    {texto:"(CÃ¡lculo) Si el perÃ­odo de una rueda es 2 s, calcula su velocidad angular ? (usa p = 3.14). (? = 2p / T)",opciones:["A. 6.28 rad/s","B. 3.14 rad/s","C. 1.57 rad/s","D. 2 rad/s"],respuesta:1},
+    {texto:"(CÃ¡lculo) Un disco compacto tiene un radio de 0.5 m y gira a 4 rad/s de velocidad angular. Â¿CuÃ¡l es su velocidad tangencial (v) en el borde? (v = ? Â· R)",opciones:["A. 8 m/s","B. 2 m/s","C. 4 m/s","D. 12 m/s"],respuesta:1},
+    {texto:"(CÃ¡lculo) Una bicicleta toma una curva de 5 m de radio con una velocidad constante de 10 m/s. Â¿CuÃ¡l es su aceleraciÃ³n centrÃ­peta? (ac = vÂ² / R)",opciones:["A. 2 m/sÂ²","B. 20 m/sÂ²","C. 50 m/sÂ²","D. 10 m/sÂ²"],respuesta:1},
+    {texto:"(CÃ¡lculo) Un objeto gira y experimenta una aceleraciÃ³n centrÃ­peta de 18 m/sÂ² a un radio de giro de 2 m. Calcula su velocidad angular ?. (ac = ?Â² Â· R)",opciones:["A. 9 rad/s","B. 3 rad/s","C. 36 rad/s","D. 6 rad/s"],respuesta:1}
 ];
 
 let preguntasSeleccionadas=[],respuestasUsuario=[],preguntaActual=0,nombreEstudiante='';
@@ -196,7 +196,7 @@ function irSiguiente(){if(preguntaActual<9)mostrarPregunta(preguntaActual+1);}
 function irAnterior(){if(preguntaActual>0)mostrarPregunta(preguntaActual-1);}
 function finalizarEvaluacion(){
     const sinResp=respuestasUsuario.filter(r=>r===null).length;
-    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¿Finalizar de todos modos?`))return;
+    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. Â¿Finalizar de todos modos?`))return;
     let correctas=0,revHTML='';
     preguntasSeleccionadas.forEach((p,i)=>{
         const resp=respuestasUsuario[i];const ok=resp===p.respuesta;if(ok)correctas++;
@@ -206,10 +206,10 @@ function finalizarEvaluacion(){
     });
     const pct=Math.round(correctas/10*100);
     let emoji,titulo;
-    if(pct>=90){emoji='??';titulo='¡Excelente! Dominas el M.C.U.';}
-    else if(pct>=70){emoji='??';titulo='¡Muy bien! Sigue practicando.';}
-    else if(pct>=50){emoji='??';titulo='Aprobado. Repasa las fórmulas.';}
-    else{emoji='??';titulo='Necesitas repasar la teoría y los cálculos.';}
+    if(pct>=90){emoji='??';titulo='Â¡Excelente! Dominas el M.C.U.';}
+    else if(pct>=70){emoji='??';titulo='Â¡Muy bien! Sigue practicando.';}
+    else if(pct>=50){emoji='??';titulo='Aprobado. Repasa las fÃ³rmulas.';}
+    else{emoji='??';titulo='Necesitas repasar la teorÃ­a y los cÃ¡lculos.';}
     document.getElementById('seccion-evaluacion').style.display='none';
     const pr=document.getElementById('pantalla-resultado');pr.classList.add('activo');
     document.getElementById('resultado-nombre').textContent='?? '+nombreEstudiante;
