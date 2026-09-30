@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Cifras Significativas - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Renderizado de f√≥rmulas matem√°ticas -->
+    <!-- Renderizado de fÛrmulas matem·ticas -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -88,6 +88,12 @@
 
         footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -96,34 +102,34 @@
             <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> F√≠sica 10</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> FÌsica 10</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a F√≠sica 10</a>
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a FÌsica 10</a>
 
         <div class="header-tema">
-            <span class="emoji-tema">üéØ</span>
+            <span class="emoji-tema">??</span>
             <h1>Cifras Significativas</h1>
-            <p>Aprende a reportar mediciones con la precisi√≥n y exactitud correctas, evitando errores al usar la calculadora.</p>
+            <p>Aprende a reportar mediciones con la precisiÛn y exactitud correctas, evitando errores al usar la calculadora.</p>
         </div>
 
         <div class="seccion">
-            <h2><i class="fa-solid fa-book-open"></i> ¬øQu√© son las Cifras Significativas?</h2>
-            <p>En f√≠sica, cualquier medici√≥n tiene un l√≠mite de precisi√≥n que depende del instrumento que usamos. Las cifras significativas son todos los d√≠gitos que conocemos con certeza en una medida, m√°s un d√≠gito final que es estimado o dudoso.</p>
-            <p>No tiene sentido decir que un auto viaja a 34.5823485 km/h si nuestro radar solo puede medir n√∫meros enteros (35 km/h). Para eso existen las reglas de las cifras significativas.</p>
+            <h2><i class="fa-solid fa-book-open"></i> øQuÈ son las Cifras Significativas?</h2>
+            <p>En fÌsica, cualquier mediciÛn tiene un lÌmite de precisiÛn que depende del instrumento que usamos. Las cifras significativas son todos los dÌgitos que conocemos con certeza en una medida, m·s un dÌgito final que es estimado o dudoso.</p>
+            <p>No tiene sentido decir que un auto viaja a 34.5823485 km/h si nuestro radar solo puede medir n˙meros enteros (35 km/h). Para eso existen las reglas de las cifras significativas.</p>
         </div>
 
         <div class="seccion">
             <h2><i class="fa-solid fa-ruler-combined"></i> Las 4 Reglas Fundamentales</h2>
             <div class="caja-formula">
                 <ul>
-                    <li><strong>Regla 1:</strong> Cualquier d√≠gito diferente de cero SIEMPRE es significativo. <br><span style="color:#aaa;">(Ej: 456 m tiene 3 cifras)</span></li>
-                    <li><strong>Regla 2:</strong> Los ceros ubicados <strong>entre</strong> dos d√≠gitos distintos de cero son significativos. <br><span style="color:#aaa;">(Ej: 4005 kg tiene 4 cifras)</span></li>
-                    <li><strong>Regla 3:</strong> Los ceros a la <strong>izquierda</strong> del primer d√≠gito distinto de cero NO son significativos (solo sirven para ubicar el decimal). <br><span style="color:#aaa;">(Ej: 0.0032 s tiene 2 cifras)</span></li>
-                    <li><strong>Regla 4:</strong> Los ceros a la <strong>derecha</strong> de un n√∫mero con punto decimal S√ç son significativos. <br><span style="color:#aaa;">(Ej: 4.500 m tiene 4 cifras)</span></li>
+                    <li><strong>Regla 1:</strong> Cualquier dÌgito diferente de cero SIEMPRE es significativo. <br><span style="color:#aaa;">(Ej: 456 m tiene 3 cifras)</span></li>
+                    <li><strong>Regla 2:</strong> Los ceros ubicados <strong>entre</strong> dos dÌgitos distintos de cero son significativos. <br><span style="color:#aaa;">(Ej: 4005 kg tiene 4 cifras)</span></li>
+                    <li><strong>Regla 3:</strong> Los ceros a la <strong>izquierda</strong> del primer dÌgito distinto de cero NO son significativos (solo sirven para ubicar el decimal). <br><span style="color:#aaa;">(Ej: 0.0032 s tiene 2 cifras)</span></li>
+                    <li><strong>Regla 4:</strong> Los ceros a la <strong>derecha</strong> de un n˙mero con punto decimal SÕ son significativos. <br><span style="color:#aaa;">(Ej: 4.500 m tiene 4 cifras)</span></li>
                 </ul>
             </div>
         </div>
@@ -133,7 +139,7 @@
 
             <div class="ejercicio">
                 <h3>Ejercicio 1: Contando las cifras</h3>
-                <p style="margin-bottom: 15px; color: #fff;">Determina cu√°ntas cifras significativas tienen las siguientes medidas:</p>
+                <p style="margin-bottom: 15px; color: #fff;">Determina cu·ntas cifras significativas tienen las siguientes medidas:</p>
                 
                 <div class="paso">
                     <div class="paso-num">A</div>
@@ -141,17 +147,17 @@
                 </div>
                 <div class="paso">
                     <div class="paso-num">B</div>
-                    <div class="paso-texto"><strong>10.050 m</strong>: El 1 y 5 cuentan. Los ceros entre ellos cuentan (Regla 2). El cero al final despu√©s del decimal cuenta (Regla 4). <strong style="color: #2ecc71;">(5 cifras)</strong></div>
+                    <div class="paso-texto"><strong>10.050 m</strong>: El 1 y 5 cuentan. Los ceros entre ellos cuentan (Regla 2). El cero al final despuÈs del decimal cuenta (Regla 4). <strong style="color: #2ecc71;">(5 cifras)</strong></div>
                 </div>
                 <div class="paso">
                     <div class="paso-num">C</div>
-                    <div class="paso-texto"><strong>35,000 km</strong>: Sin decimal expl√≠cito, normalmente los ceros finales no son significativos a menos que se indique (o se use notaci√≥n cient√≠fica). <strong style="color: #2ecc71;">(2 cifras)</strong></div>
+                    <div class="paso-texto"><strong>35,000 km</strong>: Sin decimal explÌcito, normalmente los ceros finales no son significativos a menos que se indique (o se use notaciÛn cientÌfica). <strong style="color: #2ecc71;">(2 cifras)</strong></div>
                 </div>
             </div>
 
             <div class="ejercicio">
-                <h3>Ejercicio 2: Operaciones y Redondeo (Multiplicaci√≥n/Divisi√≥n)</h3>
-                <p style="margin-bottom: 15px; color: #fff;">Regla de oro: El resultado no puede tener m√°s cifras significativas que el dato original que tenga <strong>MENOS</strong> cifras significativas. <br><br>Calcula el √°rea de un rect√°ngulo de 4.5 m de ancho por 7.32 m de largo.</p>
+                <h3>Ejercicio 2: Operaciones y Redondeo (MultiplicaciÛn/DivisiÛn)</h3>
+                <p style="margin-bottom: 15px; color: #fff;">Regla de oro: El resultado no puede tener m·s cifras significativas que el dato original que tenga <strong>MENOS</strong> cifras significativas. <br><br>Calcula el ·rea de un rect·ngulo de 4.5 m de ancho por 7.32 m de largo.</p>
                 
                 <div class="paso">
                     <div class="paso-num">1</div>
@@ -163,35 +169,35 @@
                 </div>
                 <div class="paso">
                     <div class="paso-num">3</div>
-                    <div class="paso-texto">Multiplicamos en la calculadora: 4.5 √ó 7.32 = 32.94 m¬≤</div>
+                    <div class="paso-texto">Multiplicamos en la calculadora: 4.5 ◊ 7.32 = 32.94 m≤</div>
                 </div>
                 <div class="paso">
                     <div class="paso-num">4</div>
-                    <div class="paso-texto">Redondeamos 32.94 a dos cifras. Como el tercer n√∫mero es 9 (mayor que 5), el 2 sube a 3.</div>
+                    <div class="paso-texto">Redondeamos 32.94 a dos cifras. Como el tercer n˙mero es 9 (mayor que 5), el 2 sube a 3.</div>
                 </div>
                 
                 <div class="resultado-final">
-                    Resultado: √Årea = 33 m¬≤ (Exactamente con 2 cifras significativas).
+                    Resultado: ¡rea = 33 m≤ (Exactamente con 2 cifras significativas).
                 </div>
             </div>
             
         </div>
 
         <div class="seccion" style="background: rgba(30, 30, 45, 0.9);">
-            <h2><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Explicaci√≥n en Video</h2>
-            <p>Selecci√≥n de los mejores videos explicativos sobre Cifras Significativas y Redondeo:</p>
+            <h2><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> ExplicaciÛn en Video</h2>
+            <p>SelecciÛn de los mejores videos explicativos sobre Cifras Significativas y Redondeo:</p>
             
             <div class="video-grid">
                 <div class="video-card">
-                    <div class="video-header"><i class="fa-solid fa-play"></i> Matem√°ticas Profe Alex</div>
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Matem·ticas Profe Alex</div>
                     <iframe width="100%" height="240" src="https://www.youtube-nocookie.com/embed/qB9a6E8v6Xw" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="video-card">
-                    <div class="video-header"><i class="fa-solid fa-play"></i> Khan Academy Espa√±ol</div>
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Khan Academy EspaÒol</div>
                     <iframe width="100%" height="240" src="https://www.youtube-nocookie.com/embed/8Nq_jNXX51M" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="video-card">
-                    <div class="video-header"><i class="fa-solid fa-play"></i> Jorge Cogollo (Profe en L√≠nea)</div>
+                    <div class="video-header"><i class="fa-solid fa-play"></i> Jorge Cogollo (Profe en LÌnea)</div>
                     <iframe width="100%" height="240" src="https://www.youtube-nocookie.com/embed/Jm_2T-RzG6g" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="video-card">
@@ -203,21 +209,22 @@
 
         <div class="botones-accion">
             <a href="fisica10_cifras_practica.html" class="btn-accion btn-practica">
-                <i class="fa-solid fa-gamepad"></i> Pr√°ctica Interactiva
+                <i class="fa-solid fa-gamepad"></i> Pr·ctica Interactiva
             </a>
             <a href="fisica10_cifras_evaluacion.html" class="btn-accion btn-evaluacion">
-                <i class="fa-solid fa-clipboard-check"></i> Realizar Evaluaci√≥n
+                <i class="fa-solid fa-clipboard-check"></i> Realizar EvaluaciÛn
             </a>
         </div>
     </main>
 
     <footer>
-        <p>LabVirtual W &copy; 2025 ¬∑ Construido con inteligencia artificial para la educaci√≥n</p>
+        <p>LabVirtual W &copy; 2025 ∑ Construido con inteligencia artificial para la educaciÛn</p>
     </footer>
 
     <script src="profe-ia.js"></script>
 <script src="auth.js"></script>
 </body>
 </html>
+
 
 

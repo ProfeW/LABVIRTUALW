@@ -1,8 +1,8 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Laboratorio Virtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -38,7 +38,7 @@
             min-height: 100vh;
         }
 
-        /* --- BARRA DE NAVEGACI√ìN --- */
+        /* --- BARRA DE NAVEGACI”N --- */
         nav {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px); 
@@ -94,7 +94,7 @@
             color: #4facfe;
         }
 
-        /* --- SUBMEN√öS RESTAURADOS --- */
+        /* --- SUBMEN⁄S RESTAURADOS --- */
         .submenu { z-index: 1000;
             display: none;
             position: absolute;
@@ -134,7 +134,7 @@
         .quimica:hover { border-left: 4px solid var(--color-quimica); }
         .biologia:hover { border-left: 4px solid var(--color-biologia); }
 
-        /* --- SISTEMA DE P√ÅGINAS (SIN RECARGAR) --- */
+        /* --- SISTEMA DE P¡GINAS (SIN RECARGAR) --- */
         .contenedor {
             max-width: 1200px;
             margin: 50px auto;
@@ -197,7 +197,7 @@
             transform: translateY(-5px);
         }
 
-        /* --- ESTILOS F√çSICA D√âCIMO (FRANJAS) --- */
+        /* --- ESTILOS FÕSICA D…CIMO (FRANJAS) --- */
         .titulo-seccion {
             border-left: 5px solid var(--color-fisica);
             padding-left: 15px; margin: 40px 0 20px 0; font-size: 24px; color: #4facfe;
@@ -238,6 +238,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -250,38 +256,38 @@
             <ul class="menu">
                 
                 <li>
-                    <a onclick="verPagina('inicio')" title="Ir a la p√°gina principal"><i class="fa-solid fa-house"></i> Inicio</a>
+                    <a onclick="verPagina('inicio')" title="Ir a la p·gina principal"><i class="fa-solid fa-house"></i> Inicio</a>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa-solid fa-atom"></i> F√≠sica <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <a href="#"><i class="fa-solid fa-atom"></i> FÌsica <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
                     <ul class="submenu">
                         <li><a href="#" class="fisica">Grado Noveno</a></li>
-                        <li><a onclick="verPagina('fisica-10')" class="fisica">Grado D√©cimo</a></li>
+                        <li><a onclick="verPagina('fisica-10')" class="fisica">Grado DÈcimo</a></li>
                         <li><a href="#" class="fisica">Grado 11</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa-solid fa-flask"></i> Qu√≠mica <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <a href="#"><i class="fa-solid fa-flask"></i> QuÌmica <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
                     <ul class="submenu">
                         <li><a href="#" class="quimica">Grado Noveno</a></li>
-                        <li><a href="#" class="quimica">Grado D√©cimo</a></li>
+                        <li><a href="#" class="quimica">Grado DÈcimo</a></li>
                         <li><a href="#" class="quimica">Grado 11</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa-solid fa-leaf"></i> Biolog√≠a <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <a href="#"><i class="fa-solid fa-leaf"></i> BiologÌa <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
                     <ul class="submenu">
                         <li><a href="#" class="biologia">Grado Noveno</a></li>
-                        <li><a href="#" class="biologia">Grado D√©cimo</a></li>
+                        <li><a href="#" class="biologia">Grado DÈcimo</a></li>
                         <li><a href="#" class="biologia">Grado 11</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#" onclick="alert('Pronto crearemos la p√°gina de recursos')"><i class="fa-solid fa-book-open"></i> Recursos</a>
+                    <a href="#" onclick="alert('Pronto crearemos la p·gina de recursos')"><i class="fa-solid fa-book-open"></i> Recursos</a>
                 </li>
 
             </ul>
@@ -291,8 +297,8 @@
     <main id="inicio" class="contenedor pagina activa">
         
         <section class="bienvenida">
-            <h1>Laboratorio Virtual - Instituci√≥n Educativa Gallego</h1>
-            <p>Explora, experimenta y aprende. Selecciona tu asignatura y grado en el men√∫ superior para comenzar la aventura del conocimiento.</p>
+            <h1>Laboratorio Virtual - InstituciÛn Educativa Gallego</h1>
+            <p>Explora, experimenta y aprende. Selecciona tu asignatura y grado en el men˙ superior para comenzar la aventura del conocimiento.</p>
         </section>
 
         <section class="seccion-noticias">
@@ -300,18 +306,18 @@
             
             <div class="grid-noticias">
                 <article class="tarjeta">
-                    <h3>¬°Nuevos Simuladores de Ondas!</h3>
-                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Ya est√°n disponibles los simuladores de f√≠sica para grado 11. Ingresa al men√∫ superior para practicar antes de tu evaluaci√≥n.</p>
+                    <h3>°Nuevos Simuladores de Ondas!</h3>
+                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Ya est·n disponibles los simuladores de fÌsica para grado 11. Ingresa al men˙ superior para practicar antes de tu evaluaciÛn.</p>
                 </article>
 
                 <article class="tarjeta" style="border-color: var(--color-quimica);">
-                    <h3>Bingo Qu√≠mico interactivo</h3>
-                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Revisa la secci√≥n de recursos. Hemos a√±adido herramientas interactivas para aprender la tabla peri√≥dica sin necesidad de conexi√≥n.</p>
+                    <h3>Bingo QuÌmico interactivo</h3>
+                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Revisa la secciÛn de recursos. Hemos aÒadido herramientas interactivas para aprender la tabla periÛdica sin necesidad de conexiÛn.</p>
                 </article>
 
                 <article class="tarjeta" style="border-color: var(--color-biologia);">
                     <h3>Ciencias y Contexto Cafetero</h3>
-                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Explora las nuevas gu√≠as sobre las fases del compostaje, el programa Guardianes del Planeta y la protecci√≥n del ecosistema local.</p>
+                    <p style="font-size: 14px; margin-top: 10px; color: #ccc;">Explora las nuevas guÌas sobre las fases del compostaje, el programa Guardianes del Planeta y la protecciÛn del ecosistema local.</p>
                 </article>
             </div>
         </section>
@@ -319,68 +325,68 @@
     </main>
 
     <main id="fisica-10" class="contenedor pagina">
-        <h1 style="color: var(--color-fisica); font-size: 2.5rem; margin-bottom: 10px;">F√≠sica - Grado D√©cimo</h1>
-        <p style="color: #ccc; margin-bottom: 30px;">Explora los conceptos fundamentales del movimiento y la energ√≠a.</p>
+        <h1 style="color: var(--color-fisica); font-size: 2.5rem; margin-bottom: 10px;">FÌsica - Grado DÈcimo</h1>
+        <p style="color: #ccc; margin-bottom: 30px;">Explora los conceptos fundamentales del movimiento y la energÌa.</p>
 
         <h2 class="titulo-seccion"><i class="fa-solid fa-compass"></i> 1. Fundamentos de la Medida</h2>
         <div class="lista-temas">
             <div class="entrada-tema">
                 <div class="numero-tema">01</div>
                 <div class="info-tema">
-                    <h3>Magnitudes F√≠sicas</h3>
-                    <p>¬øC√≥mo medimos la altura de un cafetal o el peso de una carga? Aprende a diferenciar magnitudes escalares y vectoriales.</p>
+                    <h3>Magnitudes FÌsicas</h3>
+                    <p>øCÛmo medimos la altura de un cafetal o el peso de una carga? Aprende a diferenciar magnitudes escalares y vectoriales.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">02</div>
                 <div class="info-tema">
-                    <h3>Conversi√≥n de Unidades</h3>
-                    <p>Transforma arrobas a kilogramos o litros de agua para lavado a metros c√∫bicos de forma exacta.</p>
+                    <h3>ConversiÛn de Unidades</h3>
+                    <p>Transforma arrobas a kilogramos o litros de agua para lavado a metros c˙bicos de forma exacta.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">03</div>
                 <div class="info-tema">
-                    <h3>Notaci√≥n Cient√≠fica</h3>
-                    <p>Maneja n√∫meros gigantescos o microsc√≥picos (como el tama√±o de una plaga) de manera profesional.</p>
+                    <h3>NotaciÛn CientÌfica</h3>
+                    <p>Maneja n˙meros gigantescos o microscÛpicos (como el tamaÒo de una plaga) de manera profesional.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">04</div>
                 <div class="info-tema">
                     <h3>Cifras Significativas</h3>
-                    <p>Aprende cu√°nta precisi√≥n necesitamos realmente en nuestras mediciones de laboratorio.</p>
+                    <p>Aprende cu·nta precisiÛn necesitamos realmente en nuestras mediciones de laboratorio.</p>
                 </div>
             </div>
         </div>
 
-        <h2 class="titulo-seccion"><i class="fa-solid fa-truck-fast"></i> 2. Cinem√°tica (El Movimiento)</h2>
+        <h2 class="titulo-seccion"><i class="fa-solid fa-truck-fast"></i> 2. Cinem·tica (El Movimiento)</h2>
         <div class="lista-temas">
             <div class="entrada-tema">
                 <div class="numero-tema">05</div>
                 <div class="info-tema">
-                    <h3>M.R.U. (Movimiento Rectil√≠neo Uniforme)</h3>
-                    <p>Velocidad constante: El viaje de un cami√≥n en l√≠nea recta por la carretera principal.</p>
+                    <h3>M.R.U. (Movimiento RectilÌneo Uniforme)</h3>
+                    <p>Velocidad constante: El viaje de un camiÛn en lÌnea recta por la carretera principal.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">06</div>
                 <div class="info-tema">
                     <h3>M.R.U.V. (Movimiento Variado)</h3>
-                    <p>Aceleraci√≥n: Cuando el transporte escolar aumenta su velocidad al salir del pueblo.</p>
+                    <p>AceleraciÛn: Cuando el transporte escolar aumenta su velocidad al salir del pueblo.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">07</div>
                 <div class="info-tema">
-                    <h3>Ca√≠da Libre</h3>
-                    <p>¬øQu√© cae m√°s r√°pido, un grano de caf√© o una piedra? Descubre la gravedad en acci√≥n.</p>
+                    <h3>CaÌda Libre</h3>
+                    <p>øQuÈ cae m·s r·pido, un grano de cafÈ o una piedra? Descubre la gravedad en acciÛn.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">08</div>
                 <div class="info-tema">
-                    <h3>Movimiento Parab√≥lico</h3>
+                    <h3>Movimiento ParabÛlico</h3>
                     <p>El lanzamiento de un objeto o el chorro de agua en un sistema de riego.</p>
                 </div>
             </div>
@@ -388,57 +394,57 @@
                 <div class="numero-tema">09</div>
                 <div class="info-tema">
                     <h3>Movimiento Circular</h3>
-                    <p>Analiza el giro de las aspas en la despulpadora de caf√© de la finca.</p>
+                    <p>Analiza el giro de las aspas en la despulpadora de cafÈ de la finca.</p>
                 </div>
             </div>
         </div>
 
-        <h2 class="titulo-seccion"><i class="fa-solid fa-dumbbell"></i> 3. Din√°mica (Fuerzas)</h2>
+        <h2 class="titulo-seccion"><i class="fa-solid fa-dumbbell"></i> 3. Din·mica (Fuerzas)</h2>
         <div class="lista-temas">
             <div class="entrada-tema">
                 <div class="numero-tema">10</div>
                 <div class="info-tema">
                     <h3>Leyes de Newton</h3>
-                    <p>Inercia, fuerza y acci√≥n/reacci√≥n aplicadas a la maquinaria agr√≠cola y la vida diaria.</p>
+                    <p>Inercia, fuerza y acciÛn/reacciÛn aplicadas a la maquinaria agrÌcola y la vida diaria.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">11</div>
                 <div class="info-tema">
                     <h3>Principales Tipos de Fuerzas</h3>
-                    <p>Tensi√≥n en cables de garrucha, fricci√≥n en el suelo y peso de los bultos.</p>
+                    <p>TensiÛn en cables de garrucha, fricciÛn en el suelo y peso de los bultos.</p>
                 </div>
             </div>
         </div>
 
-        <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> 4. Energ√≠a y Trabajo</h2>
+        <h2 class="titulo-seccion"><i class="fa-solid fa-bolt"></i> 4. EnergÌa y Trabajo</h2>
         <div class="lista-temas">
             <div class="entrada-tema">
                 <div class="numero-tema">12</div>
                 <div class="info-tema">
-                    <h3>Energ√≠a Potencial Gravitacional</h3>
-                    <p>La energ√≠a que tiene una carga de caf√© situada en la parte alta de la monta√±a.</p>
+                    <h3>EnergÌa Potencial Gravitacional</h3>
+                    <p>La energÌa que tiene una carga de cafÈ situada en la parte alta de la montaÒa.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">13</div>
                 <div class="info-tema">
-                    <h3>Energ√≠a Cin√©tica</h3>
-                    <p>La energ√≠a del movimiento: el agua bajando por los canales de lavado.</p>
+                    <h3>EnergÌa CinÈtica</h3>
+                    <p>La energÌa del movimiento: el agua bajando por los canales de lavado.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">14</div>
                 <div class="info-tema">
-                    <h3>Energ√≠a Potencial El√°stica</h3>
-                    <p>Resortes y sistemas de suspensi√≥n en la maquinaria pesada.</p>
+                    <h3>EnergÌa Potencial El·stica</h3>
+                    <p>Resortes y sistemas de suspensiÛn en la maquinaria pesada.</p>
                 </div>
             </div>
             <div class="entrada-tema">
                 <div class="numero-tema">15</div>
                 <div class="info-tema">
-                    <h3>Energ√≠a Mec√°nica</h3>
-                    <p>La suma de todo: ¬øC√≥mo se conserva la energ√≠a en un sistema cerrado?</p>
+                    <h3>EnergÌa Mec·nica</h3>
+                    <p>La suma de todo: øCÛmo se conserva la energÌa en un sistema cerrado?</p>
                 </div>
             </div>
         </div>
@@ -450,7 +456,7 @@
             const paginas = document.querySelectorAll('.pagina');
             paginas.forEach(p => p.classList.remove('activa'));
             
-            // Muestra solo la p√°gina que queremos
+            // Muestra solo la p·gina que queremos
             document.getElementById(idPagina).classList.add('activa');
             
             // Sube la pantalla al inicio suavemente
@@ -461,3 +467,4 @@
 <script src="auth.js"></script>
 </body>
 </html>
+

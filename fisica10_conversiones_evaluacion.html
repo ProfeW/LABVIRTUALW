@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaci√≥n: Conversi√≥n de Unidades - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EvaluaciÛn: ConversiÛn de Unidades - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Renderizado de f√≥rmulas matem√°ticas -->
+    <!-- Renderizado de fÛrmulas matem·ticas -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -67,26 +67,32 @@
 
         @media (max-width: 600px) { .info-estudiante { grid-template-columns: 1fr; } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
     <div class="contenedor">
-        <a href="fisica10_conversiones_practica.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Pr√°ctica</a>
+        <a href="fisica10_conversiones_practica.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Pr·ctica</a>
 
         <div class="header-evaluacion">
-            <h1><i class="fa-solid fa-clipboard-list"></i> Evaluaci√≥n Final</h1>
-            <p><strong>Tema: Conversi√≥n de Unidades</strong></p>
-            <p style="margin-top: 10px; font-size: 0.9rem; color: #ccc;">Esta evaluaci√≥n consta de 10 preguntas. Lee cuidadosamente cada enunciado antes de seleccionar tu respuesta.</p>
+            <h1><i class="fa-solid fa-clipboard-list"></i> EvaluaciÛn Final</h1>
+            <p><strong>Tema: ConversiÛn de Unidades</strong></p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #ccc;">Esta evaluaciÛn consta de 10 preguntas. Lee cuidadosamente cada enunciado antes de seleccionar tu respuesta.</p>
         </div>
 
         <!-- Formulario -->
         <div class="info-estudiante" id="datos-estudiante">
             <div class="input-group">
                 <label for="nombre">Nombre Completo:</label>
-                <input type="text" id="nombre" placeholder="Ej. Juan P√©rez" required>
+                <input type="text" id="nombre" placeholder="Ej. Juan PÈrez" required>
             </div>
             <div class="input-group">
-                <label for="grado">Grado / Secci√≥n:</label>
+                <label for="grado">Grado / SecciÛn:</label>
                 <select id="grado" required>
                     <option value="">Selecciona tu grado...</option>
                     <option value="10-1">10-1</option>
@@ -101,7 +107,7 @@
             <!-- P1 -->
             <div class="pregunta-card" data-correcta="b">
                 <div class="pregunta-num">Pregunta 1</div>
-                <div class="pregunta-texto">¬øCu√°l es el factor de conversi√≥n correcto para pasar de kil√≥metros a metros?</div>
+                <div class="pregunta-texto">øCu·l es el factor de conversiÛn correcto para pasar de kilÛmetros a metros?</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p1" value="a"> a) Multiplicar por 100</label>
                     <label class="opcion-item"><input type="radio" name="p1" value="b"> b) Multiplicar por 1000</label>
@@ -113,7 +119,7 @@
             <!-- P2 -->
             <div class="pregunta-card" data-correcta="a">
                 <div class="pregunta-num">Pregunta 2</div>
-                <div class="pregunta-texto">Una cancha de f√∫tbol mide 120 metros de largo. ¬øA cu√°ntos cent√≠metros equivale esto?</div>
+                <div class="pregunta-texto">Una cancha de f˙tbol mide 120 metros de largo. øA cu·ntos centÌmetros equivale esto?</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p2" value="a"> a) 12000 cm</label>
                     <label class="opcion-item"><input type="radio" name="p2" value="b"> b) 1200 cm</label>
@@ -125,7 +131,7 @@
             <!-- P3 -->
             <div class="pregunta-card" data-correcta="c">
                 <div class="pregunta-num">Pregunta 3</div>
-                <div class="pregunta-texto">¬øCu√°ntos segundos hay exactamente en 2 horas?</div>
+                <div class="pregunta-texto">øCu·ntos segundos hay exactamente en 2 horas?</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p3" value="a"> a) 120 s</label>
                     <label class="opcion-item"><input type="radio" name="p3" value="b"> b) 3600 s</label>
@@ -149,7 +155,7 @@
             <!-- P5 -->
             <div class="pregunta-card" data-correcta="d">
                 <div class="pregunta-num">Pregunta 5</div>
-                <div class="pregunta-texto">Un corredor recorre una pista a 10 m/s. ¬øCu√°l es su velocidad en km/h?</div>
+                <div class="pregunta-texto">Un corredor recorre una pista a 10 m/s. øCu·l es su velocidad en km/h?</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p5" value="a"> a) 100 km/h</label>
                     <label class="opcion-item"><input type="radio" name="p5" value="b"> b) 10 km/h</label>
@@ -161,7 +167,7 @@
             <!-- P6 -->
             <div class="pregunta-card" data-correcta="a">
                 <div class="pregunta-num">Pregunta 6</div>
-                <div class="pregunta-texto">La masa de una m√°quina es de 4.5 toneladas. ¬øA cu√°ntos gramos equivale esto?</div>
+                <div class="pregunta-texto">La masa de una m·quina es de 4.5 toneladas. øA cu·ntos gramos equivale esto?</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p6" value="a"> a) 4,500,000 g</label>
                     <label class="opcion-item"><input type="radio" name="p6" value="b"> b) 45,000 g</label>
@@ -173,7 +179,7 @@
             <!-- P7 -->
             <div class="pregunta-card" data-correcta="c">
                 <div class="pregunta-num">Pregunta 7</div>
-                <div class="pregunta-texto">Un l√≠mite de velocidad de carretera es de 108 km/h. Expresado en m/s es:</div>
+                <div class="pregunta-texto">Un lÌmite de velocidad de carretera es de 108 km/h. Expresado en m/s es:</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p7" value="a"> a) 10 m/s</label>
                     <label class="opcion-item"><input type="radio" name="p7" value="b"> b) 20 m/s</label>
@@ -185,7 +191,7 @@
             <!-- P8 -->
             <div class="pregunta-card" data-correcta="a">
                 <div class="pregunta-num">Pregunta 8</div>
-                <div class="pregunta-texto">Para transformar a√±os a d√≠as en problemas de f√≠sica de grado d√©cimo, ¬øcu√°l es el factor de conversi√≥n estandarizado?</div>
+                <div class="pregunta-texto">Para transformar aÒos a dÌas en problemas de fÌsica de grado dÈcimo, øcu·l es el factor de conversiÛn estandarizado?</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p8" value="a"> a) Multiplicar por 365</label>
                     <label class="opcion-item"><input type="radio" name="p8" value="b"> b) Multiplicar por 12</label>
@@ -197,7 +203,7 @@
             <!-- P9 -->
             <div class="pregunta-card" data-correcta="d">
                 <div class="pregunta-num">Pregunta 9</div>
-                <div class="pregunta-texto">Convertir 250 mil√≠metros (mm) a metros (m):</div>
+                <div class="pregunta-texto">Convertir 250 milÌmetros (mm) a metros (m):</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p9" value="a"> a) 2.5 m</label>
                     <label class="opcion-item"><input type="radio" name="p9" value="b"> b) 25 m</label>
@@ -209,17 +215,17 @@
             <!-- P10 -->
             <div class="pregunta-card" data-correcta="b">
                 <div class="pregunta-num">Pregunta 10</div>
-                <div class="pregunta-texto">¬øQu√© representa f√≠sicamente una conversi√≥n de unidades?</div>
+                <div class="pregunta-texto">øQuÈ representa fÌsicamente una conversiÛn de unidades?</div>
                 <div class="opciones-lista">
                     <label class="opcion-item"><input type="radio" name="p10" value="a"> a) Un cambio en la magnitud real del objeto</label>
-                    <label class="opcion-item"><input type="radio" name="p10" value="b"> b) Un cambio en el lenguaje o escala de medici√≥n, manteniendo la misma cantidad f√≠sica real</label>
-                    <label class="opcion-item"><input type="radio" name="p10" value="c"> c) Un aumento en la precisi√≥n de la medida</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="b"> b) Un cambio en el lenguaje o escala de mediciÛn, manteniendo la misma cantidad fÌsica real</label>
+                    <label class="opcion-item"><input type="radio" name="p10" value="c"> c) Un aumento en la precisiÛn de la medida</label>
                     <label class="opcion-item"><input type="radio" name="p10" value="d"> d) Ninguna de las anteriores</label>
                 </div>
             </div>
 
             <button class="btn-enviar" onclick="calificar()">
-                <i class="fa-solid fa-paper-plane"></i> Enviar Evaluaci√≥n y Ver Calificaci√≥n
+                <i class="fa-solid fa-paper-plane"></i> Enviar EvaluaciÛn y Ver CalificaciÛn
             </button>
         </div>
 
@@ -230,25 +236,25 @@
             
             <div class="nota-final" id="nota-numero">10/10</div>
             
-            <h3 id="mensaje-motivacional" style="margin-bottom: 30px;">¬°Excelente trabajo!</h3>
+            <h3 id="mensaje-motivacional" style="margin-bottom: 30px;">°Excelente trabajo!</h3>
             
-            <!-- Bot√≥n simulado para conectar a Google Sheets en el futuro -->
+            <!-- BotÛn simulado para conectar a Google Sheets en el futuro -->
             <button style="background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; color: #2ecc71; padding: 10px 20px; border-radius: 5px; cursor: not-allowed; margin-bottom: 40px;" title="Pendiente configurar URL de Google Apps Script">
                 <i class="fa-solid fa-cloud-arrow-up"></i> Resultado enviado a Google Drive
             </button>
 
             <div id="correcciones" style="text-align: left;">
-                <!-- Aqu√≠ van las correcciones JS -->
+                <!-- AquÌ van las correcciones JS -->
             </div>
             
-            <a href="fisica_10.html" class="btn-enviar" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none; background: linear-gradient(135deg, #3498db, #2980b9); box-shadow: none;">Volver al Men√∫ Principal</a>
+            <a href="fisica_10.html" class="btn-enviar" style="display: inline-block; width: auto; padding: 15px 40px; text-decoration: none; background: linear-gradient(135deg, #3498db, #2980b9); box-shadow: none;">Volver al Men˙ Principal</a>
         </div>
 
     </div>
 
     <script>
         function calificar() {
-            // Validaci√≥n de datos
+            // ValidaciÛn de datos
             const nombre = document.getElementById('nombre').value;
             const grado = document.getElementById('grado').value;
             
@@ -260,7 +266,7 @@
             let correctas = 0;
             const total = 10;
             const correccionesDiv = document.getElementById('correcciones');
-            correccionesDiv.innerHTML = '<h3 style="color: #fff; margin-bottom: 20px;">Revisi√≥n Detallada:</h3>';
+            correccionesDiv.innerHTML = '<h3 style="color: #fff; margin-bottom: 20px;">RevisiÛn Detallada:</h3>';
 
             // Evaluar preguntas
             const preguntas = document.querySelectorAll('.pregunta-card');
@@ -282,7 +288,7 @@
                     correctas++;
                 }
 
-                // Generar HTML de correcci√≥n
+                // Generar HTML de correcciÛn
                 let claseCSS = (respUsuario === respCorrecta) ? "resp-correcta" : "resp-incorrecta";
                 let icono = (respUsuario === respCorrecta) ? "<i class='fa-solid fa-check' style='color:#2ecc71'></i>" : "<i class='fa-solid fa-xmark' style='color:#e74c3c'></i>";
                 
@@ -315,23 +321,24 @@
             
             const mensaje = document.getElementById('mensaje-motivacional');
             if(correctas === 10) {
-                mensaje.innerText = "¬°Perfecci√≥n absoluta! Eres un genio de las unidades.";
+                mensaje.innerText = "°PerfecciÛn absoluta! Eres un genio de las unidades.";
                 notaElement.style.color = "#2ecc71";
             } else if(correctas >= 7) {
-                mensaje.innerText = "¬°Muy buen trabajo! Tienes bases s√≥lidas.";
+                mensaje.innerText = "°Muy buen trabajo! Tienes bases sÛlidas.";
                 notaElement.style.color = "#f1c40f";
             } else if(correctas >= 4) {
-                mensaje.innerText = "Pasaste, pero necesitas repasar un poco m√°s la pr√°ctica interactiva.";
+                mensaje.innerText = "Pasaste, pero necesitas repasar un poco m·s la pr·ctica interactiva.";
                 notaElement.style.color = "#f39c12";
             } else {
-                mensaje.innerText = "Debes repasar la teor√≠a de los factores de conversi√≥n e intentarlo de nuevo.";
+                mensaje.innerText = "Debes repasar la teorÌa de los factores de conversiÛn e intentarlo de nuevo.";
                 notaElement.style.color = "#e74c3c";
             }
 
-            // AQUI IRI√Å EL C√ìDIGO FETCH PARA GOOGLE APPS SCRIPT
+            // AQUI IRI¡ EL C”DIGO FETCH PARA GOOGLE APPS SCRIPT
             // fetch('URL_DE_TU_APPS_SCRIPT', { method: 'POST', mode: 'no-cors', body: formData })
         }
     </script>
 <script src="auth.js"></script>
 </body>
 </html>
+

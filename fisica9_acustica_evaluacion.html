@@ -204,7 +204,7 @@
             <div class="nota" id="notaFinal">0.0 / 5.0</div>
             
             <div class="resumen-errores" id="cajaErrores">
-                <!-- Se inyectarÃ¡n los comentarios aquÃ­ -->
+                <!-- Se inyectarán los comentarios aquí -->
             </div>
             
             <button onclick="document.getElementById('modalIA').style.display='none'">Cerrar Calificaci&oacute;n</button>
@@ -221,7 +221,7 @@
             if(!nombre) { alert("Por favor ingresa tu nombre."); return; }
             
             let puntajeTotal = 0;
-            let totalPuntos = 16; // 7 de teÃ³ricas + 9 (3 pasos x 3 misiones)
+            let totalPuntos = 16; // 7 de teóricas + 9 (3 pasos x 3 misiones)
             let errores = [];
 
             // Q1: b
@@ -250,21 +250,21 @@
             let validUltrasonido = ["murcielago", "delfin", "perro", "gato", "ecografia", "sonar", "medicina", "limpieza"];
             if(validUltrasonido.some(w => q6.includes(w))) puntajeTotal++; else errores.push("- Q6: Ejemplo de ultrasonido no v&aacute;lido.");
 
-            // Q7: b (CÃ³clea)
+            // Q7: b (Cóclea)
             let q7 = document.querySelector('input[name="q7"]:checked');
             if(q7 && q7.value === 'b') puntajeTotal++; else errores.push("- Q7: &Oacute;rgano del o&iacute;do (Es la C&oacute;clea).");
 
-            // MisiÃ³n 1
+            // Misión 1
             if(document.getElementById('q8_p1').value == "5120") puntajeTotal++; else errores.push("- M1 (Paso 1): Velocidad mal identificada.");
             if(document.getElementById('q8_p2').value == "1.5") puntajeTotal++; else errores.push("- M1 (Paso 2): Tiempo mal identificado.");
             if(document.getElementById('q8_p3').value == "7680") puntajeTotal++; else errores.push("- M1 (Paso 3): C&aacute;lculo de distancia incorrecto.");
 
-            // MisiÃ³n 2
+            // Misión 2
             if(document.getElementById('q9_p1').value == "31") puntajeTotal++; else errores.push("- M2 (Paso 1): Temperatura mal identificada.");
             if(document.getElementById('q9_p2').value == "18.6") puntajeTotal++; else errores.push("- M2 (Paso 2): Multiplicaci&oacute;n incorrecta.");
             if(document.getElementById('q9_p3').value == "349.6") puntajeTotal++; else errores.push("- M2 (Paso 3): Suma de velocidad final incorrecta.");
 
-            // MisiÃ³n 3
+            // Misión 3
             if(document.getElementById('q10_p1').value == "10") puntajeTotal++; else errores.push("- M3 (Paso 1): &Aacute;rea mal calculada.");
             if(document.getElementById('q10_p2').value == "200") puntajeTotal++; else errores.push("- M3 (Paso 2): Potencia mal identificada.");
             if(document.getElementById('q10_p3').value == "20") puntajeTotal++; else errores.push("- M3 (Paso 3): C&aacute;lculo de Intensidad incorrecto.");

@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaci√≥n Final Cinem√°tica - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EvaluaciÛn Final Cinem·tica - LabVirtual W</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>üî¨</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>??</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Confetti -->
@@ -30,7 +30,7 @@
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACI√ìN --- */
+        /* --- NAVEGACI”N --- */
         nav {
             background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -69,7 +69,7 @@
         }
         .btn-iniciar:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3); }
 
-        /* --- EVALUACI√ìN UI --- */
+        /* --- EVALUACI”N UI --- */
         #seccion-evaluacion { display: none; animation: fadeIn 0.5s ease; }
         
         .header-eval {
@@ -175,6 +175,12 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -188,24 +194,24 @@
         
         <!-- PANTALLA INICIO -->
         <div id="pantalla-inicio" class="tarjeta-bienvenida">
-            <a href="fisica_10.html" class="btn-volver" style="float: left; margin-top: -20px;"><i class="fa-solid fa-arrow-left"></i> Volver a Teor√≠a</a>
+            <a href="fisica_10.html" class="btn-volver" style="float: left; margin-top: -20px;"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÌa</a>
             <div style="clear: both;"></div>
 
-            <div style="font-size: 4rem; margin-bottom: 20px;">üöÄ</div>
-            <h1>Evaluaci√≥n Final de Cinem√°tica</h1>
-            <p>Esta prueba eval√∫a tu comprensi√≥n de los tipos de movimiento.<br>Consta de <strong>9 preguntas ICFES</strong> (50%) y un <strong>Reto Interactivo en Cascada</strong> de 3 pasos (50%).</p>
+            <div style="font-size: 4rem; margin-bottom: 20px;">??</div>
+            <h1>EvaluaciÛn Final de Cinem·tica</h1>
+            <p>Esta prueba eval˙a tu comprensiÛn de los tipos de movimiento.<br>Consta de <strong>9 preguntas ICFES</strong> (50%) y un <strong>Reto Interactivo en Cascada</strong> de 3 pasos (50%).</p>
             
             <input type="text" id="input-nombre" class="input-nombre" placeholder="Escribe tu nombre completo" autocomplete="off">
             <div id="alerta-nombre" class="alerta-nombre">Por favor ingresa tu nombre para continuar</div>
             <br>
-            <button class="btn-iniciar" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Iniciar Evaluaci√≥n</button>
+            <button class="btn-iniciar" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Iniciar EvaluaciÛn</button>
         </div>
 
         <!-- EVALUACION -->
         <div id="seccion-evaluacion">
             <div class="header-eval">
                 <div class="estudiante-badge"><i class="fa-solid fa-user-graduate"></i> <span id="nombre-top"></span></div>
-                <div style="color: #bbb; font-size: 0.9rem;"><i class="fa-solid fa-stopwatch"></i> Sin l√≠mite de tiempo</div>
+                <div style="color: #bbb; font-size: 0.9rem;"><i class="fa-solid fa-stopwatch"></i> Sin lÌmite de tiempo</div>
             </div>
 
             <div class="progreso-container">
@@ -213,7 +219,7 @@
             </div>
             <div class="progreso-texto" id="prog-texto">Fase 1: Preguntas (1 de 9)</div>
 
-            <!-- CONTENEDOR DIN√ÅMICO -->
+            <!-- CONTENEDOR DIN¡MICO -->
             <div id="contenedor-pregunta"></div>
 
             <div class="controles">
@@ -226,8 +232,8 @@
 
         <!-- RESULTADOS -->
         <div id="pantalla-resultado">
-            <div class="res-emoji" id="emoji-resultado">üéâ</div>
-            <h2 class="res-titulo" id="titulo-resultado">¬°Evaluaci√≥n Completada!</h2>
+            <div class="res-emoji" id="emoji-resultado">??</div>
+            <h2 class="res-titulo" id="titulo-resultado">°EvaluaciÛn Completada!</h2>
             <div style="font-size: 1.2rem; color: #ddd;" id="nombre-resultado"></div>
             
             <div class="res-score"><span id="score-total"></span> <span>/ 18 pts</span> <br><span style="font-size:1.2rem; color:#4facfe;" id="score-pct"></span></div>
@@ -238,17 +244,17 @@
                 <div class="desglose-item" style="border-left-color: #3498db;">
                     <h3 style="color:#3498db; margin-bottom:10px;"><i class="fa-solid fa-list-check"></i> Fase 1: Preguntas (ICFES)</h3>
                     <p style="font-size: 2rem; font-weight: 800; color: #fff;" id="res-icfes">0/9</p>
-                    <p style="color: #aaa; font-size: 0.9rem;">Conceptos b√°sicos de cinem√°tica.</p>
+                    <p style="color: #aaa; font-size: 0.9rem;">Conceptos b·sicos de cinem·tica.</p>
                 </div>
                 <div class="desglose-item" style="border-left-color: #f39c12;">
                     <h3 style="color:#f39c12; margin-bottom:10px;"><i class="fa-solid fa-layer-group"></i> Fase 2: Reto Cascada</h3>
                     <p style="font-size: 2rem; font-weight: 800; color: #fff;" id="res-cascada">0/9</p>
-                    <p style="color: #aaa; font-size: 0.9rem;">An√°lisis paso a paso del Dron Agr√≠cola.</p>
+                    <p style="color: #aaa; font-size: 0.9rem;">An·lisis paso a paso del Dron AgrÌcola.</p>
                 </div>
             </div>
 
             <div style="margin-top: 40px;">
-                <a href="fisica_10.html" class="btn-nav" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Volver a F√≠sica 10</a>
+                <a href="fisica_10.html" class="btn-nav" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Volver a FÌsica 10</a>
             </div>
         </div>
 
@@ -256,55 +262,55 @@
 
 <script>
 // ============================================================
-//   CONFIGURACI√ìN Y DATOS
+//   CONFIGURACI”N Y DATOS
 // ============================================================
 const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbzitvYZZarQok90MbWJHmepB6Dn2MNKu5HUevk63SbWoRxpPkNN5NB35y_Av7T-eKEp/exec'; 
 
 // Banco de preguntas conceptuales (Se seleccionan 9)
 const bancoICFES = [
-    { texto: "En un Movimiento Rectil√≠neo Uniforme (M.R.U.), la caracter√≠stica principal es que:", opciones: ["A. La aceleraci√≥n es constante y positiva", "B. La velocidad aumenta con el tiempo", "C. La velocidad permanece constante", "D. El objeto siempre est√° en ca√≠da libre"], respuesta: 2 },
-    { texto: "Si un auto frena frente a un sem√°foro, su aceleraci√≥n se considera:", opciones: ["A. Positiva, porque sigue avanzando", "B. Cero, porque es M.R.U.", "C. Negativa, porque se opone a la velocidad", "D. Igual a la gravedad"], respuesta: 2 },
-    { texto: "Un objeto en ca√≠da libre desde el reposo aumenta su velocidad debido a:", opciones: ["A. Su masa", "B. La fricci√≥n del aire", "C. La fuerza inicial de lanzamiento", "D. La aceleraci√≥n de la gravedad"], respuesta: 3 },
-    { texto: "En un movimiento parab√≥lico, la velocidad en el eje X (horizontal) es:", opciones: ["A. Acelerada por la gravedad", "B. Cero en el punto m√°s alto", "C. Constante en todo el trayecto (M.R.U.)", "D. Variable dependiente del peso"], respuesta: 2 },
+    { texto: "En un Movimiento RectilÌneo Uniforme (M.R.U.), la caracterÌstica principal es que:", opciones: ["A. La aceleraciÛn es constante y positiva", "B. La velocidad aumenta con el tiempo", "C. La velocidad permanece constante", "D. El objeto siempre est· en caÌda libre"], respuesta: 2 },
+    { texto: "Si un auto frena frente a un sem·foro, su aceleraciÛn se considera:", opciones: ["A. Positiva, porque sigue avanzando", "B. Cero, porque es M.R.U.", "C. Negativa, porque se opone a la velocidad", "D. Igual a la gravedad"], respuesta: 2 },
+    { texto: "Un objeto en caÌda libre desde el reposo aumenta su velocidad debido a:", opciones: ["A. Su masa", "B. La fricciÛn del aire", "C. La fuerza inicial de lanzamiento", "D. La aceleraciÛn de la gravedad"], respuesta: 3 },
+    { texto: "En un movimiento parabÛlico, la velocidad en el eje X (horizontal) es:", opciones: ["A. Acelerada por la gravedad", "B. Cero en el punto m·s alto", "C. Constante en todo el trayecto (M.R.U.)", "D. Variable dependiente del peso"], respuesta: 2 },
     { texto: "En el M.R.U.V., si la velocidad inicial es 0, la distancia recorrida es proporcional a:", opciones: ["A. El cuadrado del tiempo", "B. Solo al tiempo", "C. La masa del objeto", "D. La altura inicial"], respuesta: 0 },
-    { texto: "Una piedra se lanza verticalmente hacia arriba. En su punto m√°s alto:", opciones: ["A. Su aceleraci√≥n es cero", "B. Su velocidad es cero", "C. Su velocidad es m√°xima", "D. Su peso desaparece"], respuesta: 1 },
-    { texto: "En el movimiento circular uniforme (M.C.U.), la aceleraci√≥n centr√≠peta apunta hacia:", opciones: ["A. Afuera de la curva", "B. El centro de la trayectoria circular", "C. La direcci√≥n del movimiento", "D. Arriba, contra la gravedad"], respuesta: 1 },
-    { texto: "¬øCu√°l de las siguientes unidades corresponde a la aceleraci√≥n en el SI?", opciones: ["A. m/s", "B. km/h", "C. m/s¬≤", "D. N/m"], respuesta: 2 },
-    { texto: "Un gr√°fico de Distancia vs Tiempo que muestra una l√≠nea recta diagonal indica:", opciones: ["A. Que el objeto est√° quieto", "B. M.R.U. (velocidad constante)", "C. M.R.U.V. (aceleraci√≥n constante)", "D. Ca√≠da libre"], respuesta: 1 },
-    { texto: "Si la aceleraci√≥n de un cuerpo es 0 m/s¬≤, significa que:", opciones: ["A. Obligatoriamente est√° quieto", "B. Se mueve en c√≠rculos", "C. Su velocidad es constante o est√° en reposo", "D. Est√° frenando"], respuesta: 2 },
-    { texto: "El tiempo que tarda un proyectil parab√≥lico en subir es ___ al tiempo que tarda en bajar al mismo nivel.", opciones: ["A. Mayor", "B. Menor", "C. Igual", "D. No tienen relaci√≥n"], respuesta: 2 },
-    { texto: "La gravedad en la Tierra produce una aceleraci√≥n aproximada de:", opciones: ["A. 9.8 m/s", "B. 9.8 m/s¬≤", "C. 10 km/h", "D. Cero"], respuesta: 1 }
+    { texto: "Una piedra se lanza verticalmente hacia arriba. En su punto m·s alto:", opciones: ["A. Su aceleraciÛn es cero", "B. Su velocidad es cero", "C. Su velocidad es m·xima", "D. Su peso desaparece"], respuesta: 1 },
+    { texto: "En el movimiento circular uniforme (M.C.U.), la aceleraciÛn centrÌpeta apunta hacia:", opciones: ["A. Afuera de la curva", "B. El centro de la trayectoria circular", "C. La direcciÛn del movimiento", "D. Arriba, contra la gravedad"], respuesta: 1 },
+    { texto: "øCu·l de las siguientes unidades corresponde a la aceleraciÛn en el SI?", opciones: ["A. m/s", "B. km/h", "C. m/s≤", "D. N/m"], respuesta: 2 },
+    { texto: "Un gr·fico de Distancia vs Tiempo que muestra una lÌnea recta diagonal indica:", opciones: ["A. Que el objeto est· quieto", "B. M.R.U. (velocidad constante)", "C. M.R.U.V. (aceleraciÛn constante)", "D. CaÌda libre"], respuesta: 1 },
+    { texto: "Si la aceleraciÛn de un cuerpo es 0 m/s≤, significa que:", opciones: ["A. Obligatoriamente est· quieto", "B. Se mueve en cÌrculos", "C. Su velocidad es constante o est· en reposo", "D. Est· frenando"], respuesta: 2 },
+    { texto: "El tiempo que tarda un proyectil parabÛlico en subir es ___ al tiempo que tarda en bajar al mismo nivel.", opciones: ["A. Mayor", "B. Menor", "C. Igual", "D. No tienen relaciÛn"], respuesta: 2 },
+    { texto: "La gravedad en la Tierra produce una aceleraciÛn aproximada de:", opciones: ["A. 9.8 m/s", "B. 9.8 m/s≤", "C. 10 km/h", "D. Cero"], respuesta: 1 }
 ];
 
 // Reto en Cascada
 const retoCascada = {
-    contexto: "Un Dron Agr√≠cola en la Instituci√≥n Educativa Gallego realiza una misi√≥n en 3 intervalos de vuelo distintos. Analiza cada etapa paso a paso.",
+    contexto: "Un Dron AgrÌcola en la InstituciÛn Educativa Gallego realiza una misiÛn en 3 intervalos de vuelo distintos. Analiza cada etapa paso a paso.",
     intervalos: [
         {
             titulo: "Intervalo 1: Vuelo de reconocimiento",
-            desc: "El dron se desplaza en l√≠nea recta y de forma horizontal cubriendo 120 metros en 10 segundos, manteniendo el mismo ritmo de vuelo sin acelerar ni frenar.",
+            desc: "El dron se desplaza en lÌnea recta y de forma horizontal cubriendo 120 metros en 10 segundos, manteniendo el mismo ritmo de vuelo sin acelerar ni frenar.",
             pasos: [
-                { tipo: "select", pregunta: "1. ¬øQu√© tipo de movimiento realiza el dron?", opciones: ["M.R.U. (Uniforme)", "M.R.U.V. (Variado)", "Ca√≠da Libre", "M. Circular"], respuesta: 0, exp: "Correcto. Como mantiene el mismo ritmo (velocidad constante), es M.R.U." },
-                { tipo: "select", pregunta: "2. ¬øQu√© f√≥rmula utilizar√≠as para hallar su velocidad?", opciones: ["a = (Vf - Vi) / t", "V = d / t", "h = 1/2 * g * t¬≤", "d = Vi * t + 1/2 * a * t¬≤"], respuesta: 1, exp: "Exacto. En M.R.U. la velocidad es distancia sobre tiempo." },
-                { tipo: "input", pregunta: "3. Calcula la velocidad (en m/s):", respuesta: "12", exp: "¬°Perfecto! V = 120m / 10s = 12 m/s." }
+                { tipo: "select", pregunta: "1. øQuÈ tipo de movimiento realiza el dron?", opciones: ["M.R.U. (Uniforme)", "M.R.U.V. (Variado)", "CaÌda Libre", "M. Circular"], respuesta: 0, exp: "Correcto. Como mantiene el mismo ritmo (velocidad constante), es M.R.U." },
+                { tipo: "select", pregunta: "2. øQuÈ fÛrmula utilizarÌas para hallar su velocidad?", opciones: ["a = (Vf - Vi) / t", "V = d / t", "h = 1/2 * g * t≤", "d = Vi * t + 1/2 * a * t≤"], respuesta: 1, exp: "Exacto. En M.R.U. la velocidad es distancia sobre tiempo." },
+                { tipo: "input", pregunta: "3. Calcula la velocidad (en m/s):", respuesta: "12", exp: "°Perfecto! V = 120m / 10s = 12 m/s." }
             ]
         },
         {
-            titulo: "Intervalo 2: Ascenso r√°pido",
-            desc: "Para evadir un √°rbol alto, el dron aumenta su velocidad desde los 12 m/s que llevaba hasta alcanzar 20 m/s, tardando 4 segundos en lograrlo.",
+            titulo: "Intervalo 2: Ascenso r·pido",
+            desc: "Para evadir un ·rbol alto, el dron aumenta su velocidad desde los 12 m/s que llevaba hasta alcanzar 20 m/s, tardando 4 segundos en lograrlo.",
             pasos: [
-                { tipo: "select", pregunta: "1. ¬øQu√© tipo de movimiento realiza ahora?", opciones: ["M.R.U. (Uniforme)", "M.R.U.V. (Variado)", "Ca√≠da Libre", "M. Parab√≥lico"], respuesta: 1, exp: "Correcto. Como cambia su velocidad, hay aceleraci√≥n (M.R.U.V.)." },
-                { tipo: "select", pregunta: "2. ¬øQu√© f√≥rmula utilizas para hallar la aceleraci√≥n?", opciones: ["V = d / t", "h = 1/2 * g * t¬≤", "a = (Vf - Vi) / t", "d = Vi * t"], respuesta: 2, exp: "¬°Muy bien! Aceleraci√≥n es la variaci√≥n de velocidad sobre tiempo." },
-                { tipo: "input", pregunta: "3. Calcula la aceleraci√≥n (en m/s¬≤):", respuesta: "2", exp: "¬°Excelente! a = (20 - 12) / 4 = 8 / 4 = 2 m/s¬≤." }
+                { tipo: "select", pregunta: "1. øQuÈ tipo de movimiento realiza ahora?", opciones: ["M.R.U. (Uniforme)", "M.R.U.V. (Variado)", "CaÌda Libre", "M. ParabÛlico"], respuesta: 1, exp: "Correcto. Como cambia su velocidad, hay aceleraciÛn (M.R.U.V.)." },
+                { tipo: "select", pregunta: "2. øQuÈ fÛrmula utilizas para hallar la aceleraciÛn?", opciones: ["V = d / t", "h = 1/2 * g * t≤", "a = (Vf - Vi) / t", "d = Vi * t"], respuesta: 2, exp: "°Muy bien! AceleraciÛn es la variaciÛn de velocidad sobre tiempo." },
+                { tipo: "input", pregunta: "3. Calcula la aceleraciÛn (en m/s≤):", respuesta: "2", exp: "°Excelente! a = (20 - 12) / 4 = 8 / 4 = 2 m/s≤." }
             ]
         },
         {
             titulo: "Intervalo 3: Entrega de semillas",
-            desc: "El dron se detiene (reposo) en el aire y deja caer un paquete de semillas verticalmente, el cual tarda 3 segundos en tocar el suelo. (Asume g = 10 m/s¬≤ para simplificar)",
+            desc: "El dron se detiene (reposo) en el aire y deja caer un paquete de semillas verticalmente, el cual tarda 3 segundos en tocar el suelo. (Asume g = 10 m/s≤ para simplificar)",
             pasos: [
-                { tipo: "select", pregunta: "1. ¬øQu√© tipo de movimiento experimenta el paquete?", opciones: ["M.R.U. Horizontal", "M.R.U.V. Ascendente", "Ca√≠da Libre", "M. Parab√≥lico"], respuesta: 2, exp: "Correcto. El paquete cae bajo efecto de la gravedad desde el reposo." },
-                { tipo: "select", pregunta: "2. ¬øQu√© f√≥rmula usas para hallar la altura desde la que cay√≥?", opciones: ["h = 1/2 * g * t¬≤", "h = (Vf - Vi) / t", "V = d / t", "h = m * g"], respuesta: 0, exp: "Exacto. Como se deja caer, Vi = 0, as√≠ que la altura depende de g y t¬≤." },
-                { tipo: "input", pregunta: "3. Calcula la altura (en metros):", respuesta: "45", exp: "¬°Perfecto! h = 0.5 * 10 * (3)¬≤ = 5 * 9 = 45 m." }
+                { tipo: "select", pregunta: "1. øQuÈ tipo de movimiento experimenta el paquete?", opciones: ["M.R.U. Horizontal", "M.R.U.V. Ascendente", "CaÌda Libre", "M. ParabÛlico"], respuesta: 2, exp: "Correcto. El paquete cae bajo efecto de la gravedad desde el reposo." },
+                { tipo: "select", pregunta: "2. øQuÈ fÛrmula usas para hallar la altura desde la que cayÛ?", opciones: ["h = 1/2 * g * t≤", "h = (Vf - Vi) / t", "V = d / t", "h = m * g"], respuesta: 0, exp: "Exacto. Como se deja caer, Vi = 0, asÌ que la altura depende de g y t≤." },
+                { tipo: "input", pregunta: "3. Calcula la altura (en metros):", respuesta: "45", exp: "°Perfecto! h = 0.5 * 10 * (3)≤ = 5 * 9 = 45 m." }
             ]
         }
     ]
@@ -320,7 +326,7 @@ let faseActual = 1; // 1: ICFES (0-8), 2: Cascada (9)
 let indiceActual = 0; 
 let puntosIcfes = 0;
 let puntosCascada = 0; // Se suman al instante al verificar
-let cascadaProgreso = { intervalo: 0, paso: 0 }; // Controla en qu√© paso de la cascada va
+let cascadaProgreso = { intervalo: 0, paso: 0 }; // Controla en quÈ paso de la cascada va
 
 function iniciarEvaluacion() {
     const input = document.getElementById('input-nombre');
@@ -379,7 +385,7 @@ function mostrarVista() {
         btnAnt.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Volver a ICFES';
         btnSig.style.display = 'none';
         
-        // Solo mostramos el boton de finalizar si ya termin√≥ la cascada
+        // Solo mostramos el boton de finalizar si ya terminÛ la cascada
         const terminoCascada = cascadaProgreso.intervalo >= retoCascada.intervalos.length;
         btnFin.style.display = terminoCascada ? 'inline-block' : 'none';
 
@@ -393,7 +399,7 @@ function mostrarVista() {
 
 function seleccionarOpcionICFES(idx) {
     respuestasFase1[indiceActual] = idx;
-    mostrarVista(); // Re-render para mostrar selecci√≥n
+    mostrarVista(); // Re-render para mostrar selecciÛn
 }
 
 function irSiguiente() {
@@ -409,12 +415,12 @@ function irAnterior() {
 }
 
 // ============================================================
-//   L√ìGICA CASCADA
+//   L”GICA CASCADA
 // ============================================================
 function renderCascada() {
     let html = `<div class="cascada-container">
-        <span class="tag-fase" style="background:#f39c12;">Fase 2: Reto Pr√°ctico</span>
-        <h3 style="color:#f39c12; margin-bottom:15px; font-size:1.5rem;">El Dron Agr√≠cola</h3>
+        <span class="tag-fase" style="background:#f39c12;">Fase 2: Reto Pr·ctico</span>
+        <h3 style="color:#f39c12; margin-bottom:15px; font-size:1.5rem;">El Dron AgrÌcola</h3>
         <div class="cascada-contexto">${retoCascada.contexto}</div>`;
 
     retoCascada.intervalos.forEach((int, iIdx) => {
@@ -447,9 +453,9 @@ function renderCascada() {
             if (estado === 'pendiente') {
                 html += `<button class="btn-verificar-paso" onclick="verificarPasoCascada(${iIdx}, ${pIdx})">Verificar</button>`;
             } else {
-                const icono = estado === 'correcto' ? '‚úÖ' : '‚ùå';
+                const icono = estado === 'correcto' ? '?' : '?';
                 const claseFeed = estado === 'correcto' ? 'ok' : 'error';
-                html += `<div class="feedback-paso ${claseFeed}"><strong>${icono} ${estado==='correcto'?'¬°Punto para ti!':'Respuesta incorrecta (0 pts).'}</strong><br>${paso.exp}</div>`;
+                html += `<div class="feedback-paso ${claseFeed}"><strong>${icono} ${estado==='correcto'?'°Punto para ti!':'Respuesta incorrecta (0 pts).'}</strong><br>${paso.exp}</div>`;
             }
             html += `</div>`;
         });
@@ -470,11 +476,11 @@ function verificarPasoCascada(iIdx, pIdx) {
     let esCorrecto = false;
 
     if (paso.tipo === 'select') {
-        if (paso.seleccion === undefined) { alert("Selecciona una opci√≥n."); return; }
+        if (paso.seleccion === undefined) { alert("Selecciona una opciÛn."); return; }
         esCorrecto = (paso.seleccion === paso.respuesta);
     } else {
         const val = document.getElementById(`input-${iIdx}-${pIdx}`).value.trim();
-        if (val === '') { alert("Ingresa un valor num√©rico."); return; }
+        if (val === '') { alert("Ingresa un valor numÈrico."); return; }
         paso.seleccion = val;
         esCorrecto = (val === paso.respuesta);
     }
@@ -497,7 +503,7 @@ function verificarPasoCascada(iIdx, pIdx) {
 // ============================================================
 function mostrarResultados() {
     const sinResp = respuestasFase1.filter(r => r === null).length;
-    if (sinResp > 0 && !confirm(`Tienes ${sinResp} pregunta(s) de la Fase 1 sin responder. ¬øDeseas finalizar?`)) return;
+    if (sinResp > 0 && !confirm(`Tienes ${sinResp} pregunta(s) de la Fase 1 sin responder. øDeseas finalizar?`)) return;
 
     // Calcular puntos ICFES
     puntosIcfes = 0;
@@ -507,16 +513,16 @@ function mostrarResultados() {
     const pct = Math.round((totalPuntos / 18) * 100);
 
     let emoji, titulo, sub;
-    if (pct >= 90) { emoji = 'üèÜ'; titulo = '¬°Sobresaliente!'; sub = 'Eres un experto en Cinem√°tica.'; }
-    else if (pct >= 75) { emoji = 'üåü'; titulo = '¬°Muy bien!'; sub = 'Dominas los conceptos y la resoluci√≥n de problemas.'; }
-    else if (pct >= 60) { emoji = 'üìö'; titulo = 'Aprobado'; sub = 'Buen trabajo, aunque hay detalles que afinar.'; }
-    else { emoji = 'üîÑ'; titulo = 'Necesitas repasar'; sub = 'La cinem√°tica requiere pr√°ctica, revisa la teor√≠a nuevamente.'; }
+    if (pct >= 90) { emoji = '??'; titulo = '°Sobresaliente!'; sub = 'Eres un experto en Cinem·tica.'; }
+    else if (pct >= 75) { emoji = '??'; titulo = '°Muy bien!'; sub = 'Dominas los conceptos y la resoluciÛn de problemas.'; }
+    else if (pct >= 60) { emoji = '??'; titulo = 'Aprobado'; sub = 'Buen trabajo, aunque hay detalles que afinar.'; }
+    else { emoji = '??'; titulo = 'Necesitas repasar'; sub = 'La cinem·tica requiere pr·ctica, revisa la teorÌa nuevamente.'; }
 
     document.getElementById('seccion-evaluacion').style.display = 'none';
     const pr = document.getElementById('pantalla-resultado');
     pr.classList.add('activo');
 
-    document.getElementById('nombre-resultado').textContent = 'üë§ ' + nombreEstudiante;
+    document.getElementById('nombre-resultado').textContent = '?? ' + nombreEstudiante;
     document.getElementById('emoji-resultado').textContent = emoji;
     document.getElementById('titulo-resultado').textContent = titulo;
     document.getElementById('subtitulo-resultado').textContent = sub;
@@ -528,7 +534,7 @@ function mostrarResultados() {
 
     if (URL_GOOGLE_SCRIPT !== '') {
         const formData = new URLSearchParams();
-        formData.append('nombre', nombreEstudiante + " (Cinem√°tica 10)");
+        formData.append('nombre', nombreEstudiante + " (Cinem·tica 10)");
         formData.append('puntaje', totalPuntos); 
         formData.append('porcentaje', pct);
         formData.append('tema_ondas', puntosIcfes); 
@@ -548,3 +554,4 @@ function mostrarResultados() {
 <script src="auth.js"></script>
 </body>
 </html>
+
