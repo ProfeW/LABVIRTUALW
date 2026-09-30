@@ -254,16 +254,11 @@
 
     </main>
 
-    <script>
-        const URL_DEL_SCRIPT = 'https://script.google.com/macros/s/AKfycbxivsTI1yb7dsk9m1Rm9HuxKXJOH2q4yFmRbbefqyqLdLSpJu8BIqzdf3YP6FRc/exec';
-        fetch(URL_DEL_SCRIPT, { redirect: 'follow', method: 'GET' })
-        .then(respuesta => respuesta.json())
-        .then(datos => { document.getElementById('contador-visitas').innerText = datos.visitas; })
-        .catch(error => { document.getElementById('contador-visitas').innerText = "Activo"; });
-    </script>
+    <script type="module" src="firebase_contador.js"></script>
 
 <script src="auth.js"></script>
 </body>
 </html>
+
 
 
