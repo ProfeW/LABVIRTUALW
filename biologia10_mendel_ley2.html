@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Segunda Ley de Mendel | LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACIÃ“N --- */
+        /* --- NAVEGACIÓN --- */
         nav { 
             background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
             border-bottom: 1px solid rgba(46, 204, 113, 0.2); 
@@ -101,6 +101,12 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .analisis-grid { grid-template-columns: 1fr; } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -108,7 +114,7 @@
         <nav>
             <a href="biologia_10.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
-                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Volver al MenÃº</a></li>
+                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Volver al Menú</a></li>
             </ul>
         </nav>
     </header>
@@ -117,7 +123,7 @@
         
         <div class="encabezado-area">
             <div class="badge-grado">LEYES DE MENDEL</div>
-            <h1>Segunda Ley de Mendel:<br><span>Principio de la SegregaciÃ³n</span></h1>
+            <h1>Segunda Ley de Mendel:<br><span>Principio de la Segregación</span></h1>
         </div>
 
         <article class="tarjeta-info">
@@ -126,19 +132,19 @@
                 <h2>Concepto e Importancia</h2>
             </div>
             <div class="texto-info">
-                <p>La <strong>Segunda Ley de Mendel</strong> o principio de segregaciÃ³n establece que durante la formaciÃ³n de los gametos (Ã³vulos y espermatozoides/polen), cada alelo de un par se separa del otro miembro para determinar la constituciÃ³n genÃ©tica del gameto filial.</p>
-                <p>En otras palabras, cuando cruzamos individuos de la primera generaciÃ³n (F1, que son <strong>heterocigotos Aa</strong>), el carÃ¡cter recesivo que estaba oculto volverÃ¡ a aparecer en la segunda generaciÃ³n (F2) en una proporciÃ³n exacta.</p>
-                <p><strong>Importancia:</strong> Demuestra que los genes no se pierden ni se mezclan irreversiblemente. Un carÃ¡cter que "desaparece" en la generaciÃ³n de los hijos (porque es recesivo) puede reaparecer intacto en la generaciÃ³n de los nietos.</p>
+                <p>La <strong>Segunda Ley de Mendel</strong> o principio de segregación establece que durante la formación de los gametos (óvulos y espermatozoides/polen), cada alelo de un par se separa del otro miembro para determinar la constitución genética del gameto filial.</p>
+                <p>En otras palabras, cuando cruzamos individuos de la primera generación (F1, que son <strong>heterocigotos Aa</strong>), el carácter recesivo que estaba oculto volverá a aparecer en la segunda generación (F2) en una proporción exacta.</p>
+                <p><strong>Importancia:</strong> Demuestra que los genes no se pierden ni se mezclan irreversiblemente. Un carácter que "desaparece" en la generación de los hijos (porque es recesivo) puede reaparecer intacto en la generación de los nietos.</p>
             </div>
         </article>
 
         <article class="tarjeta-info">
             <div class="tarjeta-header">
                 <i class="fa-solid fa-table-cells"></i>
-                <h2>AnÃ¡lisis Estructural: El Cruce de la F1 (Aa x Aa)</h2>
+                <h2>Análisis Estructural: El Cruce de la F1 (Aa x Aa)</h2>
             </div>
             <div class="texto-info">
-                <p>Tomando los hijos del experimento anterior (las plantas heterocigotas de semillas amarillas <strong>Aa</strong>), Mendel las cruzÃ³ entre sÃ­. Veamos cÃ³mo los alelos recesivos reaparecen misteriosamente.</p>
+                <p>Tomando los hijos del experimento anterior (las plantas heterocigotas de semillas amarillas <strong>Aa</strong>), Mendel las cruzó entre sí. Veamos cómo los alelos recesivos reaparecen misteriosamente.</p>
             </div>
             
             <div class="punnett-container">
@@ -163,13 +169,13 @@
 
             <div class="analisis-grid">
                 <div class="analisis-caja">
-                    <h3><i class="fa-solid fa-eye"></i> AnÃ¡lisis FenotÃ­pico (ProporciÃ³n 3:1)</h3>
+                    <h3><i class="fa-solid fa-eye"></i> Análisis Fenotípico (Proporción 3:1)</h3>
                     <div class="analisis-item"><span>Semillas Amarillas (Dominante):</span> <strong>3/4</strong></div>
                     <div class="analisis-item"><span>Semillas Verdes (Recesivo):</span> <strong>1/4</strong></div>
-                    <div class="analisis-item" style="border:none; color: var(--color-bio-primario); margin-top: 10px;"><span>ProporciÃ³n Porcentual:</span> <strong>75% Amarillas | 25% Verdes</strong></div>
+                    <div class="analisis-item" style="border:none; color: var(--color-bio-primario); margin-top: 10px;"><span>Proporción Porcentual:</span> <strong>75% Amarillas | 25% Verdes</strong></div>
                 </div>
                 <div class="analisis-caja">
-                    <h3><i class="fa-solid fa-dna"></i> AnÃ¡lisis GenotÃ­pico (ProporciÃ³n 1:2:1)</h3>
+                    <h3><i class="fa-solid fa-dna"></i> Análisis Genotípico (Proporción 1:2:1)</h3>
                     <div class="analisis-item"><span>Homocigotos Dominantes (AA):</span> <strong>1/4 (25%)</strong></div>
                     <div class="analisis-item"><span>Heterocigotos (Aa):</span> <strong>2/4 (50%)</strong></div>
                     <div class="analisis-item"><span>Homocigotos Recesivos (aa):</span> <strong>1/4 (25%)</strong></div>
@@ -178,7 +184,7 @@
         </article>
 
         <!-- ========================================== -->
-        <!-- SECCIÃ“N DE EJERCICIOS RESUELTOS            -->
+        <!-- SECCIÓN DE EJERCICIOS RESUELTOS            -->
         <!-- ========================================== -->
         <h2 style="text-align: center; font-size: 2.2rem; margin: 50px 0 30px; border-bottom: 2px solid #555; padding-bottom: 20px;">
             <i class="fa-solid fa-chalkboard-user" style="color: var(--color-bio-secundario);"></i> Ejercicios Resueltos Paso a Paso
@@ -188,7 +194,7 @@
         <div class="ejercicio-resuelto">
             <h3 class="ej-titulo">Ejercicio 1: El color de ojos en los gatos</h3>
             <div class="ej-enunciado">
-                "En cierta raza de gatos, los ojos amarillos (M) son dominantes sobre los ojos azules (m). Si cruzamos dos gatos de ojos amarillos que son heterocigotos para este rasgo (Mm), Â¿CuÃ¡l es la probabilidad de que nazca un gatito de ojos azules?"
+                "En cierta raza de gatos, los ojos amarillos (M) son dominantes sobre los ojos azules (m). Si cruzamos dos gatos de ojos amarillos que son heterocigotos para este rasgo (Mm), ¿Cuál es la probabilidad de que nazca un gatito de ojos azules?"
             </div>
             
             <div class="paso-paso">
@@ -221,7 +227,7 @@
         <div class="ejercicio-resuelto">
             <h3 class="ej-titulo">Ejercicio 2: Textura del pelo en perros</h3>
             <div class="ej-enunciado">
-                "El pelo rizado (R) es dominante sobre el pelo liso (r). Se cruzan dos perros heterocigotos (Rr). Si tienen una camada de 8 cachorros, teÃ³ricamente, Â¿cuÃ¡ntos deberÃ­an tener el pelo rizado?"
+                "El pelo rizado (R) es dominante sobre el pelo liso (r). Se cruzan dos perros heterocigotos (Rr). Si tienen una camada de 8 cachorros, teóricamente, ¿cuántos deberían tener el pelo rizado?"
             </div>
             
             <div class="paso-paso">
@@ -232,7 +238,7 @@
                 <div class="paso" data-step="2">
                     <div class="paso-titulo">Identificar el Fenotipo Dominante mediante Punnett</div>
                     <div class="texto-info">
-                        <p>El pelo rizado se expresa tanto en 'RR' como en 'Rr'. Al realizar el cuadro, vemos que suman 3 casillas de 4 (es decir, el 75% o la famosa proporciÃ³n 3:1).</p>
+                        <p>El pelo rizado se expresa tanto en 'RR' como en 'Rr'. Al realizar el cuadro, vemos que suman 3 casillas de 4 (es decir, el 75% o la famosa proporción 3:1).</p>
                         <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
                             <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">R</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec);">r</th></tr>
                             <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom); background: rgba(0,0,0,0.5);">R</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">RR</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Rr</td></tr>
@@ -241,10 +247,10 @@
                     </div>
                 </div>
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
-                    <div class="paso-titulo">CÃ¡lculo NumÃ©rico</div>
+                    <div class="paso-titulo">Cálculo Numérico</div>
                     <div class="texto-info">
-                        El 75% (3/4) de la camada tendrÃ¡ pelo rizado. Si la camada es de 8 cachorros:<br>
-                        (3/4) * 8 = <strong>6 cachorros</strong> con pelo rizado teÃ³ricamente.
+                        El 75% (3/4) de la camada tendrá pelo rizado. Si la camada es de 8 cachorros:<br>
+                        (3/4) * 8 = <strong>6 cachorros</strong> con pelo rizado teóricamente.
                     </div>
                 </div>
             </div>
@@ -252,9 +258,9 @@
 
         <!-- Ejercicio 3 -->
         <div class="ejercicio-resuelto">
-            <h3 class="ej-titulo">Ejercicio 3: GenÃ©tica de las flores rojas y blancas</h3>
+            <h3 class="ej-titulo">Ejercicio 3: Genética de las flores rojas y blancas</h3>
             <div class="ej-enunciado">
-                "Una planta que da flores rojas (R) heterocigota se cruza con otra planta heterocigota. Â¿CuÃ¡l es el porcentaje de descendientes que serÃ¡n homocigotos dominantes y cuÃ¡l es el porcentaje de descendientes con flores blancas (r)?"
+                "Una planta que da flores rojas (R) heterocigota se cruza con otra planta heterocigota. ¿Cuál es el porcentaje de descendientes que serán homocigotos dominantes y cuál es el porcentaje de descendientes con flores blancas (r)?"
             </div>
             
             <div class="paso-paso">
@@ -277,7 +283,7 @@
                     <div class="paso-titulo">Responder la Pregunta 2 (Flores Blancas)</div>
                     <div class="texto-info">
                         Las flores blancas son recesivas 'rr'. Aparecen 1 vez de 4.<br>
-                        Porcentaje = <strong>25%</strong>. (Y el 50% restante serÃ¡n heterocigotos de flores rojas).
+                        Porcentaje = <strong>25%</strong>. (Y el 50% restante serán heterocigotos de flores rojas).
                     </div>
                 </div>
             </div>
@@ -287,7 +293,7 @@
             <i class="fa-solid fa-gamepad" style="color: var(--color-bio-secundario);"></i> Prueba tu Aprendizaje
         </h2>
         <div style="background: rgba(0,0,0,0.6); border: 2px dashed var(--color-bio-secundario); border-radius: 12px; padding: 25px; margin-bottom: 30px;" id="cadena-ley2">
-            <h3 style="color: #fff; margin-bottom: 15px;" id="cadena-q-text-2">Reto 1: En un cruce de dos heterocigotos (Aa x Aa), Â¿cuÃ¡l es la probabilidad de que nazca un individuo con el rasgo recesivo?</h3>
+            <h3 style="color: #fff; margin-bottom: 15px;" id="cadena-q-text-2">Reto 1: En un cruce de dos heterocigotos (Aa x Aa), ¿cuál es la probabilidad de que nazca un individuo con el rasgo recesivo?</h3>
             <div id="cadena-opciones-2" style="display: flex; gap: 10px; flex-direction: column;">
                 <button onclick="checkCadenaLey2_1(0)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">A) 50%</button>
                 <button onclick="checkCadenaLey2_1(1)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">B) 25%</button>
@@ -301,14 +307,14 @@
                 const fb = document.getElementById('cadena-feedback-2');
                 if(ans === 1) {
                     fb.style.color = '#2ecc71';
-                    fb.innerHTML = 'Â¡Correcto! Solo 1 de cada 4 (25%) serÃ¡ homocigoto recesivo (aa). <br><br> <button onclick="nextCadenaLey2_1()" class="btn-accion">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>';
+                    fb.innerHTML = '¡Correcto! Solo 1 de cada 4 (25%) será homocigoto recesivo (aa). <br><br> <button onclick="nextCadenaLey2_1()" class="btn-accion">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>';
                 } else {
                     fb.style.color = '#e74c3c';
-                    fb.innerHTML = 'Incorrecto. Revisa la proporciÃ³n 3:1.';
+                    fb.innerHTML = 'Incorrecto. Revisa la proporción 3:1.';
                 }
             }
             function nextCadenaLey2_1() {
-                document.getElementById('cadena-q-text-2').innerText = 'Reto 2: En el mismo cruce, Â¿quÃ© porcentaje serÃ¡ HETEROCIGOTO (Aa)?';
+                document.getElementById('cadena-q-text-2').innerText = 'Reto 2: En el mismo cruce, ¿qué porcentaje será HETEROCIGOTO (Aa)?';
                 document.getElementById('cadena-opciones-2').innerHTML = `
                     <button onclick="checkCadenaLey2_2(0)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">A) 50%</button>
                     <button onclick="checkCadenaLey2_2(1)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">B) 25%</button>
@@ -320,7 +326,7 @@
                 const fb = document.getElementById('cadena-feedback-2');
                 if(ans === 0) {
                     fb.style.color = '#2ecc71';
-                    fb.innerHTML = 'Â¡Excelente! Has dominado la Segunda Ley de Mendel. Puedes continuar.';
+                    fb.innerHTML = '¡Excelente! Has dominado la Segunda Ley de Mendel. Puedes continuar.';
                 } else {
                     fb.style.color = '#e74c3c';
                     fb.innerHTML = 'Incorrecto. Mira el genotipo Aa en el cuadro de Punnett, aparece en 2 casillas (2 de 4).';
@@ -338,3 +344,4 @@
 <script src="auth.js"></script>
 </body>
 </html>
+

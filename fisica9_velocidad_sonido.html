@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Velocidad del Sonido seg√∫n el Medio - F√≠sica 9 - LabVirtual W.">
-    <title>Velocidad del Sonido seg√∫n el Medio - F√≠sica 9 - LabVirtual W</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>‚ö°</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Velocidad del Sonido seg˙n el Medio - FÌsica 9 - LabVirtual W.">
+    <title>Velocidad del Sonido seg˙n el Medio - FÌsica 9 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>?</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -68,6 +68,12 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .botones-accion-final { flex-direction: column; } .btn-accion { justify-content: center; } nav { padding: 15px 20px; } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -76,11 +82,11 @@
             <ul class="menu">
                 <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
                 <li>
-                    <a href="#"><i class="fa-solid fa-atom"></i> F√≠sica <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                    <a href="#"><i class="fa-solid fa-atom"></i> FÌsica <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
                     <ul class="submenu">
                         <li><a href="fisica_9.html">Grado Noveno</a></li>
-                        <li><a href="fisica_10.html">Grado D√©cimo</a></li>
-                        <li><a href="fisica_11.html">Grado Und√©cimo</a></li>
+                        <li><a href="fisica_10.html">Grado DÈcimo</a></li>
+                        <li><a href="fisica_11.html">Grado UndÈcimo</a></li>
                     </ul>
                 </li>
             </ul>
@@ -88,163 +94,163 @@
     </header>
 
     <main class="contenedor">
-        <a href="fisica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a F√≠sica 9¬∞</a>
+        <a href="fisica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a FÌsica 9∞</a>
 
         <div class="encabezado-leccion">
-            <h1><i class="fa-solid fa-gauge-high"></i> Velocidad del Sonido seg√∫n el Medio</h1>
-            <p><i class="fa-solid fa-layer-group"></i> Unidad: El Sonido y la Ac√∫stica ¬∑ F√≠sica Grado 9¬∞</p>
+            <h1><i class="fa-solid fa-gauge-high"></i> Velocidad del Sonido seg˙n el Medio</h1>
+            <p><i class="fa-solid fa-layer-group"></i> Unidad: El Sonido y la Ac˙stica ∑ FÌsica Grado 9∞</p>
         </div>
 
         <section class="seccion-contenido">
             <h2><i class="fa-solid fa-tachometer-alt"></i> 1. El Sonido en Diferentes Materiales</h2>
-            <p>La velocidad con la que viaja el sonido depende de las propiedades f√≠sicas del medio por el que se propaga, principalmente de su <strong>elasticidad</strong> y de su <strong>densidad</strong>. Como regla general, el sonido viaja m√°s r√°pido en los s√≥lidos que en los l√≠quidos, y m√°s r√°pido en los l√≠quidos que en los gases.</p>
-            <p>A continuaci√≥n, presentamos una tabla con las velocidades aproximadas del sonido en los 12 materiales m√°s comunes:</p>
+            <p>La velocidad con la que viaja el sonido depende de las propiedades fÌsicas del medio por el que se propaga, principalmente de su <strong>elasticidad</strong> y de su <strong>densidad</strong>. Como regla general, el sonido viaja m·s r·pido en los sÛlidos que en los lÌquidos, y m·s r·pido en los lÌquidos que en los gases.</p>
+            <p>A continuaciÛn, presentamos una tabla con las velocidades aproximadas del sonido en los 12 materiales m·s comunes:</p>
 
             <table class="tabla-velocidades">
                 <thead>
-                    <tr><th>Material (Medio de propagaci√≥n)</th><th>Estado</th><th>Velocidad (m/s)</th></tr>
+                    <tr><th>Material (Medio de propagaciÛn)</th><th>Estado</th><th>Velocidad (m/s)</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Aire (0 ¬∞C)</td><td>Gas</td><td>331 m/s</td></tr>
-                    <tr><td>Aire (20 ¬∞C)</td><td>Gas</td><td>343 m/s</td></tr>
-                    <tr><td>Ox√≠geno (0 ¬∞C)</td><td>Gas</td><td>317 m/s</td></tr>
-                    <tr><td>Helio (0 ¬∞C)</td><td>Gas</td><td>965 m/s</td></tr>
-                    <tr><td>Etanol (20 ¬∞C)</td><td>L√≠quido</td><td>1162 m/s</td></tr>
-                    <tr><td>Agua dulce (20 ¬∞C)</td><td>L√≠quido</td><td>1482 m/s</td></tr>
-                    <tr><td>Agua de mar (20 ¬∞C)</td><td>L√≠quido</td><td>1522 m/s</td></tr>
-                    <tr><td>Caucho</td><td>S√≥lido</td><td>1600 m/s</td></tr>
-                    <tr><td>Madera (Pino)</td><td>S√≥lido</td><td>3320 m/s</td></tr>
-                    <tr><td>Hormig√≥n / Concreto</td><td>S√≥lido</td><td>4000 m/s</td></tr>
-                    <tr><td>Vidrio</td><td>S√≥lido</td><td>5640 m/s</td></tr>
-                    <tr><td>Acero</td><td>S√≥lido</td><td>5960 m/s</td></tr>
-                    <tr><td>Aluminio</td><td>S√≥lido</td><td>6420 m/s</td></tr>
+                    <tr><td>Aire (0 ∞C)</td><td>Gas</td><td>331 m/s</td></tr>
+                    <tr><td>Aire (20 ∞C)</td><td>Gas</td><td>343 m/s</td></tr>
+                    <tr><td>OxÌgeno (0 ∞C)</td><td>Gas</td><td>317 m/s</td></tr>
+                    <tr><td>Helio (0 ∞C)</td><td>Gas</td><td>965 m/s</td></tr>
+                    <tr><td>Etanol (20 ∞C)</td><td>LÌquido</td><td>1162 m/s</td></tr>
+                    <tr><td>Agua dulce (20 ∞C)</td><td>LÌquido</td><td>1482 m/s</td></tr>
+                    <tr><td>Agua de mar (20 ∞C)</td><td>LÌquido</td><td>1522 m/s</td></tr>
+                    <tr><td>Caucho</td><td>SÛlido</td><td>1600 m/s</td></tr>
+                    <tr><td>Madera (Pino)</td><td>SÛlido</td><td>3320 m/s</td></tr>
+                    <tr><td>HormigÛn / Concreto</td><td>SÛlido</td><td>4000 m/s</td></tr>
+                    <tr><td>Vidrio</td><td>SÛlido</td><td>5640 m/s</td></tr>
+                    <tr><td>Acero</td><td>SÛlido</td><td>5960 m/s</td></tr>
+                    <tr><td>Aluminio</td><td>SÛlido</td><td>6420 m/s</td></tr>
                 </tbody>
             </table>
         </section>
 
         <section class="seccion-contenido">
-            <h2><i class="fa-solid fa-calculator"></i> 2. F√≥rmulas Principales</h2>
-            <p>Para resolver problemas de ac√∫stica a nivel b√°sico, utilizamos principalmente dos f√≥rmulas. La primera nos permite relacionar la velocidad con la distancia y el tiempo. La segunda nos permite calcular c√≥mo var√≠a la velocidad del sonido en el aire de acuerdo a su temperatura.</p>
+            <h2><i class="fa-solid fa-calculator"></i> 2. FÛrmulas Principales</h2>
+            <p>Para resolver problemas de ac˙stica a nivel b·sico, utilizamos principalmente dos fÛrmulas. La primera nos permite relacionar la velocidad con la distancia y el tiempo. La segunda nos permite calcular cÛmo varÌa la velocidad del sonido en el aire de acuerdo a su temperatura.</p>
 
             <div class="caja-formula">
                 <div class="formula-principal">v = d / t</div>
-                <div class="formula-leyenda">Velocidad (v) = Distancia (d) / Tiempo (t). F√≥rmula del Movimiento Rectil√≠neo Uniforme.</div>
+                <div class="formula-leyenda">Velocidad (v) = Distancia (d) / Tiempo (t). FÛrmula del Movimiento RectilÌneo Uniforme.</div>
             </div>
 
             <div class="caja-formula">
-                <div class="formula-principal">v = 331.4 m/s + (0.6 m/s¬∑¬∞C‚Åª¬π) ¬∑ T</div>
-                <div class="formula-leyenda">Donde <strong>331.4 m/s</strong> es la velocidad del sonido en el aire a 0¬∞C, y <strong>T</strong> es la temperatura en grados cent√≠grados (¬∞C). Nota c√≥mo las unidades de temperatura (¬∞C) se cancelan con el ¬∞C‚Åª¬π.</div>
+                <div class="formula-principal">v = 331.4 m/s + (0.6 m/s∑∞C?π) ∑ T</div>
+                <div class="formula-leyenda">Donde <strong>331.4 m/s</strong> es la velocidad del sonido en el aire a 0∞C, y <strong>T</strong> es la temperatura en grados centÌgrados (∞C). Nota cÛmo las unidades de temperatura (∞C) se cancelan con el ∞C?π.</div>
             </div>
         </section>
 
         <section class="seccion-contenido">
-            <h2><i class="fa-solid fa-pencil"></i> 3. Ejercicios Resueltos (F√≥rmula: v = d / t)</h2>
+            <h2><i class="fa-solid fa-pencil"></i> 3. Ejercicios Resueltos (FÛrmula: v = d / t)</h2>
             
             <div class="ejercicio-tarjeta">
                 <h3>Ejercicio 1: Calculando la Distancia</h3>
-                <div class="enunciado">"Durante una tormenta, observas el rel√°mpago y 4 segundos despu√©s escuchas el trueno. Si consideramos que la velocidad del sonido en el aire en ese momento es de 340 m/s, ¬øa qu√© distancia cay√≥ el rayo?"</div>
+                <div class="enunciado">"Durante una tormenta, observas el rel·mpago y 4 segundos despuÈs escuchas el trueno. Si consideramos que la velocidad del sonido en el aire en ese momento es de 340 m/s, øa quÈ distancia cayÛ el rayo?"</div>
                 <div class="paso">
                     <div class="paso-titulo">Datos</div>
                     <p>v = 340 m/s<br>t = 4 s<br>d = ?</p>
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Soluci√≥n</div>
-                    <p>Despejamos la distancia de la f√≥rmula original (v = d / t) ‚ûî <strong>d = v ¬∑ t</strong></p>
-                    <p>d = 340 m/s ¬∑ 4 s = 1360 m</p>
-                    <p class="respuesta-final">‚úÖ El rayo cay√≥ a 1360 metros de distancia.</p>
+                    <div class="paso-titulo">SoluciÛn</div>
+                    <p>Despejamos la distancia de la fÛrmula original (v = d / t) ? <strong>d = v ∑ t</strong></p>
+                    <p>d = 340 m/s ∑ 4 s = 1360 m</p>
+                    <p class="respuesta-final">? El rayo cayÛ a 1360 metros de distancia.</p>
                 </div>
             </div>
 
             <div class="ejercicio-tarjeta">
                 <h3>Ejercicio 2: Calculando el Tiempo en el Agua</h3>
-                <div class="enunciado">"Un submarino emite un sonido bajo el agua dulce (velocidad = 1482 m/s). Si el sonido debe recorrer 7410 metros para llegar a otro submarino, ¬øcu√°nto tiempo tardar√° en escucharse?"</div>
+                <div class="enunciado">"Un submarino emite un sonido bajo el agua dulce (velocidad = 1482 m/s). Si el sonido debe recorrer 7410 metros para llegar a otro submarino, øcu·nto tiempo tardar· en escucharse?"</div>
                 <div class="paso">
                     <div class="paso-titulo">Datos</div>
                     <p>v = 1482 m/s<br>d = 7410 m<br>t = ?</p>
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Soluci√≥n</div>
-                    <p>Despejamos el tiempo (v = d / t) ‚ûî <strong>t = d / v</strong></p>
+                    <div class="paso-titulo">SoluciÛn</div>
+                    <p>Despejamos el tiempo (v = d / t) ? <strong>t = d / v</strong></p>
                     <p>t = 7410 m / 1482 m/s = 5 s</p>
-                    <p class="respuesta-final">‚úÖ El sonido tardar√° 5 segundos en llegar.</p>
+                    <p class="respuesta-final">? El sonido tardar· 5 segundos en llegar.</p>
                 </div>
             </div>
 
             <div class="ejercicio-tarjeta">
-                <h3>Ejercicio 3: Calculando la Velocidad en un S√≥lido</h3>
-                <div class="enunciado">"Golpeas un riel de tren muy largo. Un amigo situado a 2980 metros escucha el sonido propagarse a trav√©s del riel en tan solo 0.5 segundos. ¬øCu√°l es la velocidad del sonido en ese material?"</div>
+                <h3>Ejercicio 3: Calculando la Velocidad en un SÛlido</h3>
+                <div class="enunciado">"Golpeas un riel de tren muy largo. Un amigo situado a 2980 metros escucha el sonido propagarse a travÈs del riel en tan solo 0.5 segundos. øCu·l es la velocidad del sonido en ese material?"</div>
                 <div class="paso">
                     <div class="paso-titulo">Datos</div>
                     <p>d = 2980 m<br>t = 0.5 s<br>v = ?</p>
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Soluci√≥n</div>
-                    <p>Aplicamos la f√≥rmula directa: <strong>v = d / t</strong></p>
+                    <div class="paso-titulo">SoluciÛn</div>
+                    <p>Aplicamos la fÛrmula directa: <strong>v = d / t</strong></p>
                     <p>v = 2980 m / 0.5 s = 5960 m/s</p>
-                    <p class="respuesta-final">‚úÖ La velocidad del sonido en ese material es 5960 m/s (corresponde al acero).</p>
+                    <p class="respuesta-final">? La velocidad del sonido en ese material es 5960 m/s (corresponde al acero).</p>
                 </div>
             </div>
         </section>
 
         <section class="seccion-contenido">
-            <h2><i class="fa-solid fa-temperature-half"></i> 4. Ejercicios Resueltos (F√≥rmula de Temperatura)</h2>
+            <h2><i class="fa-solid fa-temperature-half"></i> 4. Ejercicios Resueltos (FÛrmula de Temperatura)</h2>
             
             <div class="ejercicio-tarjeta">
-                <h3>Ejercicio 4: Velocidad en un d√≠a caluroso</h3>
-                <div class="enunciado">"¬øCu√°l es la velocidad del sonido en el aire en un d√≠a muy caluroso de verano donde la temperatura ambiente es de 35 ¬∞C?"</div>
+                <h3>Ejercicio 4: Velocidad en un dÌa caluroso</h3>
+                <div class="enunciado">"øCu·l es la velocidad del sonido en el aire en un dÌa muy caluroso de verano donde la temperatura ambiente es de 35 ∞C?"</div>
                 <div class="paso">
                     <div class="paso-titulo">Datos</div>
-                    <p>T = 35 ¬∞C<br>v = ?</p>
+                    <p>T = 35 ∞C<br>v = ?</p>
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Soluci√≥n</div>
-                    <p>Usamos la f√≥rmula: <strong>v = 331.4 + 0.6 ¬∑ T</strong></p>
-                    <p>v = 331.4 + 0.6 ¬∑ 35</p>
+                    <div class="paso-titulo">SoluciÛn</div>
+                    <p>Usamos la fÛrmula: <strong>v = 331.4 + 0.6 ∑ T</strong></p>
+                    <p>v = 331.4 + 0.6 ∑ 35</p>
                     <p>v = 331.4 + 21 = 352.4 m/s</p>
-                    <p class="respuesta-final">‚úÖ La velocidad del sonido a 35 ¬∞C es de 352.4 m/s.</p>
+                    <p class="respuesta-final">? La velocidad del sonido a 35 ∞C es de 352.4 m/s.</p>
                 </div>
             </div>
 
             <div class="ejercicio-tarjeta">
                 <h3>Ejercicio 5: Velocidad bajo cero</h3>
-                <div class="enunciado">"Un explorador en la Ant√°rtida emite un grito. Si la temperatura del aire es de -15 ¬∞C, ¬øa qu√© velocidad viajar√° el sonido de su voz?"</div>
+                <div class="enunciado">"Un explorador en la Ant·rtida emite un grito. Si la temperatura del aire es de -15 ∞C, øa quÈ velocidad viajar· el sonido de su voz?"</div>
                 <div class="paso">
                     <div class="paso-titulo">Datos</div>
-                    <p>T = -15 ¬∞C<br>v = ?</p>
+                    <p>T = -15 ∞C<br>v = ?</p>
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Soluci√≥n</div>
-                    <p>Aplicamos la f√≥rmula teniendo en cuenta el signo negativo de la temperatura:</p>
-                    <p>v = 331.4 + (0.6 ¬∑ -15)</p>
+                    <div class="paso-titulo">SoluciÛn</div>
+                    <p>Aplicamos la fÛrmula teniendo en cuenta el signo negativo de la temperatura:</p>
+                    <p>v = 331.4 + (0.6 ∑ -15)</p>
                     <p>v = 331.4 - 9 = 322.4 m/s</p>
-                    <p class="respuesta-final">‚úÖ A -15 ¬∞C, el sonido viaja a 322.4 m/s.</p>
+                    <p class="respuesta-final">? A -15 ∞C, el sonido viaja a 322.4 m/s.</p>
                 </div>
             </div>
 
             <div class="ejercicio-tarjeta">
                 <h3>Ejercicio 6: Encontrando la Temperatura</h3>
-                <div class="enunciado">"Mediante un experimento escolar, determinamos que la velocidad del sonido en el aire del laboratorio es de 346.4 m/s. ¬øA qu√© temperatura se encuentra el laboratorio?"</div>
+                <div class="enunciado">"Mediante un experimento escolar, determinamos que la velocidad del sonido en el aire del laboratorio es de 346.4 m/s. øA quÈ temperatura se encuentra el laboratorio?"</div>
                 <div class="paso">
                     <div class="paso-titulo">Datos</div>
                     <p>v = 346.4 m/s<br>T = ?</p>
                 </div>
                 <div class="paso">
-                    <div class="paso-titulo">Soluci√≥n</div>
-                    <p>Despejamos la temperatura T de la f√≥rmula (v = 331.4 + 0.6 ¬∑ T):</p>
+                    <div class="paso-titulo">SoluciÛn</div>
+                    <p>Despejamos la temperatura T de la fÛrmula (v = 331.4 + 0.6 ∑ T):</p>
                     <p>T = (v - 331.4) / 0.6</p>
                     <p>T = (346.4 - 331.4) / 0.6</p>
-                    <p>T = 15 / 0.6 = 25 ¬∞C</p>
-                    <p class="respuesta-final">‚úÖ El laboratorio se encuentra a una temperatura de 25 ¬∞C.</p>
+                    <p>T = 15 / 0.6 = 25 ∞C</p>
+                    <p class="respuesta-final">? El laboratorio se encuentra a una temperatura de 25 ∞C.</p>
                 </div>
             </div>
         </section>
 
         <section class="botones-accion-final">
             <a href="fisica9_velocidad_sonido_practica.html" class="btn-accion btn-practica">
-                <i class="fa-solid fa-gamepad"></i> Pr√°ctica Interactiva
+                <i class="fa-solid fa-gamepad"></i> Pr·ctica Interactiva
             </a>
             <a href="fisica9_velocidad_sonido_evaluacion.html" class="btn-accion btn-evaluacion">
-                <i class="fa-solid fa-file-signature"></i> Evaluaci√≥n
+                <i class="fa-solid fa-file-signature"></i> EvaluaciÛn
             </a>
         </section>
     </main>
@@ -252,3 +258,4 @@
     <script src="auth.js"></script>
 </body>
 </html>
+

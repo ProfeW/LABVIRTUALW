@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica Reactivo Límite (Noveno) - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pr�ctica Reactivo L�mite (Noveno) - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -78,6 +78,12 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .grid-inputs { grid-template-columns: 1fr; } .input-grupo label { width: 50%; } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -88,11 +94,11 @@
     </nav>
 
     <div class="contenedor">
-        <a href="quimica9_reactivo_limite.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="quimica9_reactivo_limite.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teor�a</a>
         
         <div class="encabezado-leccion">
-            <h1>🎮 Práctica: Reactivo Límite</h1>
-            <p>Resuelve estos 8 ejercicios encadenados paso a paso. Recuerda usar 1 o 2 decimales según corresponda y separar con punto (.).</p>
+            <h1>?? Pr�ctica: Reactivo L�mite</h1>
+            <p>Resuelve estos 8 ejercicios encadenados paso a paso. Recuerda usar 1 o 2 decimales seg�n corresponda y separar con punto (.).</p>
         </div>
 
         <div class="barra-progreso-contenedor">
@@ -109,10 +115,10 @@
     <script>
         const ejerciciosData = [
             { // Ejercicio 1
-                titulo: "Formación del Agua",
-                enunciado: "Se hacen reaccionar 10 g de Hidrógeno (H₂) con 64 g de Oxígeno (O₂). Determina el reactivo límite.",
-                ecuacion: "2H₂ + 1O₂ → 2H₂O",
-                reactivos: ["H₂", "O₂"],
+                titulo: "Formaci�n del Agua",
+                enunciado: "Se hacen reaccionar 10 g de Hidr�geno (H2) con 64 g de Ox�geno (O2). Determina el reactivo l�mite.",
+                ecuacion: "2H2 + 1O2 ? 2H2O",
+                reactivos: ["H2", "O2"],
                 pm: [2, 32], // Masa Molar
                 masa: [10, 64], // Masa en gramos
                 coef: [2, 1], // Coeficientes
@@ -123,10 +129,10 @@
                 rl_correcto: "O2"
             },
             { // Ejercicio 2
-                titulo: "Formación de Amoníaco",
-                enunciado: "Se mezclan 28 g de Nitrógeno (N₂) con 12 g de Hidrógeno (H₂).",
-                ecuacion: "1N₂ + 3H₂ → 2NH₃",
-                reactivos: ["N₂", "H₂"],
+                titulo: "Formaci�n de Amon�aco",
+                enunciado: "Se mezclan 28 g de Nitr�geno (N2) con 12 g de Hidr�geno (H2).",
+                ecuacion: "1N2 + 3H2 ? 2NH3",
+                reactivos: ["N2", "H2"],
                 pm: [28, 2],
                 masa: [28, 12],
                 coef: [1, 3],
@@ -137,10 +143,10 @@
                 rl_correcto: "N2"
             },
             { // Ejercicio 3
-                titulo: "Combustión del Metano",
-                enunciado: "Se queman 32 g de Metano (CH₄) en presencia de 96 g de Oxígeno (O₂).",
-                ecuacion: "1CH₄ + 2O₂ → 1CO₂ + 2H₂O",
-                reactivos: ["CH₄", "O₂"],
+                titulo: "Combusti�n del Metano",
+                enunciado: "Se queman 32 g de Metano (CH4) en presencia de 96 g de Ox�geno (O2).",
+                ecuacion: "1CH4 + 2O2 ? 1CO2 + 2H2O",
+                reactivos: ["CH4", "O2"],
                 pm: [16, 32],
                 masa: [32, 96],
                 coef: [1, 2],
@@ -152,9 +158,9 @@
             },
             { // Ejercicio 4
                 titulo: "Cloruro de Aluminio",
-                enunciado: "Reaccionan 54 g de Aluminio (Al) con 142 g de Cloro (Cl₂).",
-                ecuacion: "2Al + 3Cl₂ → 2AlCl₃",
-                reactivos: ["Al", "Cl₂"],
+                enunciado: "Reaccionan 54 g de Aluminio (Al) con 142 g de Cloro (Cl2).",
+                ecuacion: "2Al + 3Cl2 ? 2AlCl3",
+                reactivos: ["Al", "Cl2"],
                 pm: [27, 71],
                 masa: [54, 142],
                 coef: [2, 3],
@@ -165,10 +171,10 @@
                 rl_correcto: "Cl2"
             },
             { // Ejercicio 5
-                titulo: "Óxido de Hierro (III)",
-                enunciado: "Se combinan 112 g de Hierro (Fe) con 64 g de Oxígeno (O₂).",
-                ecuacion: "4Fe + 3O₂ → 2Fe₂O₃",
-                reactivos: ["Fe", "O₂"],
+                titulo: "�xido de Hierro (III)",
+                enunciado: "Se combinan 112 g de Hierro (Fe) con 64 g de Ox�geno (O2).",
+                ecuacion: "4Fe + 3O2 ? 2Fe2O3",
+                reactivos: ["Fe", "O2"],
                 pm: [56, 32],
                 masa: [112, 64],
                 coef: [4, 3],
@@ -179,10 +185,10 @@
                 rl_correcto: "Fe"
             },
             { // Ejercicio 6
-                titulo: "Dióxido de Azufre",
-                enunciado: "Reaccionan 64 g de Azufre (S) con 32 g de Oxígeno (O₂).",
-                ecuacion: "1S + 1O₂ → 1SO₂",
-                reactivos: ["S", "O₂"],
+                titulo: "Di�xido de Azufre",
+                enunciado: "Reaccionan 64 g de Azufre (S) con 32 g de Ox�geno (O2).",
+                ecuacion: "1S + 1O2 ? 1SO2",
+                reactivos: ["S", "O2"],
                 pm: [32, 32],
                 masa: [64, 32],
                 coef: [1, 1],
@@ -193,10 +199,10 @@
                 rl_correcto: "O2"
             },
             { // Ejercicio 7
-                titulo: "Óxido de Magnesio",
-                enunciado: "Se calientan 48 g de Magnesio (Mg) con 64 g de Oxígeno (O₂).",
-                ecuacion: "2Mg + 1O₂ → 2MgO",
-                reactivos: ["Mg", "O₂"],
+                titulo: "�xido de Magnesio",
+                enunciado: "Se calientan 48 g de Magnesio (Mg) con 64 g de Ox�geno (O2).",
+                ecuacion: "2Mg + 1O2 ? 2MgO",
+                reactivos: ["Mg", "O2"],
                 pm: [24, 32],
                 masa: [48, 64],
                 coef: [2, 1],
@@ -207,10 +213,10 @@
                 rl_correcto: "Mg"
             },
             { // Ejercicio 8
-                titulo: "Dióxido de Carbono",
-                enunciado: "Combustión de 36 g de Carbono (C) con 64 g de Oxígeno (O₂).",
-                ecuacion: "1C + 1O₂ → 1CO₂",
-                reactivos: ["C", "O₂"],
+                titulo: "Di�xido de Carbono",
+                enunciado: "Combusti�n de 36 g de Carbono (C) con 64 g de Ox�geno (O2).",
+                ecuacion: "1C + 1O2 ? 1CO2",
+                reactivos: ["C", "O2"],
                 pm: [12, 32],
                 masa: [36, 64],
                 coef: [1, 1],
@@ -255,17 +261,17 @@
                         <div class="feedback" id="feed1_${index}"></div>
                     </div>
 
-                    <!-- PASO 2: DIVISIÓN -->
+                    <!-- PASO 2: DIVISI�N -->
                     <div class="paso-contenedor oculto" id="paso2_${index}">
                         <div class="paso-titulo">Paso 2: Dividir Moles / Coeficiente <i class="fa-solid fa-circle-check icono-check"></i></div>
-                        <p style="margin-bottom: 10px; font-size:0.9rem; color:#aaa;">Divide los moles obtenidos entre el coeficiente grande de la ecuación balanceada.</p>
+                        <p style="margin-bottom: 10px; font-size:0.9rem; color:#aaa;">Divide los moles obtenidos entre el coeficiente grande de la ecuaci�n balanceada.</p>
                         <div class="grid-inputs">
                             <div class="input-grupo">
-                                <label>División ${data.reactivos[0]}</label>
+                                <label>Divisi�n ${data.reactivos[0]}</label>
                                 <input type="number" step="0.01" id="in_div1_${index}" placeholder="Ej: 1.25">
                             </div>
                             <div class="input-grupo">
-                                <label>División ${data.reactivos[1]}</label>
+                                <label>Divisi�n ${data.reactivos[1]}</label>
                                 <input type="number" step="0.01" id="in_div2_${index}" placeholder="Ej: 0.6">
                             </div>
                         </div>
@@ -275,10 +281,10 @@
 
                     <!-- PASO 3: LIMITE -->
                     <div class="paso-contenedor oculto" id="paso3_${index}">
-                        <div class="paso-titulo">Paso 3: Determinar el Reactivo Límite <i class="fa-solid fa-circle-check icono-check"></i></div>
+                        <div class="paso-titulo">Paso 3: Determinar el Reactivo L�mite <i class="fa-solid fa-circle-check icono-check"></i></div>
                         <div class="grid-inputs" style="grid-template-columns: 1fr;">
                             <div class="input-grupo">
-                                <label>Reactivo Límite es:</label>
+                                <label>Reactivo L�mite es:</label>
                                 <select id="in_rl_${index}">
                                     <option value="" disabled selected>Seleccione...</option>
                                     <option value="reactivo1">${data.reactivos[0]}</option>
@@ -308,7 +314,7 @@
 
             if(data.moles_correctos.includes(v1) && data.moles2_correctos.includes(v2)) {
                 feed.className = 'feedback correcto';
-                feed.innerHTML = '<i class="fa-solid fa-check"></i> ¡Excelente! Moles calculados correctamente.';
+                feed.innerHTML = '<i class="fa-solid fa-check"></i> �Excelente! Moles calculados correctamente.';
                 document.getElementById(`paso1_${idx}`).classList.remove('activo');
                 document.getElementById(`paso1_${idx}`).classList.add('completado');
                 document.getElementById(`paso2_${idx}`).classList.remove('oculto');
@@ -327,7 +333,7 @@
 
             if(data.div_correctas.includes(v1) && data.div2_correctas.includes(v2)) {
                 feed.className = 'feedback correcto';
-                feed.innerHTML = '<i class="fa-solid fa-check"></i> ¡Divisiones correctas!';
+                feed.innerHTML = '<i class="fa-solid fa-check"></i> �Divisiones correctas!';
                 document.getElementById(`paso2_${idx}`).classList.remove('activo');
                 document.getElementById(`paso2_${idx}`).classList.add('completado');
                 document.getElementById(`paso3_${idx}`).classList.remove('oculto');
@@ -345,8 +351,8 @@
             const data = ejerciciosData[idx];
             
             let esCorrecto = false;
-            if(data.rl_correcto === data.reactivos[0].replace('₂','2').replace('₄','4') && val === 'reactivo1') esCorrecto = true;
-            if(data.rl_correcto === data.reactivos[1].replace('₂','2').replace('₄','4') && val === 'reactivo2') esCorrecto = true;
+            if(data.rl_correcto === data.reactivos[0].replace('2','2').replace('4','4') && val === 'reactivo1') esCorrecto = true;
+            if(data.rl_correcto === data.reactivos[1].replace('2','2').replace('4','4') && val === 'reactivo2') esCorrecto = true;
             // Simplificado:
             if(data.rl_correcto.includes("O2") && val === 'reactivo2') esCorrecto = true; // Ex 1,3,6,8
             if(data.rl_correcto === "N2" && val === 'reactivo1') esCorrecto = true; // Ex 2
@@ -356,7 +362,7 @@
 
             if(esCorrecto) {
                 feed.className = 'feedback correcto';
-                feed.innerHTML = '<i class="fa-solid fa-star"></i> ¡Felicidades! Has identificado correctamente el reactivo límite.';
+                feed.innerHTML = '<i class="fa-solid fa-star"></i> �Felicidades! Has identificado correctamente el reactivo l�mite.';
                 document.getElementById(`paso3_${idx}`).classList.remove('activo');
                 document.getElementById(`paso3_${idx}`).classList.add('completado');
                 
@@ -366,10 +372,10 @@
                     ejercicioActual++;
                     actualizarProgreso();
                     Swal.fire({
-                        title: '¡Práctica Completada!',
-                        text: 'Has resuelto exitosamente todos los ejercicios de reactivo límite.',
+                        title: '�Pr�ctica Completada!',
+                        text: 'Has resuelto exitosamente todos los ejercicios de reactivo l�mite.',
                         icon: 'success',
-                        confirmButtonText: 'Ir a Evaluación',
+                        confirmButtonText: 'Ir a Evaluaci�n',
                         confirmButtonColor: '#e67e22'
                     }).then((result) => {
                         if (result.isConfirmed) {
@@ -379,7 +385,7 @@
                 }
             } else {
                 feed.className = 'feedback incorrecto';
-                feed.innerHTML = '<i class="fa-solid fa-xmark"></i> Incorrecto. Recuerda: El reactivo límite es el que dio el MENOR valor en el paso 2.';
+                feed.innerHTML = '<i class="fa-solid fa-xmark"></i> Incorrecto. Recuerda: El reactivo l�mite es el que dio el MENOR valor en el paso 2.';
             }
         }
 
@@ -398,3 +404,4 @@
     </script>
 </body>
 </html>
+

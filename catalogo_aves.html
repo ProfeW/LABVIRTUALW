@@ -1,9 +1,9 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Cat√°logo de Aves - LabVirtual W</title>
+    <title>Cat·logo de Aves - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -39,7 +39,7 @@
             min-height: 100vh;
         }
 
-        /* --- BARRA DE NAVEGACI√ìN --- */
+        /* --- BARRA DE NAVEGACI”N --- */
         nav {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px); 
@@ -348,21 +348,21 @@
             </div>
             <ul class="menu">
                 <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="#" style="color: var(--color-biologia);"><i class="fa-solid fa-book-open"></i> Cat√°logo de Aves</a></li>
+                <li><a href="#" style="color: var(--color-biologia);"><i class="fa-solid fa-book-open"></i> Cat·logo de Aves</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <h1 class="titulo-principal">Cat√°logo de Aves de Gallego</h1>
-        <p class="subtitulo">Registra, visualiza y gestiona las diferentes especies de aves de la regi√≥n.</p>
+        <h1 class="titulo-principal">Cat·logo de Aves de Gallego</h1>
+        <p class="subtitulo">Registra, visualiza y gestiona las diferentes especies de aves de la regiÛn.</p>
 
         <button class="btn-nuevo" onclick="abrirModal()">
             <i class="fa-solid fa-plus"></i> Nuevo Registro de Ave
         </button>
 
         <div class="catalogo-grid" id="catalogoGrid">
-            <!-- Las aves se renderizar√°n aqu√≠ -->
+            <!-- Las aves se renderizar·n aquÌ -->
         </div>
     </main>
 
@@ -375,15 +375,15 @@
             </div>
             <form id="formAve" onsubmit="guardarAve(event)">
                 <div class="form-group">
-                    <label>Nombre Com√∫n</label>
+                    <label>Nombre Com˙n</label>
                     <input type="text" id="nombreComun" required placeholder="Ej: Barranquero">
                 </div>
                 <div class="form-group">
-                    <label>Nombre Cient√≠fico</label>
+                    <label>Nombre CientÌfico</label>
                     <input type="text" id="nombreCientifico" required placeholder="Ej: Momotus momota">
                 </div>
                 <div class="form-group">
-                    <label>Fotograf√≠a del Ave</label>
+                    <label>FotografÌa del Ave</label>
                     <input type="file" id="imagenAve" accept="image/*" required onchange="previsualizarImagen(event)">
                     <div class="preview-img-container" id="previewContainer">
                         <img id="previewImg" src="">
@@ -467,14 +467,14 @@
 
         window.renderizarCatalogo = async function() {
             const grid = document.getElementById('catalogoGrid');
-            grid.innerHTML = '<div class="no-data"><i class="fa-solid fa-spinner fa-spin"></i> Cargando cat√°logo desde la nube...</div>';
+            grid.innerHTML = '<div class="no-data"><i class="fa-solid fa-spinner fa-spin"></i> Cargando cat·logo desde la nube...</div>';
             
             try {
                 const querySnapshot = await getDocs(collection(db, "catalogo_aves"));
                 grid.innerHTML = '';
                 
                 if (querySnapshot.empty) {
-                    grid.innerHTML = '<div class="no-data">A√∫n no hay aves registradas en el cat√°logo de la nube.</div>';
+                    grid.innerHTML = '<div class="no-data">A˙n no hay aves registradas en el cat·logo de la nube.</div>';
                     return;
                 }
 
@@ -483,18 +483,18 @@
                     const aveId = doc.id;
                     const card = document.createElement('div');
                     card.className = 'ave-card';
-                    card.innerHTML = 
-                        <img src=" + ave.imagen + " class="ave-img" alt=" + ave.nombreComun + ">
+                    card.innerHTML = `
+                        <img src="${ave.imagen}" class="ave-img" alt="${ave.nombreComun}">
                         <div class="ave-info">
-                            <div class="ave-nombre"> + ave.nombreComun + </div>
-                            <div class="ave-cientifico"> + ave.nombreCientifico + </div>
+                            <div class="ave-nombre">${ave.nombreComun}</div>
+                            <div class="ave-cientifico">${ave.nombreCientifico}</div>
                             <div class="ave-acciones">
-                                <a href="practica_aves.html?id= + aveId + " class="btn-accion btn-ver-hoja">
+                                <a href="practica_aves.html?id=${aveId}" class="btn-accion btn-ver-hoja">
                                     <i class="fa-solid fa-file-pdf"></i> Ver / Editar Hoja de Vida
                                 </a>
                             </div>
                         </div>
-                    ;
+                    `;
                     grid.appendChild(card);
                 });
             } catch (e) {

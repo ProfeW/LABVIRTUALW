@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autoevaluaci贸n - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Autoevaluaci髇 - LabVirtual W</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>馃敩</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>??</text></svg>">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -30,7 +30,7 @@
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACI脫N --- */
+        /* --- NAVEGACI覰 --- */
         nav {
             background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -70,7 +70,7 @@
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-        /* TABLA DE EVALUACI脫N */
+        /* TABLA DE EVALUACI覰 */
         .eval-section { margin-bottom: 40px; }
         .eval-section h3 { background: rgba(52, 152, 219, 0.2); padding: 10px 15px; border-radius: 8px; color: #4facfe; margin-bottom: 15px; display: inline-block; }
         
@@ -119,6 +119,12 @@
         
         @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .escala { flex-direction: column; gap: 5px; } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -133,8 +139,8 @@
 
     <main class="contenedor">
         <div class="header-eval">
-            <h1>Formato de Autoevaluaci贸n</h1>
-            <p>Responda la siguiente pauta colocando una sola opci贸n en el espacio que considere, se ajusta a su desempe帽o. De su sinceridad depende el 茅xito de su autoevaluaci贸n.</p>
+            <h1>Formato de Autoevaluaci髇</h1>
+            <p>Responda la siguiente pauta colocando una sola opci髇 en el espacio que considere, se ajusta a su desempe駉. De su sinceridad depende el 閤ito de su autoevaluaci髇.</p>
         </div>
 
         <div class="escala">
@@ -152,7 +158,7 @@
                 <div class="grid-2">
                     <div class="form-group">
                         <label for="nombre">Nombre Completo</label>
-                        <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan P茅rez">
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan P閞ez">
                     </div>
                     <div class="form-group">
                         <label for="documento">Documento de Identidad</label>
@@ -165,13 +171,13 @@
                             <option value="6">Grado Sexto</option>
                             <option value="8">Grado Octavo</option>
                             <option value="9">Grado Noveno</option>
-                            <option value="10">Grado D茅cimo</option>
+                            <option value="10">Grado D閏imo</option>
                             <option value="11">Grado Once</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="asignatura">Asignatura a Evaluar</label>
-                        <input type="text" id="asignatura" name="asignatura" readonly placeholder="Se asigna autom谩ticamente...">
+                        <input type="text" id="asignatura" name="asignatura" readonly placeholder="Se asigna autom醫icamente...">
                     </div>
                 </div>
             </div>
@@ -189,7 +195,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="aspecto">1. Llego de manera puntual a la instituci贸n, a las clases y dem谩s actividades programadas dentro o fuera del establecimiento educativo.</td>
+                                <td class="aspecto">1. Llego de manera puntual a la instituci髇, a las clases y dem醩 actividades programadas dentro o fuera del establecimiento educativo.</td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_1" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_1" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_1" value="3"></td>
@@ -197,7 +203,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_lab_1" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">2. Pongo atenci贸n a las explicaciones del profesor y presento mis trabajos con calidad y en el tiempo previsto.</td>
+                                <td class="aspecto">2. Pongo atenci髇 a las explicaciones del profesor y presento mis trabajos con calidad y en el tiempo previsto.</td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_2" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_2" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_2" value="3"></td>
@@ -221,7 +227,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_lab_4" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">5. Mantengo un esp铆ritu de trabajo en grupo y promuevo esfuerzos orientados al logro de objetivos comunes.</td>
+                                <td class="aspecto">5. Mantengo un esp韗itu de trabajo en grupo y promuevo esfuerzos orientados al logro de objetivos comunes.</td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_5" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_5" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_5" value="3"></td>
@@ -229,7 +235,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_lab_5" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">6. Porto adecuadamente el uniforme con dignidad, orden, aseo y buena presentaci贸n personal.</td>
+                                <td class="aspecto">6. Porto adecuadamente el uniforme con dignidad, orden, aseo y buena presentaci髇 personal.</td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_6" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_6" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_6" value="3"></td>
@@ -237,7 +243,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_lab_6" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">7. Aplico los conocimientos adquiridos para contribuir a la soluci贸n de problemas y satisfacci贸n de necesidades.</td>
+                                <td class="aspecto">7. Aplico los conocimientos adquiridos para contribuir a la soluci髇 de problemas y satisfacci髇 de necesidades.</td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_7" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_7" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_lab_7" value="3"></td>
@@ -282,7 +288,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_ciu_2" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">3. Conozco y cumplo lo establecido en el manual de convivencia y las dem谩s normas acordadas por la instituci贸n.</td>
+                                <td class="aspecto">3. Conozco y cumplo lo establecido en el manual de convivencia y las dem醩 normas acordadas por la instituci髇.</td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_3" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_3" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_3" value="3"></td>
@@ -290,7 +296,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_ciu_3" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">4. Mantengo y soy responsable con el aseo del sal贸n de clase y conservo y colaboro con el aseo de la planta f铆sica de la instituci贸n.</td>
+                                <td class="aspecto">4. Mantengo y soy responsable con el aseo del sal髇 de clase y conservo y colaboro con el aseo de la planta f韘ica de la instituci髇.</td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_4" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_4" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_4" value="3"></td>
@@ -298,7 +304,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_ciu_4" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">5. Soy tolerante y resuelvo adecuadamente mis conflictos a trav茅s del di谩logo y la concertaci贸n, demostrando respeto y aceptaci贸n hacia los dem谩s.</td>
+                                <td class="aspecto">5. Soy tolerante y resuelvo adecuadamente mis conflictos a trav閟 del di醠ogo y la concertaci髇, demostrando respeto y aceptaci髇 hacia los dem醩.</td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_5" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_5" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_5" value="3"></td>
@@ -306,7 +312,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_ciu_5" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">6. Permanezco dentro de la Instituci贸n durante toda la jornada escolar y participo de las clases y actividades programadas.</td>
+                                <td class="aspecto">6. Permanezco dentro de la Instituci髇 durante toda la jornada escolar y participo de las clases y actividades programadas.</td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_6" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_6" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_6" value="3"></td>
@@ -314,7 +320,7 @@
                                 <td class="radio-cell"><input type="radio" name="c_ciu_6" value="5"></td>
                             </tr>
                             <tr>
-                                <td class="aspecto">7. Me comporto con el debido orden y respeto en los diferentes espacios destinados para su uso, como biblioteca, laboratorio, sala de sistemas y bater铆as sanitarias.</td>
+                                <td class="aspecto">7. Me comporto con el debido orden y respeto en los diferentes espacios destinados para su uso, como biblioteca, laboratorio, sala de sistemas y bater韆s sanitarias.</td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_7" value="1" required></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_7" value="2"></td>
                                 <td class="radio-cell"><input type="radio" name="c_ciu_7" value="3"></td>
@@ -331,7 +337,7 @@
             </div>
 
             <button type="submit" class="btn-enviar" id="btnEnviar">
-                <i class="fa-solid fa-paper-plane"></i> Enviar Autoevaluaci贸n
+                <i class="fa-solid fa-paper-plane"></i> Enviar Autoevaluaci髇
             </button>
 
             <div class="loader" id="loader"><i class="fa-solid fa-circle-notch"></i> Procesando...</div>
@@ -341,23 +347,23 @@
     </main>
 
     <script>
-        // L贸gica para asignar materia seg煤n grado
+        // L骻ica para asignar materia seg鷑 grado
         document.getElementById('grado').addEventListener('change', function() {
             const grado = this.value;
             const asignaturaInput = document.getElementById('asignatura');
             
             if (grado === '6') {
-                asignaturaInput.value = 'Biolog铆a y C谩tedra de la Paz';
+                asignaturaInput.value = 'Biolog韆 y C醫edra de la Paz';
             } else if (grado === '8') {
-                asignaturaInput.value = 'Lectura Cr铆tica';
+                asignaturaInput.value = 'Lectura Cr韙ica';
             } else if (grado === '9' || grado === '10' || grado === '11') {
-                asignaturaInput.value = 'Ciencias Naturales y C谩tedra de la Paz';
+                asignaturaInput.value = 'Ciencias Naturales y C醫edra de la Paz';
             } else {
                 asignaturaInput.value = '';
             }
         });
 
-        // L贸gica para calcular notas en tiempo real
+        // L骻ica para calcular notas en tiempo real
         const form = document.getElementById('formAutoevaluacion');
         
         function calcularNotas() {
@@ -440,10 +446,11 @@
                 loader.style.display = 'none';
                 btn.disabled = false;
                 msgBox.className = 'msg-box msg-error';
-                msgBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error de conexi贸n. Intenta de nuevo.';
+                msgBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error de conexi髇. Intenta de nuevo.';
                 msgBox.style.display = 'block';
             });
         });
     </script>
 </body>
 </html>
+

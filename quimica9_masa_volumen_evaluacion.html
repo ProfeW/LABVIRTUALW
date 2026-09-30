@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaci√≥n % m/v - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EvaluaciÛn % m/v - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --color-quimica: #9b59b6;
-            --color-evaluacion: #c0392b; /* Rojo oscuro para evaluaci√≥n */
+            --color-evaluacion: #c0392b; /* Rojo oscuro para evaluaciÛn */
             --color-oscuro: #1a1a2e;
             --color-exito: #2ecc71;
             --color-error: #e74c3c;
@@ -62,27 +62,33 @@
         .feedback.correcto { display: block; background: rgba(46,204,113,0.15); border: 1px solid var(--color-exito); color: var(--color-exito); }
         .feedback.incorrecto { display: block; background: rgba(231,76,60,0.15); border: 1px solid var(--color-error); color: var(--color-error); }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
     <nav>
         <a href="index.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
         <ul class="menu">
             <li><a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-            <li><a href="quimica_9.html"><i class="fa-solid fa-arrow-left"></i> Qu√≠mica 9</a></li>
+            <li><a href="quimica_9.html"><i class="fa-solid fa-arrow-left"></i> QuÌmica 9</a></li>
         </ul>
     </nav>
 
     <div class="contenedor">
-        <a href="quimica9_masa_volumen.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Teor√≠a</a>
+        <a href="quimica9_masa_volumen.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a TeorÌa</a>
         
         <div class="encabezado-leccion">
-            <h1>üìù Evaluaci√≥n: % m/v</h1>
+            <h1>?? EvaluaciÛn: % m/v</h1>
             <p>10 Ejercicios evaluativos. Completa todos los pasos sin saltarte ninguno.</p>
         </div>
 
         <div class="barra-progreso-contenedor">
             <div class="barra-progreso-titulo">
-                <span>üìä Progreso de Evaluaci√≥n</span>
+                <span>?? Progreso de EvaluaciÛn</span>
                 <span id="texto-progreso">0 / 10 completados</span>
             </div>
             <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
@@ -91,8 +97,8 @@
         <div id="contenedor-ejercicios"></div>
         
         <div style="text-align: center; margin-top: 40px; display: none;" id="mensaje-final">
-            <h2 style="color: var(--color-exito); margin-bottom: 20px;"><i class="fa-solid fa-medal"></i> ¬°Evaluaci√≥n Completada!</h2>
-            <a href="quimica_9.html" class="btn-validar" style="background: var(--color-quimica); text-decoration: none;">Volver al Men√∫ Principal</a>
+            <h2 style="color: var(--color-exito); margin-bottom: 20px;"><i class="fa-solid fa-medal"></i> °EvaluaciÛn Completada!</h2>
+            <a href="quimica_9.html" class="btn-validar" style="background: var(--color-quimica); text-decoration: none;">Volver al Men˙ Principal</a>
         </div>
     </div>
 
@@ -100,90 +106,90 @@
         const ejercicios = [
             {
                 titulo: "Pregunta 1",
-                enunciado: "Se mezclan 25 g de glucosa en agua hasta completar 500 mL de soluci√≥n. Determina la concentraci√≥n % m/v.",
+                enunciado: "Se mezclan 25 g de glucosa en agua hasta completar 500 mL de soluciÛn. Determina la concentraciÛn % m/v.",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [25, 500], labels: ['m. Soluto', 'v. Soluci√≥n'], unidades: ['g', 'mL'] },
+                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [25, 500], labels: ['m. Soluto', 'v. SoluciÛn'], unidades: ['g', 'mL'] },
                     { tipo: 'formula', seleccion: '%m/v' },
-                    { tipo: 'calculo', label: '% m/v', valor: 5, formula: "Aplica f√≥rmula", unidad: '%' }
+                    { tipo: 'calculo', label: '% m/v', valor: 5, formula: "Aplica fÛrmula", unidad: '%' }
                 ]
             },
             {
                 titulo: "Pregunta 2",
-                enunciado: "¬øCu√°ntos gramos de hidr√≥xido de sodio (NaOH) se necesitan para preparar 300 mL de una soluci√≥n al 10% m/v?",
+                enunciado: "øCu·ntos gramos de hidrÛxido de sodio (NaOH) se necesitan para preparar 300 mL de una soluciÛn al 10% m/v?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [300, 10], labels: ['v. Soluci√≥n', '% m/v'], unidades: ['mL', '%'] },
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [300, 10], labels: ['v. SoluciÛn', '% m/v'], unidades: ['mL', '%'] },
                     { tipo: 'formula', seleccion: 'soluto' },
-                    { tipo: 'calculo', label: 'm. Soluto', valor: 30, formula: "Aplica f√≥rmula", unidad: 'g' }
+                    { tipo: 'calculo', label: 'm. Soluto', valor: 30, formula: "Aplica fÛrmula", unidad: 'g' }
                 ]
             },
             {
                 titulo: "Pregunta 3",
-                enunciado: "¬øQu√© volumen de soluci√≥n al 8% m/v se obtiene si se utilizan 40 g de soluto?",
+                enunciado: "øQuÈ volumen de soluciÛn al 8% m/v se obtiene si se utilizan 40 g de soluto?",
                 pasos: [
                     { tipo: 'datos', inputs: ['m_soluto', 'porcentaje'], valores: [40, 8], labels: ['m. Soluto', '% m/v'], unidades: ['g', '%'] },
                     { tipo: 'formula', seleccion: 'solucion' },
-                    { tipo: 'calculo', label: 'v. Soluci√≥n', valor: 500, formula: "Aplica despeje de soluci√≥n", unidad: 'mL' }
+                    { tipo: 'calculo', label: 'v. SoluciÛn', valor: 500, formula: "Aplica despeje de soluciÛn", unidad: 'mL' }
                 ]
             },
             {
                 titulo: "Pregunta 4",
-                enunciado: "Una taza de t√© de 250 mL contiene 15 g de az√∫car disuelta. ¬øCu√°l es la concentraci√≥n de az√∫car en el t√© (% m/v)?",
+                enunciado: "Una taza de tÈ de 250 mL contiene 15 g de az˙car disuelta. øCu·l es la concentraciÛn de az˙car en el tÈ (% m/v)?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [15, 250], labels: ['m. Soluto', 'v. Soluci√≥n'], unidades: ['g', 'mL'] },
+                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [15, 250], labels: ['m. Soluto', 'v. SoluciÛn'], unidades: ['g', 'mL'] },
                     { tipo: 'formula', seleccion: '%m/v' },
-                    { tipo: 'calculo', label: '% m/v', valor: 6, formula: "Aplica f√≥rmula", unidad: '%' }
+                    { tipo: 'calculo', label: '% m/v', valor: 6, formula: "Aplica fÛrmula", unidad: '%' }
                 ]
             },
             {
                 titulo: "Pregunta 5",
-                enunciado: "Si dispones de 20 g de yodo, ¬øqu√© volumen en mL de soluci√≥n de yodo al 4% m/v puedes preparar?",
+                enunciado: "Si dispones de 20 g de yodo, øquÈ volumen en mL de soluciÛn de yodo al 4% m/v puedes preparar?",
                 pasos: [
                     { tipo: 'datos', inputs: ['m_soluto', 'porcentaje'], valores: [20, 4], labels: ['m. Soluto', '% m/v'], unidades: ['g', '%'] },
                     { tipo: 'formula', seleccion: 'solucion' },
-                    { tipo: 'calculo', label: 'v. Soluci√≥n', valor: 500, formula: "Calcula el volumen", unidad: 'mL' }
+                    { tipo: 'calculo', label: 'v. SoluciÛn', valor: 500, formula: "Calcula el volumen", unidad: 'mL' }
                 ]
             },
             {
                 titulo: "Pregunta 6",
-                enunciado: "Un suero tiene una concentraci√≥n de 5% m/v de dextrosa. Si se le administran a un paciente 1200 mL de dicho suero, ¬øcu√°ntos gramos de dextrosa recibi√≥?",
+                enunciado: "Un suero tiene una concentraciÛn de 5% m/v de dextrosa. Si se le administran a un paciente 1200 mL de dicho suero, øcu·ntos gramos de dextrosa recibiÛ?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [1200, 5], labels: ['v. Soluci√≥n', '% m/v'], unidades: ['mL', '%'] },
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [1200, 5], labels: ['v. SoluciÛn', '% m/v'], unidades: ['mL', '%'] },
                     { tipo: 'formula', seleccion: 'soluto' },
                     { tipo: 'calculo', label: 'm. Soluto', valor: 60, formula: "Calcula los gramos", unidad: 'g' }
                 ]
             },
             {
                 titulo: "Pregunta 7",
-                enunciado: "Se disuelven 75 g de una sal en agua formando 1.5 Litros de soluci√≥n. Calcula su concentraci√≥n % m/v. (1 L = 1000 mL)",
+                enunciado: "Se disuelven 75 g de una sal en agua formando 1.5 Litros de soluciÛn. Calcula su concentraciÛn % m/v. (1 L = 1000 mL)",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [75, 1500], labels: ['m. Soluto', 'v. Soluci√≥n'], unidades: ['g', 'mL'] },
+                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [75, 1500], labels: ['m. Soluto', 'v. SoluciÛn'], unidades: ['g', 'mL'] },
                     { tipo: 'formula', seleccion: '%m/v' },
-                    { tipo: 'calculo', label: '% m/v', valor: 5, formula: "Aplica f√≥rmula", unidad: '%' }
+                    { tipo: 'calculo', label: '% m/v', valor: 5, formula: "Aplica fÛrmula", unidad: '%' }
                 ]
             },
             {
                 titulo: "Pregunta 8",
-                enunciado: "Deseas preparar una soluci√≥n madre al 25% m/v. Tienes un recipiente con 80 g de reactivo. ¬øQu√© volumen de soluci√≥n puedes preparar como m√°ximo?",
+                enunciado: "Deseas preparar una soluciÛn madre al 25% m/v. Tienes un recipiente con 80 g de reactivo. øQuÈ volumen de soluciÛn puedes preparar como m·ximo?",
                 pasos: [
                     { tipo: 'datos', inputs: ['m_soluto', 'porcentaje'], valores: [80, 25], labels: ['m. Soluto', '% m/v'], unidades: ['g', '%'] },
                     { tipo: 'formula', seleccion: 'solucion' },
-                    { tipo: 'calculo', label: 'v. Soluci√≥n', valor: 320, formula: "Halla la soluci√≥n", unidad: 'mL' }
+                    { tipo: 'calculo', label: 'v. SoluciÛn', valor: 320, formula: "Halla la soluciÛn", unidad: 'mL' }
                 ]
             },
             {
                 titulo: "Pregunta 9",
-                enunciado: "Un colirio para los ojos de 10 mL tiene un medicamento al 0.5% m/v. ¬øCu√°ntos gramos de medicamento tiene en total?",
+                enunciado: "Un colirio para los ojos de 10 mL tiene un medicamento al 0.5% m/v. øCu·ntos gramos de medicamento tiene en total?",
                 pasos: [
-                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [10, 0.5], labels: ['v. Soluci√≥n', '% m/v'], unidades: ['mL', '%'] },
+                    { tipo: 'datos', inputs: ['v_solucion', 'porcentaje'], valores: [10, 0.5], labels: ['v. SoluciÛn', '% m/v'], unidades: ['mL', '%'] },
                     { tipo: 'formula', seleccion: 'soluto' },
-                    { tipo: 'calculo', label: 'm. Soluto', valor: 0.05, formula: "Aplica f√≥rmula", unidad: 'g' }
+                    { tipo: 'calculo', label: 'm. Soluto', valor: 0.05, formula: "Aplica fÛrmula", unidad: 'g' }
                 ]
             },
             {
                 titulo: "Pregunta 10",
-                enunciado: "En un experimento disuelves 4000 mg de nitrato de plata en 200 mL de soluci√≥n. Calcula la concentraci√≥n % m/v sabiendo que 1 g = 1000 mg.",
+                enunciado: "En un experimento disuelves 4000 mg de nitrato de plata en 200 mL de soluciÛn. Calcula la concentraciÛn % m/v sabiendo que 1 g = 1000 mg.",
                 pasos: [
-                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [4, 200], labels: ['m. Soluto', 'v. Soluci√≥n'], unidades: ['g', 'mL'], extra: "Convierte mg a g" },
+                    { tipo: 'datos', inputs: ['m_soluto', 'v_solucion'], valores: [4, 200], labels: ['m. Soluto', 'v. SoluciÛn'], unidades: ['g', 'mL'], extra: "Convierte mg a g" },
                     { tipo: 'formula', seleccion: '%m/v' },
                     { tipo: 'calculo', label: '% m/v', valor: 2, formula: "Calcula porcentaje final", unidad: '%' }
                 ]
@@ -192,10 +198,10 @@
 
         const formulasHTML = `
             <select class="select-formula">
-                <option value="">-- Selecciona la f√≥rmula correcta --</option>
-                <option value="%m/v">% m/v = (m. Soluto / v. Soluci√≥n) √ó 100</option>
-                <option value="soluto">m. Soluto = (% m/v √ó v. Soluci√≥n) / 100</option>
-                <option value="solucion">v. Soluci√≥n = (m. Soluto √ó 100) / % m/v</option>
+                <option value="">-- Selecciona la fÛrmula correcta --</option>
+                <option value="%m/v">% m/v = (m. Soluto / v. SoluciÛn) ◊ 100</option>
+                <option value="soluto">m. Soluto = (% m/v ◊ v. SoluciÛn) / 100</option>
+                <option value="solucion">v. SoluciÛn = (m. Soluto ◊ 100) / % m/v</option>
             </select>
         `;
 
@@ -213,7 +219,7 @@
                     html += `<div class="paso-contenedor ${activo}" id="ej${index}-p${pIndex}">`;
                     
                     if (paso.tipo === 'datos') {
-                        html += `<div class="paso-titulo">üìã Ingresar Datos <span class="icono-check">‚úî</span></div>`;
+                        html += `<div class="paso-titulo">?? Ingresar Datos <span class="icono-check">?</span></div>`;
                         if(paso.extra) html += `<p style="color:#bbb; font-size:0.9rem; margin-bottom:10px;">${paso.extra}</p>`;
                         html += `<div class="grid-datos">`;
                         paso.inputs.forEach((input, i) => {
@@ -225,10 +231,10 @@
                         });
                         html += `</div>`;
                     } else if (paso.tipo === 'formula') {
-                        html += `<div class="paso-titulo">üìê F√≥rmula Correcta <span class="icono-check">‚úî</span></div>`;
+                        html += `<div class="paso-titulo">?? FÛrmula Correcta <span class="icono-check">?</span></div>`;
                         html += formulasHTML.replace('class="select-formula"', `id="input-${index}-${pIndex}-0"`);
                     } else if (paso.tipo === 'calculo') {
-                        html += `<div class="paso-titulo">üî¢ Resultado <span class="icono-check">‚úî</span></div>`;
+                        html += `<div class="paso-titulo">?? Resultado <span class="icono-check">?</span></div>`;
                         html += `<div class="input-grupo" style="max-width:250px;">
                             <label>${paso.label}</label>
                             <input type="number" step="0.01" id="input-${index}-${pIndex}-0" placeholder="?">
@@ -267,7 +273,7 @@
 
             if (valido) {
                 fb.className = 'feedback correcto';
-                fb.textContent = '¬°Correcto! ‚úîÔ∏è';
+                fb.textContent = '°Correcto! ??';
                 pasoEl.classList.remove('activo');
                 pasoEl.classList.add('completado');
 
@@ -285,7 +291,7 @@
                 }
             } else {
                 fb.className = 'feedback incorrecto';
-                fb.textContent = 'Revisa tu respuesta. ‚ùå';
+                fb.textContent = 'Revisa tu respuesta. ?';
             }
         };
 
@@ -294,3 +300,4 @@
 <script src="auth.js"></script>
 </body>
 </html>
+

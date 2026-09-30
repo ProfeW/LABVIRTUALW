@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reactivo Límite y Gramos (Décimo) - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Reactivo L�mite y Gramos (D�cimo) - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,7 +28,7 @@
             background-size: cover; background-attachment: fixed; line-height: 1.6;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- NAVEGACI�N --- */
         nav { background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(155, 89, 182, 0.2); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .logo i { color: var(--color-quim-primario); }
@@ -73,6 +73,12 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .paso-metodo { flex-direction: column; text-align: center; gap: 10px;} }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -81,29 +87,29 @@
     </nav>
 
     <main class="contenedor">
-        <a href="quimica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Química 10°</a>
+        <a href="quimica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Qu�mica 10�</a>
 
         <div class="encabezado-leccion">
-            <h1>Reactivo Límite y Estequiometría</h1>
-            <p>Aprende a identificar la sustancia que detiene la reacción y a calcular exactamente cuántos gramos de producto se formarán.</p>
+            <h1>Reactivo L�mite y Estequiometr�a</h1>
+            <p>Aprende a identificar la sustancia que detiene la reacci�n y a calcular exactamente cu�ntos gramos de producto se formar�n.</p>
         </div>
 
         <section class="seccion">
-            <h2><i class="fa-solid fa-lightbulb"></i> 1. Concepto y Metodología (Nivel Décimo)</h2>
+            <h2><i class="fa-solid fa-lightbulb"></i> 1. Concepto y Metodolog�a (Nivel D�cimo)</h2>
             
             <div class="caja-info">
-                En cualquier proceso químico industrial, el Reactivo Límite es la sustancia que se agota primero. Al acabarse, la reacción se detiene y determina la <strong>cantidad máxima de producto</strong> que se puede fabricar. El reactivo que sobra se denomina Reactivo en Exceso.
+                En cualquier proceso qu�mico industrial, el Reactivo L�mite es la sustancia que se agota primero. Al acabarse, la reacci�n se detiene y determina la <strong>cantidad m�xima de producto</strong> que se puede fabricar. El reactivo que sobra se denomina Reactivo en Exceso.
             </div>
             
-            <p>Para resolver ejercicios completos de estequiometría, agregaremos un paso final a nuestra metodología:</p>
+            <p>Para resolver ejercicios completos de estequiometr�a, agregaremos un paso final a nuestra metodolog�a:</p>
             
             <div class="paso-metodo">
                 <div class="paso-numero">1</div>
-                <div class="paso-texto"><h4>Balancear la Ecuación</h4><p>Ley de conservación de la masa.</p></div>
+                <div class="paso-texto"><h4>Balancear la Ecuaci�n</h4><p>Ley de conservaci�n de la masa.</p></div>
             </div>
             <div class="paso-metodo">
                 <div class="paso-numero">2</div>
-                <div class="paso-texto"><h4>Calcular Masa Molar (PM)</h4><p>Suma de masas atómicas (g/mol).</p></div>
+                <div class="paso-texto"><h4>Calcular Masa Molar (PM)</h4><p>Suma de masas at�micas (g/mol).</p></div>
             </div>
             <div class="paso-metodo">
                 <div class="paso-numero">3</div>
@@ -111,17 +117,17 @@
             </div>
             <div class="paso-metodo">
                 <div class="paso-numero">4</div>
-                <div class="paso-texto"><h4>Dividir entre Coeficiente</h4><p>Divide los moles entre el número grande de la ecuación.</p></div>
+                <div class="paso-texto"><h4>Dividir entre Coeficiente</h4><p>Divide los moles entre el n�mero grande de la ecuaci�n.</p></div>
             </div>
             <div class="paso-metodo" style="border-left-color: var(--color-limite);">
                 <div class="paso-numero" style="color: var(--color-limite);">5</div>
-                <div class="paso-texto"><h4 style="color: var(--color-limite);">Determinar el Límite</h4><p>El resultado menor indica cuál es el Reactivo Límite.</p></div>
+                <div class="paso-texto"><h4 style="color: var(--color-limite);">Determinar el L�mite</h4><p>El resultado menor indica cu�l es el Reactivo L�mite.</p></div>
             </div>
             <div class="paso-metodo" style="border-left-color: var(--color-producto); background: rgba(46, 204, 113, 0.05);">
                 <div class="paso-numero" style="color: var(--color-producto);">6</div>
                 <div class="paso-texto">
-                    <h4 style="color: var(--color-producto);">Cálculo de Gramos Producidos</h4>
-                    <p>Usa <strong>los moles del Reactivo Límite</strong> y aplícales la relación estequiométrica (Regla de 3 con coeficientes) para hallar los moles del producto. Finalmente, multiplícalos por el PM del producto para obtener gramos.</p>
+                    <h4 style="color: var(--color-producto);">C�lculo de Gramos Producidos</h4>
+                    <p>Usa <strong>los moles del Reactivo L�mite</strong> y apl�cales la relaci�n estequiom�trica (Regla de 3 con coeficientes) para hallar los moles del producto. Finalmente, multipl�calos por el PM del producto para obtener gramos.</p>
                 </div>
             </div>
         </section>
@@ -131,201 +137,202 @@
 
             <!-- EJERCICIO 1 -->
             <div class="ejercicio">
-                <h3>Ejercicio 1: Síntesis del Agua</h3>
-                <p class="enunciado">Se hacen reaccionar 10g de H₂ con 64g de O₂. Determine el reactivo límite y la cantidad en gramos de H₂O que se produce.</p>
+                <h3>Ejercicio 1: S�ntesis del Agua</h3>
+                <p class="enunciado">Se hacen reaccionar 10g de H2 con 64g de O2. Determine el reactivo l�mite y la cantidad en gramos de H2O que se produce.</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">2H₂ + 1O₂ → 2H₂O</span>
+                    <span class="ecuacion">2H2 + 1O2 ? 2H2O</span>
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
-                    H₂ = 2 g/mol | O₂ = 32 g/mol | H₂O = 18 g/mol
+                    H2 = 2 g/mol | O2 = 32 g/mol | H2O = 18 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
-                    n H₂ = 10g / 2 = 5 moles<br>
-                    n O₂ = 64g / 32 = 2 moles
+                    n H2 = 10g / 2 = 5 moles<br>
+                    n O2 = 64g / 32 = 2 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
-                    H₂: 5 / 2 = 2.5<br>
-                    O₂: 2 / 1 = 2
+                    H2: 5 / 2 = 2.5<br>
+                    O2: 2 / 1 = 2
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 2. El <span>Oxígeno (O₂)</span> es el Reactivo Límite.
+                    El valor menor es 2. El <span>Ox�geno (O2)</span> es el Reactivo L�mite.
                 </div>
                 <div class="paso-ejercicio" style="border-left-color: var(--color-producto);">
-                    <strong>Paso 6: Gramos de Producto (H₂O)</strong><br>
-                    <em>1. Relación:</em> Por cada 1 mol de O₂ se producen 2 moles de H₂O.<br>
-                    <em>2. Moles del RL:</em> Tenemos 2 moles reales de O₂.<br>
-                    <em>3. Moles producto:</em> 2 moles O₂ × (2 moles H₂O / 1 mol O₂) = 4 moles H₂O.<br>
-                    <em>4. A Gramos:</em> 4 moles × 18 g/mol = 72 gramos.
+                    <strong>Paso 6: Gramos de Producto (H2O)</strong><br>
+                    <em>1. Relaci�n:</em> Por cada 1 mol de O2 se producen 2 moles de H2O.<br>
+                    <em>2. Moles del RL:</em> Tenemos 2 moles reales de O2.<br>
+                    <em>3. Moles producto:</em> 2 moles O2 � (2 moles H2O / 1 mol O2) = 4 moles H2O.<br>
+                    <em>4. A Gramos:</em> 4 moles � 18 g/mol = 72 gramos.
                 </div>
                 <div class="resultado-producto">
-                    Se producen <span>72 gramos</span> de H₂O.
+                    Se producen <span>72 gramos</span> de H2O.
                 </div>
             </div>
 
             <!-- EJERCICIO 2 -->
             <div class="ejercicio">
-                <h3>Ejercicio 2: Formación de Amoníaco</h3>
-                <p class="enunciado">Reaccionan 28g de N₂ con 12g de H₂. Encuentra el reactivo límite y los gramos de NH₃ producidos.</p>
+                <h3>Ejercicio 2: Formaci�n de Amon�aco</h3>
+                <p class="enunciado">Reaccionan 28g de N2 con 12g de H2. Encuentra el reactivo l�mite y los gramos de NH3 producidos.</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">1N₂ + 3H₂ → 2NH₃</span>
+                    <span class="ecuacion">1N2 + 3H2 ? 2NH3</span>
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
-                    N₂ = 28 g/mol | H₂ = 2 g/mol | NH₃ = 17 g/mol
+                    N2 = 28 g/mol | H2 = 2 g/mol | NH3 = 17 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
-                    n N₂ = 28g / 28 = 1 mol<br>
-                    n H₂ = 12g / 2 = 6 moles
+                    n N2 = 28g / 28 = 1 mol<br>
+                    n H2 = 12g / 2 = 6 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
-                    N₂: 1 / 1 = 1<br>
-                    H₂: 6 / 3 = 2
+                    N2: 1 / 1 = 1<br>
+                    H2: 6 / 3 = 2
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 1. El <span>Nitrógeno (N₂)</span> es el Reactivo Límite.
+                    El valor menor es 1. El <span>Nitr�geno (N2)</span> es el Reactivo L�mite.
                 </div>
                 <div class="paso-ejercicio" style="border-left-color: var(--color-producto);">
-                    <strong>Paso 6: Gramos de Producto (NH₃)</strong><br>
-                    <em>1. Relación:</em> 1 mol N₂ produce 2 moles NH₃.<br>
-                    <em>2. Moles reales producto:</em> 1 mol N₂ (RL) × (2/1) = 2 moles NH₃.<br>
-                    <em>3. A Gramos:</em> 2 moles × 17 g/mol = 34 gramos.
+                    <strong>Paso 6: Gramos de Producto (NH3)</strong><br>
+                    <em>1. Relaci�n:</em> 1 mol N2 produce 2 moles NH3.<br>
+                    <em>2. Moles reales producto:</em> 1 mol N2 (RL) � (2/1) = 2 moles NH3.<br>
+                    <em>3. A Gramos:</em> 2 moles � 17 g/mol = 34 gramos.
                 </div>
                 <div class="resultado-producto">
-                    Se producen <span>34 gramos</span> de NH₃.
+                    Se producen <span>34 gramos</span> de NH3.
                 </div>
             </div>
 
             <!-- EJERCICIO 3 -->
             <div class="ejercicio">
-                <h3>Ejercicio 3: Combustión del Metano</h3>
-                <p class="enunciado">Se queman 32g de Metano (CH₄) con 96g de Oxígeno (O₂). Determine el R.L. y los gramos de Dióxido de Carbono (CO₂) generados.</p>
+                <h3>Ejercicio 3: Combusti�n del Metano</h3>
+                <p class="enunciado">Se queman 32g de Metano (CH4) con 96g de Ox�geno (O2). Determine el R.L. y los gramos de Di�xido de Carbono (CO2) generados.</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">1CH₄ + 2O₂ → 1CO₂ + 2H₂O</span>
+                    <span class="ecuacion">1CH4 + 2O2 ? 1CO2 + 2H2O</span>
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
-                    CH₄ = 16 g/mol | O₂ = 32 g/mol | CO₂ = 44 g/mol
+                    CH4 = 16 g/mol | O2 = 32 g/mol | CO2 = 44 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
-                    n CH₄ = 32g / 16 = 2 moles<br>
-                    n O₂ = 96g / 32 = 3 moles
+                    n CH4 = 32g / 16 = 2 moles<br>
+                    n O2 = 96g / 32 = 3 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
-                    CH₄: 2 / 1 = 2<br>
-                    O₂: 3 / 2 = 1.5
+                    CH4: 2 / 1 = 2<br>
+                    O2: 3 / 2 = 1.5
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 1.5. El <span>Oxígeno (O₂)</span> es el Reactivo Límite.
+                    El valor menor es 1.5. El <span>Ox�geno (O2)</span> es el Reactivo L�mite.
                 </div>
                 <div class="paso-ejercicio" style="border-left-color: var(--color-producto);">
-                    <strong>Paso 6: Gramos de Producto (CO₂)</strong><br>
-                    <em>1. Relación:</em> 2 moles O₂ producen 1 mol CO₂.<br>
-                    <em>2. Moles reales de RL:</em> Tenemos 3 moles de O₂.<br>
-                    <em>3. Moles producto:</em> 3 moles O₂ × (1 mol CO₂ / 2 moles O₂) = 1.5 moles CO₂.<br>
-                    <em>4. A Gramos:</em> 1.5 moles × 44 g/mol = 66 gramos.
+                    <strong>Paso 6: Gramos de Producto (CO2)</strong><br>
+                    <em>1. Relaci�n:</em> 2 moles O2 producen 1 mol CO2.<br>
+                    <em>2. Moles reales de RL:</em> Tenemos 3 moles de O2.<br>
+                    <em>3. Moles producto:</em> 3 moles O2 � (1 mol CO2 / 2 moles O2) = 1.5 moles CO2.<br>
+                    <em>4. A Gramos:</em> 1.5 moles � 44 g/mol = 66 gramos.
                 </div>
                 <div class="resultado-producto">
-                    Se producen <span>66 gramos</span> de CO₂.
+                    Se producen <span>66 gramos</span> de CO2.
                 </div>
             </div>
 
             <!-- EJERCICIO 4 -->
             <div class="ejercicio">
-                <h3>Ejercicio 4: Óxido de Hierro (III)</h3>
-                <p class="enunciado">Se mezclan 112g de Hierro (Fe) con 64g de Oxígeno (O₂). Calcula los gramos de Óxido Férrico (Fe₂O₃) resultantes.</p>
+                <h3>Ejercicio 4: �xido de Hierro (III)</h3>
+                <p class="enunciado">Se mezclan 112g de Hierro (Fe) con 64g de Ox�geno (O2). Calcula los gramos de �xido F�rrico (Fe2O3) resultantes.</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">4Fe + 3O₂ → 2Fe₂O₃</span>
+                    <span class="ecuacion">4Fe + 3O2 ? 2Fe2O3</span>
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
-                    Fe = 56 g/mol | O₂ = 32 g/mol | Fe₂O₃ = 160 g/mol
+                    Fe = 56 g/mol | O2 = 32 g/mol | Fe2O3 = 160 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
                     n Fe = 112g / 56 = 2 moles<br>
-                    n O₂ = 64g / 32 = 2 moles
+                    n O2 = 64g / 32 = 2 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
                     Fe: 2 / 4 = 0.5<br>
-                    O₂: 2 / 3 = 0.66
+                    O2: 2 / 3 = 0.66
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 0.5. El <span>Hierro (Fe)</span> es el Reactivo Límite.
+                    El valor menor es 0.5. El <span>Hierro (Fe)</span> es el Reactivo L�mite.
                 </div>
                 <div class="paso-ejercicio" style="border-left-color: var(--color-producto);">
-                    <strong>Paso 6: Gramos de Producto (Fe₂O₃)</strong><br>
-                    <em>1. Relación:</em> 4 moles Fe producen 2 moles Fe₂O₃.<br>
-                    <em>2. Moles producto:</em> 2 moles Fe (RL) × (2/4) = 1 mol Fe₂O₃.<br>
-                    <em>3. A Gramos:</em> 1 mol × 160 g/mol = 160 gramos.
+                    <strong>Paso 6: Gramos de Producto (Fe2O3)</strong><br>
+                    <em>1. Relaci�n:</em> 4 moles Fe producen 2 moles Fe2O3.<br>
+                    <em>2. Moles producto:</em> 2 moles Fe (RL) � (2/4) = 1 mol Fe2O3.<br>
+                    <em>3. A Gramos:</em> 1 mol � 160 g/mol = 160 gramos.
                 </div>
                 <div class="resultado-producto">
-                    Se producen <span>160 gramos</span> de Fe₂O₃.
+                    Se producen <span>160 gramos</span> de Fe2O3.
                 </div>
             </div>
 
             <!-- EJERCICIO 5 -->
             <div class="ejercicio">
                 <h3>Ejercicio 5: Cloruro de Aluminio</h3>
-                <p class="enunciado">Reaccionan 54g de Aluminio (Al) con 142g de Cloro (Cl₂). Encuentra los gramos de producto (AlCl₃).</p>
+                <p class="enunciado">Reaccionan 54g de Aluminio (Al) con 142g de Cloro (Cl2). Encuentra los gramos de producto (AlCl3).</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">2Al + 3Cl₂ → 2AlCl₃</span>
+                    <span class="ecuacion">2Al + 3Cl2 ? 2AlCl3</span>
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
-                    Al = 27 g/mol | Cl₂ = 71 g/mol | AlCl₃ = 133.5 g/mol
+                    Al = 27 g/mol | Cl2 = 71 g/mol | AlCl3 = 133.5 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
                     n Al = 54g / 27 = 2 moles<br>
-                    n Cl₂ = 142g / 71 = 2 moles
+                    n Cl2 = 142g / 71 = 2 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
                     Al: 2 / 2 = 1<br>
-                    Cl₂: 2 / 3 = 0.66
+                    Cl2: 2 / 3 = 0.66
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 0.66. El <span>Cloro (Cl₂)</span> es el Reactivo Límite.
+                    El valor menor es 0.66. El <span>Cloro (Cl2)</span> es el Reactivo L�mite.
                 </div>
                 <div class="paso-ejercicio" style="border-left-color: var(--color-producto);">
-                    <strong>Paso 6: Gramos de Producto (AlCl₃)</strong><br>
-                    <em>1. Relación:</em> 3 moles Cl₂ producen 2 moles AlCl₃.<br>
-                    <em>2. Moles reales RL:</em> 2 moles de Cl₂.<br>
-                    <em>3. Moles producto:</em> 2 moles Cl₂ × (2/3) = 1.33 moles AlCl₃.<br>
-                    <em>4. A Gramos:</em> 1.33 moles × 133.5 g/mol = 177.5 gramos.
+                    <strong>Paso 6: Gramos de Producto (AlCl3)</strong><br>
+                    <em>1. Relaci�n:</em> 3 moles Cl2 producen 2 moles AlCl3.<br>
+                    <em>2. Moles reales RL:</em> 2 moles de Cl2.<br>
+                    <em>3. Moles producto:</em> 2 moles Cl2 � (2/3) = 1.33 moles AlCl3.<br>
+                    <em>4. A Gramos:</em> 1.33 moles � 133.5 g/mol = 177.5 gramos.
                 </div>
                 <div class="resultado-producto">
-                    Se producen <span>177.5 gramos</span> de AlCl₃.
+                    Se producen <span>177.5 gramos</span> de AlCl3.
                 </div>
             </div>
             
         </section>
 
-        <!-- BOTONES DE ACCIÓN -->
+        <!-- BOTONES DE ACCI�N -->
         <div style="display: flex; gap: 20px; justify-content: center; margin: 40px 0;">
-            <a href="quimica10_reactivo_limite_practica.html" style="background: #2ecc71; color: #14111f; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-gamepad"></i> Ir a Práctica</a>
-            <a href="quimica10_reactivo_limite_evaluacion.html" style="background: #e74c3c; color: #fff; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-file-pen"></i> Ir a Evaluación</a>
+            <a href="quimica10_reactivo_limite_practica.html" style="background: #2ecc71; color: #14111f; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-gamepad"></i> Ir a Pr�ctica</a>
+            <a href="quimica10_reactivo_limite_evaluacion.html" style="background: #e74c3c; color: #fff; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-file-pen"></i> Ir a Evaluaci�n</a>
         </div>
 
     </main>
 
 </body>
 </html>
+

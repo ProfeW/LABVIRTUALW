@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biolog√≠a 6¬∞ - Men√∫ Principal | LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>BiologÌa 6∞ - Men˙ Principal | LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,12 +22,12 @@
 
         body {
             background-color: var(--color-oscuro); color: var(--color-texto);
-            /* Fondo con imagen de naturaleza/biolog√≠a con un overlay oscuro para que el texto resalte */
+            /* Fondo con imagen de naturaleza/biologÌa con un overlay oscuro para que el texto resalte */
             background-image: linear-gradient(rgba(18, 30, 20, 0.92), rgba(18, 30, 20, 0.98)), url('https://images.unsplash.com/photo-1530508953158-6927d30f40fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACI√ìN --- */
+        /* --- NAVEGACI”N --- */
         nav { 
             background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(15px); 
             border-bottom: 1px solid rgba(46, 204, 113, 0.2); 
@@ -49,7 +49,7 @@
         .encabezado-area h1 span { color: var(--color-bio-primario); }
         .encabezado-area p { color: #ccc; font-size: 1.15rem; max-width: 800px; margin: 0 auto; line-height: 1.6; }
 
-        /* --- GRID DE UNIDADES TEM√ÅTICAS --- */
+        /* --- GRID DE UNIDADES TEM¡TICAS --- */
         .grid-unidades { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
 
         /* --- TARJETA DE UNIDAD --- */
@@ -76,7 +76,7 @@
         .icono-unidad { font-size: 2.5rem; color: var(--color-bio-primario); background: rgba(46, 204, 113, 0.1); width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
         .unidad-header h2 { font-size: 1.6rem; color: #fff; line-height: 1.2; }
 
-        /* --- LISTA DE TEMAS (MEN√ö INTERNO) --- */
+        /* --- LISTA DE TEMAS (MEN⁄ INTERNO) --- */
         .lista-temas { display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
         
         .tema-enlace {
@@ -103,7 +103,7 @@
         }
         .tema-enlace:hover i.fa-angle-right { color: var(--color-bio-primario); transform: translateX(3px); }
 
-        /* Categor√≠as o Sub-bloques visuales dentro de una tarjeta */
+        /* CategorÌas o Sub-bloques visuales dentro de una tarjeta */
         .sub-categoria {
             font-size: 0.85rem;
             text-transform: uppercase;
@@ -119,6 +119,12 @@
             .grid-unidades { grid-template-columns: 1fr; } 
             .encabezado-area h1 { font-size: 2.5rem; }
             nav { padding: 15px 20px; }
+        }
+    </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
         }
     </style>
 </head>
@@ -137,8 +143,8 @@
         
         <div class="encabezado-area">
             <div class="badge-grado">GRADO SEXTO</div>
-            <h1>Explora la <span>Biolog√≠a</span></h1>
-            <p>Selecciona una unidad tem√°tica para comenzar. Descubre los secretos del ADN, c√≥mo evolucionan las especies y los ecosistemas que conforman nuestro planeta.</p>
+            <h1>Explora la <span>BiologÌa</span></h1>
+            <p>Selecciona una unidad tem·tica para comenzar. Descubre los secretos del ADN, cÛmo evolucionan las especies y los ecosistemas que conforman nuestro planeta.</p>
         </div>
 
         <div class="grid-unidades">
@@ -152,8 +158,8 @@
                     <h2>Primer Periodo</h2>
                 </div>
                 <div class="lista-temas">
-                    <div class="sub-categoria">Introducci√≥n</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-open icono-tema"></i> Conceptos B√°sicos<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">IntroducciÛn</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-open icono-tema"></i> Conceptos B·sicos<i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </article>
 
@@ -166,8 +172,8 @@
                     <h2>Segundo Periodo</h2>
                 </div>
                 <div class="lista-temas">
-                    <div class="sub-categoria">Biolog√≠a Celular</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-circle-nodes icono-tema" style="color: #3498db;"></i> La C√©lula<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">BiologÌa Celular</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-circle-nodes icono-tema" style="color: #3498db;"></i> La CÈlula<i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </article>
 
@@ -180,12 +186,12 @@
                     <h2>Tercer Periodo</h2>
                 </div>
                 <div class="lista-temas">
-                    <div class="sub-categoria">Taxonom√≠a y Nutrici√≥n</div>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-journal-whills icono-tema" style="color: #f39c12;"></i> Clasificaci√≥n de Seres Vivos<i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="tema-enlace"><i class="fa-solid fa-apple-whole icono-tema" style="color: #f39c12;"></i> Nutrici√≥n y Pir√°mide<i class="fa-solid fa-angle-right"></i></a>
+                    <div class="sub-categoria">TaxonomÌa y NutriciÛn</div>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-book-journal-whills icono-tema" style="color: #f39c12;"></i> ClasificaciÛn de Seres Vivos<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="tema-enlace"><i class="fa-solid fa-apple-whole icono-tema" style="color: #f39c12;"></i> NutriciÛn y Pir·mide<i class="fa-solid fa-angle-right"></i></a>
                     
                     <div class="sub-categoria">Evaluaciones</div>
-                    <a href="biologia6_evaluacion_practica.html" class="tema-enlace" style="background: rgba(243,156,18,0.2); border-color: rgba(243,156,18,0.5);"><i class="fa-solid fa-clipboard-check icono-tema" style="color: #f39c12;"></i> Evaluaci√≥n de Pr√°ctica<i class="fa-solid fa-angle-right"></i></a>
+                    <a href="biologia6_evaluacion_practica.html" class="tema-enlace" style="background: rgba(243,156,18,0.2); border-color: rgba(243,156,18,0.5);"><i class="fa-solid fa-clipboard-check icono-tema" style="color: #f39c12;"></i> EvaluaciÛn de Pr·ctica<i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </article>
 
@@ -198,7 +204,7 @@
                     <h2>Cuarto Periodo</h2>
                 </div>
                 <div class="lista-temas">
-                    <div class="sub-categoria">Ecolog√≠a</div>
+                    <div class="sub-categoria">EcologÌa</div>
                     <a href="#" class="tema-enlace"><i class="fa-solid fa-tree icono-tema" style="color: #e67e22;"></i> Ecosistemas<i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </article>

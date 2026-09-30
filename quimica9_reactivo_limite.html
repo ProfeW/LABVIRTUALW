@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reactivo LÃ­mite (Noveno) - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Reactivo Límite (Noveno) - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,7 +27,7 @@
             background-size: cover; background-attachment: fixed; line-height: 1.6;
         }
 
-        /* --- NAVEGACIÃ“N --- */
+        /* --- NAVEGACIÓN --- */
         nav { background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(155, 89, 182, 0.2); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .logo i { color: var(--color-quim-primario); }
@@ -72,6 +72,12 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .grid-conceptos { grid-template-columns: 1fr; } .paso-metodo { flex-direction: column; text-align: center; gap: 10px;} }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -80,71 +86,71 @@
     </nav>
 
     <main class="contenedor">
-        <a href="quimica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a QuÃ­mica 9Â°</a>
+        <a href="quimica_9.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Química 9°</a>
 
         <div class="encabezado-leccion">
-            <h1>Reactivo LÃ­mite</h1>
-            <p>Descubre cuÃ¡l sustancia se agota primero en una reacciÃ³n quÃ­mica y por quÃ© es fundamental para la industria.</p>
+            <h1>Reactivo Límite</h1>
+            <p>Descubre cuál sustancia se agota primero en una reacción química y por qué es fundamental para la industria.</p>
         </div>
 
         <section class="seccion">
-            <h2><i class="fa-solid fa-lightbulb"></i> 1. Â¿QuÃ© es y por quÃ© es importante?</h2>
+            <h2><i class="fa-solid fa-lightbulb"></i> 1. ¿Qué es y por qué es importante?</h2>
             
             <div class="caja-info">
-                Imagina que quieres hacer sÃ¡ndwiches. Cada sÃ¡ndwich necesita 2 panes y 1 jamÃ³n. Si tienes 10 panes y 3 jamones, Â¿cuÃ¡ntos sÃ¡ndwiches puedes hacer? Â¡Solo 3! Te sobrarÃ¡ pan, pero <strong>el jamÃ³n es tu Reactivo LÃ­mite</strong> porque se acabÃ³ primero y detuvo la producciÃ³n.
+                Imagina que quieres hacer sándwiches. Cada sándwich necesita 2 panes y 1 jamón. Si tienes 10 panes y 3 jamones, ¿cuántos sándwiches puedes hacer? ¡Solo 3! Te sobrará pan, pero <strong>el jamón es tu Reactivo Límite</strong> porque se acabó primero y detuvo la producción.
             </div>
 
             <div class="grid-conceptos">
                 <div class="concepto-card" style="border-top-color: var(--color-limite);">
-                    <h3 style="color: var(--color-limite); margin-bottom: 10px;">Reactivo LÃ­mite</h3>
-                    <p>Es la sustancia que <strong>se consume por completo</strong> primero en una reacciÃ³n quÃ­mica. Determina y limita la cantidad mÃ¡xima de producto que se puede formar.</p>
+                    <h3 style="color: var(--color-limite); margin-bottom: 10px;">Reactivo Límite</h3>
+                    <p>Es la sustancia que <strong>se consume por completo</strong> primero en una reacción química. Determina y limita la cantidad máxima de producto que se puede formar.</p>
                 </div>
                 <div class="concepto-card" style="border-top-color: var(--color-exceso);">
                     <h3 style="color: var(--color-exceso); margin-bottom: 10px;">Reactivo en Exceso</h3>
-                    <p>Es la sustancia que <strong>sobra</strong> despuÃ©s de que la reacciÃ³n ha terminado porque no hubo suficiente reactivo lÃ­mite para reaccionar con ella.</p>
+                    <p>Es la sustancia que <strong>sobra</strong> después de que la reacción ha terminado porque no hubo suficiente reactivo límite para reaccionar con ella.</p>
                 </div>
             </div>
             
-            <p><strong>Aplicaciones:</strong> En la industria farmacÃ©utica o de alimentos, el reactivo mÃ¡s costoso siempre se diseÃ±a para ser el "reactivo lÃ­mite" de modo que no se desperdicie ni un solo gramo, optimizando asÃ­ los costos de producciÃ³n.</p>
+            <p><strong>Aplicaciones:</strong> En la industria farmacéutica o de alimentos, el reactivo más costoso siempre se diseña para ser el "reactivo límite" de modo que no se desperdicie ni un solo gramo, optimizando así los costos de producción.</p>
         </section>
 
         <section class="seccion">
             <h2><i class="fa-solid fa-list-check"></i> 2. Los 5 Pasos de Oro</h2>
-            <p>Para resolver CUALQUIER ejercicio de reactivo lÃ­mite en grado noveno, sigue estrictamente este orden:</p>
+            <p>Para resolver CUALQUIER ejercicio de reactivo límite en grado noveno, sigue estrictamente este orden:</p>
             
             <div class="paso-metodo">
                 <div class="paso-numero">1</div>
                 <div class="paso-texto">
-                    <h4>Balancear la EcuaciÃ³n</h4>
-                    <p>Verifica que los coeficientes cumplan la ley de conservaciÃ³n de la masa.</p>
+                    <h4>Balancear la Ecuación</h4>
+                    <p>Verifica que los coeficientes cumplan la ley de conservación de la masa.</p>
                 </div>
             </div>
             <div class="paso-metodo">
                 <div class="paso-numero">2</div>
                 <div class="paso-texto">
                     <h4>Calcular la Masa Molar (PM)</h4>
-                    <p>Busca en la tabla periÃ³dica la masa atÃ³mica de cada elemento de los reactivos y sÃºmalos para obtener el peso molecular (g/mol).</p>
+                    <p>Busca en la tabla periódica la masa atómica de cada elemento de los reactivos y súmalos para obtener el peso molecular (g/mol).</p>
                 </div>
             </div>
             <div class="paso-metodo">
                 <div class="paso-numero">3</div>
                 <div class="paso-texto">
                     <h4>Convertir gramos a Moles (n)</h4>
-                    <p>Usa la fÃ³rmula: <code>Moles (n) = Masa (g) / Masa Molar (PM)</code> para cada reactivo.</p>
+                    <p>Usa la fórmula: <code>Moles (n) = Masa (g) / Masa Molar (PM)</code> para cada reactivo.</p>
                 </div>
             </div>
             <div class="paso-metodo">
                 <div class="paso-numero">4</div>
                 <div class="paso-texto">
                     <h4>Dividir entre el Coeficiente</h4>
-                    <p>Toma los moles obtenidos en el paso 3 y divÃ­delos entre el coeficiente estequiomÃ©trico que balanceaste en el paso 1.</p>
+                    <p>Toma los moles obtenidos en el paso 3 y divídelos entre el coeficiente estequiométrico que balanceaste en el paso 1.</p>
                 </div>
             </div>
             <div class="paso-metodo" style="border-left-color: var(--color-limite); background: rgba(230, 126, 34, 0.05);">
                 <div class="paso-numero" style="color: var(--color-limite);">5</div>
                 <div class="paso-texto">
-                    <h4 style="color: var(--color-limite);">Determinar el LÃ­mite</h4>
-                    <p>Compara los resultados del paso 4. <strong>El nÃºmero MENOR</strong> indica cuÃ¡l es el Reactivo LÃ­mite.</p>
+                    <h4 style="color: var(--color-limite);">Determinar el Límite</h4>
+                    <p>Compara los resultados del paso 4. <strong>El número MENOR</strong> indica cuál es el Reactivo Límite.</p>
                 </div>
             </div>
         </section>
@@ -154,158 +160,159 @@
 
             <!-- EJERCICIO 1 -->
             <div class="ejercicio">
-                <h3>Ejercicio 1: SÃ­ntesis del Agua</h3>
-                <p class="enunciado">Se hacen reaccionar 10 gramos de HidrÃ³geno (Hâ‚‚) con 64 gramos de OxÃ­geno (Oâ‚‚). Â¿CuÃ¡l es el reactivo lÃ­mite?</p>
+                <h3>Ejercicio 1: Síntesis del Agua</h3>
+                <p class="enunciado">Se hacen reaccionar 10 gramos de Hidrógeno (H2) con 64 gramos de Oxígeno (O2). ¿Cuál es el reactivo límite?</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">2Hâ‚‚ + Oâ‚‚ â†’ 2Hâ‚‚O</span> (Coeficientes: Hâ‚‚=2, Oâ‚‚=1)
+                    <span class="ecuacion">2H2 + O2 ? 2H2O</span> (Coeficientes: H2=2, O2=1)
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
-                    PM de Hâ‚‚ = 1 g/mol Ã— 2 = 2 g/mol<br>
-                    PM de Oâ‚‚ = 16 g/mol Ã— 2 = 32 g/mol
+                    PM de H2 = 1 g/mol × 2 = 2 g/mol<br>
+                    PM de O2 = 16 g/mol × 2 = 32 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles (n = m/PM)</strong><br>
-                    Moles Hâ‚‚ = 10g / 2 g/mol = 5 moles<br>
-                    Moles Oâ‚‚ = 64g / 32 g/mol = 2 moles
+                    Moles H2 = 10g / 2 g/mol = 5 moles<br>
+                    Moles O2 = 64g / 32 g/mol = 2 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
-                    Para Hâ‚‚: 5 moles / 2 = 2.5<br>
-                    Para Oâ‚‚: 2 moles / 1 = 2
+                    Para H2: 5 moles / 2 = 2.5<br>
+                    Para O2: 2 moles / 1 = 2
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 2.<br>Por lo tanto, el <span>OxÃ­geno (Oâ‚‚)</span> es el Reactivo LÃ­mite.
+                    El valor menor es 2.<br>Por lo tanto, el <span>Oxígeno (O2)</span> es el Reactivo Límite.
                 </div>
             </div>
 
             <!-- EJERCICIO 2 -->
             <div class="ejercicio">
-                <h3>Ejercicio 2: FormaciÃ³n de AmonÃ­aco</h3>
-                <p class="enunciado">Reaccionan 28 gramos de NitrÃ³geno (Nâ‚‚) con 12 gramos de HidrÃ³geno (Hâ‚‚). Encuentra el reactivo lÃ­mite.</p>
+                <h3>Ejercicio 2: Formación de Amoníaco</h3>
+                <p class="enunciado">Reaccionan 28 gramos de Nitrógeno (N2) con 12 gramos de Hidrógeno (H2). Encuentra el reactivo límite.</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">Nâ‚‚ + 3Hâ‚‚ â†’ 2NHâ‚ƒ</span> (Coeficientes: Nâ‚‚=1, Hâ‚‚=3)
+                    <span class="ecuacion">N2 + 3H2 ? 2NH3</span> (Coeficientes: N2=1, H2=3)
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
-                    PM de Nâ‚‚ = 14 Ã— 2 = 28 g/mol<br>
-                    PM de Hâ‚‚ = 1 Ã— 2 = 2 g/mol
+                    PM de N2 = 14 × 2 = 28 g/mol<br>
+                    PM de H2 = 1 × 2 = 2 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
-                    Moles Nâ‚‚ = 28g / 28 g/mol = 1 mol<br>
-                    Moles Hâ‚‚ = 12g / 2 g/mol = 6 moles
+                    Moles N2 = 28g / 28 g/mol = 1 mol<br>
+                    Moles H2 = 12g / 2 g/mol = 6 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
-                    Para Nâ‚‚: 1 mol / 1 = 1<br>
-                    Para Hâ‚‚: 6 moles / 3 = 2
+                    Para N2: 1 mol / 1 = 1<br>
+                    Para H2: 6 moles / 3 = 2
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 1.<br>Por lo tanto, el <span>NitrÃ³geno (Nâ‚‚)</span> es el Reactivo LÃ­mite.
+                    El valor menor es 1.<br>Por lo tanto, el <span>Nitrógeno (N2)</span> es el Reactivo Límite.
                 </div>
             </div>
 
             <!-- EJERCICIO 3 -->
             <div class="ejercicio">
-                <h3>Ejercicio 3: CombustiÃ³n del Metano</h3>
-                <p class="enunciado">Se queman 32 gramos de Metano (CHâ‚„) con 96 gramos de OxÃ­geno (Oâ‚‚). Â¿QuÃ© reactivo se acaba primero?</p>
+                <h3>Ejercicio 3: Combustión del Metano</h3>
+                <p class="enunciado">Se queman 32 gramos de Metano (CH4) con 96 gramos de Oxígeno (O2). ¿Qué reactivo se acaba primero?</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">CHâ‚„ + 2Oâ‚‚ â†’ COâ‚‚ + 2Hâ‚‚O</span> (Coeficientes: CHâ‚„=1, Oâ‚‚=2)
+                    <span class="ecuacion">CH4 + 2O2 ? CO2 + 2H2O</span> (Coeficientes: CH4=1, O2=2)
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
-                    PM de CHâ‚„ = 12 + (1Ã—4) = 16 g/mol<br>
-                    PM de Oâ‚‚ = 16 Ã— 2 = 32 g/mol
+                    PM de CH4 = 12 + (1×4) = 16 g/mol<br>
+                    PM de O2 = 16 × 2 = 32 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
-                    Moles CHâ‚„ = 32g / 16 g/mol = 2 moles<br>
-                    Moles Oâ‚‚ = 96g / 32 g/mol = 3 moles
+                    Moles CH4 = 32g / 16 g/mol = 2 moles<br>
+                    Moles O2 = 96g / 32 g/mol = 3 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
-                    Para CHâ‚„: 2 moles / 1 = 2<br>
-                    Para Oâ‚‚: 3 moles / 2 = 1.5
+                    Para CH4: 2 moles / 1 = 2<br>
+                    Para O2: 3 moles / 2 = 1.5
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 1.5.<br>Por lo tanto, el <span>OxÃ­geno (Oâ‚‚)</span> es el Reactivo LÃ­mite.
+                    El valor menor es 1.5.<br>Por lo tanto, el <span>Oxígeno (O2)</span> es el Reactivo Límite.
                 </div>
             </div>
 
             <!-- EJERCICIO 4 -->
             <div class="ejercicio">
-                <h3>Ejercicio 4: Ã“xido de Hierro (III)</h3>
-                <p class="enunciado">Se mezclan 112 gramos de Hierro (Fe) con 64 gramos de OxÃ­geno (Oâ‚‚). Â¿CuÃ¡l limitarÃ¡ la reacciÃ³n?</p>
+                <h3>Ejercicio 4: Óxido de Hierro (III)</h3>
+                <p class="enunciado">Se mezclan 112 gramos de Hierro (Fe) con 64 gramos de Oxígeno (O2). ¿Cuál limitará la reacción?</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">4Fe + 3Oâ‚‚ â†’ 2Feâ‚‚Oâ‚ƒ</span> (Coeficientes: Fe=4, Oâ‚‚=3)
+                    <span class="ecuacion">4Fe + 3O2 ? 2Fe2O3</span> (Coeficientes: Fe=4, O2=3)
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
                     PM de Fe = 56 g/mol<br>
-                    PM de Oâ‚‚ = 32 g/mol
+                    PM de O2 = 32 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
                     Moles Fe = 112g / 56 g/mol = 2 moles<br>
-                    Moles Oâ‚‚ = 64g / 32 g/mol = 2 moles
+                    Moles O2 = 64g / 32 g/mol = 2 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
                     Para Fe: 2 moles / 4 = 0.5<br>
-                    Para Oâ‚‚: 2 moles / 3 = 0.66
+                    Para O2: 2 moles / 3 = 0.66
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 0.5.<br>Por lo tanto, el <span>Hierro (Fe)</span> es el Reactivo LÃ­mite.
+                    El valor menor es 0.5.<br>Por lo tanto, el <span>Hierro (Fe)</span> es el Reactivo Límite.
                 </div>
             </div>
 
             <!-- EJERCICIO 5 -->
             <div class="ejercicio">
                 <h3>Ejercicio 5: Cloruro de Aluminio</h3>
-                <p class="enunciado">Se hacen reaccionar 54 gramos de Aluminio (Al) con 142 gramos de Cloro gaseoso (Clâ‚‚). Determine el R.L.</p>
+                <p class="enunciado">Se hacen reaccionar 54 gramos de Aluminio (Al) con 142 gramos de Cloro gaseoso (Cl2). Determine el R.L.</p>
                 
                 <div class="paso-ejercicio">
                     <strong>Paso 1: Balancear</strong><br>
-                    <span class="ecuacion">2Al + 3Clâ‚‚ â†’ 2AlClâ‚ƒ</span> (Coeficientes: Al=2, Clâ‚‚=3)
+                    <span class="ecuacion">2Al + 3Cl2 ? 2AlCl3</span> (Coeficientes: Al=2, Cl2=3)
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 2: Masa Molar (PM)</strong><br>
                     PM de Al = 27 g/mol<br>
-                    PM de Clâ‚‚ = 35.5 Ã— 2 = 71 g/mol
+                    PM de Cl2 = 35.5 × 2 = 71 g/mol
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 3: Convertir a Moles</strong><br>
                     Moles Al = 54g / 27 g/mol = 2 moles<br>
-                    Moles Clâ‚‚ = 142g / 71 g/mol = 2 moles
+                    Moles Cl2 = 142g / 71 g/mol = 2 moles
                 </div>
                 <div class="paso-ejercicio">
                     <strong>Paso 4: Dividir entre coeficiente</strong><br>
                     Para Al: 2 moles / 2 = 1<br>
-                    Para Clâ‚‚: 2 moles / 3 = 0.66
+                    Para Cl2: 2 moles / 3 = 0.66
                 </div>
                 <div class="resultado-limite">
-                    El valor menor es 0.66.<br>Por lo tanto, el <span>Cloro (Clâ‚‚)</span> es el Reactivo LÃ­mite.
+                    El valor menor es 0.66.<br>Por lo tanto, el <span>Cloro (Cl2)</span> es el Reactivo Límite.
                 </div>
             </div>
             
         </section>
 
-        <!-- BOTONES DE ACCIÃ“N -->
+        <!-- BOTONES DE ACCIÓN -->
         <div style="display: flex; gap: 20px; justify-content: center; margin: 40px 0;">
-            <a href="quimica9_reactivo_limite_practica.html" style="background: #2ecc71; color: #14111f; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-gamepad"></i> Ir a PrÃ¡ctica</a>
-            <a href="quimica9_reactivo_limite_evaluacion.html" style="background: #e74c3c; color: #fff; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-file-pen"></i> Ir a EvaluaciÃ³n</a>
+            <a href="quimica9_reactivo_limite_practica.html" style="background: #2ecc71; color: #14111f; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-gamepad"></i> Ir a Práctica</a>
+            <a href="quimica9_reactivo_limite_evaluacion.html" style="background: #e74c3c; color: #fff; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.2rem; transition: 0.3s; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-file-pen"></i> Ir a Evaluación</a>
         </div>
 
     </main>
 
 </body>
 </html>
+

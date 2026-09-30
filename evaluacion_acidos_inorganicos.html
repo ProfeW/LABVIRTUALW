@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaci√≥n: √Åcidos - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EvaluaciÛn: ¡cidos - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -42,7 +42,7 @@
         .btn-regresar { display: inline-block; color: #aaa; text-decoration: none; transition: 0.3s; font-weight: 600; margin-bottom: 20px;}
         .btn-regresar:hover { color: #fff; transform: translateX(-5px);}
 
-        /* --- FORMULARIO DE EVALUACI√ìN --- */
+        /* --- FORMULARIO DE EVALUACI”N --- */
         .caja-evaluacion { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 40px; margin-bottom: 40px; border-top: 5px solid var(--color-principal); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
         .datos-estudiante { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -71,6 +71,12 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -79,67 +85,67 @@
     </nav>
 
     <main class="contenedor">
-        <a href="acidos_inorganicos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a la Teor√≠a</a>
+        <a href="acidos_inorganicos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÌa</a>
 
         <div class="encabezado">
-            <h1>Evaluaci√≥n de √Åcidos</h1>
-            <p>Lee cuidadosamente cada pregunta y selecciona la respuesta correcta. Tu nota ser√° registrada autom√°ticamente.</p>
+            <h1>EvaluaciÛn de ¡cidos</h1>
+            <p>Lee cuidadosamente cada pregunta y selecciona la respuesta correcta. Tu nota ser· registrada autom·ticamente.</p>
         </div>
 
         <section class="caja-evaluacion" id="formulario-evaluacion">
             
             <div class="datos-estudiante">
                 <label for="nombre-estudiante"><i class="fa-solid fa-user-graduate"></i> Nombre Completo:</label>
-                <input type="text" id="nombre-estudiante" class="input-nombre" placeholder="Escribe tus nombres y apellidos aqu√≠...">
+                <input type="text" id="nombre-estudiante" class="input-nombre" placeholder="Escribe tus nombres y apellidos aquÌ...">
             </div>
 
             <div class="pregunta" id="q1">
-                <h3>1. Seg√∫n la definici√≥n qu√≠mica, ¬øqu√© ion libera un √°cido al disolverse en agua?</h3>
+                <h3>1. Seg˙n la definiciÛn quÌmica, øquÈ ion libera un ·cido al disolverse en agua?</h3>
                 <div class="opciones">
-                    <label class="opcion-label"><input type="radio" name="p1" value="A"> A) Ion Hidroxilo (OH‚Åª)</label>
-                    <label class="opcion-label"><input type="radio" name="p1" value="B"> B) Ion Hidr√≥geno (H‚Å∫)</label>
-                    <label class="opcion-label"><input type="radio" name="p1" value="C"> C) Ion Cloruro (Cl‚Åª)</label>
-                    <label class="opcion-label"><input type="radio" name="p1" value="D"> D) Ion Ox√≠geno (O¬≤‚Åª)</label>
+                    <label class="opcion-label"><input type="radio" name="p1" value="A"> A) Ion Hidroxilo (OH?)</label>
+                    <label class="opcion-label"><input type="radio" name="p1" value="B"> B) Ion HidrÛgeno (H?)</label>
+                    <label class="opcion-label"><input type="radio" name="p1" value="C"> C) Ion Cloruro (Cl?)</label>
+                    <label class="opcion-label"><input type="radio" name="p1" value="D"> D) Ion OxÌgeno (O≤?)</label>
                 </div>
             </div>
 
             <div class="pregunta" id="q2">
-                <h3>2. ¬øCu√°l es la principal diferencia estructural entre un √°cido hidr√°cido y un √°cido ox√°cido?</h3>
+                <h3>2. øCu·l es la principal diferencia estructural entre un ·cido hidr·cido y un ·cido ox·cido?</h3>
                 <div class="opciones">
-                    <label class="opcion-label"><input type="radio" name="p2" value="A"> A) Los hidr√°cidos contienen ox√≠geno y los ox√°cidos no.</label>
-                    <label class="opcion-label"><input type="radio" name="p2" value="B"> B) Los ox√°cidos son compuestos binarios.</label>
-                    <label class="opcion-label"><input type="radio" name="p2" value="C"> C) Los ox√°cidos contienen ox√≠geno en su estructura, los hidr√°cidos no.</label>
+                    <label class="opcion-label"><input type="radio" name="p2" value="A"> A) Los hidr·cidos contienen oxÌgeno y los ox·cidos no.</label>
+                    <label class="opcion-label"><input type="radio" name="p2" value="B"> B) Los ox·cidos son compuestos binarios.</label>
+                    <label class="opcion-label"><input type="radio" name="p2" value="C"> C) Los ox·cidos contienen oxÌgeno en su estructura, los hidr·cidos no.</label>
                     <label class="opcion-label"><input type="radio" name="p2" value="D"> D) No existe diferencia, ambos tienen la misma estructura.</label>
                 </div>
             </div>
 
             <div class="pregunta" id="q3">
-                <h3>3. El qu√≠mico m√°s producido en el mundo, utilizado en bater√≠as y fertilizantes, cuya f√≥rmula es H‚ÇÇSO‚ÇÑ, es el:</h3>
+                <h3>3. El quÌmico m·s producido en el mundo, utilizado en baterÌas y fertilizantes, cuya fÛrmula es H2SO4, es el:</h3>
                 <div class="opciones">
-                    <label class="opcion-label"><input type="radio" name="p3" value="A"> A) √Åcido N√≠trico</label>
-                    <label class="opcion-label"><input type="radio" name="p3" value="B"> B) √Åcido Fosf√≥rico</label>
-                    <label class="opcion-label"><input type="radio" name="p3" value="C"> C) √Åcido Sulfh√≠drico</label>
-                    <label class="opcion-label"><input type="radio" name="p3" value="D"> D) √Åcido Sulf√∫rico</label>
+                    <label class="opcion-label"><input type="radio" name="p3" value="A"> A) ¡cido NÌtrico</label>
+                    <label class="opcion-label"><input type="radio" name="p3" value="B"> B) ¡cido FosfÛrico</label>
+                    <label class="opcion-label"><input type="radio" name="p3" value="C"> C) ¡cido SulfhÌdrico</label>
+                    <label class="opcion-label"><input type="radio" name="p3" value="D"> D) ¡cido Sulf˙rico</label>
                 </div>
             </div>
 
             <div class="pregunta" id="q4">
-                <h3>4. Seg√∫n la nomenclatura tradicional, ¬øcu√°l es el nombre correcto para el compuesto HCl cuando est√° disuelto en agua?</h3>
+                <h3>4. Seg˙n la nomenclatura tradicional, øcu·l es el nombre correcto para el compuesto HCl cuando est· disuelto en agua?</h3>
                 <div class="opciones">
-                    <label class="opcion-label"><input type="radio" name="p4" value="A"> A) √Åcido clorh√≠drico</label>
-                    <label class="opcion-label"><input type="radio" name="p4" value="B"> B) Cloruro de hidr√≥geno</label>
-                    <label class="opcion-label"><input type="radio" name="p4" value="C"> C) √Åcido hipocloroso</label>
-                    <label class="opcion-label"><input type="radio" name="p4" value="D"> D) √Åcido cl√≥rico</label>
+                    <label class="opcion-label"><input type="radio" name="p4" value="A"> A) ¡cido clorhÌdrico</label>
+                    <label class="opcion-label"><input type="radio" name="p4" value="B"> B) Cloruro de hidrÛgeno</label>
+                    <label class="opcion-label"><input type="radio" name="p4" value="C"> C) ¡cido hipocloroso</label>
+                    <label class="opcion-label"><input type="radio" name="p4" value="D"> D) ¡cido clÛrico</label>
                 </div>
             </div>
 
             <div class="pregunta" id="q5">
-                <h3>5. Si un no metal posee 4 estados de oxidaci√≥n, el √°cido formado con su valencia m√°xima llevar√° el prefijo y sufijo:</h3>
+                <h3>5. Si un no metal posee 4 estados de oxidaciÛn, el ·cido formado con su valencia m·xima llevar· el prefijo y sufijo:</h3>
                 <div class="opciones">
                     <label class="opcion-label"><input type="radio" name="p5" value="A"> A) Hipo - oso</label>
-                    <label class="opcion-label"><input type="radio" name="p5" value="B"> B) Solo terminaci√≥n -ico</label>
+                    <label class="opcion-label"><input type="radio" name="p5" value="B"> B) Solo terminaciÛn -ico</label>
                     <label class="opcion-label"><input type="radio" name="p5" value="C"> C) Per - ico</label>
-                    <label class="opcion-label"><input type="radio" name="p5" value="D"> D) Solo terminaci√≥n -oso</label>
+                    <label class="opcion-label"><input type="radio" name="p5" value="D"> D) Solo terminaciÛn -oso</label>
                 </div>
             </div>
 
@@ -148,10 +154,10 @@
             </button>
 
             <div id="caja-resultados">
-                <h3>Resultados de la Evaluaci√≥n</h3>
+                <h3>Resultados de la EvaluaciÛn</h3>
                 <div class="nota-final" id="nota-texto">0.0</div>
                 <div class="mensaje-resultado" id="mensaje-texto"></div>
-                <div class="mensaje-guardado" id="mensaje-guardado"><i class="fa-solid fa-cloud-arrow-up"></i> Tu calificaci√≥n ha sido enviada al profesor.</div>
+                <div class="mensaje-guardado" id="mensaje-guardado"><i class="fa-solid fa-cloud-arrow-up"></i> Tu calificaciÛn ha sido enviada al profesor.</div>
             </div>
 
         </section>
@@ -173,7 +179,7 @@
             const nombre = document.getElementById('nombre-estudiante').value.trim();
             
             if(nombre === "") {
-                alert("Por favor, ingresa tu nombre completo antes de enviar la evaluaci√≥n.");
+                alert("Por favor, ingresa tu nombre completo antes de enviar la evaluaciÛn.");
                 document.getElementById('nombre-estudiante').focus();
                 return;
             }
@@ -220,29 +226,29 @@
                 cajaResultados.style.background = 'rgba(46, 204, 113, 0.2)';
                 cajaResultados.style.border = '2px solid #2ecc71';
                 notaTexto.style.color = '#2ecc71';
-                mensajeTexto.innerText = `¬°Excelente trabajo, ${nombre}! Dominas el tema de los √°cidos.`;
+                mensajeTexto.innerText = `°Excelente trabajo, ${nombre}! Dominas el tema de los ·cidos.`;
             } else if(notaFinal >= 3.0) {
                 cajaResultados.style.background = 'rgba(241, 196, 15, 0.2)';
                 cajaResultados.style.border = '2px solid #f1c40f';
                 notaTexto.style.color = '#f1c40f';
-                mensajeTexto.innerText = `Buen intento, ${nombre}. Has aprobado, pero puedes repasar la teor√≠a para mejorar.`;
+                mensajeTexto.innerText = `Buen intento, ${nombre}. Has aprobado, pero puedes repasar la teorÌa para mejorar.`;
             } else {
                 cajaResultados.style.background = 'rgba(231, 76, 60, 0.2)';
                 cajaResultados.style.border = '2px solid #e74c3c';
                 notaTexto.style.color = '#e74c3c';
-                mensajeTexto.innerText = `${nombre}, necesitas repasar urgente el m√≥dulo de teor√≠a de √°cidos.`;
+                mensajeTexto.innerText = `${nombre}, necesitas repasar urgente el mÛdulo de teorÌa de ·cidos.`;
             }
 
             cajaResultados.style.display = 'block';
             
-            // Desactivamos todo para evitar un doble env√≠o
+            // Desactivamos todo para evitar un doble envÌo
             const opcionesBloquear = document.querySelectorAll('.opcion-label');
             opcionesBloquear.forEach(lbl => lbl.classList.add('bloqueado'));
             document.getElementById('nombre-estudiante').disabled = true;
             btnCalificar.style.display = 'none';
 
             // ==========================================
-            // ENV√çO DE DATOS A TU EXCEL (EN SEGUNDO PLANO)
+            // ENVÕO DE DATOS A TU EXCEL (EN SEGUNDO PLANO)
             // ==========================================
             const urlConDatos = URL_GUARDAR_NOTAS + '?nombre=' + encodeURIComponent(nombre) + '&nota=' + encodeURIComponent(notaFinal);
 
@@ -252,12 +258,12 @@
             })
             .then(respuesta => respuesta.json())
             .then(datos => {
-                // Muestra un mensajito extra de confirmaci√≥n
+                // Muestra un mensajito extra de confirmaciÛn
                 msgGuardado.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error al enviar la nota:', error);
-                // Si falla silenciosamente por CORS u otro tema de red, al menos ya se calific√≥ en pantalla
+                // Si falla silenciosamente por CORS u otro tema de red, al menos ya se calificÛ en pantalla
             });
         }
 

@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaci贸n: Paralelogramo - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Evaluaci髇: Paralelogramo - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -45,6 +45,12 @@
         #resultados { display: none; margin-top: 30px; padding: 20px; background: rgba(46, 204, 113, 0.2); border-radius: 10px; text-align: center; border: 1px solid var(--color-exito); }
         #resultados h2 { color: var(--color-exito); margin-bottom: 10px; }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -57,11 +63,11 @@
         </a>
 
         <div class="evaluacion-container">
-            <h1>Evaluaci贸n: Paralelogramo</h1>
+            <h1>Evaluaci髇: Paralelogramo</h1>
             
             <form id="quizForm">
                 <div class="pregunta">
-                    <h3>1. El m茅todo del paralelogramo utiliza principalmente:</h3>
+                    <h3>1. El m閠odo del paralelogramo utiliza principalmente:</h3>
                     <div class="opciones">
                         <label><input type="radio" name="q1" value="a"> La ley de Boyle.</label>
                         <label><input type="radio" name="q1" value="b"> La ley del coseno generalizada.</label>
@@ -70,10 +76,10 @@
                 </div>
 
                 <div class="pregunta">
-                    <h3>2. Si \(\theta = 90^\circ\) en la f贸rmula de la ley de cosenos para suma de vectores:</h3>
+                    <h3>2. Si \(\theta = 90^\circ\) en la f髍mula de la ley de cosenos para suma de vectores:</h3>
                     <div class="opciones">
                         <label><input type="radio" name="q2" value="a"> La magnitud es cero.</label>
-                        <label><input type="radio" name="q2" value="b"> El t茅rmino \(2AB\cos(\theta)\) se vuelve cero, transform谩ndose en el Teorema de Pit谩goras.</label>
+                        <label><input type="radio" name="q2" value="b"> El t閞mino \(2AB\cos(\theta)\) se vuelve cero, transform醤dose en el Teorema de Pit醙oras.</label>
                         <label><input type="radio" name="q2" value="c"> La magnitud se duplica.</label>
                     </div>
                 </div>
@@ -82,7 +88,7 @@
             </form>
 
             <div id="resultados">
-                <h2>隆Evaluaci贸n Completada!</h2>
+                <h2>valuaci髇 Completada!</h2>
                 <p id="puntajeTexto" style="font-size:1.2rem;"></p>
             </div>
         </div>
@@ -104,10 +110,10 @@
             form.style.display = 'none';
             const resultados = document.getElementById('resultados');
             resultados.style.display = 'block';
-            document.getElementById('puntajeTexto').innerText = `Tu calificaci贸n es: ${puntaje} / 100`;
+            document.getElementById('puntajeTexto').innerText = `Tu calificaci髇 es: ${puntaje} / 100`;
             
             if(puntaje < 100) {
-                resultados.innerHTML += `<p style="margin-top:15px; font-size:0.9rem;">Te sugerimos repasar la teor铆a del M茅todo del Paralelogramo y volver a intentarlo.</p>`;
+                resultados.innerHTML += `<p style="margin-top:15px; font-size:0.9rem;">Te sugerimos repasar la teor韆 del M閠odo del Paralelogramo y volver a intentarlo.</p>`;
             }
         }
     </script>
@@ -115,3 +121,4 @@
 <script src="auth.js"></script>
 </body>
 </html>
+

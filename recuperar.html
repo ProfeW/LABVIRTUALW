@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar ContraseÃ±a - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Recuperar Contraseña - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="auth.js"></script>
@@ -52,14 +52,20 @@
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
     <a href="login.html" class="volver-inicio"><i class="fa-solid fa-arrow-left"></i> Volver</a>
 
     <div class="auth-container">
         <i class="fa-solid fa-envelope-open-text logo-icono"></i>
-        <h1>Recuperar ContraseÃ±a</h1>
-        <p style="color: #aaa; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5;">Ingresa tu usuario o el correo electrÃ³nico con el que te registraste. Te enviaremos tu contraseÃ±a al correo.</p>
+        <h1>Recuperar Contraseña</h1>
+        <p style="color: #aaa; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5;">Ingresa tu usuario o el correo electrónico con el que te registraste. Te enviaremos tu contraseña al correo.</p>
         
         <div id="error-msg" class="error-msg"></div>
         <div id="success-msg" class="success-msg"></div>
@@ -70,11 +76,11 @@
                 <i class="fa-solid fa-user-tag"></i>
                 <input type="text" id="identificador" placeholder="Tu usuario o correo" required>
             </div>
-            <button type="submit" class="btn-submit" id="btn-recover">Enviar ContraseÃ±a</button>
+            <button type="submit" class="btn-submit" id="btn-recover">Enviar Contraseña</button>
         </form>
 
         <div class="links-bottom">
-            <p style="color: #aaa;">Â¿Recordaste tu contraseÃ±a? <a href="login.html">Inicia sesiÃ³n</a></p>
+            <p style="color: #aaa;">¿Recordaste tu contraseña? <a href="login.html">Inicia sesión</a></p>
         </div>
     </div>
 
@@ -101,15 +107,16 @@
                     errorMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> ' + res.message;
                     errorMsg.style.display = 'block';
                     btn.disabled = false;
-                    btn.innerHTML = 'Enviar ContraseÃ±a';
+                    btn.innerHTML = 'Enviar Contraseña';
                 }
             } catch (err) {
                 errorMsg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error al contactar el servidor.';
                 errorMsg.style.display = 'block';
                 btn.disabled = false;
-                btn.innerHTML = 'Enviar ContraseÃ±a';
+                btn.innerHTML = 'Enviar Contraseña';
             }
         });
     </script>
 </body>
 </html>
+

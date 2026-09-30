@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaci√≥n Final: Leyes de Mendel | LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EvaluaciÛn Final: Leyes de Mendel | LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,7 +27,7 @@
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACI√ìN --- */
+        /* --- NAVEGACI”N --- */
         nav { 
             background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
             border-bottom: 1px solid rgba(231, 76, 60, 0.3); 
@@ -63,7 +63,7 @@
         .btn-principal:hover { background: var(--color-bio-secundario); transform: scale(1.02); }
         .btn-principal:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-        /* --- √ÅREA DE EVALUACI√ìN --- */
+        /* --- ¡REA DE EVALUACI”N --- */
         #eval-section { display: none; }
         .info-estudiante { background: rgba(231, 76, 60, 0.1); border-left: 5px solid var(--color-bio-primario); padding: 15px; margin-bottom: 30px; border-radius: 5px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center;}
         
@@ -96,6 +96,12 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -111,14 +117,14 @@
     <main class="contenedor">
         
         <div class="encabezado-area">
-            <div class="badge-grado">EVALUACI√ìN SUMATIVA</div>
-            <h1>Evaluaci√≥n Final: Leyes de Mendel</h1>
+            <div class="badge-grado">EVALUACI”N SUMATIVA</div>
+            <h1>EvaluaciÛn Final: Leyes de Mendel</h1>
         </div>
 
-        <!-- SECCI√ìN DE LOGIN -->
+        <!-- SECCI”N DE LOGIN -->
         <section id="login-section">
-            <h2 style="margin-bottom: 20px;"><i class="fa-solid fa-id-badge" style="color: var(--color-bio-primario);"></i> Registro de Evaluaci√≥n</h2>
-            <p style="color: #ccc; margin-bottom: 30px; font-size: 0.9rem;">Ingresa tus datos para iniciar la prueba. Al finalizar, tu nota se enviar√° autom√°ticamente al sistema.</p>
+            <h2 style="margin-bottom: 20px;"><i class="fa-solid fa-id-badge" style="color: var(--color-bio-primario);"></i> Registro de EvaluaciÛn</h2>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 0.9rem;">Ingresa tus datos para iniciar la prueba. Al finalizar, tu nota se enviar· autom·ticamente al sistema.</p>
             
             <form id="form-login">
                 <div class="form-group">
@@ -126,11 +132,11 @@
                     <input type="text" id="nombre_estudiante" class="form-control" placeholder="Ej: Maria Gonzalez" required>
                 </div>
 
-                <button type="submit" class="btn-principal"><i class="fa-solid fa-play"></i> Comenzar Evaluaci√≥n</button>
+                <button type="submit" class="btn-principal"><i class="fa-solid fa-play"></i> Comenzar EvaluaciÛn</button>
             </form>
         </section>
 
-        <!-- SECCI√ìN DE EVALUACI√ìN -->
+        <!-- SECCI”N DE EVALUACI”N -->
         <section id="eval-section">
             <div class="info-estudiante">
                 <div><i class="fa-solid fa-user"></i> <strong id="display-nombre"></strong> (<span id="display-grado"></span>)</div>
@@ -139,17 +145,17 @@
 
             <form id="eval-form">
                 
-                <div class="seccion-titulo"><i class="fa-solid fa-list-check"></i> I. Preguntas de Selecci√≥n M√∫ltiple (2.5 puntos)</div>
-                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">Selecciona la respuesta correcta para cada una de las siguientes 5 preguntas te√≥ricas (0.5 cada una).</p>
+                <div class="seccion-titulo"><i class="fa-solid fa-list-check"></i> I. Preguntas de SelecciÛn M˙ltiple (2.5 puntos)</div>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">Selecciona la respuesta correcta para cada una de las siguientes 5 preguntas teÛricas (0.5 cada una).</p>
                 
-                <div id="contenedor-preguntas"></div> <!-- Aqu√≠ se inyectan las 5 preguntas -->
+                <div id="contenedor-preguntas"></div> <!-- AquÌ se inyectan las 5 preguntas -->
 
-                <div class="seccion-titulo"><i class="fa-solid fa-pen-to-square"></i> II. Ejercicio Pr√°ctico (2.5 puntos)</div>
-                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">Analiza el siguiente caso y selecciona el fenotipo, genotipo y proporci√≥n correcta.</p>
+                <div class="seccion-titulo"><i class="fa-solid fa-pen-to-square"></i> II. Ejercicio Pr·ctico (2.5 puntos)</div>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">Analiza el siguiente caso y selecciona el fenotipo, genotipo y proporciÛn correcta.</p>
                 
-                <div id="contenedor-ejercicio"></div> <!-- Aqu√≠ se inyecta el ejercicio -->
+                <div id="contenedor-ejercicio"></div> <!-- AquÌ se inyecta el ejercicio -->
 
-                <button type="button" class="btn-principal" id="btn-enviar-eval" style="margin-top: 40px;" onclick="calificarYEnviar()"><i class="fa-solid fa-paper-plane"></i> Finalizar y Enviar Evaluaci√≥n</button>
+                <button type="button" class="btn-principal" id="btn-enviar-eval" style="margin-top: 40px;" onclick="calificarYEnviar()"><i class="fa-solid fa-paper-plane"></i> Finalizar y Enviar EvaluaciÛn</button>
             </form>
 
         </section>
@@ -159,13 +165,13 @@
             <h2>Resultados Enviados</h2>
             <div class="nota-final" id="nota-texto">0.0</div>
             <p id="mensaje-feedback" style="font-size: 1.2rem; margin-bottom: 20px; color: #ccc;"></p>
-            <a href="biologia_10.html" class="btn-principal" style="background: #2ecc71; text-decoration: none; display: inline-block; width: auto;"><i class="fa-solid fa-house"></i> Volver al Men√∫</a>
+            <a href="biologia_10.html" class="btn-principal" style="background: #2ecc71; text-decoration: none; display: inline-block; width: auto;"><i class="fa-solid fa-house"></i> Volver al Men˙</a>
         </div>
 
     </main>
 
     <script>
-        // DATOS DE ESTUDIANTE Y CONEXI√ìN
+        // DATOS DE ESTUDIANTE Y CONEXI”N
         let estudiante = { nombre: "", grado: "" };
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDv4X5QLZXRvLdaAKLnz3z6ajdKnKM6q_vMBHhRO8803PXFZoVHnamm9vsH0q81Mqu/exec';
         
@@ -173,30 +179,30 @@
         // BANCO DE 20 PREGUNTAS
         // ==========================================
         const bancoPreguntas = [
-            { q: "¬øQui√©n es considerado el padre de la gen√©tica moderna?", opciones: ["Charles Darwin", "Gregor Mendel", "James Watson", "Louis Pasteur"], correcta: 1 },
-            { q: "La unidad de herencia que se transmite de padres a hijos se llama:", opciones: ["Cromosoma", "Gen", "Fenotipo", "C√©lula"], correcta: 1 },
-            { q: "La Primera Ley de Mendel tambi√©n es conocida como el Principio de:", opciones: ["Segregaci√≥n", "Transmisi√≥n Independiente", "Uniformidad", "Mutaci√≥n"], correcta: 2 },
+            { q: "øQuiÈn es considerado el padre de la genÈtica moderna?", opciones: ["Charles Darwin", "Gregor Mendel", "James Watson", "Louis Pasteur"], correcta: 1 },
+            { q: "La unidad de herencia que se transmite de padres a hijos se llama:", opciones: ["Cromosoma", "Gen", "Fenotipo", "CÈlula"], correcta: 1 },
+            { q: "La Primera Ley de Mendel tambiÈn es conocida como el Principio de:", opciones: ["SegregaciÛn", "TransmisiÛn Independiente", "Uniformidad", "MutaciÛn"], correcta: 2 },
             { q: "Si un alelo enmascara completamente al otro, se le denomina alelo:", opciones: ["Dominante", "Recesivo", "Homocigoto", "Codominante"], correcta: 0 },
-            { q: "Un organismo que posee dos alelos id√©nticos para un rasgo espec√≠fico es:", opciones: ["Heterocigoto", "H√≠brido", "Homocigoto", "Mutante"], correcta: 2 },
-            { q: "El conjunto de caracter√≠sticas f√≠sicas observables de un individuo se llama:", opciones: ["Genotipo", "Fenotipo", "Cariotipo", "Alelo"], correcta: 1 },
-            { q: "La Segunda Ley de Mendel establece la segregaci√≥n de los alelos durante la formaci√≥n de:", opciones: ["Prote√≠nas", "Gametos", "Tejidos", "√ìrganos"], correcta: 1 },
-            { q: "¬øCu√°l es la proporci√≥n fenot√≠pica esperada al cruzar dos heterocigotos (Aa x Aa) seg√∫n la Segunda Ley?<br><br><table style='margin: 10px auto; border-collapse: collapse; color: #fff; border: 1px solid #555; text-align: center; width: 200px;'><tr style='background:rgba(0,0,0,0.5)'><th style='padding:5px;border:1px solid #555'></th><th style='padding:5px;border:1px solid #555'>A</th><th style='padding:5px;border:1px solid #555'>a</th></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>A</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>AA</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>a</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>aa</td></tr></table>", opciones: ["1:1", "1:2:1", "3:1", "9:3:3:1"], correcta: 2 },
-            { q: "Observa el siguiente cuadro. ¬øQu√© porcentaje de descendientes homocigotos recesivos (aa) se obtiene del cruce Aa x Aa?<br><br><table style='margin: 10px auto; border-collapse: collapse; color: #fff; border: 1px solid #555; text-align: center; width: 200px;'><tr style='background:rgba(0,0,0,0.5)'><th style='padding:5px;border:1px solid #555'></th><th style='padding:5px;border:1px solid #555'>A</th><th style='padding:5px;border:1px solid #555'>a</th></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>A</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>AA</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>a</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>aa</td></tr></table>", opciones: ["0%", "25%", "50%", "100%"], correcta: 1 },
-            { q: "La composici√≥n gen√©tica interna de un organismo se conoce como:", opciones: ["Fenotipo", "Alelo dominante", "Genotipo", "Rasgo"], correcta: 2 },
-            { q: "La Tercera Ley de Mendel aplica cuando se estudian:", opciones: ["Solo caracteres recesivos", "Un solo car√°cter a la vez", "Dos o m√°s caracteres simult√°neamente", "Caracteres ligados al sexo"], correcta: 2 },
-            { q: "¬øCu√°l es la proporci√≥n fenot√≠pica cl√°sica de un cruce dih√≠brido (AaBb x AaBb)?", opciones: ["3:1", "1:2:1", "9:3:3:1", "9:7"], correcta: 2 },
-            { q: "En un Cuadro de Punnett, las letras may√∫sculas (ej: 'A') representan usualmente:", opciones: ["Alelos dominantes", "Alelos recesivos", "Genes letales", "Mutaciones"], correcta: 0 },
-            { q: "El cruce de una planta Alta pura (AA) con una enana pura (aa) dar√° como resultado una F1:<br><br><table style='margin: 10px auto; border-collapse: collapse; color: #fff; border: 1px solid #555; text-align: center; width: 200px;'><tr style='background:rgba(0,0,0,0.5)'><th style='padding:5px;border:1px solid #555'></th><th style='padding:5px;border:1px solid #555'>A</th><th style='padding:5px;border:1px solid #555'>A</th></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>a</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>a</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td></tr></table>", opciones: ["100% Alta", "50% Alta y 50% Enana", "100% Enana", "75% Alta"], correcta: 0 },
-            { q: "¬øQu√© organismo utiliz√≥ Mendel para sus principales experimentos?", opciones: ["Moscas de la fruta", "Guisantes (Pisum sativum)", "Ratones", "Bacterias"], correcta: 1 },
-            { q: "Un alelo recesivo solo se expresa f√≠sicamente si el individuo es:", opciones: ["Heterocigoto", "Homocigoto dominante", "Homocigoto recesivo", "H√≠brido"], correcta: 2 },
-            { q: "Si la proporci√≥n genot√≠pica de un cruce es 100% heterocigota (Aa), este cruce fue probablemente:", opciones: ["Aa x Aa", "AA x aa", "aa x aa", "AA x AA"], correcta: 1 },
-            { q: "¬øCu√°ntos cuadros o casillas tiene un Cuadro de Punnett est√°ndar para un cruce dih√≠brido?", opciones: ["4", "8", "16", "24"], correcta: 2 },
-            { q: "En la herencia Mendeliana, si mezclas flor roja dominante con flor blanca recesiva pura, la F1 ser√°:", opciones: ["Rosa", "Roja", "Blanca", "Roja y Blanca a manchas"], correcta: 1 },
-            { q: "¬øPor qu√© Mendel tuvo √©xito donde otros fracasaron al estudiar la herencia?", opciones: ["Us√≥ microscopios avanzados", "Descubri√≥ el ADN", "Aplic√≥ las matem√°ticas y estad√≠stica a sus datos", "Viaj√≥ a las islas Gal√°pagos"], correcta: 2 }
+            { q: "Un organismo que posee dos alelos idÈnticos para un rasgo especÌfico es:", opciones: ["Heterocigoto", "HÌbrido", "Homocigoto", "Mutante"], correcta: 2 },
+            { q: "El conjunto de caracterÌsticas fÌsicas observables de un individuo se llama:", opciones: ["Genotipo", "Fenotipo", "Cariotipo", "Alelo"], correcta: 1 },
+            { q: "La Segunda Ley de Mendel establece la segregaciÛn de los alelos durante la formaciÛn de:", opciones: ["ProteÌnas", "Gametos", "Tejidos", "”rganos"], correcta: 1 },
+            { q: "øCu·l es la proporciÛn fenotÌpica esperada al cruzar dos heterocigotos (Aa x Aa) seg˙n la Segunda Ley?<br><br><table style='margin: 10px auto; border-collapse: collapse; color: #fff; border: 1px solid #555; text-align: center; width: 200px;'><tr style='background:rgba(0,0,0,0.5)'><th style='padding:5px;border:1px solid #555'></th><th style='padding:5px;border:1px solid #555'>A</th><th style='padding:5px;border:1px solid #555'>a</th></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>A</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>AA</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>a</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>aa</td></tr></table>", opciones: ["1:1", "1:2:1", "3:1", "9:3:3:1"], correcta: 2 },
+            { q: "Observa el siguiente cuadro. øQuÈ porcentaje de descendientes homocigotos recesivos (aa) se obtiene del cruce Aa x Aa?<br><br><table style='margin: 10px auto; border-collapse: collapse; color: #fff; border: 1px solid #555; text-align: center; width: 200px;'><tr style='background:rgba(0,0,0,0.5)'><th style='padding:5px;border:1px solid #555'></th><th style='padding:5px;border:1px solid #555'>A</th><th style='padding:5px;border:1px solid #555'>a</th></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>A</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>AA</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>a</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>aa</td></tr></table>", opciones: ["0%", "25%", "50%", "100%"], correcta: 1 },
+            { q: "La composiciÛn genÈtica interna de un organismo se conoce como:", opciones: ["Fenotipo", "Alelo dominante", "Genotipo", "Rasgo"], correcta: 2 },
+            { q: "La Tercera Ley de Mendel aplica cuando se estudian:", opciones: ["Solo caracteres recesivos", "Un solo car·cter a la vez", "Dos o m·s caracteres simult·neamente", "Caracteres ligados al sexo"], correcta: 2 },
+            { q: "øCu·l es la proporciÛn fenotÌpica cl·sica de un cruce dihÌbrido (AaBb x AaBb)?", opciones: ["3:1", "1:2:1", "9:3:3:1", "9:7"], correcta: 2 },
+            { q: "En un Cuadro de Punnett, las letras may˙sculas (ej: 'A') representan usualmente:", opciones: ["Alelos dominantes", "Alelos recesivos", "Genes letales", "Mutaciones"], correcta: 0 },
+            { q: "El cruce de una planta Alta pura (AA) con una enana pura (aa) dar· como resultado una F1:<br><br><table style='margin: 10px auto; border-collapse: collapse; color: #fff; border: 1px solid #555; text-align: center; width: 200px;'><tr style='background:rgba(0,0,0,0.5)'><th style='padding:5px;border:1px solid #555'></th><th style='padding:5px;border:1px solid #555'>A</th><th style='padding:5px;border:1px solid #555'>A</th></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>a</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td></tr><tr><th style='padding:5px;border:1px solid #555;background:rgba(0,0,0,0.5)'>a</th><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td><td style='padding:5px;border:1px solid #555;background:rgba(255,255,255,0.05)'>Aa</td></tr></table>", opciones: ["100% Alta", "50% Alta y 50% Enana", "100% Enana", "75% Alta"], correcta: 0 },
+            { q: "øQuÈ organismo utilizÛ Mendel para sus principales experimentos?", opciones: ["Moscas de la fruta", "Guisantes (Pisum sativum)", "Ratones", "Bacterias"], correcta: 1 },
+            { q: "Un alelo recesivo solo se expresa fÌsicamente si el individuo es:", opciones: ["Heterocigoto", "Homocigoto dominante", "Homocigoto recesivo", "HÌbrido"], correcta: 2 },
+            { q: "Si la proporciÛn genotÌpica de un cruce es 100% heterocigota (Aa), este cruce fue probablemente:", opciones: ["Aa x Aa", "AA x aa", "aa x aa", "AA x AA"], correcta: 1 },
+            { q: "øCu·ntos cuadros o casillas tiene un Cuadro de Punnett est·ndar para un cruce dihÌbrido?", opciones: ["4", "8", "16", "24"], correcta: 2 },
+            { q: "En la herencia Mendeliana, si mezclas flor roja dominante con flor blanca recesiva pura, la F1 ser·:", opciones: ["Rosa", "Roja", "Blanca", "Roja y Blanca a manchas"], correcta: 1 },
+            { q: "øPor quÈ Mendel tuvo Èxito donde otros fracasaron al estudiar la herencia?", opciones: ["UsÛ microscopios avanzados", "DescubriÛ el ADN", "AplicÛ las matem·ticas y estadÌstica a sus datos", "ViajÛ a las islas Gal·pagos"], correcta: 2 }
         ];
 
         // ==========================================
-        // BANCO DE 3 EJERCICIOS PR√ÅCTICOS
+        // BANCO DE 3 EJERCICIOS PR¡CTICOS
         // ==========================================
         const bancoEjercicios = [
             {
@@ -204,20 +210,20 @@
                 enunciado: "En humanos, la presencia de pecas (P) domina sobre la ausencia de pecas (p). Una pareja donde el padre es Heterocigoto con pecas (Pp) y la madre no tiene pecas (pp) tiene un hijo. Analiza este cruce (Pp x pp) y responde:",
                 opcionesFeno: ["100% Con pecas", "50% Con pecas / 50% Sin pecas", "75% Con pecas / 25% Sin pecas", "100% Sin pecas"],
                 opcionesGeno: ["100% Pp", "50% Pp / 50% pp", "25% PP / 50% Pp / 25% pp", "100% pp"],
-                opcionesProp: ["Proporci√≥n 1:1", "Proporci√≥n 3:1", "Proporci√≥n 9:3:3:1", "No hay proporci√≥n exacta"],
+                opcionesProp: ["ProporciÛn 1:1", "ProporciÛn 3:1", "ProporciÛn 9:3:3:1", "No hay proporciÛn exacta"],
                 correctas: { feno: 1, geno: 1, prop: 0 }
             },
             {
                 id: "EJ-02",
-                enunciado: "En una raza bovina, los cuernos largos (L) dominan sobre los cortos (l). Si se cruzan dos toros heterocigotos (Ll x Ll) y nacen 4 terneros, selecciona el an√°lisis gen√©tico correcto para la descendencia seg√∫n las Leyes de Mendel.",
+                enunciado: "En una raza bovina, los cuernos largos (L) dominan sobre los cortos (l). Si se cruzan dos toros heterocigotos (Ll x Ll) y nacen 4 terneros, selecciona el an·lisis genÈtico correcto para la descendencia seg˙n las Leyes de Mendel.",
                 opcionesFeno: ["100% Cuernos Largos", "3 Cuernos Largos / 1 Cuerno Corto (75% - 25%)", "Mitad y Mitad (50% - 50%)", "100% Cuernos Cortos"],
                 opcionesGeno: ["25% LL / 50% Ll / 25% ll", "50% LL / 50% ll", "100% Ll", "50% Ll / 50% ll"],
-                opcionesProp: ["Proporci√≥n 1:1", "Proporci√≥n 1:2:1 Genot√≠pica", "Proporci√≥n 100% dominante", "Proporci√≥n dih√≠brida"],
+                opcionesProp: ["ProporciÛn 1:1", "ProporciÛn 1:2:1 GenotÌpica", "ProporciÛn 100% dominante", "ProporciÛn dihÌbrida"],
                 correctas: { feno: 1, geno: 0, prop: 1 }
             },
             {
                 id: "EJ-03",
-                enunciado: "Cruce de Primera Ley: Una planta de semillas amarillas Puras (AA) se cruza con otra de semillas verdes Puras (aa). Determina las caracter√≠sticas de toda su descendencia F1.",
+                enunciado: "Cruce de Primera Ley: Una planta de semillas amarillas Puras (AA) se cruza con otra de semillas verdes Puras (aa). Determina las caracterÌsticas de toda su descendencia F1.",
                 opcionesFeno: ["Semillas Verdes en su totalidad", "75% Amarillas y 25% Verdes", "100% Semillas Amarillas", "Mitad amarillas, mitad verdes"],
                 opcionesGeno: ["Todos Homocigotos Dominantes", "Todos Heterocigotos (Aa)", "Todos Homocigotos Recesivos", "Mezcla de Homocigotos y Heterocigotos"],
                 opcionesProp: ["3:1", "1:2:1", "100% Uniformidad", "9:3:3:1"],
@@ -239,11 +245,11 @@
             return array;
         }
 
-        // Iniciar Evaluaci√≥n
+        // Iniciar EvaluaciÛn
         document.getElementById('form-login').addEventListener('submit', function(e) {
             e.preventDefault();
             estudiante.nombre = document.getElementById('nombre_estudiante').value.trim();
-            estudiante.grado = "10¬∫"; // Grado Autom√°tico
+            estudiante.grado = "10∫"; // Grado Autom·tico
             
             if(estudiante.nombre) {
                 document.getElementById('login-section').style.display = 'none';
@@ -288,7 +294,7 @@
             let htmlGeno = `<option value="">-- Selecciona el Genotipo --</option>`;
             ejercicioSeleccionado.opcionesGeno.forEach((op, i) => htmlGeno += `<option value="${i}">${op}</option>`);
             
-            let htmlProp = `<option value="">-- Selecciona la Proporci√≥n / Regla --</option>`;
+            let htmlProp = `<option value="">-- Selecciona la ProporciÛn / Regla --</option>`;
             ejercicioSeleccionado.opcionesProp.forEach((op, i) => htmlProp += `<option value="${i}">${op}</option>`);
 
             contEj.innerHTML = `
@@ -297,22 +303,22 @@
                     <div class="p-texto" style="font-style: italic;">"${ejercicioSeleccionado.enunciado}"</div>
                     
                     <div class="ejercicio-box">
-                        <label style="color:#ccc; font-size:0.9rem;">1. Resultado Fenot√≠pico (0.83 pts)</label>
+                        <label style="color:#ccc; font-size:0.9rem;">1. Resultado FenotÌpico (0.83 pts)</label>
                         <select id="ej-feno" class="select-personalizado">${htmlFeno}</select>
                     </div>
                     <div class="ejercicio-box">
-                        <label style="color:#ccc; font-size:0.9rem;">2. Resultado Genot√≠pico (0.83 pts)</label>
+                        <label style="color:#ccc; font-size:0.9rem;">2. Resultado GenotÌpico (0.83 pts)</label>
                         <select id="ej-geno" class="select-personalizado">${htmlGeno}</select>
                     </div>
                     <div class="ejercicio-box" style="margin-bottom:0;">
-                        <label style="color:#ccc; font-size:0.9rem;">3. Proporci√≥n Identificada (0.84 pts)</label>
+                        <label style="color:#ccc; font-size:0.9rem;">3. ProporciÛn Identificada (0.84 pts)</label>
                         <select id="ej-prop" class="select-personalizado">${htmlProp}</select>
                     </div>
                 </div>
             `;
         }
 
-        // Calificaci√≥n y Env√≠o
+        // CalificaciÛn y EnvÌo
         function calificarYEnviar() {
             let puntajePreguntas = 0;
             let respuestasMultiplesLog = [];
@@ -321,7 +327,7 @@
             for(let i=0; i<5; i++) {
                 const seleccion = document.querySelector(`input[name="p${i}"]:checked`);
                 if(!seleccion) {
-                    Swal.fire('Atenci√≥n', `Falta responder la pregunta ${i+1}.`, 'warning');
+                    Swal.fire('AtenciÛn', `Falta responder la pregunta ${i+1}.`, 'warning');
                     return;
                 }
                 const acierto = (parseInt(seleccion.value) === preguntasSeleccionadas[i].correcta);
@@ -335,7 +341,7 @@
             const vProp = document.getElementById('ej-prop').value;
 
             if(vFeno === "" || vGeno === "" || vProp === "") {
-                Swal.fire('Atenci√≥n', `Falta completar los campos del Ejercicio Pr√°ctico.`, 'warning');
+                Swal.fire('AtenciÛn', `Falta completar los campos del Ejercicio Pr·ctico.`, 'warning');
                 return;
             }
 
@@ -350,7 +356,7 @@
             document.getElementById('btn-enviar-eval').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando Resultados...';
             document.getElementById('btn-enviar-eval').disabled = true;
 
-            // Preparar env√≠o a Google Sheets
+            // Preparar envÌo a Google Sheets
             const formData = new URLSearchParams();
             formData.append('accion', 'evaluacion');
             formData.append('nombre', estudiante.nombre);
@@ -362,8 +368,8 @@
             if(SCRIPT_URL.includes('TU_SCRIPT_ID')) {
                 setTimeout(() => {
                     Swal.fire({
-                        icon: 'info', title: 'Simulaci√≥n de Env√≠o de Evaluaci√≥n',
-                        html: `Falta configurar el Script.<br>Nota calculada: <b>${notaFinal} / 5.0</b><br>Datos que se guardar√°n en la hoja EVALUACIONES:<br>- Nombre: ${estudiante.nombre}<br>- Grado: ${estudiante.grado}<br>- Ejercicio Tocado: ${ejercicioSeleccionado.id}<br>- Detalle: ${respuestasMultiplesLog.join(", ")}`,
+                        icon: 'info', title: 'SimulaciÛn de EnvÌo de EvaluaciÛn',
+                        html: `Falta configurar el Script.<br>Nota calculada: <b>${notaFinal} / 5.0</b><br>Datos que se guardar·n en la hoja EVALUACIONES:<br>- Nombre: ${estudiante.nombre}<br>- Grado: ${estudiante.grado}<br>- Ejercicio Tocado: ${ejercicioSeleccionado.id}<br>- Detalle: ${respuestasMultiplesLog.join(", ")}`,
                         background: '#170d0d', color: '#fff'
                     }).then(() => mostrarResultadosLocales(notaFinal));
                 }, 1000);
@@ -371,8 +377,8 @@
                 fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
                     .then(res => mostrarResultadosLocales(notaFinal))
                     .catch(err => {
-                        Swal.fire('Error', 'Fallo al enviar los datos de la evaluaci√≥n. Verifica el internet.', 'error');
-                        document.getElementById('btn-enviar-eval').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Finalizar y Enviar Evaluaci√≥n';
+                        Swal.fire('Error', 'Fallo al enviar los datos de la evaluaciÛn. Verifica el internet.', 'error');
+                        document.getElementById('btn-enviar-eval').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Finalizar y Enviar EvaluaciÛn';
                         document.getElementById('btn-enviar-eval').disabled = false;
                     });
             }
@@ -386,7 +392,7 @@
             const notaElement = document.getElementById('nota-texto');
             notaElement.innerText = nota;
 
-            if(parseFloat(nota) >= 4.0) { notaElement.style.color = '#2ecc71'; document.getElementById('mensaje-feedback').innerText = "¬°Excelente dominio de la gen√©tica!"; }
+            if(parseFloat(nota) >= 4.0) { notaElement.style.color = '#2ecc71'; document.getElementById('mensaje-feedback').innerText = "°Excelente dominio de la genÈtica!"; }
             else if(parseFloat(nota) >= 3.0) { notaElement.style.color = '#f1c40f'; document.getElementById('mensaje-feedback').innerText = "Aprobado. Buen trabajo, aunque puedes repasar algunos conceptos."; }
             else { notaElement.style.color = '#e74c3c'; document.getElementById('mensaje-feedback').innerText = "Debes repasar las Leyes de Mendel y volver a intentarlo."; }
             
@@ -395,3 +401,4 @@
     </script>
 </body>
 </html>
+

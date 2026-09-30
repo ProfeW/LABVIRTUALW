@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Primera Ley de Mendel | LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACIÃ“N --- */
+        /* --- NAVEGACIÓN --- */
         nav { 
             background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
             border-bottom: 1px solid rgba(46, 204, 113, 0.2); 
@@ -101,6 +101,12 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .analisis-grid { grid-template-columns: 1fr; } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -108,7 +114,7 @@
         <nav>
             <a href="biologia_10.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
-                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Volver al MenÃº</a></li>
+                <li><a href="biologia_10.html"><i class="fa-solid fa-arrow-left"></i> Volver al Menú</a></li>
             </ul>
         </nav>
     </header>
@@ -126,19 +132,19 @@
                 <h2>Concepto e Importancia</h2>
             </div>
             <div class="texto-info">
-                <p>La <strong>Primera Ley de Mendel</strong> establece que si se cruzan dos individuos de raza pura (homocigotos) para un carÃ¡cter determinado, todos los descendientes de la primera generaciÃ³n (F1) serÃ¡n <strong>fenotÃ­pica y genotÃ­picamente iguales entre sÃ­</strong>, e iguales fenotÃ­picamente a uno de los progenitores (el dominante).</p>
-                <p><strong>Importancia:</strong> Esta ley rompiÃ³ con la idea de que los rasgos se "mezclaban" como si fueran lÃ­quidos. DemostrÃ³ que existen <span class="resaltado">alelos dominantes y recesivos</span>, y que un rasgo recesivo puede ocultarse sin desaparecer.</p>
-                <p><strong>Usos y Aplicaciones:</strong> Se utiliza en agricultura y ganaderÃ­a para obtener "lÃ­neas puras" y garantizar que la primera cosecha o camada de un cruce especÃ­fico tenga caracterÃ­sticas estandarizadas y predecibles al 100%.</p>
+                <p>La <strong>Primera Ley de Mendel</strong> establece que si se cruzan dos individuos de raza pura (homocigotos) para un carácter determinado, todos los descendientes de la primera generación (F1) serán <strong>fenotípica y genotípicamente iguales entre sí</strong>, e iguales fenotípicamente a uno de los progenitores (el dominante).</p>
+                <p><strong>Importancia:</strong> Esta ley rompió con la idea de que los rasgos se "mezclaban" como si fueran líquidos. Demostró que existen <span class="resaltado">alelos dominantes y recesivos</span>, y que un rasgo recesivo puede ocultarse sin desaparecer.</p>
+                <p><strong>Usos y Aplicaciones:</strong> Se utiliza en agricultura y ganadería para obtener "líneas puras" y garantizar que la primera cosecha o camada de un cruce específico tenga características estandarizadas y predecibles al 100%.</p>
             </div>
         </article>
 
         <article class="tarjeta-info">
             <div class="tarjeta-header">
                 <i class="fa-solid fa-table-cells"></i>
-                <h2>AnÃ¡lisis Estructural (Cuadro de Punnett)</h2>
+                <h2>Análisis Estructural (Cuadro de Punnett)</h2>
             </div>
             <div class="texto-info">
-                <p>Para ilustrar esta ley, tomemos el experimento de Mendel: cruzÃ³ plantas de guisantes de semillas amarillas puras (<span class="alelo-dom">AA</span>) con semillas verdes puras (<span class="alelo-rec">aa</span>).</p>
+                <p>Para ilustrar esta ley, tomemos el experimento de Mendel: cruzó plantas de guisantes de semillas amarillas puras (<span class="alelo-dom">AA</span>) con semillas verdes puras (<span class="alelo-rec">aa</span>).</p>
             </div>
             
             <div class="punnett-container">
@@ -163,15 +169,15 @@
 
             <div class="analisis-grid">
                 <div class="analisis-caja">
-                    <h3><i class="fa-solid fa-eye"></i> AnÃ¡lisis del Fenotipo</h3>
-                    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">(Lo que se ve fÃ­sicamente)</p>
+                    <h3><i class="fa-solid fa-eye"></i> Análisis del Fenotipo</h3>
+                    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">(Lo que se ve físicamente)</p>
                     <div class="analisis-item"><span>Semillas Amarillas:</span> <strong>4/4</strong></div>
                     <div class="analisis-item"><span>Semillas Verdes:</span> <strong>0/4</strong></div>
-                    <div class="analisis-item" style="border:none; color: var(--color-bio-primario); margin-top: 10px;"><span>ProporciÃ³n Porcentual:</span> <strong>100% Amarillas</strong></div>
+                    <div class="analisis-item" style="border:none; color: var(--color-bio-primario); margin-top: 10px;"><span>Proporción Porcentual:</span> <strong>100% Amarillas</strong></div>
                 </div>
                 <div class="analisis-caja">
-                    <h3><i class="fa-solid fa-dna"></i> AnÃ¡lisis del Genotipo</h3>
-                    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">(La composiciÃ³n de los genes)</p>
+                    <h3><i class="fa-solid fa-dna"></i> Análisis del Genotipo</h3>
+                    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">(La composición de los genes)</p>
                     <div class="analisis-item"><span>Homocigotos Dominantes (AA):</span> <strong>0/4 (0%)</strong></div>
                     <div class="analisis-item"><span>Heterocigotos (Aa):</span> <strong>4/4 (100%)</strong></div>
                     <div class="analisis-item"><span>Homocigotos Recesivos (aa):</span> <strong>0/4 (0%)</strong></div>
@@ -181,7 +187,7 @@
         </article>
 
         <!-- ========================================== -->
-        <!-- SECCIÃ“N DE EJERCICIOS RESUELTOS            -->
+        <!-- SECCIÓN DE EJERCICIOS RESUELTOS            -->
         <!-- ========================================== -->
         <h2 style="text-align: center; font-size: 2.2rem; margin: 50px 0 30px; border-bottom: 2px solid #555; padding-bottom: 20px;">
             <i class="fa-solid fa-chalkboard-user" style="color: var(--color-bio-secundario);"></i> Ejercicios Resueltos Paso a Paso
@@ -191,7 +197,7 @@
         <div class="ejercicio-resuelto">
             <h3 class="ej-titulo">Ejercicio 1: El color del pelaje en ratones</h3>
             <div class="ej-enunciado">
-                "En una especie de ratones, el pelaje negro (N) es dominante sobre el pelaje blanco (n). Se cruza un ratÃ³n macho de lÃ­nea pura para pelaje negro con una hembra de lÃ­nea pura para pelaje blanco. Determina el genotipo y fenotipo de la primera generaciÃ³n (F1)."
+                "En una especie de ratones, el pelaje negro (N) es dominante sobre el pelaje blanco (n). Se cruza un ratón macho de línea pura para pelaje negro con una hembra de línea pura para pelaje blanco. Determina el genotipo y fenotipo de la primera generación (F1)."
             </div>
             
             <div class="paso-paso">
@@ -229,7 +235,7 @@
         <div class="ejercicio-resuelto">
             <h3 class="ej-titulo">Ejercicio 2: Tallo de las plantas de tomate</h3>
             <div class="ej-enunciado">
-                "En las plantas de tomate, el tallo alto (A) es dominante frente al tallo enano (a). Un agricultor cruza una planta alta homocigota con una planta enana homocigota. Â¿QuÃ© porcentaje de las plantas resultantes serÃ¡n enanas?"
+                "En las plantas de tomate, el tallo alto (A) es dominante frente al tallo enano (a). Un agricultor cruza una planta alta homocigota con una planta enana homocigota. ¿Qué porcentaje de las plantas resultantes serán enanas?"
             </div>
             
             <div class="paso-paso">
@@ -243,7 +249,7 @@
                 <div class="paso" data-step="2">
                     <div class="paso-titulo">Cruzar e Interpretar</div>
                     <div class="texto-info">
-                        <p>Al aplicar la Primera Ley de Mendel (cruce de dos puros), sabemos por regla general que la descendencia F1 serÃ¡ 100% heterocigota (<strong>Aa</strong>).</p>
+                        <p>Al aplicar la Primera Ley de Mendel (cruce de dos puros), sabemos por regla general que la descendencia F1 será 100% heterocigota (<strong>Aa</strong>).</p>
                         <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
                             <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">A</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">A</th></tr>
                             <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">a</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Aa</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Aa</td></tr>
@@ -252,7 +258,7 @@
                     </div>
                 </div>
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
-                    <div class="paso-titulo">Responder a la pregunta especÃ­fica</div>
+                    <div class="paso-titulo">Responder a la pregunta específica</div>
                     <div class="texto-info">
                         Todas las plantas hijas tienen el genotipo <strong>Aa</strong>, por lo tanto, su fenotipo es de tallo alto. La pregunta pide el porcentaje de plantas enanas. Al no haber ninguna planta 'aa', el resultado es <strong>0%</strong>.
                     </div>
@@ -264,7 +270,7 @@
         <div class="ejercicio-resuelto">
             <h3 class="ej-titulo">Ejercicio 3: Las alas de las moscas de la fruta (Drosophila)</h3>
             <div class="ej-enunciado">
-                "Una mosca de la fruta con alas largas puras (L) se aparea con una mosca de alas cortas puras (l). Determina la proporciÃ³n genotÃ­pica y fenotÃ­pica de la F1."
+                "Una mosca de la fruta con alas largas puras (L) se aparea con una mosca de alas cortas puras (l). Determina la proporción genotípica y fenotípica de la F1."
             </div>
             
             <div class="paso-paso">
@@ -273,9 +279,9 @@
                     <div class="texto-info">Alas largas pura = <strong>LL</strong> | Alas cortas pura = <strong>ll</strong></div>
                 </div>
                 <div class="paso" data-step="2">
-                    <div class="paso-titulo">CÃ¡lculo de Proporciones</div>
+                    <div class="paso-titulo">Cálculo de Proporciones</div>
                     <div class="texto-info">
-                        <p>El cruce <strong>LL x ll</strong> generarÃ¡ 4 combinaciones genÃ©ticas. Las 4 casillas del cuadro de Punnett contendrÃ¡n el genotipo <strong>Ll</strong>.</p>
+                        <p>El cruce <strong>LL x ll</strong> generará 4 combinaciones genéticas. Las 4 casillas del cuadro de Punnett contendrán el genotipo <strong>Ll</strong>.</p>
                         <table style="margin: 15px 0; border-collapse: collapse; text-align: center; width: 250px; color: #fff; border: 1px solid #555;">
                             <tr style="background: rgba(0,0,0,0.5);"><th style="padding: 10px; border: 1px solid #555;"></th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">L</th><th style="padding: 10px; border: 1px solid #555; color: var(--color-dom);">L</th></tr>
                             <tr><th style="padding: 10px; border: 1px solid #555; color: var(--color-rec); background: rgba(0,0,0,0.5);">l</th><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Ll</td><td style="padding: 10px; border: 1px solid #555; background: rgba(255,255,255,0.05);">Ll</td></tr>
@@ -286,9 +292,9 @@
                 <div class="paso" data-step="3" style="margin-bottom: 0;">
                     <div class="paso-titulo">Reporte de Proporciones</div>
                     <div class="texto-info">
-                        <strong>ProporciÃ³n GenotÃ­pica:</strong> 4/4 Heterocigotos (Ll).<br>
-                        <strong>ProporciÃ³n FenotÃ­pica:</strong> 4/4 Moscas con alas largas.<br>
-                        <em>Â¡Ambas proporciones equivalen a la unidad total o al 100%!</em>
+                        <strong>Proporción Genotípica:</strong> 4/4 Heterocigotos (Ll).<br>
+                        <strong>Proporción Fenotípica:</strong> 4/4 Moscas con alas largas.<br>
+                        <em>¡Ambas proporciones equivalen a la unidad total o al 100%!</em>
                     </div>
                 </div>
             </div>
@@ -298,7 +304,7 @@
             <i class="fa-solid fa-gamepad" style="color: var(--color-bio-secundario);"></i> Prueba tu Aprendizaje
         </h2>
         <div style="background: rgba(0,0,0,0.6); border: 2px dashed var(--color-bio-secundario); border-radius: 12px; padding: 25px; margin-bottom: 30px;" id="cadena-ley1">
-            <h3 style="color: #fff; margin-bottom: 15px;" id="cadena-q-text">Reto 1: Si cruzas una mosca de ojos rojos pura (RR) con una de ojos blancos pura (rr), Â¿QuÃ© fenotipo tendrÃ¡n todos sus hijos?</h3>
+            <h3 style="color: #fff; margin-bottom: 15px;" id="cadena-q-text">Reto 1: Si cruzas una mosca de ojos rojos pura (RR) con una de ojos blancos pura (rr), ¿Qué fenotipo tendrán todos sus hijos?</h3>
             <div id="cadena-opciones" style="display: flex; gap: 10px; flex-direction: column;">
                 <button onclick="checkCadena1(0)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">A) 50% Ojos rojos, 50% Ojos blancos</button>
                 <button onclick="checkCadena1(1)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">B) 100% Ojos rojos</button>
@@ -312,14 +318,14 @@
                 const fb = document.getElementById('cadena-feedback');
                 if(ans === 1) {
                     fb.style.color = '#2ecc71';
-                    fb.innerHTML = 'Â¡Correcto! Todos serÃ¡n heterocigotos (Rr) y el rojo domina. <br><br> <button onclick="nextCadena1()" class="btn-accion">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>';
+                    fb.innerHTML = '¡Correcto! Todos serán heterocigotos (Rr) y el rojo domina. <br><br> <button onclick="nextCadena1()" class="btn-accion">Siguiente Reto <i class="fa-solid fa-arrow-right"></i></button>';
                 } else {
                     fb.style.color = '#e74c3c';
                     fb.innerHTML = 'Incorrecto. Recuerda que al cruzar dos puros, la F1 toma el rasgo del dominante.';
                 }
             }
             function nextCadena1() {
-                document.getElementById('cadena-q-text').innerText = 'Reto 2: Â¿CuÃ¡l es el genotipo exacto de los hijos de ese cruce (RR x rr)?';
+                document.getElementById('cadena-q-text').innerText = 'Reto 2: ¿Cuál es el genotipo exacto de los hijos de ese cruce (RR x rr)?';
                 document.getElementById('cadena-opciones').innerHTML = `
                     <button onclick="checkCadena2(0)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">A) Homocigoto Dominante (RR)</button>
                     <button onclick="checkCadena2(1)" class="btn-secundario" style="padding: 10px; border-radius: 5px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.05); color: #fff;">B) Homocigoto Recesivo (rr)</button>
@@ -331,7 +337,7 @@
                 const fb = document.getElementById('cadena-feedback');
                 if(ans === 2) {
                     fb.style.color = '#2ecc71';
-                    fb.innerHTML = 'Â¡Excelente! Has dominado la Primera Ley de Mendel. Ya puedes continuar a la segunda ley.';
+                    fb.innerHTML = '¡Excelente! Has dominado la Primera Ley de Mendel. Ya puedes continuar a la segunda ley.';
                 } else {
                     fb.style.color = '#e74c3c';
                     fb.innerHTML = 'Incorrecto. Reciben una R del padre y una r de la madre.';
@@ -349,3 +355,4 @@
 <script src="auth.js"></script>
 </body>
 </html>
+

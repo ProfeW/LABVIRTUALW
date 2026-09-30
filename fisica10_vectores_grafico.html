@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M√©todo Gr√°fico de Vectores - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MÈtodo Gr·fico de Vectores - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -76,6 +76,12 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -84,21 +90,21 @@
             <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> F√≠sica 10</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> FÌsica 10</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a F√≠sica 10</a>
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a FÌsica 10</a>
 
         <div class="header-tema">
-            <h1>Suma de Vectores: M√©todo Gr√°fico</h1>
-            <p>El m√©todo de la cabeza y la cola. Consiste en dibujar el primer vector, y desde la cabeza (flecha) de este, comenzar a dibujar la cola del siguiente.</p>
+            <h1>Suma de Vectores: MÈtodo Gr·fico</h1>
+            <p>El mÈtodo de la cabeza y la cola. Consiste en dibujar el primer vector, y desde la cabeza (flecha) de este, comenzar a dibujar la cola del siguiente.</p>
         </div>
 
         <div class="video-contenedor">
-            <iframe src="https://www.youtube.com/embed/A8pB2F7o8Ow?start=251" title="M√©todo Gr√°fico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/A8pB2F7o8Ow?start=251" title="MÈtodo Gr·fico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
         <div class="simulador-grid">
@@ -112,10 +118,10 @@
                 <button class="btn-sim btn-tut" onclick="iniciarTutorial(1)">Tutorial 3 Vectores <i class="fa-solid fa-play"></i></button>
                 <button class="btn-sim btn-tut" onclick="iniciarTutorial(2)">Tutorial 5 Vectores <i class="fa-solid fa-play"></i></button>
                 
-                <h3 style="margin-top: 20px;">2. Pr√°ctica Interactiva</h3>
-                <button class="btn-sim btn-prac" onclick="iniciarPractica(0)">Pr√°ctica 1 (2 Vect) <i class="fa-solid fa-pencil"></i></button>
-                <button class="btn-sim btn-prac" onclick="iniciarPractica(1)">Pr√°ctica 2 (3 Vect) <i class="fa-solid fa-pencil"></i></button>
-                <button class="btn-sim btn-prac" onclick="iniciarPractica(2)">Pr√°ctica 3 (5 Vect) <i class="fa-solid fa-pencil"></i></button>
+                <h3 style="margin-top: 20px;">2. Pr·ctica Interactiva</h3>
+                <button class="btn-sim btn-prac" onclick="iniciarPractica(0)">Pr·ctica 1 (2 Vect) <i class="fa-solid fa-pencil"></i></button>
+                <button class="btn-sim btn-prac" onclick="iniciarPractica(1)">Pr·ctica 2 (3 Vect) <i class="fa-solid fa-pencil"></i></button>
+                <button class="btn-sim btn-prac" onclick="iniciarPractica(2)">Pr·ctica 3 (5 Vect) <i class="fa-solid fa-pencil"></i></button>
                 
                 <div id="controles-practica" style="display: none;">
                     <button class="btn-accion" onclick="deshacerPunto()"><i class="fa-solid fa-rotate-left"></i> Deshacer Trazo</button>
@@ -123,7 +129,7 @@
                 </div>
 
                 <div class="info-sim" id="info-sim">
-                    Haz clic en un tutorial o pr√°ctica para empezar.
+                    Haz clic en un tutorial o pr·ctica para empezar.
                 </div>
                 <div class="coordenadas" id="coordenadas">X: 0, Y: 0</div>
             </div>
@@ -154,9 +160,9 @@
         ];
 
         const dataPracticas = [
-            { txt: "Pr√°ctica 1: Dibuja A=(2,5) y B=(3,-3).<br><small>Haz clic en las coordenadas correspondientes formando el camino de cabeza y cola.</small>", vecs: [{x:2,y:5}, {x:3,y:-3}] },
-            { txt: "Pr√°ctica 2: Dibuja A=(-3,4), B=(5,0) y C=(1,-6).", vecs: [{x:-3,y:4}, {x:5,y:0}, {x:1,y:-6}] },
-            { txt: "Pr√°ctica 3 (Reto 5): Dibuja A=(2,2), B=(2,2), C=(-4,1), D=(-3,-5), E=(5,2).", vecs: [{x:2,y:2}, {x:2,y:2}, {x:-4,y:1}, {x:-3,y:-5}, {x:5,y:2}] }
+            { txt: "Pr·ctica 1: Dibuja A=(2,5) y B=(3,-3).<br><small>Haz clic en las coordenadas correspondientes formando el camino de cabeza y cola.</small>", vecs: [{x:2,y:5}, {x:3,y:-3}] },
+            { txt: "Pr·ctica 2: Dibuja A=(-3,4), B=(5,0) y C=(1,-6).", vecs: [{x:-3,y:4}, {x:5,y:0}, {x:1,y:-6}] },
+            { txt: "Pr·ctica 3 (Reto 5): Dibuja A=(2,2), B=(2,2), C=(-4,1), D=(-3,-5), E=(5,2).", vecs: [{x:2,y:2}, {x:2,y:2}, {x:-4,y:1}, {x:-3,y:-5}, {x:5,y:2}] }
         ];
 
         function toPx(x, y) {
@@ -233,7 +239,7 @@
                 dibujarFlecha(pPrev.x, pPrev.y, pCur.x, pCur.y, '#3498db', 'V'+i);
             }
 
-            // Si es pr√°ctica y hay comprobaci√≥n, o si es tutorial terminado, dibujar Resultante
+            // Si es pr·ctica y hay comprobaciÛn, o si es tutorial terminado, dibujar Resultante
             if(modo === 'practica_validada' || modo === 'tutorial_fin') {
                 let final = puntosDibujados[puntosDibujados.length-1];
                 if(final.x !== 0 || final.y !== 0) {
@@ -249,7 +255,7 @@
             puntosDibujados = [{x:0, y:0}];
             pasoTutorial = 0;
             let tut = dataTutoriales[idx];
-            infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br>Observa c√≥mo se conectan la cabeza y la cola...`;
+            infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br>Observa cÛmo se conectan la cabeza y la cola...`;
             
             let pts = [{x:0, y:0}];
             let curX = 0, curY = 0;
@@ -279,13 +285,13 @@
                     else if (vOrig.y < 0) tx += `contamos ${Math.abs(vOrig.y)} hacia ABAJO (porque el signo de Y es negativo). `;
                     else tx += `no nos movemos verticalmente. `;
                     
-                    infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br><span style="color:#f39c12; font-size:1.1rem; line-height:1.6;">${tx} ¬°Ah√≠ marcamos la punta!</span>`;
+                    infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br><span style="color:#f39c12; font-size:1.1rem; line-height:1.6;">${tx} °AhÌ marcamos la punta!</span>`;
                     
                     timerAnimacion = setTimeout(animarPaso, 4500); // Dar tiempo de leer
                 } else {
                     modo = 'tutorial_fin';
                     repintarTodo();
-                    infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br><span style="color:#2ecc71;">¬°Tutorial terminado!</span> La flecha roja es el vector Resultante (R) que va desde el inicio hasta la √∫ltima cabeza.`;
+                    infoSim.innerHTML = `<strong>${tut.txt}</strong><br><br><span style="color:#2ecc71;">°Tutorial terminado!</span> La flecha roja es el vector Resultante (R) que va desde el inicio hasta la ˙ltima cabeza.`;
                 }
             }
             repintarTodo();
@@ -331,14 +337,14 @@
 
             if(correcto) {
                 modo = 'practica_validada';
-                infoSim.innerHTML = `<span style="color:#2ecc71; font-weight:bold;">¬°Perfecto!</span> Has dibujado correctamente los vectores cabeza con cola. La flecha roja es la Resultante.`;
+                infoSim.innerHTML = `<span style="color:#2ecc71; font-weight:bold;">°Perfecto!</span> Has dibujado correctamente los vectores cabeza con cola. La flecha roja es la Resultante.`;
                 repintarTodo();
             } else {
                 infoSim.innerHTML = `<span style="color:#e74c3c; font-weight:bold;">Hay un error.</span> Verifica si contaste bien las casillas X e Y para cada vector a partir de la cabeza del anterior. Usa 'Deshacer Trazo'.`;
             }
         }
 
-        // Ajuste de escala para precisi√≥n del mouse
+        // Ajuste de escala para precisiÛn del mouse
         function getPos(e) {
             let rect = canvas.getBoundingClientRect();
             let scaleX = canvas.width / rect.width;
@@ -362,10 +368,10 @@
             let p = getPos(e);
             let g = toGrid(p.px, p.py);
             
-            // Evitar clic fuera de la cuadricula √∫til
+            // Evitar clic fuera de la cuadricula ˙til
             if(g.x < -10 || g.x > 10 || g.y < -10 || g.y > 10) return;
             
-            // A√±adir el punto
+            // AÒadir el punto
             puntosDibujados.push(g);
             repintarTodo();
         });
@@ -375,3 +381,4 @@
 <script src="auth.js"></script>
 </body>
 </html>
+

@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica Interactiva: Alcanos - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pr�ctica Interactiva: Alcanos - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -68,25 +68,31 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
     <nav>
         <a href="#" class="logo"><i class="fa-solid fa-flask"></i> LabVirtual W</a>
-        <a href="alcanos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a Teoría</a>
+        <a href="alcanos.html" class="btn-regresar"><i class="fa-solid fa-arrow-left"></i> Volver a Teor�a</a>
     </nav>
 
     <main class="contenedor">
         <div class="encabezado">
-            <h1>Desafío: Alcanos</h1>
-            <p>Demuestra tu dominio de la nomenclatura IUPAC analizando cada molécula.</p>
+            <h1>Desaf�o: Alcanos</h1>
+            <p>Demuestra tu dominio de la nomenclatura IUPAC analizando cada mol�cula.</p>
         </div>
 
         <section class="leyenda">
             <h2><i class="fa-solid fa-circle-info"></i> Instrucciones de Nomenclatura</h2>
             <ul>
-                <li><i class="fa-solid fa-check"></i> Separa números de otros números con <span class="clave">comas (,)</span>.</li>
-                <li><i class="fa-solid fa-check"></i> Separa números de letras con <span class="clave">guiones (-)</span>.</li>
+                <li><i class="fa-solid fa-check"></i> Separa n�meros de otros n�meros con <span class="clave">comas (,)</span>.</li>
+                <li><i class="fa-solid fa-check"></i> Separa n�meros de letras con <span class="clave">guiones (-)</span>.</li>
                 <li><i class="fa-solid fa-check"></i> No dejes espacios entre los nombres de los radicales y la cadena principal.</li>
                 <li><i class="fa-solid fa-check"></i> Ejemplo correcto: <span style="color:var(--color-destaque)">2,2-dimetilpentano</span></li>
             </ul>
@@ -99,16 +105,16 @@
 
     <script>
         const ejercicios = [
-            { id: 1, mol: "CH₃ - CH₂ - CH₂ - CH₂ - CH₃", ans: "pentano" },
-            { id: 2, mol: "      CH₃\n      |\nCH₃ - CH - CH₂ - CH₃", ans: "2-metilbutano" },
-            { id: 3, mol: "      CH₃\n      |\nCH₃ - C - CH₃\n      |\n      CH₃", ans: "2,2-dimetilpropano" },
-            { id: 4, mol: "CH₃ - CH₂ - CH₂ - CH₂ - CH₂ - CH₃", ans: "hexano" },
-            { id: 5, mol: "            CH₃\n            |\nCH₃ - CH₂ - CH - CH₂ - CH₃", ans: "3-metilpentano" },
-            { id: 6, mol: "      CH₃   CH₃\n      |     |\nCH₃ - CH  - CH - CH₃", ans: "2,3-dimetilbutano" },
-            { id: 7, mol: "      CH₃\n      |\nCH₃ - C - CH₂ - CH₃\n      |\n      CH₃", ans: "2,2-dimetilbutano" },
-            { id: 8, mol: "      CH₃\n      |\nCH₃ - CH - CH₂ - CH₂ - CH₂ - CH₃", ans: "2-metilhexano" },
-            { id: 9, mol: "      CH₃\n      |\nCH₃ - CH - CH - CH₂ - CH₃\n           |\n           CH₂-CH₃", ans: "3-etil-2-metilpentano" },
-            { id: 10, mol: "CH₃ - CH₂ - CH₂ - CH₂ - CH₂ - CH₂ - CH₂ - CH₃", ans: "octano" }
+            { id: 1, mol: "CH3 - CH2 - CH2 - CH2 - CH3", ans: "pentano" },
+            { id: 2, mol: "      CH3\n      |\nCH3 - CH - CH2 - CH3", ans: "2-metilbutano" },
+            { id: 3, mol: "      CH3\n      |\nCH3 - C - CH3\n      |\n      CH3", ans: "2,2-dimetilpropano" },
+            { id: 4, mol: "CH3 - CH2 - CH2 - CH2 - CH2 - CH3", ans: "hexano" },
+            { id: 5, mol: "            CH3\n            |\nCH3 - CH2 - CH - CH2 - CH3", ans: "3-metilpentano" },
+            { id: 6, mol: "      CH3   CH3\n      |     |\nCH3 - CH  - CH - CH3", ans: "2,3-dimetilbutano" },
+            { id: 7, mol: "      CH3\n      |\nCH3 - C - CH2 - CH3\n      |\n      CH3", ans: "2,2-dimetilbutano" },
+            { id: 8, mol: "      CH3\n      |\nCH3 - CH - CH2 - CH2 - CH2 - CH3", ans: "2-metilhexano" },
+            { id: 9, mol: "      CH3\n      |\nCH3 - CH - CH - CH2 - CH3\n           |\n           CH2-CH3", ans: "3-etil-2-metilpentano" },
+            { id: 10, mol: "CH3 - CH2 - CH2 - CH2 - CH2 - CH2 - CH2 - CH3", ans: "octano" }
         ];
 
         const container = document.getElementById('ejercicios-container');
@@ -121,7 +127,7 @@
                     <pre>${ej.mol}</pre>
                 </div>
                 <div class="input-group">
-                    <input type="text" class="input-nombre" id="input-${ej.id}" placeholder="Escribe el nombre IUPAC aquí...">
+                    <input type="text" class="input-nombre" id="input-${ej.id}" placeholder="Escribe el nombre IUPAC aqu�...">
                     <button class="btn-validar" onclick="validar(${ej.id}, '${ej.ans}')">Validar</button>
                 </div>
                 <div class="feedback" id="feedback-${ej.id}"></div>
@@ -137,11 +143,11 @@
             feedback.style.display = 'flex';
 
             if (valorUsuario === respuestaCorrecta) {
-                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Excelente! El nombre es correcto.`;
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> �Excelente! El nombre es correcto.`;
                 feedback.className = 'feedback correct';
                 input.style.borderColor = 'var(--color-destaque)';
             } else {
-                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. Revisa la numeración o la puntuación.`;
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. Revisa la numeraci�n o la puntuaci�n.`;
                 feedback.className = 'feedback incorrect';
                 input.style.borderColor = 'var(--color-error)';
             }

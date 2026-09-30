@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Registro - LabVirtual W</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -53,6 +53,12 @@
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
     <a href="index.html" class="volver-inicio"><i class="fa-solid fa-arrow-left"></i> Inicio</a>
@@ -69,16 +75,16 @@
             <div class="input-group">
                 <label>Nombre Completo</label>
                 <i class="fa-solid fa-id-card"></i>
-                <input type="text" id="nombre" placeholder="Ej: Juan PÃ©rez" required>
+                <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
             </div>
             <div class="input-group">
-                <label>Correo ElectrÃ³nico</label>
+                <label>Correo Electrónico</label>
                 <i class="fa-solid fa-envelope"></i>
                 <input type="email" id="correo" placeholder="ejemplo@correo.com" required>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div class="input-group">
-                    <label>TelÃ©fono</label>
+                    <label>Teléfono</label>
                     <i class="fa-solid fa-phone"></i>
                     <input type="tel" id="telefono" placeholder="3000000000" required>
                 </div>
@@ -87,28 +93,28 @@
                     <i class="fa-solid fa-graduation-cap"></i>
                     <select id="grado" required>
                         <option value="">Selecciona...</option>
-                        <option value="9">Noveno (9Â°)</option>
-                        <option value="10">DÃ©cimo (10Â°)</option>
-                        <option value="11">UndÃ©cimo (11Â°)</option>
+                        <option value="9">Noveno (9°)</option>
+                        <option value="10">Décimo (10°)</option>
+                        <option value="11">Undécimo (11°)</option>
                     </select>
                 </div>
             </div>
             <div class="input-group">
-                <label>Usuario (para iniciar sesiÃ³n)</label>
+                <label>Usuario (para iniciar sesión)</label>
                 <i class="fa-solid fa-user"></i>
                 <input type="text" id="usuario" placeholder="Crea un nombre de usuario" required>
             </div>
             <div class="input-group">
-                <label>ContraseÃ±a</label>
+                <label>Contraseña</label>
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" id="contrasena" placeholder="Crea una contraseÃ±a segura" required minlength="4">
+                <input type="password" id="contrasena" placeholder="Crea una contraseña segura" required minlength="4">
             </div>
 
             <button type="submit" class="btn-submit" id="btn-register">Registrarse</button>
         </form>
 
         <div class="links-bottom">
-            <p>Â¿Ya tienes una cuenta? <a href="login.html">Inicia sesiÃ³n aquÃ­</a></p>
+            <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
         </div>
     </div>
 
@@ -144,7 +150,7 @@
                         let errores = [];
                         if (existeUsuario) errores.push("el usuario");
                         if (existeCorreo) errores.push("el correo");
-                        if (existeTelefono) errores.push("el telÃ©fono");
+                        if (existeTelefono) errores.push("el teléfono");
                         
                         errorMsg.textContent = "Error: " + errores.join(", ") + " ya se encuentra registrado.";
                         errorMsg.style.display = 'block';
@@ -156,7 +162,7 @@
 
                 const res = await window.LabAuth.registrar(datos);
                 if (res.success) {
-                    successMsg.textContent = "Â¡Registro exitoso! Redirigiendo al login...";
+                    successMsg.textContent = "¡Registro exitoso! Redirigiendo al login...";
                     successMsg.style.display = 'block';
                     btn.innerHTML = '<i class="fa-solid fa-check"></i> Completado';
                     setTimeout(() => { window.location.href = 'login.html'; }, 2000);
@@ -167,7 +173,7 @@
                     btn.innerHTML = 'Registrarse';
                 }
             } catch (err) {
-                errorMsg.textContent = "Error de conexiÃ³n con la base de datos.";
+                errorMsg.textContent = "Error de conexión con la base de datos.";
                 errorMsg.style.display = 'block';
                 btn.disabled = false;
                 btn.innerHTML = 'Registrarse';
@@ -176,3 +182,4 @@
     </script>
 </body>
 </html>
+

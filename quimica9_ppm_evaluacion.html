@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaci√≥n: Partes por Mill√≥n (ppm) - Qu√≠mica 9 - LabVirtual W</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>üìù</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EvaluaciÛn: Partes por MillÛn (ppm) - QuÌmica 9 - LabVirtual W</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>??</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -73,6 +73,12 @@
         @keyframes slideIn { from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);} }
         @keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -80,23 +86,23 @@
     <a href="index.html" class="logo"><i class="fas fa-microscope"></i> LabVirtual W</a>
     <ul class="menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="quimica_9.html"><i class="fas fa-flask"></i> Qu√≠mica 9</a></li>
-        <li><a href="quimica9_ppm.html"><i class="fas fa-arrow-left"></i> Volver a Lecci√≥n</a></li>
+        <li><a href="quimica_9.html"><i class="fas fa-flask"></i> QuÌmica 9</a></li>
+        <li><a href="quimica9_ppm.html"><i class="fas fa-arrow-left"></i> Volver a LecciÛn</a></li>
     </ul>
 </nav>
 
 <div class="contenedor">
     <div id="pantalla-inicio" class="pantalla-inicio">
-        <h1><i class="fa-solid fa-file-signature"></i> Evaluaci√≥n</h1>
-        <p>Partes por Mill√≥n (ppm) ¬∑ Qu√≠mica 9¬∞ ¬∑ Teor√≠a y Ejercicios</p>
+        <h1><i class="fa-solid fa-file-signature"></i> EvaluaciÛn</h1>
+        <p>Partes por MillÛn (ppm) ∑ QuÌmica 9∞ ∑ TeorÌa y Ejercicios</p>
         <ul class="reglas">
             <li><i class="fa-solid fa-check"></i> Consta de <strong>10 preguntas</strong>.</li>
-            <li><i class="fa-solid fa-check"></i> Encontrar√°s 5 de tipo conceptual (ICFES) y 5 c√°lculos matem√°ticos.</li>
+            <li><i class="fa-solid fa-check"></i> Encontrar·s 5 de tipo conceptual (ICFES) y 5 c·lculos matem·ticos.</li>
             <li><i class="fa-solid fa-check"></i> El orden de las preguntas y sus opciones es aleatorio.</li>
         </ul>
-        <input type="text" id="input-nombre" class="input-nombre" placeholder="‚úèÔ∏è Escribe tu nombre completo" maxlength="60">
+        <input type="text" id="input-nombre" class="input-nombre" placeholder="?? Escribe tu nombre completo" maxlength="60">
         <div id="alerta-nombre" class="alerta-nombre"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingresa tu nombre.</div><br>
-        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar Evaluaci√≥n</button>
+        <button class="btn-inicio" onclick="iniciarEvaluacion()"><i class="fa-solid fa-play"></i> Comenzar EvaluaciÛn</button>
     </div>
     <div id="seccion-evaluacion" class="seccion-evaluacion">
         <div class="header-eval"><div class="bienvenida-nombre" id="bienvenida-nombre"></div><div class="timer-badge">Pregunta <span id="num-actual">1</span> de 10</div></div>
@@ -111,34 +117,34 @@
     <div id="pantalla-resultado" class="pantalla-resultado">
         <div class="resultado-header">
             <div style="font-size:1rem;color:#aaa;margin-bottom:15px;" id="resultado-nombre"></div>
-            <span class="resultado-emoji" id="resultado-emoji">üìä</span>
+            <span class="resultado-emoji" id="resultado-emoji">??</span>
             <div class="resultado-titulo" id="resultado-titulo"></div>
         </div>
         <div class="score-grid">
-            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">‚úÖ Correctas</div></div>
-            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">‚ùå Incorrectas</div></div>
-            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">üìä Porcentaje</div></div>
+            <div class="score-card"><div class="score-num" id="score-correctas">0</div><div class="score-label">? Correctas</div></div>
+            <div class="score-card"><div class="score-num" id="score-incorrectas">0</div><div class="score-label">? Incorrectas</div></div>
+            <div class="score-card"><div class="score-num" id="score-pct">0%</div><div class="score-label">?? Porcentaje</div></div>
         </div>
-        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> Revisi√≥n de Respuestas</div>
+        <div class="revision-titulo"><i class="fa-solid fa-list-check"></i> RevisiÛn de Respuestas</div>
         <div id="revision-container"></div>
         <div style="text-align:center;margin-top:30px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
             <button onclick="location.reload()" style="padding:14px 28px;background:linear-gradient(135deg,var(--color-tema),#c0392b);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-family:'Poppins',sans-serif;font-weight:600;"><i class="fa-solid fa-rotate-right"></i> Reintentar</button>
-            <a href="quimica9_ppm.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar Teor√≠a</a>
+            <a href="quimica9_ppm.html" style="padding:14px 28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fa-solid fa-book-open"></i> Repasar TeorÌa</a>
         </div>
     </div>
 </div>
 <script>
 const bancoPreguntas = [
-    {texto:"Las partes por mill√≥n (ppm) son una unidad de concentraci√≥n utilizada habitualmente para:",opciones:["A. Medir soluciones donde el soluto y el solvente est√°n en proporciones iguales.","B. Medir cantidades muy grandes de soluto en vol√∫menes peque√±os.","C. Medir sustancias que se encuentran en cantidades extremadamente peque√±as o trazas.","D. Medir exclusivamente la densidad de metales pesados."],respuesta:2},
-    {texto:"Si usamos la f√≥rmula directa ppm = mg / L, esto significa que el soluto y la soluci√≥n est√°n medidos respectivamente en:",opciones:["A. Gramos y Mililitros.","B. Miligramos y Litros.","C. Kilogramos y Litros.","D. Gramos y Litros."],respuesta:1},
-    {texto:"En √°reas como la agricultura o control ambiental, la unidad de partes por mill√≥n suele usarse espec√≠ficamente para:",opciones:["A. Determinar el peso total del suelo en hect√°reas.","B. Expresar la concentraci√≥n exacta de nutrientes o pesticidas t√≥xicos aplicados.","C. Medir la cantidad de agua necesaria para el riego de un terreno.","D. Calcular el tama√±o de los granos de fertilizante org√°nico."],respuesta:1},
-    {texto:"Si necesitas calcular las ppm teniendo la masa del soluto en gramos y la masa de la soluci√≥n tambi√©n en gramos, la f√≥rmula correcta requiere multiplicar la divisi√≥n por un factor de:",opciones:["A. 1.000 (10¬≥)","B. 10.000 (10‚Å¥)","C. 1.000.000 (10‚Å∂)","D. 100 (10¬≤)"],respuesta:2},
-    {texto:"En la f√≥rmula ppm = mg / kg, normalmente nos referimos a que el soluto y la soluci√≥n/mezcla total se encuentran medidos, respectivamente, como si fueran de naturaleza:",opciones:["A. L√≠quida y l√≠quida.","B. S√≥lida y s√≥lida (o al menos cuantificados por masa).","C. Gaseosa y l√≠quida.","D. L√≠quida y gaseosa."],respuesta:1},
-    {contexto:"Una empresa de mantenimiento analiza el estado qu√≠mico del agua.",texto:"En una piscina que contiene 10,000 Litros de agua se ha agregado una pastilla de 30,000 mg de cloro. ¬øCu√°l es la concentraci√≥n de cloro en ppm? (Usa ppm = mg / L)",opciones:["A. 30 ppm","B. 3 ppm","C. 300 ppm","D. 0.3 ppm"],respuesta:1},
-    {contexto:"Un agr√≥nomo toma varias porciones de tierra para su laboratorio.",texto:"Una muestra de 5 kg de suelo arcilloso contiene 10 mg de mercurio contaminante. ¬øCu√°ntas ppm de mercurio hay en la muestra? (Usa ppm = mg / kg)",opciones:["A. 0.5 ppm","B. 5 ppm","C. 2 ppm","D. 50 ppm"],respuesta:2},
-    {texto:"Se sabe que un medicamento tiene una concentraci√≥n activa de 4 ppm. Si el paciente necesita consumir exactamente 8 mg de la sustancia activa, ¬øcu√°ntos Litros de soluci√≥n debe tomar?",opciones:["A. 2 Litros","B. 4 Litros","C. 32 Litros","D. 0.5 Litros"],respuesta:0},
-    {contexto:"Una empresa de tintes prepara un lote de colorante de prueba.",texto:"En un contenedor industrial hay 2,000,000 de gramos de una soluci√≥n acuosa total. Si se disolvieron exactamente 10 gramos del colorante puro, ¬øcu√°l es la concentraci√≥n en ppm? (Usa ppm = (g / g) √ó 10‚Å∂)",opciones:["A. 5 ppm","B. 50 ppm","C. 20 ppm","D. 2 ppm"],respuesta:0},
-    {texto:"Tenemos 500,000 mL de agua de acueducto que contiene 1.5 gramos de fluoruro. ¬øCu√°l es la concentraci√≥n del fluoruro en partes por mill√≥n? (Usa ppm = (g / mL) √ó 10‚Å∂)",opciones:["A. 1.5 ppm","B. 3 ppm","C. 4.5 ppm","D. 0.3 ppm"],respuesta:1}
+    {texto:"Las partes por millÛn (ppm) son una unidad de concentraciÛn utilizada habitualmente para:",opciones:["A. Medir soluciones donde el soluto y el solvente est·n en proporciones iguales.","B. Medir cantidades muy grandes de soluto en vol˙menes pequeÒos.","C. Medir sustancias que se encuentran en cantidades extremadamente pequeÒas o trazas.","D. Medir exclusivamente la densidad de metales pesados."],respuesta:2},
+    {texto:"Si usamos la fÛrmula directa ppm = mg / L, esto significa que el soluto y la soluciÛn est·n medidos respectivamente en:",opciones:["A. Gramos y Mililitros.","B. Miligramos y Litros.","C. Kilogramos y Litros.","D. Gramos y Litros."],respuesta:1},
+    {texto:"En ·reas como la agricultura o control ambiental, la unidad de partes por millÛn suele usarse especÌficamente para:",opciones:["A. Determinar el peso total del suelo en hect·reas.","B. Expresar la concentraciÛn exacta de nutrientes o pesticidas tÛxicos aplicados.","C. Medir la cantidad de agua necesaria para el riego de un terreno.","D. Calcular el tamaÒo de los granos de fertilizante org·nico."],respuesta:1},
+    {texto:"Si necesitas calcular las ppm teniendo la masa del soluto en gramos y la masa de la soluciÛn tambiÈn en gramos, la fÛrmula correcta requiere multiplicar la divisiÛn por un factor de:",opciones:["A. 1.000 (10≥)","B. 10.000 (104)","C. 1.000.000 (106)","D. 100 (10≤)"],respuesta:2},
+    {texto:"En la fÛrmula ppm = mg / kg, normalmente nos referimos a que el soluto y la soluciÛn/mezcla total se encuentran medidos, respectivamente, como si fueran de naturaleza:",opciones:["A. LÌquida y lÌquida.","B. SÛlida y sÛlida (o al menos cuantificados por masa).","C. Gaseosa y lÌquida.","D. LÌquida y gaseosa."],respuesta:1},
+    {contexto:"Una empresa de mantenimiento analiza el estado quÌmico del agua.",texto:"En una piscina que contiene 10,000 Litros de agua se ha agregado una pastilla de 30,000 mg de cloro. øCu·l es la concentraciÛn de cloro en ppm? (Usa ppm = mg / L)",opciones:["A. 30 ppm","B. 3 ppm","C. 300 ppm","D. 0.3 ppm"],respuesta:1},
+    {contexto:"Un agrÛnomo toma varias porciones de tierra para su laboratorio.",texto:"Una muestra de 5 kg de suelo arcilloso contiene 10 mg de mercurio contaminante. øCu·ntas ppm de mercurio hay en la muestra? (Usa ppm = mg / kg)",opciones:["A. 0.5 ppm","B. 5 ppm","C. 2 ppm","D. 50 ppm"],respuesta:2},
+    {texto:"Se sabe que un medicamento tiene una concentraciÛn activa de 4 ppm. Si el paciente necesita consumir exactamente 8 mg de la sustancia activa, øcu·ntos Litros de soluciÛn debe tomar?",opciones:["A. 2 Litros","B. 4 Litros","C. 32 Litros","D. 0.5 Litros"],respuesta:0},
+    {contexto:"Una empresa de tintes prepara un lote de colorante de prueba.",texto:"En un contenedor industrial hay 2,000,000 de gramos de una soluciÛn acuosa total. Si se disolvieron exactamente 10 gramos del colorante puro, øcu·l es la concentraciÛn en ppm? (Usa ppm = (g / g) ◊ 106)",opciones:["A. 5 ppm","B. 50 ppm","C. 20 ppm","D. 2 ppm"],respuesta:0},
+    {texto:"Tenemos 500,000 mL de agua de acueducto que contiene 1.5 gramos de fluoruro. øCu·l es la concentraciÛn del fluoruro en partes por millÛn? (Usa ppm = (g / mL) ◊ 106)",opciones:["A. 1.5 ppm","B. 3 ppm","C. 4.5 ppm","D. 0.3 ppm"],respuesta:1}
 ];
 
 let preguntasSeleccionadas=[],respuestasUsuario=[],preguntaActual=0,nombreEstudiante='';
@@ -152,7 +158,7 @@ function iniciarEvaluacion(){
     respuestasUsuario=new Array(10).fill(null);
     document.getElementById('pantalla-inicio').style.display='none';
     document.getElementById('seccion-evaluacion').style.display='block';
-    document.getElementById('bienvenida-nombre').textContent='üë§ '+nombreEstudiante;
+    document.getElementById('bienvenida-nombre').textContent='?? '+nombreEstudiante;
     mostrarPregunta(0);
 }
 function mostrarPregunta(idx){
@@ -188,23 +194,23 @@ function irSiguiente(){if(preguntaActual<9)mostrarPregunta(preguntaActual+1);}
 function irAnterior(){if(preguntaActual>0)mostrarPregunta(preguntaActual-1);}
 function finalizarEvaluacion(){
     const sinResp=respuestasUsuario.filter(r=>r===null).length;
-    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. ¬øFinalizar de todos modos?`))return;
+    if(sinResp>0&&!confirm(`Tienes ${sinResp} pregunta(s) sin responder. øFinalizar de todos modos?`))return;
     let correctas=0,revHTML='';
     preguntasSeleccionadas.forEach((p,i)=>{
         const resp=respuestasUsuario[i];const ok=resp===p.respuesta;if(ok)correctas++;
-        revHTML+=`<div class="revision-item ${ok?'correcta':'incorrecta'}"><div class="pregunta-r">${ok?'‚úÖ':'‚ùå'} <strong>P${i+1}:</strong> ${p.texto}</div><div>`;
+        revHTML+=`<div class="revision-item ${ok?'correcta':'incorrecta'}"><div class="pregunta-r">${ok?'?':'?'} <strong>P${i+1}:</strong> ${p.texto}</div><div>`;
         if(!ok)revHTML+=`<div class="tu-resp">Tu respuesta: ${resp!==null?p.opciones[resp]:'Sin responder'}</div>`;
         revHTML+=`<div class="resp-correcta">Correcta: ${p.opciones[p.respuesta]}</div></div></div>`;
     });
     const pct=Math.round(correctas/10*100);
     let emoji,titulo;
-    if(pct>=90){emoji='üèÜ';titulo='¬°Excelente! Dominas el tema.';}
-    else if(pct>=70){emoji='üåü';titulo='¬°Muy bien! Sigue practicando.';}
-    else if(pct>=50){emoji='üìö';titulo='Aprobado. Repasa las f√≥rmulas.';}
-    else{emoji='üí™';titulo='Necesitas repasar la teor√≠a y los c√°lculos.';}
+    if(pct>=90){emoji='??';titulo='°Excelente! Dominas el tema.';}
+    else if(pct>=70){emoji='??';titulo='°Muy bien! Sigue practicando.';}
+    else if(pct>=50){emoji='??';titulo='Aprobado. Repasa las fÛrmulas.';}
+    else{emoji='??';titulo='Necesitas repasar la teorÌa y los c·lculos.';}
     document.getElementById('seccion-evaluacion').style.display='none';
     const pr=document.getElementById('pantalla-resultado');pr.classList.add('activo');
-    document.getElementById('resultado-nombre').textContent='üë§ '+nombreEstudiante;
+    document.getElementById('resultado-nombre').textContent='?? '+nombreEstudiante;
     document.getElementById('resultado-emoji').textContent=emoji;
     document.getElementById('resultado-titulo').textContent=titulo;
     document.getElementById('score-correctas').textContent=correctas;
@@ -218,3 +224,4 @@ function finalizarEvaluacion(){
 <script src="auth.js"></script>
 </body>
 </html>
+

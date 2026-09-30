@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bases de la Química Orgánica - LabVirtual W</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Bases de la Qu�mica Org�nica - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,7 +29,7 @@
             background-size: cover; background-attachment: fixed; min-height: 100vh;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- NAVEGACI�N --- */
         nav { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 24px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .logo i { color: var(--color-principal); }
@@ -56,12 +56,12 @@
         
         .molecula-display { padding: 40px; text-align: center; min-height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%); }
         
-        /* Uso fuente monoespaciada para alinear a la perfección */
+        /* Uso fuente monoespaciada para alinear a la perfecci�n */
         .molecula-display pre { font-family: 'Fira Code', monospace; font-size: 2.2rem; font-weight: 600; color: #fff; margin: 0; line-height: 1.4; transition: 0.3s; text-align: left; display: inline-block;}
         
         .construccion-palabra { margin-top: 30px; font-size: 2.5rem; font-weight: 800; letter-spacing: 2px; color: #fff; background: rgba(0,0,0,0.5); padding: 10px 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); min-height: 70px; display: flex; align-items: center;}
 
-        /* Clases para colorear mediante JS (SIN MÁRGENES NEGATIVOS PARA NO DESALINEAR) */
+        /* Clases para colorear mediante JS (SIN M�RGENES NEGATIVOS PARA NO DESALINEAR) */
         .hl-cadena { color: var(--color-destaque); text-shadow: 0 0 10px rgba(46, 204, 113, 0.5); }
         .hl-enlace { color: var(--color-enlace); font-weight: 800;}
         .hl-radical { color: var(--color-radical); }
@@ -79,7 +79,7 @@
         .btn-pizarra:disabled { background: #34495e; color: #7f8c8d; cursor: not-allowed; transform: none; box-shadow: none;}
         .indicador-paso { font-weight: 800; color: #aaa; letter-spacing: 2px; font-size: 1.2rem; background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 20px;}
 
-        /* --- REGLAS Y TEORÍA --- */
+        /* --- REGLAS Y TEOR�A --- */
         .regla-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; margin-bottom: 30px; border-top: 4px solid var(--color-principal); }
         .regla-box h3 { color: var(--color-secundario); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;}
         .regla-box h3 .num-regla { background: var(--color-principal); color: #fff; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-size: 1.2rem; flex-shrink: 0;}
@@ -101,6 +101,12 @@
         @keyframes pulseBorder { 0% { border-color: rgba(243, 156, 18, 0.3); } 50% { border-color: rgba(243, 156, 18, 1); } 100% { border-color: rgba(243, 156, 18, 0.3); } }
         @media (max-width: 900px) { .grid-ejemplos { grid-template-columns: 1fr; } .molecula-display pre { font-size: 1.4rem; } }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -111,11 +117,11 @@
     </header>
 
     <main class="contenedor">
-        <a href="quimica_11.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Química Orgánica</a>
+        <a href="quimica_11.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a Qu�mica Org�nica</a>
 
         <div class="encabezado-leccion">
-            <h1>Bases de la Química Orgánica</h1>
-            <p>Aprende a dominar el lenguaje universal de la IUPAC. Descubre cómo numerar las cadenas correctamente, identificar radicales y convertirte en un experto nombrando moléculas.</p>
+            <h1>Bases de la Qu�mica Org�nica</h1>
+            <p>Aprende a dominar el lenguaje universal de la IUPAC. Descubre c�mo numerar las cadenas correctamente, identificar radicales y convertirte en un experto nombrando mol�culas.</p>
         </div>
 
         <!-- SIMULADOR INTERACTIVO -->
@@ -123,13 +129,13 @@
             <div class="pizarra-header">
                 <h3><i class="fa-solid fa-chalkboard-user"></i> Simulador de Nomenclatura IUPAC</h3>
                 <div class="selector-container">
-                    <span class="selector-label">👉 SELECCIONA AQUÍ TU MOLÉCULA 👈</span>
+                    <span class="selector-label">?? SELECCIONA AQU� TU MOL�CULA ??</span>
                     <select id="selectEjercicio" class="selector-ejercicio" onchange="cambiarEjercicio()"></select>
                 </div>
             </div>
             
             <div class="molecula-display">
-                <!-- Se inyecta aquí desde JS -->
+                <!-- Se inyecta aqu� desde JS -->
                 <pre id="moleculaCanvas"></pre>
                 <div class="construccion-palabra" id="construccionPalabra"></div>
             </div>
@@ -150,11 +156,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>N° Carbonos</th>
+                        <th>N� Carbonos</th>
                         <th>Prefijo IUPAC</th>
                         <th>Alcano (-)</th>
                         <th>Alqueno (=)</th>
-                        <th>Alquino (≡)</th>
+                        <th>Alquino (=)</th>
                         <th>Radical</th>
                     </tr>
                 </thead>
@@ -178,135 +184,135 @@
         
         <div class="regla-box">
             <h3><span class="num-regla">1</span> Identificar la Cadena Principal</h3>
-            <p class="texto-base">Busca la secuencia continua de carbonos <strong>más larga posible</strong>. OJO: No siempre es la línea horizontal. Si hay dobles o triples enlaces, la cadena principal <strong>debe contenerlos obligatoriamente</strong>, aunque exista otra cadena más larga de enlaces simples.</p>
+            <p class="texto-base">Busca la secuencia continua de carbonos <strong>m�s larga posible</strong>. OJO: No siempre es la l�nea horizontal. Si hay dobles o triples enlaces, la cadena principal <strong>debe contenerlos obligatoriamente</strong>, aunque exista otra cadena m�s larga de enlaces simples.</p>
             <div class="grid-ejemplos">
                 <div class="ejemplo-estatico">
 <div class="ej-titulo">A) Cadena en forma de "L" (Gana 5 carbonos)</div>
-       CH₂ - CH₃
+       CH2 - CH3
        |
-CH₃ - CH₂ - CH - CH₃
+CH3 - CH2 - CH - CH3
                 </div>
                 <div class="ejemplo-estatico">
 <div class="ej-titulo">B) El doble enlace obliga (Gana la corta)</div>
-CH₂ = C - CH₃
+CH2 = C - CH3
       |
-      CH₂ - CH₂ - CH₃
+      CH2 - CH2 - CH3
                 </div>
             </div>
-            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "2. Alcano Ramificado" para ver la selección de cadena.</div>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "2. Alcano Ramificado" para ver la selecci�n de cadena.</div>
         </div>
 
         <div class="regla-box">
-            <h3><span class="num-regla">2</span> Numerar: Localizador Más Bajo</h3>
-            <p class="texto-base">Numera la cadena desde el extremo que le asigne a las ramificaciones los números más bajos posibles. Siempre evalúa de Izquierda a Derecha y de Derecha a Izquierda.</p>
+            <h3><span class="num-regla">2</span> Numerar: Localizador M�s Bajo</h3>
+            <p class="texto-base">Numera la cadena desde el extremo que le asigne a las ramificaciones los n�meros m�s bajos posibles. Siempre eval�a de Izquierda a Derecha y de Derecha a Izquierda.</p>
             <div class="grid-ejemplos">
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">A) Incorrecto (Izq a Der da posición 3)</div>
+<div class="ej-titulo">A) Incorrecto (Izq a Der da posici�n 3)</div>
  1     2     3    4
-CH₃ - CH₂ - CH - CH₃
+CH3 - CH2 - CH - CH3
             |
-            CH₃
+            CH3
                 </div>
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">B) Correcto (Der a Izq da posición 2)</div>
+<div class="ej-titulo">B) Correcto (Der a Izq da posici�n 2)</div>
  <span style="color:#2ecc71">4</span>     <span style="color:#2ecc71">3</span>     <span style="color:#2ecc71">2</span>    <span style="color:#2ecc71">1</span>
-CH₃ - CH₂ - CH - CH₃
+CH3 - CH2 - CH - CH3
             |
-            CH₃
+            CH3
                 </div>
             </div>
             <div class="leyenda-numeros">
-                <strong><i class="fa-solid fa-circle-info"></i> LEYENDA:</strong> Los números <span style="color:var(--color-destaque); font-weight:800;">VERDES</span> indican la numeración Correcta/Ganadora. Los números <span style="color:#e74c3c; font-weight:800; text-decoration:line-through;">ROJOS TACHADOS</span> indican la numeración Incorrecta/Perdedora en el simulador.
+                <strong><i class="fa-solid fa-circle-info"></i> LEYENDA:</strong> Los n�meros <span style="color:var(--color-destaque); font-weight:800;">VERDES</span> indican la numeraci�n Correcta/Ganadora. Los n�meros <span style="color:#e74c3c; font-weight:800; text-decoration:line-through;">ROJOS TACHADOS</span> indican la numeraci�n Incorrecta/Perdedora en el simulador.
             </div>
-            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Ve al simulador y selecciona: "3. Evaluando Numeración (Der a Izq vs Izq a Der)".</div>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Ve al simulador y selecciona: "3. Evaluando Numeraci�n (Der a Izq vs Izq a Der)".</div>
         </div>
 
         <div class="regla-box">
-            <h3><span class="num-regla">3</span> Jerarquía (El Enlace Manda)</h3>
-            <p class="texto-base">Si la molécula tiene enlaces múltiples (Alquenos o Alquinos), la numeración debe darle el menor número posible al ENLACE MÚLTIPLE, sin importar dónde queden los radicales.</p>
+            <h3><span class="num-regla">3</span> Jerarqu�a (El Enlace Manda)</h3>
+            <p class="texto-base">Si la mol�cula tiene enlaces m�ltiples (Alquenos o Alquinos), la numeraci�n debe darle el menor n�mero posible al ENLACE M�LTIPLE, sin importar d�nde queden los radicales.</p>
             <div class="grid-ejemplos">
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">A) Gana el doble enlace (Posición 1)</div>
+<div class="ej-titulo">A) Gana el doble enlace (Posici�n 1)</div>
  <span style="color:#2ecc71">1</span>     <span style="color:#2ecc71">2</span>    <span style="color:#2ecc71">3</span>    <span style="color:#2ecc71">4</span>
-CH₂ = CH - CH - CH₃
+CH2 = CH - CH - CH3
            |
-           CH₃
+           CH3
                 </div>
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">B) Gana el triple enlace (Posición 2)</div>
+<div class="ej-titulo">B) Gana el triple enlace (Posici�n 2)</div>
  <span style="color:#2ecc71">5</span>     <span style="color:#2ecc71">4</span>    <span style="color:#2ecc71">3</span>   <span style="color:#2ecc71">2</span>   <span style="color:#2ecc71">1</span>
-CH₃ - CH - C ≡ C - CH₃
+CH3 - CH - C = C - CH3
       |
-      CH₃
+      CH3
                 </div>
             </div>
             <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "8. Alqueno Ramificado (Prioridad de Enlace)".</div>
         </div>
 
         <div class="regla-box">
-            <h3><span class="num-regla">4</span> Orden Alfabético de Radicales</h3>
-            <p class="texto-base">Si tienes radicales diferentes (ej. Etil y Metil), al escribir el nombre final se ordenan alfabéticamente: la <strong>E</strong> va antes que la <strong>M</strong>.</p>
+            <h3><span class="num-regla">4</span> Orden Alfab�tico de Radicales</h3>
+            <p class="texto-base">Si tienes radicales diferentes (ej. Etil y Metil), al escribir el nombre final se ordenan alfab�ticamente: la <strong>E</strong> va antes que la <strong>M</strong>.</p>
             <div class="grid-ejemplos">
                 <div class="ejemplo-estatico">
 <div class="ej-titulo">A) Etil se escribe primero</div>
-      CH₂-CH₃ (Etil)
+      CH2-CH3 (Etil)
       |
-CH₃ - CH - CH - CH₃
+CH3 - CH - CH - CH3
            |
-           CH₃ (Metil)
+           CH3 (Metil)
 
 <span style="color:#2ecc71">3-Etil-2-metilbutano</span>
                 </div>
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">B) Propil va después de Etil</div>
-      CH₂-CH₂-CH₃ (Propil)
+<div class="ej-titulo">B) Propil va despu�s de Etil</div>
+      CH2-CH2-CH3 (Propil)
       |
-CH₃ - CH - CH - CH₃
+CH3 - CH - CH - CH3
            |
-           CH₂-CH₃ (Etil)
+           CH2-CH3 (Etil)
 
 <span style="color:#2ecc71">2-Etil-3-propilbutano</span>
                 </div>
             </div>
-            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "5. Orden Alfabético (Etil y Metil)".</div>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "5. Orden Alfab�tico (Etil y Metil)".</div>
         </div>
 
         <div class="regla-box">
             <h3><span class="num-regla">5</span> Prefijos Multiplicadores (Di, Tri, Tetra)</h3>
-            <p class="texto-base">Si el mismo radical se repite, usamos prefijos (di=2, tri=3, tetra=4). <strong>Importante:</strong> Estos prefijos NO se toman en cuenta para el orden alfabético (Ej: en "Dimetil", se mira la M de metil, no la D).</p>
+            <p class="texto-base">Si el mismo radical se repite, usamos prefijos (di=2, tri=3, tetra=4). <strong>Importante:</strong> Estos prefijos NO se toman en cuenta para el orden alfab�tico (Ej: en "Dimetil", se mira la M de metil, no la D).</p>
             <div class="grid-ejemplos">
                 <div class="ejemplo-estatico">
 <div class="ej-titulo">A) Dos Metiles (Dimetil)</div>
-      CH₃
+      CH3
       |
-CH₃ - C - CH₃
+CH3 - C - CH3
       |
-      CH₃
+      CH3
 
 <span style="color:#2ecc71">2,2-Dimetilpropano</span>
                 </div>
                 <div class="ejemplo-estatico">
 <div class="ej-titulo">B) Tres Metiles (Trimetil)</div>
-      CH₃         CH₃
+      CH3         CH3
       |           |
-CH₃ - C   - CH₂ - CH  - CH₃
+CH3 - C   - CH2 - CH  - CH3
       |
-      CH₃
+      CH3
 
 <span style="color:#2ecc71">2,2,4-Trimetilpentano</span>
                 </div>
             </div>
-            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "4. Múltiples Radicales Iguales (Dimetil)".</div>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Selecciona en el simulador: "4. M�ltiples Radicales Iguales (Dimetil)".</div>
         </div>
 
         <div class="regla-box">
-            <h3><span class="num-regla">6</span> Puntuación Correcta</h3>
-            <p class="texto-base">La IUPAC es estricta con la ortografía química: Los números se separan de otros números con <strong>comas (,)</strong> y los números se separan de las letras con <strong>guiones (-)</strong>.</p>
+            <h3><span class="num-regla">6</span> Puntuaci�n Correcta</h3>
+            <p class="texto-base">La IUPAC es estricta con la ortograf�a qu�mica: Los n�meros se separan de otros n�meros con <strong>comas (,)</strong> y los n�meros se separan de las letras con <strong>guiones (-)</strong>.</p>
             <div class="grid-ejemplos">
                 <div class="ejemplo-estatico">
 <div class="ej-titulo">A) Correcto</div>
 <span style="color:#2ecc71">2,3,4-Trimetilhexano</span>
-(Comas entre números, guion antes de letra)
+(Comas entre n�meros, guion antes de letra)
                 </div>
                 <div class="ejemplo-estatico">
 <div class="ej-titulo">B) Incorrecto</div>
@@ -316,160 +322,160 @@ CH₃ - C   - CH₂ - CH  - CH₃
             </div>
         </div>
 
-        <!-- ISÓMEROS -->
-        <h2 class="titulo-seccion">Isómeros y los prefijos ISO / NEO</h2>
+        <!-- IS�MEROS -->
+        <h2 class="titulo-seccion">Is�meros y los prefijos ISO / NEO</h2>
         <div class="regla-box">
-            <p class="texto-base">Los isómeros tienen la misma fórmula molecular (ej. C₄H₁₀) pero estructura diferente. IUPAC acepta prefijos comunes para formas especiales: <strong>ISO-</strong> (una ramificación en el penúltimo carbono formando una "Y") y <strong>NEO-</strong> (un carbono central rodeado de 4 carbonos en cruz). En estos casos, se cuenta el TOTAL de carbonos de la molécula para armar el nombre.</p>
+            <p class="texto-base">Los is�meros tienen la misma f�rmula molecular (ej. C4H10) pero estructura diferente. IUPAC acepta prefijos comunes para formas especiales: <strong>ISO-</strong> (una ramificaci�n en el pen�ltimo carbono formando una "Y") y <strong>NEO-</strong> (un carbono central rodeado de 4 carbonos en cruz). En estos casos, se cuenta el TOTAL de carbonos de la mol�cula para armar el nombre.</p>
             
             <div class="grid-ejemplos">
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">ISOBUTANO (C₄H₁₀)</div>
-      CH₃
+<div class="ej-titulo">ISOBUTANO (C4H10)</div>
+      CH3
       |
-CH₃ - CH - CH₃
+CH3 - CH - CH3
                 </div>
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">ISOPENTANO (C₅H₁₂)</div>
-      CH₃
+<div class="ej-titulo">ISOPENTANO (C5H12)</div>
+      CH3
       |
-CH₃ - CH - CH₂ - CH₃
+CH3 - CH - CH2 - CH3
                 </div>
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">NEOPENTANO (C₅H₁₂)</div>
-      CH₃
+<div class="ej-titulo">NEOPENTANO (C5H12)</div>
+      CH3
       |
-CH₃ - C - CH₃
+CH3 - C - CH3
       |
-      CH₃
+      CH3
                 </div>
                 <div class="ejemplo-estatico">
-<div class="ej-titulo">ISOHEXANO (C₆H₁₄)</div>
-      CH₃
+<div class="ej-titulo">ISOHEXANO (C6H14)</div>
+      CH3
       |
-CH₃ - CH - CH₂ - CH₂ - CH₃
+CH3 - CH - CH2 - CH2 - CH3
                 </div>
             </div>
-            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Busca en el simulador los ejercicios 10 y 11 para ver la construcción interactiva de estos isómeros.</div>
+            <div class="nota-simulador"><i class="fa-solid fa-gamepad"></i> Busca en el simulador los ejercicios 10 y 11 para ver la construcci�n interactiva de estos is�meros.</div>
         </div>
 
     </main>
 
     <!-- SCRIPT DEL VISUALIZADOR INTERACTIVO -->
     <script>
-        // ¡GARANTÍA DE ALINEACIÓN PERFECTA!
+        // �GARANT�A DE ALINEACI�N PERFECTA!
         // Todas las cadenas (visual) mantienen los mismos espacios desde el paso 1 hasta el final.
-        // Los números se colocan en una fila superior limpia, evitando el desplazamiento de los carbonos.
+        // Los n�meros se colocan en una fila superior limpia, evitando el desplazamiento de los carbonos.
         
         const ejercicios = [
             {
                 id: 0,
                 nombre: "1. Alcano Simple (Propano)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Observamos la molécula. Es una cadena lineal continua.", visual: "\nCH₃ - CH₂ - CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2 (Prefijo):</strong> Contamos los carbonos. Hay 3 carbonos. En la tabla, 3 carbonos corresponde al prefijo <strong>PROP</strong>.", visual: "\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₃</span>", palabra: "<span style='color:var(--color-destaque)'>PROP</span>" },
-                    { texto: "<strong>Paso 3 (Sufijo):</strong> Observamos los enlaces. Todos son enlaces simples (-). Corresponde a la familia de los Alcanos, sufijo <strong>ANO</strong>.", visual: "\nCH₃ <span class='hl-enlace'>-</span> CH₂ <span class='hl-enlace'>-</span> CH₃", palabra: "PROP <span style='color:var(--color-enlace)'>+ ANO</span>" },
-                    { texto: "<strong>Paso 4:</strong> Unimos el prefijo y el sufijo.", visual: "\n<span style='color:#2ecc71'>CH₃ - CH₂ - CH₃</span>", palabra: "PROPANO" }
+                    { texto: "<strong>Paso 1:</strong> Observamos la mol�cula. Es una cadena lineal continua.", visual: "\nCH3 - CH2 - CH3", palabra: "" },
+                    { texto: "<strong>Paso 2 (Prefijo):</strong> Contamos los carbonos. Hay 3 carbonos. En la tabla, 3 carbonos corresponde al prefijo <strong>PROP</strong>.", visual: "\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH3</span>", palabra: "<span style='color:var(--color-destaque)'>PROP</span>" },
+                    { texto: "<strong>Paso 3 (Sufijo):</strong> Observamos los enlaces. Todos son enlaces simples (-). Corresponde a la familia de los Alcanos, sufijo <strong>ANO</strong>.", visual: "\nCH3 <span class='hl-enlace'>-</span> CH2 <span class='hl-enlace'>-</span> CH3", palabra: "PROP <span style='color:var(--color-enlace)'>+ ANO</span>" },
+                    { texto: "<strong>Paso 4:</strong> Unimos el prefijo y el sufijo.", visual: "\n<span style='color:#2ecc71'>CH3 - CH2 - CH3</span>", palabra: "PROPANO" }
                 ]
             },
             {
                 id: 1,
                 nombre: "2. Alcano Ramificado (Identificando partes)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Tenemos una cadena con una ramificación. Observa que el enlace sale exactamente del Carbono.", visual: "      CH₃\n      |\n\nCH₃ - CH - CH₂ - CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Buscamos la cadena principal más larga. La horizontal tiene 4 carbonos = <strong>BUT</strong>.", visual: "      CH₃\n      |\n\n<span class='hl-cadena'>CH₃ - CH - CH₂ - CH₃</span>", palabra: "<span style='color:var(--color-destaque)'>BUT</span>" },
-                    { texto: "<strong>Paso 3:</strong> Enlaces simples = <strong>ANO</strong>. El nombre base es BUTANO.", visual: "      CH₃\n      |\n\n<span class='hl-cadena'>CH₃</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH₂</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH₃</span>", palabra: "BUT<span style='color:var(--color-enlace)'>ANO</span>" },
-                    { texto: "<strong>Paso 4:</strong> Lo que quedó fuera de la cadena es un radical. Tiene 1 carbono (MET) + terminación IL = <strong>METIL</strong>.", visual: "      <span class='hl-radical'>CH₃</span> (Metil)\n      |\n\n<span class='hl-cadena'>CH₃ - CH - CH₂ - CH₃</span>", palabra: "<span style='color:var(--color-radical)'>METIL</span> + BUTANO" },
-                    { texto: "<strong>Paso 5:</strong> Faltan los números. Evaluaremos de qué lado enumerar en el siguiente ejercicio.", visual: "      <span class='hl-radical'>CH₃</span>\n      |\n?     ?    ?     ?\n<span class='hl-cadena'>CH₃</span>-<span class='hl-cadena'>CH</span>-<span class='hl-cadena'>CH₂</span>-<span class='hl-cadena'>CH₃</span>", palabra: "?-METILBUTANO" }
+                    { texto: "<strong>Paso 1:</strong> Tenemos una cadena con una ramificaci�n. Observa que el enlace sale exactamente del Carbono.", visual: "      CH3\n      |\n\nCH3 - CH - CH2 - CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Buscamos la cadena principal m�s larga. La horizontal tiene 4 carbonos = <strong>BUT</strong>.", visual: "      CH3\n      |\n\n<span class='hl-cadena'>CH3 - CH - CH2 - CH3</span>", palabra: "<span style='color:var(--color-destaque)'>BUT</span>" },
+                    { texto: "<strong>Paso 3:</strong> Enlaces simples = <strong>ANO</strong>. El nombre base es BUTANO.", visual: "      CH3\n      |\n\n<span class='hl-cadena'>CH3</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH2</span> <span class='hl-enlace'>-</span> <span class='hl-cadena'>CH3</span>", palabra: "BUT<span style='color:var(--color-enlace)'>ANO</span>" },
+                    { texto: "<strong>Paso 4:</strong> Lo que qued� fuera de la cadena es un radical. Tiene 1 carbono (MET) + terminaci�n IL = <strong>METIL</strong>.", visual: "      <span class='hl-radical'>CH3</span> (Metil)\n      |\n\n<span class='hl-cadena'>CH3 - CH - CH2 - CH3</span>", palabra: "<span style='color:var(--color-radical)'>METIL</span> + BUTANO" },
+                    { texto: "<strong>Paso 5:</strong> Faltan los n�meros. Evaluaremos de qu� lado enumerar en el siguiente ejercicio.", visual: "      <span class='hl-radical'>CH3</span>\n      |\n?     ?    ?     ?\n<span class='hl-cadena'>CH3</span>-<span class='hl-cadena'>CH</span>-<span class='hl-cadena'>CH2</span>-<span class='hl-cadena'>CH3</span>", palabra: "?-METILBUTANO" }
                 ]
             },
             {
                 id: 2,
-                nombre: "3. Evaluando Numeración (Der a Izq vs Izq a Der)",
+                nombre: "3. Evaluando Numeraci�n (Der a Izq vs Izq a Der)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Usaremos una molécula ramificada hacia la derecha para probar la regla.", visual: "            CH₃\n            |\n\nCH₃ - CH₂ - CH - CH₃", palabra: "METILBUTANO" },
-                    { texto: "<strong>Opción A:</strong> Numeramos de Izquierda a Derecha. El radical Metil cae en el carbono <strong>3</strong>.", visual: "            <span class='hl-radical'>CH₃</span>\n            |\n1     2     3    4\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₃</span>", palabra: "Posición Izq->Der: 3" },
-                    { texto: "<strong>Opción B:</strong> Numeramos de Derecha a Izquierda. El radical Metil cae en el carbono <strong>2</strong>.", visual: "            <span class='hl-radical'>CH₃</span>\n            |\n4     3     2    1\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₃</span>", palabra: "Posición Der->Izq: 2" },
-                    { texto: "<strong>Decisión:</strong> La regla exige el localizador MÁS BAJO. Comparamos: 2 es menor que 3. Por lo tanto, ¡la numeración correcta es de Derecha a Izquierda!", visual: "            <span class='hl-radical'>CH₃</span>\n            |\n<span class='hl-num-bad'>1</span>     <span class='hl-num-bad'>2</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>1</span>\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₃</span>", palabra: "<span style='color:var(--color-destaque)'>2-</span>METILBUTANO" }
+                    { texto: "<strong>Paso 1:</strong> Usaremos una mol�cula ramificada hacia la derecha para probar la regla.", visual: "            CH3\n            |\n\nCH3 - CH2 - CH - CH3", palabra: "METILBUTANO" },
+                    { texto: "<strong>Opci�n A:</strong> Numeramos de Izquierda a Derecha. El radical Metil cae en el carbono <strong>3</strong>.", visual: "            <span class='hl-radical'>CH3</span>\n            |\n1     2     3    4\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH3</span>", palabra: "Posici�n Izq->Der: 3" },
+                    { texto: "<strong>Opci�n B:</strong> Numeramos de Derecha a Izquierda. El radical Metil cae en el carbono <strong>2</strong>.", visual: "            <span class='hl-radical'>CH3</span>\n            |\n4     3     2    1\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH3</span>", palabra: "Posici�n Der->Izq: 2" },
+                    { texto: "<strong>Decisi�n:</strong> La regla exige el localizador M�S BAJO. Comparamos: 2 es menor que 3. Por lo tanto, �la numeraci�n correcta es de Derecha a Izquierda!", visual: "            <span class='hl-radical'>CH3</span>\n            |\n<span class='hl-num-bad'>1</span>     <span class='hl-num-bad'>2</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>1</span>\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH3</span>", palabra: "<span style='color:var(--color-destaque)'>2-</span>METILBUTANO" }
                 ]
             },
             {
                 id: 3,
-                nombre: "4. Múltiples Radicales Iguales (Dimetil)",
+                nombre: "4. M�ltiples Radicales Iguales (Dimetil)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Molécula con varias ramificaciones. Fíjate cómo cada enlace vertical sale exacto del Carbono.", visual: "      CH₃        CH₃\n      |          |\n\nCH₃ - CH - CH₂ - CH - CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Cadena principal: 5 carbonos = PENTANO.", visual: "      CH₃        CH₃\n      |          |\n\n<span class='hl-cadena'>CH₃ - CH - CH₂ - CH - CH₃</span>", palabra: "<span style='color:var(--color-destaque)'>PENTANO</span>" },
-                    { texto: "<strong>Paso 3:</strong> Hay DOS radicales CH₃ (Metil). Como son iguales, agrupamos usando el prefijo <strong>DI</strong> = DIMETIL.", visual: "      <span class='hl-radical'>CH₃</span>        <span class='hl-radical'>CH₃</span>\n      |          |\n\n<span class='hl-cadena'>CH₃ - CH - CH₂ - CH - CH₃</span>", palabra: "<span style='color:var(--color-radical)'>DIMETIL</span>PENTANO" },
-                    { texto: "<strong>Paso 4:</strong> Numeramos. De Izq a Der da (2,4). De Der a Izq da (2,4). Es simétrica, ambas dan igual.", visual: "      <span class='hl-radical'>CH₃</span>        <span class='hl-radical'>CH₃</span>\n      |          |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>     <span class='hl-num-good'>4</span>    <span class='hl-num-good'>5</span>\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₃</span>", palabra: "<span style='color:var(--color-destaque)'>2,4-</span>DIMETILPENTANO" }
+                    { texto: "<strong>Paso 1:</strong> Mol�cula con varias ramificaciones. F�jate c�mo cada enlace vertical sale exacto del Carbono.", visual: "      CH3        CH3\n      |          |\n\nCH3 - CH - CH2 - CH - CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena principal: 5 carbonos = PENTANO.", visual: "      CH3        CH3\n      |          |\n\n<span class='hl-cadena'>CH3 - CH - CH2 - CH - CH3</span>", palabra: "<span style='color:var(--color-destaque)'>PENTANO</span>" },
+                    { texto: "<strong>Paso 3:</strong> Hay DOS radicales CH3 (Metil). Como son iguales, agrupamos usando el prefijo <strong>DI</strong> = DIMETIL.", visual: "      <span class='hl-radical'>CH3</span>        <span class='hl-radical'>CH3</span>\n      |          |\n\n<span class='hl-cadena'>CH3 - CH - CH2 - CH - CH3</span>", palabra: "<span style='color:var(--color-radical)'>DIMETIL</span>PENTANO" },
+                    { texto: "<strong>Paso 4:</strong> Numeramos. De Izq a Der da (2,4). De Der a Izq da (2,4). Es sim�trica, ambas dan igual.", visual: "      <span class='hl-radical'>CH3</span>        <span class='hl-radical'>CH3</span>\n      |          |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>     <span class='hl-num-good'>4</span>    <span class='hl-num-good'>5</span>\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH3</span>", palabra: "<span style='color:var(--color-destaque)'>2,4-</span>DIMETILPENTANO" }
                 ]
             },
             {
                 id: 4,
-                nombre: "5. Orden Alfabético (Etil y Metil)",
+                nombre: "5. Orden Alfab�tico (Etil y Metil)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Molécula con radicales diferentes (Arriba y Abajo).", visual: "      CH₃\n      |\n\nCH₃ - CH - CH - CH₂ - CH₂ - CH₃\n           |\n           CH₂-CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Cadena principal: 6 carbonos = HEXANO.", visual: "      CH₃\n      |\n\n<span class='hl-cadena'>CH₃ - CH - CH - CH₂ - CH₂ - CH₃</span>\n           |\n           CH₂-CH₃", palabra: "HEXANO" },
-                    { texto: "<strong>Paso 3:</strong> Radical Arriba: 1 carbono = METIL. Radical Abajo: 2 carbonos = ETIL.", visual: "      <span class='hl-radical'>CH₃</span> (Metil)\n      |\n\n<span class='hl-cadena'>CH₃ - CH - CH - CH₂ - CH₂ - CH₃</span>\n           |\n           <span style='color:#e67e22'>CH₂-CH₃</span> (Etil)", palabra: "METIL y ETIL" },
-                    { texto: "<strong>Paso 4:</strong> Numeración Izquierda a Derecha asegura los menores números posibles (2 y 3).", visual: "      <span class='hl-radical'>CH₃</span>\n      |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>    <span class='hl-num-good'>4</span>     <span class='hl-num-good'>5</span>     <span class='hl-num-good'>6</span>\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₃</span>\n           |\n           <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "Posición 2 y 3" },
-                    { texto: "<strong>Paso 5:</strong> ORDEN ALFABÉTICO. Al armar el nombre final, primero se pone la 'E' de Etil (en el carbono 3), y luego la 'M' de Metil (en el carbono 2).", visual: "      <span class='hl-radical'>CH₃</span>\n      |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>    <span class='hl-num-good'>4</span>     <span class='hl-num-good'>5</span>     <span class='hl-num-good'>6</span>\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₃</span>\n           |\n           <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "3-ETIL-2-METILHEXANO" }
+                    { texto: "<strong>Paso 1:</strong> Mol�cula con radicales diferentes (Arriba y Abajo).", visual: "      CH3\n      |\n\nCH3 - CH - CH - CH2 - CH2 - CH3\n           |\n           CH2-CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena principal: 6 carbonos = HEXANO.", visual: "      CH3\n      |\n\n<span class='hl-cadena'>CH3 - CH - CH - CH2 - CH2 - CH3</span>\n           |\n           CH2-CH3", palabra: "HEXANO" },
+                    { texto: "<strong>Paso 3:</strong> Radical Arriba: 1 carbono = METIL. Radical Abajo: 2 carbonos = ETIL.", visual: "      <span class='hl-radical'>CH3</span> (Metil)\n      |\n\n<span class='hl-cadena'>CH3 - CH - CH - CH2 - CH2 - CH3</span>\n           |\n           <span style='color:#e67e22'>CH2-CH3</span> (Etil)", palabra: "METIL y ETIL" },
+                    { texto: "<strong>Paso 4:</strong> Numeraci�n Izquierda a Derecha asegura los menores n�meros posibles (2 y 3).", visual: "      <span class='hl-radical'>CH3</span>\n      |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>    <span class='hl-num-good'>4</span>     <span class='hl-num-good'>5</span>     <span class='hl-num-good'>6</span>\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH3</span>\n           |\n           <span style='color:#e67e22'>CH2-CH3</span>", palabra: "Posici�n 2 y 3" },
+                    { texto: "<strong>Paso 5:</strong> ORDEN ALFAB�TICO. Al armar el nombre final, primero se pone la 'E' de Etil (en el carbono 3), y luego la 'M' de Metil (en el carbono 2).", visual: "      <span class='hl-radical'>CH3</span>\n      |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>    <span class='hl-num-good'>4</span>     <span class='hl-num-good'>5</span>     <span class='hl-num-good'>6</span>\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH3</span>\n           |\n           <span style='color:#e67e22'>CH2-CH3</span>", palabra: "3-ETIL-2-METILHEXANO" }
                 ]
             },
             {
                 id: 5,
                 nombre: "6. Alqueno Simple (2-Buteno)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Observamos un doble enlace (C=C). Pertenece a la familia de los Alquenos.", visual: "\nCH₃ - CH = CH - CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Cadena de 4 carbonos = BUT.", visual: "\n<span class='hl-cadena'>CH₃ - CH</span> = <span class='hl-cadena'>CH - CH₃</span>", palabra: "BUT" },
-                    { texto: "<strong>Paso 3:</strong> Doble enlace = sufijo ENO. Base: BUTENO.", visual: "\nCH₃ - CH <span class='hl-enlace'>=</span> CH - CH₃", palabra: "BUT<span style='color:var(--color-enlace)'>ENO</span>" },
-                    { texto: "<strong>Paso 4:</strong> Hay que indicar en DÓNDE empieza el doble enlace. Numeramos y vemos que arranca en el carbono 2.", visual: "<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>    <span class='hl-num-good'>4</span>\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH</span> <span class='hl-enlace'>=</span> <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₃</span>", palabra: "2-BUTENO" }
+                    { texto: "<strong>Paso 1:</strong> Observamos un doble enlace (C=C). Pertenece a la familia de los Alquenos.", visual: "\nCH3 - CH = CH - CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena de 4 carbonos = BUT.", visual: "\n<span class='hl-cadena'>CH3 - CH</span> = <span class='hl-cadena'>CH - CH3</span>", palabra: "BUT" },
+                    { texto: "<strong>Paso 3:</strong> Doble enlace = sufijo ENO. Base: BUTENO.", visual: "\nCH3 - CH <span class='hl-enlace'>=</span> CH - CH3", palabra: "BUT<span style='color:var(--color-enlace)'>ENO</span>" },
+                    { texto: "<strong>Paso 4:</strong> Hay que indicar en D�NDE empieza el doble enlace. Numeramos y vemos que arranca en el carbono 2.", visual: "<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>    <span class='hl-num-good'>4</span>\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH</span> <span class='hl-enlace'>=</span> <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH3</span>", palabra: "2-BUTENO" }
                 ]
             },
             {
                 id: 6,
                 nombre: "7. Alquino Simple (2-Pentino)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Observamos un triple enlace (C≡C). Familia de los Alquinos.", visual: "\nCH₃ - C ≡ C - CH₂ - CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Cadena de 5 carbonos = PENT. Triple enlace = INO.", visual: "\n<span class='hl-cadena'>CH₃ - C</span> <span class='hl-enlace'>≡</span> <span class='hl-cadena'>C - CH₂ - CH₃</span>", palabra: "PENT<span style='color:var(--color-enlace)'>INO</span>" },
-                    { texto: "<strong>Paso 3:</strong> Numeramos. Izq a Der empieza en 2. Der a Izq empieza en 3. Elegimos la más baja (2).", visual: "<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>   <span class='hl-num-good'>3</span>   <span class='hl-num-good'>4</span>     <span class='hl-num-good'>5</span>\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>C</span> <span class='hl-enlace'>≡</span> <span class='hl-cadena'>C</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₃</span>", palabra: "2-PENTINO" }
+                    { texto: "<strong>Paso 1:</strong> Observamos un triple enlace (C=C). Familia de los Alquinos.", visual: "\nCH3 - C = C - CH2 - CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena de 5 carbonos = PENT. Triple enlace = INO.", visual: "\n<span class='hl-cadena'>CH3 - C</span> <span class='hl-enlace'>=</span> <span class='hl-cadena'>C - CH2 - CH3</span>", palabra: "PENT<span style='color:var(--color-enlace)'>INO</span>" },
+                    { texto: "<strong>Paso 3:</strong> Numeramos. Izq a Der empieza en 2. Der a Izq empieza en 3. Elegimos la m�s baja (2).", visual: "<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>   <span class='hl-num-good'>3</span>   <span class='hl-num-good'>4</span>     <span class='hl-num-good'>5</span>\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>C</span> <span class='hl-enlace'>=</span> <span class='hl-cadena'>C</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH3</span>", palabra: "2-PENTINO" }
                 ]
             },
             {
                 id: 7,
                 nombre: "8. Alqueno Ramificado (Prioridad de Enlace)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Molécula con doble enlace Y ramificación.", visual: "\nCH₂ = CH - CH - CH₃\n           |\n           CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Cadena principal de 4 carbonos = BUTENO.", visual: "\n<span class='hl-cadena'>CH₂ = CH - CH - CH₃</span>\n           |\n           CH₃", palabra: "BUTENO" },
-                    { texto: "<strong>Paso 3:</strong> Numeramos. ¿Damos prioridad al radical o al enlace? ¡EL ENLACE MANDA! Se numera de Izquierda a Derecha para que el enlace esté en el carbono 1.", visual: "<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>    <span class='hl-num-good'>4</span>\n<span class='hl-cadena'>CH₂</span> = <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₃</span>\n           |\n           <span class='hl-radical'>CH₃</span>", palabra: "3-METIL-1-BUTENO" }
+                    { texto: "<strong>Paso 1:</strong> Mol�cula con doble enlace Y ramificaci�n.", visual: "\nCH2 = CH - CH - CH3\n           |\n           CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena principal de 4 carbonos = BUTENO.", visual: "\n<span class='hl-cadena'>CH2 = CH - CH - CH3</span>\n           |\n           CH3", palabra: "BUTENO" },
+                    { texto: "<strong>Paso 3:</strong> Numeramos. �Damos prioridad al radical o al enlace? �EL ENLACE MANDA! Se numera de Izquierda a Derecha para que el enlace est� en el carbono 1.", visual: "<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>    <span class='hl-num-good'>3</span>    <span class='hl-num-good'>4</span>\n<span class='hl-cadena'>CH2</span> = <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH3</span>\n           |\n           <span class='hl-radical'>CH3</span>", palabra: "3-METIL-1-BUTENO" }
                 ]
             },
             {
                 id: 8,
                 nombre: "9. Complejidad: 4-Etil-2,2-dimetilheptano",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Cadena con múltiples carbonos arriba y abajo. Alineación perfecta garantizada.", visual: "      CH₃\n      |\n\nCH₃ - C - CH₂ - CH - CH₂ - CH₂ - CH₃\n      |         |\n      CH₃       CH₂-CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Cadena principal: 7 carbonos = HEPTANO.", visual: "      CH₃\n      |\n\n<span class='hl-cadena'>CH₃ - C - CH₂ - CH - CH₂ - CH₂ - CH₃</span>\n      |         |\n      CH₃       CH₂-CH₃", palabra: "HEPTANO" },
-                    { texto: "<strong>Paso 3:</strong> Radicales: Dos Metiles en el mismo Carbono y un Etil más adelante.", visual: "      <span class='hl-radical'>CH₃</span>\n      |\n\n<span class='hl-cadena'>CH₃ - C - CH₂ - CH - CH₂ - CH₂ - CH₃</span>\n      |         |\n      <span class='hl-radical'>CH₃</span>       <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "DIMETIL y ETIL" },
-                    { texto: "<strong>Paso 4:</strong> Numeramos Izq a Der (posiciones 2, 2 y 4). Es la más baja posible para todos.", visual: "      <span class='hl-radical'>CH₃</span>\n      |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>   <span class='hl-num-good'>3</span>     <span class='hl-num-good'>4</span>    <span class='hl-num-good'>5</span>     <span class='hl-num-good'>6</span>     <span class='hl-num-good'>7</span>\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>C</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₃</span>\n      |         |\n      <span class='hl-radical'>CH₃</span>       <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "Posiciones: 2, 2, 4" },
-                    { texto: "<strong>Paso 5:</strong> Orden alfabético. Etil va antes de Dimetil (la D de 'di' no cuenta para el alfabeto).", visual: "      <span class='hl-radical'>CH₃</span>\n      |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>   <span class='hl-num-good'>3</span>     <span class='hl-num-good'>4</span>    <span class='hl-num-good'>5</span>     <span class='hl-num-good'>6</span>     <span class='hl-num-good'>7</span>\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>C</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₃</span>\n      |         |\n      <span class='hl-radical'>CH₃</span>       <span style='color:#e67e22'>CH₂-CH₃</span>", palabra: "4-ETIL-2,2-DIMETILHEPTANO" }
+                    { texto: "<strong>Paso 1:</strong> Cadena con m�ltiples carbonos arriba y abajo. Alineaci�n perfecta garantizada.", visual: "      CH3\n      |\n\nCH3 - C - CH2 - CH - CH2 - CH2 - CH3\n      |         |\n      CH3       CH2-CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Cadena principal: 7 carbonos = HEPTANO.", visual: "      CH3\n      |\n\n<span class='hl-cadena'>CH3 - C - CH2 - CH - CH2 - CH2 - CH3</span>\n      |         |\n      CH3       CH2-CH3", palabra: "HEPTANO" },
+                    { texto: "<strong>Paso 3:</strong> Radicales: Dos Metiles en el mismo Carbono y un Etil m�s adelante.", visual: "      <span class='hl-radical'>CH3</span>\n      |\n\n<span class='hl-cadena'>CH3 - C - CH2 - CH - CH2 - CH2 - CH3</span>\n      |         |\n      <span class='hl-radical'>CH3</span>       <span style='color:#e67e22'>CH2-CH3</span>", palabra: "DIMETIL y ETIL" },
+                    { texto: "<strong>Paso 4:</strong> Numeramos Izq a Der (posiciones 2, 2 y 4). Es la m�s baja posible para todos.", visual: "      <span class='hl-radical'>CH3</span>\n      |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>   <span class='hl-num-good'>3</span>     <span class='hl-num-good'>4</span>    <span class='hl-num-good'>5</span>     <span class='hl-num-good'>6</span>     <span class='hl-num-good'>7</span>\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>C</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH3</span>\n      |         |\n      <span class='hl-radical'>CH3</span>       <span style='color:#e67e22'>CH2-CH3</span>", palabra: "Posiciones: 2, 2, 4" },
+                    { texto: "<strong>Paso 5:</strong> Orden alfab�tico. Etil va antes de Dimetil (la D de 'di' no cuenta para el alfabeto).", visual: "      <span class='hl-radical'>CH3</span>\n      |\n<span class='hl-num-good'>1</span>     <span class='hl-num-good'>2</span>   <span class='hl-num-good'>3</span>     <span class='hl-num-good'>4</span>    <span class='hl-num-good'>5</span>     <span class='hl-num-good'>6</span>     <span class='hl-num-good'>7</span>\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>C</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH3</span>\n      |         |\n      <span class='hl-radical'>CH3</span>       <span style='color:#e67e22'>CH2-CH3</span>", palabra: "4-ETIL-2,2-DIMETILHEPTANO" }
                 ]
             },
             {
                 id: 9,
                 nombre: "10. El prefijo ISO (Isobutano)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Fórmula C₄H₁₀ en forma ramificada.", visual: "      CH₃\n      |\n\nCH₃ - CH - CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Nombre sistemático IUPAC: Cadena de 3 (Propano) con Metil en el 2. Sería 2-Metilpropano.", visual: "      <span class='hl-radical'>CH₃</span>\n      |\n1     2    3\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₃</span>", palabra: "2-METILPROPANO" },
-                    { texto: "<strong>Paso 3:</strong> Regla ISO: Si termina en forma de 'Y' (cola de pez), se cuenta el TOTAL de carbonos de la molécula para el nombre común. Tiene 4 carbonos totales = BUT.", visual: "\n\n<span style='color:var(--color-principal)'>      CH₃\n      |\nCH₃ - CH</span> - CH₃\n\nTotal = 4 Carbonos", palabra: "ISO + BUT + ANO" },
-                    { texto: "<strong>Paso 4:</strong> Nombre común aceptado por IUPAC: ISOBUTANO.", visual: "\n\n<span style='color:var(--color-secundario)'>      CH₃\n      |\nCH₃ - CH - CH₃</span>", palabra: "ISOBUTANO" }
+                    { texto: "<strong>Paso 1:</strong> F�rmula C4H10 en forma ramificada.", visual: "      CH3\n      |\n\nCH3 - CH - CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Nombre sistem�tico IUPAC: Cadena de 3 (Propano) con Metil en el 2. Ser�a 2-Metilpropano.", visual: "      <span class='hl-radical'>CH3</span>\n      |\n1     2    3\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH3</span>", palabra: "2-METILPROPANO" },
+                    { texto: "<strong>Paso 3:</strong> Regla ISO: Si termina en forma de 'Y' (cola de pez), se cuenta el TOTAL de carbonos de la mol�cula para el nombre com�n. Tiene 4 carbonos totales = BUT.", visual: "\n\n<span style='color:var(--color-principal)'>      CH3\n      |\nCH3 - CH</span> - CH3\n\nTotal = 4 Carbonos", palabra: "ISO + BUT + ANO" },
+                    { texto: "<strong>Paso 4:</strong> Nombre com�n aceptado por IUPAC: ISOBUTANO.", visual: "\n\n<span style='color:var(--color-secundario)'>      CH3\n      |\nCH3 - CH - CH3</span>", palabra: "ISOBUTANO" }
                 ]
             },
             {
                 id: 10,
                 nombre: "11. El prefijo ISO (Isopentano)",
                 pasos: [
-                    { texto: "<strong>Paso 1:</strong> Fórmula C₅H₁₂.", visual: "      CH₃\n      |\n\nCH₃ - CH - CH₂ - CH₃", palabra: "" },
-                    { texto: "<strong>Paso 2:</strong> Nombre sistemático IUPAC: 2-Metilbutano.", visual: "      <span class='hl-radical'>CH₃</span>\n      |\n1     2    3     4\n<span class='hl-cadena'>CH₃</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH₂</span> - <span class='hl-cadena'>CH₃</span>", palabra: "2-METILBUTANO" },
-                    { texto: "<strong>Paso 3:</strong> Vemos la 'cola de pez' en un extremo. Contamos los carbonos totales = 5 (PENT).", visual: "\n\n<span style='color:var(--color-principal)'>      CH₃\n      |\nCH₃ - CH</span> - CH₂ - CH₃\n\nTotal = 5 Carbonos", palabra: "ISO + PENT + ANO" },
-                    { texto: "<strong>Paso 4:</strong> Nombre común aceptado: ISOPENTANO.", visual: "\n\n<span style='color:var(--color-secundario)'>      CH₃\n      |\nCH₃ - CH - CH₂ - CH₃</span>", palabra: "ISOPENTANO" }
+                    { texto: "<strong>Paso 1:</strong> F�rmula C5H12.", visual: "      CH3\n      |\n\nCH3 - CH - CH2 - CH3", palabra: "" },
+                    { texto: "<strong>Paso 2:</strong> Nombre sistem�tico IUPAC: 2-Metilbutano.", visual: "      <span class='hl-radical'>CH3</span>\n      |\n1     2    3     4\n<span class='hl-cadena'>CH3</span> - <span class='hl-cadena'>CH</span> - <span class='hl-cadena'>CH2</span> - <span class='hl-cadena'>CH3</span>", palabra: "2-METILBUTANO" },
+                    { texto: "<strong>Paso 3:</strong> Vemos la 'cola de pez' en un extremo. Contamos los carbonos totales = 5 (PENT).", visual: "\n\n<span style='color:var(--color-principal)'>      CH3\n      |\nCH3 - CH</span> - CH2 - CH3\n\nTotal = 5 Carbonos", palabra: "ISO + PENT + ANO" },
+                    { texto: "<strong>Paso 4:</strong> Nombre com�n aceptado: ISOPENTANO.", visual: "\n\n<span style='color:var(--color-secundario)'>      CH3\n      |\nCH3 - CH - CH2 - CH3</span>", palabra: "ISOPENTANO" }
                 ]
             }
         ];
@@ -533,7 +539,7 @@ CH₃ - CH - CH₂ - CH₂ - CH₃
             btnPrev.disabled = (pasoActual === 0);
             btnNext.disabled = (pasoActual === totalPasos - 1);
             
-            // Ligera animación para indicar cambio
+            // Ligera animaci�n para indicar cambio
             canvas.style.opacity = 0.5;
             panelPalabra.style.opacity = 0.5;
             setTimeout(() => {

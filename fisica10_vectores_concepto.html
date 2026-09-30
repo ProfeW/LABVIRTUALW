@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Conceptos de Vectores - LabVirtual W</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -66,6 +66,12 @@
 
         footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.3); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
     </style>
+    <style>
+        body {
+            padding-top: max(5mm, env(safe-area-inset-top)) !important;
+            padding-bottom: max(5mm, env(safe-area-inset-bottom)) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -74,56 +80,57 @@
             <a href="inicio.html" class="logo"><i class="fa-solid fa-microscope"></i> LabVirtual W</a>
             <ul class="menu">
                 <li><a href="inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> F√≠sica 10</a></li>
+                <li><a href="fisica_10.html" style="color: #4facfe;"><i class="fa-solid fa-atom"></i> FÌsica 10</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="contenedor">
-        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a F√≠sica 10</a>
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a FÌsica 10</a>
 
         <div class="header-tema">
-            <span class="emoji-tema">üèπ</span>
+            <span class="emoji-tema">??</span>
             <h1>Concepto de Vectores</h1>
-            <p>Descubre c√≥mo representar cantidades f√≠sicas que necesitan m√°s que solo un n√∫mero para ser descritas: magnitud, direcci√≥n y sentido.</p>
+            <p>Descubre cÛmo representar cantidades fÌsicas que necesitan m·s que solo un n˙mero para ser descritas: magnitud, direcciÛn y sentido.</p>
         </div>
 
         <div class="seccion">
-            <h2><i class="fa-solid fa-book-open"></i> ¬øQu√© es un Vector?</h2>
-            <p>Un vector es un segmento de recta dirigido (una flecha) en el espacio que representa una <strong>magnitud vectorial</strong>. Mientras que una magnitud escalar se define solo por un n√∫mero y una unidad (ej. masa: 5 kg), una magnitud vectorial necesita de tres caracter√≠sticas fundamentales:</p>
+            <h2><i class="fa-solid fa-book-open"></i> øQuÈ es un Vector?</h2>
+            <p>Un vector es un segmento de recta dirigido (una flecha) en el espacio que representa una <strong>magnitud vectorial</strong>. Mientras que una magnitud escalar se define solo por un n˙mero y una unidad (ej. masa: 5 kg), una magnitud vectorial necesita de tres caracterÌsticas fundamentales:</p>
             <ul>
-                <li><strong>Magnitud o M√≥dulo:</strong> Es la longitud de la flecha, que representa el "tama√±o" o "cantidad" de la magnitud.</li>
-                <li><strong>Direcci√≥n:</strong> Es la recta sobre la que se apoya el vector o el √°ngulo que forma con un eje de referencia (ej. 30¬∞ respecto a la horizontal).</li>
-                <li><strong>Sentido:</strong> Es hacia d√≥nde apunta la flecha (norte, sur, arriba, derecha).</li>
+                <li><strong>Magnitud o MÛdulo:</strong> Es la longitud de la flecha, que representa el "tamaÒo" o "cantidad" de la magnitud.</li>
+                <li><strong>DirecciÛn:</strong> Es la recta sobre la que se apoya el vector o el ·ngulo que forma con un eje de referencia (ej. 30∞ respecto a la horizontal).</li>
+                <li><strong>Sentido:</strong> Es hacia dÛnde apunta la flecha (norte, sur, arriba, derecha).</li>
             </ul>
         </div>
 
         <div class="seccion">
-            <h2><i class="fa-solid fa-pencil"></i> Representaci√≥n Gr√°fica</h2>
-            <p>Gr√°ficamente, un vector se dibuja como una flecha. Matem√°ticamente se denota con una letra y una flecha encima, por ejemplo: \(\vec{v}\), \(\vec{F}\), \(\vec{a}\).</p>
+            <h2><i class="fa-solid fa-pencil"></i> RepresentaciÛn Gr·fica</h2>
+            <p>Gr·ficamente, un vector se dibuja como una flecha. Matem·ticamente se denota con una letra y una flecha encima, por ejemplo: \(\vec{v}\), \(\vec{F}\), \(\vec{a}\).</p>
             <div class="caja-formula">
                 <h3>Partes del Vector</h3>
                 <ul>
-                    <li><strong>Origen o punto de aplicaci√≥n:</strong> Donde inicia el vector.</li>
+                    <li><strong>Origen o punto de aplicaciÛn:</strong> Donde inicia el vector.</li>
                     <li><strong>Extremo:</strong> Donde termina el vector (la punta de la flecha).</li>
                 </ul>
             </div>
-            <p>Los vectores son fundamentales en la f√≠sica de grado d√©cimo para describir conceptos como el desplazamiento, la velocidad, la aceleraci√≥n y las fuerzas.</p>
+            <p>Los vectores son fundamentales en la fÌsica de grado dÈcimo para describir conceptos como el desplazamiento, la velocidad, la aceleraciÛn y las fuerzas.</p>
         </div>
 
         <div class="seccion">
             <h2><i class="fa-solid fa-compass"></i> Vectores en el Plano Cartesiano</h2>
             <p>Un vector se puede ubicar en el plano cartesiano usando coordenadas rectangulares (x, y).</p>
-            <p>El punto de inicio usualmente es el origen (0,0), y la punta de la flecha llega a una coordenada (x, y). Esta forma de expresarlo nos facilitar√° mucho las operaciones m√°s adelante.</p>
+            <p>El punto de inicio usualmente es el origen (0,0), y la punta de la flecha llega a una coordenada (x, y). Esta forma de expresarlo nos facilitar· mucho las operaciones m·s adelante.</p>
         </div>
 
     </main>
 
     <footer>
-        <p>LabVirtual W &copy; 2025 ¬∑ Construido con inteligencia artificial para la educaci√≥n</p>
+        <p>LabVirtual W &copy; 2025 ∑ Construido con inteligencia artificial para la educaciÛn</p>
     </footer>
 
     <script src="profe-ia.js"></script>
 <script src="auth.js"></script>
 </body>
 </html>
+
