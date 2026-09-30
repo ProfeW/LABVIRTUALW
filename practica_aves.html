@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -30,6 +30,33 @@
             align-items: center;
             padding: 10px;
             margin: 0;
+        }
+
+        .nav-top-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn-nav-top {
+            background-color: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .btn-nav-top:hover {
+            background-color: #34495e;
         }
 
         .hoja {
@@ -571,8 +598,17 @@
 
     </div>
 
-        <div style="display: flex; gap: 15px; margin-top: 15px; margin-bottom: 20px; justify-content: center;" class="botones-container">
-        <button class="btn-imprimir" style="background-color: #4facfe;" onclick="guardarHojaVida()">
+    <div class="nav-top-buttons">
+        <a href="index.html" class="btn-nav-top" style="background-color: #e74c3c;">
+            <i class="fa-solid fa-home"></i> Ir al Inicio
+        </a>
+        <a href="catalogo_aves.html" class="btn-nav-top" style="background-color: #f39c12;">
+            <i class="fa-solid fa-arrow-left"></i> Volver al Catálogo
+        </a>
+    </div>
+
+    <div style="display: flex; gap: 15px; margin-top: 15px; margin-bottom: 20px; justify-content: center;" class="botones-container">
+        <button id="btn-guardar-hoja" class="btn-imprimir" style="background-color: #4facfe;" onclick="guardarHojaVida()">
             <i class="fa-solid fa-save"></i> GUARDAR CAMBIOS
         </button>
         <button class="btn-imprimir" onclick="window.print()">
@@ -607,7 +643,7 @@
 
             const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
             if (!user || user.usuario !== 'profew') {
-                const btnGuardar = document.querySelector('.btn-guardar-hoja');
+                const btnGuardar = document.getElementById('btn-guardar-hoja');
                 if (btnGuardar) btnGuardar.style.display = 'none';
                 
                 const inputs = document.querySelectorAll('input:not([type="radio"]), textarea');
@@ -673,7 +709,7 @@
                 return;
             }
 
-            const btn = document.querySelector('.btn-guardar-hoja');
+            const btn = document.getElementById('btn-guardar-hoja');
             const btnOriginalText = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> GUARDANDO...';
             btn.disabled = true;
@@ -736,6 +772,7 @@
 <script src="auth.js"></script>
 </body>
 </html>
+
 
 
 
