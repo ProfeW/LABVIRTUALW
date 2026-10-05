@@ -190,3 +190,144 @@ window.LabAuth = {
         return await req.json();
     }
 };
+
+// ==========================================
+// INTEGRACIÓN AUTOMÁTICA CON FIRESTORE PARA TODAS LAS EVALUACIONES
+// ==========================================
+(function() {
+    let currentPage = window.location.pathname.split('/').pop();
+    // Solo inyectar en evaluaciones o practicas
+    if(!currentPage.includes('evaluacion') && !currentPage.includes('practica')) return;
+
+    // Si ya existe firebase, solo inicializamos el listener
+    if(typeof firebase !== 'undefined') {
+        initFirebaseEvaluacion();
+        return;
+    }
+    
+    // Cargar Firebase App v8
+    let scriptApp = document.createElement('script');
+    scriptApp.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js";
+    document.head.appendChild(scriptApp);
+
+    scriptApp.onload = function() {
+        let scriptFS = document.createElement('script');
+        scriptFS.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js";
+        document.head.appendChild(scriptFS);
+        
+        scriptFS.onload = function() {
+            // Inicializar Firestore
+            const firebaseConfig = {
+                apiKey: "AIzaSyBNjJw7xUyNplALmQBQCapzNzr1C79vTDc",
+                authDomain: "labvirtual-profew.firebaseapp.com",
+                projectId: "labvirtual-profew",
+                storageBucket: "labvirtual-profew.firebasestorage.app",
+                messagingSenderId: "981474222295",
+                appId: "1:981474222295:web:5f413bb53231afc4bb1092"
+            };
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            initFirebaseEvaluacion();
+        }
+    }
+})();
+
+function initFirebaseEvaluacion() {
+    document.body.addEventListener('click', (e) => {
+        let btn = e.target.closest('button') || e.target.closest('input') || e.target.closest('.btn') || e.target.closest('.btn-enviar') || e.target;
+        
+        let text = (btn.innerText || btn.value || "").toLowerCase();
+        let onclickAttr = (btn.getAttribute('onclick') || "").toLowerCase();
+        
+        if (btn.tagName === 'BUTTON' || btn.tagName === 'INPUT' || btn.classList?.contains('btn') || btn.classList?.contains('btn-enviar')) {
+            if (text.includes('calificar') || text.includes('evaluar') || text.includes('enviar') || text.includes('terminar') || onclickAttr.includes('calificar')) {
+                setTimeout(guardarResultadosDesdeDOM, 1500);
+            }
+        }
+    });
+}
+
+function guardarResultadosDesdeDOM() {
+    // Si la página tiene su propia función de guardar en Firestore (ej: Dinámica 10), no hacemos nada para evitar duplicados
+    if (typeof window.calificarYGuardar === 'function') {
+        return;
+    }
+
+    if (window.yaGuardadoFirebase) return;
+    window.yaGuardadoFirebase = true;
+
+    let pageTitle = document.title || "";
+    let title = pageTitle.replace(/ - LabVirtual.*/i, '').replace(/Evaluación de /i, '').replace(/Evaluación /i, '').trim();
+    if(!title) title = window.location.pathname.split('/').pop().replace('.html','');
+    
+    let notaCalculada = 0;
+    let userStr = localStorage.getItem('usuario_labvirtual');
+    if(!userStr) return; // Si no hay sesión, no guarda
+    let userObj = JSON.parse(userStr);
+
+    let scoreText = "";
+    let notaEl = document.getElementById('nota-final') || document.getElementById('nota-numero') || document.querySelector('.nota-final') || document.querySelector('.res-aprobado') || document.querySelector('.res-reprobado');
+    let resFinal = document.getElementById('resultado-final') || document.getElementById('resultado') || document.getElementById('pantalla-resultados');
+
+    if(notaEl) scoreText = notaEl.innerText;
+    else if(resFinal) scoreText = resFinal.innerText;
+    else scoreText = document.body.innerText;
+
+    // Convertimos cualquier nota a escala 5.0
+    let matchPct = scoreText.match(/(\d{1,3})\s*%/);
+    if(matchPct) {
+        notaCalculada = parseFloat(matchPct[1]) / 20; // 100% -> 5.0
+    } else {
+        let matchFrac = scoreText.match(/(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)/);
+        if(matchFrac) {
+            let pts = parseFloat(matchFrac[1]);
+            let total = parseFloat(matchFrac[2]);
+            if(total > 0) notaCalculada = (pts / total) * 5.0;
+        } else {
+            let matchDe = scoreText.match(/(\d+(?:\.\d+)?)\s*de\s*(\d+(?:\.\d+)?)/i);
+            if(matchDe) {
+                let pts = parseFloat(matchDe[1]);
+                let total = parseFloat(matchDe[2]);
+                if(total > 0) notaCalculada = (pts / total) * 5.0;
+            } else {
+                if(typeof window.nota !== 'undefined') {
+                    if (window.nota > 5.0) notaCalculada = window.nota / 20;
+                    else notaCalculada = window.nota;
+                }
+                else if(typeof window.puntaje !== 'undefined') {
+                    if (window.puntaje > 5.0) notaCalculada = window.puntaje / 2;
+                    else notaCalculada = window.puntaje;
+                }
+            }
+        }
+    }
+
+    if(notaCalculada > 5.0) notaCalculada = 5.0;
+    if(isNaN(notaCalculada) || notaCalculada < 0) notaCalculada = 0;
+
+    const db = firebase.firestore();
+    db.collection('evaluaciones').add({
+        usuario: userObj.usuario,
+        nombre: userObj.nombre,
+        tema: title,
+        puntaje: notaCalculada,
+        fecha: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        mostrarToastFirebase();
+    }).catch(e => console.error("Error guardando autoevaluación: ", e));
+}
+
+function mostrarToastFirebase() {
+    if(document.getElementById('firebase-toast')) return;
+    let t = document.createElement('div');
+    t.id = 'firebase-toast';
+    t.innerHTML = "<i class='fa-solid fa-cloud-arrow-up'></i> Resultado guardado en Firestore";
+    t.style = "position:fixed; bottom:20px; right:20px; background:#2ecc71; color:white; padding:12px 20px; border-radius:8px; z-index:9999; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-family:sans-serif; font-size:14px; animation: fadein 0.5s;";
+    document.body.appendChild(t);
+    setTimeout(() => {
+        t.style.opacity = "0";
+        t.style.transition = "opacity 0.5s";
+        setTimeout(() => t.remove(), 500);
+    }, 4000);
+}
