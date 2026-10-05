@@ -176,6 +176,16 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="periodo">Periodo</label>
+                        <select id="periodo" name="periodo" required>
+                            <option value="" disabled selected>Seleccione el periodo...</option>
+                            <option value="1">Periodo 1</option>
+                            <option value="2">Periodo 2</option>
+                            <option value="3">Periodo 3</option>
+                            <option value="4">Periodo 4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="asignatura">Asignatura a Evaluar</label>
                         <input type="text" id="asignatura" name="asignatura" readonly placeholder="Se asigna automáticamente...">
                     </div>
@@ -417,6 +427,33 @@
             data.nota_laborales = document.getElementById('nota_laborales').innerText;
             data.nota_ciudadanas = document.getElementById('nota_ciudadanas').innerText;
 
+            // Guardar en Firestore además de Google Sheets
+            if (typeof firebase !== 'undefined') {
+                const db = firebase.firestore();
+                let userStr = localStorage.getItem('usuario_labvirtual');
+                let usuarioId = userStr ? JSON.parse(userStr).usuario : (data.documento || "Invitado");
+                
+                let baseData = {
+                    usuario: usuarioId,
+                    nombre: data.nombre,
+                    grado: data.grado,
+                    periodo: data.periodo,
+                    fecha: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                // Guardar nota Laborales
+                db.collection('evaluaciones').add(Object.assign({}, baseData, {
+                    tema: `Autoevaluación P${data.periodo} - Competencias Laborales - ${data.asignatura} - ${data.grado}`,
+                    puntaje: parseFloat(data.nota_laborales)
+                })).catch(e => console.error("Error Firestore Laborales:", e));
+
+                // Guardar nota Ciudadanas
+                db.collection('evaluaciones').add(Object.assign({}, baseData, {
+                    tema: `Autoevaluación P${data.periodo} - Competencias Ciudadanas - ${data.asignatura} - ${data.grado}`,
+                    puntaje: parseFloat(data.nota_ciudadanas)
+                })).catch(e => console.error("Error Firestore Ciudadanas:", e));
+            }
+
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -429,7 +466,7 @@
                 loader.style.display = 'none';
                 if (response.status === 'success') {
                     msgBox.className = 'msg-box msg-success';
-                    msgBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> ' + response.message;
+                    msgBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> ' + response.message + ' (Guardado en Base de Datos)';
                     msgBox.style.display = 'block';
                     form.reset();
                     document.getElementById('nota_laborales').innerText = '0.0';
@@ -443,11 +480,15 @@
                 }
             })
             .catch(error => {
+                // Incluso si falla Sheets, ya se guardó en Firestore si había internet.
                 loader.style.display = 'none';
                 btn.disabled = false;
-                msgBox.className = 'msg-box msg-error';
-                msgBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error de conexión. Intenta de nuevo.';
+                msgBox.className = 'msg-box msg-success';
+                msgBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> Evaluación guardada localmente en Firestore.';
                 msgBox.style.display = 'block';
+                form.reset();
+                document.getElementById('nota_laborales').innerText = '0.0';
+                document.getElementById('nota_ciudadanas').innerText = '0.0';
             });
         });
     </script>

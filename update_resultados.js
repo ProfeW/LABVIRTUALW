@@ -1,43 +1,7 @@
-﻿<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados de Evaluaciones</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --color-primario: #9b59b6; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--color-oscuro); color: var(--color-texto); padding: 20px; line-height: 1.6; background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
-        .contenedor { max-width: 1000px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid var(--color-primario); }
-        h1 { color: var(--color-primario); font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
-        
-        .cargando { text-align: center; font-size: 1.2rem; color: #4facfe; padding: 40px; }
-        
-        /* Acordeones */
-        .acordeon { background: rgba(255,255,255,0.05); margin-bottom: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
-        .acordeon-header { background: rgba(0,0,0,0.3); padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.2rem; transition: 0.3s; }
-        .acordeon-header:hover { background: rgba(155, 89, 182, 0.3); }
-        .acordeon-header i { transition: transform 0.3s; }
-        .acordeon-header.activo i { transform: rotate(180deg); color: var(--color-primario); }
-        .acordeon-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0,0,0,0.2); }
-        .acordeon-body.abierto { padding: 20px; max-height: 2000px; /* valor alto para permitir expansión */ transition: max-height 0.5s ease-in; }
+﻿const fs = require('fs');
+let content = fs.readFileSync('resultados.html', 'utf8');
 
-        /* Tabla de resultados */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        th { background: rgba(155, 89, 182, 0.2); color: #fff; font-weight: 600; }
-        tr:hover { background: rgba(255,255,255,0.05); }
-        .nota-alta { color: #2ecc71; font-weight: bold; }
-        .nota-media { color: #f1c40f; font-weight: bold; }
-        .nota-baja { color: #e74c3c; font-weight: bold; }
-
-        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
-        
-        .sin-datos { text-align: center; color: #aaa; padding: 20px; font-style: italic; }
-
-        /* --- NUEVO LAYOUT Y FILTROS --- */
+const css_add = \
         .layout-grid { display: grid; grid-template-columns: 280px 1fr; gap: 20px; max-width: 1400px; margin: 40px auto; }
         .sidebar-filtros { background: rgba(20,20,35,0.95); padding: 30px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #3498db; height: fit-content; position: sticky; top: 40px; }
         .sidebar-filtros h3 { color: #3498db; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-size: 1.3rem;}
@@ -49,11 +13,11 @@
         .btn-descargar:hover { background: #27ae60; transform: translateY(-2px); }
         .contenedor { max-width: 100%; margin: 0; }
         @media (max-width: 900px) { .layout-grid { grid-template-columns: 1fr; } .sidebar-filtros { position: relative; top: 0; } }
-    </style>
-</head>
-<body>
+\;
+content = content.replace('</style>', css_add + '\n    </style>');
+
+const body_start = \<body>
     <div class="layout-grid">
-        <!-- BARRA LATERAL FILTROS -->
         <aside class="sidebar-filtros">
             <a href="inicio.html" class="btn-volver" style="display:block; margin-bottom:20px;"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
             <h3><i class="fa-solid fa-filter"></i> Filtros</h3>
@@ -95,55 +59,31 @@
             </div>
             <button class="btn-descargar" onclick="descargarExcel()"><i class="fa-solid fa-file-excel"></i> Descargar Excel</button>
         </aside>
-
-        <!-- CONTENIDO PRINCIPAL -->
+        
         <div class="contenedor">
             <h1 style="text-align: left; margin-bottom:5px;"><i class="fa-solid fa-chart-bar"></i> Calificaciones</h1>
             <p style="color:#ddd; margin-bottom: 40px; text-align: left;">Resultados y autoevaluaciones.</p>
+\;
 
-        <div id="cargando" class="cargando">
-            <i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Conectando con la base de datos...
+const old_body = \<body>
+    <div class="contenedor">
+        <a href="inicio.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
+        <h1><i class="fa-solid fa-chart-bar"></i> Historial de Evaluaciones</h1>
+        <p style="text-align: center; color:#ddd; margin-bottom: 40px;">Aquí puedes consultar las calificaciones obtenidas en las diferentes áreas y temas de aprendizaje.</p>\;
+        
+content = content.replace(old_body, body_start);
+
+const old_div = \        <div id="contenedor-resultados" style="display: none;">
+            <!-- Aquí se inyectarán los acordeones dinámicamente -->
         </div>
-
-        <div id="contenedor-resultados" style="display: none;"></div>
+    </div>\;
+const new_div = \        <div id="contenedor-resultados" style="display: none;"></div>
         </div>
-    </div>
+    </div>\;
+content = content.replace(old_div, new_div);
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <!-- Archivo de configuración local -->
-    <script src="auth.js"></script>
-    <script>
-        if (typeof firebase !== 'undefined' && !firebase.apps.length) {
-            firebase.initializeApp({
-                apiKey: "AIzaSyBNjJw7xUyNplALmQBQCapzNzr1C79vTDc",
-                authDomain: "labvirtual-profew.firebaseapp.com",
-                projectId: "labvirtual-profew",
-                storageBucket: "labvirtual-profew.firebasestorage.app",
-                messagingSenderId: "981474222295",
-                appId: "1:981474222295:web:5f413bb53231afc4bb1092"
-            });
-        }
-        const db = typeof firebase !== 'undefined' ? firebase.firestore() : null;
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (!db) {
-                document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-triangle-exclamation'></i> Error: No se pudo conectar a Firebase.</span>";
-                return;
-            }
-
-            const userLocal = JSON.parse(localStorage.getItem('usuario_labvirtual'));
-            if (userLocal) {
-                cargarResultados(userLocal);
-            } else {
-                document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-lock'></i> Debes iniciar sesión para ver los resultados.</span>";
-            }
-        });
-
-                window.datosGlobales = [];
+const js_logic = \
+        window.datosGlobales = [];
         window.datosFiltrados = [];
 
         function cargarResultados(user) {
@@ -208,7 +148,7 @@
                 let grado = "Otros Grados";
                 if (data.grado) grado = "Grado " + data.grado;
                 else {
-                    const gradoMatch = temaCompleto.match(/\b(6|7|8|9|10|11)\b/);
+                    const gradoMatch = temaCompleto.match(/\\b(6|7|8|9|10|11)\\b/);
                     if (gradoMatch) grado = "Grado " + gradoMatch[1];
                 }
 
@@ -228,7 +168,7 @@
                 
                 if (temaCompleto.includes(" - ")) {
                     const partes = temaCompleto.split(" - ");
-                    data._temaGeneral = partes[0].replace(/\b(6|7|8|9|10|11)\b/g, '').trim();
+                    data._temaGeneral = partes[0].replace(/\\b(6|7|8|9|10|11)\\b/g, '').trim();
                     data._subtema = partes[1].trim();
                 } else {
                     data._temaGeneral = temaCompleto;
@@ -236,7 +176,7 @@
                 }
                 
                 if(asignatura === "Autoevaluación") {
-                    data._subtema = "Autoevaluación Periodo " + (perMatch || "?");
+                    data._subtema = \Autoevaluación Periodo \\;
                 }
 
                 return true;
@@ -273,47 +213,47 @@
                 if (nota >= 4.0) notaClass = "nota-alta";
                 else if (nota >= 3.0) notaClass = "nota-media";
 
-                grupos[asig][gr][tem].push(
+                grupos[asig][gr][tem].push(\
                     <tr>
-                        <td> + (data.nombre || data.usuario || "Desconocido") + </td>
-                        <td> + data._subtema + </td>
-                        <td><span class=" + notaClass + "> + nota.toFixed(1) +  / 5.0</span></td>
-                        <td> + fechaStr + </td>
+                        <td>\</td>
+                        <td>\</td>
+                        <td><span class="\">\ / 5.0</span></td>
+                        <td>\</td>
                     </tr>
-                );
+                \);
             });
 
             let html = "";
             Object.keys(grupos).sort().forEach(asig => {
-                html += <div class="acordeon" style="margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius:8px; overflow:hidden;">
+                html += \<div class="acordeon" style="margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius:8px; overflow:hidden;">
                     <div class="acordeon-header activo" onclick="toggleAcordeon(this)" style="background: #2c3e50; color: white; border-radius:0;">
-                        <span><i class="fa-solid fa-book"></i> Asignatura:  + asig + </span><i class="fa-solid fa-chevron-down"></i>
-                    </div><div class="acordeon-body abierto" style="padding: 10px; background: #ecf0f1;">;
+                        <span><i class="fa-solid fa-book"></i> Asignatura: \</span><i class="fa-solid fa-chevron-down"></i>
+                    </div><div class="acordeon-body abierto" style="padding: 10px; background: #ecf0f1;">\;
 
                 Object.keys(grupos[asig]).sort((a,b) => {
                     const numA = parseInt(a.replace('Grado ', '')) || 0;
                     const numB = parseInt(b.replace('Grado ', '')) || 0;
                     return numA - numB;
                 }).forEach(gr => {
-                    html += <div class="acordeon" style="margin-bottom: 8px; border-radius:6px; overflow:hidden;">
+                    html += \<div class="acordeon" style="margin-bottom: 8px; border-radius:6px; overflow:hidden;">
                         <div class="acordeon-header activo" onclick="toggleAcordeon(this)" style="background: #e67e22; color: white; border-radius:0; padding: 12px 15px;">
-                            <span><i class="fa-solid fa-graduation-cap"></i>  + gr + </span><i class="fa-solid fa-chevron-down"></i>
-                        </div><div class="acordeon-body abierto" style="padding: 10px; background: #fdfefe;">;
+                            <span><i class="fa-solid fa-graduation-cap"></i> \</span><i class="fa-solid fa-chevron-down"></i>
+                        </div><div class="acordeon-body abierto" style="padding: 10px; background: #fdfefe;">\;
                     
                     Object.keys(grupos[asig][gr]).sort().forEach(tem => {
-                        html += <div class="acordeon" style="margin-bottom: 5px; border-radius:6px; overflow:hidden;">
+                        html += \<div class="acordeon" style="margin-bottom: 5px; border-radius:6px; overflow:hidden;">
                             <div class="acordeon-header activo" onclick="toggleAcordeon(this)" style="background: #3498db; color: white; border-radius:0; padding: 10px 15px; font-size: 0.95rem;">
-                                <span><i class="fa-solid fa-layer-group"></i> Tema:  + tem + </span><i class="fa-solid fa-chevron-down"></i>
+                                <span><i class="fa-solid fa-layer-group"></i> Tema: \</span><i class="fa-solid fa-chevron-down"></i>
                             </div><div class="acordeon-body abierto" style="padding:0;">
                                 <table style="margin:0; border-radius:0; box-shadow:none;">
                                     <thead><tr><th>Estudiante</th><th>Práctica/Evaluación</th><th>Calificación</th><th>Fecha</th></tr></thead>
-                                    <tbody> + grupos[asig][gr][tem].join('') + </tbody>
+                                    <tbody>\</tbody>
                                 </table>
-                            </div></div>;
+                            </div></div>\;
                     });
-                    html += </div></div>;
+                    html += \</div></div>\;
                 });
-                html += </div></div>;
+                html += \</div></div>\;
             });
 
             contenedor.innerHTML = html;
@@ -330,14 +270,14 @@
                     const dateObj = d.fecha.toDate();
                     fechaStr = dateObj.toLocaleDateString('es-ES') + " " + dateObj.toLocaleTimeString('es-ES');
                 }
-                html += "<tr><td>" + d._asignatura + "</td><td>" + d._grado + "</td><td>" + d._temaGeneral + "</td><td>" + d._subtema + "</td><td>" + (d.nombre || d.usuario) + "</td><td>" + parseFloat(d.puntaje).toFixed(1) + "</td><td>" + fechaStr + "</td></tr>";
+                html += \<tr><td>\</td><td>\</td><td>\</td><td>\</td><td>\</td><td>\</td><td>\</td></tr>\;
             });
             html += "</tbody></table>";
             
             const uri = 'data:application/vnd.ms-excel;base64,';
             const template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body>{table}</body></html>';
             const base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) };
-            const format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) };
+            const format = function(s, c) { return s.replace(/\{(\\w+)\}/g, function(m, p) { return c[p]; }) };
             
             const ctx = { worksheet: 'Calificaciones', table: html };
             const link = document.createElement("a");
@@ -345,16 +285,13 @@
             link.href = uri + base64(format(template, ctx));
             link.click();
         }
+\;
 
-        function toggleAcordeon(elemento) {            elemento.classList.toggle("activo");
-            const body = elemento.nextElementSibling;
-            if (body.classList.contains("abierto")) {
-                body.classList.remove("abierto");
-            } else {
-                body.classList.add("abierto");
-            }
-        }
-    </script>
-</body>
-</html>
+const start_idx = content.indexOf('function cargarResultados');
+const end_idx = content.indexOf('function toggleAcordeon');
+if (start_idx !== -1 && end_idx !== -1) {
+    content = content.substring(0, start_idx) + js_logic + content.substring(end_idx);
+}
 
+fs.writeFileSync('resultados.html', content, 'utf8');
+console.log('Update success!');
