@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -252,19 +252,15 @@
         };
 
         function calificar() {
-            let puntaje = 0;
-            let total = Object.keys(respuestas).length;
-            
-            for (const [name, correcta] of Object.entries(respuestas)) {
-                const seleccion = document.querySelector(\input[name="\"]:checked\);
-                if (seleccion && parseInt(seleccion.value) === correcta) {
-                    puntaje++;
-                }
+            let puntaje = 0; let total = 20;
+            for (let i=1; i<=10; i++) {
+                const math = document.querySelector('input[name="q'+i+'_math"]:checked');
+                const analisis = document.querySelector('input[name="q'+i+'_analisis"]:checked');
+                if (math && math.value === "0") puntaje++;
+                if (analisis && analisis.value === "0") puntaje++;
             }
-            
-            const resDiv = document.getElementById('resultado');
-            resDiv.style.display = 'block';
-            resDiv.innerHTML = \Acertaste <span style="color:#2ecc71;">\</span> de \ pasos.\;
+            const resDiv = document.getElementById('resultado'); resDiv.style.display = 'block';
+            resDiv.innerHTML = `Acertaste <span style="color:#2ecc71;">${puntaje}</span> de ${total} pasos.`;
             
             if (puntaje === total) {
                 resDiv.innerHTML += "<br>¡Excelente! Entendiste perfectamente la matemática y el concepto físico.";
