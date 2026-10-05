@@ -59,30 +59,39 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <!-- Archivo de configuración local -->
     <script src="auth.js"></script>
-
+    <script>
+        if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+            firebase.initializeApp({
+                apiKey: "AIzaSyBNjJw7xUyNplALmQBQCapzNzr1C79vTDc",
+                authDomain: "labvirtual-profew.firebaseapp.com",
+                projectId: "labvirtual-profew",
+                storageBucket: "labvirtual-profew.firebasestorage.app",
+                messagingSenderId: "981474222295",
+                appId: "1:981474222295:web:5f413bb53231afc4bb1092"
+            });
+        }
+        const db = typeof firebase !== 'undefined' ? firebase.firestore() : null;
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Verificar si auth y db existen (vienen de auth.js)
-            if (typeof auth === 'undefined' || typeof db === 'undefined') {
-                document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-triangle-exclamation'></i> Error: No se pudo cargar la configuración de Firebase (auth.js).</span>";
+            if (!db) {
+                document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-triangle-exclamation'></i> Error: No se pudo conectar a Firebase.</span>";
                 return;
             }
 
-            // Esperar a que el usuario se autentique para saber qué datos traer
-            auth.onAuthStateChanged(user => {
-                if (user) {
-                    cargarResultados(user);
-                } else {
-                    document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-lock'></i> Debes iniciar sesión para ver los resultados.</span>";
-                }
-            });
+            const userLocal = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+            if (userLocal) {
+                cargarResultados(userLocal);
+            } else {
+                document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-lock'></i> Debes iniciar sesión para ver los resultados.</span>";
+            }
         });
 
         function cargarResultados(user) {
             // Se puede hacer la consulta para traer TODOS los resultados (si es admin) 
             // O solo los del usuario activo. Por ahora traeremos todos los resultados asociados a este email.
             db.collection('evaluaciones')
-              .where('email', '==', user.email)
+              .where('usuario', '==', user.usuario)
               .orderBy('fecha', 'desc')
               .get()
               .then(snapshot => {

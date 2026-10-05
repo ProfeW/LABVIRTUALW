@@ -140,6 +140,19 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="auth.js"></script>
+    <script>
+        if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+            firebase.initializeApp({
+                apiKey: "AIzaSyBNjJw7xUyNplALmQBQCapzNzr1C79vTDc",
+                authDomain: "labvirtual-profew.firebaseapp.com",
+                projectId: "labvirtual-profew",
+                storageBucket: "labvirtual-profew.firebasestorage.app",
+                messagingSenderId: "981474222295",
+                appId: "1:981474222295:web:5f413bb53231afc4bb1092"
+            });
+        }
+        const db = typeof firebase !== 'undefined' ? firebase.firestore() : null;
+    </script>
 
     <script>
         function calificarYGuardar() {
@@ -156,17 +169,18 @@
             
             resDiv.innerHTML = `Puntaje: ${aciertos} de ${totalPreguntas} aciertos.<br>Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><small style="color:#aaa;"><i class="fa-solid fa-spinner fa-spin"></i> Guardando resultado en Firestore...</small>`;
             
-            if (typeof db !== 'undefined' && typeof auth !== 'undefined') {
-                auth.onAuthStateChanged(user => {
-                    if(user) {
-                        db.collection('evaluaciones').add({
-                            uid: user.uid, email: user.email, tema: "Dinámica 10 - Ley de Hooke", puntaje: nota, fecha: firebase.firestore.FieldValue.serverTimestamp()
-                        }).then(() => {
-                            resDiv.innerHTML = `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><span style='color:#2ecc71;'><i class="fa-solid fa-check-circle"></i> ¡Resultado guardado exitosamente!</span>`;
-                        }).catch(err => { resDiv.innerHTML += `<br><span style='color:#e74c3c;'>Error al guardar: ` + err.message + `</span>`; });
-                    } else { resDiv.innerHTML = `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><span style='color:#e74c3c;'><i class="fa-solid fa-circle-exclamation"></i> Inicia sesión para guardar el resultado.</span>`; }
-                });
-            } else { resDiv.innerHTML += "<br><span style='color:#e74c3c;'>Error de Firestore.</span>"; }
+            const userLocal = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+            if (db && userLocal) {
+                db.collection('evaluaciones').add({
+                    usuario: userLocal.usuario, nombre: userLocal.nombre, tema: "Dinámica 10 - Ley de Hooke", puntaje: nota, fecha: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    resDiv.innerHTML = `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><span style='color:#2ecc71;'><i class="fa-solid fa-check-circle"></i> ¡Resultado guardado exitosamente!</span>`;
+                }).catch(err => { resDiv.innerHTML += `<br><span style='color:#e74c3c;'>Error al guardar: ` + err.message + `</span>`; });
+            } else if (!userLocal) {
+                resDiv.innerHTML = `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><span style='color:#e74c3c;'><i class="fa-solid fa-circle-exclamation"></i> Inicia sesión para guardar el resultado.</span>`;
+            } else {
+                resDiv.innerHTML += "<br><span style='color:#e74c3c;'>Error de inicialización de Firestore.</span>";
+            }
         }
     </script>
 </body>
