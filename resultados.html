@@ -90,9 +90,12 @@
         function cargarResultados(user) {
             // Se puede hacer la consulta para traer TODOS los resultados (si es admin) 
             // O solo los del usuario activo. Por ahora traeremos todos los resultados asociados a este email.
-            db.collection('evaluaciones')
-              .where('usuario', '==', user.usuario)
-              .get()
+            let query = db.collection('evaluaciones');
+            if (user.usuario !== 'profew') {
+                query = query.where('usuario', '==', user.usuario);
+            }
+
+            query.get()
               .then(snapshot => {
                   document.getElementById('cargando').style.display = 'none';
                   const contenedor = document.getElementById('contenedor-resultados');
@@ -103,8 +106,7 @@
                       return;
                   }
 
-                  // Agrupar los resultados por Asignatura/Curso
-                  // Usaremos la primera palabra del "tema" para agrupar (Ej: "Dinámica 10 - Ley de Hooke" => Grupo: "Dinámica 10")
+                  // Agrupar jerárquicamente: Asignatura -> Grado -> TemaGeneral
                   const grupos = {};
 
                   const dataDocs = [];
@@ -117,25 +119,43 @@
 
                   dataDocs.forEach(data => {
                       const temaCompleto = data.tema || "Tema Desconocido";
-                      let categoria = "Otros";
+                      const nombreEst = data.nombre || data.usuario || "Desconocido";
+                      
+                      let asignatura = "Otras Asignaturas";
+                      let grado = "Otros Grados";
+                      let temaGeneral = temaCompleto;
                       let subtema = temaCompleto;
 
-                      // Intentar separar categoría de subtema si existe un guión o patrón similar
-                      if (temaCompleto.includes(" - ")) {
-                          const partes = temaCompleto.split(" - ");
-                          categoria = partes[0].trim();
-                          subtema = partes[1].trim();
-                      } else if (temaCompleto.toLowerCase().includes("física")) {
-                           categoria = "Física";
-                      } else if (temaCompleto.toLowerCase().includes("química")) {
-                           categoria = "Química";
-                      } else if (temaCompleto.toLowerCase().includes("biología")) {
-                           categoria = "Biología";
+                      const lower = temaCompleto.toLowerCase();
+
+                      // Determinar Asignatura
+                      if (lower.includes('fisica') || lower.includes('física') || lower.includes('dinámica') || lower.includes('cinemática') || lower.includes('vector') || lower.includes('newton') || lower.includes('caida') || lower.includes('hooke') || lower.includes('sonido') || lower.includes('acústica') || lower.includes('ondas')) {
+                          asignatura = "Física";
+                      } else if (lower.includes('quimica') || lower.includes('química') || lower.includes('balanceo') || lower.includes('reactivo') || lower.includes('organica') || lower.includes('alcano') || lower.includes('ácido') || lower.includes('solucion') || lower.includes('gases') || lower.includes('masa')) {
+                          asignatura = "Química";
+                      } else if (lower.includes('biologia') || lower.includes('biología') || lower.includes('mendel') || lower.includes('genética') || lower.includes('adn') || lower.includes('ecosistema')) {
+                          asignatura = "Biología";
                       }
 
-                      if (!grupos[categoria]) {
-                          grupos[categoria] = [];
+                      // Determinar Grado
+                      const gradoMatch = temaCompleto.match(/\b(6|7|8|9|10|11)\b/);
+                      if (gradoMatch) {
+                          grado = "Grado " + gradoMatch[1];
                       }
+
+                      // Determinar Tema General y Subtema
+                      if (temaCompleto.includes(" - ")) {
+                          const partes = temaCompleto.split(" - ");
+                          temaGeneral = partes[0].replace(/\b(6|7|8|9|10|11)\b/g, '').trim();
+                          subtema = partes[1].trim();
+                      } else {
+                          temaGeneral = temaCompleto;
+                          subtema = "Evaluación";
+                      }
+
+                      if (!grupos[asignatura]) grupos[asignatura] = {};
+                      if (!grupos[asignatura][grado]) grupos[asignatura][grado] = {};
+                      if (!grupos[asignatura][grado][temaGeneral]) grupos[asignatura][grado][temaGeneral] = [];
 
                       // Formatear fecha
                       let fechaStr = "Desconocida";
@@ -150,8 +170,9 @@
                       if (nota >= 4.0) notaClass = "nota-alta";
                       else if (nota >= 3.0) notaClass = "nota-media";
 
-                      grupos[categoria].push(`
+                      grupos[asignatura][grado][temaGeneral].push(`
                           <tr>
+                              <td>${nombreEst}</td>
                               <td>${subtema}</td>
                               <td><span class="${notaClass}">${nota.toFixed(1)} / 5.0</span></td>
                               <td>${fechaStr}</td>
@@ -159,35 +180,64 @@
                       `);
                   });
 
-                  // Generar el HTML de los acordeones
+                  // Generar el HTML de los acordeones anidados
                   let htmlAcordeones = "";
                   
-                  // Ordenar categorías alfabéticamente
-                  const categoriasOrdenadas = Object.keys(grupos).sort();
-
-                  categoriasOrdenadas.forEach(cat => {
+                  Object.keys(grupos).sort().forEach(asig => {
                       htmlAcordeones += `
-                          <div class="acordeon">
-                              <div class="acordeon-header" onclick="toggleAcordeon(this)">
-                                  <span><i class="fa-solid fa-folder"></i> ${cat}</span>
+                          <div class="acordeon" style="margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius:8px; overflow:hidden;">
+                              <div class="acordeon-header" onclick="toggleAcordeon(this)" style="background: #2c3e50; color: white; border-radius:0;">
+                                  <span><i class="fa-solid fa-book"></i> Asignatura: ${asig}</span>
                                   <i class="fa-solid fa-chevron-down"></i>
                               </div>
-                              <div class="acordeon-body">
-                                  <table>
-                                      <thead>
-                                          <tr>
-                                              <th>Tema Evaluado</th>
-                                              <th>Calificación</th>
-                                              <th>Fecha</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                          ${grupos[cat].join('')}
-                                      </tbody>
-                                  </table>
-                              </div>
-                          </div>
+                              <div class="acordeon-body" style="padding: 10px; background: #ecf0f1;">
                       `;
+
+                      Object.keys(grupos[asig]).sort((a,b) => {
+                          // Sort grades naturally
+                          const numA = parseInt(a.replace('Grado ', '')) || 0;
+                          const numB = parseInt(b.replace('Grado ', '')) || 0;
+                          return numA - numB;
+                      }).forEach(gr => {
+                          htmlAcordeones += `
+                              <div class="acordeon" style="margin-bottom: 8px; border-radius:6px; overflow:hidden;">
+                                  <div class="acordeon-header" onclick="toggleAcordeon(this)" style="background: #e67e22; color: white; border-radius:0; padding: 12px 15px;">
+                                      <span><i class="fa-solid fa-graduation-cap"></i> ${gr}</span>
+                                      <i class="fa-solid fa-chevron-down"></i>
+                                  </div>
+                                  <div class="acordeon-body" style="padding: 10px; background: #fdfefe;">
+                          `;
+                          
+                          Object.keys(grupos[asig][gr]).sort().forEach(tem => {
+                                htmlAcordeones += `
+                                  <div class="acordeon" style="margin-bottom: 5px; border-radius:6px; overflow:hidden;">
+                                      <div class="acordeon-header" onclick="toggleAcordeon(this)" style="background: #3498db; color: white; border-radius:0; padding: 10px 15px; font-size: 0.95rem;">
+                                          <span><i class="fa-solid fa-layer-group"></i> Tema: ${tem}</span>
+                                          <i class="fa-solid fa-chevron-down"></i>
+                                      </div>
+                                      <div class="acordeon-body" style="padding:0;">
+                                          <table style="margin:0; border-radius:0; box-shadow:none;">
+                                              <thead>
+                                                  <tr>
+                                                      <th>Estudiante</th>
+                                                      <th>Práctica/Evaluación</th>
+                                                      <th>Calificación</th>
+                                                      <th>Fecha</th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody>
+                                                  ${grupos[asig][gr][tem].join('')}
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                                `;
+                          });
+
+                          htmlAcordeones += `</div></div>`;
+                      });
+
+                      htmlAcordeones += `</div></div>`;
                   });
 
                   contenedor.innerHTML = htmlAcordeones;
