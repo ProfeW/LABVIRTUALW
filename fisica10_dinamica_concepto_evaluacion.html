@@ -1,55 +1,138 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvaluaciÃ³n - Concepto de Fuerza y Fuerzas Ficticias</title>
+    <title>Evaluación - Concepto de Fuerza</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--color-oscuro); color: var(--color-texto); padding: 20px; line-height: 1.6; background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
-        .contenedor { max-width: 800px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #e74c3c; }
+        .contenedor { max-width: 900px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #e74c3c; }
         h1 { color: #e74c3c; font-size: 2.2rem; margin-bottom: 20px; }
-        .pregunta { margin-bottom: 25px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px; border-left: 4px solid #e74c3c; }
-        label { display: block; margin: 10px 0; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .pregunta-bloque { margin-bottom: 30px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; border-left: 5px solid #e74c3c; }
+        .pregunta-bloque h3 { margin-bottom: 15px; color: #f1c40f; }
+        .sub-pregunta { margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        label { display: block; margin: 8px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; cursor: pointer; transition: 0.3s; }
         label:hover { background: rgba(231, 76, 60, 0.2); }
         input[type="radio"] { margin-right: 10px; }
-        .btn { display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
+        .btn { display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; width: 100%; text-align: center; }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
-        .resultado { font-size: 1.3rem; margin-top: 25px; text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none; }
+        .resultado { font-size: 1.5rem; font-weight: bold; margin-top: 25px; text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none; }
         .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
     </style>
 </head>
 <body>
     <div class="contenedor">
-        <a href="fisica10_dinamica_concepto.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÃ­a</a>
-        <h1><i class="fa-solid fa-graduation-cap"></i> EvaluaciÃ³n (ICFES): Concepto de Fuerza y Fuerzas Ficticias</h1>
-        <p style="color:#ddd; margin-bottom:30px;"><i class="fa-solid fa-triangle-exclamation" style="color:#e74c3c;"></i> <b>Preguntas de AnÃ¡lisis y Casos de AplicaciÃ³n.</b> El resultado se guardarÃ¡ automÃ¡ticamente en tu perfil mediante Firestore al finalizar.</p>
+        <a href="fisica10_dinamica_concepto.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Teoría</a>
+        <h1><i class="fa-solid fa-graduation-cap"></i> Evaluación ICFES: Concepto de Fuerza</h1>
+        <p style="color:#ddd; margin-bottom:30px;"><i class="fa-solid fa-triangle-exclamation" style="color:#e74c3c;"></i> En cada pregunta ICFES deberás resolver la matemática (Paso 1) y justificar físicamente la situación (Paso 2). La nota final sobre 5.0 se enviará a Firestore.</p>
         
         <div id="quiz-container">
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">1. Caso: En un experimento, se observa que el valor de la fuerza neta es de 50N pero un sensor detecta que el objeto avanza a velocidad constante. FÃ­sicamente, Â¿quÃ© nos indica esto sobre el sistema de fuerzas aplicado?</p>
-                <label><input type="radio" name="q0" value="0"> Que existe una fuerza de fricciÃ³n igual y opuesta de 50N que anula la fuerza aplicada.</label>
-                <label><input type="radio" name="q0" value="1"> Que el objeto perdiÃ³ masa repentinamente por el calor.</label>
-                <label><input type="radio" name="q0" value="2"> Que el cronÃ³metro fallÃ³ en la mediciÃ³n de la velocidad.</label>
+            <!-- P1 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 1: Fuerzas concurrentes</h3>
+                <p>Una máquina levanta un motor. El cable ejerce 500 N hacia arriba, pero el peso del motor es 400 N hacia abajo.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la fuerza neta resultante?</p>
+                    <label><input type="radio" name="q1_math" value="0"> 100 N hacia arriba</label>
+                    <label><input type="radio" name="q1_math" value="1"> 900 N hacia arriba</label>
+                    <label><input type="radio" name="q1_math" value="2"> 100 N hacia abajo</label>
+                    <label><input type="radio" name="q1_math" value="3"> 0 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué sucederá físicamente con el motor?</p>
+                    <label><input type="radio" name="q1_analisis" value="0"> El motor acelerará hacia arriba debido a que la fuerza neta rompió el equilibrio estático a favor de la tensión del cable.</label>
+                    <label><input type="radio" name="q1_analisis" value="1"> El motor se quedará quieto porque pesa mucho.</label>
+                    <label><input type="radio" name="q1_analisis" value="2"> El cable se romperá de inmediato.</label>
+                    <label><input type="radio" name="q1_analisis" value="3"> El motor bajará a velocidad constante.</label>
+                </div>
             </div>
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">2. Caso: Si al despejar una fÃ³rmula obtienes una aceleraciÃ³n matemÃ¡tica de -2 m/sÂ², Â¿cÃ³mo interpretas este nÃºmero negativo en el contexto fÃ­sico de un automÃ³vil?</p>
-                <label><input type="radio" name="q1" value="0"> El automÃ³vil estÃ¡ frenando (desacelerando) o moviÃ©ndose en sentido contrario al eje positivo de referencia.</label>
-                <label><input type="radio" name="q1" value="1"> Hubo un error, porque la aceleraciÃ³n en la realidad nunca puede ser negativa.</label>
-                <label><input type="radio" name="q1" value="2"> El automÃ³vil estÃ¡ acelerando cada vez mÃ¡s rÃ¡pido hacia adelante pero en retroceso.</label>
+            
+            <!-- P2 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 2: Fuerza Ficticia</h3>
+                <p>Un tren arranca muy rápido hacia el norte. Una taza de café se desliza hacia el sur sobre la mesa del tren.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo/Clasificación):</b> La fuerza que parece tirar de la taza hacia el sur es:</p>
+                    <label><input type="radio" name="q2_math" value="0"> Una fuerza ficticia (inercial)</label>
+                    <label><input type="radio" name="q2_math" value="1"> Fuerza gravitacional</label>
+                    <label><input type="radio" name="q2_math" value="2"> Fuerza magnética del tren</label>
+                    <label><input type="radio" name="q2_math" value="3"> Fuerza de fricción cinética</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿por qué la taza viaja hacia el sur?</p>
+                    <label><input type="radio" name="q2_analisis" value="0"> La taza en realidad se estaba quedando quieta en su lugar original por inercia, mientras que el tren se movía hacia el norte por debajo de ella.</label>
+                    <label><input type="radio" name="q2_analisis" value="1"> Porque el motor del tren empujó el aire dentro de la cabina hacia atrás.</label>
+                    <label><input type="radio" name="q2_analisis" value="2"> Porque la tierra giró en dirección contraria.</label>
+                    <label><input type="radio" name="q2_analisis" value="3"> Porque todas las tazas buscan el equilibrio termodinámico.</label>
+                </div>
             </div>
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">3. Caso: Un bulto de cafÃ© reposa en el suelo. Se le aplica una fuerza de 100N hacia arriba, pero el bulto pesa 150N. Â¿QuÃ© significado fÃ­sico tiene el hecho de que 100N sea menor que el peso?</p>
-                <label><input type="radio" name="q2" value="0"> El bulto no se levantarÃ¡ del suelo y la fuerza normal disminuirÃ¡ a 50N.</label>
-                <label><input type="radio" name="q2" value="1"> El bulto se moverÃ¡ hacia abajo rompiendo el suelo.</label>
-                <label><input type="radio" name="q2" value="2"> El bulto comenzarÃ¡ a flotar lentamente.</label>
+
+            <!-- P3 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 3: Suma 2D (Concepto Pitágoras)</h3>
+                <p>Dos tractores tiran de una gran roca. Uno jala hacia el norte con 30 kN y el otro al este con 40 kN.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> Usando Pitágoras (R² = A² + B²), ¿cuál es la magnitud de la resultante?</p>
+                    <label><input type="radio" name="q3_math" value="0"> 50 kN</label>
+                    <label><input type="radio" name="q3_math" value="1"> 70 kN</label>
+                    <label><input type="radio" name="q3_math" value="2"> 10 kN</label>
+                    <label><input type="radio" name="q3_math" value="3"> 35 kN</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué no sumaron simplemente 30 + 40 = 70 kN?</p>
+                    <label><input type="radio" name="q3_analisis" value="0"> Porque la fuerza es una magnitud vectorial. Su dirección importa. Tirar en ángulos perpendiculares hace que la eficiencia del esfuerzo combinado sea la diagonal geométrica, perdiendo fuerza neta lineal.</label>
+                    <label><input type="radio" name="q3_analisis" value="1"> Porque la roca es redonda.</label>
+                    <label><input type="radio" name="q3_analisis" value="2"> Porque un tractor siempre tiene más potencia que el otro.</label>
+                    <label><input type="radio" name="q3_analisis" value="3"> Es un error, deberían sumar 70 kN siempre.</label>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 4: Fuerza Normal</h3>
+                <p>Una pared recibe el empuje de una persona que se apoya en ella con 200 N horizontalmente. La pared no cede.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es el valor de la Fuerza Normal que ejerce la pared?</p>
+                    <label><input type="radio" name="q4_math" value="0"> 200 N horizontal hacia la persona</label>
+                    <label><input type="radio" name="q4_math" value="1"> 200 N vertical hacia arriba</label>
+                    <label><input type="radio" name="q4_math" value="2"> 0 N</label>
+                    <label><input type="radio" name="q4_math" value="3"> 400 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Si la Fuerza Normal siempre contrarresta, ¿qué pasaría si la pared solo pudiera ejercer 150 N de Fuerza Normal?</p>
+                    <label><input type="radio" name="q4_analisis" value="0"> Significaría que la resistencia estructural de los ladrillos falló y la pared se rompería o derrumbaría ante el empuje mayor de 200 N.</label>
+                    <label><input type="radio" name="q4_analisis" value="1"> La persona flotaría ligeramente.</label>
+                    <label><input type="radio" name="q4_analisis" value="2"> La pared simplemente se encogería un poco.</label>
+                    <label><input type="radio" name="q4_analisis" value="3"> La persona resbalaría hacia abajo.</label>
+                </div>
+            </div>
+
+            <!-- P5 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 5: Tensión de Cuerdas</h3>
+                <p>Un candelabro que pesa 600 N cuelga de dos cuerdas idénticas ancladas al techo. El sistema está simétrico y quieto.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> Si el ángulo permite que compartan la carga exactamente a la mitad de forma vertical, ¿cuánta tensión soporta la componente vertical de cada cuerda?</p>
+                    <label><input type="radio" name="q5_math" value="0"> 300 N cada una</label>
+                    <label><input type="radio" name="q5_math" value="1"> 600 N cada una</label>
+                    <label><input type="radio" name="q5_math" value="2"> 0 N</label>
+                    <label><input type="radio" name="q5_math" value="3"> 1200 N en total</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿qué asegura que no se caiga?</p>
+                    <label><input type="radio" name="q5_analisis" value="0"> El equilibrio estático. La suma de las fuerzas hacia arriba (Tensiones) anula exactamente la fuerza gravitacional hacia abajo, manteniendo la aceleración en cero.</label>
+                    <label><input type="radio" name="q5_analisis" value="1"> El aire acondicionado empujando hacia arriba.</label>
+                    <label><input type="radio" name="q5_analisis" value="2"> Porque el peso del candelabro es una fuerza irreal.</label>
+                    <label><input type="radio" name="q5_analisis" value="3"> Porque el techo ejerce magnetismo sobre las cuerdas.</label>
+                </div>
             </div>
         </div>
         
-        <button class="btn" onclick="calificarYGuardar()"><i class="fa-solid fa-paper-plane"></i> Enviar EvaluaciÃ³n</button>
+        <button class="btn" onclick="calificarYGuardar()"><i class="fa-solid fa-paper-plane"></i> Finalizar, Calificar y Enviar</button>
         <div id="resultado" class="resultado"></div>
     </div>
     
@@ -61,35 +144,41 @@
 
     <script>
         function calificarYGuardar() {
-            let puntaje = 0;
-            const res = [0, 0, 0];
-            for (let i = 0; i < 3; i++) {
-                const seleccion = document.querySelector('input[name="q'+i+'"]:checked');
-                if(seleccion && parseInt(seleccion.value) === res[i]) puntaje++;
+            let aciertos = 0;
+            let totalPreguntas = 10; // 5 de math + 5 de analisis
+            for (let i=1; i<=5; i++) {
+                const math = document.querySelector('input[name="q'+i+'_math"]:checked');
+                const analisis = document.querySelector('input[name="q'+i+'_analisis"]:checked');
+                if (math && math.value === "0") aciertos++;
+                if (analisis && analisis.value === "0") aciertos++;
             }
-            const nota = (puntaje / 3) * 5.0; 
+            
+            // Nota sobre 5.0
+            const nota = (aciertos / totalPreguntas) * 5.0; 
             const resDiv = document.getElementById('resultado');
             resDiv.style.display = 'block';
-            resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><small style="color:#aaa;"><i class="fa-solid fa-spinner fa-spin"></i> Guardando resultado en Firestore...</small>;
+            let colorNota = nota >= 3.0 ? "#2ecc71" : "#e74c3c";
             
-            // Guardar en Firestore
+            resDiv.innerHTML = `Puntaje: ${aciertos} de ${totalPreguntas} aciertos.<br>`;
+            resDiv.innerHTML += `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><small style="color:#aaa;"><i class="fa-solid fa-spinner fa-spin"></i> Guardando resultado en Firestore...</small>`;
+            
             if (typeof db !== 'undefined' && typeof auth !== 'undefined') {
                 auth.onAuthStateChanged(user => {
                     if(user) {
                         db.collection('evaluaciones').add({
                             uid: user.uid,
                             email: user.email,
-                            tema: "DinÃ¡mica 10 - Concepto de Fuerza y Fuerzas Ficticias",
+                            tema: "Dinámica 10 - Concepto de Fuerza",
                             puntaje: nota,
                             fecha: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
-                            resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><span style='color:#2ecc71;'><i class="fa-solid fa-check-circle"></i> Â¡Resultado guardado exitosamente en tu perfil!</span>;
+                            resDiv.innerHTML = `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><span style='color:#2ecc71;'><i class="fa-solid fa-check-circle"></i> ¡Resultado guardado exitosamente en tu perfil! Puedes verlo en Mis Calificaciones.</span>`;
                         }).catch(err => {
                             console.error("Error guardando:", err);
-                            resDiv.innerHTML += <br><span style='color:#e74c3c;'>Error al guardar:  + err.message + </span>;
+                            resDiv.innerHTML += `<br><span style='color:#e74c3c;'>Error al guardar: ` + err.message + `</span>`;
                         });
                     } else {
-                        resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><span style='color:#e74c3c;'><i class="fa-solid fa-circle-exclamation"></i> Inicia sesiÃ³n para que el resultado se guarde en tu cuenta.</span>;
+                        resDiv.innerHTML = `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><span style='color:#e74c3c;'><i class="fa-solid fa-circle-exclamation"></i> Inicia sesión para que el resultado se guarde en tu cuenta.</span>`;
                     }
                 });
             } else {

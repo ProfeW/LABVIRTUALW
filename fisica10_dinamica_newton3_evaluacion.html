@@ -1,59 +1,141 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvaluaciÃ³n - Tercera Ley de Newton (AcciÃ³n y ReacciÃ³n)</title>
+    <title>Evaluación - Tercera Ley de Newton</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--color-oscuro); color: var(--color-texto); padding: 20px; line-height: 1.6; background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
-        .contenedor { max-width: 800px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #e74c3c; }
+        .contenedor { max-width: 900px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #e74c3c; }
         h1 { color: #e74c3c; font-size: 2.2rem; margin-bottom: 20px; }
-        .pregunta { margin-bottom: 25px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px; border-left: 4px solid #e74c3c; }
-        label { display: block; margin: 10px 0; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .pregunta-bloque { margin-bottom: 30px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; border-left: 5px solid #e74c3c; }
+        .pregunta-bloque h3 { margin-bottom: 15px; color: #f1c40f; }
+        .sub-pregunta { margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        label { display: block; margin: 8px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; cursor: pointer; transition: 0.3s; }
         label:hover { background: rgba(231, 76, 60, 0.2); }
         input[type="radio"] { margin-right: 10px; }
-        .btn { display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
+        .btn { display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; width: 100%; text-align: center; }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
-        .resultado { font-size: 1.3rem; margin-top: 25px; text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none; }
+        .resultado { font-size: 1.5rem; font-weight: bold; margin-top: 25px; text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none; }
         .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
         .btn-volver:hover { color: #fff; transform: translateX(-5px); }
     </style>
 </head>
 <body>
     <div class="contenedor">
-        <a href="fisica10_dinamica_newton3.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÃ­a</a>
-        <h1><i class="fa-solid fa-graduation-cap"></i> EvaluaciÃ³n (ICFES): Tercera Ley de Newton (AcciÃ³n y ReacciÃ³n)</h1>
-        <p style="color:#ddd; margin-bottom:30px;"><i class="fa-solid fa-triangle-exclamation" style="color:#e74c3c;"></i> <b>Preguntas de AnÃ¡lisis y Casos de AplicaciÃ³n.</b> El resultado se guardarÃ¡ automÃ¡ticamente en tu perfil mediante Firestore al finalizar.</p>
+        <a href="fisica10_dinamica_newton3.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Teoría</a>
+        <h1><i class="fa-solid fa-graduation-cap"></i> Evaluación ICFES: Tercera Ley de Newton</h1>
+        <p style="color:#ddd; margin-bottom:30px;"><i class="fa-solid fa-triangle-exclamation" style="color:#e74c3c;"></i> Analiza cada caso físico. El resultado se guardará en tu perfil.</p>
         
         <div id="quiz-container">
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">1. Caso: En un experimento, se observa que el valor de la fuerza neta es de 50N pero un sensor detecta que el objeto avanza a velocidad constante. FÃ­sicamente, Â¿quÃ© nos indica esto sobre el sistema de fuerzas aplicado?</p>
-                <label><input type="radio" name="q0" value="0"> Que existe una fuerza de fricciÃ³n igual y opuesta de 50N que anula la fuerza aplicada.</label>
-                <label><input type="radio" name="q0" value="1"> Que el objeto perdiÃ³ masa repentinamente por el calor.</label>
-                <label><input type="radio" name="q0" value="2"> Que el cronÃ³metro fallÃ³ en la mediciÃ³n de la velocidad.</label>
+            <!-- P1 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 1: Golpe a la Pared</h3>
+                <p>Una persona enfurecida golpea una pared de concreto sólido con su puño, aplicando una fuerza de 1000 N.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la magnitud de la fuerza que la pared ejerce de vuelta sobre los huesos de su puño?</p>
+                    <label><input type="radio" name="q1_math" value="0"> 1000 N</label>
+                    <label><input type="radio" name="q1_math" value="1"> 0 N, las paredes no hacen fuerza</label>
+                    <label><input type="radio" name="q1_math" value="2"> 500 N porque absorbe impacto</label>
+                    <label><input type="radio" name="q1_math" value="3"> 2000 N por el rebote</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿por qué puede llegar a romperse la mano pero la pared no?</p>
+                    <label><input type="radio" name="q1_analisis" value="0"> Aunque ambos reciben exactamente 1000 N, el límite elástico y la resistencia estructural de los huesos humanos es inferior al del concreto armado. Los 1000 N son suficientes para fracturar el hueso, pero no para quebrar el concreto.</label>
+                    <label><input type="radio" name="q1_analisis" value="1"> Porque la pared hizo una fuerza mayor escondida.</label>
+                    <label><input type="radio" name="q1_analisis" value="2"> Porque la persona usó mucha aceleración inicial.</label>
+                    <label><input type="radio" name="q1_analisis" value="3"> Porque las fuerzas de reacción no se sienten de inmediato.</label>
+                </div>
             </div>
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">2. Caso: Si al despejar una fÃ³rmula obtienes una aceleraciÃ³n matemÃ¡tica de -2 m/sÂ², Â¿cÃ³mo interpretas este nÃºmero negativo en el contexto fÃ­sico de un automÃ³vil?</p>
-                <label><input type="radio" name="q1" value="0"> El automÃ³vil estÃ¡ frenando (desacelerando) o moviÃ©ndose en sentido contrario al eje positivo de referencia.</label>
-                <label><input type="radio" name="q1" value="1"> Hubo un error, porque la aceleraciÃ³n en la realidad nunca puede ser negativa.</label>
-                <label><input type="radio" name="q1" value="2"> El automÃ³vil estÃ¡ acelerando cada vez mÃ¡s rÃ¡pido hacia adelante pero en retroceso.</label>
+
+            <!-- P2 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 2: El Vuelo del Pájaro</h3>
+                <p>Para poder elevarse en el aire y mantenerse en vuelo, un pájaro bate sus alas hacia abajo.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Identificación):</b> Si el pájaro aplica 5 N de fuerza hacia abajo sobre el aire, ¿qué hace el aire?</p>
+                    <label><input type="radio" name="q2_math" value="0"> El aire aplica 5 N de fuerza hacia arriba sobre las alas del pájaro.</label>
+                    <label><input type="radio" name="q2_math" value="1"> El aire se escapa hacia los lados impidiendo el vuelo.</label>
+                    <label><input type="radio" name="q2_math" value="2"> El aire aplica una fuerza de succión de 10 N.</label>
+                    <label><input type="radio" name="q2_math" value="3"> El aire aplica 0 N porque es un gas.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿por qué esto permite volar al ave?</p>
+                    <label><input type="radio" name="q2_analisis" value="0"> Es pura acción y reacción. Al empujar una masa de aire hacia abajo, la reacción del aire empuja al ave hacia arriba. Si esta fuerza de reacción supera o iguala el peso del ave, esta puede elevarse o mantenerse en vuelo.</label>
+                    <label><input type="radio" name="q2_analisis" value="1"> Porque las alas tienen una forma aerodinámica que corta el viento.</label>
+                    <label><input type="radio" name="q2_analisis" value="2"> Porque los pájaros tienen huesos huecos sin gravedad.</label>
+                    <label><input type="radio" name="q2_analisis" value="3"> Porque el aleteo calienta el aire y el aire caliente sube.</label>
+                </div>
             </div>
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">3. Caso: Un bulto de cafÃ© reposa en el suelo. Se le aplica una fuerza de 100N hacia arriba, pero el bulto pesa 150N. Â¿QuÃ© significado fÃ­sico tiene el hecho de que 100N sea menor que el peso?</p>
-                <label><input type="radio" name="q2" value="0"> El bulto no se levantarÃ¡ del suelo y la fuerza normal disminuirÃ¡ a 50N.</label>
-                <label><input type="radio" name="q2" value="1"> El bulto se moverÃ¡ hacia abajo rompiendo el suelo.</label>
-                <label><input type="radio" name="q2" value="2"> El bulto comenzarÃ¡ a flotar lentamente.</label>
+
+            <!-- P3 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 3: Choque de Autos (Ligero vs Pesado)</h3>
+                <p>Un enorme camión de 10,000 kg choca de frente contra un pequeño carro compacto de 1,000 kg.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo Ficticio):</b> Si la fuerza del choque mutuo es de 50,000 N, ¿qué fuerza experimenta el camión y qué fuerza experimenta el carro compacto?</p>
+                    <label><input type="radio" name="q3_math" value="0"> Ambos experimentan exactamente 50,000 N.</label>
+                    <label><input type="radio" name="q3_math" value="1"> El carro experimenta 50,000 N y el camión 5,000 N.</label>
+                    <label><input type="radio" name="q3_math" value="2"> El camión experimenta 50,000 N y el carro 500,000 N.</label>
+                    <label><input type="radio" name="q3_math" value="3"> El choque se cancela mutuamente quedando en 0 N.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Si la fuerza recibida es idéntica para ambos, ¿por qué los ocupantes del auto pequeño sufren más daño y su auto sale despedido hacia atrás?</p>
+                    <label><input type="radio" name="q3_analisis" value="0"> Por la Segunda Ley. Al dividir los mismos 50,000 N entre la poca masa del carro, este sufre una aceleración brutal. Al dividir 50,000 N entre la enorme masa del camión, su aceleración de frenado es pequeña y segura para sus ocupantes.</label>
+                    <label><input type="radio" name="q3_analisis" value="1"> Porque los carros pequeños están hechos de materiales más baratos que no absorben el golpe.</label>
+                    <label><input type="radio" name="q3_analisis" value="2"> Porque la fuerza se multiplica al entrar en un volumen más pequeño (el carro).</label>
+                    <label><input type="radio" name="q3_analisis" value="3"> Es un mito visual, los ocupantes del camión sufren lo mismo internamente.</label>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 4: Manguera de Bomberos</h3>
+                <p>Cuando un bombero abre la válvula de una manguera de alta presión, grandes cantidades de agua salen disparadas hacia el frente a gran velocidad.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Identificación):</b> Como resultado, ¿qué fuerza experimenta el bombero?</p>
+                    <label><input type="radio" name="q4_math" value="0"> Un fuerte empuje hacia atrás (fuerza de reacción igual al empuje que se le da al agua).</label>
+                    <label><input type="radio" name="q4_math" value="1"> Un empuje hacia adelante por el flujo del agua.</label>
+                    <label><input type="radio" name="q4_math" value="2"> 0 N, la presión solo afecta al agua.</label>
+                    <label><input type="radio" name="q4_math" value="3"> Una succión hacia el hidrante.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué esto requiere que a veces sean dos o tres bomberos sosteniendo la manguera?</p>
+                    <label><input type="radio" name="q4_analisis" value="0"> Porque la fuerza (Acción) necesaria para acelerar cientos de litros de agua por minuto hacia adelante es masiva. La manguera genera una reacción idéntica hacia atrás, que un solo bombero por su masa y fricción de zapatos no puede contrarrestar (saldría volando).</label>
+                    <label><input type="radio" name="q4_analisis" value="1"> Porque la manguera es demasiado pesada para levantarla.</label>
+                    <label><input type="radio" name="q4_analisis" value="2"> Porque el agua se enfría y requiere calor humano.</label>
+                    <label><input type="radio" name="q4_analisis" value="3"> Porque el motor del camión genera vibraciones peligrosas en la punta de la manguera.</label>
+                </div>
+            </div>
+
+            <!-- P5 -->
+            <div class="pregunta-bloque">
+                <h3>Pregunta 5: Saltando hacia la Luna (Gravedad mutua)</h3>
+                <p>Un astronauta que pesa solo 110 N en la Luna salta impulsándose con sus piernas hacia arriba.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la magnitud de la fuerza con la que la Luna lo atrae de vuelta, y con cuánta fuerza atrae él a la Luna?</p>
+                    <label><input type="radio" name="q5_math" value="0"> La Luna lo atrae con 110 N; él atrae a la Luna con 110 N.</label>
+                    <label><input type="radio" name="q5_math" value="1"> La Luna lo atrae con 110 N; él no atrae a la Luna.</label>
+                    <label><input type="radio" name="q5_math" value="2"> La Luna lo atrae con 600 N (gravedad terrestre); él con 110 N.</label>
+                    <label><input type="radio" name="q5_math" value="3"> La Luna no atrae nada, él simplemente cae por inercia cósmica.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Si la atracción es exactamente mutua e igual (110 N), ¿por qué él cae de vuelta a la superficie lunar y no se ve que la Luna suba hacia él?</p>
+                    <label><input type="radio" name="q5_analisis" value="0"> Nuevamente, la aceleración se obtiene dividiendo la fuerza entre la masa. La aceleración que sufren la Luna entera por 110 N es tan infinitesimalmente pequeña que el movimiento total lo realiza el cuerpo del astronauta (que tiene mucha menos masa).</label>
+                    <label><input type="radio" name="q5_analisis" value="1"> Porque en realidad la fuerza de reacción se canceló por el traje espacial.</label>
+                    <label><input type="radio" name="q5_analisis" value="2"> Porque la Tercera Ley de Newton no se aplica a distancias gravitacionales fuera de la atmósfera.</label>
+                    <label><input type="radio" name="q5_analisis" value="3"> Porque él saltó de forma incorrecta para atraer la luna entera.</label>
+                </div>
             </div>
         </div>
         
-        <button class="btn" onclick="calificarYGuardar()"><i class="fa-solid fa-paper-plane"></i> Enviar EvaluaciÃ³n</button>
+        <button class="btn" onclick="calificarYGuardar()"><i class="fa-solid fa-paper-plane"></i> Finalizar, Calificar y Enviar</button>
         <div id="resultado" class="resultado"></div>
     </div>
     
-    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -61,39 +143,30 @@
 
     <script>
         function calificarYGuardar() {
-            let puntaje = 0;
-            const res = [0, 0, 0];
-            for (let i = 0; i < 3; i++) {
-                const seleccion = document.querySelector('input[name="q'+i+'"]:checked');
-                if(seleccion && parseInt(seleccion.value) === res[i]) puntaje++;
+            let aciertos = 0; let totalPreguntas = 10;
+            for (let i=1; i<=5; i++) {
+                const math = document.querySelector('input[name="q'+i+'_math"]:checked');
+                const analisis = document.querySelector('input[name="q'+i+'_analisis"]:checked');
+                if (math && math.value === "0") aciertos++;
+                if (analisis && analisis.value === "0") aciertos++;
             }
-            const nota = (puntaje / 3) * 5.0; 
-            const resDiv = document.getElementById('resultado');
-            resDiv.style.display = 'block';
-            resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><small style="color:#aaa;"><i class="fa-solid fa-spinner fa-spin"></i> Guardando resultado en Firestore...</small>;
+            const nota = (aciertos / totalPreguntas) * 5.0; 
+            const resDiv = document.getElementById('resultado'); resDiv.style.display = 'block';
+            let colorNota = nota >= 3.0 ? "#2ecc71" : "#e74c3c";
+            
+            resDiv.innerHTML = `Puntaje: ${aciertos} de ${totalPreguntas} aciertos.<br>Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><small style="color:#aaa;"><i class="fa-solid fa-spinner fa-spin"></i> Guardando resultado en Firestore...</small>`;
             
             if (typeof db !== 'undefined' && typeof auth !== 'undefined') {
                 auth.onAuthStateChanged(user => {
                     if(user) {
                         db.collection('evaluaciones').add({
-                            uid: user.uid,
-                            email: user.email,
-                            tema: "DinÃ¡mica 10 - Tercera Ley de Newton (AcciÃ³n y ReacciÃ³n)",
-                            puntaje: nota,
-                            fecha: firebase.firestore.FieldValue.serverTimestamp()
+                            uid: user.uid, email: user.email, tema: "Dinámica 10 - Tercera Ley de Newton", puntaje: nota, fecha: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
-                            resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><span style='color:#2ecc71;'><i class="fa-solid fa-check-circle"></i> Â¡Resultado guardado exitosamente en tu perfil!</span>;
-                        }).catch(err => {
-                            console.error("Error guardando:", err);
-                            resDiv.innerHTML += <br><span style='color:#e74c3c;'>Error al guardar:  + err.message + </span>;
-                        });
-                    } else {
-                        resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><span style='color:#e74c3c;'><i class="fa-solid fa-circle-exclamation"></i> Inicia sesiÃ³n para que el resultado se guarde en tu cuenta.</span>;
-                    }
+                            resDiv.innerHTML = `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><span style='color:#2ecc71;'><i class="fa-solid fa-check-circle"></i> ¡Resultado guardado exitosamente!</span>`;
+                        }).catch(err => { resDiv.innerHTML += `<br><span style='color:#e74c3c;'>Error al guardar: ` + err.message + `</span>`; });
+                    } else { resDiv.innerHTML = `Tu calificación es: <b style="color:${colorNota}; font-size:2rem;">` + nota.toFixed(1) + ` / 5.0</b><br><br><span style='color:#e74c3c;'><i class="fa-solid fa-circle-exclamation"></i> Inicia sesión para guardar el resultado.</span>`; }
                 });
-            } else {
-                resDiv.innerHTML += "<br><span style='color:#e74c3c;'>Error: No se pudo conectar con Firestore.</span>";
-            }
+            } else { resDiv.innerHTML += "<br><span style='color:#e74c3c;'>Error de Firestore.</span>"; }
         }
     </script>
 </body>
