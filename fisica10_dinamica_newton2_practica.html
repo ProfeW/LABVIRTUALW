@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica - Segunda Ley de Newton (F=m*a) y el Peso</title>
+    <title>Práctica - Segunda Ley de Newton</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--color-oscuro); color: var(--color-texto); padding: 20px; line-height: 1.6; background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
-        .contenedor { max-width: 800px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #2ecc71; }
+        .contenedor { max-width: 900px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #2ecc71; }
         h1 { color: #2ecc71; font-size: 2.2rem; margin-bottom: 20px; }
-        .pregunta { margin-bottom: 25px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px; border-left: 4px solid #2ecc71; }
-        label { display: block; margin: 10px 0; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .pregunta-bloque { margin-bottom: 30px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; border-left: 5px solid #2ecc71; }
+        .pregunta-bloque h3 { margin-bottom: 15px; color: #f1c40f; }
+        .sub-pregunta { margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        label { display: block; margin: 8px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; cursor: pointer; transition: 0.3s; }
         label:hover { background: rgba(46, 204, 113, 0.2); }
         input[type="radio"] { margin-right: 10px; }
-        .btn { display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
+        .btn { display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; width: 100%; text-align: center; }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4); }
         .resultado { font-size: 1.5rem; font-weight: bold; margin-top: 25px; color: #f1c40f; text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none; }
         .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
@@ -24,45 +26,253 @@
 </head>
 <body>
     <div class="contenedor">
-        <a href="fisica10_dinamica_newton2.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÃ­a</a>
-        <h1><i class="fa-solid fa-dumbbell"></i> PrÃ¡ctica: Segunda Ley de Newton (F=m*a) y el Peso</h1>
-        <p style="color:#ddd; margin-bottom:30px;">Resuelve los siguientes ejercicios de prÃ¡ctica. Selecciona la respuesta correcta y haz clic en calificar.</p>
+        <a href="fisica10_dinamica_newton2.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Teoría</a>
+        <h1><i class="fa-solid fa-dumbbell"></i> Práctica en Cadena: Segunda Ley de Newton</h1>
+        <p style="color:#ddd; margin-bottom:30px;">A continuación resolverás 10 ejercicios paso a paso. En cada uno, primero realizarás el cálculo matemático y luego seleccionarás la interpretación física de ese resultado.</p>
         
         <div id="quiz-container">
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">1. Si la masa de un objeto es 5 kg y su aceleraciÃ³n es 3 m/sÂ², Â¿cuÃ¡l es la magnitud de la fuerza?</p>
-                <label><input type="radio" name="q0" value="0"> 15 N</label>
-                <label><input type="radio" name="q0" value="1"> 8 N</label>
-                <label><input type="radio" name="q0" value="2"> 1.6 N</label>
+            <!-- Ejercicio 1 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 1: Calculando la Fuerza</h3>
+                <p>Un bulto de café tiene una masa de 50 kg. Si quieres acelerarlo a 2 m/s² sobre una superficie lisa, ¿qué fuerza debes aplicar?</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> Selecciona el valor matemático correcto.</p>
+                    <label><input type="radio" name="q1_math" value="0"> 100 N</label>
+                    <label><input type="radio" name="q1_math" value="1"> 25 N</label>
+                    <label><input type="radio" name="q1_math" value="2"> 52 N</label>
+                    <label><input type="radio" name="q1_math" value="3"> 10 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué significa físicamente este resultado numérico?</p>
+                    <label><input type="radio" name="q1_analisis" value="0"> Es la fuerza neta exacta necesaria para vencer la inercia de esos 50 kg y lograr ese cambio de velocidad.</label>
+                    <label><input type="radio" name="q1_analisis" value="1"> Significa que el bulto pesa esa cantidad en la Tierra.</label>
+                    <label><input type="radio" name="q1_analisis" value="2"> Es la fricción máxima que soporta el bulto antes de moverse.</label>
+                    <label><input type="radio" name="q1_analisis" value="3"> Es la cantidad de energía que se pierde como calor.</label>
+                </div>
             </div>
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">2. Si tienes 2000 gramos de masa, Â¿cuÃ¡ntos kg son antes de usar la fÃ³rmula F=m*a?</p>
-                <label><input type="radio" name="q1" value="0"> 2 kg</label>
-                <label><input type="radio" name="q1" value="1"> 20 kg</label>
-                <label><input type="radio" name="q1" value="2"> 0.2 kg</label>
+
+            <!-- Ejercicio 2 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 2: Conversión y Aceleración</h3>
+                <p>A un carro de carga de 2 toneladas (2000 kg) se le aplica una fuerza del motor de 6000 N. ¿Cuál será su aceleración?</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> Selecciona el valor matemático correcto.</p>
+                    <label><input type="radio" name="q2_math" value="0"> 3 m/s²</label>
+                    <label><input type="radio" name="q2_math" value="1"> 12,000 m/s²</label>
+                    <label><input type="radio" name="q2_math" value="2"> 0.3 m/s²</label>
+                    <label><input type="radio" name="q2_math" value="3"> 30 m/s²</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué nos dice este número sobre el movimiento del carro?</p>
+                    <label><input type="radio" name="q2_analisis" value="0"> Por cada segundo que pasa, la velocidad del carro aumenta en esa cantidad de metros por segundo.</label>
+                    <label><input type="radio" name="q2_analisis" value="1"> El carro avanza esa cantidad de metros y luego se detiene.</label>
+                    <label><input type="radio" name="q2_analisis" value="2"> El carro necesita esa cantidad de segundos para empezar a moverse.</label>
+                    <label><input type="radio" name="q2_analisis" value="3"> La masa del carro está disminuyendo por segundo.</label>
+                </div>
             </div>
-            <div class="pregunta">
-                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">3. Al despejar la masa en F=m*a, la fÃ³rmula correcta es:</p>
-                <label><input type="radio" name="q2" value="0"> m = F / a</label>
-                <label><input type="radio" name="q2" value="1"> m = F * a</label>
-                <label><input type="radio" name="q2" value="2"> m = a / F</label>
+            
+            <!-- Ejercicio 3 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 3: Despejando la Masa</h3>
+                <p>Se aplica una fuerza constante de 200 N a una caja misteriosa, la cual adquiere una aceleración de 0.5 m/s². ¿Cuál es su masa?</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> Selecciona el valor matemático correcto.</p>
+                    <label><input type="radio" name="q3_math" value="0"> 400 kg</label>
+                    <label><input type="radio" name="q3_math" value="1"> 100 kg</label>
+                    <label><input type="radio" name="q3_math" value="2"> 40 kg</label>
+                    <label><input type="radio" name="q3_math" value="3"> 200.5 kg</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿por qué una fuerza de 200 N produce una aceleración tan baja (0.5 m/s²)?</p>
+                    <label><input type="radio" name="q3_analisis" value="0"> Porque la caja tiene mucha inercia, lo que hace que se resista fuertemente a cambiar su estado de movimiento.</label>
+                    <label><input type="radio" name="q3_analisis" value="1"> Porque la fuerza de gravedad anula casi toda la fuerza de 200 N.</label>
+                    <label><input type="radio" name="q3_analisis" value="2"> Porque la caja está hecha de un material ligero.</label>
+                    <label><input type="radio" name="q3_analisis" value="3"> Porque la aceleración no depende de la masa.</label>
+                </div>
             </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 4: Cálculo del Peso</h3>
+                <p>Una herramienta de agricultura tiene una masa de 15 kg. Calcula su peso exacto en la Tierra (g = 9.8 m/s²).</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> Selecciona el valor correcto.</p>
+                    <label><input type="radio" name="q4_math" value="0"> 147 N</label>
+                    <label><input type="radio" name="q4_math" value="1"> 15 N</label>
+                    <label><input type="radio" name="q4_math" value="2"> 1.53 N</label>
+                    <label><input type="radio" name="q4_math" value="3"> 150 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Si llevamos esa misma herramienta a la Luna, ¿qué ocurriría con estos valores?</p>
+                    <label><input type="radio" name="q4_analisis" value="0"> Su masa sigue siendo la misma, pero su peso (fuerza) sería mucho menor debido a la menor gravedad lunar.</label>
+                    <label><input type="radio" name="q4_analisis" value="1"> Su masa y su peso cambiarían drásticamente porque en el espacio no hay gravedad.</label>
+                    <label><input type="radio" name="q4_analisis" value="2"> La masa disminuiría pero el peso seguiría siendo idéntico.</label>
+                    <label><input type="radio" name="q4_analisis" value="3"> Ambos valores permanecen idénticos ya que son una propiedad intrínseca del material.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 5 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 5: Fuerzas Contrarias (Fricción)</h3>
+                <p>Empujas un mueble de 20 kg con una fuerza de 100 N, pero el mueble acelera a solo 2 m/s². ¿Cuál es la magnitud de la fuerza de fricción que el piso ejerce en contra?</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> (Pista: F_neta = m*a; Fricción = F_empuje - F_neta)</p>
+                    <label><input type="radio" name="q5_math" value="0"> 60 N</label>
+                    <label><input type="radio" name="q5_math" value="1"> 40 N</label>
+                    <label><input type="radio" name="q5_math" value="2"> 140 N</label>
+                    <label><input type="radio" name="q5_math" value="3"> 100 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué nos indica la presencia de esa fricción en la realidad?</p>
+                    <label><input type="radio" name="q5_analisis" value="0"> Que de la fuerza que aplicamos, una parte se "gasta" superando el roce con el suelo, dejando el resto como fuerza útil para acelerar.</label>
+                    <label><input type="radio" name="q5_analisis" value="1"> Que el piso está empujando el mueble hacia adelante extra.</label>
+                    <label><input type="radio" name="q5_analisis" value="2"> Que la masa del mueble en realidad es mayor a la indicada.</label>
+                    <label><input type="radio" name="q5_analisis" value="3"> Que el mueble frenará inevitablemente de inmediato.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 6 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 6: Despejando Fricción Inversa</h3>
+                <p>Un trineo de 100 kg es arrastrado con una fuerza de 500 N, pero la fricción con la nieve es de 200 N. ¿Cuál es su aceleración?</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b></p>
+                    <label><input type="radio" name="q6_math" value="0"> 3 m/s²</label>
+                    <label><input type="radio" name="q6_math" value="1"> 5 m/s²</label>
+                    <label><input type="radio" name="q6_math" value="2"> 7 m/s²</label>
+                    <label><input type="radio" name="q6_math" value="3"> 2 m/s²</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué restamos los 200 N en vez de sumarlos?</p>
+                    <label><input type="radio" name="q6_analisis" value="0"> Porque la fricción es una fuerza que siempre se opone a la dirección del movimiento relativo.</label>
+                    <label><input type="radio" name="q6_analisis" value="1"> Porque la nieve es un sólido frío que contrae las fuerzas.</label>
+                    <label><input type="radio" name="q6_analisis" value="2"> Porque la masa de 100 kg exige que se resten para conservar la energía.</label>
+                    <label><input type="radio" name="q6_analisis" value="3"> Porque las fuerzas menores siempre se restan de las mayores por regla matemática.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 7 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 7: Aceleración Negativa (Frenado)</h3>
+                <p>Un auto de 1000 kg va por la carretera y frena. Si la fuerza de los frenos es de -4000 N, ¿cuál es su aceleración?</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b></p>
+                    <label><input type="radio" name="q7_math" value="0"> -4 m/s²</label>
+                    <label><input type="radio" name="q7_math" value="1"> 4 m/s²</label>
+                    <label><input type="radio" name="q7_math" value="2"> -0.25 m/s²</label>
+                    <label><input type="radio" name="q7_math" value="3"> 4000 m/s²</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué significa el signo negativo en el resultado?</p>
+                    <label><input type="radio" name="q7_analisis" value="0"> Indica que la aceleración tiene sentido contrario a la velocidad, lo que en la realidad significa que el auto está perdiendo velocidad.</label>
+                    <label><input type="radio" name="q7_analisis" value="1"> Significa que la masa del auto se está volviendo negativa.</label>
+                    <label><input type="radio" name="q7_analisis" value="2"> Fue un error de tipeo en la calculadora.</label>
+                    <label><input type="radio" name="q7_analisis" value="3"> Indica que el auto se empezó a mover en reversa de inmediato.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 8 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 8: Fuerza y Caída Libre</h3>
+                <p>Si dejas caer una piedra de 2 kg, sabemos que acelera a 9.8 m/s² por la gravedad. Calcula la fuerza neta actuando sobre ella durante la caída.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b></p>
+                    <label><input type="radio" name="q8_math" value="0"> 19.6 N</label>
+                    <label><input type="radio" name="q8_math" value="1"> 4.9 N</label>
+                    <label><input type="radio" name="q8_math" value="2"> 9.8 N</label>
+                    <label><input type="radio" name="q8_math" value="3"> 2 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué fuerza es esta que acabamos de calcular?</p>
+                    <label><input type="radio" name="q8_analisis" value="0"> Es exactamente su propio peso (la fuerza de atracción gravitacional de la Tierra).</label>
+                    <label><input type="radio" name="q8_analisis" value="1"> Es la fricción del aire empujando la piedra hacia arriba.</label>
+                    <label><input type="radio" name="q8_analisis" value="2"> Es una fuerza ficticia que aparece por el movimiento.</label>
+                    <label><input type="radio" name="q8_analisis" value="3"> Es la inercia propia de la piedra rechazando la caída.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 9 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 9: Masa en gramos</h3>
+                <p>Una pequeña pelota experimenta una fuerza de 12 N y acelera a 6 m/s². ¿Cuál es su masa en gramos?</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b></p>
+                    <label><input type="radio" name="q9_math" value="0"> 2000 g</label>
+                    <label><input type="radio" name="q9_math" value="1"> 2 g</label>
+                    <label><input type="radio" name="q9_math" value="2"> 500 g</label>
+                    <label><input type="radio" name="q9_math" value="3"> 72 g</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué debes tener cuidado con los gramos al usar F=m*a?</p>
+                    <label><input type="radio" name="q9_analisis" value="0"> Porque un Newton está definido usando Kilogramos (kg*m/s²). Usar gramos directamente en la fórmula da un resultado equivocado.</label>
+                    <label><input type="radio" name="q9_analisis" value="1"> Porque los gramos son muy pequeños para generar fricción.</label>
+                    <label><input type="radio" name="q9_analisis" value="2"> Porque la masa solo se puede medir en onzas.</label>
+                    <label><input type="radio" name="q9_analisis" value="3"> No hay que tener cuidado, el resultado siempre será correcto.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 10 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 10: Ascensor Acelerando Arriba</h3>
+                <p>Estás en un ascensor. Tu masa es de 60 kg. Si el ascensor acelera hacia arriba a 2 m/s², la fuerza neta sobre ti es de 120 N. ¿Cuál debe ser la fuerza Normal (la que hace el piso sobre tus pies) sabiendo que tu peso es 588 N?</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> (Pista: F_neta = Normal - Peso -> Normal = F_neta + Peso)</p>
+                    <label><input type="radio" name="q10_math" value="0"> 708 N</label>
+                    <label><input type="radio" name="q10_math" value="1"> 468 N</label>
+                    <label><input type="radio" name="q10_math" value="2"> 120 N</label>
+                    <label><input type="radio" name="q10_math" value="3"> 588 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué efecto físico sientes debido a esta fuerza Normal mayor a tu peso?</p>
+                    <label><input type="radio" name="q10_analisis" value="0"> Sientes que estás más pesado o que te empujan hacia el piso. Esta es la "fuerza G" que experimentamos al acelerar hacia arriba.</label>
+                    <label><input type="radio" name="q10_analisis" value="1"> Sientes que estás flotando o cayendo.</label>
+                    <label><input type="radio" name="q10_analisis" value="2"> No sientes nada especial, todo parece normal.</label>
+                    <label><input type="radio" name="q10_analisis" value="3"> Sientes que tu masa aumenta permanentemente.</label>
+                </div>
+            </div>
+            
         </div>
         
-        <button class="btn" onclick="calificar()"><i class="fa-solid fa-check-double"></i> Calificar PrÃ¡ctica</button>
+        <button class="btn" onclick="calificar()"><i class="fa-solid fa-check-double"></i> Finalizar y Calificar</button>
         <div id="resultado" class="resultado"></div>
     </div>
+    
     <script>
+        const respuestas = {
+            q1_math: 0, q1_analisis: 0,
+            q2_math: 0, q2_analisis: 0,
+            q3_math: 0, q3_analisis: 0,
+            q4_math: 0, q4_analisis: 0,
+            q5_math: 0, q5_analisis: 0,
+            q6_math: 0, q6_analisis: 0,
+            q7_math: 0, q7_analisis: 0,
+            q8_math: 0, q8_analisis: 0,
+            q9_math: 0, q9_analisis: 0,
+            q10_math: 0, q10_analisis: 0
+        };
+
         function calificar() {
             let puntaje = 0;
-            const res = [0, 0, 0];
-            for (let i = 0; i < 3; i++) {
-                const seleccion = document.querySelector('input[name="q'+i+'"]:checked');
-                if(seleccion && parseInt(seleccion.value) === res[i]) puntaje++;
+            let total = Object.keys(respuestas).length;
+            
+            for (const [name, correcta] of Object.entries(respuestas)) {
+                const seleccion = document.querySelector(\input[name="\"]:checked\);
+                if (seleccion && parseInt(seleccion.value) === correcta) {
+                    puntaje++;
+                }
             }
+            
             const resDiv = document.getElementById('resultado');
             resDiv.style.display = 'block';
-            resDiv.innerHTML = Tu puntaje es: <span style="color:#2ecc71;"> + puntaje +  / 3</span> correctas.;
+            resDiv.innerHTML = \Acertaste <span style="color:#2ecc71;">\</span> de \ pasos.\;
+            
+            if (puntaje === total) {
+                resDiv.innerHTML += "<br>¡Excelente! Entendiste perfectamente la matemática y el concepto físico.";
+            } else if (puntaje > total/2) {
+                resDiv.innerHTML += "<br>¡Buen trabajo! Pero revisa los pasos en los que fallaste.";
+            } else {
+                resDiv.innerHTML += "<br>Te recomiendo repasar la teoría de la Segunda Ley.";
+            }
         }
     </script>
     <script src="auth.js"></script>

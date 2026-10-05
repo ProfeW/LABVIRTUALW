@@ -72,7 +72,6 @@
             resDiv.style.display = 'block';
             resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><small style="color:#aaa;"><i class="fa-solid fa-spinner fa-spin"></i> Guardando resultado en Firestore...</small>;
             
-            // Guardar en Firestore
             if (typeof db !== 'undefined' && typeof auth !== 'undefined') {
                 auth.onAuthStateChanged(user => {
                     if(user) {

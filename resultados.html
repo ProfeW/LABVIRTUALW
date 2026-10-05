@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Evaluaciones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-primario: #9b59b6; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--color-oscuro); color: var(--color-texto); padding: 20px; line-height: 1.6; background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+        .contenedor { max-width: 1000px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid var(--color-primario); }
+        h1 { color: var(--color-primario); font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
+        
+        .cargando { text-align: center; font-size: 1.2rem; color: #4facfe; padding: 40px; }
+        
+        /* Acordeones */
+        .acordeon { background: rgba(255,255,255,0.05); margin-bottom: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
+        .acordeon-header { background: rgba(0,0,0,0.3); padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.2rem; transition: 0.3s; }
+        .acordeon-header:hover { background: rgba(155, 89, 182, 0.3); }
+        .acordeon-header i { transition: transform 0.3s; }
+        .acordeon-header.activo i { transform: rotate(180deg); color: var(--color-primario); }
+        .acordeon-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0,0,0,0.2); }
+        .acordeon-body.abierto { padding: 20px; max-height: 2000px; /* valor alto para permitir expansión */ transition: max-height 0.5s ease-in; }
+
+        /* Tabla de resultados */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(155, 89, 182, 0.2); color: #fff; font-weight: 600; }
+        tr:hover { background: rgba(255,255,255,0.05); }
+        .nota-alta { color: #2ecc71; font-weight: bold; }
+        .nota-media { color: #f1c40f; font-weight: bold; }
+        .nota-baja { color: #e74c3c; font-weight: bold; }
+
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+        
+        .sin-datos { text-align: center; color: #aaa; padding: 20px; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <a href="inicio.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
+        <h1><i class="fa-solid fa-chart-bar"></i> Historial de Evaluaciones</h1>
+        <p style="text-align: center; color:#ddd; margin-bottom: 40px;">Aquí puedes consultar las calificaciones obtenidas en las diferentes áreas y temas de aprendizaje.</p>
+
+        <div id="cargando" class="cargando">
+            <i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Conectando con la base de datos...
+        </div>
+
+        <div id="contenedor-resultados" style="display: none;">
+            <!-- Aquí se inyectarán los acordeones dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <!-- Archivo de configuración local -->
+    <script src="auth.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar si auth y db existen (vienen de auth.js)
+            if (typeof auth === 'undefined' || typeof db === 'undefined') {
+                document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-triangle-exclamation'></i> Error: No se pudo cargar la configuración de Firebase (auth.js).</span>";
+                return;
+            }
+
+            // Esperar a que el usuario se autentique para saber qué datos traer
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    cargarResultados(user);
+                } else {
+                    document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-lock'></i> Debes iniciar sesión para ver los resultados.</span>";
+                }
+            });
+        });
+
+        function cargarResultados(user) {
+            // Se puede hacer la consulta para traer TODOS los resultados (si es admin) 
+            // O solo los del usuario activo. Por ahora traeremos todos los resultados asociados a este email.
+            db.collection('evaluaciones')
+              .where('email', '==', user.email)
+              .orderBy('fecha', 'desc')
+              .get()
+              .then(snapshot => {
+                  document.getElementById('cargando').style.display = 'none';
+                  const contenedor = document.getElementById('contenedor-resultados');
+                  contenedor.style.display = 'block';
+
+                  if (snapshot.empty) {
+                      contenedor.innerHTML = "<div class='sin-datos'><i class='fa-solid fa-folder-open'></i> Aún no has completado ninguna evaluación.</div>";
+                      return;
+                  }
+
+                  // Agrupar los resultados por Asignatura/Curso
+                  // Usaremos la primera palabra del "tema" para agrupar (Ej: "Dinámica 10 - Ley de Hooke" => Grupo: "Dinámica 10")
+                  const grupos = {};
+
+                  snapshot.forEach(doc => {
+                      const data = doc.data();
+                      const temaCompleto = data.tema || "Tema Desconocido";
+                      let categoria = "Otros";
+                      let subtema = temaCompleto;
+
+                      // Intentar separar categoría de subtema si existe un guión o patrón similar
+                      if (temaCompleto.includes(" - ")) {
+                          const partes = temaCompleto.split(" - ");
+                          categoria = partes[0].trim();
+                          subtema = partes[1].trim();
+                      } else if (temaCompleto.toLowerCase().includes("física")) {
+                           categoria = "Física";
+                      } else if (temaCompleto.toLowerCase().includes("química")) {
+                           categoria = "Química";
+                      } else if (temaCompleto.toLowerCase().includes("biología")) {
+                           categoria = "Biología";
+                      }
+
+                      if (!grupos[categoria]) {
+                          grupos[categoria] = [];
+                      }
+
+                      // Formatear fecha
+                      let fechaStr = "Desconocida";
+                      if (data.fecha) {
+                          const dateObj = data.fecha.toDate();
+                          fechaStr = dateObj.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' });
+                      }
+
+                      // Determinar color de la nota
+                      let notaClass = "nota-baja";
+                      const nota = parseFloat(data.puntaje);
+                      if (nota >= 4.0) notaClass = "nota-alta";
+                      else if (nota >= 3.0) notaClass = "nota-media";
+
+                      grupos[categoria].push(`
+                          <tr>
+                              <td>${subtema}</td>
+                              <td><span class="${notaClass}">${nota.toFixed(1)} / 5.0</span></td>
+                              <td>${fechaStr}</td>
+                          </tr>
+                      `);
+                  });
+
+                  // Generar el HTML de los acordeones
+                  let htmlAcordeones = "";
+                  
+                  // Ordenar categorías alfabéticamente
+                  const categoriasOrdenadas = Object.keys(grupos).sort();
+
+                  categoriasOrdenadas.forEach(cat => {
+                      htmlAcordeones += `
+                          <div class="acordeon">
+                              <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                                  <span><i class="fa-solid fa-folder"></i> ${cat}</span>
+                                  <i class="fa-solid fa-chevron-down"></i>
+                              </div>
+                              <div class="acordeon-body">
+                                  <table>
+                                      <thead>
+                                          <tr>
+                                              <th>Tema Evaluado</th>
+                                              <th>Calificación</th>
+                                              <th>Fecha</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          ${grupos[cat].join('')}
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      `;
+                  });
+
+                  contenedor.innerHTML = htmlAcordeones;
+              })
+              .catch(err => {
+                  console.error("Error obteniendo resultados:", err);
+                  document.getElementById('cargando').innerHTML = `<span style='color:#e74c3c;'><i class='fa-solid fa-triangle-exclamation'></i> Error al obtener datos: ${err.message}</span><br><br><small>Nota: Si es la primera vez que se consulta este filtro, Firestore puede requerir la creación de un Índice compuesto en la base de datos.</small>`;
+              });
+        }
+
+        function toggleAcordeon(elemento) {
+            elemento.classList.toggle("activo");
+            const body = elemento.nextElementSibling;
+            if (body.classList.contains("abierto")) {
+                body.classList.remove("abierto");
+            } else {
+                body.classList.add("abierto");
+            }
+        }
+    </script>
+</body>
+</html>
