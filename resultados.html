@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -273,47 +273,47 @@
                 if (nota >= 4.0) notaClass = "nota-alta";
                 else if (nota >= 3.0) notaClass = "nota-media";
 
-                grupos[asig][gr][tem].push(
+                grupos[asig][gr][tem].push(`
                     <tr>
-                        <td> + (data.nombre || data.usuario || "Desconocido") + </td>
-                        <td> + data._subtema + </td>
-                        <td><span class=" + notaClass + "> + nota.toFixed(1) +  / 5.0</span></td>
-                        <td> + fechaStr + </td>
+                        <td>${data.nombre || data.usuario || "Desconocido"}</td>
+                        <td>${data._subtema}</td>
+                        <td><span class="${notaClass}">${nota.toFixed(1)} / 5.0</span></td>
+                        <td>${fechaStr}</td>
                     </tr>
-                );
+                `);
             });
 
             let html = "";
             Object.keys(grupos).sort().forEach(asig => {
-                html += <div class="acordeon" style="margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius:8px; overflow:hidden;">
+                html += `<div class="acordeon" style="margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius:8px; overflow:hidden;">
                     <div class="acordeon-header activo" onclick="toggleAcordeon(this)" style="background: #2c3e50; color: white; border-radius:0;">
-                        <span><i class="fa-solid fa-book"></i> Asignatura:  + asig + </span><i class="fa-solid fa-chevron-down"></i>
-                    </div><div class="acordeon-body abierto" style="padding: 10px; background: #ecf0f1;">;
+                        <span><i class="fa-solid fa-book"></i> Asignatura: ${asig}</span><i class="fa-solid fa-chevron-down"></i>
+                    </div><div class="acordeon-body abierto" style="padding: 10px; background: #ecf0f1;">`;
 
                 Object.keys(grupos[asig]).sort((a,b) => {
                     const numA = parseInt(a.replace('Grado ', '')) || 0;
                     const numB = parseInt(b.replace('Grado ', '')) || 0;
                     return numA - numB;
                 }).forEach(gr => {
-                    html += <div class="acordeon" style="margin-bottom: 8px; border-radius:6px; overflow:hidden;">
+                    html += `<div class="acordeon" style="margin-bottom: 8px; border-radius:6px; overflow:hidden;">
                         <div class="acordeon-header activo" onclick="toggleAcordeon(this)" style="background: #e67e22; color: white; border-radius:0; padding: 12px 15px;">
-                            <span><i class="fa-solid fa-graduation-cap"></i>  + gr + </span><i class="fa-solid fa-chevron-down"></i>
-                        </div><div class="acordeon-body abierto" style="padding: 10px; background: #fdfefe;">;
+                            <span><i class="fa-solid fa-graduation-cap"></i> ${gr}</span><i class="fa-solid fa-chevron-down"></i>
+                        </div><div class="acordeon-body abierto" style="padding: 10px; background: #fdfefe;">`;
                     
                     Object.keys(grupos[asig][gr]).sort().forEach(tem => {
-                        html += <div class="acordeon" style="margin-bottom: 5px; border-radius:6px; overflow:hidden;">
+                        html += `<div class="acordeon" style="margin-bottom: 5px; border-radius:6px; overflow:hidden;">
                             <div class="acordeon-header activo" onclick="toggleAcordeon(this)" style="background: #3498db; color: white; border-radius:0; padding: 10px 15px; font-size: 0.95rem;">
-                                <span><i class="fa-solid fa-layer-group"></i> Tema:  + tem + </span><i class="fa-solid fa-chevron-down"></i>
+                                <span><i class="fa-solid fa-layer-group"></i> Tema: ${tem}</span><i class="fa-solid fa-chevron-down"></i>
                             </div><div class="acordeon-body abierto" style="padding:0;">
                                 <table style="margin:0; border-radius:0; box-shadow:none;">
                                     <thead><tr><th>Estudiante</th><th>Práctica/Evaluación</th><th>Calificación</th><th>Fecha</th></tr></thead>
-                                    <tbody> + grupos[asig][gr][tem].join('') + </tbody>
+                                    <tbody>${grupos[asig][gr][tem].join('')}</tbody>
                                 </table>
-                            </div></div>;
+                            </div></div>`;
                     });
-                    html += </div></div>;
+                    html += `</div></div>`;
                 });
-                html += </div></div>;
+                html += `</div></div>`;
             });
 
             contenedor.innerHTML = html;
