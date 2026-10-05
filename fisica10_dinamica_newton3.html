@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FÃ­sica 10 - Tercera Ley de Newton (AcciÃ³n y ReacciÃ³n)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--color-oscuro); color: var(--color-texto); padding: 20px; line-height: 1.6; background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+        .contenedor { max-width: 900px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        h1 { color: var(--color-fisica); font-size: 2.5rem; margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 12px 25px; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s; text-align: center; }
+        .btn-practica { background: linear-gradient(135deg, #2ecc71, #27ae60); box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4); }
+        .btn-evaluacion { background: linear-gradient(135deg, #e74c3c, #c0392b); box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+        .ejercicio { background: rgba(255,255,255,0.05); padding: 25px; border-left: 5px solid var(--color-fisica); margin: 30px 0; border-radius: 0 10px 10px 0; }
+        p { font-size: 1.1rem; color: #ddd; margin-bottom: 15px; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <a href="fisica_10.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a FÃ­sica 10</a>
+        <h1>Tercera Ley de Newton (AcciÃ³n y ReacciÃ³n)</h1>
+        <p>Con toda acciÃ³n ocurre siempre una reacciÃ³n igual y contraria: o sea, las acciones mutuas de dos cuerpos siempre son iguales y dirigidas en sentido opuesto.</p>
+        
+        <div class="ejercicio">
+            <h3 style="color: #4facfe; margin-bottom: 15px;"><i class="fa-solid fa-calculator"></i> Ejercicio Resuelto y ExplicaciÃ³n</h3>
+            <p>Supongamos un bloque de masa <b>m = 10 kg</b>. Queremos calcular su peso (W) en la Tierra. Sabemos que la gravedad es aproximadamente <b>g = 9.8 m/sÂ²</b>.</p>
+            <p>Usando la fÃ³rmula, despejamos: <code>W = m * g</code></p>
+            <p>W = 10 kg * 9.8 m/sÂ² = <b>98 N (Newtons)</b></p>
+            <p><i>Nota: En fÃ­sica, siempre verifica tus conversiones, por ejemplo, si la masa estÃ¡ en gramos, divÃ­dela entre 1000 para pasarla a kg antes de calcular la fuerza.</i></p>
+        </div>
+
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+            <a href="fisica10_dinamica_newton3_practica.html" class="btn btn-practica"><i class="fa-solid fa-dumbbell"></i> Ir a PrÃ¡ctica</a>
+            <a href="fisica10_dinamica_newton3_evaluacion.html" class="btn btn-evaluacion"><i class="fa-solid fa-graduation-cap"></i> Evaluar (Tipo ICFES)</a>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+    <script src="profe-ia.js"></script>
+</body>
+</html>

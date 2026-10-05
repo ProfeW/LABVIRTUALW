@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrÃ¡ctica - Ley de Hooke (Fuerza ElÃ¡stica)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--color-oscuro); color: var(--color-texto); padding: 20px; line-height: 1.6; background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+        .contenedor { max-width: 800px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #2ecc71; }
+        h1 { color: #2ecc71; font-size: 2.2rem; margin-bottom: 20px; }
+        .pregunta { margin-bottom: 25px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px; border-left: 4px solid #2ecc71; }
+        label { display: block; margin: 10px 0; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        label:hover { background: rgba(46, 204, 113, 0.2); }
+        input[type="radio"] { margin-right: 10px; }
+        .btn { display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4); }
+        .resultado { font-size: 1.5rem; font-weight: bold; margin-top: 25px; color: #f1c40f; text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <a href="fisica10_dinamica_hooke.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÃ­a</a>
+        <h1><i class="fa-solid fa-dumbbell"></i> PrÃ¡ctica: Ley de Hooke (Fuerza ElÃ¡stica)</h1>
+        <p style="color:#ddd; margin-bottom:30px;">Resuelve los siguientes ejercicios de prÃ¡ctica. Selecciona la respuesta correcta y haz clic en calificar.</p>
+        
+        <div id="quiz-container">
+            <div class="pregunta">
+                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">1. Si la masa de un objeto es 5 kg y su aceleraciÃ³n es 3 m/sÂ², Â¿cuÃ¡l es la magnitud de la fuerza?</p>
+                <label><input type="radio" name="q0" value="0"> 15 N</label>
+                <label><input type="radio" name="q0" value="1"> 8 N</label>
+                <label><input type="radio" name="q0" value="2"> 1.6 N</label>
+            </div>
+            <div class="pregunta">
+                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">2. Si tienes 2000 gramos de masa, Â¿cuÃ¡ntos kg son antes de usar la fÃ³rmula F=m*a?</p>
+                <label><input type="radio" name="q1" value="0"> 2 kg</label>
+                <label><input type="radio" name="q1" value="1"> 20 kg</label>
+                <label><input type="radio" name="q1" value="2"> 0.2 kg</label>
+            </div>
+            <div class="pregunta">
+                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">3. Al despejar la masa en F=m*a, la fÃ³rmula correcta es:</p>
+                <label><input type="radio" name="q2" value="0"> m = F / a</label>
+                <label><input type="radio" name="q2" value="1"> m = F * a</label>
+                <label><input type="radio" name="q2" value="2"> m = a / F</label>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="calificar()"><i class="fa-solid fa-check-double"></i> Calificar PrÃ¡ctica</button>
+        <div id="resultado" class="resultado"></div>
+    </div>
+    <script>
+        function calificar() {
+            let puntaje = 0;
+            const res = [0, 0, 0];
+            for (let i = 0; i < 3; i++) {
+                const seleccion = document.querySelector('input[name="q'+i+'"]:checked');
+                if(seleccion && parseInt(seleccion.value) === res[i]) puntaje++;
+            }
+            const resDiv = document.getElementById('resultado');
+            resDiv.style.display = 'block';
+            resDiv.innerHTML = Tu puntaje es: <span style="color:#2ecc71;"> + puntaje +  / 3</span> correctas.;
+        }
+    </script>
+    <script src="auth.js"></script>
+</body>
+</html>

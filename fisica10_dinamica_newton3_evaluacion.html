@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EvaluaciÃ³n - Tercera Ley de Newton (AcciÃ³n y ReacciÃ³n)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-fisica: #3498db; --color-oscuro: #1a1a2e; --color-texto: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--color-oscuro); color: var(--color-texto); padding: 20px; line-height: 1.6; background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.95)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed; }
+        .contenedor { max-width: 800px; margin: 40px auto; background: rgba(20,20,35,0.95); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #e74c3c; }
+        h1 { color: #e74c3c; font-size: 2.2rem; margin-bottom: 20px; }
+        .pregunta { margin-bottom: 25px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px; border-left: 4px solid #e74c3c; }
+        label { display: block; margin: 10px 0; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        label:hover { background: rgba(231, 76, 60, 0.2); }
+        input[type="radio"] { margin-right: 10px; }
+        .btn { display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
+        .resultado { font-size: 1.3rem; margin-top: 25px; text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none; }
+        .btn-volver { display: inline-block; margin-bottom: 20px; color: #4facfe; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-volver:hover { color: #fff; transform: translateX(-5px); }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <a href="fisica10_dinamica_newton3.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÃ­a</a>
+        <h1><i class="fa-solid fa-graduation-cap"></i> EvaluaciÃ³n (ICFES): Tercera Ley de Newton (AcciÃ³n y ReacciÃ³n)</h1>
+        <p style="color:#ddd; margin-bottom:30px;"><i class="fa-solid fa-triangle-exclamation" style="color:#e74c3c;"></i> <b>Preguntas de AnÃ¡lisis y Casos de AplicaciÃ³n.</b> El resultado se guardarÃ¡ automÃ¡ticamente en tu perfil mediante Firestore al finalizar.</p>
+        
+        <div id="quiz-container">
+            <div class="pregunta">
+                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">1. Caso: En un experimento, se observa que el valor de la fuerza neta es de 50N pero un sensor detecta que el objeto avanza a velocidad constante. FÃ­sicamente, Â¿quÃ© nos indica esto sobre el sistema de fuerzas aplicado?</p>
+                <label><input type="radio" name="q0" value="0"> Que existe una fuerza de fricciÃ³n igual y opuesta de 50N que anula la fuerza aplicada.</label>
+                <label><input type="radio" name="q0" value="1"> Que el objeto perdiÃ³ masa repentinamente por el calor.</label>
+                <label><input type="radio" name="q0" value="2"> Que el cronÃ³metro fallÃ³ en la mediciÃ³n de la velocidad.</label>
+            </div>
+            <div class="pregunta">
+                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">2. Caso: Si al despejar una fÃ³rmula obtienes una aceleraciÃ³n matemÃ¡tica de -2 m/sÂ², Â¿cÃ³mo interpretas este nÃºmero negativo en el contexto fÃ­sico de un automÃ³vil?</p>
+                <label><input type="radio" name="q1" value="0"> El automÃ³vil estÃ¡ frenando (desacelerando) o moviÃ©ndose en sentido contrario al eje positivo de referencia.</label>
+                <label><input type="radio" name="q1" value="1"> Hubo un error, porque la aceleraciÃ³n en la realidad nunca puede ser negativa.</label>
+                <label><input type="radio" name="q1" value="2"> El automÃ³vil estÃ¡ acelerando cada vez mÃ¡s rÃ¡pido hacia adelante pero en retroceso.</label>
+            </div>
+            <div class="pregunta">
+                <p style="font-weight:600; font-size:1.1rem; margin-bottom:15px; color:#fff;">3. Caso: Un bulto de cafÃ© reposa en el suelo. Se le aplica una fuerza de 100N hacia arriba, pero el bulto pesa 150N. Â¿QuÃ© significado fÃ­sico tiene el hecho de que 100N sea menor que el peso?</p>
+                <label><input type="radio" name="q2" value="0"> El bulto no se levantarÃ¡ del suelo y la fuerza normal disminuirÃ¡ a 50N.</label>
+                <label><input type="radio" name="q2" value="1"> El bulto se moverÃ¡ hacia abajo rompiendo el suelo.</label>
+                <label><input type="radio" name="q2" value="2"> El bulto comenzarÃ¡ a flotar lentamente.</label>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="calificarYGuardar()"><i class="fa-solid fa-paper-plane"></i> Enviar EvaluaciÃ³n</button>
+        <div id="resultado" class="resultado"></div>
+    </div>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="auth.js"></script>
+
+    <script>
+        function calificarYGuardar() {
+            let puntaje = 0;
+            const res = [0, 0, 0];
+            for (let i = 0; i < 3; i++) {
+                const seleccion = document.querySelector('input[name="q'+i+'"]:checked');
+                if(seleccion && parseInt(seleccion.value) === res[i]) puntaje++;
+            }
+            const nota = (puntaje / 3) * 5.0; 
+            const resDiv = document.getElementById('resultado');
+            resDiv.style.display = 'block';
+            resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><small style="color:#aaa;"><i class="fa-solid fa-spinner fa-spin"></i> Guardando resultado en Firestore...</small>;
+            
+            // Guardar en Firestore
+            if (typeof db !== 'undefined' && typeof auth !== 'undefined') {
+                auth.onAuthStateChanged(user => {
+                    if(user) {
+                        db.collection('evaluaciones').add({
+                            uid: user.uid,
+                            email: user.email,
+                            tema: "DinÃ¡mica 10 - Tercera Ley de Newton (AcciÃ³n y ReacciÃ³n)",
+                            puntaje: nota,
+                            fecha: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => {
+                            resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><span style='color:#2ecc71;'><i class="fa-solid fa-check-circle"></i> Â¡Resultado guardado exitosamente en tu perfil!</span>;
+                        }).catch(err => {
+                            console.error("Error guardando:", err);
+                            resDiv.innerHTML += <br><span style='color:#e74c3c;'>Error al guardar:  + err.message + </span>;
+                        });
+                    } else {
+                        resDiv.innerHTML = Tu calificaciÃ³n es: <b style="color:#f1c40f;"> + nota.toFixed(1) +  / 5.0</b><br><br><span style='color:#e74c3c;'><i class="fa-solid fa-circle-exclamation"></i> Inicia sesiÃ³n para que el resultado se guarde en tu cuenta.</span>;
+                    }
+                });
+            } else {
+                resDiv.innerHTML += "<br><span style='color:#e74c3c;'>Error: No se pudo conectar con Firestore.</span>";
+            }
+        }
+    </script>
+</body>
+</html>
