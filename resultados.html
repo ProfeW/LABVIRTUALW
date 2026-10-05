@@ -92,7 +92,6 @@
             // O solo los del usuario activo. Por ahora traeremos todos los resultados asociados a este email.
             db.collection('evaluaciones')
               .where('usuario', '==', user.usuario)
-              .orderBy('fecha', 'desc')
               .get()
               .then(snapshot => {
                   document.getElementById('cargando').style.display = 'none';
@@ -108,8 +107,15 @@
                   // Usaremos la primera palabra del "tema" para agrupar (Ej: "Dinámica 10 - Ley de Hooke" => Grupo: "Dinámica 10")
                   const grupos = {};
 
-                  snapshot.forEach(doc => {
-                      const data = doc.data();
+                  const dataDocs = [];
+                  snapshot.forEach(doc => dataDocs.push(doc.data()));
+                  
+                  dataDocs.sort((a, b) => {
+                      if (!a.fecha || !b.fecha) return 0;
+                      return b.fecha.toMillis() - a.fecha.toMillis();
+                  });
+
+                  dataDocs.forEach(data => {
                       const temaCompleto = data.tema || "Tema Desconocido";
                       let categoria = "Otros";
                       let subtema = temaCompleto;
