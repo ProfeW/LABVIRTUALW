@@ -400,7 +400,7 @@
         radios.forEach(radio => radio.addEventListener('change', calcularNotas));
 
         // Enviar formulario
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const btn = document.getElementById('btnEnviar');
@@ -433,6 +433,29 @@
                 let userStr = localStorage.getItem('usuario_labvirtual');
                 let usuarioId = userStr ? JSON.parse(userStr).usuario : (data.documento || "Invitado");
                 
+                // VALIDAR 1 SOLA VEZ POR PERIODO
+                try {
+                    const snapshot = await db.collection('evaluaciones').where('usuario', '==', usuarioId).get();
+                    let yaPresento = false;
+                    snapshot.forEach(doc => {
+                        let d = doc.data();
+                        if (d.tema && d.tema.includes(`Autoevaluación P${data.periodo}`) && d.tema.includes(data.asignatura)) {
+                            yaPresento = true;
+                        }
+                    });
+
+                    if (yaPresento) {
+                        loader.style.display = 'none';
+                        btn.disabled = false;
+                        msgBox.className = 'msg-box msg-error';
+                        msgBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Ya has presentado la autoevaluación de ' + data.asignatura + ' para el Periodo ' + data.periodo + '.';
+                        msgBox.style.display = 'block';
+                        return; // Detener envío
+                    }
+                } catch(err) {
+                    console.error("Error al validar historial:", err);
+                }
+
                 let baseData = {
                     usuario: usuarioId,
                     nombre: data.nombre,
