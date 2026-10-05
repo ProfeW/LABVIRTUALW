@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica - Ley de Hooke (Fuerza ElÃ¡stica)</title>
+    <title>Práctica - Ley de Hooke</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -26,199 +26,243 @@
 </head>
 <body>
     <div class="contenedor">
-        <a href="fisica10_dinamica_hooke.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÃ­a</a>
-        <h1><i class="fa-solid fa-dumbbell"></i> PrÃ¡ctica en Cadena: Ley de Hooke (Fuerza ElÃ¡stica)</h1>
-        <p style="color:#ddd; margin-bottom:30px;">A continuaciÃ³n resolverÃ¡s 10 ejercicios paso a paso en cadena.</p>
+        <a href="fisica10_dinamica_hooke.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Teoría</a>
+        <h1><i class="fa-solid fa-dumbbell"></i> Práctica en Cadena: Ley de Hooke</h1>
+        <p style="color:#ddd; margin-bottom:30px;">A continuación resolverás 10 ejercicios paso a paso usando la fórmula F = k * x (ignora el signo negativo para magnitud pura). Primero calcularás el valor y luego interpretarás qué significa.</p>
         
-        <div id="quiz-container">            <div class="pregunta-bloque">
-                <h3>Ejercicio 1: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 1.</p>
+        <div id="quiz-container">
+            <!-- Ejercicio 1 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 1: Calculando la Fuerza Restauradora</h3>
+                <p>El resorte de una máquina clasificadora de granos tiene una constante elástica (k) de 500 N/m. Se comprime una distancia de 0.2 metros.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q1_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q1_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q1_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q1_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuánta fuerza elástica hace el resorte para intentar volver a su estado natural?</p>
+                    <label><input type="radio" name="q1_math" value="0"> 100 N</label>
+                    <label><input type="radio" name="q1_math" value="1"> 2500 N</label>
+                    <label><input type="radio" name="q1_math" value="2"> 50.2 N</label>
+                    <label><input type="radio" name="q1_math" value="3"> 0.0004 N</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q1_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q1_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q1_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q1_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿qué nos dice el resultado de 100 N?</p>
+                    <label><input type="radio" name="q1_analisis" value="0"> Significa que la estructura molecular del resorte está peleando en contra de la compresión con un empuje de 100 N para regresar al equilibrio.</label>
+                    <label><input type="radio" name="q1_analisis" value="1"> Que el resorte se va a romper inmediatamente.</label>
+                    <label><input type="radio" name="q1_analisis" value="2"> Que la máquina pesa 100 N.</label>
+                    <label><input type="radio" name="q1_analisis" value="3"> Que la compresión disminuye la masa en 100 g.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 2: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 2.</p>
+            </div>
+
+            <!-- Ejercicio 2 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 2: Despejando la Constante 'k'</h3>
+                <p>Tomas un elástico resistente y le aplicas una fuerza de 30 N. El elástico se estira 0.15 metros.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q2_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q2_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q2_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q2_math" value="3"> OpciÃ³n Incorrecta 3</label>
-                </div>
-                <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q2_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q2_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q2_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q2_analisis" value="3"> No significa nada.</label>
-                </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 3: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 3.</p>
-                <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q3_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q3_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q3_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q3_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es su constante de elasticidad (k)? (k = F / x)</p>
+                    <label><input type="radio" name="q2_math" value="0"> 200 N/m</label>
+                    <label><input type="radio" name="q2_math" value="1"> 4.5 N/m</label>
+                    <label><input type="radio" name="q2_math" value="2"> 30.15 N/m</label>
+                    <label><input type="radio" name="q2_math" value="3"> 2 N/m</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q3_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q3_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q3_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q3_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué representa el número 200 N/m en la vida real?</p>
+                    <label><input type="radio" name="q2_analisis" value="0"> Representa la "dureza" o "rigidez" del material. Nos dice que si quisieras estirar ese elástico exactamente 1 metro completo, tendrías que aplicar 200 N de fuerza.</label>
+                    <label><input type="radio" name="q2_analisis" value="1"> Representa la cantidad de energía que gasta el elástico por hora.</label>
+                    <label><input type="radio" name="q2_analisis" value="2"> Nos dice que se romperá a los 200 metros.</label>
+                    <label><input type="radio" name="q2_analisis" value="3"> Representa el peso máximo que soporta antes de cortarse.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 4: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 4.</p>
+            </div>
+
+            <!-- Ejercicio 3 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 3: Conversión de Unidades (cm a m)</h3>
+                <p>Una báscula de resorte (Dinamómetro) tiene k = 1000 N/m. Al colgar un saco de papas, el resorte baja 5 centímetros (cm).</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q4_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q4_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q4_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q4_math" value="3"> OpciÃ³n Incorrecta 3</label>
-                </div>
-                <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q4_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q4_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q4_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q4_analisis" value="3"> No significa nada.</label>
-                </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 5: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 5.</p>
-                <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q5_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q5_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q5_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q5_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la fuerza de tensión del resorte (es decir, el peso del saco)? Pista: 5 cm = 0.05 m.</p>
+                    <label><input type="radio" name="q3_math" value="0"> 50 N</label>
+                    <label><input type="radio" name="q3_math" value="1"> 5000 N</label>
+                    <label><input type="radio" name="q3_math" value="2"> 20 N</label>
+                    <label><input type="radio" name="q3_math" value="3"> 0.05 N</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q5_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q5_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q5_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q5_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué era obligatorio convertir los centímetros a metros?</p>
+                    <label><input type="radio" name="q3_analisis" value="0"> Porque la constante 'k' está en Newtons por Metro (N/m). Para poder multiplicar y cancelar las unidades dejando solo Newtons, la deformación debe estar en metros.</label>
+                    <label><input type="radio" name="q3_analisis" value="1"> Porque las papas solo se pesan usando el sistema métrico internacional mayor.</label>
+                    <label><input type="radio" name="q3_analisis" value="2"> Porque un metro de resorte estira mejor que un centímetro.</label>
+                    <label><input type="radio" name="q3_analisis" value="3"> No era obligatorio, es una coincidencia.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 6: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 6.</p>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 4: Despejando la Deformación 'x'</h3>
+                <p>El amortiguador de una motocicleta soporta una carga de 1500 N. Se sabe que su constante k = 15,000 N/m.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q6_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q6_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q6_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q6_math" value="3"> OpciÃ³n Incorrecta 3</label>
-                </div>
-                <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q6_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q6_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q6_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q6_analisis" value="3"> No significa nada.</label>
-                </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 7: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 7.</p>
-                <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q7_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q7_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q7_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q7_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuántos metros se comprimirá (x = F / k)?</p>
+                    <label><input type="radio" name="q4_math" value="0"> 0.1 m (10 cm)</label>
+                    <label><input type="radio" name="q4_math" value="1"> 10 m</label>
+                    <label><input type="radio" name="q4_math" value="2"> 22.5 m</label>
+                    <label><input type="radio" name="q4_math" value="3"> 15 m</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q7_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q7_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q7_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q7_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué este amortiguador tiene una 'k' tan alta (15,000 N/m) en comparación al elástico anterior (200 N/m)?</p>
+                    <label><input type="radio" name="q4_analisis" value="0"> Porque está diseñado para amortiguar impactos de masas grandes y a altas velocidades; necesita ser muy rígido para no comprimirse por completo (hacer tope) con el peso de la moto y sus ocupantes.</label>
+                    <label><input type="radio" name="q4_analisis" value="1"> Para que la moto salte más alto al frenar.</label>
+                    <label><input type="radio" name="q4_analisis" value="2"> Porque los fabricantes compraron resortes defectuosos.</label>
+                    <label><input type="radio" name="q4_analisis" value="3"> Porque el metal pesa más de 15,000 kg por defecto.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 8: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 8.</p>
+            </div>
+
+            <!-- Ejercicio 5 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 5: Resorte sobreestirado (Límite Elástico)</h3>
+                <p>Cuelgas un motor viejo en un resorte escolar cuya k = 10 N/m. La fuerza del motor es 4000 N. Matemáticamente, el resorte debería estirarse x = 400 m.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q8_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q8_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q8_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q8_math" value="3"> OpciÃ³n Incorrecta 3</label>
-                </div>
-                <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q8_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q8_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q8_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q8_analisis" value="3"> No significa nada.</label>
-                </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 9: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 9.</p>
-                <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q9_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q9_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q9_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q9_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1 (Identificación):</b> ¿Qué sucederá en la realidad física con este resorte?</p>
+                    <label><input type="radio" name="q5_math" value="0"> Se deformará permanentemente o se romperá.</label>
+                    <label><input type="radio" name="q5_math" value="1"> Se estirará exactamente 400 metros intacto.</label>
+                    <label><input type="radio" name="q5_math" value="2"> Levitará al motor a los 400 m.</label>
+                    <label><input type="radio" name="q5_math" value="3"> Se comprimirá en vez de estirarse.</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q9_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q9_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q9_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q9_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué nos demuestra esto acerca de la fórmula F = kx?</p>
+                    <label><input type="radio" name="q5_analisis" value="0"> Que la fórmula de Hooke solo funciona dentro del "límite elástico" del material. Si la fuerza es tan grande que rompe o deforma el metal, el material pierde su capacidad de regresar a su forma original y la fórmula falla.</label>
+                    <label><input type="radio" name="q5_analisis" value="1"> Que la fórmula está mal estructurada desde el principio.</label>
+                    <label><input type="radio" name="q5_analisis" value="2"> Que la k del metal cambia a negativo con mucho peso.</label>
+                    <label><input type="radio" name="q5_analisis" value="3"> Que la gravedad afecta más a los resortes escolares.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 10: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 10.</p>
+            </div>
+
+            <!-- Ejercicio 6 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 6: El Signo Negativo F = -kx</h3>
+                <p>Comprimes un resorte hacia la derecha con tu mano, recorriendo +0.05 metros.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q10_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q10_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q10_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q10_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1 (Cálculo vectorial básico):</b> Si 'k' es de 1000 N/m y x = +0.05m, la fuerza del resorte F = - (1000 * +0.05).</p>
+                    <label><input type="radio" name="q6_math" value="0"> F = -50 N</label>
+                    <label><input type="radio" name="q6_math" value="1"> F = +50 N</label>
+                    <label><input type="radio" name="q6_math" value="2"> F = -500 N</label>
+                    <label><input type="radio" name="q6_math" value="3"> F = +1000 N</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q10_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q10_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q10_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q10_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué significa físicamente que la fuerza nos haya dado negativa (-50 N)?</p>
+                    <label><input type="radio" name="q6_analisis" value="0"> Es la esencia de la "fuerza restauradora". Indica que si el desplazamiento fue hacia la derecha (positivo), el resorte siempre empujará hacia la izquierda (negativo) intentando volver a su centro (Tercera Ley de Newton implícita).</label>
+                    <label><input type="radio" name="q6_analisis" value="1"> Que la fuerza disminuyó hasta cero.</label>
+                    <label><input type="radio" name="q6_analisis" value="2"> Significa que la masa es negativa temporalmente.</label>
+                    <label><input type="radio" name="q6_analisis" value="3"> Indica que el resorte absorbió el frío del ambiente.</label>
                 </div>
-            </div>        </div>
+            </div>
+
+            <!-- Ejercicio 7 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 7: Resortes en Serie vs Paralelo (Concepto)</h3>
+                <p>Tienes dos resortes idénticos (cada uno soporta 100 N para estirarse 1 metro). Si los pones uno al lado del otro (en paralelo) para cargar el mismo bulto de 100 N...</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuánto se van a estirar en conjunto?</p>
+                    <label><input type="radio" name="q7_math" value="0"> 0.5 m</label>
+                    <label><input type="radio" name="q7_math" value="1"> 2 m</label>
+                    <label><input type="radio" name="q7_math" value="2"> 1 m</label>
+                    <label><input type="radio" name="q7_math" value="3"> 0 m</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué sucede esto?</p>
+                    <label><input type="radio" name="q7_analisis" value="0"> Al ponerlos en paralelo, el peso de 100 N se reparte entre los dos (50 N a cada uno). Por lo tanto, cada uno se deforma la mitad de lo que se deformaría si cargara con todo él solo. El sistema es ahora el doble de "rígido".</label>
+                    <label><input type="radio" name="q7_analisis" value="1"> Porque los resortes juntos anulan la gravedad.</label>
+                    <label><input type="radio" name="q7_analisis" value="2"> Porque un resorte transfiere su elasticidad al otro.</label>
+                    <label><input type="radio" name="q7_analisis" value="3"> No hay explicación, es una coincidencia.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 8 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 8: Combinando Newton y Hooke</h3>
+                <p>Sujetas horizontalmente un bloque de 2 kg (m=2) a un resorte (k=100 N/m). Estiras el resorte 0.3 m y lo sueltas de golpe en una superficie sin fricción.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo de Aceleración inicial):</b> Fuerza inicial (F=100*0.3 = 30N). Luego, aceleración (a = F/m = 30N / 2kg).</p>
+                    <label><input type="radio" name="q8_math" value="0"> 15 m/s²</label>
+                    <label><input type="radio" name="q8_math" value="1"> 30 m/s²</label>
+                    <label><input type="radio" name="q8_math" value="2"> 60 m/s²</label>
+                    <label><input type="radio" name="q8_math" value="3"> 100 m/s²</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Al momento en que el bloque pasa por el centro de equilibrio (resorte relajado), ¿cuál es su aceleración ahí?</p>
+                    <label><input type="radio" name="q8_analisis" value="0"> Es cero. Porque en el punto de equilibrio, x=0, entonces F=0 y la aceleración es nula. ¡Pero su velocidad ahí es máxima (inercia) lo que hace que comprima el resorte hacia el otro lado!</label>
+                    <label><input type="radio" name="q8_analisis" value="1"> Es máxima, porque en el centro siempre hay más gravedad.</label>
+                    <label><input type="radio" name="q8_analisis" value="2"> Es negativa debido a la radiación térmica.</label>
+                    <label><input type="radio" name="q8_analisis" value="3"> Es constante en todo el recorrido desde que lo sueltas.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 9 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 9: Gravedad y Resortes Colgantes</h3>
+                <p>Cuelgas un bloque en un resorte vertical. Este se estira hasta llegar a un nuevo punto donde se queda completamente quieto.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Identificación):</b> En ese nuevo punto de equilibrio estático, ¿qué relación hay entre las fuerzas?</p>
+                    <label><input type="radio" name="q9_math" value="0"> Fuerza Elástica hacia arriba = Peso hacia abajo (k*x = m*g)</label>
+                    <label><input type="radio" name="q9_math" value="1"> Fuerza Elástica es mayor que el Peso.</label>
+                    <label><input type="radio" name="q9_math" value="2"> El Peso superó a la fuerza elástica.</label>
+                    <label><input type="radio" name="q9_math" value="3"> La Fuerza Normal eliminó la gravedad.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué este principio es útil en la vida diaria?</p>
+                    <label><input type="radio" name="q9_analisis" value="0"> Porque es exactamente el principio de funcionamiento de las balanzas colgantes (dinamómetros) que usan en los mercados. Al saber cuánto se estira (x) y conocer la rigidez (k), marcamos el peso del producto.</label>
+                    <label><input type="radio" name="q9_analisis" value="1"> Porque ayuda a que las frutas no se caigan.</label>
+                    <label><input type="radio" name="q9_analisis" value="2"> No es muy útil, ya casi no se usan resortes.</label>
+                    <label><input type="radio" name="q9_analisis" value="3"> Porque genera energía infinita para levantar bultos.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 10 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 10: Materiales No Hookeanos</h3>
+                <p>Se estira una liga de goma común (caucho). Mides sus datos y te das cuenta de que si la fuerzas al doble, no se estira exactamente el doble, sino menos de forma irregular.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Clasificación):</b></p>
+                    <label><input type="radio" name="q10_math" value="0"> La liga de goma no obedece la Ley de Hooke perfectamente.</label>
+                    <label><input type="radio" name="q10_math" value="1"> La liga tiene una 'k' negativa.</label>
+                    <label><input type="radio" name="q10_math" value="2"> La liga de goma es el mejor material Hookeano.</label>
+                    <label><input type="radio" name="q10_math" value="3"> La temperatura evaporó su constante elástica.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿por qué pasa esto en gomas a diferencia de metales?</p>
+                    <label><input type="radio" name="q10_analisis" value="0"> Porque la Ley de Hooke asume una relación lineal perfecta. Los materiales poliméricos como la goma (caucho) tienen estructuras moleculares complejas que se desenredan de forma no lineal, por lo que su 'k' varía a medida que se estiran.</label>
+                    <label><input type="radio" name="q10_analisis" value="1"> Porque la goma no tiene masa real.</label>
+                    <label><input type="radio" name="q10_analisis" value="2"> Porque el metal absorbe la gravedad terrestre mejor.</label>
+                    <label><input type="radio" name="q10_analisis" value="3"> Porque es una ley obsoleta que ya no se usa.</label>
+                </div>
+            </div>
+
+        </div>
         
         <button class="btn" onclick="calificar()"><i class="fa-solid fa-check-double"></i> Finalizar y Calificar</button>
         <div id="resultado" class="resultado"></div>
     </div>
     
     <script>
+        const respuestas = {
+            q1_math: 0, q1_analisis: 0, q2_math: 0, q2_analisis: 0,
+            q3_math: 0, q3_analisis: 0, q4_math: 0, q4_analisis: 0,
+            q5_math: 0, q5_analisis: 0, q6_math: 0, q6_analisis: 0,
+            q7_math: 0, q7_analisis: 0, q8_math: 0, q8_analisis: 0,
+            q9_math: 0, q9_analisis: 0, q10_math: 0, q10_analisis: 0
+        };
         function calificar() {
-            let puntaje = 0;
-            let total = 20;
+            let puntaje = 0; let total = 20;
             for (let i=1; i<=10; i++) {
                 const math = document.querySelector('input[name="q'+i+'_math"]:checked');
                 const analisis = document.querySelector('input[name="q'+i+'_analisis"]:checked');
                 if (math && math.value === "0") puntaje++;
                 if (analisis && analisis.value === "0") puntaje++;
             }
-            const resDiv = document.getElementById('resultado');
-            resDiv.style.display = 'block';
-            resDiv.innerHTML = Acertaste <span style="color:#2ecc71;"> + puntaje + </span> de  + total +  pasos.;
+            const resDiv = document.getElementById('resultado'); resDiv.style.display = 'block';
+            resDiv.innerHTML = `Acertaste <span style="color:#2ecc71;">` + puntaje + `</span> de ` + total + ` pasos.`;
+            
+            if (puntaje === total) {
+                resDiv.innerHTML += "<br>¡Excelente! Entendiste perfectamente la matemática y el concepto físico.";
+            } else if (puntaje > total/2) {
+                resDiv.innerHTML += "<br>¡Buen trabajo! Pero revisa los pasos en los que fallaste.";
+            } else {
+                resDiv.innerHTML += "<br>Te recomiendo repasar la teoría de Hooke.";
+            }
         }
     </script>
     <script src="auth.js"></script>

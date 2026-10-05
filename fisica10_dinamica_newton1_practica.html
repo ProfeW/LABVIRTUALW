@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica - Primera Ley de Newton (Inercia)</title>
+    <title>Práctica - Primera Ley de Newton</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -26,199 +26,217 @@
 </head>
 <body>
     <div class="contenedor">
-        <a href="fisica10_dinamica_newton1.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÃ­a</a>
-        <h1><i class="fa-solid fa-dumbbell"></i> PrÃ¡ctica en Cadena: Primera Ley de Newton (Inercia)</h1>
-        <p style="color:#ddd; margin-bottom:30px;">A continuaciÃ³n resolverÃ¡s 10 ejercicios paso a paso en cadena.</p>
+        <a href="fisica10_dinamica_newton1.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Teoría</a>
+        <h1><i class="fa-solid fa-dumbbell"></i> Práctica en Cadena: Primera Ley de Newton</h1>
+        <p style="color:#ddd; margin-bottom:30px;">A continuación resolverás 10 ejercicios. Primero calcula/identifica la fuerza neta, y luego analiza el concepto de inercia aplicado al caso.</p>
         
-        <div id="quiz-container">            <div class="pregunta-bloque">
-                <h3>Ejercicio 1: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 1.</p>
+        <div id="quiz-container">
+            <!-- Ejercicio 1 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 1: El Objeto en Reposo</h3>
+                <p>Una caja de 20 kg está quieta sobre el piso. La gravedad la tira con 196 N hacia abajo y el piso la empuja con 196 N hacia arriba.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q1_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q1_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q1_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q1_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la suma vectorial de las fuerzas (Fuerza Neta)?</p>
+                    <label><input type="radio" name="q1_math" value="0"> 0 N</label>
+                    <label><input type="radio" name="q1_math" value="1"> 196 N</label>
+                    <label><input type="radio" name="q1_math" value="2"> 392 N</label>
+                    <label><input type="radio" name="q1_math" value="3"> -196 N</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q1_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q1_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q1_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q1_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, según la Primera Ley, ¿qué pasará con la caja?</p>
+                    <label><input type="radio" name="q1_analisis" value="0"> Permanecerá en reposo absoluto indefinidamente hasta que una fuerza externa desequilibre la suma de 0 N.</label>
+                    <label><input type="radio" name="q1_analisis" value="1"> Se empezará a mover por el peso.</label>
+                    <label><input type="radio" name="q1_analisis" value="2"> Flotará porque las fuerzas son iguales.</label>
+                    <label><input type="radio" name="q1_analisis" value="3"> Ganará energía potencial.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 2: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 2.</p>
+            </div>
+
+            <!-- Ejercicio 2 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 2: Movimiento a Velocidad Constante</h3>
+                <p>Un astronauta lanza una llave en el espacio profundo a 5 m/s. No hay aire, fricción ni gravedad cerca.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q2_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q2_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q2_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q2_math" value="3"> OpciÃ³n Incorrecta 3</label>
-                </div>
-                <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q2_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q2_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q2_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q2_analisis" value="3"> No significa nada.</label>
-                </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 3: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 3.</p>
-                <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q3_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q3_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q3_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q3_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1 (Identificación):</b> ¿Cuánta fuerza debe seguir aplicando el astronauta para que la llave siga viajando a 5 m/s?</p>
+                    <label><input type="radio" name="q2_math" value="0"> 0 N</label>
+                    <label><input type="radio" name="q2_math" value="1"> 5 N</label>
+                    <label><input type="radio" name="q2_math" value="2"> Depende de la masa de la llave</label>
+                    <label><input type="radio" name="q2_math" value="3"> 9.8 N</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q3_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q3_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q3_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q3_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué ocurre esto?</p>
+                    <label><input type="radio" name="q2_analisis" value="0"> Por la Inercia. Un objeto en movimiento rectilíneo uniforme se mantendrá en movimiento indefinidamente si no hay fuerzas que lo detengan.</label>
+                    <label><input type="radio" name="q2_analisis" value="1"> Porque en el espacio hay una fuerza oscura que mueve todo.</label>
+                    <label><input type="radio" name="q2_analisis" value="2"> Porque el astronauta la empujó con mucha fuerza inicial.</label>
+                    <label><input type="radio" name="q2_analisis" value="3"> Porque la velocidad no necesita fuerza en ningún lado, ni siquiera en la Tierra.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 4: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 4.</p>
+            </div>
+
+            <!-- (Para efectos de límites, aquí incluiría los ejercicios 3 al 10 con la misma lógica. Voy a inyectar el resto en el código final rápidamente) -->
+            <!-- Ejercicio 3 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 3: Fricción vs Motor</h3>
+                <p>Un carro viaja a velocidad constante de 80 km/h en línea recta. El motor genera 2000 N de empuje. ¿Cuánta fuerza de fricción debe haber?</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q4_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q4_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q4_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q4_math" value="3"> OpciÃ³n Incorrecta 3</label>
-                </div>
-                <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q4_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q4_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q4_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q4_analisis" value="3"> No significa nada.</label>
-                </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 5: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 5.</p>
-                <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q5_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q5_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q5_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q5_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <label><input type="radio" name="q3_math" value="0"> Exactamente 2000 N</label>
+                    <label><input type="radio" name="q3_math" value="1"> 0 N</label>
+                    <label><input type="radio" name="q3_math" value="2"> Menos de 2000 N</label>
+                    <label><input type="radio" name="q3_math" value="3"> Más de 2000 N</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q5_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q5_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q5_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q5_analisis" value="3"> No significa nada.</label>
+                    <label><input type="radio" name="q3_analisis" value="0"> Para ir a velocidad constante, la aceleración es 0. Según Newton, si la aceleración es 0, la fuerza neta debe ser 0. Por ende, el empuje debe igualar a la fricción.</label>
+                    <label><input type="radio" name="q3_analisis" value="1"> El motor debe hacer más fuerza para moverse.</label>
+                    <label><input type="radio" name="q3_analisis" value="2"> La fricción siempre frena todo a cero eventualmente.</label>
+                    <label><input type="radio" name="q3_analisis" value="3"> La velocidad constante no tiene relación con las fuerzas.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 6: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 6.</p>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 4: Curvas y Dirección</h3>
+                <p>Una moto entra a una curva manteniendo el velocímetro clavado en 50 km/h (velocidad constante en magnitud).</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q6_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q6_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q6_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q6_math" value="3"> OpciÃ³n Incorrecta 3</label>
-                </div>
-                <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q6_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q6_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q6_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q6_analisis" value="3"> No significa nada.</label>
-                </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 7: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 7.</p>
-                <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q7_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q7_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q7_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q7_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <p><b>Paso 1:</b> ¿La fuerza neta sobre la moto en la curva es cero?</p>
+                    <label><input type="radio" name="q4_math" value="0"> No, no es cero.</label>
+                    <label><input type="radio" name="q4_math" value="1"> Sí, es cero.</label>
+                    <label><input type="radio" name="q4_math" value="2"> Depende de la masa de la moto.</label>
+                    <label><input type="radio" name="q4_math" value="3"> Solo si la curva es de bajada.</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q7_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q7_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q7_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q7_analisis" value="3"> No significa nada.</label>
+                    <p><b>Paso 2:</b> ¿Qué nos dice la Primera Ley al respecto?</p>
+                    <label><input type="radio" name="q4_analisis" value="0"> La ley exige que el movimiento sea rectilíneo (línea recta) para que la fuerza sea cero. Como la moto cambió de dirección, hubo una aceleración (centrípeta) y por tanto una fuerza neta involucrada.</label>
+                    <label><input type="radio" name="q4_analisis" value="1"> Como el velocímetro no cambió, no hay fuerza aplicada.</label>
+                    <label><input type="radio" name="q4_analisis" value="2"> La inercia en las curvas desaparece por la fricción de la llanta.</label>
+                    <label><input type="radio" name="q4_analisis" value="3"> Las curvas no están reguladas por las leyes de Newton.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 8: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 8.</p>
+            </div>
+
+            <!-- Ejercicio 5 al 10: Continuación del flujo -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 5: Tirón del Mantel</h3>
+                <p>Un mago tira rápidamente de un mantel de una mesa sin botar los platos.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q8_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q8_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q8_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q8_math" value="3"> OpciÃ³n Incorrecta 3</label>
-                </div>
-                <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q8_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q8_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q8_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q8_analisis" value="3"> No significa nada.</label>
-                </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 9: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 9.</p>
-                <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q9_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q9_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q9_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q9_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <label><input type="radio" name="q5_math" value="0"> La fuerza de fricción transmitida a los platos fue casi 0 N</label>
+                    <label><input type="radio" name="q5_math" value="1"> Hizo una fuerza de 1000 N hacia arriba</label>
+                    <label><input type="radio" name="q5_math" value="2"> Aumentó la masa de los platos</label>
+                    <label><input type="radio" name="q5_math" value="3"> Ninguna fuerza actúa en los trucos</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q9_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q9_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q9_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q9_analisis" value="3"> No significa nada.</label>
+                    <label><input type="radio" name="q5_analisis" value="0"> Los platos tienen inercia de reposo. Al tirar tan rápido, no hubo tiempo de transmitir suficiente fuerza neta a los platos, por lo que conservaron su estado estático.</label>
+                    <label><input type="radio" name="q5_analisis" value="1"> Es pura ilusión óptica.</label>
+                    <label><input type="radio" name="q5_analisis" value="2"> Los platos son muy pesados.</label>
+                    <label><input type="radio" name="q5_analisis" value="3"> El mantel es mágicamente resbaloso.</label>
                 </div>
-            </div>            <div class="pregunta-bloque">
-                <h3>Ejercicio 10: AplicaciÃ³n de la Ley</h3>
-                <p>Enunciado del problema fÃ­sico 10.</p>
+            </div>
+            
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 6: Frenazo en Bus</h3>
+                <p>Vas parado en un bus. El bus frena de golpe. Te vas hacia adelante.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Selecciona el valor matemÃ¡tico correcto.</p>
-                    <label><input type="radio" name="q10_math" value="0"> OpciÃ³n Correcta</label>
-                    <label><input type="radio" name="q10_math" value="1"> OpciÃ³n Incorrecta 1</label>
-                    <label><input type="radio" name="q10_math" value="2"> OpciÃ³n Incorrecta 2</label>
-                    <label><input type="radio" name="q10_math" value="3"> OpciÃ³n Incorrecta 3</label>
+                    <label><input type="radio" name="q6_math" value="0"> Tu fuerza neta de avance fue 0 N, fue inercia.</label>
+                    <label><input type="radio" name="q6_math" value="1"> Alguien te empujó con 50 N por la espalda.</label>
+                    <label><input type="radio" name="q6_math" value="2"> El chofer hizo 100 N sobre tu cuerpo.</label>
+                    <label><input type="radio" name="q6_math" value="3"> Tu peso te tiró hacia adelante.</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿QuÃ© significa fÃ­sicamente este resultado?</p>
-                    <label><input type="radio" name="q10_analisis" value="0"> La aplicaciÃ³n o explicaciÃ³n conceptual correcta de este resultado en la vida real.</label>
-                    <label><input type="radio" name="q10_analisis" value="1"> Una conclusiÃ³n falsa sobre la masa/fuerza.</label>
-                    <label><input type="radio" name="q10_analisis" value="2"> Una conclusiÃ³n falsa sobre la energÃ­a.</label>
-                    <label><input type="radio" name="q10_analisis" value="3"> No significa nada.</label>
+                    <label><input type="radio" name="q6_analisis" value="0"> Como estabas viajando a cierta velocidad, tu inercia intenta mantener esa velocidad. Al no estar sujeto, no recibiste la fuerza de frenado a tiempo y continuaste moviéndote hacia adelante.</label>
+                    <label><input type="radio" name="q6_analisis" value="1"> El bus creó un vacío adelante.</label>
+                    <label><input type="radio" name="q6_analisis" value="2"> La gravedad cambió de eje.</label>
+                    <label><input type="radio" name="q6_analisis" value="3"> Es una ley exclusiva de la cinemática, no de la dinámica.</label>
                 </div>
-            </div>        </div>
+            </div>
+
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 7: Cinturón de Seguridad</h3>
+                <p>El cinturón de seguridad de un carro te retiene durante un choque frontal.</p>
+                <div class="sub-pregunta">
+                    <label><input type="radio" name="q7_math" value="0"> El cinturón ejerce una fuerza neta muy grande hacia atrás.</label>
+                    <label><input type="radio" name="q7_math" value="1"> El cinturón no hace fuerza, solo está ahí.</label>
+                    <label><input type="radio" name="q7_math" value="2"> Genera 0 N de resistencia.</label>
+                    <label><input type="radio" name="q7_math" value="3"> El cinturón empuja hacia adelante.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <label><input type="radio" name="q7_analisis" value="0"> Sirve para cambiar tu estado de inercia violento, aplicándote una fuerza neta que te obliga a frenar junto con el vehículo y evita que salgas volando.</label>
+                    <label><input type="radio" name="q7_analisis" value="1"> Sirve para decorar.</label>
+                    <label><input type="radio" name="q7_analisis" value="2"> Sirve para evitar multas, no tiene base física.</label>
+                    <label><input type="radio" name="q7_analisis" value="3"> Sirve para acelerarte más.</label>
+                </div>
+            </div>
+
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 8: Sacudir el Polvo</h3>
+                <p>Para sacarle el polvo a una alfombra, la golpeas con un palo.</p>
+                <div class="sub-pregunta">
+                    <label><input type="radio" name="q8_math" value="0"> La fuerza va hacia la alfombra, el polvo experimenta 0 N iniciales en su eje.</label>
+                    <label><input type="radio" name="q8_math" value="1"> Le pegas al polvo directamente.</label>
+                    <label><input type="radio" name="q8_math" value="2"> La gravedad del polvo aumenta.</label>
+                    <label><input type="radio" name="q8_math" value="3"> El palo absorbe el polvo.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <label><input type="radio" name="q8_analisis" value="0"> La alfombra se mueve por la fuerza del palo, pero el polvo por su inercia de reposo tiende a quedarse en su sitio; así, la alfombra se aparta y el polvo cae.</label>
+                    <label><input type="radio" name="q8_analisis" value="1"> El sonido espanta al polvo.</label>
+                    <label><input type="radio" name="q8_analisis" value="2"> El palo está magnetizado.</label>
+                    <label><input type="radio" name="q8_analisis" value="3"> Es pura casualidad térmica.</label>
+                </div>
+            </div>
+
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 9: Apagar el Motor de un Barco</h3>
+                <p>Un barco grande apaga sus motores. Sin embargo, avanza un gran trayecto antes de detenerse.</p>
+                <div class="sub-pregunta">
+                    <label><input type="radio" name="q9_math" value="0"> Hay muy poca fuerza de fricción (agua) comparada con su enorme masa.</label>
+                    <label><input type="radio" name="q9_math" value="1"> La hélice sigue girando con motor apagado.</label>
+                    <label><input type="radio" name="q9_math" value="2"> El agua lo empuja.</label>
+                    <label><input type="radio" name="q9_math" value="3"> El viento es de 1000 N siempre.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <label><input type="radio" name="q9_analisis" value="0"> El barco tiene tanta masa que su inercia de movimiento es altísima. Como el agua ejerce una fuerza de fricción relativamente pequeña, tomará mucho tiempo y distancia para que esa pequeña fuerza cambie su estado a reposo.</label>
+                    <label><input type="radio" name="q9_analisis" value="1"> El barco no tiene inercia, solo se resbala.</label>
+                    <label><input type="radio" name="q9_analisis" value="2"> Porque la tierra es curva.</label>
+                    <label><input type="radio" name="q9_analisis" value="3"> Porque el motor guarda energía que se libera sola.</label>
+                </div>
+            </div>
+
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 10: Inercia y Masa</h3>
+                <p>Te lanzan una pelota de tenis a 10 m/s y la atrapas fácilmente. Luego te lanzan una bola de bolos a 10 m/s y te tira al piso.</p>
+                <div class="sub-pregunta">
+                    <label><input type="radio" name="q10_math" value="0"> Ambas tienen igual velocidad, pero la bola de bolos tiene mayor masa (mayor inercia).</label>
+                    <label><input type="radio" name="q10_math" value="1"> La bola de bolos iba más rápido.</label>
+                    <label><input type="radio" name="q10_math" value="2"> La de tenis no tenía gravedad.</label>
+                    <label><input type="radio" name="q10_math" value="3"> La bola de bolos es de metal.</label>
+                </div>
+                <div class="sub-pregunta">
+                    <label><input type="radio" name="q10_analisis" value="0"> La masa es la medida cuantitativa de la inercia. Mayor masa requiere una fuerza neta mucho mayor para detenerla, por eso la bola de bolos te arrolla al intentar cambiar su estado de movimiento.</label>
+                    <label><input type="radio" name="q10_analisis" value="1"> La inercia solo depende de la forma del objeto.</label>
+                    <label><input type="radio" name="q10_analisis" value="2"> Porque los bolos tienen huecos para los dedos.</label>
+                    <label><input type="radio" name="q10_analisis" value="3"> Porque la de tenis rebotó antes de llegar.</label>
+                </div>
+            </div>
+
+        </div>
         
         <button class="btn" onclick="calificar()"><i class="fa-solid fa-check-double"></i> Finalizar y Calificar</button>
         <div id="resultado" class="resultado"></div>
     </div>
     
     <script>
+        const respuestas = {
+            q1_math: 0, q1_analisis: 0, q2_math: 0, q2_analisis: 0,
+            q3_math: 0, q3_analisis: 0, q4_math: 0, q4_analisis: 0,
+            q5_math: 0, q5_analisis: 0, q6_math: 0, q6_analisis: 0,
+            q7_math: 0, q7_analisis: 0, q8_math: 0, q8_analisis: 0,
+            q9_math: 0, q9_analisis: 0, q10_math: 0, q10_analisis: 0
+        };
         function calificar() {
-            let puntaje = 0;
-            let total = 20;
+            let puntaje = 0; let total = 20;
             for (let i=1; i<=10; i++) {
                 const math = document.querySelector('input[name="q'+i+'_math"]:checked');
                 const analisis = document.querySelector('input[name="q'+i+'_analisis"]:checked');
                 if (math && math.value === "0") puntaje++;
                 if (analisis && analisis.value === "0") puntaje++;
             }
-            const resDiv = document.getElementById('resultado');
-            resDiv.style.display = 'block';
-            resDiv.innerHTML = Acertaste <span style="color:#2ecc71;"> + puntaje + </span> de  + total +  pasos.;
+            const resDiv = document.getElementById('resultado'); resDiv.style.display = 'block';
+            resDiv.innerHTML = `Acertaste <span style="color:#2ecc71;">` + puntaje + `</span> de ` + total + ` pasos.`;
         }
     </script>
     <script src="auth.js"></script>

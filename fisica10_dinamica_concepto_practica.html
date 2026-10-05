@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrÃ¡ctica - Concepto de Fuerza</title>
+    <title>Práctica - Concepto de Fuerza</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -26,67 +26,254 @@
 </head>
 <body>
     <div class="contenedor">
-        <a href="fisica10_dinamica_concepto.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la TeorÃ­a</a>
-        <h1>PrÃ¡ctica en Cadena: Concepto de Fuerza</h1>
-        <p style="color:#ddd; margin-bottom:30px;">Resuelve los siguientes ejercicios de prÃ¡ctica. Aunque aquÃ­ no hay una fÃ³rmula como F=ma, debes aplicar la suma de fuerzas y anÃ¡lisis conceptual. Selecciona la opciÃ³n correcta en cada paso.</p>
+        <a href="fisica10_dinamica_concepto.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la Teoría</a>
+        <h1><i class="fa-solid fa-dumbbell"></i> Práctica en Cadena: Concepto de Fuerza</h1>
+        <p style="color:#ddd; margin-bottom:30px;">A continuación resolverás 10 ejercicios analíticos y de cálculo rápido. En cada uno, primero realizarás el cálculo vectorial de fuerzas y luego seleccionarás la interpretación física de ese resultado.</p>
         
         <div id="quiz-container">
-            <!-- Ejercicio 1 al 10 para Conceptos (Simplificados para no exceder lÃ­mite de script, pero siguiendo el esquema de cadena) -->
-            <!-- Q1 -->
+            
+            <!-- Ejercicio 1 -->
             <div class="pregunta-bloque">
-                <h3>Ejercicio 1: Suma de Fuerzas en una DimensiÃ³n</h3>
+                <h3>Ejercicio 1: Suma de Fuerzas Horizontales</h3>
                 <p>Dos personas empujan una caja hacia la derecha, una con 30 N y otra con 40 N. Una tercera persona empuja hacia la izquierda con 50 N.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo Vectorial):</b> Â¿CuÃ¡l es la magnitud y direcciÃ³n de la fuerza resultante?</p>
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la magnitud y dirección de la fuerza resultante neta?</p>
                     <label><input type="radio" name="q1_math" value="0"> 20 N hacia la derecha</label>
                     <label><input type="radio" name="q1_math" value="1"> 120 N hacia la derecha</label>
                     <label><input type="radio" name="q1_math" value="2"> 20 N hacia la izquierda</label>
-                    <label><input type="radio" name="q1_math" value="3"> 0 N</label>
+                    <label><input type="radio" name="q1_math" value="3"> 0 N (Equilibrio)</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> FÃ­sicamente, Â¿quÃ© implica este resultado de 20 N?</p>
-                    <label><input type="radio" name="q1_analisis" value="0"> Implica que a efectos prÃ¡cticos, es como si una sola persona estuviera empujando la caja a la derecha con 20 N.</label>
-                    <label><input type="radio" name="q1_analisis" value="1"> Que la caja se romperÃ¡.</label>
-                    <label><input type="radio" name="q1_analisis" value="2"> Que la caja estÃ¡ en completo equilibrio y no se moverÃ¡.</label>
-                    <label><input type="radio" name="q1_analisis" value="3"> Que la fuerza de 50 N venciÃ³ a las otras dos completamente.</label>
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿qué implica este resultado (20 N)?</p>
+                    <label><input type="radio" name="q1_analisis" value="0"> Implica que el efecto combinado de las 3 personas es exactamente el mismo que si una sola persona empujara la caja a la derecha con 20 N.</label>
+                    <label><input type="radio" name="q1_analisis" value="1"> Que la caja se va a romper por la presión.</label>
+                    <label><input type="radio" name="q1_analisis" value="2"> Que la caja no se va a mover en lo absoluto.</label>
+                    <label><input type="radio" name="q1_analisis" value="3"> Que la fuerza de 50 N hacia la izquierda dominó todo el sistema.</label>
                 </div>
             </div>
-            <!-- Q2 a Q10 se condensan para viabilidad, pero el estudiante lo verÃ¡ como 10 ejercicios interactivos -->
+
+            <!-- Ejercicio 2 -->
             <div class="pregunta-bloque">
                 <h3>Ejercicio 2: Fuerza Normal</h3>
-                <p>Un televisor ejerce 150 N sobre una mesa.</p>
+                <p>Una herramienta de 150 N de peso está apoyada sobre una mesa de trabajo plana. La herramienta no se hunde ni sale volando.</p>
                 <div class="sub-pregunta">
-                    <p><b>Paso 1 (CÃ¡lculo):</b> Â¿CuÃ¡l es el valor de la Fuerza Normal de la mesa si el TV no se mueve verticalmente?</p>
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es el valor de la Fuerza Normal ejercida por la mesa?</p>
                     <label><input type="radio" name="q2_math" value="0"> 150 N hacia arriba</label>
                     <label><input type="radio" name="q2_math" value="1"> 0 N</label>
                     <label><input type="radio" name="q2_math" value="2"> 150 N hacia abajo</label>
-                    <label><input type="radio" name="q2_math" value="3"> Infinito</label>
+                    <label><input type="radio" name="q2_math" value="3"> 300 N hacia arriba</label>
                 </div>
                 <div class="sub-pregunta">
-                    <p><b>Paso 2 (AnÃ¡lisis):</b> Â¿Por quÃ©?</p>
-                    <label><input type="radio" name="q2_analisis" value="0"> Porque para que no exista aceleraciÃ³n (movimiento), las fuerzas deben anularse, por lo que la mesa responde con una fuerza igual y opuesta.</label>
-                    <label><input type="radio" name="q2_analisis" value="1"> Porque las mesas son mÃ¡gicas.</label>
-                    <label><input type="radio" name="q2_analisis" value="2"> Porque el peso no existe.</label>
-                    <label><input type="radio" name="q2_analisis" value="3"> Porque el aire sostiene el televisor.</label>
+                    <p><b>Paso 2 (Análisis):</b> ¿Por qué ocurre esto?</p>
+                    <label><input type="radio" name="q2_analisis" value="0"> Para mantener el equilibrio (fuerza neta cero verticalmente), la estructura rígida de la mesa debe generar una fuerza de reacción idéntica y opuesta al peso.</label>
+                    <label><input type="radio" name="q2_analisis" value="1"> Porque las mesas están diseñadas para empujar objetos de manera autónoma.</label>
+                    <label><input type="radio" name="q2_analisis" value="2"> Porque en la superficie de la mesa no existe la gravedad.</label>
+                    <label><input type="radio" name="q2_analisis" value="3"> Porque el aire sostiene la herramienta, no la mesa.</label>
                 </div>
             </div>
+
+            <!-- Ejercicio 3 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 3: Equilibrio Estático</h3>
+                <p>Estás halando una cuerda hacia la izquierda con 80 N y otra persona la hala hacia la derecha. La cuerda está completamente quieta (equilibrio estático).</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la fuerza exacta que está haciendo la otra persona?</p>
+                    <label><input type="radio" name="q3_math" value="0"> 80 N hacia la derecha</label>
+                    <label><input type="radio" name="q3_math" value="1"> 0 N</label>
+                    <label><input type="radio" name="q3_math" value="2"> 160 N hacia la derecha</label>
+                    <label><input type="radio" name="q3_math" value="3"> 80 N hacia la izquierda</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué significa físicamente que la suma de fuerzas sea cero en este caso?</p>
+                    <label><input type="radio" name="q3_analisis" value="0"> Que las dos fuerzas interactúan con la misma magnitud pero en sentidos opuestos, cancelándose mutuamente y manteniendo la inercia de reposo de la cuerda.</label>
+                    <label><input type="radio" name="q3_analisis" value="1"> Significa que la cuerda no existe o no tiene masa.</label>
+                    <label><input type="radio" name="q3_analisis" value="2"> Que ambos dejaron de hacer fuerza al mismo tiempo.</label>
+                    <label><input type="radio" name="q3_analisis" value="3"> Significa que la fuerza se multiplicó en el centro de la cuerda.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 4: Sensación de Peso en un Ascensor (Fuerza Ficticia)</h3>
+                <p>Estás en un ascensor que arranca bruscamente hacia arriba (acelerando). Tu peso real es de 600 N, pero por la aceleración, la báscula marca 700 N temporalmente.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la magnitud de la "fuerza extra" (fuerza ficticia) que percibes hacia abajo?</p>
+                    <label><input type="radio" name="q4_math" value="0"> 100 N</label>
+                    <label><input type="radio" name="q4_math" value="1"> 600 N</label>
+                    <label><input type="radio" name="q4_math" value="2"> 1300 N</label>
+                    <label><input type="radio" name="q4_math" value="3"> 0 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué explica la aparición de esos 100 N extra en la báscula?</p>
+                    <label><input type="radio" name="q4_analisis" value="0"> Es una fuerza ficticia. Tu cuerpo por inercia quiere quedarse quieto, y el piso del ascensor empuja fuertemente hacia arriba contra ti para acelerarte, lo que se siente como si pesaras más.</label>
+                    <label><input type="radio" name="q4_analisis" value="1"> Es porque la gravedad terrestre aumenta cuando te alejas del suelo.</label>
+                    <label><input type="radio" name="q4_analisis" value="2"> Porque mágicamente adquiriste más masa corporal.</label>
+                    <label><input type="radio" name="q4_analisis" value="3"> Porque el aire del ascensor te empuja hacia abajo.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 5 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 5: Fuerzas Concurrentes con Ángulo (Básico)</h3>
+                <p>Dos caballos tiran de un poste. Uno tira hacia el Norte con 300 N y otro hacia el Este con 400 N. (Pista: Usa Pitágoras para la resultante R² = 300² + 400²).</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la fuerza resultante (hipotenusa)?</p>
+                    <label><input type="radio" name="q5_math" value="0"> 500 N</label>
+                    <label><input type="radio" name="q5_math" value="1"> 700 N</label>
+                    <label><input type="radio" name="q5_math" value="2"> 100 N</label>
+                    <label><input type="radio" name="q5_math" value="3"> 250 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué nos dice este resultado de 500 N sobre la eficiencia de tirar en diferentes direcciones?</p>
+                    <label><input type="radio" name="q5_analisis" value="0"> Nos muestra que las fuerzas no se suman como números simples (300+400 no es 700 N aquí). Al tirar en ángulo, una parte del esfuerzo "se pierde", resultando en una fuerza neta diagonal de solo 500 N.</label>
+                    <label><input type="radio" name="q5_analisis" value="1"> Que los caballos están generando energía infinita.</label>
+                    <label><input type="radio" name="q5_analisis" value="2"> Que siempre es mejor tirar en ángulo que en la misma dirección.</label>
+                    <label><input type="radio" name="q5_analisis" value="3"> Que la fuerza resultante siempre será la resta de ambas.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 6 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 6: Fuerza de Tensión Constante</h3>
+                <p>Una garrucha en una finca suspende en el aire un bulto de 400 N. El bulto está quieto, colgado del cable.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es el valor de la tensión en el cable?</p>
+                    <label><input type="radio" name="q6_math" value="0"> 400 N hacia arriba</label>
+                    <label><input type="radio" name="q6_math" value="1"> 0 N</label>
+                    <label><input type="radio" name="q6_math" value="2"> 200 N hacia arriba</label>
+                    <label><input type="radio" name="q6_math" value="3"> 800 N hacia arriba</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué ocurre si la resistencia máxima del cable es de solo 300 N?</p>
+                    <label><input type="radio" name="q6_analisis" value="0"> El cable se romperá, porque la inercia gravitacional (el peso de 400 N) supera la fuerza electromagnética máxima que pueden soportar las moléculas del cable (300 N).</label>
+                    <label><input type="radio" name="q6_analisis" value="1"> El bulto se volverá más liviano para adaptarse al cable.</label>
+                    <label><input type="radio" name="q6_analisis" value="2"> El cable se estirará infinitamente sin romperse.</label>
+                    <label><input type="radio" name="q6_analisis" value="3"> La garrucha se moverá hacia los lados automáticamente.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 7 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 7: Vehículo Frenando de Golpe</h3>
+                <p>Vas en un jeep a 40 km/h y frena abruptamente. Sientes una fuerza que te empuja hacia el parabrisas.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo/Clasificación):</b> Esta "fuerza" que te empuja hacia adelante se clasifica estrictamente como:</p>
+                    <label><input type="radio" name="q7_math" value="0"> Una fuerza ficticia (Inercia)</label>
+                    <label><input type="radio" name="q7_math" value="1"> Una fuerza de fricción aerodinámica</label>
+                    <label><input type="radio" name="q7_math" value="2"> Una fuerza electromagnética repulsiva</label>
+                    <label><input type="radio" name="q7_math" value="3"> Gravedad horizontal</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿por qué experimentas este empuje ficticio?</p>
+                    <label><input type="radio" name="q7_analisis" value="0"> Porque ningún objeto real te empujó. Simplemente tu masa intentó seguir viajando a 40 km/h en línea recta mientras el jeep se detenía debajo de ti.</label>
+                    <label><input type="radio" name="q7_analisis" value="1"> Porque el motor del carro invirtió su giro y creó un campo magnético.</label>
+                    <label><input type="radio" name="q7_analisis" value="2"> Porque el aire comprimido dentro de la cabina te aplastó.</label>
+                    <label><input type="radio" name="q7_analisis" value="3"> Porque perdiste peso repentinamente al frenar.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 8 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 8: Equilibrio en Plano Inclinado (Concepto)</h3>
+                <p>Una roca pesada está sobre la ladera de una montaña, pero no rueda hacia abajo gracias a un tronco que la traba.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> Si la componente del peso de la roca que intenta hacerla caer es de 2000 N, ¿cuánta fuerza debe estar aplicando el tronco hacia arriba de la ladera para mantenerla quieta?</p>
+                    <label><input type="radio" name="q8_math" value="0"> 2000 N</label>
+                    <label><input type="radio" name="q8_math" value="1"> 4000 N</label>
+                    <label><input type="radio" name="q8_math" value="2"> 0 N</label>
+                    <label><input type="radio" name="q8_math" value="3"> 1000 N</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Qué nos demuestra este equilibrio en la naturaleza?</p>
+                    <label><input type="radio" name="q8_analisis" value="0"> Nos demuestra que fuerzas inmensas pueden estar operando constantemente a nuestro alrededor (gravedad vs. fuerza de contacto), pero si su suma vectorial es cero, el objeto se mantendrá en reposo.</label>
+                    <label><input type="radio" name="q8_analisis" value="1"> Que la gravedad no afecta a las rocas en las montañas.</label>
+                    <label><input type="radio" name="q8_analisis" value="2"> Que la fricción desaparece en los planos inclinados.</label>
+                    <label><input type="radio" name="q8_analisis" value="3"> Que los troncos generan energía cinética pasiva.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 9 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 9: Peso Aparente en Caída Libre</h3>
+                <p>Supongamos que saltas en un paracaídas. En el primer segundo (antes de abrirlo y antes de que el aire haga resistencia) estás en caída libre a 9.8 m/s².</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es tu Fuerza Normal (tu peso aparente) en ese instante en el aire vacío?</p>
+                    <label><input type="radio" name="q9_math" value="0"> 0 N</label>
+                    <label><input type="radio" name="q9_math" value="1"> 9.8 N</label>
+                    <label><input type="radio" name="q9_math" value="2"> Tu peso exacto normal</label>
+                    <label><input type="radio" name="q9_math" value="3"> Infinito</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> ¿Cómo se traduce este 0 N en lo que siente tu cuerpo?</p>
+                    <label><input type="radio" name="q9_analisis" value="0"> Es la sensación de ingravidez en el estómago. Como no hay un piso o estructura (Fuerza Normal) que contrarreste tu peso y te "aplaste", experimentas la falta de peso aparente.</label>
+                    <label><input type="radio" name="q9_analisis" value="1"> Sientes que te haces muy pesado y no puedes respirar.</label>
+                    <label><input type="radio" name="q9_analisis" value="2"> Sientes que el aire te empuja hacia arriba fuertemente desde el primer milisegundo.</label>
+                    <label><input type="radio" name="q9_analisis" value="3"> No sientes absolutamente ninguna diferencia con estar de pie.</label>
+                </div>
+            </div>
+
+            <!-- Ejercicio 10 -->
+            <div class="pregunta-bloque">
+                <h3>Ejercicio 10: Suma de Tres Fuerzas Colineales</h3>
+                <p>En el juego de "tirar de la soga", el equipo A (Izquierda) tira con dos personas: una hace 150 N y otra 200 N. El equipo B (Derecha) tira con una sola persona muy fuerte que aplica 400 N.</p>
+                <div class="sub-pregunta">
+                    <p><b>Paso 1 (Cálculo):</b> ¿Cuál es la fuerza neta y quién gana?</p>
+                    <label><input type="radio" name="q10_math" value="0"> 50 N a favor del Equipo B (Derecha)</label>
+                    <label><input type="radio" name="q10_math" value="1"> 50 N a favor del Equipo A (Izquierda)</label>
+                    <label><input type="radio" name="q10_math" value="2"> Empate (0 N)</label>
+                    <label><input type="radio" name="q10_math" value="3"> 750 N en total</label>
+                </div>
+                <div class="sub-pregunta">
+                    <p><b>Paso 2 (Análisis):</b> Físicamente, ¿qué sucederá con la marca central de la soga?</p>
+                    <label><input type="radio" name="q10_analisis" value="0"> Comenzará a acelerar hacia la derecha, dictado por la fuerza neta de 50 N que rompió el equilibrio del sistema.</label>
+                    <label><input type="radio" name="q10_analisis" value="1"> Se quedará quieta porque son dos personas contra una.</label>
+                    <label><input type="radio" name="q10_analisis" value="2"> Se romperá inmediatamente por la tensión.</label>
+                    <label><input type="radio" name="q10_analisis" value="3"> Se moverá a velocidad constante hacia la izquierda.</label>
+                </div>
+            </div>
+
         </div>
         
-        <button class="btn" onclick="calificar()"><i class="fa-solid fa-check-double"></i> Calificar PrÃ¡ctica</button>
+        <button class="btn" onclick="calificar()"><i class="fa-solid fa-check-double"></i> Finalizar y Calificar</button>
         <div id="resultado" class="resultado"></div>
     </div>
     
     <script>
-        const respuestas = { q1_math:0, q1_analisis:0, q2_math:0, q2_analisis:0 };
+        const respuestas = {
+            q1_math: 0, q1_analisis: 0,
+            q2_math: 0, q2_analisis: 0,
+            q3_math: 0, q3_analisis: 0,
+            q4_math: 0, q4_analisis: 0,
+            q5_math: 0, q5_analisis: 0,
+            q6_math: 0, q6_analisis: 0,
+            q7_math: 0, q7_analisis: 0,
+            q8_math: 0, q8_analisis: 0,
+            q9_math: 0, q9_analisis: 0,
+            q10_math: 0, q10_analisis: 0
+        };
+
         function calificar() {
-            let puntaje = 0; let total = 4;
-            for (const [name, correcta] of Object.entries(respuestas)) {
-                const sel = document.querySelector(\input[name="\"]:checked\);
-                if (sel && parseInt(sel.value) === correcta) puntaje++;
+            let puntaje = 0;
+            let total = 20;
+            for (let i=1; i<=10; i++) {
+                const math = document.querySelector('input[name="q'+i+'_math"]:checked');
+                const analisis = document.querySelector('input[name="q'+i+'_analisis"]:checked');
+                if (math && math.value === "0") puntaje++;
+                if (analisis && analisis.value === "0") puntaje++;
             }
-            const res = document.getElementById('resultado'); res.style.display = 'block';
-            res.innerHTML = \Acertaste <span style="color:#2ecc71;">\</span> de \ pasos.\;
+            const resDiv = document.getElementById('resultado');
+            resDiv.style.display = 'block';
+            resDiv.innerHTML = `Acertaste <span style="color:#2ecc71;">` + puntaje + `</span> de ` + total + ` pasos.`;
+            
+            if (puntaje === total) {
+                resDiv.innerHTML += "<br>¡Excelente! Entendiste perfectamente la matemática y el concepto físico.";
+            } else if (puntaje > total/2) {
+                resDiv.innerHTML += "<br>¡Buen trabajo! Pero revisa los pasos en los que fallaste.";
+            } else {
+                resDiv.innerHTML += "<br>Te recomiendo repasar la teoría.";
+            }
         }
     </script>
+    <script src="auth.js"></script>
 </body>
 </html>
