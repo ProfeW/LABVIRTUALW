@@ -541,7 +541,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             window.renderizarCatalogo();
             const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
-            if (!user || user.usuario !== 'profew') {
+            const gestoresAves = ['profew', '1115949464', '1083903981', '1081413587', '1081412687'];
+            const puedeGestionar = user && gestoresAves.includes(String(user.usuario).trim());
+            if (!puedeGestionar) {
                 const btnNuevo = document.querySelector('.btn-nuevo');
                 if (btnNuevo) btnNuevo.style.display = 'none';
             }

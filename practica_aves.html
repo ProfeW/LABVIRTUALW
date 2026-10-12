@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -642,7 +642,9 @@
             }
 
             const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
-            if (!user || user.usuario !== 'profew') {
+            const gestoresAves = ['profew', '1115949464', '1083903981', '1081413587', '1081412687'];
+            const puedeGestionar = user && gestoresAves.includes(String(user.usuario).trim());
+            if (!puedeGestionar) {
                 const btnGuardar = document.getElementById('btn-guardar-hoja');
                 if (btnGuardar) btnGuardar.style.display = 'none';
                 

@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
     const isAuth = !!user;
 
+    // Usuarios autorizados con rol especial para gestión del Catálogo de Aves
+    const GESTORES_AVES = ['1115949464', '1083903981', '1081413587', '1081412687'];
+    const esAdminGeneral = isAuth && user.usuario === 'profew';
+    const esGestorAves = isAuth && (esAdminGeneral || GESTORES_AVES.includes(String(user.usuario).trim()));
+
     // Extraer el nombre de la página actual
     let currentPage = window.location.pathname.split('/').pop();
     if (!currentPage) currentPage = 'index.html'; // Si es el directorio raíz
@@ -22,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    if (isAdminPage && (!isAuth || user.usuario !== 'profew')) {
+    if (isAdminPage && (!isAuth || !esAdminGeneral)) {
         window.location.href = 'index.html';
         return;
     }
@@ -37,12 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menu) {
         if (isAuth) {
             const li = document.createElement('li');
+            const rolBadge = esAdminGeneral 
+                ? ' <span style="font-size: 10px; background: #f1c40f; color: #000; padding: 2px 6px; border-radius: 4px; font-weight: 700; margin-left: 4px;">ADMIN</span>' 
+                : (esGestorAves ? ' <span style="font-size: 10px; background: #2ecc71; color: #000; padding: 2px 6px; border-radius: 4px; font-weight: 700; margin-left: 4px;">ADMIN-AVES</span>' : '');
+
             li.innerHTML = `
                 <a href="#" style="background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71;">
-                    <i class="fa-solid fa-user"></i> Hola, ${user.nombre.split(' ')[0]} <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
+                    <i class="fa-solid fa-user"></i> Hola, ${user.nombre.split(' ')[0]}${rolBadge} <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
                 </a>
                 <ul class="submenu">
-                    ${user.usuario === 'profew' ? '<li><a href="admin.html" style="color: #f1c40f;"><i class="fa-solid fa-gear"></i> Panel Admin</a></li>' : ''}
+                    ${esAdminGeneral ? '<li><a href="admin.html" style="color: #f1c40f;"><i class="fa-solid fa-gear"></i> Panel Admin</a></li>' : ''}
+                    ${esGestorAves ? '<li><a href="catalogo_aves.html" style="color: #2ecc71;"><i class="fa-solid fa-feather"></i> Catálogo Aves</a></li>' : ''}
                     <li><a href="#" id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
                 </ul>
             `;
@@ -188,6 +198,14 @@ window.LabAuth = {
             body: JSON.stringify({ action: 'get_logs' })
         });
         return await req.json();
+    },
+
+    canManageAves: function() {
+        const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+        if (!user) return false;
+        if (user.usuario === 'profew') return true;
+        const gestores = ['1115949464', '1083903981', '1081413587', '1081412687'];
+        return gestores.includes(String(user.usuario).trim());
     }
 };
 
