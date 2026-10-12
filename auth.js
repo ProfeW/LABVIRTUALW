@@ -10,12 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const esAdminGeneral = isAuth && user.usuario === 'profew';
     const esGestorAves = isAuth && (esAdminGeneral || GESTORES_AVES.includes(String(user.usuario).trim()));
 
-    // Extraer el nombre de la página actual
-    let currentPage = window.location.pathname.split('/').pop();
-    if (!currentPage) currentPage = 'index.html'; // Si es el directorio raíz
+    // Extraer el nombre del archivo de la página actual de forma robusta
+    let pathname = window.location.pathname || '';
+    let currentPage = pathname.split('/').pop().split('?')[0].split('#')[0].toLowerCase();
+    if (!currentPage) currentPage = 'index.html';
 
-    // Páginas que requieren autenticación (practica_aves.html es de libre consulta)
-    const isProtected = (currentPage.includes('practica') || currentPage.includes('evaluacion') || currentPage.includes('juego')) && currentPage !== 'practica_aves.html';
+    const isAvesPage = currentPage.includes('aves');
+
+    // Páginas que requieren autenticación (las aves son de libre consulta para todos)
+    const isProtected = !isAvesPage && (currentPage.includes('practica') || currentPage.includes('evaluacion') || currentPage.includes('juego'));
     // Páginas exclusivas para invitados (login, registro)
     const isAuthPage = currentPage === 'login.html' || currentPage === 'registro.html' || currentPage === 'recuperar.html';
 
@@ -74,16 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. Deshabilitar los botones hacia páginas protegidas si no hay sesión (excepto practica_aves.html)
+    // 3. Deshabilitar los botones hacia páginas protegidas si no hay sesión (excepto aves)
     if (!isAuth) {
-        // Busca enlaces que vayan a _practica, _evaluacion
+        // Busca enlaces que vayan a _practica, _evaluacion, _juego
         const allLinks = document.querySelectorAll('a');
         allLinks.forEach(link => {
-            const href = link.getAttribute('href');
+            const href = (link.getAttribute('href') || '').toLowerCase();
+            if (href.includes('aves')) {
+                return; // Permitir cualquier enlace relacionado con aves (catalogo_aves, practica_aves, etc.)
+            }
             if (href && (href.includes('practica') || href.includes('evaluacion') || href.includes('juego'))) {
-                if (href.includes('practica_aves.html')) {
-                    return; // Permitir libre visualización de la hoja de vida de aves
-                }
                 // Cambiar el estilo para que parezca deshabilitado
                 link.style.background = '#555';
                 link.style.color = '#999';
