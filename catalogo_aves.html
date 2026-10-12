@@ -497,6 +497,10 @@
             grid.innerHTML = '<div class="no-data"><i class="fa-solid fa-spinner fa-spin"></i> Cargando catálogo desde la nube...</div>';
             
             try {
+                const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+                const gestoresAves = ['profew', '1115949464', '1083903981', '1081413587', '1081412687'];
+                const puedeGestionar = user && gestoresAves.includes(String(user.usuario).trim());
+
                 const querySnapshot = await getDocs(collection(db, "catalogo_aves"));
                 grid.innerHTML = '';
                 
@@ -510,6 +514,10 @@
                     const aveId = doc.id;
                     const card = document.createElement('div');
                     card.className = 'ave-card';
+                    const textoBoton = puedeGestionar 
+                        ? '<i class="fa-solid fa-pen-to-square"></i> Editar Hoja de Vida' 
+                        : '<i class="fa-solid fa-eye"></i> Ver Hoja de Vida';
+
                     card.innerHTML = `
                         <img src="${ave.imagen}" class="ave-img" alt="${ave.nombreComun}">
                         <div class="ave-info">
@@ -517,7 +525,7 @@
                             <div class="ave-cientifico">${ave.nombreCientifico}</div>
                             <div class="ave-acciones">
                                 <a href="practica_aves.html?id=${aveId}" class="btn-accion btn-ver-hoja">
-                                    <i class="fa-solid fa-file-pdf"></i> Ver / Editar Hoja de Vida
+                                    ${textoBoton}
                                 </a>
                             </div>
                         </div>

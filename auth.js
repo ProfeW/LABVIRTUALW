@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = window.location.pathname.split('/').pop();
     if (!currentPage) currentPage = 'index.html'; // Si es el directorio raíz
 
-    // Páginas que requieren autenticación
-    const isProtected = currentPage.includes('practica') || currentPage.includes('evaluacion') || currentPage.includes('juego');
+    // Páginas que requieren autenticación (practica_aves.html es de libre consulta)
+    const isProtected = (currentPage.includes('practica') || currentPage.includes('evaluacion') || currentPage.includes('juego')) && currentPage !== 'practica_aves.html';
     // Páginas exclusivas para invitados (login, registro)
     const isAuthPage = currentPage === 'login.html' || currentPage === 'registro.html' || currentPage === 'recuperar.html';
 
@@ -74,13 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. Deshabilitar los botones hacia páginas protegidas si no hay sesión
+    // 3. Deshabilitar los botones hacia páginas protegidas si no hay sesión (excepto practica_aves.html)
     if (!isAuth) {
         // Busca enlaces que vayan a _practica, _evaluacion
         const allLinks = document.querySelectorAll('a');
         allLinks.forEach(link => {
             const href = link.getAttribute('href');
             if (href && (href.includes('practica') || href.includes('evaluacion') || href.includes('juego'))) {
+                if (href.includes('practica_aves.html')) {
+                    return; // Permitir libre visualización de la hoja de vida de aves
+                }
                 // Cambiar el estilo para que parezca deshabilitado
                 link.style.background = '#555';
                 link.style.color = '#999';

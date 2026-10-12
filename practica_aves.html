@@ -638,7 +638,7 @@
             if (birdId) {
                 await window.cargarHojaVida();
             } else {
-                alert("Atenci?n: Has entrado sin seleccionar un ave espec?fica. Vuelve al cat?logo para seleccionar una.");
+                alert("Atención: Has entrado sin seleccionar un ave específica. Vuelve al catálogo para seleccionar una.");
             }
 
             const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
@@ -706,8 +706,16 @@
         }
 
         window.guardarHojaVida = async function() {
+            const user = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+            const gestoresAves = ['profew', '1115949464', '1083903981', '1081413587', '1081412687'];
+            const puedeGestionar = user && gestoresAves.includes(String(user.usuario).trim());
+            if (!puedeGestionar) {
+                alert('No tienes permisos de edición para modificar esta hoja de vida.');
+                return;
+            }
+
             if (!birdId) {
-                alert('No se puede guardar: No hay un ID de ave asociado. Vuelve al cat?logo.');
+                alert('No se puede guardar: No hay un ID de ave asociado. Vuelve al catálogo.');
                 return;
             }
 
@@ -744,10 +752,10 @@
             try {
                 const docRef = doc(db, "catalogo_aves", birdId);
                 await updateDoc(docRef, data);
-                alert('?Hoja de vida guardada exitosamente en la nube!');
+                alert('¡Hoja de vida guardada exitosamente en la nube!');
             } catch (error) {
                 console.error("Error actualizando documento: ", error);
-                alert("Hubo un error al guardar. Aseg?rate de tener permisos en Firebase.");
+                alert("Hubo un error al guardar. Asegúrate de tener permisos en Firebase.");
             } finally {
                 btn.innerHTML = btnOriginalText;
                 btn.disabled = false;
