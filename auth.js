@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const isAvesPage = currentPage.includes('aves');
 
     // Páginas que requieren autenticación (las aves son de libre consulta para todos)
-    const isProtected = !isAvesPage && (currentPage.includes('practica') || currentPage.includes('evaluacion') || currentPage.includes('juego'));
+    const isProtected = !isAvesPage && currentPage !== 'autoevaluacion.html' && (currentPage.includes('practica') || currentPage.includes('evaluacion') || currentPage.includes('juego'));
     // Páginas exclusivas para invitados (login, registro)
     const isAuthPage = currentPage === 'login.html' || currentPage === 'registro.html' || currentPage === 'recuperar.html';
 
-    const isAdminPage = currentPage === 'admin.html';
+    const isAdminPage = currentPage === 'admin.html' || currentPage === 'resultados_autoevaluacion.html';
 
     // 1. Proteger las rutas directamente
     if (isProtected && !isAuth) {
@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
                 <ul class="submenu">
                     ${esAdminGeneral ? '<li><a href="admin.html" style="color: #f1c40f;"><i class="fa-solid fa-gear"></i> Panel Admin</a></li>' : ''}
+                    ${esAdminGeneral ? '<li><a href="resultados_autoevaluacion.html" style="color: #f39c12;"><i class="fa-solid fa-clipboard-check"></i> Autoevaluaciones</a></li>' : ''}
                     ${esGestorAves ? '<li><a href="catalogo_aves.html" style="color: #2ecc71;"><i class="fa-solid fa-feather"></i> Catálogo Aves</a></li>' : ''}
                     <li><a href="#" id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
                 </ul>
@@ -220,8 +221,8 @@ window.LabAuth = {
 // ==========================================
 (function() {
     let currentPage = window.location.pathname.split('/').pop();
-    // Solo inyectar en evaluaciones o practicas
-    if(!currentPage.includes('evaluacion') && !currentPage.includes('practica')) return;
+    // Solo inyectar en evaluaciones o practicas (la autoevaluación se gestiona de forma aislada)
+    if((!currentPage.includes('evaluacion') && !currentPage.includes('practica')) || currentPage.includes('autoevaluacion')) return;
 
     // Si ya existe firebase, solo inicializamos el listener
     if(typeof firebase !== 'undefined') {

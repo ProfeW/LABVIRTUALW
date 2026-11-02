@@ -64,7 +64,6 @@
                     <option value="Física">Física</option>
                     <option value="Química">Química</option>
                     <option value="Biología">Biología</option>
-                    <option value="Autoevaluación">Autoevaluación</option>
                 </select>
             </div>
             <div class="filter-group">
@@ -94,12 +93,17 @@
                 <input type="text" id="filter-nombre" placeholder="Buscar nombre..." onkeyup="aplicarFiltros()">
             </div>
             <button class="btn-descargar" onclick="descargarExcel()"><i class="fa-solid fa-file-excel"></i> Descargar Excel</button>
+            <div id="btn-autoeval-wrapper" style="display: none; margin-top: 15px;">
+                <a href="resultados_autoevaluacion.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: linear-gradient(135deg, #f39c12, #d35400); color: white; text-decoration: none; border-radius: 5px; font-weight: 600; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.35); text-align: center; font-size: 0.9rem;">
+                    <i class="fa-solid fa-clipboard-check"></i> Ver Autoevaluaciones
+                </a>
+            </div>
         </aside>
 
         <!-- CONTENIDO PRINCIPAL -->
         <div class="contenedor">
             <h1 style="text-align: left; margin-bottom:5px;"><i class="fa-solid fa-chart-bar"></i> Calificaciones</h1>
-            <p style="color:#ddd; margin-bottom: 40px; text-align: left;">Resultados y autoevaluaciones.</p>
+            <p style="color:#ddd; margin-bottom: 40px; text-align: left;">Historial de calificaciones de prácticas y evaluaciones de Física, Química y Biología.</p>
 
         <div id="cargando" class="cargando">
             <i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Conectando con la base de datos...
@@ -137,6 +141,10 @@
 
             const userLocal = JSON.parse(localStorage.getItem('usuario_labvirtual'));
             if (userLocal) {
+                if (userLocal.usuario === 'profew') {
+                    const btnAuto = document.getElementById('btn-autoeval-wrapper');
+                    if (btnAuto) btnAuto.style.display = 'block';
+                }
                 cargarResultados(userLocal);
             } else {
                 document.getElementById('cargando').innerHTML = "<span style='color:#e74c3c;'><i class='fa-solid fa-lock'></i> Debes iniciar sesión para ver los resultados.</span>";
@@ -194,6 +202,11 @@
                 const nombreEst = (data.nombre || data.usuario || "Desconocido").toLowerCase();
                 const lower = temaCompleto.toLowerCase();
                 
+                // AISLAR AUTOEVALUACIÓN: Tiene su propia sección especializada
+                if (lower.includes('autoevaluación') || lower.includes('autoevaluacion')) {
+                    return false;
+                }
+                
                 let asignatura = "Otras Asignaturas";
                 if (lower.includes('fisica') || lower.includes('física') || lower.includes('dinámica') || lower.includes('cinemática') || lower.includes('vector') || lower.includes('newton') || lower.includes('caida') || lower.includes('hooke') || lower.includes('sonido') || lower.includes('acústica') || lower.includes('ondas')) {
                     asignatura = "Física";
@@ -201,8 +214,6 @@
                     asignatura = "Química";
                 } else if (lower.includes('biologia') || lower.includes('biología') || lower.includes('mendel') || lower.includes('genética') || lower.includes('adn') || lower.includes('ecosistema')) {
                     asignatura = "Biología";
-                } else if (lower.includes('autoevaluación') || lower.includes('autoevaluacion')) {
-                    asignatura = "Autoevaluación";
                 }
 
                 let grado = "Otros Grados";
@@ -233,10 +244,6 @@
                 } else {
                     data._temaGeneral = temaCompleto;
                     data._subtema = "Evaluación";
-                }
-                
-                if(asignatura === "Autoevaluación") {
-                    data._subtema = "Autoevaluación Periodo " + (perMatch || "?");
                 }
 
                 return true;

@@ -85,7 +85,11 @@
 <body>
     <header>
         <a href="#" class="logo"><i class="fa-solid fa-user-shield"></i> Admin Panel</a>
-        <a href="index.html" class="volver-inicio"><i class="fa-solid fa-arrow-left"></i> Volver a LabVirtual</a>
+        <div>
+            <a href="resultados_autoevaluacion.html" class="volver-inicio" style="margin-right: 8px; color: #f39c12; border: 1px solid #f39c12;"><i class="fa-solid fa-clipboard-check"></i> Autoevaluación</a>
+            <a href="resultados.html" class="volver-inicio" style="margin-right: 8px;"><i class="fa-solid fa-chart-bar"></i> Calificaciones</a>
+            <a href="index.html" class="volver-inicio"><i class="fa-solid fa-arrow-left"></i> Volver a LabVirtual</a>
+        </div>
     </header>
 
     <div class="contenedor">
@@ -96,6 +100,7 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab('usuarios')"><i class="fa-solid fa-users"></i> Estudiantes</button>
             <button class="tab-btn" onclick="openTab('ingresos')"><i class="fa-solid fa-chart-line"></i> Registro de Ingresos</button>
+            <a href="resultados_autoevaluacion.html" class="tab-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; background:rgba(243,156,18,0.18); border-color:#f39c12; color:#f39c12;"><i class="fa-solid fa-clipboard-check"></i> Resultados Autoevaluación</a>
         </div>
 
         <div id="usuarios" class="tab-content active">

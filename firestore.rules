@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Reglas para LabVirtual (proyecto: labvirtual-profew)
+    // La autenticación de alumnos/docente se gestiona mediante Google Sheets/Apps Script
+    // por lo que las solicitudes a Firestore llegan como cliente web sin Firebase Auth.
+
+    // 1. Contador de visitas
+    match /estadisticas/{document=**} {
+      allow read, write: if true;
+    }
+
+    // 2. Registro y consulta de evaluaciones de estudiantes
+    match /evaluaciones/{document=**} {
+      allow read, write: if true;
+    }
+
+    // 2.1 Registro y consulta de autoevaluaciones
+    match /autoevaluaciones/{document=**} {
+      allow read, write: if true;
+    }
+
+    // 3. Catálogo de aves (consulta y registro)
+    match /catalogo_aves/{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

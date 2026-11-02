@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Resultados de Autoevaluación - LabVirtual W</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SheetJS (Excel .xlsx en su versión moderna) -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+
+    <!-- Firebase SDK v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="auth.js"></script>
+
+    <style>
+        :root {
+            --color-admin: #f39c12;
+            --color-azul: #3498db;
+            --color-morado: #9b59b6;
+            --color-verde: #2ecc71;
+            --color-rojo: #e74c3c;
+            --color-oscuro: #1a1a2e;
+            --color-card: rgba(20, 20, 35, 0.92);
+            --color-texto: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            background-image: linear-gradient(rgba(26, 26, 46, 0.92), rgba(26, 26, 46, 0.97)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-attachment: fixed; min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
+            padding: 15px 40px; border-bottom: 2px solid var(--color-admin);
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { color: var(--color-admin); font-size: 1.4rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; align-items: center; gap: 12px; }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1); color: #fff; text-decoration: none;
+            padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; font-weight: 600;
+            display: flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .nav-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+
+        /* LAYOUT PRINCIPAL */
+        .layout-grid {
+            display: grid; grid-template-columns: 300px 1fr; gap: 25px;
+            max-width: 1550px; margin: 30px auto; padding: 0 20px;
+        }
+
+        /* SIDEBAR DE FILTROS */
+        .sidebar {
+            background: var(--color-card); border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 25px 20px; border-radius: 12px; height: fit-content;
+            position: sticky; top: 90px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border-top: 4px solid var(--color-admin);
+        }
+        .sidebar h3 {
+            color: var(--color-admin); font-size: 1.25rem; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        .filtro-item { margin-bottom: 18px; }
+        .filtro-item label { display: block; font-size: 0.88rem; color: #ccc; margin-bottom: 6px; font-weight: 600; }
+        .filtro-item select, .filtro-item input {
+            width: 100%; padding: 10px 12px; border-radius: 6px;
+            background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff; font-size: 0.95rem; outline: none; transition: 0.3s;
+        }
+        .filtro-item select:focus, .filtro-item input:focus { border-color: var(--color-admin); box-shadow: 0 0 8px rgba(243, 156, 18, 0.3); }
+
+        .btn-excel {
+            width: 100%; padding: 13px; background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem;
+            cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center;
+            gap: 10px; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3); margin-top: 15px;
+        }
+        .btn-excel:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(46, 204, 113, 0.5); }
+        .btn-excel:disabled { background: #555; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .btn-recargar {
+            width: 100%; padding: 10px; background: rgba(255,255,255,0.08); color: #ccc;
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-size: 0.88rem;
+            font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-recargar:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+        /* CONTENIDO PRINCIPAL */
+        .contenido { min-width: 0; }
+
+        /* METRICAS / ESTADÍSTICAS */
+        .metricas-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 15px; margin-bottom: 25px;
+        }
+        .metrica-card {
+            background: var(--color-card); border: 1px solid rgba(255,255,255,0.1);
+            padding: 18px; border-radius: 10px; border-left: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+        .metrica-card.total { border-left-color: var(--color-admin); }
+        .metrica-card.lab { border-left-color: var(--color-azul); }
+        .metrica-card.ciu { border-left-color: var(--color-morado); }
+        .metrica-card.prom { border-left-color: var(--color-verde); }
+
+        .metrica-titulo { font-size: 0.82rem; text-transform: uppercase; color: #aaa; margin-bottom: 6px; font-weight: 600; }
+        .metrica-valor { font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; }
+
+        /* TABLA DE RESULTADOS */
+        .tabla-contenedor {
+            background: var(--color-card); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .tabla-header-info {
+            padding: 18px 25px; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+        }
+        .tabla-header-info h2 { font-size: 1.3rem; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .contador-badge {
+            background: rgba(243, 156, 18, 0.2); color: var(--color-admin);
+            border: 1px solid var(--color-admin); padding: 4px 12px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 700;
+        }
+
+        .table-responsive { overflow-x: auto; max-width: 100%; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; }
+        thead { background: rgba(0, 0, 0, 0.45); }
+        th {
+            padding: 14px 15px; color: #e0e0e0; font-weight: 600; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid rgba(255,255,255,0.1);
+            white-space: nowrap;
+        }
+        td {
+            padding: 12px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            vertical-align: middle;
+        }
+        tbody tr:hover { background: rgba(255, 255, 255, 0.04); }
+
+        .badge-grado {
+            background: rgba(52, 152, 219, 0.2); color: #5dade2; border: 1px solid rgba(52, 152, 219, 0.4);
+            padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 0.82rem; white-space: nowrap;
+        }
+        .badge-periodo {
+            background: rgba(243, 156, 18, 0.2); color: #f8c471; border: 1px solid rgba(243, 156, 18, 0.4);
+            padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 0.82rem; white-space: nowrap;
+        }
+
+        .nota-pill {
+            font-weight: 800; font-size: 0.95rem; padding: 4px 10px; border-radius: 6px; display: inline-block;
+        }
+        .nota-alta { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+        .nota-media { background: rgba(241, 196, 15, 0.2); color: #f1c40f; border: 1px solid #f1c40f; }
+        .nota-baja { background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid #e74c3c; }
+
+        .btn-detalle {
+            background: rgba(52, 152, 219, 0.15); color: #3498db; border: 1px solid #3498db;
+            padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+            transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+        }
+        .btn-detalle:hover { background: #3498db; color: #fff; }
+
+        .mini-resumen {
+            display: flex; gap: 3px; font-size: 0.72rem; font-weight: 700;
+        }
+        .mini-dot {
+            width: 18px; height: 18px; border-radius: 3px; display: flex; align-items: center; justify-content: center;
+            color: #fff;
+        }
+        .dot-5 { background: #27ae60; }
+        .dot-4 { background: #2ecc71; color: #000; }
+        .dot-3 { background: #f39c12; }
+        .dot-2 { background: #e67e22; }
+        .dot-1 { background: #e74c3c; }
+
+        /* ESTADOS VACÍOS O CARGANDO */
+        .estado-box {
+            text-align: center; padding: 50px 20px; color: #aaa;
+        }
+        .estado-box i { font-size: 3rem; margin-bottom: 15px; color: var(--color-admin); }
+
+        /* MODAL DE DETALLE COMPLETO */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content {
+            background: #161625; border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 14px; width: 100%; max-width: 850px; max-height: 90vh;
+            overflow-y: auto; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            animation: modalIn 0.3s ease; position: relative;
+        }
+        @keyframes modalIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .modal-header {
+            padding: 20px 25px; background: rgba(0,0,0,0.4); border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10;
+        }
+        .modal-header h2 { font-size: 1.35rem; color: var(--color-admin); display: flex; align-items: center; gap: 10px; }
+        .btn-cerrar {
+            background: none; border: none; color: #aaa; font-size: 1.5rem; cursor: pointer; transition: 0.2s;
+        }
+        .btn-cerrar:hover { color: #fff; transform: scale(1.1); }
+
+        .modal-body { padding: 25px; }
+        
+        .modal-info-estudiante {
+            background: rgba(255, 255, 255, 0.05); padding: 15px 20px; border-radius: 10px;
+            margin-bottom: 25px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px; font-size: 0.9rem; border-left: 4px solid var(--color-admin);
+        }
+        .modal-info-estudiante strong { color: #ccc; }
+
+        .modal-seccion { margin-bottom: 30px; }
+        .modal-seccion h3 {
+            font-size: 1.15rem; margin-bottom: 15px; padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .pregunta-item {
+            background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px; padding: 12px 16px; margin-bottom: 10px;
+            display: flex; justify-content: space-between; align-items: center; gap: 15px;
+        }
+        .pregunta-texto { font-size: 0.88rem; color: #ddd; flex: 1; }
+        .pregunta-respuesta {
+            padding: 5px 12px; border-radius: 6px; font-weight: 700; font-size: 0.85rem;
+            white-space: nowrap; text-align: center;
+        }
+
+        @media (max-width: 950px) {
+            .layout-grid { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-clipboard-check"></i> LabVirtual W &bull; Autoevaluación
+        </a>
+        <div class="nav-links">
+            <a href="resultados.html" class="nav-btn"><i class="fa-solid fa-chart-bar"></i> Calificaciones</a>
+            <a href="admin.html" class="nav-btn" style="color: var(--color-admin);"><i class="fa-solid fa-gear"></i> Panel Admin</a>
+            <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Inicio</a>
+        </div>
+    </header>
+
+    <div class="layout-grid">
+        
+        <!-- SIDEBAR DE FILTROS Y ACCIONES -->
+        <aside class="sidebar">
+            <h3><i class="fa-solid fa-filter"></i> Filtros de Consulta</h3>
+            
+            <div class="filtro-item">
+                <label for="filtro-periodo"><i class="fa-solid fa-calendar-days"></i> Periodo</label>
+                <select id="filtro-periodo" onchange="aplicarFiltros()">
+                    <option value="TODOS">Todos los Periodos</option>
+                    <option value="1">Periodo 1</option>
+                    <option value="2">Periodo 2</option>
+                    <option value="3">Periodo 3</option>
+                    <option value="4" selected>Periodo 4</option>
+                </select>
+            </div>
+
+            <div class="filtro-item">
+                <label for="filtro-grado"><i class="fa-solid fa-graduation-cap"></i> Grado</label>
+                <select id="filtro-grado" onchange="aplicarFiltros()">
+                    <option value="TODOS">Todos los Grados</option>
+                    <option value="6">Grado Sexto (6°)</option>
+                    <option value="8">Grado Octavo (8°)</option>
+                    <option value="9">Grado Noveno (9°)</option>
+                    <option value="10">Grado Décimo (10°)</option>
+                    <option value="11">Grado Once (11°)</option>
+                </select>
+            </div>
+
+            <div class="filtro-item">
+                <label for="filtro-busqueda"><i class="fa-solid fa-magnifying-glass"></i> Estudiante o Documento</label>
+                <input type="text" id="filtro-busqueda" placeholder="Ej. Juan o 1000..." oninput="aplicarFiltros()">
+            </div>
+
+            <button class="btn-excel" id="btnExportar" onclick="exportarExcelModerne()">
+                <i class="fa-solid fa-file-excel"></i> Exportar a Excel (.xlsx)
+            </button>
+
+            <button class="btn-recargar" onclick="cargarAutoevaluaciones()">
+                <i class="fa-solid fa-rotate-right"></i> Actualizar Datos
+            </button>
+        </aside>
+
+        <!-- CONTENIDO: MÉTRICAS Y TABLA RESUMEN -->
+        <main class="contenido">
+            
+            <!-- TARJETAS DE MÉTRICAS -->
+            <div class="metricas-grid">
+                <div class="metrica-card total">
+                    <div class="metrica-titulo"><i class="fa-solid fa-users"></i> Autoevaluaciones</div>
+                    <div class="metrica-valor" id="metric-total">0</div>
+                </div>
+                <div class="metrica-card lab">
+                    <div class="metrica-titulo"><i class="fa-solid fa-briefcase"></i> Prom. Laborales</div>
+                    <div class="metrica-valor" id="metric-lab" style="color: var(--color-azul);">0.0</div>
+                </div>
+                <div class="metrica-card ciu">
+                    <div class="metrica-titulo"><i class="fa-solid fa-users"></i> Prom. Ciudadanas</div>
+                    <div class="metrica-valor" id="metric-ciu" style="color: var(--color-morado);">0.0</div>
+                </div>
+                <div class="metrica-card prom">
+                    <div class="metrica-titulo"><i class="fa-solid fa-star"></i> Prom. Consolidado</div>
+                    <div class="metrica-valor" id="metric-def" style="color: var(--color-verde);">0.0</div>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DE TABLA -->
+            <div class="tabla-contenedor">
+                <div class="tabla-header-info">
+                    <h2><i class="fa-solid fa-table-list"></i> Resumen de Respuestas de Autoevaluación</h2>
+                    <span class="contador-badge" id="contador-mostrando">0 registros</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="tabla-autoeval">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Documento</th>
+                                <th>Estudiante</th>
+                                <th>Grado</th>
+                                <th>Periodo</th>
+                                <th>Laborales (L1-L7)</th>
+                                <th>Nota Lab</th>
+                                <th>Ciudadanas (C1-C7)</th>
+                                <th>Nota Ciu</th>
+                                <th>Definitiva</th>
+                                <th>Fecha</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-body">
+                            <!-- Inserción dinámica -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="estado-cargando" class="estado-box">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <h3>Conectando a Firestore y cargando autoevaluaciones...</h3>
+                </div>
+
+                <div id="estado-vacio" class="estado-box" style="display: none;">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <h3>No se encontraron autoevaluaciones con los filtros seleccionados</h3>
+                    <p style="color: #777; font-size: 0.9rem; margin-top: 5px;">Ajusta el periodo o el grado en el panel izquierdo.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL DE DETALLE COMPLETO -->
+    <div class="modal" id="modalDetalle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-clipboard-list"></i> Detalle de Autoevaluación</h2>
+                <button class="btn-cerrar" onclick="cerrarModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Se llena dinámicamente con las 14 respuestas y notas -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TEXTOS COMPLETOS DE CADA ASPECTO EVALUADO
+        const TEXTOS_LABORALES = [
+            "1. Llego de manera puntual a la institución, a las clases y demás actividades programadas dentro o fuera del establecimiento educativo.",
+            "2. Pongo atención a las explicaciones del profesor y presento mis trabajos con calidad y en el tiempo previsto.",
+            "3. Llevo ordenadamente los apuntes de la clase y desarrollo tareas, talleres y trabajos con eficiencia, responsabilidad y calidad.",
+            "4. Cuido y doy buen uso a los elementos, muebles y enseres de mi aula de clases.",
+            "5. Mantengo un espíritu de trabajo en grupo y promuevo esfuerzos orientados al logro de objetivos comunes.",
+            "6. Porto adecuadamente el uniforme con dignidad, orden, aseo y buena presentación personal.",
+            "7. Aplico los conocimientos adquiridos para contribuir a la solución de problemas y satisfacción de necesidades."
+        ];
+
+        const TEXTOS_CIUDADANAS = [
+            "1. Soy respetuoso con todas las personas con las que me relaciono en la comunidad educativa.",
+            "2. Mi comportamiento y actitud durante el desarrollo de la clase se ajustan a las normas disciplinarias establecidas.",
+            "3. Conozco y cumplo lo establecido en el manual de convivencia y las demás normas acordadas por la institución.",
+            "4. Mantengo y soy responsable con el aseo del salón de clase y conservo y colaboro con el aseo de la planta física de la institución.",
+            "5. Soy tolerante y resuelvo adecuadamente mis conflictos a través del diálogo y la concertación, demostrando respeto y aceptación hacia los demás.",
+            "6. Permanezco dentro de la Institución durante toda la jornada escolar y participo de las clases y actividades programadas.",
+            "7. Me comporto con el debido orden y respeto en los diferentes espacios destinados para su uso, como biblioteca, laboratorio, sala de sistemas y baterías sanitarias."
+        ];
+
+        const ESCALA_TEXTO = {
+            1: "1 = Nunca",
+            2: "2 = Rara Vez",
+            3: "3 = Algunas Veces",
+            4: "4 = Con Frecuencia",
+            5: "5 = Siempre"
+        };
+
+        // 1. VERIFICACIÓN ESTRICTA DE ROL (Solo profew)
+        (function verificarAccesoRol() {
+            const userStr = localStorage.getItem('usuario_labvirtual');
+            const user = userStr ? JSON.parse(userStr) : null;
+            if (!user || user.usuario !== 'profew') {
+                alert('Acceso restringido: Esta sección está habilitada exclusivamente para el docente/administrador.');
+                window.location.href = 'index.html';
+            }
+        })();
+
+        // 2. INICIALIZACIÓN DE FIREBASE FIRESTORE
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNjJw7xUyNplALmQBQCapzNzr1C79vTDc",
+            authDomain: "labvirtual-profew.firebaseapp.com",
+            projectId: "labvirtual-profew",
+            storageBucket: "labvirtual-profew.firebasestorage.app",
+            messagingSenderId: "981474222295",
+            appId: "1:981474222295:web:5f413bb53231afc4bb1092"
+        };
+        if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = typeof firebase !== 'undefined' ? firebase.firestore() : null;
+
+        // Variables globales
+        window.todasAutoevaluaciones = [];
+        window.autoevaluacionesFiltradas = [];
+
+        // 3. CARGA DE DATOS DESDE FIRESTORE
+        async function cargarAutoevaluaciones() {
+            const cargandoEl = document.getElementById('estado-cargando');
+            const vacioEl = document.getElementById('estado-vacio');
+            const tbody = document.getElementById('tabla-body');
+            
+            cargandoEl.style.display = 'block';
+            vacioEl.style.display = 'none';
+            tbody.innerHTML = '';
+
+            if (!db) {
+                cargandoEl.innerHTML = '<span style="color:#e74c3c;"><i class="fa-solid fa-triangle-exclamation"></i> Error: No se pudo conectar a Firebase Firestore.</span>';
+                return;
+            }
+
+            try {
+                const listaDocs = [];
+
+                // 3.1 Cargar de la colección especializada 'autoevaluaciones'
+                const snapAuto = await db.collection('autoevaluaciones').get();
+                snapAuto.forEach(doc => {
+                    const d = doc.data();
+                    d._id = doc.id;
+                    listaDocs.push(d);
+                });
+
+                // 3.2 Cargar registros antiguos de 'evaluaciones' que contengan Autoevaluación (compatibilidad)
+                const snapEval = await db.collection('evaluaciones').get();
+                snapEval.forEach(doc => {
+                    const d = doc.data();
+                    const tema = (d.tema || "").toLowerCase();
+                    if (tema.includes('autoevaluación') || tema.includes('autoevaluacion')) {
+                        // Comprobar si ya está en listaDocs por documento y periodo para no duplicar
+                        const matchP = (d.periodo || (d.tema.match(/P([1-4])/i) ? d.tema.match(/P([1-4])/i)[1] : "")).toString();
+                        const docIdNum = (d.documento || d.usuario || "").toString();
+                        
+                        const existe = listaDocs.some(item => 
+                            String(item.documento) === docIdNum && String(item.periodo) === matchP
+                        );
+
+                        if (!existe) {
+                            listaDocs.push({
+                                _id: doc.id,
+                                documento: docIdNum,
+                                usuario: d.usuario || docIdNum,
+                                nombre: d.nombre || d.usuario || "Estudiante",
+                                grado: d.grado || (d.tema.match(/\b(6|7|8|9|10|11)\b/) ? d.tema.match(/\b(6|7|8|9|10|11)\b/)[1] : "6"),
+                                periodo: matchP || "4",
+                                asignatura: "Ciencias Naturales / Competencias",
+                                nota_laborales: parseFloat(d.puntaje) || 0,
+                                nota_ciudadanas: parseFloat(d.puntaje) || 0,
+                                nota_final: parseFloat(d.puntaje) || 0,
+                                respuestas_laborales: {},
+                                respuestas_ciudadanas: {},
+                                fecha: d.fecha || null
+                            });
+                        }
+                    }
+                });
+
+                // Ordenar por fecha descendente
+                listaDocs.sort((a, b) => {
+                    let timeA = 0;
+                    let timeB = 0;
+                    if (a.fecha && a.fecha.toMillis) timeA = a.fecha.toMillis();
+                    else if (a.fecha) timeA = new Date(a.fecha).getTime();
+                    if (b.fecha && b.fecha.toMillis) timeB = b.fecha.toMillis();
+                    else if (b.fecha) timeB = new Date(b.fecha).getTime();
+                    return timeB - timeA;
+                });
+
+                window.todasAutoevaluaciones = listaDocs;
+                cargandoEl.style.display = 'none';
+                aplicarFiltros();
+
+            } catch (err) {
+                console.error("Error cargando autoevaluaciones:", err);
+                cargandoEl.innerHTML = `<span style="color:#e74c3c;"><i class="fa-solid fa-triangle-exclamation"></i> Error al cargar datos: ${err.message}</span>`;
+            }
+        }
+
+        // 4. APLICAR FILTROS EN TIEMPO REAL
+        function aplicarFiltros() {
+            const fPeriodo = document.getElementById('filtro-periodo').value;
+            const fGrado = document.getElementById('filtro-grado').value;
+            const fBusqueda = document.getElementById('filtro-busqueda').value.toLowerCase().trim();
+
+            window.autoevaluacionesFiltradas = window.todasAutoevaluaciones.filter(item => {
+                const perStr = String(item.periodo || '').trim();
+                const graStr = String(item.grado || '').trim();
+                const nomStr = String(item.nombre || '').toLowerCase();
+                const docStr = String(item.documento || '').toLowerCase();
+
+                if (fPeriodo !== 'TODOS' && perStr !== fPeriodo) return false;
+                if (fGrado !== 'TODOS' && graStr !== fGrado) return false;
+                if (fBusqueda && !nomStr.includes(fBusqueda) && !docStr.includes(fBusqueda)) return false;
+
+                return true;
+            });
+
+            renderizarTabla();
+            calcularMetricas();
+        }
+
+        // 5. CALCULAR MÉTRICAS CONSOLIDADAS
+        function calcularMetricas() {
+            const arr = window.autoevaluacionesFiltradas;
+            const total = arr.length;
+            
+            document.getElementById('metric-total').innerText = total;
+
+            if (total === 0) {
+                document.getElementById('metric-lab').innerText = "0.0";
+                document.getElementById('metric-ciu').innerText = "0.0";
+                document.getElementById('metric-def').innerText = "0.0";
+                return;
+            }
+
+            let sumLab = 0;
+            let sumCiu = 0;
+            let sumDef = 0;
+
+            arr.forEach(d => {
+                sumLab += (parseFloat(d.nota_laborales) || 0);
+                sumCiu += (parseFloat(d.nota_ciudadanas) || 0);
+                sumDef += (parseFloat(d.nota_final) || 0);
+            });
+
+            document.getElementById('metric-lab').innerText = (sumLab / total).toFixed(1);
+            document.getElementById('metric-ciu').innerText = (sumCiu / total).toFixed(1);
+            document.getElementById('metric-def').innerText = (sumDef / total).toFixed(1);
+        }
+
+        // 6. RENDERIZAR TABLA RESUMEN
+        function renderizarTabla() {
+            const tbody = document.getElementById('tabla-body');
+            const vacioEl = document.getElementById('estado-vacio');
+            const contadorEl = document.getElementById('contador-mostrando');
+            const arr = window.autoevaluacionesFiltradas;
+
+            contadorEl.innerText = `${arr.length} estudiante${arr.length === 1 ? '' : 's'}`;
+
+            if (arr.length === 0) {
+                tbody.innerHTML = '';
+                vacioEl.style.display = 'block';
+                return;
+            }
+
+            vacioEl.style.display = 'none';
+
+            let html = '';
+            arr.forEach((item, index) => {
+                // Formatear fecha
+                let fechaStr = "Sin fecha";
+                if (item.fecha && item.fecha.toDate) {
+                    const dt = item.fecha.toDate();
+                    fechaStr = dt.toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric' }) + " " +
+                               dt.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+                } else if (item.fecha_texto) {
+                    fechaStr = item.fecha_texto;
+                }
+
+                // Generar mini barras de respuestas
+                const miniLab = generarMiniBadges(item.respuestas_laborales, 'c_lab');
+                const miniCiu = generarMiniBadges(item.respuestas_ciudadanas, 'c_ciu');
+
+                const nLab = (parseFloat(item.nota_laborales) || 0).toFixed(1);
+                const nCiu = (parseFloat(item.nota_ciudadanas) || 0).toFixed(1);
+                const nDef = (parseFloat(item.nota_final) || ((parseFloat(nLab) + parseFloat(nCiu))/2)).toFixed(1);
+
+                const claseDef = nDef >= 4.0 ? 'nota-alta' : (nDef >= 3.0 ? 'nota-media' : 'nota-baja');
+
+                html += `
+                    <tr>
+                        <td style="color: #888; font-weight:600;">${index + 1}</td>
+                        <td style="font-family: monospace; font-weight: 700; color: #4facfe;">${item.documento || item.usuario || 'N/A'}</td>
+                        <td><strong>${item.nombre || 'Desconocido'}</strong></td>
+                        <td><span class="badge-grado">Grado ${item.grado}°</span></td>
+                        <td><span class="badge-periodo">P${item.periodo}</span></td>
+                        <td>${miniLab}</td>
+                        <td><span class="nota-pill" style="color:#3498db; background:rgba(52,152,219,0.15);">${nLab}</span></td>
+                        <td>${miniCiu}</td>
+                        <td><span class="nota-pill" style="color:#9b59b6; background:rgba(155,89,182,0.15);">${nCiu}</span></td>
+                        <td><span class="nota-pill ${claseDef}">${nDef}</span></td>
+                        <td style="font-size: 0.82rem; color: #bbb; white-space: nowrap;">${fechaStr}</td>
+                        <td>
+                            <button class="btn-detalle" onclick="verDetalleEstudiante(${index})">
+                                <i class="fa-solid fa-eye"></i> Detalle
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function generarMiniBadges(obj, prefijo) {
+            if (!obj || Object.keys(obj).length === 0) {
+                return '<span style="color:#666; font-size:0.75rem;">Sin desglose</span>';
+            }
+            let dots = '<div class="mini-resumen" title="Respuestas marcadas del 1 al 7">';
+            for (let i = 1; i <= 7; i++) {
+                const val = obj[`${prefijo}_${i}`] || 0;
+                dots += `<div class="mini-dot dot-${val}" title="P${i}: ${val}">${val}</div>`;
+            }
+            dots += '</div>';
+            return dots;
+        }
+
+        // 7. VER DETALLE COMPLETO EN MODAL
+        function verDetalleEstudiante(index) {
+            const item = window.autoevaluacionesFiltradas[index];
+            if (!item) return;
+
+            let fechaStr = "Sin fecha";
+            if (item.fecha && item.fecha.toDate) {
+                fechaStr = item.fecha.toDate().toLocaleString('es-CO');
+            } else if (item.fecha_texto) {
+                fechaStr = item.fecha_texto;
+            }
+
+            const nLab = (parseFloat(item.nota_laborales) || 0).toFixed(1);
+            const nCiu = (parseFloat(item.nota_ciudadanas) || 0).toFixed(1);
+            const nDef = (parseFloat(item.nota_final) || ((parseFloat(nLab) + parseFloat(nCiu))/2)).toFixed(1);
+
+            let html = `
+                <div class="modal-info-estudiante">
+                    <div><strong>Estudiante:</strong> ${item.nombre}</div>
+                    <div><strong>Documento:</strong> ${item.documento || item.usuario}</div>
+                    <div><strong>Grado:</strong> Grado ${item.grado}°</div>
+                    <div><strong>Periodo:</strong> Periodo ${item.periodo}</div>
+                    <div><strong>Asignatura:</strong> ${item.asignatura || 'Ciencias / Paz'}</div>
+                    <div><strong>Fecha:</strong> ${fechaStr}</div>
+                </div>
+
+                <!-- NOTAS RESUMEN EN EL MODAL -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 25px; text-align: center;">
+                    <div style="background: rgba(52, 152, 219, 0.15); border: 1px solid #3498db; padding: 12px; border-radius: 8px;">
+                        <div style="font-size: 0.8rem; color: #bbb;">NOTA LABORALES</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: #3498db;">${nLab}</div>
+                    </div>
+                    <div style="background: rgba(155, 89, 182, 0.15); border: 1px solid #9b59b6; padding: 12px; border-radius: 8px;">
+                        <div style="font-size: 0.8rem; color: #bbb;">NOTA CIUDADANAS</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: #9b59b6;">${nCiu}</div>
+                    </div>
+                    <div style="background: rgba(243, 156, 18, 0.15); border: 1px solid #f39c12; padding: 12px; border-radius: 8px;">
+                        <div style="font-size: 0.8rem; color: #bbb;">NOTA DEFINITIVA</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: #f1c40f;">${nDef}</div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 1: COMPETENCIAS LABORALES -->
+                <div class="modal-seccion">
+                    <h3 style="color: #3498db;">
+                        <span><i class="fa-solid fa-briefcase"></i> Competencias Laborales</span>
+                        <span style="font-size: 0.9rem; color: #aaa;">Promedio: ${nLab} / 5.0</span>
+                    </h3>
+            `;
+
+            for (let i = 1; i <= 7; i++) {
+                const val = (item.respuestas_laborales && item.respuestas_laborales[`c_lab_${i}`]) || 'N/A';
+                const textoPregunta = TEXTOS_LABORALES[i - 1];
+                const etiqueta = ESCALA_TEXTO[val] || `${val}`;
+                const claseVal = `dot-${val}`;
+
+                html += `
+                    <div class="pregunta-item">
+                        <div class="pregunta-texto">${textoPregunta}</div>
+                        <div class="pregunta-respuesta ${claseVal}">${etiqueta}</div>
+                    </div>
+                `;
+            }
+
+            html += `
+                </div>
+
+                <!-- SECCIÓN 2: COMPETENCIAS CIUDADANAS -->
+                <div class="modal-seccion">
+                    <h3 style="color: #9b59b6;">
+                        <span><i class="fa-solid fa-users"></i> Competencias Ciudadanas</span>
+                        <span style="font-size: 0.9rem; color: #aaa;">Promedio: ${nCiu} / 5.0</span>
+                    </h3>
+            `;
+
+            for (let i = 1; i <= 7; i++) {
+                const val = (item.respuestas_ciudadanas && item.respuestas_ciudadanas[`c_ciu_${i}`]) || 'N/A';
+                const textoPregunta = TEXTOS_CIUDADANAS[i - 1];
+                const etiqueta = ESCALA_TEXTO[val] || `${val}`;
+                const claseVal = `dot-${val}`;
+
+                html += `
+                    <div class="pregunta-item">
+                        <div class="pregunta-texto">${textoPregunta}</div>
+                        <div class="pregunta-respuesta ${claseVal}">${etiqueta}</div>
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+
+            document.getElementById('modalBody').innerHTML = html;
+            document.getElementById('modalDetalle').style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalDetalle').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalDetalle');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // 8. EXPORTACIÓN A EXCEL EN LA VERSIÓN MÁS RECIENTE (.XLSX)
+        function exportarExcelModerne() {
+            const data = window.autoevaluacionesFiltradas;
+            if (!data || data.length === 0) {
+                alert("No hay autoevaluaciones que coincidan con los filtros seleccionados.");
+                return;
+            }
+
+            if (typeof XLSX === 'undefined') {
+                alert("La biblioteca SheetJS aún se está cargando. Por favor espera un segundo.");
+                return;
+            }
+
+            const fPeriodo = document.getElementById('filtro-periodo').value;
+            const fGrado = document.getElementById('filtro-grado').value;
+
+            // Encabezados claros y completos
+            const encabezados = [
+                "Documento de Identidad",
+                "Nombre del Estudiante",
+                "Grado",
+                "Periodo",
+                "Asignatura",
+                "L1. Puntualidad (1-5)",
+                "L2. Atención y Calidad (1-5)",
+                "L3. Orden y Tareas (1-5)",
+                "L4. Cuidado Enseres (1-5)",
+                "L5. Trabajo en Grupo (1-5)",
+                "L6. Porte Uniforme (1-5)",
+                "L7. Solución Problemas (1-5)",
+                "NOTA LABORALES (5.0)",
+                "C1. Respeto Comunidad (1-5)",
+                "C2. Disciplina Aula (1-5)",
+                "C3. Manual Convivencia (1-5)",
+                "C4. Aseo Planta Física (1-5)",
+                "C5. Resolución Conflictos (1-5)",
+                "C6. Permanencia Sede (1-5)",
+                "C7. Orden en Espacios (1-5)",
+                "NOTA CIUDADANAS (5.0)",
+                "NOTA DEFINITIVA (5.0)",
+                "Fecha y Hora de Presentación"
+            ];
+
+            const filas = [encabezados];
+
+            data.forEach(d => {
+                let fechaStr = "Sin fecha";
+                if (d.fecha && d.fecha.toDate) {
+                    const dt = d.fecha.toDate();
+                    fechaStr = dt.toLocaleDateString('es-CO') + " " + dt.toLocaleTimeString('es-CO');
+                } else if (d.fecha_texto) {
+                    fechaStr = d.fecha_texto;
+                }
+
+                const rLab = d.respuestas_laborales || {};
+                const rCiu = d.respuestas_ciudadanas || {};
+
+                const nLab = parseFloat(d.nota_laborales) || 0;
+                const nCiu = parseFloat(d.nota_ciudadanas) || 0;
+                const nDef = parseFloat(d.nota_final) || parseFloat(((nLab + nCiu)/2).toFixed(1));
+
+                filas.push([
+                    d.documento || d.usuario || "",
+                    d.nombre || "",
+                    `Grado ${d.grado || ""}`,
+                    `Periodo ${d.periodo || ""}`,
+                    d.asignatura || "",
+                    rLab.c_lab_1 || "",
+                    rLab.c_lab_2 || "",
+                    rLab.c_lab_3 || "",
+                    rLab.c_lab_4 || "",
+                    rLab.c_lab_5 || "",
+                    rLab.c_lab_6 || "",
+                    rLab.c_lab_7 || "",
+                    nLab,
+                    rCiu.c_ciu_1 || "",
+                    rCiu.c_ciu_2 || "",
+                    rCiu.c_ciu_3 || "",
+                    rCiu.c_ciu_4 || "",
+                    rCiu.c_ciu_5 || "",
+                    rCiu.c_ciu_6 || "",
+                    rCiu.c_ciu_7 || "",
+                    nCiu,
+                    nDef,
+                    fechaStr
+                ]);
+            });
+
+            // Construir Libro de Trabajo y Hoja
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet(filas);
+
+            // Anchos de columna óptimos para presentación impecable
+            ws['!cols'] = [
+                { wch: 22 }, // Documento
+                { wch: 32 }, // Nombre
+                { wch: 12 }, // Grado
+                { wch: 12 }, // Periodo
+                { wch: 30 }, // Asignatura
+                { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, // L1-L7
+                { wch: 20 }, // Nota Laborales
+                { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, // C1-C7
+                { wch: 20 }, // Nota Ciudadanas
+                { wch: 22 }, // Nota Definitiva
+                { wch: 26 }  // Fecha
+            ];
+
+            XLSX.utils.book_append_sheet(wb, ws, "Autoevaluaciones");
+
+            // Nombre de archivo con fecha y filtros aplicados
+            const fechaHoy = new Date().toISOString().split('T')[0];
+            const pNombre = fPeriodo !== 'TODOS' ? `P${fPeriodo}` : 'TodosPeriodos';
+            const gNombre = fGrado !== 'TODOS' ? `Grado${fGrado}` : 'TodosGrados';
+            const nombreArchivo = `Autoevaluacion_${pNombre}_${gNombre}_${fechaHoy}.xlsx`;
+
+            // Descargar el archivo .xlsx moderno
+            XLSX.writeFile(wb, nombreArchivo);
+        }
+
+        // 9. INICIAR CARGA AL ABRIR LA PÁGINA
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarAutoevaluaciones();
+        });
+    </script>
+</body>
+</html>

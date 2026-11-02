@@ -10,6 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Firebase SDK v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="auth.js"></script>
+    
     <style>
         :root {
             --color-fisica: #3498db;   
@@ -115,6 +120,33 @@
         .msg-success { background: rgba(46, 204, 113, 0.2); border: 1px solid var(--color-biologia); color: #2ecc71; }
         .msg-error { background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; color: #e74c3c; }
 
+        .status-alerta {
+            padding: 14px 18px; border-radius: 8px; background: rgba(231, 76, 60, 0.25);
+            border: 1px solid #e74c3c; color: #ff9999; font-size: 0.95rem; margin-top: 15px;
+            display: flex; align-items: flex-start; gap: 12px; animation: fadeIn 0.3s ease; line-height: 1.5;
+        }
+        .status-ok {
+            padding: 14px 18px; border-radius: 8px; background: rgba(46, 204, 113, 0.2);
+            border: 1px solid #2ecc71; color: #2ecc71; font-size: 0.95rem; margin-top: 15px;
+            display: flex; align-items: center; gap: 12px; animation: fadeIn 0.3s ease;
+        }
+        .status-info {
+            padding: 14px 18px; border-radius: 8px; background: rgba(52, 152, 219, 0.2);
+            border: 1px solid #3498db; color: #4facfe; font-size: 0.95rem; margin-top: 15px;
+            display: flex; align-items: center; gap: 12px; animation: fadeIn 0.3s ease;
+        }
+
+        .resumen-notas-card {
+            background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px; padding: 20px; margin: 25px 0 15px 0;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: center;
+        }
+        .resumen-item {
+            background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; border-top: 3px solid #3498db;
+        }
+        .resumen-item h4 { font-size: 0.85rem; color: #bbb; text-transform: uppercase; margin-bottom: 5px; }
+        .resumen-item .valor-nota { font-size: 1.8rem; font-weight: 800; color: #fff; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         
         @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .escala { flex-direction: column; gap: 5px; } }
@@ -190,6 +222,7 @@
                         <input type="text" id="asignatura" name="asignatura" readonly placeholder="Se asigna automáticamente...">
                     </div>
                 </div>
+                <div id="statusValidacion" style="display: none;"></div>
             </div>
 
             <!-- COMPETENCIAS LABORALES -->
@@ -346,18 +379,67 @@
                 <div class="clear"></div>
             </div>
 
+            <!-- RESUMEN EN TIEMPO REAL -->
+            <div class="resumen-notas-card">
+                <div class="resumen-item" style="border-top-color: #3498db;">
+                    <h4><i class="fa-solid fa-briefcase"></i> Competencias Laborales</h4>
+                    <div class="valor-nota" id="resumen_lab" style="color: #3498db;">0.0</div>
+                </div>
+                <div class="resumen-item" style="border-top-color: #9b59b6;">
+                    <h4><i class="fa-solid fa-users"></i> Competencias Ciudadanas</h4>
+                    <div class="valor-nota" id="resumen_ciu" style="color: #9b59b6;">0.0</div>
+                </div>
+                <div class="resumen-item" style="border-top-color: #f1c40f;">
+                    <h4><i class="fa-solid fa-star"></i> Nota Final Autoevaluación</h4>
+                    <div class="valor-nota" id="resumen_def" style="color: #f1c40f;">0.0</div>
+                </div>
+            </div>
+
             <button type="submit" class="btn-enviar" id="btnEnviar">
                 <i class="fa-solid fa-paper-plane"></i> Enviar Autoevaluación
             </button>
 
-            <div class="loader" id="loader"><i class="fa-solid fa-circle-notch"></i> Procesando...</div>
+            <div class="loader" id="loader"><i class="fa-solid fa-circle-notch"></i> Procesando y guardando en Firestore...</div>
             <div class="msg-box" id="msgBox"></div>
 
         </form>
     </main>
 
     <script>
-        // Lógica para asignar materia según grado
+        // Prevenir que auth.js intercepte con el guardado genérico
+        window.calificarYGuardar = function() { return true; };
+
+        // 1. Inicialización de Firebase Firestore
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNjJw7xUyNplALmQBQCapzNzr1C79vTDc",
+            authDomain: "labvirtual-profew.firebaseapp.com",
+            projectId: "labvirtual-profew",
+            storageBucket: "labvirtual-profew.firebasestorage.app",
+            messagingSenderId: "981474222295",
+            appId: "1:981474222295:web:5f413bb53231afc4bb1092"
+        };
+        if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = typeof firebase !== 'undefined' ? firebase.firestore() : null;
+
+        // 2. Precargar información del usuario si hay sesión iniciada
+        document.addEventListener('DOMContentLoaded', () => {
+            const userSession = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+            if (userSession && userSession.usuario !== 'profew') {
+                const docInput = document.getElementById('documento');
+                const nomInput = document.getElementById('nombre');
+                if (userSession.usuario && /^\d+$/.test(String(userSession.usuario).trim())) {
+                    docInput.value = String(userSession.usuario).trim();
+                }
+                if (userSession.nombre) {
+                    nomInput.value = userSession.nombre.trim();
+                }
+            }
+            validarPeriodoDoc();
+        });
+
+        // 3. Asignación automática de asignatura según grado
         document.getElementById('grado').addEventListener('change', function() {
             const grado = this.value;
             const asignaturaInput = document.getElementById('asignatura');
@@ -373,7 +455,120 @@
             }
         });
 
-        // Lógica para calcular notas en tiempo real
+        // 4. Validación de periodo por documento en Firestore
+        let debounceTimer = null;
+        function programarValidacion() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(validarPeriodoDoc, 400);
+        }
+
+        document.getElementById('documento').addEventListener('input', programarValidacion);
+        document.getElementById('periodo').addEventListener('change', validarPeriodoDoc);
+
+        async function validarPeriodoDoc() {
+            const docInput = document.getElementById('documento');
+            const perSelect = document.getElementById('periodo');
+            const statusBox = document.getElementById('statusValidacion');
+            const btnEnviar = document.getElementById('btnEnviar');
+
+            const docVal = (docInput.value || '').trim();
+            const perVal = perSelect.value;
+
+            if (!docVal || !perVal) {
+                statusBox.style.display = 'none';
+                btnEnviar.disabled = false;
+                return true;
+            }
+
+            if (!db) {
+                console.warn("Firestore no inicializado para validar periodo.");
+                return true;
+            }
+
+            statusBox.className = 'status-info';
+            statusBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verificando entregas del documento <strong>' + docVal + '</strong> en el <strong>Periodo ' + perVal + '</strong>...';
+            statusBox.style.display = 'flex';
+
+            try {
+                // A) Verificar documento específico en 'autoevaluaciones' por ID predecible
+                const docRef = db.collection('autoevaluaciones').doc(`doc_${docVal}_p${perVal}`);
+                const docSnap = await docRef.get();
+
+                let yaPresento = false;
+                let fechaEntrega = '';
+
+                if (docSnap.exists) {
+                    yaPresento = true;
+                    const d = docSnap.data();
+                    if (d.fecha) {
+                        try { fechaEntrega = d.fecha.toDate().toLocaleDateString('es-CO'); } catch(e){}
+                    } else if (d.fecha_texto) {
+                        fechaEntrega = d.fecha_texto;
+                    }
+                } else {
+                    // B) Búsqueda por documento y periodo en 'autoevaluaciones'
+                    const snapAuto = await db.collection('autoevaluaciones')
+                        .where('documento', '==', docVal)
+                        .where('periodo', '==', String(perVal))
+                        .get();
+
+                    if (!snapAuto.empty) {
+                        yaPresento = true;
+                        const d = snapAuto.docs[0].data();
+                        if (d.fecha) {
+                            try { fechaEntrega = d.fecha.toDate().toLocaleDateString('es-CO'); } catch(e){}
+                        } else if (d.fecha_texto) {
+                            fechaEntrega = d.fecha_texto;
+                        }
+                    } else {
+                        // C) Compatibilidad con registros antiguos en 'evaluaciones'
+                        const snapEval = await db.collection('evaluaciones')
+                            .where('usuario', '==', docVal)
+                            .get();
+                        snapEval.forEach(doc => {
+                            let d = doc.data();
+                            if (d.tema && d.tema.toLowerCase().includes('autoevaluación') && d.tema.includes(`P${perVal}`)) {
+                                yaPresento = true;
+                                if (d.fecha) {
+                                    try { fechaEntrega = d.fecha.toDate().toLocaleDateString('es-CO'); } catch(e){}
+                                }
+                            }
+                        });
+                    }
+                }
+
+                if (yaPresento) {
+                    statusBox.className = 'status-alerta';
+                    statusBox.innerHTML = `
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.5rem; margin-top: 3px;"></i>
+                        <div>
+                            <strong>¡Autoevaluación ya realizada para este periodo!</strong><br>
+                            El documento <strong>${docVal}</strong> ya presentó su autoevaluación correspondiente al <strong>Periodo ${perVal}</strong>${fechaEntrega ? ' (' + fechaEntrega + ')' : ''}.<br>
+                            <span style="font-size:0.88rem; color:#fce4ec;">Cada documento solo puede presentar la autoevaluación <strong>una vez por periodo</strong>. Si vas a realizar la del periodo en curso (por ejemplo, <strong>Periodo 4</strong>), selecciona el periodo correspondiente en la casilla superior.</span>
+                        </div>
+                    `;
+                    btnEnviar.disabled = true;
+                    return false;
+                } else {
+                    statusBox.className = 'status-ok';
+                    statusBox.innerHTML = `
+                        <i class="fa-solid fa-circle-check" style="font-size: 1.4rem;"></i>
+                        <div>
+                            <strong>Documento habilitado:</strong> No se registra autoevaluación previa del documento <strong>${docVal}</strong> para el <strong>Periodo ${perVal}</strong>. ¡Puedes completar y enviar tu evaluación!
+                        </div>
+                    `;
+                    btnEnviar.disabled = false;
+                    return true;
+                }
+            } catch (err) {
+                console.error("Error al validar periodo en Firestore:", err);
+                statusBox.style.display = 'none';
+                btnEnviar.disabled = false;
+                return true;
+            }
+        }
+
+        // 5. Cálculo de notas en tiempo real
         const form = document.getElementById('formAutoevaluacion');
         
         function calcularNotas() {
@@ -390,16 +585,21 @@
 
             const notaLab = countLab === 7 ? (sumLab / 7).toFixed(1) : '0.0';
             const notaCiu = countCiu === 7 ? (sumCiu / 7).toFixed(1) : '0.0';
+            const notaDef = (countLab === 7 && countCiu === 7) 
+                ? (((parseFloat(notaLab) + parseFloat(notaCiu)) / 2).toFixed(1)) 
+                : '0.0';
 
             document.getElementById('nota_laborales').innerText = notaLab;
             document.getElementById('nota_ciudadanas').innerText = notaCiu;
+            document.getElementById('resumen_lab').innerText = notaLab;
+            document.getElementById('resumen_ciu').innerText = notaCiu;
+            document.getElementById('resumen_def').innerText = notaDef;
         }
 
-        // Agregar evento a todos los radio buttons
         const radios = document.querySelectorAll('input[type="radio"]');
         radios.forEach(radio => radio.addEventListener('change', calcularNotas));
 
-        // Enviar formulario
+        // 6. Envío y Registro en Firestore
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -407,13 +607,14 @@
             const loader = document.getElementById('loader');
             const msgBox = document.getElementById('msgBox');
             
-            // URL de la Web App de Google Apps Script
-            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6MifwZvb7nxaIYJVK1Wrc-0Mljvr_q4Hey1VGw9lEC0J9kk--fLhVi3r0_In_izhe/exec'; 
-            
-            if(SCRIPT_URL === 'URL_DE_TU_WEB_APP_AQUI') {
-                msgBox.className = 'msg-box msg-error';
-                msgBox.innerHTML = 'Falta configurar la URL de Google Apps Script. Edite este archivo (autoevaluacion.html) y reemplace "URL_DE_TU_WEB_APP_AQUI" por la URL de su Web App.';
-                msgBox.style.display = 'block';
+            const docVal = (document.getElementById('documento').value || '').trim();
+            const perVal = document.getElementById('periodo').value;
+            const gradoVal = document.getElementById('grado').value;
+            const nomVal = (document.getElementById('nombre').value || '').trim();
+            const asigVal = document.getElementById('asignatura').value;
+
+            if (!docVal || !perVal || !gradoVal || !nomVal) {
+                alert("Por favor completa todos los datos del estudiante.");
                 return;
             }
 
@@ -421,98 +622,109 @@
             loader.style.display = 'block';
             msgBox.style.display = 'none';
 
-            // Recolectar datos
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-            data.nota_laborales = document.getElementById('nota_laborales').innerText;
-            data.nota_ciudadanas = document.getElementById('nota_ciudadanas').innerText;
-
-            // Guardar en Firestore además de Google Sheets
-            if (typeof firebase !== 'undefined') {
-                const db = firebase.firestore();
-                let userStr = localStorage.getItem('usuario_labvirtual');
-                let usuarioId = userStr ? JSON.parse(userStr).usuario : (data.documento || "Invitado");
-                
-                // VALIDAR 1 SOLA VEZ POR PERIODO
-                try {
-                    const snapshot = await db.collection('evaluaciones').where('usuario', '==', usuarioId).get();
-                    let yaPresento = false;
-                    snapshot.forEach(doc => {
-                        let d = doc.data();
-                        if (d.tema && d.tema.includes(`Autoevaluación P${data.periodo}`) && d.tema.includes(data.asignatura)) {
-                            yaPresento = true;
-                        }
-                    });
-
-                    if (yaPresento) {
-                        loader.style.display = 'none';
-                        btn.disabled = false;
-                        msgBox.className = 'msg-box msg-error';
-                        msgBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Ya has presentado la autoevaluación de ' + data.asignatura + ' para el Periodo ' + data.periodo + '.';
-                        msgBox.style.display = 'block';
-                        return; // Detener envío
-                    }
-                } catch(err) {
-                    console.error("Error al validar historial:", err);
-                }
-
-                let baseData = {
-                    usuario: usuarioId,
-                    nombre: data.nombre,
-                    grado: data.grado,
-                    periodo: data.periodo,
-                    fecha: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                // Guardar nota Laborales
-                db.collection('evaluaciones').add(Object.assign({}, baseData, {
-                    tema: `Autoevaluación P${data.periodo} - Competencias Laborales - ${data.asignatura} - ${data.grado}`,
-                    puntaje: parseFloat(data.nota_laborales)
-                })).catch(e => console.error("Error Firestore Laborales:", e));
-
-                // Guardar nota Ciudadanas
-                db.collection('evaluaciones').add(Object.assign({}, baseData, {
-                    tema: `Autoevaluación P${data.periodo} - Competencias Ciudadanas - ${data.asignatura} - ${data.grado}`,
-                    puntaje: parseFloat(data.nota_ciudadanas)
-                })).catch(e => console.error("Error Firestore Ciudadanas:", e));
+            // Validar nuevamente periodo en Firestore
+            const puedeEnviar = await validarPeriodoDoc();
+            if (!puedeEnviar) {
+                loader.style.display = 'none';
+                btn.disabled = true;
+                msgBox.className = 'msg-box msg-error';
+                msgBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Ya has presentado la autoevaluación para el Periodo ${perVal}. Si deseas presentar otro periodo, selecciona un periodo diferente arriba.`;
+                msgBox.style.display = 'block';
+                return;
             }
 
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'text/plain;charset=utf-8',
+            // Recolectar respuestas detalladas
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            const notaLab = parseFloat(document.getElementById('nota_laborales').innerText) || 0;
+            const notaCiu = parseFloat(document.getElementById('nota_ciudadanas').innerText) || 0;
+            const notaDef = parseFloat(((notaLab + notaCiu) / 2).toFixed(1));
+
+            const respLab = {};
+            for (let i = 1; i <= 7; i++) {
+                respLab[`c_lab_${i}`] = parseInt(data[`c_lab_${i}`]) || 0;
+            }
+
+            const respCiu = {};
+            for (let i = 1; i <= 7; i++) {
+                respCiu[`c_ciu_${i}`] = parseInt(data[`c_ciu_${i}`]) || 0;
+            }
+
+            const userSession = JSON.parse(localStorage.getItem('usuario_labvirtual'));
+            const usuarioId = userSession ? userSession.usuario : docVal;
+
+            const registroAutoeval = {
+                documento: docVal,
+                usuario: usuarioId,
+                nombre: nomVal,
+                grado: String(gradoVal),
+                periodo: String(perVal),
+                asignatura: asigVal,
+                nota_laborales: notaLab,
+                nota_ciudadanas: notaCiu,
+                nota_final: notaDef,
+                respuestas_laborales: respLab,
+                respuestas_ciudadanas: respCiu,
+                fecha: (typeof firebase !== 'undefined' && firebase.firestore) ? firebase.firestore.FieldValue.serverTimestamp() : new Date(),
+                fecha_texto: new Date().toLocaleDateString('es-CO') + " " + new Date().toLocaleTimeString('es-CO')
+            };
+
+            let guardadoEnFirestore = false;
+
+            if (db) {
+                try {
+                    // Guardar en la colección especializada 'autoevaluaciones' con ID predecible
+                    await db.collection('autoevaluaciones').doc(`doc_${docVal}_p${perVal}`).set(registroAutoeval);
+                    guardadoEnFirestore = true;
+                    console.log("Autoevaluación guardada exitosamente en Firestore:", `doc_${docVal}_p${perVal}`);
+                } catch(errorFS) {
+                    console.error("Error al guardar en Firestore:", errorFS);
                 }
-            })
-            .then(res => res.json())
-            .then(response => {
-                loader.style.display = 'none';
-                if (response.status === 'success') {
-                    msgBox.className = 'msg-box msg-success';
-                    msgBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> ' + response.message + ' (Guardado en Base de Datos)';
-                    msgBox.style.display = 'block';
-                    form.reset();
-                    document.getElementById('nota_laborales').innerText = '0.0';
-                    document.getElementById('nota_ciudadanas').innerText = '0.0';
-                    btn.disabled = false;
-                } else {
-                    btn.disabled = false;
-                    msgBox.className = 'msg-box msg-error';
-                    msgBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> ' + response.message;
-                    msgBox.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                // Incluso si falla Sheets, ya se guardó en Firestore si había internet.
-                loader.style.display = 'none';
-                btn.disabled = false;
+            }
+
+            // Envío opcional de respaldo a Google Apps Script
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6MifwZvb7nxaIYJVK1Wrc-0Mljvr_q4Hey1VGw9lEC0J9kk--fLhVi3r0_In_izhe/exec';
+            data.nota_laborales = notaLab.toFixed(1);
+            data.nota_ciudadanas = notaCiu.toFixed(1);
+            data.nota_final = notaDef.toFixed(1);
+
+            try {
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).catch(e => console.warn("Aviso Sheets respaldo:", e));
+            } catch(e) {}
+
+            loader.style.display = 'none';
+
+            if (guardadoEnFirestore) {
                 msgBox.className = 'msg-box msg-success';
-                msgBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> Evaluación guardada localmente en Firestore.';
+                msgBox.innerHTML = `
+                    <div style="font-size: 1.2rem; margin-bottom: 8px;"><i class="fa-solid fa-circle-check"></i> ¡Autoevaluación guardada exitosamente en Firestore!</div>
+                    <div>Estudiante: <strong>${nomVal}</strong> (Doc: ${docVal}) | Grado: <strong>${gradoVal}°</strong> | Periodo: <strong>${perVal}</strong></div>
+                    <div style="margin-top: 8px; font-size: 1.1rem;">
+                        Laborales: <strong>${notaLab.toFixed(1)}</strong> | Ciudadanas: <strong>${notaCiu.toFixed(1)}</strong> | 
+                        Nota Final: <strong style="color: #f1c40f;">${notaDef.toFixed(1)} / 5.0</strong>
+                    </div>
+                `;
                 msgBox.style.display = 'block';
                 form.reset();
                 document.getElementById('nota_laborales').innerText = '0.0';
                 document.getElementById('nota_ciudadanas').innerText = '0.0';
-            });
+                document.getElementById('resumen_lab').innerText = '0.0';
+                document.getElementById('resumen_ciu').innerText = '0.0';
+                document.getElementById('resumen_def').innerText = '0.0';
+                document.getElementById('statusValidacion').style.display = 'none';
+                btn.disabled = false;
+                window.scrollTo({ top: msgBox.offsetTop - 50, behavior: 'smooth' });
+            } else {
+                btn.disabled = false;
+                msgBox.className = 'msg-box msg-error';
+                msgBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Ocurrió un inconveniente al conectar con la base de datos. Por favor revisa tu conexión a internet e intenta nuevamente.';
+                msgBox.style.display = 'block';
+            }
         });
     </script>
 </body>
